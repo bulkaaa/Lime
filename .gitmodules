@@ -1,0 +1,2 @@
+[submodule "src/main/webapp"]
+	url = bitbucket.org:mini_lime/web_app.git
