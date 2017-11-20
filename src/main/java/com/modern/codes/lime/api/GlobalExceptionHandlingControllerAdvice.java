@@ -16,7 +16,7 @@ import javax.naming.ServiceUnavailableException;
 import java.nio.file.AccessDeniedException;
 
 /**
- * * Performs exception handling for all REST API controllers. This class provides exception handlers that respond to
+ * * Performs exception handling for all REST API controller. This class provides exception handlers that respond to
  * possible exceptions with appropriate HTTP status codes for the client.
  *
  *  @author jaroszk

@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 /**
- * Main configuration class to enable the Swagger UI frontend. It registers all supported controllers and describes the
+ * Main configuration class to enable the Swagger UI frontend. It registers all supported controller and describes the
  * API.
  * 
  * @author jaroszk
