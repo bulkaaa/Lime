@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,9 +66,27 @@ public class Product implements Serializable {
     @Column(nullable = false, name = "created_at", updatable = false)
     private Date createdAt;
 
+    @ApiModelProperty(value = "The category of the product", required = true)
+    @NotNull
+    private String category;
+
+    @ApiModelProperty(value = "The image url of the product", required = true)
+    @NotNull
+    @URL
+    private String image;
+
+    @ApiModelProperty(value = "?", required = true)
+    @NotNull
+    private Integer expectedValue;
+
+
     @ManyToOne
     @JoinColumn(name = "job_id", referencedColumnName="ID")
     private Job job;
+
+    @ManyToOne
+    @JoinColumn(name = "formula_id", referencedColumnName="ID")
+    private Formula formula;
 
     @PrePersist
     public void updateTimeStamps() {
@@ -156,5 +175,29 @@ public class Product implements Serializable {
 
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Integer getExpectedValue() {
+        return expectedValue;
+    }
+
+    public void setExpectedValue(Integer expectedValue) {
+        this.expectedValue = expectedValue;
     }
 }

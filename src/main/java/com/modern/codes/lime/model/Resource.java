@@ -1,15 +1,18 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * Model representation of a resource used in Lime.
@@ -19,7 +22,7 @@ import javax.validation.constraints.Size;
  */
 @ApiModel(description = "Model representation of a resource used in Lime")
 @Entity
-public class Resource {
+public class Resource implements Serializable{
 
     private static final long serialVersionUID = 8269473897901383543L;
 
@@ -29,27 +32,43 @@ public class Resource {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @ApiModelProperty(value = "The unqiue id of the resource", required = true)
-    @JsonProperty("id")
+    @ApiModelProperty(value = "The unique id of the resource", required = true)
     private String id;
 
-    @ApiModelProperty(value = "The name of the resource. E.g \"TrackMyTools Basic month\"", required = true)
+    @ApiModelProperty(value = "The name of the resource. E.g \"LIME super resource\"", required = true)
     @NotNull
     @Size(max = MAX_LENGTH_NAME)
-    @JsonProperty("name")
     private String name;
 
     @ApiModelProperty(value = "The long description of the resource", required = true)
     @NotNull
     @Size(max = MAX_LENGTH_DESC)
-    @JsonProperty("description")
     private String description;
 
     @ApiModelProperty(value = "The unit in which resource is measured", required = true)
     @NotNull
-    @Size(max = MAX_LENGTH_DESC)
-    @JsonProperty("unit")
     private Unit unit;
+
+    @ApiModelProperty(value = "The long description of the resource", required = true)
+    @NotNull
+    private Integer quantity;
+
+    @ApiModelProperty(value = "The category of the resource", required = true)
+    @NotNull
+    private String category;
+
+    @ApiModelProperty(value = "The image url of the resource", required = true)
+    @NotNull
+    @URL
+    private String image;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id", referencedColumnName="ID")
+    private Supplier supplier;
+
+    @ManyToOne
+    @JoinColumn(name = "formula_id", referencedColumnName="ID")
+    private Formula formula;
 
     /**
      * Get the id of the entity.
@@ -125,5 +144,45 @@ public class Resource {
      */
     public void setUnit(Unit unit) {
         this.unit = unit;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+
+    public Formula getFormula() {
+        return formula;
+    }
+
+    public void setFormula(Formula formula) {
+        this.formula = formula;
     }
 }
