@@ -3,6 +3,7 @@ package com.modern.codes.lime.exception;
 /**
  * thrown when an entity is not found where it is expected.
  *
+ * @author jaroszk
  *
  */
 public class NotFoundException extends RuntimeException {

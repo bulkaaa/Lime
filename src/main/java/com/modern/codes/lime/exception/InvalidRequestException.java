@@ -7,6 +7,7 @@ import java.util.Locale;
 /**
  * thrown when a request is invalid in the current context.
  *
+ * @author jaroszk
  *
  */
 public class InvalidRequestException extends RuntimeException {

@@ -1,6 +1,10 @@
 package com.modern.codes.lime.exception;
 
-
+/**
+ *
+ * @author jaroszk
+ *
+ */
 public class ServiceUnavailableException extends RuntimeException {
 
     private static final long serialVersionUID = 6872580404755827065L;

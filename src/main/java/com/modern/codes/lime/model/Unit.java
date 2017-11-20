@@ -1,5 +1,11 @@
 package com.modern.codes.lime.model;
 
+/**
+ *
+ * @author jaroszk
+ *
+ */
+
 public enum Unit {
     FEET,METERS,INCHES,MM, UNKNOWN;
 

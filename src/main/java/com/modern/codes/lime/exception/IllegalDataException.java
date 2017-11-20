@@ -3,6 +3,7 @@ package com.modern.codes.lime.exception;
 /**
  * thrown when the given data is not valid in the current context.
  *
+ * @author jaroszk
  *
  */
 public class IllegalDataException extends RuntimeException {
