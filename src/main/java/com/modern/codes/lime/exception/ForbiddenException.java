@@ -3,6 +3,7 @@ package com.modern.codes.lime.exception;
 /**
  * thrown when eg. an authentication attempt is not allowed with the given credentials (not details returned).
  *
+ * @author jaroszk
  *
  */
 public class ForbiddenException extends RuntimeException {

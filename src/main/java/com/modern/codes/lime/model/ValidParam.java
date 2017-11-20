@@ -7,6 +7,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Model representation of parameter validation errors.
+ *
+ * @author jaroszk
+ *
+ */
 
 public class ValidParam implements Serializable {
 

@@ -1,9 +1,9 @@
 package com.modern.codes.lime.exception;
 
 /**
- * eShop API exception, thrown when given data is not acceptable.
+ * exception, thrown when given data is not acceptable.
  *
- * @author kai8wz
+ * @author jaroszk
  *
  */
 public class NotAcceptableException extends RuntimeException {

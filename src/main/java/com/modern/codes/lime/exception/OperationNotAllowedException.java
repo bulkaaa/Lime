@@ -1,8 +1,9 @@
 package com.modern.codes.lime.exception;
 
 /**
- * thrown when a contract management API call is not allowed (eg. the subscription is inactive).
+ * thrown when a contract management API call is not allowed.
  *
+ * @author jaroszk
  *
  */
 public class OperationNotAllowedException extends RuntimeException {

@@ -7,6 +7,7 @@ import java.util.Locale;
 /**
  *  thrown when an entity contains validation errors.
  *
+ * @author jarosz
  *
  */
 public class UnprocessableEntityException extends RuntimeException {
