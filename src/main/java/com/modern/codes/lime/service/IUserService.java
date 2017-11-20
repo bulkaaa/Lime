@@ -1,7 +1,6 @@
 package com.modern.codes.lime.service;
 
 import com.modern.codes.lime.model.User;
-import com.modern.codes.lime.model.User;
 import java.util.List;
 
 public interface IUserService {
