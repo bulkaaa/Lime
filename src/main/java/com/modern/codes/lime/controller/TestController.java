@@ -18,7 +18,7 @@ public class TestController {
     IUserDAO dao;
     @GetMapping(path = "/add-user")
     public boolean addUser(){
-        UserPOJO k = new UserPOJO("testName", "testSurname");
+        UserPOJO k = new UserPOJO("testName", "testSurname", "username", "password");
         ModelParser parser = new ModelParser();
         dao.save(parser.userPOJOToDB(k));
         return true;

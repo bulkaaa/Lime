@@ -7,5 +7,5 @@ import java.io.Serializable;
 
 @NoRepositoryBean
 public interface IBasicCRUDRepository<T, ID extends Serializable> extends CrudRepository<T, ID> {
-    //Place to implement DAO functions for most of models.
+    //Place to implement DAO methods available for all models.
 }
