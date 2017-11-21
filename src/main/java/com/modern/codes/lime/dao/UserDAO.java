@@ -2,12 +2,11 @@ package com.modern.codes.lime.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.modern.codes.lime.model.User;
 
 @Transactional
-public class UserDAO implements IUserDAO {
+public abstract class UserDAO implements IUserDAO {
     @PersistenceContext
     private EntityManager entityManager;
 

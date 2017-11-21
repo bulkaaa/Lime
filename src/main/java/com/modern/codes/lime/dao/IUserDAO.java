@@ -1,9 +1,9 @@
 package com.modern.codes.lime.dao;
 import com.modern.codes.lime.model.User;
-import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@NoRepositoryBean
-public interface IUserDAO {
+@Repository
+public interface IUserDAO extends IBasicCRUDRepository<User, String>{
     List<User> getUserByNameAndSurname(String name, String surname);
 }
