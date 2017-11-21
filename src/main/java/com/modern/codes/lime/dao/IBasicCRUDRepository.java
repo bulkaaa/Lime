@@ -6,4 +6,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 import java.io.Serializable;
 
 @NoRepositoryBean
-public interface IBasicCRUDRepository<T, ID extends Serializable> extends CrudRepository<T, ID> { }
+public interface IBasicCRUDRepository<T, ID extends Serializable> extends CrudRepository<T, ID> {
+    //Place to implement DAO functions for most of models.
+}

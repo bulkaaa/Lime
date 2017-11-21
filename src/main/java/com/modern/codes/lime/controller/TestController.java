@@ -1,7 +1,9 @@
 package com.modern.codes.lime.controller;
 
+import com.modern.codes.lime.ModelParser;
+import com.modern.codes.lime.dao.IUserDAO;
 import com.modern.codes.lime.model.User;
-import com.modern.codes.lime.service.IUserService;
+import com.modern.codes.lime.pojo.UserPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,17 +15,16 @@ import java.util.List;
 @RequestMapping(path="/api")
 public class TestController {
     @Autowired
-    private IUserService userService;
+    IUserDAO dao;
     @GetMapping(path = "/add-user")
     public boolean addUser(){
-        User K = new User();
-        K.setName("Aleksandra");
-        K.setSurname("Bulka");
-        userService.save(K);
+        UserPOJO k = new UserPOJO("testName", "testSurname");
+        ModelParser parser = new ModelParser();
+        dao.save(parser.userPOJOToDB(k));
         return true;
     }
     @GetMapping(path = "/hello-world")
     public List<User> helloWorld(){
-        return userService.getUserByNameAndSurname("Aleksandra", "Bulka");
+        return dao.getUserByNameAndSurname("testName", "testSurname");
     }
 }

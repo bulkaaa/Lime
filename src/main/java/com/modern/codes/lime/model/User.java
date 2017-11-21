@@ -83,13 +83,26 @@ public class User {
         return surname;
     }
 
-    public String getDescription() {
-        return surname;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setDescription(String description) {
-        this.surname = description;
+    public void setJoinedAt(Date joinedAt) {
+        this.joinedAt = joinedAt;
     }
+
+    public Date getJoinedAt() {
+
+        return joinedAt;
+    }
+
+    //    public String getDescription() {
+//        return surname;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.surname = description;
+//    }
 
     public List<Job> getJobs() {
         return jobs;
