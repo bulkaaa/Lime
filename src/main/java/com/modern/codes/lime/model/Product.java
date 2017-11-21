@@ -75,10 +75,11 @@ public class Product implements Serializable {
     @URL
     private String image;
 
+
     @ApiModelProperty(value = "?", required = true)
     @NotNull
-    private Integer expectedValue;
 
+    private Integer expectedValue;
 
     @ManyToOne
     @JoinColumn(name = "job_id", referencedColumnName="ID")
@@ -199,5 +200,21 @@ public class Product implements Serializable {
 
     public void setExpectedValue(Integer expectedValue) {
         this.expectedValue = expectedValue;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setFormula(Formula formula) {
+        this.formula = formula;
+    }
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Formula getFormula() {
+
+        return formula;
     }
 }
