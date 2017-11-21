@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +17,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Model representation of a resource used in Lime.
+ * Model representation of a supplier in Lime.
  *
  * @author jaroszk
  *

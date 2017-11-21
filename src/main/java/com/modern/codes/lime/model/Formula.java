@@ -3,7 +3,6 @@ package com.modern.codes.lime.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +32,7 @@ public class Formula implements Serializable {
     @ApiModelProperty(value = "The unqiue id of the formula", required = true)
     private String id;
 
-    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "formula", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Resource> resources;
 
     @OneToMany(mappedBy = "formula", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

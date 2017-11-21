@@ -1,16 +1,17 @@
 package com.modern.codes.lime.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
@@ -61,12 +62,27 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Job> jobs;
 
+    @ApiModelProperty(value = "The login of the user of the \"ChemicalLabs\"", required = true)
+    @NotNull
+    private String login;
+
+    @ApiModelProperty(value = "The password of the user of the \"ChemicalLabs\"", required = true)
+    @NotNull
+    private String password;
+
     @PrePersist
     public void updateTimeStamps() {
         if (joinedAt == null) {
             joinedAt = new Date();
         }
     }
+
+    @ManyToMany
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+
+
     public String getId()   { return id; }
 
     public void setName(String name) {
@@ -96,13 +112,6 @@ public class User {
         return joinedAt;
     }
 
-    //    public String getDescription() {
-//        return surname;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.surname = description;
-//    }
 
     public List<Job> getJobs() {
         return jobs;
@@ -111,6 +120,29 @@ public class User {
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
-    // Login, pass and roles will be added later with Spring security
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
 }
