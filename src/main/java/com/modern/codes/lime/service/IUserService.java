@@ -1,15 +1,10 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.dao.IUserDAO;
 import com.modern.codes.lime.model.User;
-import java.util.List;
+import org.springframework.stereotype.Service;
 
-public interface IUserService {
-    List<User> getAllUsers();
-    User getUserById(String userId);
-    User getUserByName(String name);
-    boolean addUser(User user);
-    void updateUser(User user);
-    void deleteUser(String userName);
-    void deleteUser(User user);
-    boolean userExists(String userName);
+@Service
+public interface IUserService extends IBasicCRUDService <User, String>, IUserDAO {
+    //methods For Users that does not access strictly database
 }
