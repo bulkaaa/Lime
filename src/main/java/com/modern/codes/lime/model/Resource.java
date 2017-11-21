@@ -146,6 +146,10 @@ public class Resource implements Serializable{
         this.unit = unit;
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public Integer getQuantity() {
         return quantity;
     }

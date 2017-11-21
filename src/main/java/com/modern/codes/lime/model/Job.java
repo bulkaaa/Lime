@@ -70,6 +70,10 @@ public class Job {
         return products;
     }
 
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
+
     public void setProducts(List<Product> products) {
         this.products = products;
     }
