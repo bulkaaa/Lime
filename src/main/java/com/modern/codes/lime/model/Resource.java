@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.URL;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -49,7 +48,7 @@ public class Resource implements Serializable{
     @NotNull
     private Unit unit;
 
-    @ApiModelProperty(value = "The long description of the resource", required = true)
+    @ApiModelProperty(value = "The quantity of the resource", required = true)
     @NotNull
     private Integer quantity;
 
