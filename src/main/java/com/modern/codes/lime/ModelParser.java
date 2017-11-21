@@ -11,6 +11,9 @@ public class ModelParser {
         usr.setSurname(user.getSurname());
         usr.setJobs(user.getJobs());
         usr.setJoinedAt(user.getJoinedAt());
+        usr.setLogin(user.getLogin());
+        usr.setPassword(user.getPassword());
+        usr.setRoles(user.getRoles());
         return usr;
     }
     public User userPOJOToDB(UserPOJO user) {
@@ -20,6 +23,9 @@ public class ModelParser {
         usr.setSurname(user.getSurname());
         usr.setJobs(user.getJobs());
         usr.setJoinedAt(user.getJoinedAt());
+        usr.setLogin(user.getLogin());
+        usr.setPassword(user.getPassword());
+        usr.setRoles(user.getRoles());
         return usr;
     }
     public FormulaPOJO formulaDBtoPOJO(Formula formula){

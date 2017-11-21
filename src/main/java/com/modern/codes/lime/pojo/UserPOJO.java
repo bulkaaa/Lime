@@ -1,7 +1,7 @@
 package com.modern.codes.lime.pojo;
 
 import com.modern.codes.lime.model.Job;
-import com.modern.codes.lime.model.User;
+import com.modern.codes.lime.model.Role;
 
 import java.util.Date;
 import java.util.List;
@@ -12,14 +12,43 @@ public class UserPOJO {
     private String name;
     private String surname;
     private Date joinedAt;
-
+    private List<Role> roles;
     private List<Job> jobs;
+    private String login;
+    private String password;
 
-    public UserPOJO() {}
+    public List<Role> getRoles() {
+        return roles;
+    }
 
-    public UserPOJO(String name, String surname) {
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserPOJO() {
+    }
+
+    public UserPOJO(String name, String surname, String login, String password) {
         this.name = name;
         this.surname = surname;
+        this.login = login;
+        this.password = password;
     }
 
     public Date getJoinedAt() {
@@ -70,4 +99,6 @@ public class UserPOJO {
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
+
+
 }
