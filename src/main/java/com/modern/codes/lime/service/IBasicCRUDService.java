@@ -7,7 +7,14 @@ import java.util.List;
 @NoRepositoryBean
 public interface IBasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T, String>> {
     List<T_POJO> findAll();
-    T_POJO delete(String id);
+    void delete(String id);
     void save(T_POJO t);
     boolean exists(String id);
+    long count();
+    boolean equals(T_POJO t, T_POJO y);
+    void deleteAll();
+    T_POJO findById(String id);
+    void delete(T_POJO t);
+    void save(List<T_POJO> l);
+    void delete(List<T_POJO> l);
 }
