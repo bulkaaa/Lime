@@ -72,6 +72,8 @@ public class ParseTools {
 
     }
     public static UserPOJO parse(User user) {
+        if(null == user)
+            return null;
         UserPOJO usr = new UserPOJO();
         usr.setId(user.getId());
         usr.setName(user.getName());
@@ -84,6 +86,8 @@ public class ParseTools {
         return usr;
     }
     public static User parse(UserPOJO user) {
+        if(null == user)
+            return null;
         User usr = new User();
         usr.setId(user.getId());
         usr.setName(user.getName());
@@ -96,6 +100,8 @@ public class ParseTools {
         return usr;
     }
     public static FormulaPOJO parse(Formula formula){
+        if(null == formula)
+            return null;
         FormulaPOJO form = new FormulaPOJO();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
@@ -104,6 +110,8 @@ public class ParseTools {
         return form;
     }
     public static Formula parse(FormulaPOJO formula){
+        if(null == formula)
+            return null;
         Formula form = new Formula();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
@@ -112,6 +120,8 @@ public class ParseTools {
         return form;
     }
     public static JobPOJO parse(Job job){
+        if(null == job)
+            return null;
         JobPOJO jb = new JobPOJO();
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
@@ -124,6 +134,8 @@ public class ParseTools {
         return jb;
     }
     public static Job parse(JobPOJO job){
+        if(null == job)
+            return null;
         Job jb = new Job();
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
@@ -136,6 +148,8 @@ public class ParseTools {
         return jb;
     }
     public static ProductPOJO parse(Product product){
+        if(null == product)
+            return null;
         ProductPOJO prdct = new ProductPOJO();
         prdct.setCategory(product.getCategory());
         prdct.setCreatedAt(product.getCreatedAt());
@@ -150,6 +164,8 @@ public class ParseTools {
         return prdct;
     }
     public static Product parse(ProductPOJO product){
+        if(null == product)
+            return null;
         Product prdct = new Product();
         prdct.setCategory(product.getCategory());
         prdct.setCreatedAt(product.getCreatedAt());
@@ -164,6 +180,8 @@ public class ParseTools {
         return prdct;
     }
     public static ResourcePOJO parse(Resource resource){
+        if(null == resource)
+            return null;
         ResourcePOJO res = new ResourcePOJO();
         res.setCategory(resource.getCategory());
         res.setDescription(resource.getDescription());
@@ -177,6 +195,8 @@ public class ParseTools {
         return res;
     }
     public static Resource parse(ResourcePOJO resource){
+        if(null == resource)
+            return null;
         Resource res = new Resource();
         res.setCategory(resource.getCategory());
         res.setDescription(resource.getDescription());
@@ -190,6 +210,8 @@ public class ParseTools {
         return res;
     }
     public static SupplierPOJO parse(Supplier supplier){
+        if(null == supplier)
+            return null;
         SupplierPOJO sup = new SupplierPOJO();
         sup.setCity(supplier.getCity());
         sup.setEmailAddress(supplier.getEmailAddress());
@@ -203,6 +225,8 @@ public class ParseTools {
         return sup;
     }
     public static Supplier parse(SupplierPOJO supplier){
+        if(null == supplier)
+            return null;
         Supplier sup = new Supplier();
         sup.setCity(supplier.getCity());
         sup.setEmailAddress(supplier.getEmailAddress());
@@ -216,6 +240,8 @@ public class ParseTools {
         return sup;
     }
     public static RolePOJO parse(Role role){
+        if(null == role)
+            return null;
         RolePOJO rl = new RolePOJO();
         rl.setId(role.getId());
         rl.setDBPrivileges(role.getPrivileges());
@@ -224,6 +250,8 @@ public class ParseTools {
         return rl;
     }
     public static Role parse(RolePOJO role){
+        if(null == role)
+            return null;
         Role rl = new Role();
         rl.setId(role.getId());
         rl.setPrivileges(role.getDBPrivileges());
@@ -232,6 +260,8 @@ public class ParseTools {
         return rl;
     }
     public static PrivilegePOJO parse(Privilege privilege){
+        if(null == privilege)
+            return null;
         PrivilegePOJO pv = new PrivilegePOJO();
         pv.setId(privilege.getId());
         pv.setName(privilege.getName());
@@ -239,6 +269,8 @@ public class ParseTools {
         return pv;
     }
     public static Privilege parse(PrivilegePOJO privilege){
+        if(null == privilege)
+            return null;
         Privilege pv = new Privilege();
         pv.setId(privilege.getId());
         pv.setName(privilege.getName());
@@ -247,9 +279,13 @@ public class ParseTools {
     }
 
     public static List<?> parseList(List<?> list) {
+        if(list == null)
+            return null;
         return list.stream().map(ParseTools::parse).collect(Collectors.toList());
     }
     public static <T> List<T>  parseList(List<?> list, Class<T> cl){
+        if(list == null)
+            return null;
         return list.stream().map(t-> ParseTools.parse(t, cl)).collect(Collectors.toList());
     }
     public static <T> T convertInstanceOfObject(Object o, Class<T> clazz) {
