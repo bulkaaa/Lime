@@ -6,7 +6,7 @@ import com.modern.codes.lime.model.Role;
 import java.util.Date;
 import java.util.List;
 
-public class UserPOJO extends BasicPOJO<String> {
+public class UserPOJO extends BasicPOJO {
 
 
     private String name;

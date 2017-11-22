@@ -1,7 +1,12 @@
-//package com.modern.codes.lime.service;
-//
-//import org.springframework.stereotype.Service;
-//
-//@Service
-//public class IUserService {
-//}
+package com.modern.codes.lime.service;
+
+import com.modern.codes.lime.pojo.UserPOJO;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+@Service
+public interface IUserService {
+//    List<UserPOJO> findAll();
+//    UserPOJO delete(String id);
+//    void save(Object t);
+}
