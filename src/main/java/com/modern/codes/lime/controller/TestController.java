@@ -20,6 +20,7 @@ public class TestController {
     public boolean addUser(){
         UserPOJO k = new UserPOJO("testName", "testSurname", "username", "password");
         ModelParser parser = new ModelParser();
+//        dao.getAll();
         dao.save(parser.userParse(k));
         return true;
     }

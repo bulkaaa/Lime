@@ -9,7 +9,6 @@ import com.modern.codes.lime.model.User;
 public abstract class UserDAO implements IUserDAO {
     @PersistenceContext
     private EntityManager entityManager;
-
     @Override
     public List<User> getUserByNameAndSurname(String name, String surname) {
         String hql = "FROM User as usr WHERE usr.name = ? and usr.surname = ?";
