@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.modern.codes.lime.model.User;
 
 @Transactional
-public abstract class UserDAO implements IUserDAO {
+public class UserDAO implements IUserDAO {
     @PersistenceContext
     private EntityManager entityManager;
     @Override
