@@ -43,4 +43,8 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
             throw new IllegalDataException("Trying to save wrong type of object it's " + Object.class + " object, should be " + T_POJOtype);
         }
     }
+    @Override
+    public boolean exists(String id){
+        return dao.exists(id);
+    }
 }
