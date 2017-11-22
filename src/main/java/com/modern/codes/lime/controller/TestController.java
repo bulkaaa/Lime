@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping(path="/api")
 public class TestController {
     @Autowired
-//    private IBasicCRUDService<User, UserPOJO, IUserDAO> dao;
     IUserService userService;
     @GetMapping(path = "/add-user")
     public boolean addUser(){

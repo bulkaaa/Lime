@@ -10,4 +10,5 @@ public interface IUserService {
     UserPOJO delete(String id);
     List<UserPOJO> getUserByNameAndSurname(String name, String surname);
     void save(Object t);
+    boolean exists(String id);
 }

@@ -9,4 +9,5 @@ public interface IBasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDReposito
     List<T_POJO> findAll();
     T_POJO delete(String id);
     void save(T_POJO t);
+    boolean exists(String id);
 }
