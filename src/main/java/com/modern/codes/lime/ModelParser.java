@@ -148,22 +148,6 @@ public class ModelParser {
         sup.setTelephone(supplier.getTelephone());
         return sup;
     }
-    public ValidationErrorPOJO validationErrorParse(ValidationError validationError){
-        return new ValidationErrorPOJO(validationError.getField(), validationError.getCode(), validationError.getHint());
-    }
-    public ValidationError validationErrorParse(ValidationErrorPOJO validationError){
-        return new ValidationError(validationError.getField(), validationError.getCode(), validationError.getHint());
-    }
-    public ValidParamPOJO validParamParse(ValidParam validParam){
-        ValidParamPOJO vp = new ValidParamPOJO();
-        vp.setValidationErrors(validParam.getValidationErrors());
-        return vp;
-    }
-    public ValidParam validParamParse(ValidParamPOJO validParam){
-        ValidParam vp = new ValidParam();
-        vp.setValidationErrors(validParam.getValidationErrors());
-        return vp;
-    }
     public RolePOJO roleParse(Role role){
         RolePOJO rl = new RolePOJO();
         rl.setId(role.getId());
