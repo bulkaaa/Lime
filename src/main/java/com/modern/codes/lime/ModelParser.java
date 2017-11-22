@@ -4,7 +4,7 @@ import com.modern.codes.lime.model.*;
 import com.modern.codes.lime.pojo.*;
 
 public class ModelParser {
-    public UserPOJO userDBtoPOJO(User user) {
+    public UserPOJO userParse(User user) {
         UserPOJO usr = new UserPOJO();
         usr.setId(user.getId());
         usr.setName(user.getName());
@@ -16,7 +16,7 @@ public class ModelParser {
         usr.setRoles(user.getRoles());
         return usr;
     }
-    public User userPOJOToDB(UserPOJO user) {
+    public User userParse(UserPOJO user) {
         User usr = new User();
         usr.setId(user.getId());
         usr.setName(user.getName());
@@ -28,7 +28,7 @@ public class ModelParser {
         usr.setRoles(user.getRoles());
         return usr;
     }
-    public FormulaPOJO formulaDBtoPOJO(Formula formula){
+    public FormulaPOJO formulaParse(Formula formula){
         FormulaPOJO form = new FormulaPOJO();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
@@ -36,7 +36,7 @@ public class ModelParser {
         form.setResources(formula.getResources());
         return form;
     }
-    public Formula formulaPOJOtoDB(FormulaPOJO formula){
+    public Formula formulaParse(FormulaPOJO formula){
         Formula form = new Formula();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
@@ -44,7 +44,7 @@ public class ModelParser {
         form.setResources(formula.getResources());
         return form;
     }
-    public JobPOJO jobDBtoPOJO(Job job){
+    public JobPOJO jobParse(Job job){
         JobPOJO jb = new JobPOJO();
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
@@ -56,7 +56,7 @@ public class ModelParser {
         jb.setDetails(job.getDetails());
         return jb;
     }
-    public Job jobPOJOtoDB(JobPOJO job){
+    public Job jobParse(JobPOJO job){
         Job jb = new Job();
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
@@ -68,7 +68,7 @@ public class ModelParser {
         jb.setDetails(job.getDetails());
         return jb;
     }
-    public ProductPOJO productDBtoPOJO(Product product){
+    public ProductPOJO productParse(Product product){
         ProductPOJO prdct = new ProductPOJO();
         prdct.setCategory(product.getCategory());
         prdct.setCreatedAt(product.getCreatedAt());
@@ -82,7 +82,7 @@ public class ModelParser {
         prdct.setUnit(product.getUnit());
         return prdct;
     }
-    public Product productPOJOtoDB(ProductPOJO product){
+    public Product productParse(ProductPOJO product){
         Product prdct = new Product();
         prdct.setCategory(product.getCategory());
         prdct.setCreatedAt(product.getCreatedAt());
@@ -96,7 +96,7 @@ public class ModelParser {
         prdct.setUnit(product.getUnit());
         return prdct;
     }
-    public ResourcePOJO resourceDBtoPOJO(Resource resource){
+    public ResourcePOJO resourceParse(Resource resource){
         ResourcePOJO res = new ResourcePOJO();
         res.setCategory(resource.getCategory());
         res.setDescription(resource.getDescription());
@@ -109,7 +109,7 @@ public class ModelParser {
         res.setUnit(resource.getUnit());
         return res;
     }
-    public Resource resourcePOJOtoDB(ResourcePOJO resource){
+    public Resource resourceParse(ResourcePOJO resource){
         Resource res = new Resource();
         res.setCategory(resource.getCategory());
         res.setDescription(resource.getDescription());
@@ -122,7 +122,7 @@ public class ModelParser {
         res.setUnit(resource.getUnit());
         return res;
     }
-    public SupplierPOJO supplierDBtoPOJO(Supplier supplier){
+    public SupplierPOJO supplierParse(Supplier supplier){
         SupplierPOJO sup = new SupplierPOJO();
         sup.setCity(supplier.getCity());
         sup.setEmailAddress(supplier.getEmailAddress());
@@ -135,7 +135,7 @@ public class ModelParser {
         sup.setTelephone(supplier.getTelephone());
         return sup;
     }
-    public Supplier supplierPOJOtoDB(SupplierPOJO supplier){
+    public Supplier supplierParse(SupplierPOJO supplier){
         Supplier sup = new Supplier();
         sup.setCity(supplier.getCity());
         sup.setEmailAddress(supplier.getEmailAddress());
@@ -148,20 +148,50 @@ public class ModelParser {
         sup.setTelephone(supplier.getTelephone());
         return sup;
     }
-    public ValidationErrorPOJO validationErrorDBtoPOJO(ValidationError validationError){
+    public ValidationErrorPOJO validationErrorParse(ValidationError validationError){
         return new ValidationErrorPOJO(validationError.getField(), validationError.getCode(), validationError.getHint());
     }
-    public ValidationError validationErrorPOJOtoDB(ValidationErrorPOJO validationError){
+    public ValidationError validationErrorParse(ValidationErrorPOJO validationError){
         return new ValidationError(validationError.getField(), validationError.getCode(), validationError.getHint());
     }
-    public ValidParamPOJO validParamDBtoPOJO(ValidParam validParam){
+    public ValidParamPOJO validParamParse(ValidParam validParam){
         ValidParamPOJO vp = new ValidParamPOJO();
         vp.setValidationErrors(validParam.getValidationErrors());
         return vp;
     }
-    public ValidParam validParamPOJOtoDB(ValidParamPOJO validParam){
+    public ValidParam validParamParse(ValidParamPOJO validParam){
         ValidParam vp = new ValidParam();
         vp.setValidationErrors(validParam.getValidationErrors());
         return vp;
+    }
+    public RolePOJO roleParse(Role role){
+        RolePOJO rl = new RolePOJO();
+        rl.setId(role.getId());
+        rl.setPrivileges(role.getPrivileges());
+        rl.setName(role.getName());
+        rl.setUsers(role.getUsers());
+        return rl;
+    }
+    public Role roleParse(RolePOJO role){
+        Role rl = new Role();
+        rl.setId(role.getId());
+        rl.setPrivileges(role.getPrivileges());
+        rl.setName(role.getName());
+        rl.setUsers(role.getUsers());
+        return rl;
+    }
+    public PrivilegePOJO privilegeParse(Privilege privilege){
+        PrivilegePOJO pv = new PrivilegePOJO();
+        pv.setId(privilege.getId());
+        pv.setName(privilege.getName());
+        pv.setRoles(privilege.getRoles());
+        return pv;
+    }
+    public Privilege privilegeParse(PrivilegePOJO privilege){
+        Privilege pv = new Privilege();
+        pv.setId(privilege.getId());
+        pv.setName(privilege.getName());
+        pv.setRoles(privilege.getRoles());
+        return pv;
     }
 }
