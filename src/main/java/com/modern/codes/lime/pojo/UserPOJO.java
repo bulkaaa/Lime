@@ -1,5 +1,6 @@
 package com.modern.codes.lime.pojo;
 
+import com.modern.codes.lime.ParseTools;
 import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.Role;
 
@@ -7,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 public class UserPOJO extends BasicPOJO {
-
 
     private String name;
     private String surname;
@@ -17,12 +17,30 @@ public class UserPOJO extends BasicPOJO {
     private String login;
     private String password;
 
-    public List<Role> getRoles() {
+    public UserPOJO() {
+    }
+
+    public UserPOJO(String name, String surname, String login, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+    }
+
+    public List<Role> getDBRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setDBRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<RolePOJO> getRoles() {
+        return ParseTools.parseList(roles, RolePOJO.class);
+    }
+
+    public void setRoles(List<RolePOJO> roles) {
+        this.roles = ParseTools.parseList(roles, Role.class);
     }
 
     public String getLogin() {
@@ -41,25 +59,13 @@ public class UserPOJO extends BasicPOJO {
         this.password = password;
     }
 
-    public UserPOJO() {
-    }
-
-    public UserPOJO(String name, String surname, String login, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.login = login;
-        this.password = password;
-    }
-
     public Date getJoinedAt() {
         return joinedAt;
     }
 
-
     public void setJoinedAt(Date joinedAt) {
         this.joinedAt = joinedAt;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -85,13 +91,18 @@ public class UserPOJO extends BasicPOJO {
         this.surname = description;
     }
 
-    public List<Job> getJobs() {
+    public List<JobPOJO> getJobs() { return ParseTools.parseList(jobs, JobPOJO.class); }
+
+    public void setJobs(List<JobPOJO> jobs) {
+        this.jobs = ParseTools.parseList(jobs, Job.class);
+    }
+
+    public List<Job> getDBJobs() {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setDBJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
-
 
 }

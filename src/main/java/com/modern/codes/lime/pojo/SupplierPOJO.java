@@ -1,10 +1,11 @@
 package com.modern.codes.lime.pojo;
 
+import com.modern.codes.lime.ParseTools;
 import com.modern.codes.lime.model.Resource;
 import java.util.List;
 
-public class SupplierPOJO {
-    private String id;
+public class SupplierPOJO extends BasicPOJO{
+
     private String name;
     private String emailAddress;
     private String postalCode;
@@ -13,14 +14,6 @@ public class SupplierPOJO {
     private String street;
     private String telephone;
     private List<Resource> resources;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -78,12 +71,20 @@ public class SupplierPOJO {
         this.telephone = telephone;
     }
 
-    public List<Resource> getResources() {
+    public List<Resource> getDBResources() {
         return resources;
     }
 
-    public void setResources(List<Resource> resources) {
+    public void setDBResources(List<Resource> resources) {
         this.resources = resources;
+    }
+
+    public List<ResourcePOJO> getResources() {
+        return ParseTools.parseList(resources, ResourcePOJO.class);
+    }
+
+    public void setResources(List<ResourcePOJO> resources) {
+        this.resources = ParseTools.parseList(resources, Resource.class);
     }
 
 

@@ -76,11 +76,11 @@ public class ParseTools {
         usr.setId(user.getId());
         usr.setName(user.getName());
         usr.setSurname(user.getSurname());
-        usr.setJobs(user.getJobs());
+        usr.setDBJobs(user.getJobs());
         usr.setJoinedAt(user.getJoinedAt());
         usr.setLogin(user.getLogin());
         usr.setPassword(user.getPassword());
-        usr.setRoles(user.getRoles());
+        usr.setDBRoles(user.getRoles());
         return usr;
     }
     public static User parse(UserPOJO user) {
@@ -88,27 +88,27 @@ public class ParseTools {
         usr.setId(user.getId());
         usr.setName(user.getName());
         usr.setSurname(user.getSurname());
-        usr.setJobs(user.getJobs());
+        usr.setJobs(user.getDBJobs());
         usr.setJoinedAt(user.getJoinedAt());
         usr.setLogin(user.getLogin());
         usr.setPassword(user.getPassword());
-        usr.setRoles(user.getRoles());
+        usr.setRoles(user.getDBRoles());
         return usr;
     }
     public static FormulaPOJO parse(Formula formula){
         FormulaPOJO form = new FormulaPOJO();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
-        form.setProducts(formula.getProducts());
-        form.setResources(formula.getResources());
+        form.setDBProducts(formula.getProducts());
+        form.setDBResources(formula.getResources());
         return form;
     }
     public static Formula parse(FormulaPOJO formula){
         Formula form = new Formula();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
-        form.setProducts(formula.getProducts());
-        form.setResources(formula.getResources());
+        form.setProducts(formula.getDBProducts());
+        form.setResources(formula.getDBResources());
         return form;
     }
     public static JobPOJO parse(Job job){
@@ -116,7 +116,7 @@ public class ParseTools {
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
         jb.setId(job.getId());
-        jb.setProducts(job.getProducts());
+        jb.setDBProducts(job.getProducts());
         jb.setResultvalue(job.getResultvalue());
         jb.setStartDate(job.getStartDate());
         jb.setUser(job.getUser());
@@ -128,7 +128,7 @@ public class ParseTools {
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
         jb.setId(job.getId());
-        jb.setProducts(job.getProducts());
+        jb.setProducts(job.getDBProducts());
         jb.setResultvalue(job.getResultvalue());
         jb.setStartDate(job.getStartDate());
         jb.setUser(job.getUser());
@@ -197,7 +197,7 @@ public class ParseTools {
         sup.setId(supplier.getId());
         sup.setName(supplier.getName());
         sup.setPostalCode(supplier.getPostalCode());
-        sup.setResources(supplier.getResources());
+        sup.setDBResources(supplier.getResources());
         sup.setStreet(supplier.getStreet());
         sup.setTelephone(supplier.getTelephone());
         return sup;
@@ -210,7 +210,7 @@ public class ParseTools {
         sup.setId(supplier.getId());
         sup.setName(supplier.getName());
         sup.setPostalCode(supplier.getPostalCode());
-        sup.setResources(supplier.getResources());
+        sup.setResources(supplier.getDBResources());
         sup.setStreet(supplier.getStreet());
         sup.setTelephone(supplier.getTelephone());
         return sup;
@@ -218,31 +218,31 @@ public class ParseTools {
     public static RolePOJO parse(Role role){
         RolePOJO rl = new RolePOJO();
         rl.setId(role.getId());
-        rl.setPrivileges(role.getPrivileges());
+        rl.setDBPrivileges(role.getPrivileges());
         rl.setName(role.getName());
-        rl.setUsers(role.getUsers());
+        rl.setDBUsers(role.getUsers());
         return rl;
     }
     public static Role parse(RolePOJO role){
         Role rl = new Role();
         rl.setId(role.getId());
-        rl.setPrivileges(role.getPrivileges());
+        rl.setPrivileges(role.getDBPrivileges());
         rl.setName(role.getName());
-        rl.setUsers(role.getUsers());
+        rl.setUsers(role.getDBUsers());
         return rl;
     }
     public static PrivilegePOJO parse(Privilege privilege){
         PrivilegePOJO pv = new PrivilegePOJO();
         pv.setId(privilege.getId());
         pv.setName(privilege.getName());
-        pv.setRoles(privilege.getRoles());
+        pv.setDBRoles(privilege.getRoles());
         return pv;
     }
     public static Privilege parse(PrivilegePOJO privilege){
         Privilege pv = new Privilege();
         pv.setId(privilege.getId());
         pv.setName(privilege.getName());
-        pv.setRoles(privilege.getRoles());
+        pv.setRoles(privilege.getDBRoles());
         return pv;
     }
 
