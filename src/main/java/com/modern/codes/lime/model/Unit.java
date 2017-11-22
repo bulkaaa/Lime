@@ -7,7 +7,7 @@ package com.modern.codes.lime.model;
  */
 
 public enum Unit {
-    FEET,METERS,INCHES,MM,UNKNOWN;
+    FEET,METERS,INCHES,MM,UNKNOWN,UNIT,LITER,ML,GRAMS,KG,MG;
 
     public static Unit fromValue(final String val) {
         if (null != val) {
