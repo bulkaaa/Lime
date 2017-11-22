@@ -4,6 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface IUserDAO{
+public interface IUserDAO extends IBasicCRUDRepository<User, String>{
     List<User> getUserByNameAndSurname(String name, String surname);
 }

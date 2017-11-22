@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Transactional
-public class SupplierDAO implements ISupplierDAO {
+public abstract class SupplierDAO implements ISupplierDAO {
     @PersistenceContext
     private EntityManager entityManager;
 }
