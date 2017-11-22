@@ -7,16 +7,15 @@ package com.modern.codes.lime.model;
  */
 
 public enum Unit {
-    FEET,METERS,INCHES,MM,UNKNOWN,UNIT,LITER,ML,GRAMS,KG,MG;
+    FEET,METERS,INCHES,MM,UNKNOWN,UNIT,LITER,ML,GRAMS,KG,MG,SQM,CBM;
 
     public static Unit fromValue(final String val) {
         if (null != val) {
-            for (final Unit unit : Unit.values()) {
-                if (unit.toString().equalsIgnoreCase(val)) {
-                    return unit;
-                }
+            try{
+                return Unit.valueOf(val);
+            } catch (Exception e) {
+                return UNKNOWN;
             }
-            return UNKNOWN;
         } else {
             return null;
         }
