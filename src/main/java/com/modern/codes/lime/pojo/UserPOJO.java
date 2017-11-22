@@ -6,9 +6,9 @@ import com.modern.codes.lime.model.Role;
 import java.util.Date;
 import java.util.List;
 
-public class UserPOJO {
+public class UserPOJO extends BasicPOJO {
 
-    private String id;
+
     private String name;
     private String surname;
     private Date joinedAt;
@@ -55,18 +55,11 @@ public class UserPOJO {
         return joinedAt;
     }
 
-    public void setId(String id) {
-
-        this.id = id;
-    }
 
     public void setJoinedAt(Date joinedAt) {
         this.joinedAt = joinedAt;
     }
 
-    public String getId() {
-        return id;
-    }
 
     public void setName(String name) {
         this.name = name;
