@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Transactional
-public abstract class JobDAO implements IJobDAO {
+public class JobDAO implements IJobDAO {
     @PersistenceContext
     private EntityManager entityManager;
 }

@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Transactional
-public abstract class RoleDAO implements IRoleDAO {
+public class RoleDAO implements IRoleDAO {
     @PersistenceContext
     private EntityManager entityManager;
 }
