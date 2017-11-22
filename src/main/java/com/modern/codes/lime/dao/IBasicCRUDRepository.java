@@ -8,6 +8,5 @@ import java.util.List;
 
 @NoRepositoryBean
 public interface IBasicCRUDRepository<T, ID extends Serializable> extends CrudRepository<T, ID> {
-//    List<T> getListById();
-//    void getListById();
+      List<T> findAll();
 }
