@@ -1,33 +1,33 @@
 package com.modern.codes.lime.pojo;
 
+import com.modern.codes.lime.ParseTools;
 import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.model.User;
 
 import java.util.Date;
 import java.util.List;
 
-public class JobPOJO {
-    private String id;
+public class JobPOJO extends BasicPOJO{
     private List<Product> products;
     private User user;
     private String details;
     private Date startDate;
     private Date endDate;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public List<Product> getProducts() {
+    public List<Product> getDBProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setDBProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public List<ProductPOJO> getProducts() {
+        return ParseTools.parseList(products, ProductPOJO.class);
+    }
+
+    public void setProducts(List<ProductPOJO> products) {
+        this.products = ParseTools.parseList(products, Product.class);
     }
 
     public User getUser() {

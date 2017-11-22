@@ -4,8 +4,8 @@ import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.model.Unit;
 
-public class ResourcePOJO {
-    private String id;
+public class ResourcePOJO extends BasicPOJO{
+
     private String name;
     private String description;
     private Unit unit;
@@ -13,14 +13,6 @@ public class ResourcePOJO {
     private String category;
     private String image;
     private Supplier supplier;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
