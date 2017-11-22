@@ -4,6 +4,6 @@ import com.modern.codes.lime.model.Job;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IJobDAO  {
+public interface IJobDAO extends IBasicCRUDRepository<Job, String>{
 
 }

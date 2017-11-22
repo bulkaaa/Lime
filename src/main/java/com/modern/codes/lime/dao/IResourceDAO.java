@@ -4,5 +4,5 @@ import com.modern.codes.lime.model.Resource;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IResourceDAO {
+public interface IResourceDAO extends IBasicCRUDRepository<Resource, String>{
 }

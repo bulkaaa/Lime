@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface ISupplierDAO{
+public interface ISupplierDAO extends IBasicCRUDRepository<Supplier, String>{
 }

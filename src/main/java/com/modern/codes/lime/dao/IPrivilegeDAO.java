@@ -4,6 +4,6 @@ import com.modern.codes.lime.model.Privilege;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IPrivilegeDAO {
+public interface IPrivilegeDAO extends IBasicCRUDRepository<Privilege, String>{
 
 }

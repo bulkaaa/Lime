@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Transactional
-public class FormulaDAO implements IFormulaDAO {
+public abstract class FormulaDAO implements IFormulaDAO {
     @PersistenceContext
     private EntityManager entityManager;
 }
