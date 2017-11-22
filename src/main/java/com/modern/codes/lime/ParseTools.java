@@ -7,7 +7,7 @@ import com.modern.codes.lime.pojo.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ModelParser {
+public class ParseTools {
         enum ClassName {
             FormulaPOJO,
             Formula,
@@ -26,57 +26,52 @@ public class ModelParser {
             UserPOJO,
             User
         }
-    public List<Object> parseList(List<Object> obj){
-        if(obj.isEmpty())
-            throw new IllegalDataException("Trying to parse empty list.");
-        ClassName cl = ClassName.valueOf(obj.get(0).getClass().getSimpleName());
-        switch(cl) {
-            case FormulaPOJO:
-                return obj.stream().map(t->formulaParse((FormulaPOJO)t)).collect(Collectors.toList());
-            default:
-                throw new IllegalDataException("Illegal class to parse. Trying to parse: " + cl.toString());
-        }
-    }
-    public Object parse(Object obj){
+
+    public static Object parse(Object obj){
         ClassName cl = ClassName.valueOf(obj.getClass().getSimpleName());
         switch(cl) {
             case FormulaPOJO:
-                return formulaParse((FormulaPOJO) obj);
+                return parse((FormulaPOJO) obj);
             case Formula:
-                return formulaParse((Formula) obj);
+                return parse((Formula) obj);
             case JobPOJO:
-                return jobParse((JobPOJO) obj);
+                return parse((JobPOJO) obj);
             case Job:
-                return jobParse((Job) obj);
+                return parse((Job) obj);
             case PrivilegePOJO:
-                return privilegeParse((PrivilegePOJO) obj);
+                return parse((PrivilegePOJO) obj);
             case Privilege:
-                return privilegeParse((Privilege) obj);
+                return parse((Privilege) obj);
             case ProductPOJO:
-                return productParse((ProductPOJO) obj);
+                return parse((ProductPOJO) obj);
             case Product:
-                return productParse((Product) obj);
+                return parse((Product) obj);
             case ResourcePOJO:
-                return resourceParse((ResourcePOJO) obj);
+                return parse((ResourcePOJO) obj);
             case Resource:
-                return resourceParse((Resource) obj);
+                return parse((Resource) obj);
             case RolePOJO:
-                return roleParse((RolePOJO) obj);
+                return parse((RolePOJO) obj);
             case Role:
-                return roleParse((Role) obj);
+                return parse((Role) obj);
             case SupplierPOJO:
-                return supplierParse((SupplierPOJO) obj);
+                return parse((SupplierPOJO) obj);
             case Supplier:
-                return supplierParse((Supplier) obj);
+                return parse((Supplier) obj);
             case UserPOJO:
-                return userParse((UserPOJO) obj);
+                return parse((UserPOJO) obj);
             case User :
-                return userParse((User) obj);
+                return parse((User) obj);
             default:
                 throw new IllegalDataException("Illegal class to parse. Trying to parse: " + cl.toString());
         }
     }
-    private UserPOJO userParse(User user) {
+
+    public static<T> T parse (Object obj, Class<T> cl){
+        return convertInstanceOfObject(parse(obj), cl);
+
+    }
+    public static UserPOJO parse(User user) {
         UserPOJO usr = new UserPOJO();
         usr.setId(user.getId());
         usr.setName(user.getName());
@@ -88,7 +83,7 @@ public class ModelParser {
         usr.setRoles(user.getRoles());
         return usr;
     }
-    private User userParse(UserPOJO user) {
+    public static User parse(UserPOJO user) {
         User usr = new User();
         usr.setId(user.getId());
         usr.setName(user.getName());
@@ -100,7 +95,7 @@ public class ModelParser {
         usr.setRoles(user.getRoles());
         return usr;
     }
-    public FormulaPOJO formulaParse(Formula formula){
+    public static FormulaPOJO parse(Formula formula){
         FormulaPOJO form = new FormulaPOJO();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
@@ -108,7 +103,7 @@ public class ModelParser {
         form.setResources(formula.getResources());
         return form;
     }
-    private Formula formulaParse(FormulaPOJO formula){
+    public static Formula parse(FormulaPOJO formula){
         Formula form = new Formula();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
@@ -116,7 +111,7 @@ public class ModelParser {
         form.setResources(formula.getResources());
         return form;
     }
-    private JobPOJO jobParse(Job job){
+    public static JobPOJO parse(Job job){
         JobPOJO jb = new JobPOJO();
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
@@ -128,7 +123,7 @@ public class ModelParser {
         jb.setDetails(job.getDetails());
         return jb;
     }
-    private Job jobParse(JobPOJO job){
+    public static Job parse(JobPOJO job){
         Job jb = new Job();
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
@@ -140,7 +135,7 @@ public class ModelParser {
         jb.setDetails(job.getDetails());
         return jb;
     }
-    private ProductPOJO productParse(Product product){
+    public static ProductPOJO parse(Product product){
         ProductPOJO prdct = new ProductPOJO();
         prdct.setCategory(product.getCategory());
         prdct.setCreatedAt(product.getCreatedAt());
@@ -154,7 +149,7 @@ public class ModelParser {
         prdct.setUnit(product.getUnit());
         return prdct;
     }
-    private Product productParse(ProductPOJO product){
+    public static Product parse(ProductPOJO product){
         Product prdct = new Product();
         prdct.setCategory(product.getCategory());
         prdct.setCreatedAt(product.getCreatedAt());
@@ -168,7 +163,7 @@ public class ModelParser {
         prdct.setUnit(product.getUnit());
         return prdct;
     }
-    private ResourcePOJO resourceParse(Resource resource){
+    public static ResourcePOJO parse(Resource resource){
         ResourcePOJO res = new ResourcePOJO();
         res.setCategory(resource.getCategory());
         res.setDescription(resource.getDescription());
@@ -181,7 +176,7 @@ public class ModelParser {
         res.setUnit(resource.getUnit());
         return res;
     }
-    private Resource resourceParse(ResourcePOJO resource){
+    public static Resource parse(ResourcePOJO resource){
         Resource res = new Resource();
         res.setCategory(resource.getCategory());
         res.setDescription(resource.getDescription());
@@ -194,7 +189,7 @@ public class ModelParser {
         res.setUnit(resource.getUnit());
         return res;
     }
-    private SupplierPOJO supplierParse(Supplier supplier){
+    public static SupplierPOJO parse(Supplier supplier){
         SupplierPOJO sup = new SupplierPOJO();
         sup.setCity(supplier.getCity());
         sup.setEmailAddress(supplier.getEmailAddress());
@@ -207,7 +202,7 @@ public class ModelParser {
         sup.setTelephone(supplier.getTelephone());
         return sup;
     }
-    private Supplier supplierParse(SupplierPOJO supplier){
+    public static Supplier parse(SupplierPOJO supplier){
         Supplier sup = new Supplier();
         sup.setCity(supplier.getCity());
         sup.setEmailAddress(supplier.getEmailAddress());
@@ -220,7 +215,7 @@ public class ModelParser {
         sup.setTelephone(supplier.getTelephone());
         return sup;
     }
-    private RolePOJO roleParse(Role role){
+    public static RolePOJO parse(Role role){
         RolePOJO rl = new RolePOJO();
         rl.setId(role.getId());
         rl.setPrivileges(role.getPrivileges());
@@ -228,7 +223,7 @@ public class ModelParser {
         rl.setUsers(role.getUsers());
         return rl;
     }
-    private Role roleParse(RolePOJO role){
+    public static Role parse(RolePOJO role){
         Role rl = new Role();
         rl.setId(role.getId());
         rl.setPrivileges(role.getPrivileges());
@@ -236,18 +231,32 @@ public class ModelParser {
         rl.setUsers(role.getUsers());
         return rl;
     }
-    private PrivilegePOJO privilegeParse(Privilege privilege){
+    public static PrivilegePOJO parse(Privilege privilege){
         PrivilegePOJO pv = new PrivilegePOJO();
         pv.setId(privilege.getId());
         pv.setName(privilege.getName());
         pv.setRoles(privilege.getRoles());
         return pv;
     }
-    private Privilege privilegeParse(PrivilegePOJO privilege){
+    public static Privilege parse(PrivilegePOJO privilege){
         Privilege pv = new Privilege();
         pv.setId(privilege.getId());
         pv.setName(privilege.getName());
         pv.setRoles(privilege.getRoles());
         return pv;
+    }
+
+    public static List<?> parseList(List<?> list) {
+        return list.stream().map(ParseTools::parse).collect(Collectors.toList());
+    }
+    public static <T> List<T>  parseList(List<?> list, Class<T> cl){
+        return list.stream().map(t-> ParseTools.parse(t, cl)).collect(Collectors.toList());
+    }
+    public static <T> T convertInstanceOfObject(Object o, Class<T> clazz) {
+        try {
+            return clazz.cast(o);
+        } catch(ClassCastException e) {
+            return null;
+        }
     }
 }
