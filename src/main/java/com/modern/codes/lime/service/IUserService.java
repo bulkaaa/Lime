@@ -8,5 +8,6 @@ import java.util.List;
 public interface IUserService {
     List<UserPOJO> findAll();
     UserPOJO delete(String id);
+    List<UserPOJO> getUserByNameAndSurname(String name, String surname);
     void save(Object t);
 }

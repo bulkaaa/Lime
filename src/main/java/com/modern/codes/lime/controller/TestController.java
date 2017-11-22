@@ -28,10 +28,12 @@ public class TestController {
         return true;
     }
     @GetMapping(path = "/hello-world")
-    public String helloWorld(){
+    public List<UserPOJO> helloWorld(){
+        UserPOJO t = new UserPOJO("testtest", "testtest","a", "a" );
+        userService.save(t);
+        t = userService.getUserByNameAndSurname("testtest", "testtest").get(0);
+        userService.save(t);
         List<UserPOJO> flist = userService.findAll();
-        List<Object> newList= new ArrayList<Object>(flist);
-        List<User> newLis = ParseTools.parseList(newList, User.class);
-        return newLis.get(0).getClass().getSimpleName() + " " + newLis.getClass().getSimpleName() + " " + newLis.size() + " " + newLis.get(0).getName();
+        return flist;
     }
 }

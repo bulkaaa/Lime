@@ -37,8 +37,10 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
 
     @Override
     public void save(Object t) {
-        if (Object.class != T_POJOtype)
+        try {
+            dao.save(ParseTools.parse(t, Ttype));
+        } catch (Exception e){
             throw new IllegalDataException("Trying to save wrong type of object it's " + Object.class + " object, should be " + T_POJOtype);
-        dao.save(ParseTools.parse(t, Ttype));
+        }
     }
 }
