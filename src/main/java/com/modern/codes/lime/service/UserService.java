@@ -18,6 +18,7 @@ public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> impl
         super(dao, User.class, UserPOJO.class);
         this.dao = dao;
     }
+    @Override
     public List<UserPOJO> getUserByNameAndSurname(String name, String surname){
         return ParseTools.parseList(dao.getUserByNameAndSurname(name, surname), UserPOJO.class);
     }
