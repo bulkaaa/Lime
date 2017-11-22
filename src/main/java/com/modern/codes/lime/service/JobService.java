@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implements IJobService {
 
+    private IJobDAO dao;
     @Autowired
-    IJobDAO dao;
-    public JobService() {
-        super(Job.class, JobPOJO.class);
+    public JobService(IJobDAO dao) {
+        super(dao, Job.class, JobPOJO.class);
+        this.dao = dao;
     }
 }

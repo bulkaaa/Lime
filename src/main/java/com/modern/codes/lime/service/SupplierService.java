@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class SupplierService extends BasicCRUDService<Supplier, SupplierPOJO, ISupplierDAO> implements ISupplierService {
 
-    @Autowired
     ISupplierDAO dao;
-    public SupplierService() {
-        super(Supplier.class, SupplierPOJO.class);
+    @Autowired
+    public SupplierService(ISupplierDAO dao) {
+        super(dao, Supplier.class, SupplierPOJO.class);
+        this.dao = dao;
     }
 }

@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService extends BasicCRUDService<Product, ProductPOJO, IProductDAO> implements IProductService {
 
-    @Autowired
     IProductDAO dao;
-    public ProductService() {
-        super(Product.class, ProductPOJO.class);
+    @Autowired
+    public ProductService(IProductDAO dao) {
+        super(dao, Product.class, ProductPOJO.class);
+        this.dao = dao;
     }
 }
