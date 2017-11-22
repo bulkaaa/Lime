@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleService extends BasicCRUDService<Role, RolePOJO, IRoleDAO> implements IRoleService {
 
-    @Autowired
     IRoleDAO dao;
-    public RoleService() {
-        super(Role.class, RolePOJO.class);
+    @Autowired
+    public RoleService(IRoleDAO dao) {
+        super(dao, Role.class, RolePOJO.class);
+        this.dao = dao;
     }
 }

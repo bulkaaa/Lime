@@ -12,10 +12,11 @@ import java.util.List;
 @Service
 public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> implements IUserService {
 
+    private IUserDAO dao;
     @Autowired
-    IUserDAO dao;
-    public UserService() {
-        super(User.class, UserPOJO.class);
+    public UserService(IUserDAO dao) {
+        super(dao, User.class, UserPOJO.class);
+        this.dao = dao;
     }
     public List<UserPOJO> getUserByNameAndSurname(String name, String surname){
         return ParseTools.parseList(dao.getUserByNameAndSurname(name, surname), UserPOJO.class);

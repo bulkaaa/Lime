@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrivilegeService extends BasicCRUDService<Privilege, PrivilegePOJO, IPrivilegeDAO> implements IPrivilegeService {
 
+    private IPrivilegeDAO dao;
     @Autowired
-    IPrivilegeDAO dao;
-    public PrivilegeService() {
-        super(Privilege.class, PrivilegePOJO.class);
+    public PrivilegeService(IPrivilegeDAO dao) {
+        super(dao, Privilege.class, PrivilegePOJO.class);
+        this.dao = dao;
     }
 }

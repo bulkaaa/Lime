@@ -5,18 +5,17 @@ import com.modern.codes.lime.dao.IBasicCRUDRepository;
 import com.modern.codes.lime.exception.IllegalDataException;
 import com.modern.codes.lime.exception.NotFoundException;
 import com.modern.codes.lime.pojo.BasicPOJO;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 
 public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T, String>> implements IBasicCRUDService{
-    @Autowired
     private T_DAO dao;
     private Class<T> Ttype;
     private Class<T_POJO> T_POJOtype;
 
-    BasicCRUDService(Class<T> Ttype, Class<T_POJO> T_POJOtype) {
+    BasicCRUDService(T_DAO dao, Class<T> Ttype, Class<T_POJO> T_POJOtype) {
+        this.dao = dao;
         this.Ttype = Ttype;
         this.T_POJOtype = T_POJOtype;
     }

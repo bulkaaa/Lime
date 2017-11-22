@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IFormulaDAO> implements IFormulaService {
 
+    private IFormulaDAO dao;
     @Autowired
-    IFormulaDAO dao;
-    public FormulaService() {
-        super(Formula.class, FormulaPOJO.class);
+    public FormulaService(IFormulaDAO dao) {
+        super(dao, Formula.class, FormulaPOJO.class);
+        this.dao = dao;
     }
 }
