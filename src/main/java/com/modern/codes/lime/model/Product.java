@@ -5,19 +5,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.URL;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Model representation of a product created in Lime.
@@ -80,9 +74,8 @@ public class Product implements Serializable {
 
     private Integer expectedValue;
 
-    @ManyToOne
-    @JoinColumn(name = "job_id", referencedColumnName="ID")
-    private Job job;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Job> jobs;
 
     @ManyToOne
     @JoinColumn(name = "formula_id", referencedColumnName="ID")
@@ -169,12 +162,12 @@ public class Product implements Serializable {
         this.unit = unit;
     }
 
-    public Job getJob() {
-        return job;
+    public List<Job> getJob() {
+        return jobs;
     }
 
-    public void setJob(Job job) {
-        this.job = job;
+    public void setJob(List<Job> jobs) {
+        this.jobs = jobs;
     }
 
     public String getCategory() {
