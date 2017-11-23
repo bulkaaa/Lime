@@ -3,6 +3,8 @@ package com.modern.codes.lime.service;
 import com.modern.codes.lime.pojo.ProductPOJO;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface IProductService {
     List<ProductPOJO> findAll();
@@ -16,4 +18,16 @@ public interface IProductService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+    static List<ProductPOJO> filterByName(List<ProductPOJO> list, String name){
+        return filterByName(list.stream(), name).collect(Collectors.toList());
+    }
+    static Stream<ProductPOJO> filterByName(Stream<ProductPOJO> stream, String name){
+        return stream.filter(t -> t.getName().equals(name));
+    }
+    static List<ProductPOJO> filterByCategory(List<ProductPOJO> list, String category){
+        return filterByCategory(list.stream(), category).collect(Collectors.toList());
+    }
+    static Stream<ProductPOJO> filterByCategory(Stream<ProductPOJO> stream, String category){
+        return stream.filter(t -> t.getCategory().equals(category));
+    }
 }

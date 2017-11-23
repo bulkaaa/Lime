@@ -1,10 +1,12 @@
 package com.modern.codes.lime.pojo;
 
+import com.modern.codes.lime.ParseTools;
 import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.Unit;
 
 import java.util.Date;
+import java.util.List;
 
 public class ProductPOJO extends BasicPOJO{
 
@@ -15,7 +17,7 @@ public class ProductPOJO extends BasicPOJO{
     private String category;
     private String image;
     private Integer expectedValue;
-    private Job job;
+    private List<Job> jobs;
     private Formula formula;
 
     public String getName() {
@@ -74,19 +76,35 @@ public class ProductPOJO extends BasicPOJO{
         this.expectedValue = expectedValue;
     }
 
-    public Job getJob() {
-        return job;
+    public List<Job> getDBJobs() {
+        return jobs;
     }
 
-    public void setJob(Job job) {
-        this.job = job;
+    public void setDBJobs(List<Job> jobs) {
+        this.jobs = jobs;
     }
 
-    public Formula getFormula() {
+    public List<JobPOJO> getJobs() {
+        return ParseTools.parseList(jobs, JobPOJO.class);
+    }
+
+    public void setJobs(List<JobPOJO> jobs) {
+        this.jobs = ParseTools.parseList(jobs, Job.class);
+    }
+
+    public Formula getDBFormula() {
         return formula;
     }
 
-    public void setFormula(Formula formula) {
+    public void setDBFormula(Formula formula) {
         this.formula = formula;
     }
+    public FormulaPOJO getFormula() {
+        return ParseTools.parse(formula);
+    }
+
+    public void setFormula(FormulaPOJO formula) {
+        this.formula = ParseTools.parse(formula);
+    }
+
 }
