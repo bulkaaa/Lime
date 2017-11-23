@@ -1,5 +1,6 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.pojo.JobPOJO;
 import com.modern.codes.lime.pojo.ProductPOJO;
 
 import java.util.List;
@@ -29,5 +30,11 @@ public interface IProductService {
     }
     static Stream<ProductPOJO> filterByCategory(Stream<ProductPOJO> stream, String category){
         return stream.filter(t -> t.getCategory().equals(category));
+    }
+    static List<ProductPOJO> filterByJob(List<ProductPOJO> list, JobPOJO job){
+        return filterByJob(list.stream(), job).collect(Collectors.toList());
+    }
+    static Stream<ProductPOJO> filterByJob(Stream<ProductPOJO> stream, JobPOJO job){
+        return stream.filter(t -> t.getJobs().contains(job));
     }
 }
