@@ -49,8 +49,11 @@ public interface ISupplierService {
     static Stream<SupplierPOJO> filterByCountry(Stream<SupplierPOJO> stream, String country){
         return stream.filter(t -> t.getCountry().equals(country));
     }
-    static Stream<SupplierPOJO> filterByResource(Stream<SupplierPOJO> stream, String ResourceName){
-        return stream.filter(t -> !IResourceService.filterByName(t.getResources(), ResourceName).isEmpty());
+    static List<SupplierPOJO> filterByResource(List<SupplierPOJO> list, String resourceName){
+        return filterByResource(list.stream(), resourceName).collect(Collectors.toList());
+    }
+    static Stream<SupplierPOJO> filterByResource(Stream<SupplierPOJO> stream, String resourceName){
+        return stream.filter(t -> !IResourceService.filterByName(t.getResources(), resourceName).isEmpty());
     }
     static List<SupplierPOJO> filterByResource(List<SupplierPOJO> list, ResourcePOJO resource){
         return filterByResource(list.stream(), resource).collect(Collectors.toList());
