@@ -33,7 +33,7 @@ public interface IUserService {
         return stream.filter(t -> t.getName().equals(surname));
     }
     static List<UserPOJO> filterByRole(List<UserPOJO> list, String roleName){
-        return filterBySurname(list.stream(), roleName).collect(Collectors.toList());
+        return filterByRole(list.stream(), roleName).collect(Collectors.toList());
     }
     static Stream<UserPOJO> filterByRole(Stream<UserPOJO> stream, String roleName){
         return stream.filter(t -> !IRoleService.filterByName(t.getRoles(), roleName).isEmpty());
