@@ -27,12 +27,20 @@ public class JobPOJO extends BasicPOJO{
         this.product = ParseTools.parse(products, Product.class);
     }
 
-    public User getUser() {
+    public User getDBUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setDBUser(User user) {
         this.user = user;
+    }
+
+    public UserPOJO getUser() {
+        return ParseTools.parse(user);
+    }
+
+    public void setUser(UserPOJO user) {
+        this.user = ParseTools.parse(user);
     }
 
     public String getDetails() {
