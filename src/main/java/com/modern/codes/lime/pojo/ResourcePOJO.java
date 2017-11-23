@@ -1,5 +1,6 @@
 package com.modern.codes.lime.pojo;
 
+import com.modern.codes.lime.ParseTools;
 import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.model.Unit;
@@ -62,13 +63,22 @@ public class ResourcePOJO extends BasicPOJO{
         this.image = image;
     }
 
-    public Supplier getSupplier() {
+    public Supplier getDBSupplier() {
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public void setDBSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
+
+    public SupplierPOJO getSupplier() {
+        return ParseTools.parse(supplier);
+    }
+
+    public void setSupplier(SupplierPOJO supplier) {
+        this.supplier = ParseTools.parse(supplier);
+    }
+
 
     public Formula getFormula() {
         return formula;
