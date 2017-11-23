@@ -1,5 +1,6 @@
 package com.modern.codes.lime.pojo;
 
+import com.modern.codes.lime.ParseTools;
 import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.Unit;
@@ -74,12 +75,20 @@ public class ProductPOJO extends BasicPOJO{
         this.expectedValue = expectedValue;
     }
 
-    public Job getJob() {
+    public Job getDBJob() {
         return job;
     }
 
-    public void setJob(Job job) {
+    public void setDBJob(Job job) {
         this.job = job;
+    }
+    
+    public JobPOJO getJob() {
+        return ParseTools.parse(job);
+    }
+
+    public void setJob(JobPOJO job) {
+        this.job = ParseTools.parse(job);
     }
 
     public Formula getFormula() {
