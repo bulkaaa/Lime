@@ -162,11 +162,11 @@ public class Product implements Serializable {
         this.unit = unit;
     }
 
-    public List<Job> getJobs() {
+    public List<Job> getJob() {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJob(List<Job> jobs) {
         this.jobs = jobs;
     }
 

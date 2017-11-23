@@ -76,12 +76,12 @@ public class ProductPOJO extends BasicPOJO{
         this.expectedValue = expectedValue;
     }
 
-    public List<Job> getDBJob() {
+    public List<Job> getDBJobs() {
         return jobs;
     }
 
-    public void setDBJob(List<Job> job) {
-        this.jobs = job;
+    public void setDBJobs(List<Job> jobs) {
+        this.jobs = jobs;
     }
 
     public List<JobPOJO> getJobs() {
