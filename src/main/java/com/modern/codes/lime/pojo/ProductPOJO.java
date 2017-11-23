@@ -82,7 +82,7 @@ public class ProductPOJO extends BasicPOJO{
     public void setDBJob(Job job) {
         this.job = job;
     }
-    
+
     public JobPOJO getJob() {
         return ParseTools.parse(job);
     }
@@ -98,4 +98,5 @@ public class ProductPOJO extends BasicPOJO{
     public void setFormula(Formula formula) {
         this.formula = formula;
     }
+
 }

@@ -158,7 +158,7 @@ public class ParseTools {
         prdct.setFormula(product.getFormula());
         prdct.setId(product.getId());
         prdct.setImage(product.getImage());
-        prdct.setJob(product.getJob());
+        prdct.setDBJob(product.getJob());
         prdct.setName(product.getName());
         prdct.setUnit(product.getUnit());
         return prdct;
@@ -174,7 +174,7 @@ public class ParseTools {
         prdct.setFormula(product.getFormula());
         prdct.setId(product.getId());
         prdct.setImage(product.getImage());
-        prdct.setJob(product.getJob());
+        prdct.setJob(product.getDBJob());
         prdct.setName(product.getName());
         prdct.setUnit(product.getUnit());
         return prdct;
