@@ -5,29 +5,26 @@ import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.model.User;
 
 import java.util.Date;
-import java.util.List;
 
 public class JobPOJO extends BasicPOJO{
-    private List<Product> products;
+    private Product product;
     private User user;
     private String details;
     private Date startDate;
     private Date endDate;
-
-    public List<Product> getDBProducts() {
-        return products;
+    private Integer resultValue;
+    public void setDBProduct(Product product) {
+        this.product = product;
+    }
+    public Product getDBProduct() {
+        return product;
+    }
+    public ProductPOJO getProduct() {
+        return ParseTools.parse(product, ProductPOJO.class);
     }
 
-    public void setDBProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public List<ProductPOJO> getProducts() {
-        return ParseTools.parseList(products, ProductPOJO.class);
-    }
-
-    public void setProducts(List<ProductPOJO> products) {
-        this.products = ParseTools.parseList(products, Product.class);
+    public void setProduct(ProductPOJO products) {
+        this.product = ParseTools.parse(products, Product.class);
     }
 
     public User getUser() {
@@ -62,13 +59,12 @@ public class JobPOJO extends BasicPOJO{
         this.endDate = endDate;
     }
 
-    public Integer getResultvalue() {
-        return resultvalue;
+    public Integer getResultValue() {
+        return resultValue;
     }
 
-    public void setResultvalue(Integer resultvalue) {
-        this.resultvalue = resultvalue;
+    public void setResultValue(Integer resultValue) {
+        this.resultValue = resultValue;
     }
 
-    private Integer resultvalue;
 }

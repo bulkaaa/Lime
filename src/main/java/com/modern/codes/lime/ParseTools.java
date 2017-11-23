@@ -126,7 +126,7 @@ public class ParseTools {
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
         jb.setId(job.getId());
-        jb.setDBProducts(job.getProducts());
+        jb.setDBProduct(job.getProducts());
         jb.setResultvalue(job.getResultvalue());
         jb.setStartDate(job.getStartDate());
         jb.setUser(job.getUser());
@@ -140,7 +140,7 @@ public class ParseTools {
         jb.setDetails(job.getDetails());
         jb.setEndDate(job.getEndDate());
         jb.setId(job.getId());
-        jb.setProducts(job.getDBProducts());
+        jb.setProducts(job.getDBProduct());
         jb.setResultvalue(job.getResultvalue());
         jb.setStartDate(job.getStartDate());
         jb.setUser(job.getUser());
@@ -158,7 +158,7 @@ public class ParseTools {
         prdct.setFormula(product.getFormula());
         prdct.setId(product.getId());
         prdct.setImage(product.getImage());
-        prdct.setDBJob(product.getJob());
+        prdct.setDBJob(product.getJobs());
         prdct.setName(product.getName());
         prdct.setUnit(product.getUnit());
         return prdct;
@@ -174,7 +174,7 @@ public class ParseTools {
         prdct.setFormula(product.getFormula());
         prdct.setId(product.getId());
         prdct.setImage(product.getImage());
-        prdct.setJob(product.getDBJob());
+        prdct.setJobs(product.getDBJob());
         prdct.setName(product.getName());
         prdct.setUnit(product.getUnit());
         return prdct;

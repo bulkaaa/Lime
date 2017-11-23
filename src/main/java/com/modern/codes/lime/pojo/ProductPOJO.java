@@ -6,6 +6,7 @@ import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.Unit;
 
 import java.util.Date;
+import java.util.List;
 
 public class ProductPOJO extends BasicPOJO{
 
@@ -16,7 +17,7 @@ public class ProductPOJO extends BasicPOJO{
     private String category;
     private String image;
     private Integer expectedValue;
-    private Job job;
+    private List<Job> jobs;
     private Formula formula;
 
     public String getName() {
@@ -75,20 +76,20 @@ public class ProductPOJO extends BasicPOJO{
         this.expectedValue = expectedValue;
     }
 
-    public Job getDBJob() {
-        return job;
+    public List<Job> getDBJob() {
+        return jobs;
     }
 
-    public void setDBJob(Job job) {
-        this.job = job;
+    public void setDBJob(List<Job> job) {
+        this.jobs = job;
     }
 
-    public JobPOJO getJob() {
-        return ParseTools.parse(job);
+    public List<JobPOJO> getJobs() {
+        return ParseTools.parseList(jobs, JobPOJO.class);
     }
 
-    public void setJob(JobPOJO job) {
-        this.job = ParseTools.parse(job);
+    public void setJobs(List<JobPOJO> jobs) {
+        this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
     public Formula getFormula() {
