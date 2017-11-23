@@ -1,5 +1,6 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.model.Role;
 import com.modern.codes.lime.pojo.UserPOJO;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,11 @@ public interface IUserService {
     }
     static Stream<UserPOJO> filterByRole(Stream<UserPOJO> stream, String roleName){
         return stream.filter(t -> !IRoleService.filterByName(t.getRoles(), roleName).isEmpty());
+    }
+    static List<UserPOJO> filterByRole(List<UserPOJO> list, Role role){
+        return filterByRole(list.stream(), role).collect(Collectors.toList());
+    }
+    static Stream<UserPOJO> filterByRole(Stream<UserPOJO> stream, Role role){
+        return stream.filter(t -> t.getRoles().contains(role));
     }
 }
