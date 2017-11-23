@@ -92,12 +92,19 @@ public class ProductPOJO extends BasicPOJO{
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
-    public Formula getFormula() {
+    public Formula getDBFormula() {
         return formula;
     }
 
-    public void setFormula(Formula formula) {
+    public void setDBFormula(Formula formula) {
         this.formula = formula;
+    }
+    public FormulaPOJO getFormula() {
+        return ParseTools.parse(formula);
+    }
+
+    public void setFormula(FormulaPOJO formula) {
+        this.formula = ParseTools.parse(formula);
     }
 
 }
