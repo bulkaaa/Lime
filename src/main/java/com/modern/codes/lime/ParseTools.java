@@ -190,7 +190,7 @@ public class ParseTools {
         res.setImage(resource.getImage());
         res.setName(resource.getName());
         res.setQuantity(resource.getQuantity());
-        res.setSupplier(resource.getSupplier());
+        res.setDBSupplier(resource.getSupplier());
         res.setUnit(resource.getUnit());
         return res;
     }
@@ -205,7 +205,7 @@ public class ParseTools {
         res.setImage(resource.getImage());
         res.setName(resource.getName());
         res.setQuantity(resource.getQuantity());
-        res.setSupplier(resource.getSupplier());
+        res.setSupplier(resource.getDBSupplier());
         res.setUnit(resource.getUnit());
         return res;
     }
