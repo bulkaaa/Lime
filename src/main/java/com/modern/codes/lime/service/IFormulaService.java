@@ -37,12 +37,12 @@ public interface IFormulaService {
         return filterByProduct(list.stream(), productName).collect(Collectors.toList());
     }
     static Stream<FormulaPOJO> filterByProduct(Stream<FormulaPOJO> stream, String productName){
-        return stream.filter(t -> !IProductService.filterByName(t.getProducts(), productName).isEmpty());
+        return stream.filter(t -> t.getProduct().getName().equals(productName));
     }
     static List<FormulaPOJO> filterByProduct(List<FormulaPOJO> list, ProductPOJO product){
         return filterByProduct(list.stream(), product).collect(Collectors.toList());
     }
     static Stream<FormulaPOJO> filterByProduct(Stream<FormulaPOJO> stream, ProductPOJO product){
-        return stream.filter(t -> t.getProducts().contains(product));
+        return stream.filter(t -> t.getProduct().equals(product));
     }
 }

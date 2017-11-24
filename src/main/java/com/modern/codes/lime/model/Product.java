@@ -77,9 +77,8 @@ public class Product implements Serializable {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Job> jobs;
 
-    @ManyToOne
-    @JoinColumn(name = "formula_id", referencedColumnName="ID")
-    private Formula formula;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Formula> formulas;
 
     @PrePersist
     public void updateTimeStamps() {
@@ -198,15 +197,14 @@ public class Product implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public void setFormula(Formula formula) {
-        this.formula = formula;
+    public void setFormula(List<Formula> formulas) {
+        this.formulas = formulas;
     }
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public Formula getFormula() {
-
-        return formula;
+    public List<Formula> getFormula() {
+        return formulas;
     }
 }
