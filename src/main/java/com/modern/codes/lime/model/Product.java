@@ -14,12 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Model representation of a product created in Lime.
+ * Model representation of a product added in Lime.
  *
  * @author jaroszk
  *
  */
-@ApiModel(description = "Model representation of a product created in Lime")
+@ApiModel(description = "Model representation of a product in Lime")
 @Entity
 public class Product implements Serializable {
 
@@ -56,8 +56,8 @@ public class Product implements Serializable {
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "created_at", updatable = false)
-    private Date createdAt;
+    @Column(nullable = false, name = "added_at", updatable = false)
+    private Date addedAt;
 
     @ApiModelProperty(value = "The category of the product", required = true)
     @NotNull
@@ -82,8 +82,8 @@ public class Product implements Serializable {
 
     @PrePersist
     public void updateTimeStamps() {
-        if (createdAt == null) {
-            createdAt = new Date();
+        if (addedAt == null) {
+            addedAt = new Date();
         }
     }
 
@@ -149,8 +149,8 @@ public class Product implements Serializable {
      *
      * @return The product creation date
      */
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getAddedAt() {
+        return addedAt;
     }
 
     public Unit getUnit() {
@@ -193,8 +193,8 @@ public class Product implements Serializable {
         this.expectedValue = expectedValue;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setAddedAt(Date addedAt) {
+        this.addedAt = addedAt;
     }
 
     public void setFormula(List<Formula> formulas) {

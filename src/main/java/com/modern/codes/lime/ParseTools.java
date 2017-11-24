@@ -152,7 +152,7 @@ public class ParseTools {
             return null;
         ProductPOJO prdct = new ProductPOJO();
         prdct.setCategory(product.getCategory());
-        prdct.setCreatedAt(product.getCreatedAt());
+        prdct.setAddedAt(product.getAddedAt());
         prdct.setDescription(product.getDescription());
         prdct.setExpectedValue(product.getExpectedValue());
         prdct.setDBFormulas(product.getFormula());
@@ -168,7 +168,7 @@ public class ParseTools {
             return null;
         Product prdct = new Product();
         prdct.setCategory(product.getCategory());
-        prdct.setCreatedAt(product.getCreatedAt());
+        prdct.setAddedAt(product.getAddedAt());
         prdct.setDescription(product.getDescription());
         prdct.setExpectedValue(product.getExpectedValue());
         prdct.setFormula(product.getDBFormulas());
