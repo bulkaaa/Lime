@@ -1,4 +1,5 @@
 package com.modern.codes.lime.dao;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -6,9 +7,35 @@ import org.springframework.transaction.annotation.Transactional;
 import com.modern.codes.lime.model.User;
 
 @Transactional
-public abstract class UserDAO implements IUserDAO {
+public class UserCustomDAO implements IUserCustomDAO {
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Override
+    public List<User> getUserByName(String name, String surname) {
+        return null;
+    }
+
+    @Override
+    public List<User> getUserBySurname(String name, String surname) {
+        return null;
+    }
+
+    @Override
+    public List<User> getUserByLogin(String name, String surname) {
+        return null;
+    }
+
+    @Override
+    public List<User> getUserJoinedAtBefore(Date date) {
+        return null;
+    }
+
+    @Override
+    public List<User> getUserJoinedAtAfter(Date date) {
+        return null;
+    }
+
     @Override
     public List<User> getUserByNameAndSurname(String name, String surname) {
         String hql = "FROM User as usr WHERE usr.name = ? and usr.surname = ?";

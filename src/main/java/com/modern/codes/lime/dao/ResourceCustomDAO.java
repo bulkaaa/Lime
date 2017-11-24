@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Transactional
-public abstract class PrivilegeDAO implements IPrivilegeDAO {
+public class ResourceCustomDAO implements IResourceCustomDAO {
     @PersistenceContext
     private EntityManager entityManager;
 }

@@ -22,7 +22,7 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
         this.T_POJOtype = T_POJOtype;
     }
     @Override
-    public List<T_POJO> findAll(){
+    public List<T_POJO> getAll(){
         Optional<List<T>> t = Optional.ofNullable(dao.findAll());
         if(!t.isPresent())
             throw new NotFoundException(Ttype + " object could not be found in DB");
@@ -61,7 +61,7 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
         dao.deleteAll();
     }
     @Override
-    public T_POJO findById(String id){
+    public T_POJO getById(String id){
         try{
         return ParseTools.parse(dao.findOne(id), T_POJOtype);
         } catch (Exception e){
