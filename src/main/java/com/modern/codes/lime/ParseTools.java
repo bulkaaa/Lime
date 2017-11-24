@@ -127,7 +127,7 @@ public class ParseTools {
         jb.setEndDate(job.getEndDate());
         jb.setId(job.getId());
         jb.setDBProduct(job.getProducts());
-        jb.setResultValue(job.getResultvalue());
+        jb.setResultValue(job.getResultValue());
         jb.setStartDate(job.getStartDate());
         jb.setDBUser(job.getUser());
         jb.setDetails(job.getDetails());
@@ -141,7 +141,7 @@ public class ParseTools {
         jb.setEndDate(job.getEndDate());
         jb.setId(job.getId());
         jb.setProducts(job.getDBProduct());
-        jb.setResultvalue(job.getResultValue());
+        jb.setResultValue(job.getResultValue());
         jb.setStartDate(job.getStartDate());
         jb.setUser(job.getDBUser());
         jb.setDetails(job.getDetails());
