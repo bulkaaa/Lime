@@ -18,7 +18,7 @@ public class ProductPOJO extends BasicPOJO{
     private String image;
     private Integer expectedValue;
     private List<Job> jobs;
-    private Formula formula;
+    private List<Formula> formulas;
 
     public String getName() {
         return name;
@@ -92,19 +92,20 @@ public class ProductPOJO extends BasicPOJO{
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
-    public Formula getDBFormula() {
-        return formula;
+    public List<Formula> getDBFormulas() {
+        return formulas;
     }
 
-    public void setDBFormula(Formula formula) {
-        this.formula = formula;
-    }
-    public FormulaPOJO getFormula() {
-        return ParseTools.parse(formula);
+    public void setDBFormulas(List<Formula> formulas) {
+        this.formulas = formulas;
     }
 
-    public void setFormula(FormulaPOJO formula) {
-        this.formula = ParseTools.parse(formula);
+    public List<FormulaPOJO> getFormulas() {
+        return ParseTools.parseList(formulas, FormulaPOJO.class);
+    }
+
+    public void setFormulas(List<FormulaPOJO> formulas) {
+        this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
 
 }

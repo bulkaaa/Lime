@@ -155,7 +155,7 @@ public class ParseTools {
         prdct.setCreatedAt(product.getCreatedAt());
         prdct.setDescription(product.getDescription());
         prdct.setExpectedValue(product.getExpectedValue());
-        prdct.setDBFormula(product.getFormula());
+        prdct.setDBFormulas(product.getFormula());
         prdct.setId(product.getId());
         prdct.setImage(product.getImage());
         prdct.setDBJobs(product.getJob());
@@ -171,7 +171,7 @@ public class ParseTools {
         prdct.setCreatedAt(product.getCreatedAt());
         prdct.setDescription(product.getDescription());
         prdct.setExpectedValue(product.getExpectedValue());
-        prdct.setFormula(product.getDBFormula());
+        prdct.setFormula(product.getDBFormulas());
         prdct.setId(product.getId());
         prdct.setImage(product.getImage());
         prdct.setJob(product.getDBJobs());

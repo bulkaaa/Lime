@@ -32,8 +32,9 @@ public class Formula implements Serializable {
     @JoinColumn(name = "resource_id", referencedColumnName="ID")
     private Resource resource;
 
-    @OneToMany(mappedBy = "formula", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Product> products;
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName="ID")
+    private Product product;
 
     @ApiModelProperty(value = "The quantity of resources needed for product", required = true)
     @NotNull
@@ -48,12 +49,12 @@ public class Formula implements Serializable {
         this.resource = resources;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Product getProducts() {
+        return product;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProducts(Product product) {
+        this.product = product;
     }
 
     public Integer getValue() {

@@ -9,7 +9,7 @@ import java.util.List;
 public class FormulaPOJO extends BasicPOJO{
 
     private Resource resource;
-    private List<Product> products;
+    private Product product;
     private Integer value;
 
     public Resource getDBResource() {
@@ -25,23 +25,23 @@ public class FormulaPOJO extends BasicPOJO{
     }
 
     public void setResource(ResourcePOJO resources) {
-        this.resource = ParseTools.parse(resource, Resource.class);
+        this.resource = ParseTools.parse(resources, Resource.class);
     }
 
-    public List<Product> getDBProducts() {
-        return products;
+    public Product getDBProduct() {
+        return product;
     }
 
-    public void setDBProducts(List<Product> products) {
-        this.products = products;
+    public void setDBProduct(Product product) {
+        this.product = product;
     }
 
-    public List<ProductPOJO> getProducts() {
-        return ParseTools.parseList(products, ProductPOJO.class);
+    public ProductPOJO getProduct() {
+        return ParseTools.parse(product);
     }
 
-    public void setProducts(List<ProductPOJO> products) {
-        this.products = ParseTools.parseList(products, Product.class);
+    public void setProduct(ProductPOJO product) {
+        this.product = ParseTools.parse(product);
     }
 
     public Integer getValue() {
