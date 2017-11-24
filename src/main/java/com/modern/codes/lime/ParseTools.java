@@ -105,7 +105,7 @@ public class ParseTools {
         FormulaPOJO form = new FormulaPOJO();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
-        form.setDBProducts(formula.getProducts());
+        form.setDBProduct(formula.getProducts());
         form.setDBResource(formula.getResources());
         return form;
     }
@@ -115,7 +115,7 @@ public class ParseTools {
         Formula form = new Formula();
         form.setId(formula.getId());
         form.setValue(formula.getValue());
-        form.setProducts(formula.getDBProducts());
+        form.setProducts(formula.getDBProduct());
         form.setResources(formula.getDBResource());
         return form;
     }
