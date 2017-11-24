@@ -1,5 +1,9 @@
 package com.modern.codes.lime.model;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.Size;
+
 /**
  *
  * @author jaroszk

@@ -5,7 +5,9 @@ import com.modern.codes.lime.dao.IBasicCRUDRepository;
 import com.modern.codes.lime.exception.IllegalDataException;
 import com.modern.codes.lime.exception.NotFoundException;
 import com.modern.codes.lime.pojo.BasicPOJO;
+import org.springframework.transaction.TransactionSystemException;
 
+import javax.transaction.TransactionRolledbackException;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,11 +36,11 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
     }
 
     @Override
-    public void save(Object t) {
+    public T_POJO save(Object t) {
         try {
-            dao.save(ParseTools.parse(t, Ttype));
-        } catch (Exception e){
-            throw new IllegalDataException("Trying to save wrong type of object it's " + t.getClass() + " object, should be " + T_POJOtype);
+            return ParseTools.parse(dao.save(ParseTools.parse(t, Ttype)), T_POJOtype);
+        } catch (TransactionSystemException rollbackException) {
+            throw rollbackException;
         }
     }
     @Override
@@ -73,8 +75,8 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
             if(!exists(((BasicPOJO)t).getId()))
                 throw new NotFoundException(Ttype + " object could not be found in DB");
             dao.delete(ParseTools.parse(t, Ttype));
-        } catch (Exception e){
-            throw new IllegalDataException("Trying to save wrong type of object it's " + t.getClass() + " object, should be " + T_POJOtype);
+        } catch (TransactionSystemException rollbackException) {
+            throw rollbackException;
         }
     }
 
@@ -82,16 +84,16 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
     public void save(List l) {
         try {
             dao.save(ParseTools.parseList(l, Ttype));
-        } catch (Exception e){
-            throw new IllegalDataException("Trying to save wrong type of object it's " + l.get(0).getClass() + " object, should be " + T_POJOtype);
+        } catch (TransactionSystemException rollbackException) {
+            throw rollbackException;
         }
     }
     @Override
     public void delete(List l) {
         try {
             dao.delete(ParseTools.parseList(l, Ttype));
-        } catch (Exception e){
-            throw new IllegalDataException("Trying to save wrong type of object it's " + l.get(0).getClass() + " object, should be " + T_POJOtype);
+        } catch (TransactionSystemException rollbackException) {
+            throw rollbackException;
         }
     }
 

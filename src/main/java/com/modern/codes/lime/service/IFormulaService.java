@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public interface IFormulaService {
     List<FormulaPOJO> findAll();
     void delete(String id);
-    void save(Object t);
+    FormulaPOJO save(Object t);
     boolean exists(String id);
     long count();
     boolean equals(Object t, Object y);
