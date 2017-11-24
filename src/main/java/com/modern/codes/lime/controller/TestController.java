@@ -1,5 +1,6 @@
 package com.modern.codes.lime.controller;
 
+import com.modern.codes.lime.DBPopulator;
 import com.modern.codes.lime.pojo.UserPOJO;
 
 import com.modern.codes.lime.service.IUserService;
@@ -16,18 +17,14 @@ import java.util.List;
 @RequestMapping(path="/api")
 public class TestController {
     @Autowired
-    IUserService userService;
+    DBPopulator pop;
     @GetMapping(path = "/add-user")
     public boolean addUser(){
         return true;
     }
     @GetMapping(path = "/hello-world")
-    public List<UserPOJO> helloWorld(){
-        UserPOJO t = new UserPOJO("testtest", "testtest","a", "a" );
-        userService.save(t);
-        t = userService.getUserByNameAndSurname("testtest", "testtest").get(0);
-        userService.save(t);
-        List<UserPOJO> flist = userService.findAll();
-        return flist;
+    public String helloWorld(){
+        pop.populate();
+        return "Database reseted";
     }
 }
