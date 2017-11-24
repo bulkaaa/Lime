@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Transactional
-public abstract class SupplierDAO implements ISupplierDAO {
+public class SupplierCustomDAO implements ISupplierCustomDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
