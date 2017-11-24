@@ -11,7 +11,7 @@ public interface IUserService {
     List<UserPOJO> findAll();
     void delete(String id);
     List<UserPOJO> getUserByNameAndSurname(String name, String surname);
-    void save(Object t);
+    UserPOJO save(Object t);
     boolean exists(String id);
     long count();
     boolean equals(Object t, Object y);

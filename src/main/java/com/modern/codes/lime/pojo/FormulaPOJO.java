@@ -21,11 +21,11 @@ public class FormulaPOJO extends BasicPOJO{
     }
 
     public ResourcePOJO getResource() {
-        return ParseTools.parse(resource, ResourcePOJO.class);
+        return ParseTools.parse(resource);
     }
 
     public void setResource(ResourcePOJO resources) {
-        this.resource = ParseTools.parse(resources, Resource.class);
+        this.resource = ParseTools.parse(resources);
     }
 
     public Product getDBProduct() {

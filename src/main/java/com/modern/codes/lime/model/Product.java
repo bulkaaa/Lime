@@ -50,7 +50,6 @@ public class Product implements Serializable {
 
     @ApiModelProperty(value = "The unit in which product is measured", required = true)
     @NotNull
-    @Size(max = MAX_LENGTH_DESC)
     @JsonProperty("unit")
     private Unit unit;
 

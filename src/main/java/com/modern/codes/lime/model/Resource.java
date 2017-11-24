@@ -1,5 +1,6 @@
 package com.modern.codes.lime.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
@@ -44,6 +45,7 @@ public class Resource implements Serializable{
 
     @ApiModelProperty(value = "The unit in which resource is measured", required = true)
     @NotNull
+    @JsonProperty("unit")
     private Unit unit;
 
     @ApiModelProperty(value = "The quantity of the resource", required = true)
