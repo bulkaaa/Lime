@@ -25,13 +25,13 @@ public interface IFormulaService {
         return filterByResource(list.stream(), resourceName).collect(Collectors.toList());
     }
     static Stream<FormulaPOJO> filterByResource(Stream<FormulaPOJO> stream, String resourceName) {
-        return stream.filter(t -> !IResourceService.filterByName(t.getResources(), resourceName).isEmpty());
+        return stream.filter(t -> t.getResource().getName().equals(resourceName));
     }
     static List<FormulaPOJO> filterByResource(List<FormulaPOJO> list, ResourcePOJO resource){
         return filterByResource(list.stream(), resource).collect(Collectors.toList());
     }
     static Stream<FormulaPOJO> filterByResource(Stream<FormulaPOJO> stream, ResourcePOJO resource){
-        return stream.filter(t -> t.getResources().contains(resource));
+        return stream.filter(t -> t.getResource().equals(resource));
     }
     static List<FormulaPOJO> filterByProduct(List<FormulaPOJO> list, String productName){
         return filterByProduct(list.stream(), productName).collect(Collectors.toList());

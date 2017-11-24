@@ -4,14 +4,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.URL;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Model representation of a resource used in Lime.
@@ -65,9 +63,9 @@ public class Resource implements Serializable{
     @JoinColumn(name = "supplier_id", referencedColumnName="ID")
     private Supplier supplier;
 
-    @ManyToOne
-    @JoinColumn(name = "formula_id", referencedColumnName="ID")
-    private Formula formula;
+
+    @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Formula> formulas;
 
     /**
      * Get the id of the entity.
@@ -181,11 +179,11 @@ public class Resource implements Serializable{
         this.supplier = supplier;
     }
 
-    public Formula getFormula() {
-        return formula;
+    public List<Formula> getFormula() {
+        return formulas;
     }
 
-    public void setFormula(Formula formula) {
-        this.formula = formula;
+    public void setFormula(List<Formula> formulas) {
+        this.formulas = formulas;
     }
 }
