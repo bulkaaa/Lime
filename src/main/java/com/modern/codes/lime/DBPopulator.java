@@ -515,14 +515,14 @@ public class DBPopulator {
     private void jobsRelations(){
         jobA.setUser(userC);
         jobA.setProduct(productA);
-        jobA.setUser(userC);
-        jobA.setProduct(productB);
-        jobA.setUser(userC);
-        jobA.setProduct(productC);
-        jobA.setUser(userC);
-        jobA.setProduct(productD);
-        jobA.setUser(userC);
-        jobA.setProduct(productD);
+        jobB.setUser(userC);
+        jobB.setProduct(productB);
+        jobC.setUser(userC);
+        jobC.setProduct(productC);
+        jobD.setUser(userC);
+        jobD.setProduct(productD);
+        jobE.setUser(userC);
+        jobE.setProduct(productD);
     }
     private void formulasRelations(){
         formulaA.setProduct(productA);
@@ -569,14 +569,16 @@ public class DBPopulator {
         formulaU.setResource(resourceG);
     }
     private void saveToDB(){
-        Logger logger = Logger.getLogger(this.getClass());
-        logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX saving job");
-        jobA = jobService.save(jobA);
-        jobB = jobService.save(jobB);
-        jobC = jobService.save(jobC);
-        jobD = jobService.save(jobD);
-        jobE = jobService.save(jobE);
-        logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX saving formula");
+        saveSuppliers();
+        saveResources();
+        saveProducts();
+        saveUsers();
+        saveFormulas();
+        savePrivileges();
+        saveRole();
+        saveJobs();
+    }
+    private void saveFormulas(){
         formulaA = formulaService.save(formulaA);
         formulaB = formulaService.save(formulaB);
         formulaC = formulaService.save(formulaC);
@@ -598,18 +600,21 @@ public class DBPopulator {
         formulaS = formulaService.save(formulaS);
         formulaT = formulaService.save(formulaT);
         formulaU = formulaService.save(formulaU);
-        logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX saving privilege");
+    }
+    private void savePrivileges(){
         privilegeA = privilegeService.save(privilegeA);
         privilegeB = privilegeService.save(privilegeB);
         privilegeC = privilegeService.save(privilegeC);
         privilegeD = privilegeService.save(privilegeD);
         privilegeE = privilegeService.save(privilegeE);
-        logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX saving product");
+    }
+    private void saveProducts(){
         productA = productService.save(productA);
         productB = productService.save(productB);
         productC = productService.save(productC);
         productD = productService.save(productD);
-        logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX saving resource");
+    }
+    private void saveResources(){
         resourceA = resourceService.save(resourceA);
         resourceB = resourceService.save(resourceB);
         resourceC = resourceService.save(resourceC);
@@ -617,14 +622,24 @@ public class DBPopulator {
         resourceE = resourceService.save(resourceE);
         resourceF = resourceService.save(resourceF);
         resourceG = resourceService.save(resourceG);
-        logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX saving role");
+    }
+    private void saveRole(){
         roleA = roleService.save(roleA);
         roleB = roleService.save(roleB);
         roleC = roleService.save(roleC);
-        logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX saving supplier");
+    }
+    private void saveSuppliers(){
         supA = supplierService.save(supA);
         supB = supplierService.save(supB);
-        logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX saving user");
+    }
+    private void saveJobs(){
+        jobA = jobService.save(jobA);
+        jobB = jobService.save(jobB);
+        jobC = jobService.save(jobC);
+        jobD = jobService.save(jobD);
+        jobE = jobService.save(jobE);
+    }
+    private void saveUsers (){
         userA = userService.save(userA);
         userB = userService.save(userB);
         userC = userService.save(userC);
