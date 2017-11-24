@@ -28,7 +28,7 @@ public class Job {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
-    private Product products;
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName="ID")
@@ -53,11 +53,11 @@ public class Job {
 
     @ApiModelProperty(value = "?", required = true)
     @NotNull
-    private Integer resultvalue;
+    private Integer resultValue;
 
 
     public Product getProducts() {
-        return products;
+        return product;
     }
 
     public String getId() { return id; }
@@ -65,7 +65,7 @@ public class Job {
     public void setId(String id) { this.id = id; }
 
     public void setProducts(Product products) {
-        this.products = products;
+        this.product = products;
     }
 
     public User getUser() {
@@ -100,11 +100,11 @@ public class Job {
         this.endDate = endDate;
     }
 
-    public Integer getResultvalue() {
-        return resultvalue;
+    public Integer getResultValue() {
+        return resultValue;
     }
 
-    public void setResultvalue(Integer resultvalue) {
-        this.resultvalue = resultvalue;
+    public void setResultValue(Integer resultValue) {
+        this.resultValue = resultValue;
     }
 }
