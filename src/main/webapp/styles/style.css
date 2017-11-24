@@ -3,20 +3,17 @@ background-color: #373737;
 font-weight:bold;
 }
 
+.navbar-brand {float:none;}
+
  #nav_top a{
  color:  #71AF14 !important;
  font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
  }
  .footer{
     position: fixed;
-
-    bottom: 0;
-    right:10px;
+    bottom: 5px;
+    right:15px;
     width: 100%;
     color:#71AF14 ;
     text-align: right;
  }
-
-#navbarNav{
-right: 0px;
-}
