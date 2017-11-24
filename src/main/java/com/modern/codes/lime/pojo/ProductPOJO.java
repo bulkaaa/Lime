@@ -16,7 +16,7 @@ public class ProductPOJO extends BasicPOJO{
     private Date addedAt;
     private String category;
     private String image;
-    private Integer expectedValue;
+    private Double expectedValue;
     private List<Job> jobs;
     private List<Formula> formulas;
 
@@ -68,11 +68,11 @@ public class ProductPOJO extends BasicPOJO{
         this.image = image;
     }
 
-    public Integer getExpectedValue() {
+    public Double getExpectedValue() {
         return expectedValue;
     }
 
-    public void setExpectedValue(Integer expectedValue) {
+    public void setExpectedValue(Double expectedValue) {
         this.expectedValue = expectedValue;
     }
 

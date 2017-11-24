@@ -48,7 +48,7 @@ public class Resource implements Serializable{
 
     @ApiModelProperty(value = "The quantity of the resource", required = true)
     @NotNull
-    private Integer quantity;
+    private Double quantity;
 
     @ApiModelProperty(value = "The category of the resource", required = true)
     @NotNull
@@ -147,11 +147,11 @@ public class Resource implements Serializable{
         return serialVersionUID;
     }
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 

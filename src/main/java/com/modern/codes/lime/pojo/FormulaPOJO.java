@@ -10,7 +10,7 @@ public class FormulaPOJO extends BasicPOJO{
 
     private Resource resource;
     private Product product;
-    private Integer value;
+    private Double value;
 
     public Resource getDBResource() {
         return resource;
@@ -44,11 +44,11 @@ public class FormulaPOJO extends BasicPOJO{
         this.product = ParseTools.parse(product);
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 
