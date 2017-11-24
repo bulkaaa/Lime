@@ -53,7 +53,7 @@ public class Job {
 
     @ApiModelProperty(value = "?", required = true)
     @NotNull
-    private Integer resultValue;
+    private Double resultValue;
 
 
     public Product getProducts() {
@@ -100,11 +100,11 @@ public class Job {
         this.endDate = endDate;
     }
 
-    public Integer getResultValue() {
+    public Double getResultValue() {
         return resultValue;
     }
 
-    public void setResultValue(Integer resultValue) {
+    public void setResultValue(Double resultValue) {
         this.resultValue = resultValue;
     }
 }

@@ -12,7 +12,7 @@ public class JobPOJO extends BasicPOJO{
     private String details;
     private Date startDate;
     private Date endDate;
-    private Integer resultValue;
+    private Double resultValue;
     public void setDBProduct(Product product) {
         this.product = product;
     }
@@ -67,11 +67,11 @@ public class JobPOJO extends BasicPOJO{
         this.endDate = endDate;
     }
 
-    public Integer getResultValue() {
+    public Double getResultValue() {
         return resultValue;
     }
 
-    public void setResultValue(Integer resultValue) {
+    public void setResultValue(Double resultValue) {
         this.resultValue = resultValue;
     }
 

@@ -12,7 +12,7 @@ public class ResourcePOJO extends BasicPOJO{
     private String name;
     private String description;
     private Unit unit;
-    private Integer quantity;
+    private Double quantity;
     private String category;
     private String image;
     private Supplier supplier;
@@ -42,11 +42,11 @@ public class ResourcePOJO extends BasicPOJO{
         this.unit = unit;
     }
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 

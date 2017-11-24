@@ -33,12 +33,12 @@ public class Formula implements Serializable {
     private Resource resource;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName="ID")
+    @JoinColumn(name = "_id", referencedColumnName="ID")
     private Product product;
 
     @ApiModelProperty(value = "The quantity of resources needed for product", required = true)
     @NotNull
-    private Integer value;
+    private Double value;
 
 
     public Resource getResources() {
@@ -57,11 +57,11 @@ public class Formula implements Serializable {
         this.product = product;
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

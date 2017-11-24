@@ -72,7 +72,7 @@ public class Product implements Serializable {
     @ApiModelProperty(value = "?", required = true)
     @NotNull
 
-    private Integer expectedValue;
+    private Double expectedValue;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Job> jobs;
@@ -185,11 +185,11 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-    public Integer getExpectedValue() {
+    public Double getExpectedValue() {
         return expectedValue;
     }
 
-    public void setExpectedValue(Integer expectedValue) {
+    public void setExpectedValue(Double expectedValue) {
         this.expectedValue = expectedValue;
     }
 
