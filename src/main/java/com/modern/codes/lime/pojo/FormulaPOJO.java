@@ -8,24 +8,24 @@ import java.util.List;
 
 public class FormulaPOJO extends BasicPOJO{
 
-    private List<Resource> resources;
+    private Resource resource;
     private List<Product> products;
     private Integer value;
 
-    public List<Resource> getDBResources() {
-        return resources;
+    public Resource getDBResource() {
+        return resource;
     }
 
-    public void setDBResources(List<Resource> resources) {
-        this.resources = resources;
+    public void setDBResource(Resource resource) {
+        this.resource = resource;
     }
 
-    public List<ResourcePOJO> getResources() {
-        return ParseTools.parseList(resources, ResourcePOJO.class);
+    public ResourcePOJO getResource() {
+        return ParseTools.parse(resource, ResourcePOJO.class);
     }
 
-    public void setResources(List<ResourcePOJO> resources) {
-        this.resources = ParseTools.parseList(resources, Resource.class);
+    public void setResource(ResourcePOJO resources) {
+        this.resource = ParseTools.parse(resource, Resource.class);
     }
 
     public List<Product> getDBProducts() {

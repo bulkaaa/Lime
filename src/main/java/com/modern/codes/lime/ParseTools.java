@@ -106,7 +106,7 @@ public class ParseTools {
         form.setId(formula.getId());
         form.setValue(formula.getValue());
         form.setDBProducts(formula.getProducts());
-        form.setDBResources(formula.getResources());
+        form.setDBResource(formula.getResources());
         return form;
     }
     public static Formula parse(FormulaPOJO formula){
@@ -116,7 +116,7 @@ public class ParseTools {
         form.setId(formula.getId());
         form.setValue(formula.getValue());
         form.setProducts(formula.getDBProducts());
-        form.setResources(formula.getDBResources());
+        form.setResources(formula.getDBResource());
         return form;
     }
     public static JobPOJO parse(Job job){
@@ -185,7 +185,7 @@ public class ParseTools {
         ResourcePOJO res = new ResourcePOJO();
         res.setCategory(resource.getCategory());
         res.setDescription(resource.getDescription());
-        res.setFormula(resource.getFormula());
+        res.setDBFormula(resource.getFormula());
         res.setId(resource.getId());
         res.setImage(resource.getImage());
         res.setName(resource.getName());
@@ -200,7 +200,7 @@ public class ParseTools {
         Resource res = new Resource();
         res.setCategory(resource.getCategory());
         res.setDescription(resource.getDescription());
-        res.setFormula(resource.getFormula());
+        res.setFormula(resource.getDBFormula());
         res.setId(resource.getId());
         res.setImage(resource.getImage());
         res.setName(resource.getName());

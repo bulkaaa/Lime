@@ -5,6 +5,8 @@ import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.model.Unit;
 
+import java.util.List;
+
 public class ResourcePOJO extends BasicPOJO{
 
     private String name;
@@ -14,6 +16,7 @@ public class ResourcePOJO extends BasicPOJO{
     private String category;
     private String image;
     private Supplier supplier;
+    private List<Formula> formulas;
 
     public String getName() {
         return name;
@@ -80,13 +83,20 @@ public class ResourcePOJO extends BasicPOJO{
     }
 
 
-    public Formula getFormula() {
-        return formula;
+    public List<Formula> getDBFormula() {
+        return formulas;
     }
 
-    public void setFormula(Formula formula) {
-        this.formula = formula;
+    public void setDBFormula(List<Formula> formulas) {
+        this.formulas = formulas;
     }
 
-    private Formula formula;
+    public List<FormulaPOJO> getFormula() {
+        return ParseTools.parseList(formulas, FormulaPOJO.class);
+    }
+
+    public void setFormula(List<FormulaPOJO> formulas) {
+        this.formulas = ParseTools.parseList(formulas, Formula.class);
+    }
+
 }
