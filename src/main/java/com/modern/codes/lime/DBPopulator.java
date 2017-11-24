@@ -1,22 +1,12 @@
 package com.modern.codes.lime;
 
-<<<<<<< HEAD
 import com.modern.codes.lime.pojo.*;
-=======
-import com.modern.codes.lime.model.Resource;
-import com.modern.codes.lime.pojo.ResourcePOJO;
-import com.modern.codes.lime.pojo.SupplierPOJO;
->>>>>>> BDPopulator
 import com.modern.codes.lime.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import java.util.Date;
 import java.util.UUID;
-=======
-import java.util.List;
->>>>>>> BDPopulator
 
 @Service
 public class DBPopulator {
@@ -31,13 +21,13 @@ public class DBPopulator {
     private UserService userService;
     @Autowired
     public DBPopulator(JobService jobService,
-            FormulaService formulaService,
-            PrivilegeService privilegeService,
-            ProductService productService,
-            ResourceService resourceService,
-            RoleService roleService,
-            SupplierService supplierService,
-            UserService userService){
+                       FormulaService formulaService,
+                       PrivilegeService privilegeService,
+                       ProductService productService,
+                       ResourceService resourceService,
+                       RoleService roleService,
+                       SupplierService supplierService,
+                       UserService userService){
         this.jobService = jobService;
         this.formulaService = formulaService;
         this.privilegeService = privilegeService;
@@ -47,7 +37,6 @@ public class DBPopulator {
         this.supplierService = supplierService;
         this.userService = userService;
     }
-<<<<<<< HEAD
     private SupplierPOJO supA = new SupplierPOJO();
     private SupplierPOJO supB = new SupplierPOJO();
     private UserPOJO userA = new UserPOJO();
@@ -92,17 +81,6 @@ public class DBPopulator {
     public void populate(){
         clearDB();
         setSuppliers();
-=======
-
-    SupplierPOJO supA = new SupplierPOJO();
-    SupplierPOJO supB = new SupplierPOJO();
-
-    public void populate(){
-        clearDB();
-        //SUPPLIER
-
-
->>>>>>> BDPopulator
     }
     public void clearDB(){
         jobService.deleteAll();
@@ -129,7 +107,6 @@ public class DBPopulator {
         supB.setCity("Kurza Stopka");
         supA.setEmailAddress("Jan@Kowalski.pl");
         supB.setEmailAddress("Cezary@Pazura.co");
-<<<<<<< HEAD
         supA.setId(UUID.randomUUID().toString());
         supA.setId(UUID.randomUUID().toString());
     }
@@ -172,16 +149,4 @@ public class DBPopulator {
 //        resourceA.setDescription();
 //        resourceA.setCategory();
     }
-=======
-//        supA.setResources();
-//        supA.setResources();
-    }
-//    List<ResourcePOJO> AddResources(){
-//        ResourcePOJO milk;
-//        ResourcePOJO flour;
-//        ResourcePOJO egg;
-//        ResourcePOJO sugar;
-//        milk.set
-//    }
->>>>>>> BDPopulator
 }
