@@ -14,12 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Model representation of a product created in Lime.
+ * Model representation of a product added in Lime.
  *
  * @author jaroszk
  *
  */
-@ApiModel(description = "Model representation of a product created in Lime")
+@ApiModel(description = "Model representation of a product in Lime")
 @Entity
 public class Product implements Serializable {
 
@@ -50,14 +50,13 @@ public class Product implements Serializable {
 
     @ApiModelProperty(value = "The unit in which product is measured", required = true)
     @NotNull
-    @Size(max = MAX_LENGTH_DESC)
     @JsonProperty("unit")
     private Unit unit;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "created_at", updatable = false)
-    private Date createdAt;
+    @Column(nullable = false, name = "added_at", updatable = false)
+    private Date addedAt;
 
     @ApiModelProperty(value = "The category of the product", required = true)
     @NotNull
@@ -72,19 +71,18 @@ public class Product implements Serializable {
     @ApiModelProperty(value = "?", required = true)
     @NotNull
 
-    private Integer expectedValue;
+    private Double expectedValue;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Job> jobs;
 
-    @ManyToOne
-    @JoinColumn(name = "formula_id", referencedColumnName="ID")
-    private Formula formula;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Formula> formulas;
 
     @PrePersist
     public void updateTimeStamps() {
-        if (createdAt == null) {
-            createdAt = new Date();
+        if (addedAt == null) {
+            addedAt = new Date();
         }
     }
 
@@ -150,8 +148,8 @@ public class Product implements Serializable {
      *
      * @return The product creation date
      */
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getAddedAt() {
+        return addedAt;
     }
 
     public Unit getUnit() {
@@ -186,27 +184,26 @@ public class Product implements Serializable {
         this.image = image;
     }
 
-    public Integer getExpectedValue() {
+    public Double getExpectedValue() {
         return expectedValue;
     }
 
-    public void setExpectedValue(Integer expectedValue) {
+    public void setExpectedValue(Double expectedValue) {
         this.expectedValue = expectedValue;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setAddedAt(Date addedAt) {
+        this.addedAt = addedAt;
     }
 
-    public void setFormula(Formula formula) {
-        this.formula = formula;
+    public void setFormula(List<Formula> formulas) {
+        this.formulas = formulas;
     }
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public Formula getFormula() {
-
-        return formula;
+    public List<Formula> getFormula() {
+        return formulas;
     }
 }

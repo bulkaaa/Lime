@@ -13,12 +13,12 @@ public class ProductPOJO extends BasicPOJO{
     private String name;
     private String description;
     private Unit unit;
-    private Date createdAt;
+    private Date addedAt;
     private String category;
     private String image;
-    private Integer expectedValue;
+    private Double expectedValue;
     private List<Job> jobs;
-    private Formula formula;
+    private List<Formula> formulas;
 
     public String getName() {
         return name;
@@ -44,12 +44,12 @@ public class ProductPOJO extends BasicPOJO{
         this.unit = unit;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public Date getAddedAt() {
+        return addedAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setAddedAt(Date addedAt) {
+        this.addedAt = addedAt;
     }
 
     public String getCategory() {
@@ -68,11 +68,11 @@ public class ProductPOJO extends BasicPOJO{
         this.image = image;
     }
 
-    public Integer getExpectedValue() {
+    public Double getExpectedValue() {
         return expectedValue;
     }
 
-    public void setExpectedValue(Integer expectedValue) {
+    public void setExpectedValue(Double expectedValue) {
         this.expectedValue = expectedValue;
     }
 
@@ -92,19 +92,20 @@ public class ProductPOJO extends BasicPOJO{
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
-    public Formula getDBFormula() {
-        return formula;
+    public List<Formula> getDBFormulas() {
+        return formulas;
     }
 
-    public void setDBFormula(Formula formula) {
-        this.formula = formula;
-    }
-    public FormulaPOJO getFormula() {
-        return ParseTools.parse(formula);
+    public void setDBFormulas(List<Formula> formulas) {
+        this.formulas = formulas;
     }
 
-    public void setFormula(FormulaPOJO formula) {
-        this.formula = ParseTools.parse(formula);
+    public List<FormulaPOJO> getFormulas() {
+        return ParseTools.parseList(formulas, FormulaPOJO.class);
+    }
+
+    public void setFormulas(List<FormulaPOJO> formulas) {
+        this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
 
 }

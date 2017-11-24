@@ -5,15 +5,18 @@ import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.model.Unit;
 
+import java.util.List;
+
 public class ResourcePOJO extends BasicPOJO{
 
     private String name;
     private String description;
     private Unit unit;
-    private Integer quantity;
+    private Double quantity;
     private String category;
     private String image;
     private Supplier supplier;
+    private List<Formula> formulas;
 
     public String getName() {
         return name;
@@ -39,11 +42,11 @@ public class ResourcePOJO extends BasicPOJO{
         this.unit = unit;
     }
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
@@ -80,13 +83,20 @@ public class ResourcePOJO extends BasicPOJO{
     }
 
 
-    public Formula getFormula() {
-        return formula;
+    public List<Formula> getDBFormula() {
+        return formulas;
     }
 
-    public void setFormula(Formula formula) {
-        this.formula = formula;
+    public void setDBFormula(List<Formula> formulas) {
+        this.formulas = formulas;
     }
 
-    private Formula formula;
+    public List<FormulaPOJO> getFormula() {
+        return ParseTools.parseList(formulas, FormulaPOJO.class);
+    }
+
+    public void setFormula(List<FormulaPOJO> formulas) {
+        this.formulas = ParseTools.parseList(formulas, Formula.class);
+    }
+
 }

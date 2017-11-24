@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public interface IJobService {
     List<JobPOJO> findAll();
     void delete(String id);
-    void save(Object t);
+    JobPOJO save(Object t);
     boolean exists(String id);
     long count();
     boolean equals(Object t, Object y);

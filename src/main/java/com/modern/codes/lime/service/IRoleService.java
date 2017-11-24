@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public interface IRoleService {
     List<RolePOJO> findAll();
     void delete(String id);
-    void save(Object t);
+    RolePOJO save(Object t);
     boolean exists(String id);
     long count();
     boolean equals(Object t, Object y);
