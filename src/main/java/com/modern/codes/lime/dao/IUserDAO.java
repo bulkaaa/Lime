@@ -11,5 +11,6 @@ public interface IUserDAO extends IBasicCRUDRepository<User, String>{
     List<User> getUserByLogin(String name, String surname);
     List<User> getJoinedBefore(Date date);
     List<User> getJoinedAfter(Date date);
-    
+
+    List<User> getUserByNameAndSurname(String name, String surname);
 }
