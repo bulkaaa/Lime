@@ -8,47 +8,47 @@ import java.util.List;
 
 public class FormulaPOJO extends BasicPOJO{
 
-    private List<Resource> resources;
-    private List<Product> products;
-    private Integer value;
+    private Resource resource;
+    private Product product;
+    private Double value;
 
-    public List<Resource> getDBResources() {
-        return resources;
+    public Resource getDBResource() {
+        return resource;
     }
 
-    public void setDBResources(List<Resource> resources) {
-        this.resources = resources;
+    public void setDBResource(Resource resource) {
+        this.resource = resource;
     }
 
-    public List<ResourcePOJO> getResources() {
-        return ParseTools.parseList(resources, ResourcePOJO.class);
+    public ResourcePOJO getResource() {
+        return ParseTools.parse(resource);
     }
 
-    public void setResources(List<ResourcePOJO> resources) {
-        this.resources = ParseTools.parseList(resources, Resource.class);
+    public void setResource(ResourcePOJO resources) {
+        this.resource = ParseTools.parse(resources);
     }
 
-    public List<Product> getDBProducts() {
-        return products;
+    public Product getDBProduct() {
+        return product;
     }
 
-    public void setDBProducts(List<Product> products) {
-        this.products = products;
+    public void setDBProduct(Product product) {
+        this.product = product;
     }
 
-    public List<ProductPOJO> getProducts() {
-        return ParseTools.parseList(products, ProductPOJO.class);
+    public ProductPOJO getProduct() {
+        return ParseTools.parse(product);
     }
 
-    public void setProducts(List<ProductPOJO> products) {
-        this.products = ParseTools.parseList(products, Product.class);
+    public void setProduct(ProductPOJO product) {
+        this.product = ParseTools.parse(product);
     }
 
-    public Integer getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public interface IPrivilegeService {
     List<PrivilegePOJO> findAll();
     void delete(String id);
-    void save(Object t);
+    PrivilegePOJO save(Object t);
     boolean exists(String id);
     long count();
     boolean equals(Object t, Object y);
