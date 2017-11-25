@@ -12,32 +12,40 @@ public class UserCustomDAO implements IUserCustomDAO {
     private EntityManager entityManager;
 
     @Override
-    public List<User> getUserByName(String name, String surname) {
-        return null;
+    public List<User> findUserByName(String name, String surname) {
+        String hql = "FROM User as usr WHERE usr.name = ?";
+        return entityManager.createQuery(hql, User.class)
+                .setParameter(1, name)
+                .getResultList();
     }
 
     @Override
-    public List<User> getUserBySurname(String name, String surname) {
-        return null;
+    public List<User> findUserBySurname(String surname) {
+        String hql = "FROM User as usr WHERE usr.surname = ?";
+        return entityManager.createQuery(hql, User.class)
+                .setParameter(1, surname)
+                .getResultList();
+}
+
+    @Override
+    public List<User> findUserByLogin(String login) {
+        String hql = "FROM User as usr WHERE usr.login = ?";
+        return entityManager.createQuery(hql, User.class)
+                .setParameter(1, login)
+                .getResultList();
     }
 
     @Override
-    public List<User> getUserByLogin(String name, String surname) {
-        return null;
+    public List<User> findByJoinedAtBetween(Date begin, Date end) {
+        String hql = "FROM User as usr WHERE usr.joinedAt >= ? and usr.joinedAt <= ?";
+        return entityManager.createQuery(hql, User.class)
+                .setParameter(1, begin)
+                .setParameter(2, end)
+                .getResultList();
     }
 
     @Override
-    public List<User> getUserJoinedAtBefore(Date date) {
-        return null;
-    }
-
-    @Override
-    public List<User> getUserJoinedAtAfter(Date date) {
-        return null;
-    }
-
-    @Override
-    public List<User> getUserByNameAndSurname(String name, String surname) {
+    public List<User> findUserByNameAndSurname(String name, String surname) {
         String hql = "FROM User as usr WHERE usr.name = ? and usr.surname = ?";
         return entityManager.createQuery(hql, User.class)
                             .setParameter(1, name)

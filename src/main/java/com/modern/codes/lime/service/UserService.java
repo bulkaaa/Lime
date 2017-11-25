@@ -19,7 +19,7 @@ public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> impl
         this.dao = dao;
     }
     @Override
-    public List<UserPOJO> getUserByNameAndSurname(String name, String surname){
-        return ParseTools.parseList(dao.getUserByNameAndSurname(name, surname), UserPOJO.class);
+    public List<UserPOJO> findUserByNameAndSurname(String name, String surname){
+        return ParseTools.parseList(dao.findUserByNameAndSurname(name, surname), UserPOJO.class);
     }
 }

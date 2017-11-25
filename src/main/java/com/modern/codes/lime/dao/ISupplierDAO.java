@@ -8,15 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ISupplierDAO extends IBasicCRUDRepository<Supplier, String>, ISupplierCustomDAO{
-    List<Supplier> getByEmailAddress(String emailAddress);
 
-    List<Supplier> getByPostalCode(String postalCode);
-
-    List<Supplier> getByCity(String city);
-
-    List<Supplier> getByCountry(String country);
-
-    List<Supplier> getByName(String name);
-
-    List<Supplier> getByTelephone(String telephone);
 }

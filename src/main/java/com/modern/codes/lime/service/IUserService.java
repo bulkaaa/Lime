@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 public interface IUserService {
     List<UserPOJO> findAll();
     void delete(String id);
-    List<UserPOJO> getUserByNameAndSurname(String name, String surname);
+    List<UserPOJO> findUserByNameAndSurname(String name, String surname);
     UserPOJO save(Object t);
     boolean exists(String id);
     long count();
