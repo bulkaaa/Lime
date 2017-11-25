@@ -5,15 +5,15 @@ import com.modern.codes.lime.model.Supplier;
 import java.util.List;
 
 public interface ISupplierCustomDAO {
-    List<Supplier> getByEmailAddress(String emailAddress);
+    List<Supplier> findByEmailAddress(String emailAddress);
 
-    List<Supplier> getByPostalCode(String postalCode);
+    List<Supplier> findByPostalCode(String postalCode);
 
-    List<Supplier> getByCity(String city);
+    List<Supplier> findByCity(String city);
 
-    List<Supplier> getByCountry(String country);
+    List<Supplier> findByCountry(String country);
 
-    List<Supplier> getByName(String name);
+    List<Supplier> findByName(String name);
 
-    List<Supplier> getByTelephone(String telephone);
+    List<Supplier> findByTelephone(String telephone);
 }

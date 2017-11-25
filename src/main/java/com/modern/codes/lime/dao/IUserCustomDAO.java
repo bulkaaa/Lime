@@ -6,11 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 public interface IUserCustomDAO {
-    List<User> getUserByName(String name, String surname);
-    List<User> getUserBySurname(String name, String surname);
-    List<User> getUserByLogin(String name, String surname);
-    List<User> getUserJoinedAtBefore(Date date);
-    List<User> getUserJoinedAtAfter(Date date);
-
-    List<User> getUserByNameAndSurname(String name, String surname);
+    List<User> findUserByName(String name, String surname);
+    List<User> findUserBySurname(String surname);
+    List<User> findUserByLogin(String login);
+    List<User> findByJoinedAtBetween(Date begin, Date end);
+    List<User> findUserByNameAndSurname(String name, String surname);
 }
