@@ -1,16 +1,19 @@
 package com.modern.codes.lime;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.modern.codes.lime.exception.IllegalDataException;
 import com.modern.codes.lime.model.*;
 import com.modern.codes.lime.pojo.*;
+import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Service
 public class ParseTools {
         enum ClassName {
             FormulaPOJO,
@@ -378,5 +381,20 @@ public class ParseTools {
     }
     public static String parseDate(Date date){
         return date.toString();
+    }
+    public static String parseToJson(Object obj){
+
+        if(obj.getClass().toString().contains("POJO"))
+            obj = parse(obj);
+        if(obj instanceof List) {
+            List<Object> list = (List<Object>)obj;
+            if(!list.isEmpty() && list.get(0).getClass().toString().contains("POJO"))
+            obj = parseList(list);
+        }
+        try{
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e){
+            return e.getMessage();
+        }
     }
 }
