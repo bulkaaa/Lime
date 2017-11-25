@@ -8,7 +8,7 @@ import java.util.List;
 public interface IBasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T, String>> {
     List<T_POJO> findAll();
     void delete(String id);
-    void save(T_POJO t);
+    T_POJO save(T_POJO t);
     boolean exists(String id);
     long count();
     boolean equals(T_POJO t, T_POJO y);

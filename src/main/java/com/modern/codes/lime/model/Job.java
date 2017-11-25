@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,8 +18,9 @@ import java.util.Date;
  */
 @ApiModel(description = "Model representation of a job that is created by Lime user")
 @Entity
-public class Job {
+public class Job implements Serializable {
 
+    private static final long serialVersionUID = 6863653782430587120L;
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -53,10 +55,13 @@ public class Job {
 
     @ApiModelProperty(value = "?", required = true)
     @NotNull
-    private Integer resultValue;
+    private Double resultValue;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
-    public Product getProducts() {
+    public Product getProduct() {
         return product;
     }
 
@@ -64,8 +69,8 @@ public class Job {
 
     public void setId(String id) { this.id = id; }
 
-    public void setProducts(Product products) {
-        this.product = products;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public User getUser() {
@@ -100,11 +105,11 @@ public class Job {
         this.endDate = endDate;
     }
 
-    public Integer getResultValue() {
+    public Double getResultValue() {
         return resultValue;
     }
 
-    public void setResultValue(Integer resultValue) {
+    public void setResultValue(Double resultValue) {
         this.resultValue = resultValue;
     }
 }

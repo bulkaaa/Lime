@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public interface IProductService {
     List<ProductPOJO> findAll();
     void delete(String id);
-    void save(Object t);
+    ProductPOJO save(Object t);
     boolean exists(String id);
     long count();
     boolean equals(Object t, Object y);
