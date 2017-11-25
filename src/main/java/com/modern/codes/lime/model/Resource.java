@@ -1,6 +1,6 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
@@ -63,10 +63,12 @@ public class Resource implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", referencedColumnName="ID")
+    @JsonManagedReference
     private Supplier supplier;
 
 
     @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Formula> formulas;
 
     /**

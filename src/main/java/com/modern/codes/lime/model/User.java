@@ -1,6 +1,6 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.CascadeType;
@@ -60,6 +60,7 @@ public class User {
     private Date joinedAt;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Job> jobs;
 
     @ApiModelProperty(value = "The login of the user of the \"ChemicalLabs\"", required = true)
@@ -80,6 +81,7 @@ public class User {
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    @JsonManagedReference
     private List<Role> roles;
 
 
