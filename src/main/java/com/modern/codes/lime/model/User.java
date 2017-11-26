@@ -69,6 +69,7 @@ public class User {
 
     @ApiModelProperty(value = "The password of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
+    @JsonIgnore
     private String password;
 
     @PrePersist

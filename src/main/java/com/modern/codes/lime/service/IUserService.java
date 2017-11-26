@@ -2,12 +2,14 @@ package com.modern.codes.lime.service;
 
 import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public interface IUserService {
+public interface IUserService extends UserDetailsService {
     List<UserPOJO> findAll();
     void delete(String id);
     List<UserPOJO> findUserByNameAndSurname(String name, String surname);
