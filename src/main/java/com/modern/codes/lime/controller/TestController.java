@@ -1,9 +1,10 @@
 package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.ParseTools;
-import com.modern.codes.lime.dao.IUserDAO;
-import com.modern.codes.lime.model.User;
+import com.modern.codes.lime.dao.IResourceDAO;
+import com.modern.codes.lime.model.Resource;
 
+import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.service.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.modern.codes.lime.ParseTools.parseDate;
 
 
 @RestController()
@@ -23,23 +23,22 @@ public class TestController {
     @Autowired
     IUserService us;
     @Autowired
-    IUserDAO ud;
-    @Autowired
-    ParseTools ps;
+    IResourceDAO ud;
     @GetMapping(path = "/add-user")
     public boolean addUser(){
         return true;
     }
     @GetMapping(path = "/hello-world2")
-    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+//    @PreAuthorize("hasAuthority('Manage Users') or hasAuthority('Get Reports')")
+    @PreAuthorize("hasAuthority('Manage Users')")
     public int helloWorld2(){
-        List<User> filtered = ud.findByJoinedAtBetween(parseDate("2017-05-05 13:00:00"), parseDate("2017-05-06 13:00:00"));
+        List<Resource> filtered = ud.findAll();
         return filtered.size();
     }
     @GetMapping(path = "/hello-world")
     public String helloWorld(){
 
-        List<User> filtered = (ud.findByJoinedAtBetween(parseDate("2017-05-05 13:00:00"), parseDate("2017-05-06 13:00:00")));
-        return ps.parseToJson(filtered);
+        List<ResourcePOJO> filtered = ParseTools.parseList(ud.findAll(), ResourcePOJO.class);
+        return ParseTools.parseToJson(filtered, Resource.class);
     }
 }
