@@ -28,11 +28,11 @@ public class UserCustomDAO implements IUserCustomDAO {
 }
 
     @Override
-    public List<User> findUserByLogin(String login) {
+    public User findUserByLogin(String login) {
         String hql = "FROM User as usr WHERE usr.login = ?";
         return entityManager.createQuery(hql, User.class)
                 .setParameter(1, login)
-                .getResultList();
+                .getResultList().get(0);
     }
 
     @Override

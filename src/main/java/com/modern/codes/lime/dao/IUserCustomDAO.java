@@ -8,7 +8,7 @@ import java.util.List;
 public interface IUserCustomDAO {
     List<User> findUserByName(String name, String surname);
     List<User> findUserBySurname(String surname);
-    List<User> findUserByLogin(String login);
+    User findUserByLogin(String login);
     List<User> findByJoinedAtBetween(Date begin, Date end);
     List<User> findUserByNameAndSurname(String name, String surname);
 }

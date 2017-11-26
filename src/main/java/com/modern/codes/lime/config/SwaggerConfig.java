@@ -1,4 +1,4 @@
-package com.modern.codes.lime;
+package com.modern.codes.lime.config;
 
 
 import org.springframework.beans.factory.annotation.Value;
