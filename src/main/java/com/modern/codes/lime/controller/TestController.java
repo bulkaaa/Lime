@@ -31,7 +31,8 @@ public class TestController {
         return true;
     }
     @GetMapping(path = "/hello-world2")
-    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+//    @PreAuthorize("hasAuthority('Manage Users') or hasAuthority('Get Reports')")
+    @PreAuthorize("hasAuthority('Manage Users')")
     public int helloWorld2(){
         List<User> filtered = ud.findByJoinedAtBetween(parseDate("2017-05-05 13:00:00"), parseDate("2017-05-06 13:00:00"));
         return filtered.size();
