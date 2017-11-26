@@ -1,24 +1,33 @@
-<nav class="navbar navbar-expand-lg " id="nav_top">
+<nav class="navbar navbar-expand-lg navbar-fixed-top" id="nav_top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <img src="libs/img/lime_logo3.png" width="80" height="60" class="d-inline-block align-top" alt="">
-            <a class="navbar-brand inline-block " href="#/!">LIME</a>
+            <img src="libs/img/lime_logo_design2.png" class="img_responsive">
         </div>
-       <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">-->
-            <ul class="nav navbar-nav mr-auto">
+            <ul class="nav navbar-nav mr-auto" >
                 <li class="nav-item ">
                     <a class="nav-link" href="#/!">Home </a>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link"  href="#!cart">Add </a>
+                <li class="nav-item dropdown nav_link">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Options</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#!cart">Add resources</a></li>
+                        <li class="divider" role="separator"></li>
+                        <li><a href="#">Another action</a></li>
+
+                    </ul>
                 </li>
             </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a class="nav-link" href="#"><span><i class="fa fa-user-o"></i></span> Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="#!register"><span><i class="fa fa-user-o"></i></span> Sign Up</a></li>
             <li class="nav-item"><a class="nav-link" href="#!log"><span><i class="fa fa-sign-in "></i></span> Login</a></li>
         </ul>
     </div>
 </nav>
+
+<script>
+    $('ul.nav li.dropdown').hover(function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(500);
+}, function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(500);
+});
+</script>

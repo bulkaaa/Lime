@@ -10,7 +10,6 @@ body {
     height: 100%;
     padding: 10px;
     margin: 0;
-    background-color: #7EC855;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -132,7 +131,7 @@ body {
     font-weight: 300;
 }
 
-button[class*=btn] {
+.cart-button {
     width: 30px;
     height: 30px;
     background-color: #E1E8EE;

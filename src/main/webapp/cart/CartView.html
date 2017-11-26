@@ -1,70 +1,58 @@
-<div class="shopping-cart">
-    <!-- Title -->
-    <div class="title">
-        Add Resources
-    </div>
 
-    <!-- Product #1 -->
+<div ng-app="myApp" ng-controller="CartController" class="shopping-cart">
+    <div class="title">Add Resources</div>
     <div class="item">
         <div class="buttons">
             <span class="delete-btn"></span>
-            <span class="like-btn"></span>
         </div>
-
         <div class="image">
             <img src="images/item-1.png" alt="">
         </div>
-
         <div class="description">
-            <span>Common Projects</span>
-            <span>Bball High</span>
-            <span>White</span>
+            <span>buty1</span>
+            <span></span>
+            <span></span>
         </div>
-
         <div class="quantity">
-            <button class="plus-btn" type="button" name="button">
+            <button class="plus-btn cart-button" type="button" name="button">
                 <img src="images/plus.svg" alt="">
             </button>
-            <input type="text" name="name" value="1">
-            <button class="minus-btn" type="button" name="button">
+            <input type="input" name="name" value="1">
+            <button class="minus-btn cart-button" type="button" name="button">
                 <img src="images/minus.svg" alt="">
             </button>
         </div>
+
     </div>
 
-    <!-- Product #2 -->
     <div class="item">
         <div class="buttons">
             <span class="delete-btn"></span>
-            <span class="like-btn"></span>
         </div>
 
         <div class="image">
             <img src="images/item-2.png" alt="">
         </div>
-
         <div class="description">
-            <span>Maison Margiela</span>
-            <span>Future Sneakers</span>
-            <span>White</span>
+            <span>buty2</span>
+            <span></span>
+            <span></span>
         </div>
 
         <div class="quantity">
-            <button class="plus-btn" type="button" name="button">
+            <button class="plus-btn cart-button" type="button" name="button">
                 <img src="images/plus.svg" alt="">
             </button>
             <input type="text" name="name" value="1">
-            <button class="minus-btn" type="button" name="button">
+            <button class="minus-btn cart-button" type="button" name="button">
                 <img src="images/minus.svg" alt="">
             </button>
         </div>
     </div>
 
-    <!-- Product #3 -->
     <div class="item">
         <div class="buttons">
             <span class="delete-btn"></span>
-            <span class="like-btn"></span>
         </div>
 
         <div class="image">
@@ -72,61 +60,19 @@
         </div>
 
         <div class="description">
-            <span>Our Legacy</span>
-            <span>Brushed Scarf</span>
-            <span>Brown</span>
+            <span>szalik</span>
+            <span></span>
+            <span></span>
         </div>
 
         <div class="quantity">
-            <button class="plus-btn" type="button" name="button">
+            <button class="plus-btn cart-button" type="button" name="button">
                 <img src="images/plus.svg" alt="">
             </button>
             <input type="text" name="name" value="1">
-            <button class="minus-btn" type="button" name="button">
+            <button class="minus-btn cart-button" type="button" name="button">
                 <img src="images/minus.svg" alt="">
             </button>
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $('.minus-btn').on('click', function(e) {
-        e.preventDefault();
-        var $this = $(this);
-        var $input = $this.closest('div').find('input');
-        var value = parseInt($input.val());
-
-        if (value > 1) {
-            value = value - 1;
-        } else {
-            value = 0;
-        }
-
-        $input.val(value);
-
-    });
-
-    $('.plus-btn').on('click', function(e) {
-        e.preventDefault();
-        var $this = $(this);
-        var $input = $this.closest('div').find('input');
-        var value = parseInt($input.val());
-
-        if (value < 100) {
-            value = value + 1;
-        } else {
-            value =100;
-        }
-
-        $input.val(value);
-    });
-
-    $('.like-btn').on('click', function() {
-        $(this).toggleClass('is-active');
-    });
-
-    $('.delete-btn').on('click', function() {
-        $(this).closest('.item').remove();
-    });
-
-</script>
