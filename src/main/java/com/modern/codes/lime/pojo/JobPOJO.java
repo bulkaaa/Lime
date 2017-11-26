@@ -20,11 +20,11 @@ public class JobPOJO extends BasicPOJO{
         return product;
     }
     public ProductPOJO getProduct() {
-        return ParseTools.parse(product);
+        return ParseTools.parse(product, ProductPOJO.class);
     }
 
     public void setProduct(ProductPOJO product) {
-        this.product = ParseTools.parse(product);
+        this.product = ParseTools.parse(product, Product.class);
     }
 
     public User getDBUser() {
@@ -36,11 +36,11 @@ public class JobPOJO extends BasicPOJO{
     }
 
     public UserPOJO getUser() {
-        return ParseTools.parse(user);
+        return ParseTools.parse(user, UserPOJO.class);
     }
 
     public void setUser(UserPOJO user) {
-        this.user = ParseTools.parse(user);
+        this.user = ParseTools.parse(user, User.class);
     }
 
     public String getDetails() {
