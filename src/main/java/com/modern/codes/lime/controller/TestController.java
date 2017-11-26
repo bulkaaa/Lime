@@ -4,7 +4,6 @@ import com.modern.codes.lime.ParseTools;
 import com.modern.codes.lime.dao.IUserDAO;
 import com.modern.codes.lime.model.User;
 
-import com.modern.codes.lime.pojo.UserPOJO;
 import com.modern.codes.lime.service.IUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
