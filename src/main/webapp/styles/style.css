@@ -1,14 +1,19 @@
+body{
+background-color: #e9ecef;
+
+}
 #nav_top{
 background-color: #373737;
-font-weight:bold;
+font-weight:600;
+color:  #71AF14 !important;
+ font-family: Georgia, Serif;
+ border-radius: 15px;
 }
-
-.navbar-brand {float:none;}
 
  #nav_top a{
  color:  #71AF14 !important;
- font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
  }
+
  .footer{
     position: fixed;
     bottom: 5px;
@@ -16,4 +21,21 @@ font-weight:bold;
     width: 100%;
     color:#71AF14 ;
     text-align: right;
- }
+    }
+
+   .img_responsive{
+    height: auto;
+    width: auto;
+    max-height: 72px;
+    max-width: 250px;
+   }
+
+   .login_buttons{
+   background-color:#373737;
+   color:  #71AF14;
+
+   }
+.nav_link{
+min-height: 100%;
+ float: none;
+}
