@@ -43,3 +43,6 @@
     }
 
 })();*/
+app.controller('HomeController', function($scope) {
+    $scope.bgimg = "libs/img/main_color.jpg";
+});

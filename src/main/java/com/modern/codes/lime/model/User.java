@@ -3,6 +3,9 @@ package com.modern.codes.lime.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +36,7 @@ public class User {
 
     public static final int MAX_LENGTH_NAME = 25;
     public static final int MAX_LENGTH_SURNAME = 250;
+    public static final int MAX_LENGTH_EMAIL = 240;
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -52,6 +56,12 @@ public class User {
     @Size(max = MAX_LENGTH_SURNAME)
     @JsonProperty("surname")
     private String surname;
+
+    @ApiModelProperty(value = "The E-Mail address of the supplier.", required = true)
+    @NotEmpty
+    @Email
+    @Size(max = MAX_LENGTH_EMAIL)
+    private String emailAddress;
 
     @ApiModelProperty(value = "The datetime when the user joined the  \"ChemicalLabs\"", required = true)
     @NotNull
@@ -112,7 +122,6 @@ public class User {
         return joinedAt;
     }
 
-
     public List<Job> getJobs() {
         return jobs;
     }
@@ -145,4 +154,11 @@ public class User {
         this.roles = roles;
     }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
 }

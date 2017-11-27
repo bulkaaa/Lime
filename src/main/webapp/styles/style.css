@@ -1,7 +1,26 @@
 body{
     background-color: #e9ecef;
     margin-top: 50px;
+}
 
+
+section.featured {
+    padding: 250px 0 60px;
+    color: #71AF14;
+}
+
+section.featured h2.slogan {
+    color: #71AF14;
+    font-size: 48px;
+    font-weight: 900;
+    align-content:  center !important;
+
+}
+
+
+
+.page-container{
+    padding-left: 225px;
 }
 #nav_top{
     background-color: #373737;
