@@ -75,11 +75,11 @@ public class ResourcePOJO extends BasicPOJO{
     }
 
     public SupplierPOJO getSupplier() {
-        return ParseTools.parse(supplier);
+        return ParseTools.parse(supplier, SupplierPOJO.class);
     }
 
     public void setSupplier(SupplierPOJO supplier) {
-        this.supplier = ParseTools.parse(supplier);
+        this.supplier = ParseTools.parse(supplier, Supplier.class);
     }
 
 
