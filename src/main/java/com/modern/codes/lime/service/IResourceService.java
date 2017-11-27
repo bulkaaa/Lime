@@ -21,6 +21,9 @@ public interface IResourceService {
     void save(List l);
     void delete(List l);
 
+    List<ResourcePOJO> findByName(String name);
+    List<ResourcePOJO> findByCategory(String category);
+
     static List<ResourcePOJO> filterByName(List<ResourcePOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }

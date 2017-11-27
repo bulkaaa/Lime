@@ -5,6 +5,7 @@ import com.modern.codes.lime.pojo.UserPOJO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,7 +13,6 @@ import java.util.stream.Stream;
 public interface IUserService extends UserDetailsService {
     List<UserPOJO> findAll();
     void delete(String id);
-    List<UserPOJO> findUserByNameAndSurname(String name, String surname);
     UserPOJO save(Object t);
     boolean exists(String id);
     long count();
@@ -22,6 +22,13 @@ public interface IUserService extends UserDetailsService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+
+    List<UserPOJO> findByName(String name);
+    List<UserPOJO> findBySurname(String surname);
+    UserPOJO findByLogin(String login);
+    List<UserPOJO> findByJoinedAtBetween(Date begin, Date end);
+    List<UserPOJO> findByNameAndSurname(String name, String surname);
+
     static List<UserPOJO> filterByName(List<UserPOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }

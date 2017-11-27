@@ -19,6 +19,16 @@ public interface ISupplierService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+
+
+    List<SupplierPOJO> findByEmailAddress(String emailAddress);
+    List<SupplierPOJO> findByPostalCode(String postalCode);
+    List<SupplierPOJO> findByCity(String city);
+    List<SupplierPOJO> findByCountry(String country);
+    List<SupplierPOJO> findByName(String name);
+    List<SupplierPOJO> findByTelephone(String telephone);
+
+
     static List<SupplierPOJO> filterByName(List<SupplierPOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }

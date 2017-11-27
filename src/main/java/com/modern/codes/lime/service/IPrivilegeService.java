@@ -19,6 +19,9 @@ public interface IPrivilegeService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+
+    List<PrivilegePOJO> findByName(String name);
+
     static List<PrivilegePOJO> filterByName(List<PrivilegePOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }

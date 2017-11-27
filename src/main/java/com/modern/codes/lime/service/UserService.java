@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,16 +24,37 @@ public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> impl
         super(dao, User.class, UserPOJO.class);
         this.dao = dao;
     }
+
     @Override
-    public List<UserPOJO> findUserByNameAndSurname(String name, String surname){
-        return ParseTools.parseList(dao.findUserByNameAndSurname(name, surname), UserPOJO.class);
+    public List<UserPOJO> findByName(String name) {
+        return ParseTools.parseList(dao.findByName(name), UserPOJO.class);
+    }
+
+    @Override
+    public List<UserPOJO> findBySurname(String surname) {
+        return ParseTools.parseList(dao.findBySurname(surname), UserPOJO.class);
+    }
+
+    @Override
+    public UserPOJO findByLogin(String login) {
+        return ParseTools.parse(dao.findByLogin(login), UserPOJO.class);
+    }
+
+    @Override
+    public List<UserPOJO> findByJoinedAtBetween(Date begin, Date end) {
+        return ParseTools.parseList(dao.findByJoinedAtBetween(begin, end), UserPOJO.class);
+    }
+
+    @Override
+    public List<UserPOJO> findByNameAndSurname(String name, String surname){
+        return ParseTools.parseList(dao.findByNameAndSurname(name, surname), UserPOJO.class);
     }
 
 
 
     @Override
     public UserDetails loadUserByUsername(String login) {
-        User user = dao.findUserByLogin(login);
+        User user = dao.findByLogin(login);
         if(user == null) {
             throw new UsernameNotFoundException(String.format("User with login %s doesn't exist", login));
         }
