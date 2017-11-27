@@ -1,5 +1,8 @@
 package com.modern.codes.lime.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,10 +33,12 @@ public class Formula implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "resource_id", referencedColumnName="ID")
+    @JsonManagedReference
     private Resource resource;
 
     @ManyToOne
     @JoinColumn(name = "_id", referencedColumnName="ID")
+    @JsonManagedReference
     private Product product;
 
     @ApiModelProperty(value = "The quantity of resources needed for product", required = true)

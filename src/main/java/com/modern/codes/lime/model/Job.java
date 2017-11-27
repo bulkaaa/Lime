@@ -1,6 +1,9 @@
 package com.modern.codes.lime.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,10 +33,12 @@ public class Job implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
+    @JsonManagedReference
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName="ID")
+    @JsonManagedReference
     private User user;
 
     @ApiModelProperty(value = "The details of the job", required = true)
