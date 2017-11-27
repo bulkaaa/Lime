@@ -1,9 +1,11 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.JobPOJO;
 import com.modern.codes.lime.pojo.ProductPOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,6 +22,11 @@ public interface IJobService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+
+    List<JobPOJO> findByStartDateBetween(Date begin, Date end);
+    List<JobPOJO> findByEndDateBetween(Date begin, Date end);
+    List<JobPOJO> findByUser(User user);
+
     static List<JobPOJO> filterByUser(List<JobPOJO> list, String userName){
         return filterByUser(list.stream(), userName).collect(Collectors.toList());
     }

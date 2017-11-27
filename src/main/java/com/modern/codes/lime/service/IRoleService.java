@@ -20,6 +20,8 @@ public interface IRoleService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+    List<RolePOJO> findByName(String name);
+
     static List<RolePOJO> filterByName(List<RolePOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }
