@@ -1,5 +1,6 @@
 package com.modern.codes.lime.controller;
 
+import com.modern.codes.lime.DBPopulator;
 import com.modern.codes.lime.ParseTools;
 import com.modern.codes.lime.dao.IResourceDAO;
 import com.modern.codes.lime.model.Resource;
@@ -24,6 +25,8 @@ public class TestController {
     IUserService us;
     @Autowired
     IResourceDAO ud;
+    @Autowired
+    DBPopulator pop;
     @GetMapping(path = "/add-user")
     public boolean addUser(){
         return true;
@@ -37,8 +40,13 @@ public class TestController {
     }
     @GetMapping(path = "/hello-world")
     public String helloWorld(){
-
+        pop.populate();
         List<ResourcePOJO> filtered = ParseTools.parseList(ud.findAll(), ResourcePOJO.class);
         return ParseTools.parseToJson(filtered, Resource.class);
+    }
+    @GetMapping(path = "/populate")
+    public String populate(){
+        pop.populate();
+        return "DB reset completed";
     }
 }
