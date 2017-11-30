@@ -76,35 +76,35 @@ public class ProductPOJO extends BasicPOJO{
         this.expectedValue = expectedValue;
     }
 
-    public List<Job> getDBJobs() {
+    public List<Job> getJobs() {
         return jobs;
     }
 
-    public void setDBJobs(List<Job> jobs) {
+    public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
 
-    public List<JobPOJO> getJobs() {
+    public List<JobPOJO> getPOJOJobs() {
         return ParseTools.parseList(jobs, JobPOJO.class);
     }
 
-    public void setJobs(List<JobPOJO> jobs) {
+    public void setPOJOJobs(List<JobPOJO> jobs) {
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
-    public List<Formula> getDBFormulas() {
+    public List<Formula> getFormulas() {
         return formulas;
     }
 
-    public void setDBFormulas(List<Formula> formulas) {
+    public void setFormulas(List<Formula> formulas) {
         this.formulas = formulas;
     }
 
-    public List<FormulaPOJO> getFormulas() {
+    public List<FormulaPOJO> getPOJOFormulas() {
         return ParseTools.parseList(formulas, FormulaPOJO.class);
     }
 
-    public void setFormulas(List<FormulaPOJO> formulas) {
+    public void setPOJOFormulas(List<FormulaPOJO> formulas) {
         this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
 

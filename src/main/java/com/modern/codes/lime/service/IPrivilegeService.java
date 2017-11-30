@@ -32,7 +32,7 @@ public interface IPrivilegeService {
         return filterByRole(list.stream(), roleName).collect(Collectors.toList());
     }
     static Stream<PrivilegePOJO> filterByRole(Stream<PrivilegePOJO> stream, String roleName){
-        return stream.filter(t -> !IRoleService.filterByName(t.getRoles(), roleName).isEmpty());
+        return stream.filter(t -> !IRoleService.filterByName(t.getPOJORoles(), roleName).isEmpty());
     }
     static List<PrivilegePOJO> filterByRole(List<PrivilegePOJO> list, RolePOJO role){
         return filterByRole(list.stream(), role).collect(Collectors.toList());

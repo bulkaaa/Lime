@@ -12,35 +12,35 @@ public class FormulaPOJO extends BasicPOJO{
     private Product product;
     private Double value;
 
-    public Resource getDBResource() {
+    public Resource getResource() {
         return resource;
     }
 
-    public void setDBResource(Resource resource) {
+    public void setResource(Resource resource) {
         this.resource = resource;
     }
 
-    public ResourcePOJO getResource() {
+    public ResourcePOJO getPOJOResource() {
         return ParseTools.parse(resource, ResourcePOJO.class);
     }
 
-    public void setResource(ResourcePOJO resources) {
+    public void setPOJOResource(ResourcePOJO resources) {
         this.resource = ParseTools.parse(resources, Resource.class);
     }
 
-    public Product getDBProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setDBProduct(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
-    public ProductPOJO getProduct() {
+    public ProductPOJO getPOJOProduct() {
         return ParseTools.parse(product, ProductPOJO.class);
     }
 
-    public void setProduct(ProductPOJO product) {
+    public void setPOJOProduct(ProductPOJO product) {
         this.product = ParseTools.parse(product, Product.class);
     }
 

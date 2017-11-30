@@ -10,7 +10,7 @@ import java.util.List;
 public class PrivilegePOJO extends BasicPOJO{
 
     private String name;
-    private Collection<Role> roles;
+    private List<Role> roles;
 
     public String getName() {
         return name;
@@ -20,19 +20,19 @@ public class PrivilegePOJO extends BasicPOJO{
         this.name = name;
     }
 
-    public Collection<Role> getDBRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setDBRoles(Collection<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public List<RolePOJO> getRoles() {
+    public List<RolePOJO> getPOJORoles() {
         return ParseTools.parseList(Lists.newArrayList(roles), RolePOJO.class);
     }
 
-    public void setRoles(List<RolePOJO> roles) {
+    public void setPOJORoles(List<RolePOJO> roles) {
         this.roles = ParseTools.parseList(roles, Role.class);
     }
 

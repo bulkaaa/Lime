@@ -13,33 +13,33 @@ public class JobPOJO extends BasicPOJO{
     private Date startDate;
     private Date endDate;
     private Double resultValue;
-    public void setDBProduct(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
-    public Product getDBProduct() {
+    public Product getProduct() {
         return product;
     }
-    public ProductPOJO getProduct() {
+    public ProductPOJO getPOJOProduct() {
         return ParseTools.parse(product, ProductPOJO.class);
     }
 
-    public void setProduct(ProductPOJO product) {
+    public void setPOJOProduct(ProductPOJO product) {
         this.product = ParseTools.parse(product, Product.class);
     }
 
-    public User getDBUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setDBUser(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public UserPOJO getUser() {
+    public UserPOJO getPOJOUser() {
         return ParseTools.parse(user, UserPOJO.class);
     }
 
-    public void setUser(UserPOJO user) {
+    public void setPOJOUser(UserPOJO user) {
         this.user = ParseTools.parse(user, User.class);
     }
 

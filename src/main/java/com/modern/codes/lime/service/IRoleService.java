@@ -44,6 +44,6 @@ public interface IRoleService {
         return filterByPrivilege(list.stream(), privilegeName).collect(Collectors.toList());
     }
     static Stream<RolePOJO> filterByPrivilege(Stream<RolePOJO> stream, String privilegeName){
-        return stream.filter(t -> !IPrivilegeService.filterByName(t.getPrivileges(), privilegeName).isEmpty());
+        return stream.filter(t -> !IPrivilegeService.filterByName(t.getPOJOPrivileges(), privilegeName).isEmpty());
     }
 }

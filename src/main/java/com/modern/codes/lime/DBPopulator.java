@@ -356,8 +356,8 @@ public class DBPopulator {
         resA.add(resourceF);
         resA.add(resourceG);
         resB.add(resourceC);
-        supA.setResources(resA);
-        supB.setResources(resB);
+        supA.setPOJOResources(resA);
+        supB.setPOJOResources(resB);
     }
     private void usersRelations(){
         List<JobPOJO> jobListC = new ArrayList<>();
@@ -372,10 +372,10 @@ public class DBPopulator {
         roleListA.add(roleA);
         roleListB.add(roleB);
         roleListC.add(roleC);
-        userC.setJobs(jobListC);
-        userC.setRoles(roleListA);
-        userB.setRoles(roleListB);
-        userA.setRoles(roleListC);
+        userC.setPOJOJobs(jobListC);
+        userC.setPOJORoles(roleListA);
+        userB.setPOJORoles(roleListB);
+        userA.setPOJORoles(roleListC);
     }
     private void rolesRelations(){
         List<PrivilegePOJO> privilegeListA = new ArrayList<>();
@@ -395,12 +395,12 @@ public class DBPopulator {
         userListA.add(userA);
         userListB.add(userB);
         userListC.add(userC);
-        roleA.setPrivileges(privilegeListA);
-        roleA.setUsers(userListA);
-        roleB.setPrivileges(privilegeListB);
-        roleB.setUsers(userListB);
-        roleC.setPrivileges(privilegeListC);
-        roleC.setUsers(userListC);
+        roleA.setPOJOPrivileges(privilegeListA);
+        roleA.setPOJOUsers(userListA);
+        roleB.setPOJOPrivileges(privilegeListB);
+        roleB.setPOJOUsers(userListB);
+        roleC.setPOJOPrivileges(privilegeListC);
+        roleC.setPOJOUsers(userListC);
     }
     private void resourcesRelations(){
         List<FormulaPOJO> formulaListA = new ArrayList<>();
@@ -431,20 +431,20 @@ public class DBPopulator {
         formulaListE.add(formulaS); // Strawberry for choc cake
         formulaListG.add(formulaT); // chocolate for cake
         formulaListG.add(formulaU); // chocolate for donuts
-        resourceA.setFormula(formulaListA);
-        resourceB.setFormula(formulaListB);
-        resourceC.setFormula(formulaListC);
-        resourceD.setFormula(formulaListD);
-        resourceE.setFormula(formulaListE);
-        resourceF.setFormula(formulaListF);
-        resourceG.setFormula(formulaListG);
-        resourceA.setSupplier(supA);
-        resourceB.setSupplier(supA);
-        resourceD.setSupplier(supA);
-        resourceE.setSupplier(supA);
-        resourceF.setSupplier(supA);
-        resourceG.setSupplier(supA);
-        resourceC.setSupplier(supB);
+        resourceA.setPOJOFormula(formulaListA);
+        resourceB.setPOJOFormula(formulaListB);
+        resourceC.setPOJOFormula(formulaListC);
+        resourceD.setPOJOFormula(formulaListD);
+        resourceE.setPOJOFormula(formulaListE);
+        resourceF.setPOJOFormula(formulaListF);
+        resourceG.setPOJOFormula(formulaListG);
+        resourceA.setPOJOSupplier(supA);
+        resourceB.setPOJOSupplier(supA);
+        resourceD.setPOJOSupplier(supA);
+        resourceE.setPOJOSupplier(supA);
+        resourceF.setPOJOSupplier(supA);
+        resourceG.setPOJOSupplier(supA);
+        resourceC.setPOJOSupplier(supB);
     }
     private void productsRelations(){
         List<JobPOJO> jobListA = new ArrayList<>();
@@ -481,14 +481,14 @@ public class DBPopulator {
         jobListC.add(jobC);
         jobListD.add(jobD);
         jobListD.add(jobE);
-        productA.setFormulas(formulaListA);
-        productA.setJobs(jobListA);
-        productB.setFormulas(formulaListB);
-        productB.setJobs(jobListB);
-        productC.setFormulas(formulaListC);
-        productC.setJobs(jobListC);
-        productD.setFormulas(formulaListD);
-        productD.setJobs(jobListD);
+        productA.setPOJOFormulas(formulaListA);
+        productA.setPOJOJobs(jobListA);
+        productB.setPOJOFormulas(formulaListB);
+        productB.setPOJOJobs(jobListB);
+        productC.setPOJOFormulas(formulaListC);
+        productC.setPOJOJobs(jobListC);
+        productD.setPOJOFormulas(formulaListD);
+        productD.setPOJOJobs(jobListD);
     }
     private void privilegesRelations(){
         List<RolePOJO> roleListA = new ArrayList<>();
@@ -504,68 +504,68 @@ public class DBPopulator {
         roleListD.add(roleB);
         roleListE.add(roleA);
         roleListE.add(roleC);
-        privilegeA.setRoles(roleListA);
-        privilegeB.setRoles(roleListB);
-        privilegeC.setRoles(roleListC);
-        privilegeD.setRoles(roleListD);
-        privilegeE.setRoles(roleListE);
+        privilegeA.setPOJORoles(roleListA);
+        privilegeB.setPOJORoles(roleListB);
+        privilegeC.setPOJORoles(roleListC);
+        privilegeD.setPOJORoles(roleListD);
+        privilegeE.setPOJORoles(roleListE);
 
     }
     private void jobsRelations(){
-        jobA.setUser(userC);
-        jobA.setProduct(productA);
-        jobB.setUser(userC);
-        jobB.setProduct(productB);
-        jobC.setUser(userC);
-        jobC.setProduct(productC);
-        jobD.setUser(userC);
-        jobD.setProduct(productD);
-        jobE.setUser(userC);
-        jobE.setProduct(productD);
+        jobA.setPOJOUser(userC);
+        jobA.setPOJOProduct(productA);
+        jobB.setPOJOUser(userC);
+        jobB.setPOJOProduct(productB);
+        jobC.setPOJOUser(userC);
+        jobC.setPOJOProduct(productC);
+        jobD.setPOJOUser(userC);
+        jobD.setPOJOProduct(productD);
+        jobE.setPOJOUser(userC);
+        jobE.setPOJOProduct(productD);
     }
     private void formulasRelations(){
-        formulaA.setProduct(productA);
-        formulaB.setProduct(productA);
-        formulaC.setProduct(productA);
-        formulaD.setProduct(productA);
-        formulaE.setProduct(productB);
-        formulaF.setProduct(productB);
-        formulaG.setProduct(productB);
-        formulaH.setProduct(productB);
-        formulaI.setProduct(productC);
-        formulaJ.setProduct(productC);
-        formulaK.setProduct(productC);
-        formulaL.setProduct(productC);
-        formulaM.setProduct(productD);
-        formulaN.setProduct(productD);
-        formulaO.setProduct(productD);
-        formulaP.setProduct(productD);
-        formulaQ.setProduct(productA);
-        formulaR.setProduct(productB);
-        formulaS.setProduct(productC);
-        formulaT.setProduct(productC);
-        formulaU.setProduct(productD);
-        formulaA.setResource(resourceA);
-        formulaE.setResource(resourceA);
-        formulaI.setResource(resourceA);
-        formulaM.setResource(resourceA);
-        formulaB.setResource(resourceB);
-        formulaF.setResource(resourceB);
-        formulaJ.setResource(resourceB);
-        formulaN.setResource(resourceB);
-        formulaC.setResource(resourceC);
-        formulaG.setResource(resourceC);
-        formulaK.setResource(resourceC);
-        formulaO.setResource(resourceC);
-        formulaD.setResource(resourceD);
-        formulaH.setResource(resourceD);
-        formulaL.setResource(resourceD);
-        formulaP.setResource(resourceD);
-        formulaQ.setResource(resourceF);
-        formulaR.setResource(resourceE);
-        formulaS.setResource(resourceE);
-        formulaT.setResource(resourceG);
-        formulaU.setResource(resourceG);
+        formulaA.setPOJOProduct(productA);
+        formulaB.setPOJOProduct(productA);
+        formulaC.setPOJOProduct(productA);
+        formulaD.setPOJOProduct(productA);
+        formulaE.setPOJOProduct(productB);
+        formulaF.setPOJOProduct(productB);
+        formulaG.setPOJOProduct(productB);
+        formulaH.setPOJOProduct(productB);
+        formulaI.setPOJOProduct(productC);
+        formulaJ.setPOJOProduct(productC);
+        formulaK.setPOJOProduct(productC);
+        formulaL.setPOJOProduct(productC);
+        formulaM.setPOJOProduct(productD);
+        formulaN.setPOJOProduct(productD);
+        formulaO.setPOJOProduct(productD);
+        formulaP.setPOJOProduct(productD);
+        formulaQ.setPOJOProduct(productA);
+        formulaR.setPOJOProduct(productB);
+        formulaS.setPOJOProduct(productC);
+        formulaT.setPOJOProduct(productC);
+        formulaU.setPOJOProduct(productD);
+        formulaA.setPOJOResource(resourceA);
+        formulaE.setPOJOResource(resourceA);
+        formulaI.setPOJOResource(resourceA);
+        formulaM.setPOJOResource(resourceA);
+        formulaB.setPOJOResource(resourceB);
+        formulaF.setPOJOResource(resourceB);
+        formulaJ.setPOJOResource(resourceB);
+        formulaN.setPOJOResource(resourceB);
+        formulaC.setPOJOResource(resourceC);
+        formulaG.setPOJOResource(resourceC);
+        formulaK.setPOJOResource(resourceC);
+        formulaO.setPOJOResource(resourceC);
+        formulaD.setPOJOResource(resourceD);
+        formulaH.setPOJOResource(resourceD);
+        formulaL.setPOJOResource(resourceD);
+        formulaP.setPOJOResource(resourceD);
+        formulaQ.setPOJOResource(resourceF);
+        formulaR.setPOJOResource(resourceE);
+        formulaS.setPOJOResource(resourceE);
+        formulaT.setPOJOResource(resourceG);
+        formulaU.setPOJOResource(resourceG);
     }
     private void saveToDB(){
         saveSuppliers();

@@ -66,36 +66,36 @@ public class ResourcePOJO extends BasicPOJO{
         this.image = image;
     }
 
-    public Supplier getDBSupplier() {
+    public Supplier getSupplier() {
         return supplier;
     }
 
-    public void setDBSupplier(Supplier supplier) {
+    public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
 
-    public SupplierPOJO getSupplier() {
+    public SupplierPOJO getPOJOSupplier() {
         return ParseTools.parse(supplier, SupplierPOJO.class);
     }
 
-    public void setSupplier(SupplierPOJO supplier) {
+    public void setPOJOSupplier(SupplierPOJO supplier) {
         this.supplier = ParseTools.parse(supplier, Supplier.class);
     }
 
 
-    public List<Formula> getDBFormula() {
+    public List<Formula> getFormula() {
         return formulas;
     }
 
-    public void setDBFormula(List<Formula> formulas) {
+    public void setFormula(List<Formula> formulas) {
         this.formulas = formulas;
     }
 
-    public List<FormulaPOJO> getFormula() {
+    public List<FormulaPOJO> getPOJOFormula() {
         return ParseTools.parseList(formulas, FormulaPOJO.class);
     }
 
-    public void setFormula(List<FormulaPOJO> formulas) {
+    public void setPOJOFormula(List<FormulaPOJO> formulas) {
         this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
 
