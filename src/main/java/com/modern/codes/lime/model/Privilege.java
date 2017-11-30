@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Model representation of a user role in Lime.
@@ -31,7 +32,7 @@ public class Privilege {
 
     @ManyToMany(mappedBy = "privileges")
     @JsonBackReference
-    private Collection<Role> roles;
+    private List<Role> roles;
 
     public String getId() {
         return id;
@@ -49,11 +50,11 @@ public class Privilege {
         this.name = name;
     }
 
-    public Collection<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

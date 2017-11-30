@@ -45,7 +45,7 @@ public interface IUserService extends UserDetailsService {
         return filterByRole(list.stream(), roleName).collect(Collectors.toList());
     }
     static Stream<UserPOJO> filterByRole(Stream<UserPOJO> stream, String roleName){
-        return stream.filter(t -> !IRoleService.filterByName(t.getRoles(), roleName).isEmpty());
+        return stream.filter(t -> !IRoleService.filterByName(t.getPOJORoles(), roleName).isEmpty());
     }
     static List<UserPOJO> filterByRole(List<UserPOJO> list, RolePOJO role){
         return filterByRole(list.stream(), role).collect(Collectors.toList());

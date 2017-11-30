@@ -27,19 +27,19 @@ public class UserPOJO extends BasicPOJO {
         this.password = password;
     }
 
-    public List<Role> getDBRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setDBRoles(List<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public List<RolePOJO> getRoles() {
+    public List<RolePOJO> getPOJORoles() {
         return ParseTools.parseList(roles, RolePOJO.class);
     }
 
-    public void setRoles(List<RolePOJO> roles) {
+    public void setPOJORoles(List<RolePOJO> roles) {
         this.roles = ParseTools.parseList(roles, Role.class);
     }
 
@@ -91,17 +91,17 @@ public class UserPOJO extends BasicPOJO {
         this.surname = description;
     }
 
-    public List<JobPOJO> getJobs() { return ParseTools.parseList(jobs, JobPOJO.class); }
+    public List<JobPOJO> getPOJOJobs() { return ParseTools.parseList(jobs, JobPOJO.class); }
 
-    public void setJobs(List<JobPOJO> jobs) {
+    public void setPOJOJobs(List<JobPOJO> jobs) {
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
-    public List<Job> getDBJobs() {
+    public List<Job> getJobs() {
         return jobs;
     }
 
-    public void setDBJobs(List<Job> jobs) {
+    public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
 

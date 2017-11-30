@@ -63,7 +63,7 @@ public interface ISupplierService {
         return filterByResource(list.stream(), resourceName).collect(Collectors.toList());
     }
     static Stream<SupplierPOJO> filterByResource(Stream<SupplierPOJO> stream, String resourceName){
-        return stream.filter(t -> !IResourceService.filterByName(t.getResources(), resourceName).isEmpty());
+        return stream.filter(t -> !IResourceService.filterByName(t.getPOJOResources(), resourceName).isEmpty());
     }
     static List<SupplierPOJO> filterByResource(List<SupplierPOJO> list, ResourcePOJO resource){
         return filterByResource(list.stream(), resource).collect(Collectors.toList());

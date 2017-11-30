@@ -71,19 +71,19 @@ public class SupplierPOJO extends BasicPOJO{
         this.telephone = telephone;
     }
 
-    public List<Resource> getDBResources() {
+    public List<Resource> getResources() {
         return resources;
     }
 
-    public void setDBResources(List<Resource> resources) {
+    public void setResources(List<Resource> resources) {
         this.resources = resources;
     }
 
-    public List<ResourcePOJO> getResources() {
+    public List<ResourcePOJO> getPOJOResources() {
         return ParseTools.parseList(resources, ResourcePOJO.class);
     }
 
-    public void setResources(List<ResourcePOJO> resources) {
+    public void setPOJOResources(List<ResourcePOJO> resources) {
         this.resources = ParseTools.parseList(resources, Resource.class);
     }
 
