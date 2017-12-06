@@ -22,7 +22,7 @@ public class DBPopulator {
     private SupplierService supplierService;
     private UserService userService;
     @Autowired
-    private DBPopulator(JobService jobService,
+    public DBPopulator(JobService jobService,
                        FormulaService formulaService,
                        PrivilegeService privilegeService,
                        ProductService productService,
@@ -114,7 +114,7 @@ public class DBPopulator {
 
 
 
-    private void clearDB(){
+    public void clearDB(){
         userService.deleteAll();
         roleService.deleteAll();
         privilegeService.deleteAll();
@@ -146,21 +146,18 @@ public class DBPopulator {
     private void setUsers(){
         userA.setPassword("passA");
         userA.setLogin("loginA");
-        userA.setDescription("Desctiprion of user B");
         userA.setJoinedAt(ParseTools.parseDate("2017-05-05 12:00:00"));
         userA.setName("Maciej");
         userA.setSurname("Glowala");
         userA.setId(UUID.randomUUID().toString());
         userB.setPassword("passB");
         userB.setLogin("loginB");
-        userB.setDescription("Desctiprion of user B");
         userB.setJoinedAt(ParseTools.parseDate("2017-05-06 12:00:00"));
         userB.setName("Klaudia");
         userB.setSurname("Jarosz");
         userB.setId(UUID.randomUUID().toString());
         userC.setPassword("passC");
         userC.setLogin("loginC");
-        userC.setDescription("Desctiprion of user B");
         userC.setJoinedAt(ParseTools.parseDate("2017-05-06 12:00:00"));
         userC.setName("Aleksandra");
         userC.setSurname("Bulka");
