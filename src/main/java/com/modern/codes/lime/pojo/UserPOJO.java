@@ -83,14 +83,6 @@ public class UserPOJO extends BasicPOJO {
         return surname;
     }
 
-    public String getDescription() {
-        return surname;
-    }
-
-    public void setDescription(String description) {
-        this.surname = description;
-    }
-
     public List<JobPOJO> getPOJOJobs() { return ParseTools.parseList(jobs, JobPOJO.class); }
 
     public void setPOJOJobs(List<JobPOJO> jobs) {
