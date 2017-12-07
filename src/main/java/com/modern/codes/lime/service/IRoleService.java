@@ -13,6 +13,7 @@ public interface IRoleService {
     void delete(String id);
     RolePOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -32,13 +33,13 @@ public interface IRoleService {
         return filterByUser(list.stream(), user).collect(Collectors.toList());
     }
     static Stream<RolePOJO> filterByUser(Stream<RolePOJO> stream, UserPOJO user){
-        return stream.filter(t -> t.getUsers().contains(user));
+        return stream.filter(t -> t.getPOJOUsers().contains(user));
     }
     static List<RolePOJO> filterByPrivilege(List<RolePOJO> list, PrivilegePOJO privilege){
         return filterByPrivilege(list.stream(), privilege).collect(Collectors.toList());
     }
     static Stream<RolePOJO> filterByPrivilege(Stream<RolePOJO> stream, PrivilegePOJO privilege){
-        return stream.filter(t -> t.getPrivileges().contains(privilege));
+        return stream.filter(t -> t.getPOJOPrivileges().contains(privilege));
     }
     static List<RolePOJO> filterByPrivilege(List<RolePOJO> list, String privilegeName){
         return filterByPrivilege(list.stream(), privilegeName).collect(Collectors.toList());

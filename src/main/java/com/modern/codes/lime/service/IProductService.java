@@ -12,6 +12,7 @@ public interface IProductService {
     void delete(String id);
     ProductPOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();

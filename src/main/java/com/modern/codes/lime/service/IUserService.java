@@ -15,6 +15,7 @@ public interface IUserService extends UserDetailsService {
     void delete(String id);
     UserPOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -51,6 +52,6 @@ public interface IUserService extends UserDetailsService {
         return filterByRole(list.stream(), role).collect(Collectors.toList());
     }
     static Stream<UserPOJO> filterByRole(Stream<UserPOJO> stream, RolePOJO role){
-        return stream.filter(t -> t.getRoles().contains(role));
+        return stream.filter(t -> t.getPOJORoles().contains(role));
     }
 }

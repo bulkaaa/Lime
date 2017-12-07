@@ -13,6 +13,7 @@ public interface IResourceService {
     void delete(String id);
     ResourcePOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -46,12 +47,12 @@ public interface IResourceService {
         return filterBySupplier(list.stream(), supplierName).collect(Collectors.toList());
     }
     static Stream<ResourcePOJO> filterBySupplier(Stream<ResourcePOJO> stream, String supplierName){
-        return stream.filter(t -> t.getSupplier().getName().equals(supplierName));
+        return stream.filter(t -> t.getPOJOSupplier().getName().equals(supplierName));
     }
     static List<ResourcePOJO> filterBySupplier(List<ResourcePOJO> list, SupplierPOJO supplier){
         return filterBySupplier(list.stream(), supplier).collect(Collectors.toList());
     }
     static Stream<ResourcePOJO> filterBySupplier(Stream<ResourcePOJO> stream, SupplierPOJO supplier) {
-        return stream.filter(t -> t.getSupplier().equals(supplier));
+        return stream.filter(t -> t.getPOJOSupplier().equals(supplier));
     }
 }

@@ -15,6 +15,7 @@ public interface IJobService {
     void delete(String id);
     JobPOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -31,25 +32,25 @@ public interface IJobService {
         return filterByUser(list.stream(), userName).collect(Collectors.toList());
     }
     static Stream<JobPOJO> filterByUser(Stream<JobPOJO> stream, String userName){
-        return stream.filter(t -> t.getUser().getName().equals(userName));
+        return stream.filter(t -> t.getPOJOUser().getName().equals(userName));
     }
     static List<JobPOJO> filterByUser(List<JobPOJO> list, UserPOJO user){
         return filterByUser(list.stream(), user).collect(Collectors.toList());
     }
     static Stream<JobPOJO> filterByUser(Stream<JobPOJO> stream, UserPOJO user){
-        return stream.filter(t -> t.getUser().equals(user));
+        return stream.filter(t -> t.getPOJOUser().equals(user));
     }
 
     static List<JobPOJO> filterByProduct(List<JobPOJO> list, String productName){
         return filterByProduct(list.stream(), productName).collect(Collectors.toList());
     }
     static Stream<JobPOJO> filterByProduct(Stream<JobPOJO> stream, String productName){
-        return stream.filter(t -> t.getProduct().getName().equals(productName));
+        return stream.filter(t -> t.getPOJOProduct().getName().equals(productName));
     }
     static List<JobPOJO> filterByProduct(List<JobPOJO> list, ProductPOJO product){
         return filterByProduct(list.stream(), product).collect(Collectors.toList());
     }
     static Stream<JobPOJO> filterByProduct(Stream<JobPOJO> stream, ProductPOJO product){
-        return stream.filter(t -> t.getProduct().equals(product));
+        return stream.filter(t -> t.getPOJOProduct().equals(product));
     }
 }

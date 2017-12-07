@@ -12,6 +12,7 @@ public interface IPrivilegeService {
     void delete(String id);
     PrivilegePOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -38,6 +39,6 @@ public interface IPrivilegeService {
         return filterByRole(list.stream(), role).collect(Collectors.toList());
     }
     static Stream<PrivilegePOJO> filterByRole(Stream<PrivilegePOJO> stream, RolePOJO role){
-        return stream.filter(t -> t.getRoles().contains(role));
+        return stream.filter(t -> t.getPOJORoles().contains(role));
     }
 }

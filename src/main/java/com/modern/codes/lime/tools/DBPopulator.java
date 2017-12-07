@@ -1,4 +1,4 @@
-package com.modern.codes.lime;
+package com.modern.codes.lime.tools;
 
 import com.modern.codes.lime.model.Unit;
 import com.modern.codes.lime.pojo.*;
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DBPopulator {
@@ -39,56 +38,56 @@ public class DBPopulator {
         this.supplierService = supplierService;
         this.userService = userService;
     }
-    private SupplierPOJO supA = new SupplierPOJO();
-    private SupplierPOJO supB = new SupplierPOJO();
-    private UserPOJO userA = new UserPOJO();
-    private UserPOJO userB = new UserPOJO();
-    private UserPOJO userC = new UserPOJO();
-    private RolePOJO roleA = new RolePOJO();
-    private RolePOJO roleB = new RolePOJO();
-    private RolePOJO roleC = new RolePOJO();
-    private ResourcePOJO resourceA = new ResourcePOJO();
-    private ResourcePOJO resourceB = new ResourcePOJO();
-    private ResourcePOJO resourceC = new ResourcePOJO();
-    private ResourcePOJO resourceD = new ResourcePOJO();
-    private ResourcePOJO resourceE = new ResourcePOJO();
-    private ResourcePOJO resourceF = new ResourcePOJO();
-    private ResourcePOJO resourceG = new ResourcePOJO();
-    private ProductPOJO productA = new ProductPOJO();
-    private ProductPOJO productB = new ProductPOJO();
-    private ProductPOJO productC = new ProductPOJO();
-    private ProductPOJO productD = new ProductPOJO();
-    private PrivilegePOJO privilegeA = new PrivilegePOJO();
-    private PrivilegePOJO privilegeB = new PrivilegePOJO();
-    private PrivilegePOJO privilegeC = new PrivilegePOJO();
-    private PrivilegePOJO privilegeD = new PrivilegePOJO();
-    private PrivilegePOJO privilegeE = new PrivilegePOJO();
-    private JobPOJO jobA = new JobPOJO();
-    private JobPOJO jobB = new JobPOJO();
-    private JobPOJO jobC = new JobPOJO();
-    private JobPOJO jobD = new JobPOJO();
-    private JobPOJO jobE = new JobPOJO();
-    private FormulaPOJO formulaA = new FormulaPOJO();
-    private FormulaPOJO formulaB = new FormulaPOJO();
-    private FormulaPOJO formulaC = new FormulaPOJO();
-    private FormulaPOJO formulaD = new FormulaPOJO();
-    private FormulaPOJO formulaE = new FormulaPOJO();
-    private FormulaPOJO formulaF = new FormulaPOJO();
-    private FormulaPOJO formulaG = new FormulaPOJO();
-    private FormulaPOJO formulaH = new FormulaPOJO();
-    private FormulaPOJO formulaI = new FormulaPOJO();
-    private FormulaPOJO formulaJ = new FormulaPOJO();
-    private FormulaPOJO formulaK = new FormulaPOJO();
-    private FormulaPOJO formulaL = new FormulaPOJO();
-    private FormulaPOJO formulaM = new FormulaPOJO();
-    private FormulaPOJO formulaN = new FormulaPOJO();
-    private FormulaPOJO formulaO = new FormulaPOJO();
-    private FormulaPOJO formulaP = new FormulaPOJO();
-    private FormulaPOJO formulaQ = new FormulaPOJO();
-    private FormulaPOJO formulaR = new FormulaPOJO();
-    private FormulaPOJO formulaS = new FormulaPOJO();
-    private FormulaPOJO formulaT = new FormulaPOJO();
-    private FormulaPOJO formulaU = new FormulaPOJO();
+    private SupplierPOJO supA;
+    private SupplierPOJO supB;
+    private UserPOJO userA;
+    private UserPOJO userB;
+    private UserPOJO userC;
+    private RolePOJO roleA;
+    private RolePOJO roleB;
+    private RolePOJO roleC;
+    private ResourcePOJO resourceA;
+    private ResourcePOJO resourceB;
+    private ResourcePOJO resourceC;
+    private ResourcePOJO resourceD;
+    private ResourcePOJO resourceE;
+    private ResourcePOJO resourceF;
+    private ResourcePOJO resourceG;
+    private ProductPOJO productA;
+    private ProductPOJO productB;
+    private ProductPOJO productC;
+    private ProductPOJO productD;
+    private PrivilegePOJO privilegeA;
+    private PrivilegePOJO privilegeB;
+    private PrivilegePOJO privilegeC;
+    private PrivilegePOJO privilegeD;
+    private PrivilegePOJO privilegeE;
+    private JobPOJO jobA;
+    private JobPOJO jobB;
+    private JobPOJO jobC;
+    private JobPOJO jobD;
+    private JobPOJO jobE;
+    private FormulaPOJO formulaA;
+    private FormulaPOJO formulaB;
+    private FormulaPOJO formulaC;
+    private FormulaPOJO formulaD;
+    private FormulaPOJO formulaE;
+    private FormulaPOJO formulaF;
+    private FormulaPOJO formulaG;
+    private FormulaPOJO formulaH;
+    private FormulaPOJO formulaI;
+    private FormulaPOJO formulaJ;
+    private FormulaPOJO formulaK;
+    private FormulaPOJO formulaL;
+    private FormulaPOJO formulaM;
+    private FormulaPOJO formulaN;
+    private FormulaPOJO formulaO;
+    private FormulaPOJO formulaP;
+    private FormulaPOJO formulaQ;
+    private FormulaPOJO formulaR;
+    private FormulaPOJO formulaS;
+    private FormulaPOJO formulaT;
+    private FormulaPOJO formulaU;
 
     public void populate(){
         clearDB();
@@ -113,19 +112,52 @@ public class DBPopulator {
     }
 
 
-
     public void clearDB(){
-        userService.deleteAll();
-        roleService.deleteAll();
-        privilegeService.deleteAll();
-        jobService.deleteAll();
-        formulaService.deleteAll();
-        productService.deleteAll();
-        resourceService.deleteAll();
-        supplierService.deleteAll();
-
+        deleteUsers();
+        deleteRoles();
+        deletePrivileges();
+        deleteJobs();
+        deleteFormulas();
+        deleteProducts();
+        deleteResources();
+        deleteSuppliers();
     }
-    private void setSuppliers(){
+
+    public void deleteSuppliers() {
+        supplierService.deleteAll();
+    }
+
+    public void deleteResources() {
+        resourceService.deleteAll();
+    }
+
+    public void deleteProducts() {
+        productService.deleteAll();
+    }
+
+    public void deleteFormulas() {
+        formulaService.deleteAll();
+    }
+
+    public void deleteJobs() {
+        jobService.deleteAll();
+    }
+
+    public void deletePrivileges() {
+        privilegeService.deleteAll();
+    }
+
+    public void deleteRoles() {
+        roleService.deleteAll();
+    }
+
+    public void deleteUsers() {
+        userService.deleteAll();
+    }
+
+    public void setSuppliers() {
+        supA = new SupplierPOJO();
+        supB = new SupplierPOJO();
         supA.setName("Hurtownia Spozywcza");
         supB.setName("JAJO sp. z o.o. ");
         supA.setTelephone("123123123");
@@ -140,78 +172,76 @@ public class DBPopulator {
         supB.setCity("Kurza Stopka");
         supA.setEmailAddress("Jan@Kowalski.pl");
         supB.setEmailAddress("Cezary@Pazura.co");
-        supA.setId(UUID.randomUUID().toString());
-        supA.setId(UUID.randomUUID().toString());
     }
-    private void setUsers(){
+    public void setUsers(){
+        userA = new UserPOJO();
+        userB = new UserPOJO();
+        userC = new UserPOJO();
         userA.setPassword("passA");
         userA.setLogin("loginA");
         userA.setJoinedAt(ParseTools.parseDate("2017-05-05 12:00:00"));
         userA.setName("Maciej");
         userA.setSurname("Glowala");
-        userA.setId(UUID.randomUUID().toString());
         userB.setPassword("passB");
         userB.setLogin("loginB");
         userB.setJoinedAt(ParseTools.parseDate("2017-05-06 12:00:00"));
         userB.setName("Klaudia");
         userB.setSurname("Jarosz");
-        userB.setId(UUID.randomUUID().toString());
         userC.setPassword("passC");
         userC.setLogin("loginC");
         userC.setJoinedAt(ParseTools.parseDate("2017-05-06 12:00:00"));
         userC.setName("Aleksandra");
         userC.setSurname("Bulka");
-        userC.setId(UUID.randomUUID().toString());
     }
-    private void setRoles(){
+    public void setRoles(){
+        roleA = new RolePOJO();
+        roleB = new RolePOJO();
+        roleC = new RolePOJO();
         roleA.setName("Administrator");
-        roleA.setId(UUID.randomUUID().toString());
         roleB.setName("Manager");
-        roleB.setId(UUID.randomUUID().toString());
         roleC.setName("Staff");
-        roleC.setId(UUID.randomUUID().toString());
     }
-    private void setResources(){
+    public void setResources(){
+        resourceA = new ResourcePOJO();
+        resourceB = new ResourcePOJO();
+        resourceC = new ResourcePOJO();
+        resourceD = new ResourcePOJO();
+        resourceE = new ResourcePOJO();
+        resourceF = new ResourcePOJO();
+        resourceG = new ResourcePOJO();
         resourceA.setName("Flour");
         resourceA.setUnit(Unit.KG);
         resourceA.setQuantity((double)30);
-        resourceA.setId(UUID.randomUUID().toString());
         resourceA.setDescription("Description for resource A");
         resourceA.setCategory("Basic");
         resourceB.setName("Milk");
         resourceB.setUnit(Unit.LITER);
         resourceB.setQuantity((double)20);
-        resourceB.setId(UUID.randomUUID().toString());
         resourceB.setDescription("Description for resource B");
         resourceB.setCategory("Basic");
         resourceC.setName("EGG");
         resourceC.setUnit(Unit.UNIT);
         resourceC.setQuantity((double)50);
-        resourceC.setId(UUID.randomUUID().toString());
         resourceC.setDescription("Description for resource C");
         resourceC.setCategory("Basic");
         resourceD.setName("SUGAR");
         resourceD.setUnit(Unit.KG);
         resourceD.setQuantity((double)20);
-        resourceD.setId(UUID.randomUUID().toString());
         resourceD.setDescription("Description for resource D");
         resourceD.setCategory("Additional");
         resourceE.setName("Strawberry");
         resourceE.setUnit(Unit.KG);
         resourceE.setQuantity((double)10);
-        resourceE.setId(UUID.randomUUID().toString());
         resourceE.setDescription("Description for resource E");
         resourceE.setCategory("Additional");
         resourceF.setName("Cherry");
         resourceF.setUnit(Unit.KG);
         resourceF.setQuantity((double)10);
-        resourceF.setId(UUID.randomUUID().toString());
         resourceF.setDescription("Description for resource F");
         resourceF.setCategory("Additional");
         resourceG.setName("Chocolate");  //formula  S U
         resourceG.setUnit(Unit.BAR);
         resourceG.setQuantity((double)30);
-        resourceG.setId(UUID.randomUUID().toString());
         resourceG.setDescription("Description for resource G");
         resourceG.setCategory("Additional");
 
@@ -224,31 +254,31 @@ public class DBPopulator {
         resourceG.setImage("https://tinyurl.com/ya9ene6r");
     }
 
-    private void setProducts(){
+    public void setProducts(){
+        productA = new ProductPOJO();
+        productB = new ProductPOJO();
+        productC = new ProductPOJO();
+        productD = new ProductPOJO();
         productA.setUnit(Unit.UNIT);
         productA.setName("Cherry Cake");
-        productA.setId(UUID.randomUUID().toString());
         productA.setExpectedValue((double)1);
         productA.setDescription("Description for product A");
         productA.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
         productA.setCategory("Cake");
         productB.setUnit(Unit.UNIT);
         productB.setName("Strawberry Cake");
-        productB.setId(UUID.randomUUID().toString());
         productB.setExpectedValue((double)1);
         productB.setDescription("Description for product B");
         productB.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
         productB.setCategory("Cake");
         productC.setUnit(Unit.UNIT);
         productC.setName("Chocolate Cake with Strawberries");
-        productC.setId(UUID.randomUUID().toString());
         productC.setExpectedValue((double)1);
         productC.setDescription("Description for product C");
         productC.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
         productC.setCategory("Cake");
         productD.setUnit(Unit.UNIT);
         productD.setName("Donut with chocolate");
-        productD.setId(UUID.randomUUID().toString());
         productD.setExpectedValue((double)20);
         productD.setDescription("Description for product D");
         productD.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
@@ -260,87 +290,87 @@ public class DBPopulator {
         productD.setImage("https://tinyurl.com/ya9ene6r");
     }
 
-    private void setPrivileges(){
+    public void setPrivileges(){
+        privilegeA = new PrivilegePOJO();
+        privilegeB = new PrivilegePOJO();
+        privilegeC = new PrivilegePOJO();
+        privilegeD = new PrivilegePOJO();
+        privilegeE = new PrivilegePOJO();
         privilegeA.setName("Manage Users");
-        privilegeA.setId(UUID.randomUUID().toString());
         privilegeB.setName("Manage Recipes");
-        privilegeB.setId(UUID.randomUUID().toString());
         privilegeC.setName("Get Reports");
-        privilegeC.setId(UUID.randomUUID().toString());
         privilegeD.setName("Manage Resources");
-        privilegeD.setId(UUID.randomUUID().toString());
         privilegeE.setName("Create Product");
-        privilegeE.setId(UUID.randomUUID().toString());
     }
-    private void setJobs() {
-        jobA.setId(UUID.randomUUID().toString());
+    public void setJobs() {
+        jobA = new JobPOJO();
+        jobB = new JobPOJO();
+        jobC = new JobPOJO();
+        jobD = new JobPOJO();
+        jobE = new JobPOJO();
         jobA.setStartDate(ParseTools.parseDate("2017-07-01 12:00:00"));
         jobA.setEndDate(ParseTools.parseDate("2017-07-01 16:00:00"));
         jobA.setResultValue((double)1);
         jobA.setDetails("Details for job A. Making cherry cake.");
-        jobB.setId(UUID.randomUUID().toString());
         jobB.setStartDate(ParseTools.parseDate("2017-07-02 12:00:00"));
         jobB.setEndDate(ParseTools.parseDate("2017-07-02 16:00:00"));
         jobB.setResultValue((double)1);
         jobB.setDetails("Details for job B. Making Strawberry cake");
-        jobC.setId(UUID.randomUUID().toString());
         jobC.setStartDate(ParseTools.parseDate("2017-07-03 12:00:00"));
         jobC.setEndDate(ParseTools.parseDate("2017-07-03 16:00:00"));
         jobC.setResultValue((double)1);
         jobC.setDetails("Details for job C. Making chocolate cake with strawberries");
-        jobD.setId(UUID.randomUUID().toString());
         jobD.setStartDate(ParseTools.parseDate("2017-07-04 12:00:00"));
         jobD.setEndDate(ParseTools.parseDate("2017-07-04 16:00:00"));
         jobD.setResultValue((double)20);
         jobD.setDetails("Details for job D. Making donuts");
-        jobE.setId(UUID.randomUUID().toString());
         jobE.setStartDate(ParseTools.parseDate("2017-07-05 12:00:00"));
         jobE.setEndDate(ParseTools.parseDate("2017-07-05 16:00:00"));
         jobE.setResultValue((double)19);
         jobE.setDetails("Details for job E. Making donuts");
     }
-    private void setFormulas(){
-        formulaA.setId(UUID.randomUUID().toString());
+    public void setFormulas(){
+        formulaA = new FormulaPOJO();
+        formulaB = new FormulaPOJO();
+        formulaC = new FormulaPOJO();
+        formulaD = new FormulaPOJO();
+        formulaE = new FormulaPOJO();
+        formulaF = new FormulaPOJO();
+        formulaG = new FormulaPOJO();
+        formulaH = new FormulaPOJO();
+        formulaI = new FormulaPOJO();
+        formulaJ = new FormulaPOJO();
+        formulaK = new FormulaPOJO();
+        formulaL = new FormulaPOJO();
+        formulaM = new FormulaPOJO();
+        formulaN = new FormulaPOJO();
+        formulaO = new FormulaPOJO();
+        formulaP = new FormulaPOJO();
+        formulaQ = new FormulaPOJO();
+        formulaR = new FormulaPOJO();
+        formulaS = new FormulaPOJO();
+        formulaT = new FormulaPOJO();
+        formulaU = new FormulaPOJO();
         formulaA.setValue((double)1);
-        formulaB.setId(UUID.randomUUID().toString());
         formulaB.setValue((double)1);
-        formulaC.setId(UUID.randomUUID().toString());
         formulaC.setValue((double)5);
-        formulaD.setId(UUID.randomUUID().toString());
         formulaD.setValue(0.1);
-        formulaE.setId(UUID.randomUUID().toString());
         formulaE.setValue((double)1);
-        formulaF.setId(UUID.randomUUID().toString());
         formulaF.setValue((double)1);
-        formulaG.setId(UUID.randomUUID().toString());
         formulaG.setValue((double)5);
-        formulaH.setId(UUID.randomUUID().toString());
         formulaH.setValue(0.1);
-        formulaI.setId(UUID.randomUUID().toString());
         formulaI.setValue((double)1);
-        formulaJ.setId(UUID.randomUUID().toString());
         formulaJ.setValue((double)1);
-        formulaK.setId(UUID.randomUUID().toString());
         formulaK.setValue((double)5);
-        formulaL.setId(UUID.randomUUID().toString());
         formulaL.setValue(0.1);
-        formulaM.setId(UUID.randomUUID().toString());
         formulaM.setValue((double)1);
-        formulaN.setId(UUID.randomUUID().toString());
         formulaN.setValue((double)1);
-        formulaO.setId(UUID.randomUUID().toString());
         formulaO.setValue((double)5);
-        formulaP.setId(UUID.randomUUID().toString());
         formulaP.setValue(0.1);
-        formulaQ.setId(UUID.randomUUID().toString());
         formulaQ.setValue(0.2);
-        formulaR.setId(UUID.randomUUID().toString());
         formulaR.setValue(0.2);
-        formulaS.setId(UUID.randomUUID().toString());
         formulaS.setValue((double)1);
-        formulaT.setId(UUID.randomUUID().toString());
         formulaT.setValue(0.1);
-        formulaU.setId(UUID.randomUUID().toString());
         formulaU.setValue((double)1);
     }
     private void suppliersRelations(){
@@ -571,10 +601,10 @@ public class DBPopulator {
         saveUsers();
         saveFormulas();
         savePrivileges();
-        saveRole();
+        saveRoles();
         saveJobs();
     }
-    private void saveFormulas(){
+    public void saveFormulas(){
         formulaA = formulaService.save(formulaA);
         formulaB = formulaService.save(formulaB);
         formulaC = formulaService.save(formulaC);
@@ -597,20 +627,20 @@ public class DBPopulator {
         formulaT = formulaService.save(formulaT);
         formulaU = formulaService.save(formulaU);
     }
-    private void savePrivileges(){
+    public void savePrivileges(){
         privilegeA = privilegeService.save(privilegeA);
         privilegeB = privilegeService.save(privilegeB);
         privilegeC = privilegeService.save(privilegeC);
         privilegeD = privilegeService.save(privilegeD);
         privilegeE = privilegeService.save(privilegeE);
     }
-    private void saveProducts(){
+    public void saveProducts(){
         productA = productService.save(productA);
         productB = productService.save(productB);
         productC = productService.save(productC);
         productD = productService.save(productD);
     }
-    private void saveResources(){
+    public void saveResources(){
         resourceA = resourceService.save(resourceA);
         resourceB = resourceService.save(resourceB);
         resourceC = resourceService.save(resourceC);
@@ -619,23 +649,23 @@ public class DBPopulator {
         resourceF = resourceService.save(resourceF);
         resourceG = resourceService.save(resourceG);
     }
-    private void saveRole(){
+    public void saveRoles(){
         roleA = roleService.save(roleA);
         roleB = roleService.save(roleB);
         roleC = roleService.save(roleC);
     }
-    private void saveSuppliers(){
+    public void saveSuppliers(){
         supA = supplierService.save(supA);
         supB = supplierService.save(supB);
     }
-    private void saveJobs(){
+    public void saveJobs(){
         jobA = jobService.save(jobA);
         jobB = jobService.save(jobB);
         jobC = jobService.save(jobC);
         jobD = jobService.save(jobD);
         jobE = jobService.save(jobE);
     }
-    private void saveUsers (){
+    public void saveUsers (){
         userA = userService.save(userA);
         userB = userService.save(userB);
         userC = userService.save(userC);
