@@ -1,8 +1,5 @@
-/*(function () {
-    'use strict';
-
-    angular
-        .module('app')
+   /* angular
+        .module('myApp')
         .factory('UserService', UserService);
 
     UserService.$inject = ['$http'];
@@ -54,5 +51,4 @@
             };
         }
     }
-
-})();*/
+*/

@@ -1,8 +1,5 @@
-/*(function () {
-    'use strict';
-
-    angular
-        .module('app')
+ angular
+        .module('myApp')
         .controller('HomeController', HomeController);
 
     HomeController.$inject = ['UserService', '$rootScope'];
@@ -41,8 +38,3 @@
             });
         }
     }
-
-})();*/
-app.controller('HomeController', function($scope) {
-    $scope.bgimg = "libs/img/main_color.jpg";
-});

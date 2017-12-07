@@ -1,8 +1,5 @@
-/*(function () {
-    'use strict';
-
-    angular
-        .module('app')
+angular
+        .module('myApp')
         .controller('RegisterController', RegisterController);
 
     RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
@@ -25,5 +22,3 @@
                 });
         }
     }
-
-})();*/
