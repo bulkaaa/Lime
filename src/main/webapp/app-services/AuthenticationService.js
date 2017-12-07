@@ -1,8 +1,5 @@
-/*(function () {
-    'use strict';
-
-    angular
-        .module('app')
+ angular
+        .module('myApp')
         .factory('AuthenticationService', AuthenticationService);
 
     AuthenticationService.$inject = ['$http', '$cookies', '$rootScope', '$timeout', 'UserService'];
@@ -140,5 +137,3 @@
             return output;
         }
     };
-
-})();*/

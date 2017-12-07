@@ -1,8 +1,5 @@
-/*(function () {
-    'use strict';
-
     angular
-        .module('app')
+        .module('myApp')
         .factory('UserService', UserService);
 
     UserService.$inject = ['$timeout', '$filter', '$q'];
@@ -116,4 +113,3 @@
             localStorage.users = JSON.stringify(users);
         }
     }
-})();*/
