@@ -1,6 +1,6 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.ParseTools;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.dao.IFormulaDAO;
 import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Product;

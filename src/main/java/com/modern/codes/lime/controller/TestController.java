@@ -1,14 +1,11 @@
 package com.modern.codes.lime.controller;
 
-import com.modern.codes.lime.DBPopulator;
-import com.modern.codes.lime.ParseTools;
+import com.modern.codes.lime.tools.DBPopulator;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.dao.IResourceDAO;
-import com.modern.codes.lime.model.Privilege;
 import com.modern.codes.lime.model.Resource;
 
-import com.modern.codes.lime.pojo.PrivilegePOJO;
 import com.modern.codes.lime.pojo.ResourcePOJO;
-import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.service.IPrivilegeService;
 import com.modern.codes.lime.service.IUserService;
 
@@ -18,9 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 @RestController()

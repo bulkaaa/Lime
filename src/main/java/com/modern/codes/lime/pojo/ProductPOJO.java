@@ -1,6 +1,6 @@
 package com.modern.codes.lime.pojo;
 
-import com.modern.codes.lime.ParseTools;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.Unit;
@@ -107,5 +107,39 @@ public class ProductPOJO extends BasicPOJO{
     public void setPOJOFormulas(List<FormulaPOJO> formulas) {
         this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !ProductPOJO.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final ProductPOJO other = (ProductPOJO) obj;
+        return  (this.id == null && other.id == null) ||
+                (this.id != null && this.id.equals(other.id)) &&
+                (this.name == null && other.name == null) ||
+                (this.name != null && this.name.equals(other.name)) &&
+                (this.category == null && other.category == null) ||
+                (this.category != null && this.category.equals(other.category)) &&
+                (this.description == null && other.description == null) ||
+                (this.description != null && this.description.equals(other.description)) &&
+                (this.formulas == null && other.formulas == null) ||
+                (this.formulas != null && this.formulas.equals(other.formulas)) &&
+                (this.image == null && other.image == null) ||
+                (this.image != null && this.image.equals(other.image)) &&
+                (this.unit == null && other.unit == null) ||
+                (this.unit != null && this.unit.equals(other.unit)) &&
+                (this.jobs == null && other.jobs == null) ||
+                (this.jobs != null && this.jobs.equals(other.jobs)) &&
+                (this.expectedValue == null && other.expectedValue == null) ||
+                (this.expectedValue != null && this.expectedValue.equals(other.expectedValue)) &&
+                (this.addedAt == null && other.addedAt == null) ||
+                (this.addedAt != null && this.addedAt.equals(other.addedAt));
+    }
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
+    }
+    
 }

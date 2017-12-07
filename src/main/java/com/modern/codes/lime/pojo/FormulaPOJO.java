@@ -1,10 +1,8 @@
 package com.modern.codes.lime.pojo;
 
-import com.modern.codes.lime.ParseTools;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.model.Resource;
-
-import java.util.List;
 
 public class FormulaPOJO extends BasicPOJO{
 
@@ -52,4 +50,26 @@ public class FormulaPOJO extends BasicPOJO{
         this.value = value;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !FormulaPOJO.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final FormulaPOJO other = (FormulaPOJO) obj;
+        return  (this.id == null && other.id == null) ||
+                (this.id != null && this.id.equals(other.id)) &&
+                (this.resource == null && other.resource == null) ||
+                (this.resource != null && this.resource.equals(other.resource)) &&
+                (this.product == null && other.product == null) ||
+                (this.product != null && this.product.equals(other.product)) &&
+                (this.value == null && other.value == null) ||
+                (this.value != null && this.value.equals(other.value));
+    }
+    @Override
+    public int hashCode() {
+        int hash = 13;
+        hash = 11 * hash + (this.product.getName() != null ? this.product.getName().hashCode() : 0);
+        hash = 11 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
+    }
 }

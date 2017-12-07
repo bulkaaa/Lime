@@ -1,6 +1,6 @@
 package com.modern.codes.lime.pojo;
 
-import com.modern.codes.lime.ParseTools;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.Role;
 
@@ -97,4 +97,32 @@ public class UserPOJO extends BasicPOJO {
         this.jobs = jobs;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !UserPOJO.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final UserPOJO other = (UserPOJO) obj;
+        return  (this.id == null && other.id == null) ||
+                (this.id != null && this.id.equals(other.id)) &&
+                (this.name == null && other.name == null) ||
+                (this.name != null && this.name.equals(other.name)) &&
+                (this.surname == null && other.surname == null) ||
+                (this.surname != null && this.surname.equals(other.surname)) &&
+                (this.joinedAt == null && other.joinedAt == null) ||
+                (this.joinedAt != null && this.joinedAt.equals(other.joinedAt)) &&
+                (this.login == null && other.login == null) ||
+                (this.login != null && this.login.equals(other.login)) &&
+                (this.jobs == null && other.jobs == null) ||
+                (this.jobs != null && this.jobs.equals(other.jobs)) &&
+                (this.roles == null && other.roles == null) ||
+                (this.roles != null && this.roles.equals(other.roles));
+    }
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
+    }
 }

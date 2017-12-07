@@ -12,6 +12,7 @@ public interface ISupplierService {
     void delete(String id);
     SupplierPOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -69,6 +70,6 @@ public interface ISupplierService {
         return filterByResource(list.stream(), resource).collect(Collectors.toList());
     }
     static Stream<SupplierPOJO> filterByResource(Stream<SupplierPOJO> stream, ResourcePOJO resource){
-        return stream.filter(t -> t.getResources().contains(resource));
+        return stream.filter(t -> t.getPOJOResources().contains(resource));
     }
 }

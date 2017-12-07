@@ -37,7 +37,8 @@ dependencies {
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.2.1.RELEASE'
     compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
     compile group: 'org.modelmapper', name: 'modelmapper', version: '1.1.1'
-//    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
 //    testCompile 'junit:junit:4.12'
 //    testCompile 'org.assertj:assertj-core:3.8.0'
 //    testCompile group: 'org.springframework', name: 'spring-test', version: '5.0.1.RELEASE'
@@ -54,10 +55,12 @@ sourceSets {
         }
     }
 }
-
-processResources {
-    dependsOn "buildAngular"
+test {
+    exclude "com/modern/codes/lime/service/IBasicCRUDServiceTest.class"
 }
+//processResources {
+//    dependsOn "buildAngular"
+//}
 
 task buildAngular(type:Exec) {
     dependsOn "installAngular"

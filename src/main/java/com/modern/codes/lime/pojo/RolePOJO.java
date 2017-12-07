@@ -1,6 +1,6 @@
 package com.modern.codes.lime.pojo;
 
-import com.modern.codes.lime.ParseTools;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.Privilege;
 import com.modern.codes.lime.model.User;
 
@@ -45,6 +45,27 @@ public class RolePOJO extends BasicPOJO{
     public void setPOJOPrivileges(List<PrivilegePOJO> privileges) {
         this.privileges = ParseTools.parseList(privileges, Privilege.class);
     }
-
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !RolePOJO.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final RolePOJO other = (RolePOJO) obj;
+        return  (this.id == null && other.id == null) ||
+                (this.id != null && this.id.equals(other.id)) &&
+                (this.name == null && other.name == null) ||
+                (this.name != null && this.name.equals(other.name)) &&
+                (this.privileges == null && other.privileges == null) ||
+                (this.privileges != null && this.privileges.equals(other.privileges)) &&
+                (this.users == null && other.users == null) ||
+                (this.users != null && this.users.equals(other.users));
+    }
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
+    }
 
 }
