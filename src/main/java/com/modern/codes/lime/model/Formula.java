@@ -37,7 +37,7 @@ public class Formula implements Serializable {
     private Resource resource;
 
     @ManyToOne
-    @JoinColumn(name = "_id", referencedColumnName="ID")
+    @JoinColumn(name = "product_id", referencedColumnName="ID")
     @JsonManagedReference
     private Product product;
 

@@ -1,5 +1,6 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.pojo.ProductPOJO;
@@ -23,6 +24,7 @@ public interface IFormulaService {
     void save(List l);
     void delete(List l);
     List<FormulaPOJO> findByProduct(Product product);
+    List<FormulaPOJO> findByProductId(String id);
 
 
     static List<FormulaPOJO> filterByResource(List<FormulaPOJO> list, String resourceName){

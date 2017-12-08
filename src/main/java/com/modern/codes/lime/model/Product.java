@@ -36,7 +36,6 @@ public class Product implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @ApiModelProperty(value = "The unqiue id of the product", required = true)
-    @JsonProperty("id")
     private String id;
 
     @ApiModelProperty(value = "The name of the product. E.g \"Lime basic\"", required = true)

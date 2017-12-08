@@ -24,4 +24,9 @@ public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IForm
     public List<FormulaPOJO> findByProduct(Product product) {
         return ParseTools.parseList(dao.findByProduct(product), FormulaPOJO.class);
     }
+
+    @Override
+    public List<FormulaPOJO> findByProductId(String id) {
+        return ParseTools.parseList(dao.findByProductId(id), FormulaPOJO.class);
+    }
 }
