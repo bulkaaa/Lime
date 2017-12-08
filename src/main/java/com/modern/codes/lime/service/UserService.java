@@ -5,17 +5,20 @@ import com.modern.codes.lime.dao.IUserDAO;
 import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.UserPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service("userDetailsService")
 public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> implements IUserService {
 
     private IUserDAO dao;
@@ -36,9 +39,10 @@ public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> impl
     }
 
     @Override
-    public UserPOJO findByLogin(String login) {
-        return ParseTools.parse(dao.findByLogin(login), UserPOJO.class);
+    public UserPOJO findByUsername(String username) {
+        return ParseTools.parse(dao.findByUsername(username), UserPOJO.class);
     }
+
 
     @Override
     public List<UserPOJO> findByJoinedAtBetween(Date begin, Date end) {
@@ -50,23 +54,8 @@ public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> impl
         return ParseTools.parseList(dao.findByNameAndSurname(name, surname), UserPOJO.class);
     }
 
-
-
-    @Override
-    public UserDetails loadUserByUsername(String login) {
-        User user = dao.findByLogin(login);
-        if(user == null) {
-            throw new UsernameNotFoundException(String.format("User with login %s doesn't exist", login));
-        }
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        user.getRoles().forEach(r -> {
-            r.getPrivileges().forEach(p -> {
-                authorities.add(new SimpleGrantedAuthority(p.getName()));
-            });
-        });
-
-        return new org.springframework.security.core.userdetails.
-                User(user.getLogin(), user.getPassword(), authorities);
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }

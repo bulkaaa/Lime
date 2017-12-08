@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 @ApiModel(description = "Model representation of a resource used in Lime")
 @Entity
+@Transactional
 public class Resource implements Serializable{
 
     private static final long serialVersionUID = 8269473897901383543L;

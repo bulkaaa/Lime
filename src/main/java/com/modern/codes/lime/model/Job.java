@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,6 +22,7 @@ import java.util.Date;
  */
 @ApiModel(description = "Model representation of a job that is created by Lime user")
 @Entity
+@Transactional
 public class Job implements Serializable {
 
     private static final long serialVersionUID = 6863653782430587120L;

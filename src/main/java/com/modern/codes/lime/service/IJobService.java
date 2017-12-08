@@ -27,6 +27,7 @@ public interface IJobService {
     List<JobPOJO> findByStartDateBetween(Date begin, Date end);
     List<JobPOJO> findByEndDateBetween(Date begin, Date end);
     List<JobPOJO> findByUser(User user);
+    List<JobPOJO> findByUserId(String id);
 
     static List<JobPOJO> filterByUser(List<JobPOJO> list, String userName){
         return filterByUser(list.stream(), userName).collect(Collectors.toList());

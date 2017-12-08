@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,19 +25,19 @@ import java.util.List;
  */
 @ApiModel(description = "Model representation of a product in Lime")
 @Entity
+@Transactional
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 8269473897901384963L;
 
 
-    public static final int MAX_LENGTH_NAME = 50;
-    public static final int MAX_LENGTH_DESC = 250;
+    private static final int MAX_LENGTH_NAME = 50;
+    private static final int MAX_LENGTH_DESC = 250;
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @ApiModelProperty(value = "The unqiue id of the product", required = true)
-    @JsonProperty("id")
     private String id;
 
     @ApiModelProperty(value = "The name of the product. E.g \"Lime basic\"", required = true)
