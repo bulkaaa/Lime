@@ -2,7 +2,6 @@ package com.modern.codes.lime.service;
 
 import com.modern.codes.lime.dao.IBasicCRUDRepository;
 import com.modern.codes.lime.pojo.BasicPOJO;
-import com.modern.codes.lime.pojo.SupplierPOJO;
 import org.junit.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.List;

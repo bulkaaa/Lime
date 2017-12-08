@@ -4,7 +4,6 @@ import com.modern.codes.lime.dao.ISupplierDAO;
 import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.pojo.SupplierPOJO;
 import com.modern.codes.lime.tools.DBPopulator;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +17,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @ComponentScan(basePackages={"com.modern.codes.lime.tools"})

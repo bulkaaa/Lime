@@ -599,10 +599,10 @@ public class DBPopulator {
         saveResources();
         saveProducts();
         saveUsers();
-        saveFormulas();
         savePrivileges();
         saveRoles();
         saveJobs();
+        saveFormulas();
     }
     public void saveFormulas(){
         formulaA = formulaService.save(formulaA);
