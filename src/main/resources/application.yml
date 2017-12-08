@@ -10,10 +10,10 @@
 #    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
 #    username: Admin
 #    password: Admin
-#spring.datasource.url = jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11209663?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
-## Username and password
-#spring.datasource.username = sql11209663
-#spring.datasource.password = kan4wNnVVj
+#    url: jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11209663?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
+#    username: sql11209663
+#    password: kan4wNnVVj
+
 spring:
   datasource:
     url: jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11209663?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
@@ -45,12 +45,3 @@ security:
     resource-id: oauth2-resource
     client-id: test-lime-client
     secret: 8c0ae96c-dc07-11e7-9296-cec278b6b50a
-
-
-#security.signing-key=MaYzkSjmkzPC57L
-#security.encoding-strength=256
-#security.security-realm=LIME APP REALM
-#
-#security.jwt.client-id=limeAppClientID
-#security.jwt.client-secret=UtajR3RWyB
-#security.jwt.grant-type=password

@@ -37,7 +37,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory().withClient(clientId)
                 .authorizedGrantTypes("client_credentials", "password")
                 .authorities("ROLE_CLIENT","ROLE_TRUSTED_CLIENT").scopes("read","write","trust")
-                .resourceIds(resourceId).accessTokenValiditySeconds(5000).secret(secret);
+                .resourceIds(resourceId).accessTokenValiditySeconds(3600).secret(secret);
     }
 
     @Override
