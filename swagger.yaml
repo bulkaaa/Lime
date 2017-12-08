@@ -180,7 +180,7 @@ paths:
           description: Successful operation
       security:
         - api_key: []
-  /user/login:
+  /user/username:
     get:
       tags:
         - user
@@ -192,12 +192,12 @@ paths:
       parameters:
         - name: username
           in: query
-          description: The user name for login
+          description: The user name for username
           required: true
           type: string
         - name: password
           in: query
-          description: The password for login in clear text
+          description: The password for username in clear text
           required: true
           type: string
       responses:
@@ -313,9 +313,9 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: login
+        - name: username
           in: query
-          description: The user login for reset password
+          description: The user username for reset password
           required: true
           type: string
       responses:
@@ -367,7 +367,7 @@ definitions:
         type: string
       email:
         type: string
-      login:
+      username:
         type: string
       password:
         type: string

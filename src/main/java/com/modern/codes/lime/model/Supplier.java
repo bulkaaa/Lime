@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,17 +29,18 @@ import java.util.List;
  */
 @ApiModel(description = "Model representation of a supplier used in Lime")
 @Entity
+@Transactional
 public class Supplier implements Serializable{
 
     private static final long serialVersionUID = 8269473897901383432L;
 
-    public static final int MAX_LENGTH_NAME = 50;
-    public static final int MAX_LENGTH_POSTAL_CODE = 10;
-    public static final int MAX_LENGTH_CITY = 40;
-    public static final int MAX_LENGTH_STREET = 35;
-    public static final int MAX_LENGTH_COUNTRY = 3;
-    public static final int MAX_LENGTH_TELEPHONE = 30;
-    public static final int MAX_LENGTH_EMAIL = 240;
+    private static final int MAX_LENGTH_NAME = 50;
+    private static final int MAX_LENGTH_POSTAL_CODE = 10;
+    private static final int MAX_LENGTH_CITY = 40;
+    private static final int MAX_LENGTH_STREET = 35;
+    private static final int MAX_LENGTH_COUNTRY = 3;
+    private static final int MAX_LENGTH_TELEPHONE = 30;
+    private static final int MAX_LENGTH_EMAIL = 240;
 
     @Id
     @GeneratedValue(generator = "uuid")

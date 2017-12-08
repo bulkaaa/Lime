@@ -41,7 +41,7 @@ public class IUserServiceTest extends IBasicCRUDServiceTest<User, UserPOJO, IUse
     @Test
     public void findUserByNameAndUserName(){
         List<UserPOJO> list = serv.findByNameAndSurname("Maciej", "Glowala");
-        assertEquals(list.get(0).getLogin(), "loginA");
+        assertEquals(list.get(0).getUsername(), "loginA");
     }
 
     @Test
@@ -50,11 +50,11 @@ public class IUserServiceTest extends IBasicCRUDServiceTest<User, UserPOJO, IUse
         UserPOJO obj = new UserPOJO();
         obj.setName("Nam");
         obj.setSurname("surn");
-        obj.setLogin("logtest0");
+        obj.setUsername("logtest0");
         obj.setPassword("pass");
         service.save(obj);
-        UserPOJO fObj = service.findByLogin("logtest0");
-        assertEquals(obj.getLogin(), fObj.getLogin());
+        UserPOJO fObj = service.findByUsername("logtest0");
+        assertEquals(obj.getUsername(), fObj.getUsername());
         assertEquals(count + 1, service.count());
     }
     @Test
@@ -65,19 +65,19 @@ public class IUserServiceTest extends IBasicCRUDServiceTest<User, UserPOJO, IUse
         List<UserPOJO> list = new ArrayList<>();
         obj.setName("Nam");
         obj.setSurname("surn");
-        obj.setLogin("logtest0");
+        obj.setUsername("logtest0");
         obj.setPassword("pass");
         obj2.setName("Nam2");
         obj2.setSurname("surn2");
-        obj2.setLogin("logtest02");
+        obj2.setUsername("logtest02");
         obj2.setPassword("pass2");
         list.add(obj);
         list.add(obj2);
         service.save(list);
-        UserPOJO fObj = service.findByLogin("logtest0");
-        assertEquals(obj.getLogin(), fObj.getLogin());
-        UserPOJO fObj2 = service.findByLogin("logtest02");
-        assertEquals(obj2.getLogin(), fObj2.getLogin());
+        UserPOJO fObj = service.findByUsername("logtest0");
+        assertEquals(obj.getUsername(), fObj.getUsername());
+        UserPOJO fObj2 = service.findByUsername("logtest02");
+        assertEquals(obj2.getUsername(), fObj2.getUsername());
         assertEquals(count + 2, service.count());
     }
     @Test
