@@ -12,4 +12,5 @@ public interface IJobDAO extends IBasicCRUDRepository<Job, String> {
     List<Job> findByStartDateBetween(Date begin, Date end);
     List<Job> findByEndDateBetween(Date begin, Date end);
     List<Job> findByUser(User user);
+    List<Job> findByUserId(String id);
 }

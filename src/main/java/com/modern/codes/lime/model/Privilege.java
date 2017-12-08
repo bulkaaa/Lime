@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +22,7 @@ import java.util.List;
  */
 @ApiModel(description = "Model representation of a privilege of the users in Lime")
 @Entity
+@Transactional
 public class Privilege {
 
     @Id

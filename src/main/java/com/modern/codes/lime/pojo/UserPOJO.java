@@ -3,27 +3,35 @@ package com.modern.codes.lime.pojo;
 import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.Role;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Date;
 import java.util.List;
 
 public class UserPOJO extends BasicPOJO {
-
     private String name;
     private String surname;
     private Date joinedAt;
     private List<Role> roles;
     private List<Job> jobs;
-    private String login;
+    private String username;
     private String password;
+    private boolean enabled = true;
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public UserPOJO() {
     }
 
-    public UserPOJO(String name, String surname, String login, String password) {
+    public UserPOJO(String name, String surname, String username, String password) {
         this.name = name;
         this.surname = surname;
-        this.login = login;
+        this.username = username;
         this.password = password;
     }
 
@@ -43,12 +51,12 @@ public class UserPOJO extends BasicPOJO {
         this.roles = ParseTools.parseList(roles, Role.class);
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -57,6 +65,11 @@ public class UserPOJO extends BasicPOJO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public void setPlainPassword(String password) {
+        this.password = (new BCryptPasswordEncoder()).encode(password);
     }
 
     public Date getJoinedAt() {
@@ -111,8 +124,8 @@ public class UserPOJO extends BasicPOJO {
                 (this.surname != null && this.surname.equals(other.surname)) &&
                 (this.joinedAt == null && other.joinedAt == null) ||
                 (this.joinedAt != null && this.joinedAt.equals(other.joinedAt)) &&
-                (this.login == null && other.login == null) ||
-                (this.login != null && this.login.equals(other.login)) &&
+                (this.username == null && other.username == null) ||
+                (this.username != null && this.username.equals(other.username)) &&
                 (this.jobs == null && other.jobs == null) ||
                 (this.jobs != null && this.jobs.equals(other.jobs)) &&
                 (this.roles == null && other.roles == null) ||
