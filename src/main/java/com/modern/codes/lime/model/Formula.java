@@ -46,19 +46,19 @@ public class Formula implements Serializable {
     private Double value;
 
 
-    public Resource getResources() {
+    public Resource getResource() {
         return resource;
     }
 
-    public void setResources(Resource resources) {
+    public void setResource(Resource resources) {
         this.resource = resources;
     }
 
-    public Product getProducts() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProducts(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 
