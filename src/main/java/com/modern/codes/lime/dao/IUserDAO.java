@@ -9,7 +9,7 @@ import java.util.List;
 public interface IUserDAO extends IBasicCRUDRepository<User, String> {
     List<User> findByName(String name);
     List<User> findBySurname(String surname);
-    User findByLogin(String login);
+    User findByUsername(String username);
     List<User> findByJoinedAtBetween(Date begin, Date end);
     List<User> findByNameAndSurname(String name, String surname);
 }

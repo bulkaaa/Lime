@@ -23,6 +23,7 @@ import java.util.List;
  */
 @ApiModel(description = "Model representation of a user role in Lime")
 @Entity
+
 public class Role {
     @Id
     @GeneratedValue(generator = "uuid")

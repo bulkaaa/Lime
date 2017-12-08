@@ -4,13 +4,14 @@ import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public interface IUserService extends UserDetailsService {
+public interface IUserService {
     List<UserPOJO> findAll();
     void delete(String id);
     UserPOJO save(Object t);
@@ -26,9 +27,10 @@ public interface IUserService extends UserDetailsService {
 
     List<UserPOJO> findByName(String name);
     List<UserPOJO> findBySurname(String surname);
-    UserPOJO findByLogin(String login);
+    UserPOJO findByUsername(String username);
     List<UserPOJO> findByJoinedAtBetween(Date begin, Date end);
     List<UserPOJO> findByNameAndSurname(String name, String surname);
+    PasswordEncoder getPasswordEncoder();
 
     static List<UserPOJO> filterByName(List<UserPOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());

@@ -177,18 +177,18 @@ public class DBPopulator {
         userA = new UserPOJO();
         userB = new UserPOJO();
         userC = new UserPOJO();
-        userA.setPassword("passA");
-        userA.setLogin("loginA");
+        userA.setPlainPassword("passA");
+        userA.setUsername("loginA");
         userA.setJoinedAt(ParseTools.parseDate("2017-05-05 12:00:00"));
         userA.setName("Maciej");
         userA.setSurname("Glowala");
-        userB.setPassword("passB");
-        userB.setLogin("loginB");
+        userB.setPlainPassword("passB");
+        userB.setUsername("loginB");
         userB.setJoinedAt(ParseTools.parseDate("2017-05-06 12:00:00"));
         userB.setName("Klaudia");
         userB.setSurname("Jarosz");
-        userC.setPassword("passC");
-        userC.setLogin("loginC");
+        userC.setPlainPassword("passC");
+        userC.setUsername("loginC");
         userC.setJoinedAt(ParseTools.parseDate("2017-05-06 12:00:00"));
         userC.setName("Aleksandra");
         userC.setSurname("Bulka");
@@ -197,9 +197,9 @@ public class DBPopulator {
         roleA = new RolePOJO();
         roleB = new RolePOJO();
         roleC = new RolePOJO();
-        roleA.setName("Administrator");
-        roleB.setName("Manager");
-        roleC.setName("Staff");
+        roleA.setName("ROLE_ADMIN");
+        roleB.setName("ROLE_MANAGER");
+        roleC.setName("ROLE_STAFF");
     }
     public void setResources(){
         resourceA = new ResourcePOJO();
@@ -278,7 +278,7 @@ public class DBPopulator {
         productC.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
         productC.setCategory("Cake");
         productD.setUnit(Unit.UNIT);
-        productD.setName("Donut with chocolate");
+        productD.setName("Donut");
         productD.setExpectedValue((double)20);
         productD.setDescription("Description for product D");
         productD.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
