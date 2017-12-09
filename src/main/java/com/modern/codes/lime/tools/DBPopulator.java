@@ -117,8 +117,6 @@ public class DBPopulator {
 
 
     public void clearDB(){
-        deleteResourceCategories();
-        deleteProductCategories();
         deleteUsers();
         deleteRoles();
         deleteJobs();
@@ -126,6 +124,8 @@ public class DBPopulator {
         deleteProducts();
         deleteResources();
         deleteSuppliers();
+        deleteResourceCategories();
+        deleteProductCategories();
     }
     public void deleteResourceCategories(){
         resourceCategoryService.deleteAll();

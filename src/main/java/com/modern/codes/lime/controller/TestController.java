@@ -5,6 +5,7 @@ import com.modern.codes.lime.tools.DBPopulator;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -34,5 +35,10 @@ public class TestController {
     public String hello(){
         return "hello world";
     }
+    @GetMapping(path = "/hello-world2")
+    public String hello2(){
+        return "hello worl2d";
+    }
+
 
 }
