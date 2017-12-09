@@ -3,7 +3,6 @@ package com.modern.codes.lime.service;
 import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.dao.IJobDAO;
 import com.modern.codes.lime.model.Job;
-import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.JobPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,11 +29,6 @@ public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implemen
     public List<JobPOJO> findByEndDateBetween(Date begin, Date end) {
         return ParseTools.parseList(dao.findByEndDateBetween(begin, end), JobPOJO.class);
 
-    }
-
-    @Override
-    public List<JobPOJO> findByUser(User user) {
-        return ParseTools.parseList(dao.findByUser(user), JobPOJO.class);
     }
 
     @Override

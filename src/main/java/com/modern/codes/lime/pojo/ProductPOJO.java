@@ -1,5 +1,6 @@
 package com.modern.codes.lime.pojo;
 
+import com.modern.codes.lime.model.ProductCategory;
 import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Job;
@@ -14,7 +15,7 @@ public class ProductPOJO extends BasicPOJO{
     private String description;
     private Unit unit;
     private Date addedAt;
-    private String category;
+    private ProductCategory category;
     private String image;
     private Double expectedValue;
     private List<Job> jobs;
@@ -52,13 +53,21 @@ public class ProductPOJO extends BasicPOJO{
         this.addedAt = addedAt;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
+    public ProductCategoryPOJO getPOJOCategory() {
+        return ParseTools.parse(category, ProductCategoryPOJO.class);
+    }
+
+    public void setPOJOCategory(ProductCategoryPOJO category) {
+        this.category = ParseTools.parse(category, ProductCategory.class);
+    }
+
 
     public String getImage() {
         return image;
