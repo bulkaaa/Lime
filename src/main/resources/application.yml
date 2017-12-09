@@ -9,12 +9,12 @@
 
 spring:
   datasource:
-#    url: jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11209663?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
-#    username: sql11209663
-#    password: kan4wNnVVj
-    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
-    username: Admin
-    password: Admin
+    url: jdbc:mysql://sql11.freemysqlhosting.net:3306/sql11209663?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
+    username: sql11209663
+    password: kan4wNnVVj
+#    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
+#    username: Admin
+#    password: Admin
     tomcat:
       test-while-idle: true
       validation-query: SELECT 1
@@ -30,14 +30,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
-
-security:
-  user:
-    password: password
-  oauth2:
-    resource:
-      filter-order: 3
-  credentials:
-    resource-id: oauth2-resource
-    client-id: test-lime-client
-    secret: 8c0ae96c-dc07-11e7-9296-cec278b6b50a
+server:
+    port: 8080
+    address: localhost
+    session:
+      timeout: 120
