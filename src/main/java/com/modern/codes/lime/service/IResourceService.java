@@ -1,5 +1,6 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.model.ResourceCategory;
 import com.modern.codes.lime.model.Unit;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.pojo.SupplierPOJO;
@@ -23,7 +24,7 @@ public interface IResourceService {
     void delete(List l);
 
     List<ResourcePOJO> findByName(String name);
-    List<ResourcePOJO> findByCategory(String category);
+    List<ResourcePOJO>findByCategoryName(String categoryName);
 
     static List<ResourcePOJO> filterByName(List<ResourcePOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());

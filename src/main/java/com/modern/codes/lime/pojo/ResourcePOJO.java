@@ -1,5 +1,6 @@
 package com.modern.codes.lime.pojo;
 
+import com.modern.codes.lime.model.ResourceCategory;
 import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.model.Supplier;
@@ -13,7 +14,7 @@ public class ResourcePOJO extends BasicPOJO{
     private String description;
     private Unit unit;
     private Double quantity;
-    private String category;
+    private ResourceCategory category;
     private String image;
     private Supplier supplier;
     private List<Formula> formulas;
@@ -50,12 +51,19 @@ public class ResourcePOJO extends BasicPOJO{
         this.quantity = quantity;
     }
 
-    public String getCategory() {
+    public ResourceCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ResourceCategory category) {
         this.category = category;
+    }
+    public ResourceCategoryPOJO getPOJOCategory() {
+        return ParseTools.parse(category, ResourceCategoryPOJO.class);
+    }
+
+    public void setPOJOCategory(ResourceCategoryPOJO category) {
+        this.category = ParseTools.parse(category, ResourceCategory.class);
     }
 
     public String getImage() {
@@ -83,19 +91,19 @@ public class ResourcePOJO extends BasicPOJO{
     }
 
 
-    public List<Formula> getFormula() {
+    public List<Formula> getFormulas() {
         return formulas;
     }
 
-    public void setFormula(List<Formula> formulas) {
+    public void setFormulas(List<Formula> formulas) {
         this.formulas = formulas;
     }
 
-    public List<FormulaPOJO> getPOJOFormula() {
+    public List<FormulaPOJO> getPOJOFormulas() {
         return ParseTools.parseList(formulas, FormulaPOJO.class);
     }
 
-    public void setPOJOFormula(List<FormulaPOJO> formulas) {
+    public void setPOJOFormulas(List<FormulaPOJO> formulas) {
         this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
 
