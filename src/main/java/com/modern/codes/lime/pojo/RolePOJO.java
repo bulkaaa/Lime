@@ -1,7 +1,6 @@
 package com.modern.codes.lime.pojo;
 
 import com.modern.codes.lime.tools.ParseTools;
-import com.modern.codes.lime.model.Privilege;
 import com.modern.codes.lime.model.User;
 
 import java.util.List;
@@ -12,7 +11,6 @@ public class RolePOJO extends BasicPOJO{
 
     private List<User> users;
 
-    private List<Privilege> privileges;
 
     public List<User> getUsers() { return users; }
 
@@ -30,21 +28,6 @@ public class RolePOJO extends BasicPOJO{
         this.name = name;
     }
 
-    public List<Privilege> getPrivileges() {
-        return privileges;
-    }
-
-    public void setPrivileges(List<Privilege> privileges) {
-        this.privileges = privileges;
-    }
-
-    public List<PrivilegePOJO> getPOJOPrivileges() {
-        return ParseTools.parseList(privileges, PrivilegePOJO.class);
-    }
-
-    public void setPOJOPrivileges(List<PrivilegePOJO> privileges) {
-        this.privileges = ParseTools.parseList(privileges, Privilege.class);
-    }
     @Override
     public boolean equals(Object obj) {
         if (obj == null || !RolePOJO.class.isAssignableFrom(obj.getClass())) {
@@ -55,8 +38,6 @@ public class RolePOJO extends BasicPOJO{
                 (this.id != null && this.id.equals(other.id)) &&
                 (this.name == null && other.name == null) ||
                 (this.name != null && this.name.equals(other.name)) &&
-                (this.privileges == null && other.privileges == null) ||
-                (this.privileges != null && this.privileges.equals(other.privileges)) &&
                 (this.users == null && other.users == null) ||
                 (this.users != null && this.users.equals(other.users));
     }

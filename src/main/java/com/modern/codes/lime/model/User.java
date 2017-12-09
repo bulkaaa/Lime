@@ -1,13 +1,8 @@
 package com.modern.codes.lime.model;
 
 import com.fasterxml.jackson.annotation.*;
-import com.modern.codes.lime.pojo.PrivilegePOJO;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.CascadeType;
@@ -25,11 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Model representation of user of Lime.
