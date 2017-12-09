@@ -1,5 +1,6 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.model.ProductCategory;
 import com.modern.codes.lime.pojo.ProductPOJO;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ public interface IProductService {
 
     List<ProductPOJO> findByName(String name);
     List<ProductPOJO> findByAddedAtBetween(Date begin, Date end);
-    List<ProductPOJO> findByCategory(String category);
+    List<ProductPOJO> findByCategoryName(String categoryName);
 
     static List<ProductPOJO> filterByName(List<ProductPOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());

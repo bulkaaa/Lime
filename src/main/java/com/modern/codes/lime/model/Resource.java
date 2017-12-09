@@ -26,8 +26,8 @@ public class Resource implements Serializable{
 
     private static final long serialVersionUID = 8269473897901383543L;
 
-    public static final int MAX_LENGTH_NAME = 50;
-    public static final int MAX_LENGTH_DESC = 250;
+    private static final int MAX_LENGTH_NAME = 50;
+    private static final int MAX_LENGTH_DESC = 250;
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -54,9 +54,10 @@ public class Resource implements Serializable{
     @NotNull
     private Double quantity;
 
-    @ApiModelProperty(value = "The category of the resource", required = true)
-    @NotNull
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName="ID")
+    @JsonManagedReference
+    private ResourceCategory category;
 
     @ApiModelProperty(value = "The image url of the resource", required = true)
     @NotNull
@@ -149,6 +150,14 @@ public class Resource implements Serializable{
         this.unit = unit;
     }
 
+    public ResourceCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ResourceCategory category) {
+        this.category = category;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -159,14 +168,6 @@ public class Resource implements Serializable{
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getImage() {
@@ -185,11 +186,11 @@ public class Resource implements Serializable{
         this.supplier = supplier;
     }
 
-    public List<Formula> getFormula() {
+    public List<Formula> getFormulas() {
         return formulas;
     }
 
-    public void setFormula(List<Formula> formulas) {
+    public void setFormulas(List<Formula> formulas) {
         this.formulas = formulas;
     }
 }

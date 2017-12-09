@@ -48,7 +48,6 @@ public class IProductServiceTest extends IBasicCRUDServiceTest<Product, ProductP
         obj.setExpectedValue(102132.00);
         obj.setDescription("desc00");
         obj.setUnit(Unit.KG);
-        obj.setCategory("category");
         service.save(obj);
         assertEquals(obj.getName(), service.findByName("obj1").get(0).getName());
         assertEquals(count + 1, service.count());
@@ -64,13 +63,11 @@ public class IProductServiceTest extends IBasicCRUDServiceTest<Product, ProductP
         obj.setDescription("desc00");
         obj.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj.setUnit(Unit.KG);
-        obj.setCategory("category");
         obj2.setName("obj2");
         obj2.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj2.setExpectedValue(102132.00);
         obj2.setDescription("desc00");
         obj2.setUnit(Unit.KG);
-        obj2.setCategory("category");
         list.add(obj);
         list.add(obj2);
         service.save(list);

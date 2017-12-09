@@ -48,7 +48,6 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
         obj.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj.setDescription("desc");
         obj.setUnit(Unit.KG);
-        obj.setCategory("Konserwatory");
         service.save(obj);
         assertEquals(obj.getName(), service.findByName("Resource").get(0).getName());
         assertEquals(count + 1, service.count());
@@ -64,13 +63,11 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
         obj.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj.setDescription("desc");
         obj.setUnit(Unit.KG);
-        obj.setCategory("Konserwatory");
         obj2.setName("Resource2");
         obj2.setQuantity(10101.00);
         obj2.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj2.setDescription("desc");
         obj2.setUnit(Unit.KG);
-        obj2.setCategory("Konserwatory");
 
         list.add(obj);
         list.add(obj2);

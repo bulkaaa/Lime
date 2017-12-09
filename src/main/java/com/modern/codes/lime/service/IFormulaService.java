@@ -23,7 +23,7 @@ public interface IFormulaService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
-    List<FormulaPOJO> findByProduct(Product product);
+    List<FormulaPOJO> findByProductName(String productName);
     List<FormulaPOJO> findByProductId(String id);
 
 

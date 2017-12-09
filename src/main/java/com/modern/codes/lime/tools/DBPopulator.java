@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Service
 public class DBPopulator {
 
@@ -19,6 +18,9 @@ public class DBPopulator {
     private RoleService roleService;
     private SupplierService supplierService;
     private UserService userService;
+    private ResourceCategoryService resourceCategoryService;
+    private ProductCategoryService productCategoryService;
+
     @Autowired
     public DBPopulator(JobService jobService,
                        FormulaService formulaService,
@@ -26,7 +28,9 @@ public class DBPopulator {
                        ResourceService resourceService,
                        RoleService roleService,
                        SupplierService supplierService,
-                       UserService userService){
+                       UserService userService,
+                       ResourceCategoryService resourceCategoryService,
+                       ProductCategoryService productCategoryService){
         this.jobService = jobService;
         this.formulaService = formulaService;
         this.productService = productService;
@@ -34,7 +38,13 @@ public class DBPopulator {
         this.roleService = roleService;
         this.supplierService = supplierService;
         this.userService = userService;
+        this.resourceCategoryService = resourceCategoryService;
+        this.productCategoryService = productCategoryService;
     }
+    private ResourceCategoryPOJO resourceCategoryA;
+    private ResourceCategoryPOJO resourceCategoryB;
+    private ProductCategoryPOJO productCategoryA;
+    private ProductCategoryPOJO productCategoryB;
     private SupplierPOJO supA;
     private SupplierPOJO supB;
     private UserPOJO userA;
@@ -83,6 +93,8 @@ public class DBPopulator {
 
     public void populate(){
         clearDB();
+        setResourceCategories();
+        setProductCategories();
         setSuppliers();
         setUsers();
         setRoles();
@@ -91,6 +103,8 @@ public class DBPopulator {
         setJobs();
         setFormulas();
         saveToDB();
+        resourceCategoriesRelations();
+        productCategoriesRelations();
         suppliersRelations();
         usersRelations();
         rolesRelations();
@@ -103,6 +117,8 @@ public class DBPopulator {
 
 
     public void clearDB(){
+        deleteResourceCategories();
+        deleteProductCategories();
         deleteUsers();
         deleteRoles();
         deleteJobs();
@@ -111,7 +127,12 @@ public class DBPopulator {
         deleteResources();
         deleteSuppliers();
     }
-
+    public void deleteResourceCategories(){
+        resourceCategoryService.deleteAll();
+    }
+    public void deleteProductCategories(){
+        productCategoryService.deleteAll();
+    }
     public void deleteSuppliers() {
         supplierService.deleteAll();
     }
@@ -140,6 +161,18 @@ public class DBPopulator {
         userService.deleteAll();
     }
 
+    private void setResourceCategories() {
+        resourceCategoryA = new ResourceCategoryPOJO();
+        resourceCategoryB = new ResourceCategoryPOJO();
+        resourceCategoryA.setName("Basics");
+        resourceCategoryB.setName("Fruits");
+    }
+    private void setProductCategories() {
+        productCategoryA = new ProductCategoryPOJO();
+        productCategoryB = new ProductCategoryPOJO();
+        productCategoryA.setName("Cakes");
+        productCategoryB.setName("Others");
+    }
     public void setSuppliers() {
         supA = new SupplierPOJO();
         supB = new SupplierPOJO();
@@ -198,37 +231,30 @@ public class DBPopulator {
         resourceA.setUnit(Unit.KG);
         resourceA.setQuantity((double)30);
         resourceA.setDescription("Description for resource A");
-        resourceA.setCategory("Basic");
         resourceB.setName("Milk");
         resourceB.setUnit(Unit.LITER);
         resourceB.setQuantity((double)20);
         resourceB.setDescription("Description for resource B");
-        resourceB.setCategory("Basic");
         resourceC.setName("EGG");
         resourceC.setUnit(Unit.UNIT);
         resourceC.setQuantity((double)50);
         resourceC.setDescription("Description for resource C");
-        resourceC.setCategory("Basic");
         resourceD.setName("SUGAR");
         resourceD.setUnit(Unit.KG);
         resourceD.setQuantity((double)20);
         resourceD.setDescription("Description for resource D");
-        resourceD.setCategory("Additional");
         resourceE.setName("Strawberry");
         resourceE.setUnit(Unit.KG);
         resourceE.setQuantity((double)10);
         resourceE.setDescription("Description for resource E");
-        resourceE.setCategory("Additional");
         resourceF.setName("Cherry");
         resourceF.setUnit(Unit.KG);
         resourceF.setQuantity((double)10);
         resourceF.setDescription("Description for resource F");
-        resourceF.setCategory("Additional");
         resourceG.setName("Chocolate");  //formula  S U
         resourceG.setUnit(Unit.BAR);
         resourceG.setQuantity((double)30);
         resourceG.setDescription("Description for resource G");
-        resourceG.setCategory("Additional");
 
         resourceA.setImage("https://tinyurl.com/ya9ene6r");
         resourceB.setImage("https://tinyurl.com/ya9ene6r");
@@ -249,26 +275,21 @@ public class DBPopulator {
         productA.setExpectedValue((double)1);
         productA.setDescription("Description for product A");
         productA.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
-        productA.setCategory("Cake");
         productB.setUnit(Unit.UNIT);
         productB.setName("Strawberry Cake");
         productB.setExpectedValue((double)1);
         productB.setDescription("Description for product B");
         productB.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
-        productB.setCategory("Cake");
         productC.setUnit(Unit.UNIT);
         productC.setName("Chocolate Cake with Strawberries");
         productC.setExpectedValue((double)1);
         productC.setDescription("Description for product C");
         productC.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
-        productC.setCategory("Cake");
         productD.setUnit(Unit.UNIT);
         productD.setName("Donut");
         productD.setExpectedValue((double)20);
         productD.setDescription("Description for product D");
         productD.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
-        productD.setCategory("Donut");
-
         productA.setImage("https://tinyurl.com/ya9ene6r");
         productB.setImage("https://tinyurl.com/ya9ene6r");
         productC.setImage("https://tinyurl.com/ya9ene6r");
@@ -346,6 +367,30 @@ public class DBPopulator {
         formulaT.setValue(0.1);
         formulaU.setValue((double)1);
     }
+    private void productCategoriesRelations() {
+        // catB products: D, catA a b c
+        List<ProductPOJO> prodA = new ArrayList<>();
+        List<ProductPOJO> prodB = new ArrayList<>();
+        prodA.add(productA);
+        prodA.add(productB);
+        prodA.add(productC);
+        prodB.add(productD);
+        productCategoryA.setPOJOProducts(prodA);
+        productCategoryB.setPOJOProducts(prodB);
+    }
+    private void resourceCategoriesRelations(){
+        List<ResourcePOJO> resA = new ArrayList<>();
+        List<ResourcePOJO> resB = new ArrayList<>();
+        resA.add(resourceA);
+        resA.add(resourceB);
+        resA.add(resourceC);
+        resA.add(resourceD);
+        resA.add(resourceG);
+        resB.add(resourceE);
+        resB.add(resourceF);
+        resourceCategoryA.setPOJOResources(resA);
+        resourceCategoryB.setPOJOResources(resB);
+    }
     private void suppliersRelations(){
         List<ResourcePOJO> resA = new ArrayList<>();
         List<ResourcePOJO> resB = new ArrayList<>();
@@ -417,13 +462,20 @@ public class DBPopulator {
         formulaListE.add(formulaS); // Strawberry for choc cake
         formulaListG.add(formulaT); // chocolate for cake
         formulaListG.add(formulaU); // chocolate for donuts
-        resourceA.setPOJOFormula(formulaListA);
-        resourceB.setPOJOFormula(formulaListB);
-        resourceC.setPOJOFormula(formulaListC);
-        resourceD.setPOJOFormula(formulaListD);
-        resourceE.setPOJOFormula(formulaListE);
-        resourceF.setPOJOFormula(formulaListF);
-        resourceG.setPOJOFormula(formulaListG);
+        resourceG.setPOJOCategory(resourceCategoryA);
+        resourceF.setPOJOCategory(resourceCategoryB);
+        resourceE.setPOJOCategory(resourceCategoryB);
+        resourceB.setPOJOCategory(resourceCategoryA);
+        resourceA.setPOJOCategory(resourceCategoryA);
+        resourceC.setPOJOCategory(resourceCategoryA);
+        resourceD.setPOJOCategory(resourceCategoryA);
+        resourceA.setPOJOFormulas(formulaListA);
+        resourceB.setPOJOFormulas(formulaListB);
+        resourceC.setPOJOFormulas(formulaListC);
+        resourceD.setPOJOFormulas(formulaListD);
+        resourceE.setPOJOFormulas(formulaListE);
+        resourceF.setPOJOFormulas(formulaListF);
+        resourceG.setPOJOFormulas(formulaListG);
         resourceA.setPOJOSupplier(supA);
         resourceB.setPOJOSupplier(supA);
         resourceD.setPOJOSupplier(supA);
@@ -467,6 +519,10 @@ public class DBPopulator {
         jobListC.add(jobC);
         jobListD.add(jobD);
         jobListD.add(jobE);
+        productD.setPOJOCategory(productCategoryB);
+        productC.setPOJOCategory(productCategoryA);
+        productB.setPOJOCategory(productCategoryA);
+        productA.setPOJOCategory(productCategoryA);
         productA.setPOJOFormulas(formulaListA);
         productA.setPOJOJobs(jobListA);
         productB.setPOJOFormulas(formulaListB);
@@ -534,6 +590,8 @@ public class DBPopulator {
         formulaU.setPOJOResource(resourceG);
     }
     private void saveToDB(){
+        saveResourceCategories();
+        saveProductCategories();
         saveSuppliers();
         saveResources();
         saveProducts();
@@ -542,6 +600,16 @@ public class DBPopulator {
         saveJobs();
         saveFormulas();
     }
+
+    private void saveResourceCategories() {
+        resourceCategoryA = resourceCategoryService.save(resourceCategoryA);
+        resourceCategoryB = resourceCategoryService.save(resourceCategoryB);
+    }
+    private void saveProductCategories() {
+        productCategoryA = productCategoryService.save(productCategoryA);
+        productCategoryB = productCategoryService.save(productCategoryB);
+    }
+
     public void saveFormulas(){
         formulaA = formulaService.save(formulaA);
         formulaB = formulaService.save(formulaB);
