@@ -1,9 +1,5 @@
-package com.modern.codes.lime.config;
+package com.modern.codes.lime.model;
 
-import com.modern.codes.lime.model.Role;
-import com.modern.codes.lime.model.User;
-import com.modern.codes.lime.pojo.RolePOJO;
-import com.modern.codes.lime.pojo.UserPOJO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +25,7 @@ public class CustomUserDetails implements UserDetails {
 
     private Collection<? extends GrantedAuthority> translate(List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        roles.stream().forEach(x -> authorities.add(new SimpleGrantedAuthority(x.getName())));
+        roles.forEach(x -> authorities.add(new SimpleGrantedAuthority(x.getName())));
         return authorities;
     }
 
