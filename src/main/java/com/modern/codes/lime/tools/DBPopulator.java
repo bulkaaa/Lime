@@ -14,7 +14,6 @@ public class DBPopulator {
 
     private JobService jobService;
     private FormulaService formulaService;
-    private PrivilegeService privilegeService;
     private ProductService productService;
     private ResourceService resourceService;
     private RoleService roleService;
@@ -23,7 +22,6 @@ public class DBPopulator {
     @Autowired
     public DBPopulator(JobService jobService,
                        FormulaService formulaService,
-                       PrivilegeService privilegeService,
                        ProductService productService,
                        ResourceService resourceService,
                        RoleService roleService,
@@ -31,7 +29,6 @@ public class DBPopulator {
                        UserService userService){
         this.jobService = jobService;
         this.formulaService = formulaService;
-        this.privilegeService = privilegeService;
         this.productService = productService;
         this.resourceService = resourceService;
         this.roleService = roleService;
@@ -57,11 +54,6 @@ public class DBPopulator {
     private ProductPOJO productB;
     private ProductPOJO productC;
     private ProductPOJO productD;
-    private PrivilegePOJO privilegeA;
-    private PrivilegePOJO privilegeB;
-    private PrivilegePOJO privilegeC;
-    private PrivilegePOJO privilegeD;
-    private PrivilegePOJO privilegeE;
     private JobPOJO jobA;
     private JobPOJO jobB;
     private JobPOJO jobC;
@@ -96,7 +88,6 @@ public class DBPopulator {
         setRoles();
         setResources();
         setProducts();
-        setPrivileges();
         setJobs();
         setFormulas();
         saveToDB();
@@ -105,7 +96,6 @@ public class DBPopulator {
         rolesRelations();
         resourcesRelations();
         productsRelations();
-        privilegesRelations();
         jobsRelations();
         formulasRelations();
         saveToDB();
@@ -115,7 +105,6 @@ public class DBPopulator {
     public void clearDB(){
         deleteUsers();
         deleteRoles();
-        deletePrivileges();
         deleteJobs();
         deleteFormulas();
         deleteProducts();
@@ -141,10 +130,6 @@ public class DBPopulator {
 
     public void deleteJobs() {
         jobService.deleteAll();
-    }
-
-    public void deletePrivileges() {
-        privilegeService.deleteAll();
     }
 
     public void deleteRoles() {
@@ -290,18 +275,6 @@ public class DBPopulator {
         productD.setImage("https://tinyurl.com/ya9ene6r");
     }
 
-    public void setPrivileges(){
-        privilegeA = new PrivilegePOJO();
-        privilegeB = new PrivilegePOJO();
-        privilegeC = new PrivilegePOJO();
-        privilegeD = new PrivilegePOJO();
-        privilegeE = new PrivilegePOJO();
-        privilegeA.setName("Manage Users");
-        privilegeB.setName("Manage Recipes");
-        privilegeC.setName("Get Reports");
-        privilegeD.setName("Manage Resources");
-        privilegeE.setName("Create Product");
-    }
     public void setJobs() {
         jobA = new JobPOJO();
         jobB = new JobPOJO();
@@ -405,28 +378,14 @@ public class DBPopulator {
         userA.setPOJORoles(roleListC);
     }
     private void rolesRelations(){
-        List<PrivilegePOJO> privilegeListA = new ArrayList<>();
-        List<PrivilegePOJO> privilegeListB = new ArrayList<>();
-        List<PrivilegePOJO> privilegeListC = new ArrayList<>();
         List<UserPOJO> userListC = new ArrayList<>();
         List<UserPOJO> userListB = new ArrayList<>();
         List<UserPOJO> userListA = new ArrayList<>();
-        privilegeListA.add(privilegeA);
-        privilegeListA.add(privilegeB);
-        privilegeListA.add(privilegeC);
-        privilegeListA.add(privilegeD);
-        privilegeListA.add(privilegeE);
-        privilegeListB.add(privilegeC);
-        privilegeListB.add(privilegeD);
-        privilegeListC.add(privilegeE);
         userListA.add(userA);
         userListB.add(userB);
         userListC.add(userC);
-        roleA.setPOJOPrivileges(privilegeListA);
         roleA.setPOJOUsers(userListA);
-        roleB.setPOJOPrivileges(privilegeListB);
         roleB.setPOJOUsers(userListB);
-        roleC.setPOJOPrivileges(privilegeListC);
         roleC.setPOJOUsers(userListC);
     }
     private void resourcesRelations(){
@@ -517,27 +476,7 @@ public class DBPopulator {
         productD.setPOJOFormulas(formulaListD);
         productD.setPOJOJobs(jobListD);
     }
-    private void privilegesRelations(){
-        List<RolePOJO> roleListA = new ArrayList<>();
-        List<RolePOJO> roleListB = new ArrayList<>();
-        List<RolePOJO> roleListC = new ArrayList<>();
-        List<RolePOJO> roleListD = new ArrayList<>();
-        List<RolePOJO> roleListE = new ArrayList<>();
-        roleListA.add(roleA);
-        roleListB.add(roleA);
-        roleListC.add(roleA);
-        roleListC.add(roleB);
-        roleListD.add(roleA);
-        roleListD.add(roleB);
-        roleListE.add(roleA);
-        roleListE.add(roleC);
-        privilegeA.setPOJORoles(roleListA);
-        privilegeB.setPOJORoles(roleListB);
-        privilegeC.setPOJORoles(roleListC);
-        privilegeD.setPOJORoles(roleListD);
-        privilegeE.setPOJORoles(roleListE);
 
-    }
     private void jobsRelations(){
         jobA.setPOJOUser(userC);
         jobA.setPOJOProduct(productA);
@@ -599,7 +538,6 @@ public class DBPopulator {
         saveResources();
         saveProducts();
         saveUsers();
-        savePrivileges();
         saveRoles();
         saveJobs();
         saveFormulas();
@@ -627,13 +565,7 @@ public class DBPopulator {
         formulaT = formulaService.save(formulaT);
         formulaU = formulaService.save(formulaU);
     }
-    public void savePrivileges(){
-        privilegeA = privilegeService.save(privilegeA);
-        privilegeB = privilegeService.save(privilegeB);
-        privilegeC = privilegeService.save(privilegeC);
-        privilegeD = privilegeService.save(privilegeD);
-        privilegeE = privilegeService.save(privilegeE);
-    }
+
     public void saveProducts(){
         productA = productService.save(productA);
         productB = productService.save(productB);

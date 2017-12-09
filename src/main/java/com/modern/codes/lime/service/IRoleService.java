@@ -1,6 +1,5 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.pojo.PrivilegePOJO;
 import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
 
@@ -34,17 +33,5 @@ public interface IRoleService {
     }
     static Stream<RolePOJO> filterByUser(Stream<RolePOJO> stream, UserPOJO user){
         return stream.filter(t -> t.getPOJOUsers().contains(user));
-    }
-    static List<RolePOJO> filterByPrivilege(List<RolePOJO> list, PrivilegePOJO privilege){
-        return filterByPrivilege(list.stream(), privilege).collect(Collectors.toList());
-    }
-    static Stream<RolePOJO> filterByPrivilege(Stream<RolePOJO> stream, PrivilegePOJO privilege){
-        return stream.filter(t -> t.getPOJOPrivileges().contains(privilege));
-    }
-    static List<RolePOJO> filterByPrivilege(List<RolePOJO> list, String privilegeName){
-        return filterByPrivilege(list.stream(), privilegeName).collect(Collectors.toList());
-    }
-    static Stream<RolePOJO> filterByPrivilege(Stream<RolePOJO> stream, String privilegeName){
-        return stream.filter(t -> !IPrivilegeService.filterByName(t.getPOJOPrivileges(), privilegeName).isEmpty());
     }
 }
