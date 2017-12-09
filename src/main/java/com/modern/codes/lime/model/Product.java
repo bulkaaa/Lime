@@ -1,9 +1,6 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
@@ -62,9 +59,10 @@ public class Product implements Serializable {
     @Column(nullable = false, name = "added_at", updatable = false)
     private Date addedAt;
 
-    @ApiModelProperty(value = "The category of the product", required = true)
-    @NotNull
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName="ID")
+    @JsonManagedReference
+    private ProductCategory category;
 
     @ApiModelProperty(value = "The image url of the product", required = true)
     @NotNull
@@ -165,19 +163,19 @@ public class Product implements Serializable {
         this.unit = unit;
     }
 
-    public List<Job> getJob() {
+    public List<Job> getJobs() {
         return jobs;
     }
 
-    public void setJob(List<Job> jobs) {
+    public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
@@ -201,14 +199,14 @@ public class Product implements Serializable {
         this.addedAt = addedAt;
     }
 
-    public void setFormula(List<Formula> formulas) {
+    public void setFormulas(List<Formula> formulas) {
         this.formulas = formulas;
     }
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public List<Formula> getFormula() {
+    public List<Formula> getFormulas() {
         return formulas;
     }
 }

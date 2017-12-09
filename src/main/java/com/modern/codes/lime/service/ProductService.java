@@ -31,7 +31,7 @@ public class ProductService extends BasicCRUDService<Product, ProductPOJO, IProd
     }
 
     @Override
-    public List<ProductPOJO> findByCategory(String category) {
-        return ParseTools.parseList(dao.findByCategory(category), ProductPOJO.class);
+    public List<ProductPOJO> findByCategoryName(String categoryName) {
+        return ParseTools.parseList(dao.findByCategoryName(categoryName), ProductPOJO.class);
     }
 }
