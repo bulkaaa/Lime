@@ -1,4 +1,5 @@
-package com.modern.codes.lime.api;
+package com.modern.codes.lime.controller;
+
 
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Product;
