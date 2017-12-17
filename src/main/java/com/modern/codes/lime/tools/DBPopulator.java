@@ -418,9 +418,9 @@ public class DBPopulator {
         roleListB.add(roleB);
         roleListC.add(roleC);
         userC.setPOJOJobs(jobListC);
-        userC.setPOJORoles(roleListA);
+        userC.setPOJORoles(roleListC);
         userB.setPOJORoles(roleListB);
-        userA.setPOJORoles(roleListC);
+        userA.setPOJORoles(roleListA);
     }
     private void rolesRelations(){
         List<UserPOJO> userListC = new ArrayList<>();

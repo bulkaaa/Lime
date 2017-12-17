@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController()
 @RequestMapping(path="/dev")
-public class TestController {
+public class DevController {
 
     @Autowired
     DBPopulator pop;
