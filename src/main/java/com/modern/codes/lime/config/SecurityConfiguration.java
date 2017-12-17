@@ -45,18 +45,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/dev/**").hasAnyRole("ROLE_ADMIN", "ROLE_MANAGER")
-                .antMatchers("/dev/hello-world2").hasAnyRole("ROLE_STAFF")
-                .antMatchers("/dev/hello-world").hasAnyRole("ROLE_MANAGER")
+                // .antMatchers("/dev/**").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/dev/hello-world2").hasAnyRole("STAFF")
+                .antMatchers("/dev/hello-world").hasAnyRole("MANAGER")
                 .anyRequest().permitAll()
                 .and()
-                .formLogin().loginPage("/login")
-                .successHandler(successHandler())
-                .failureHandler(failureHandler())
-                .and()
-                .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler())
-                .authenticationEntryPoint(authenticationEntryPoint());
+                // .formLogin().loginPage("/login")
+                // .successHandler(successHandler())
+                // .failureHandler(failureHandler())
+                // .and()
+                // .exceptionHandling()
+                // .accessDeniedHandler(accessDeniedHandler())
+                // .authenticationEntryPoint(authenticationEntryPoint());
+               .formLogin();
+
     }
     private AuthenticationSuccessHandler successHandler() {
         return (httpServletRequest, httpServletResponse, authentication) -> {
