@@ -1,0 +1,409 @@
+swagger: '2.0'
+info:
+  description: >-
+    This is a sample server Petstore server.  You can find out more about    
+    Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net,
+    #swagger](http://swagger.io/irc/).      For this sample, you can use the api
+    key `special-key` to test the authorization     filters.
+  version: 1.0.0
+  title: Swagger LIME
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: petstore.swagger.io
+basePath: /v2
+tags:
+  - name: product
+    description: Everything about LIME Products
+    externalDocs:
+      description: Find out more
+      url: 'http://swagger.io'
+  - name: resource
+    description: Access to LIME resources
+  - name: user
+    description: Operations about user
+    externalDocs:
+      description: Find out more about LIME
+      url: 'http://swagger.io'
+schemes:
+  - http
+paths:
+  '/product/add/{userId}':
+    post:
+      tags:
+        - product
+      summary: Add a new product to the LIME
+      description: ''
+      operationId: addProduct
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: product
+          description: The user to create.
+          schema:
+            $ref: '#/definitions/Product'
+        - in: path
+          name: userId
+          required: true
+          type: string
+          description: The id of user that is adding a product.
+      responses:
+        '200':
+          description: successful operation
+        '401':
+          description: Unauthorized user
+        '422':
+          description: Validation error
+      security:
+        - api_key: []
+  '/resource/add/{userId}':
+    post:
+      tags:
+        - resource
+      summary: Add resource object
+      description: ''
+      operationId: addResource
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Resource object that needs to be modified
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+        - in: path
+          name: userId
+          required: true
+          type: string
+          description: The id of user that is adding a resource.
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Resource'
+        '401':
+          description: Unauthorized user
+        '422':
+          description: Validation error
+      security:
+        - api_key: []
+  '/resource/modify/{userId}':
+    post:
+      tags:
+        - resource
+      summary: Modify resource object
+      description: ''
+      operationId: modifyResource
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Resource object that needs to be modified
+          required: true
+          schema:
+            $ref: '#/definitions/Resource'
+        - in: path
+          name: userId
+          required: true
+          type: string
+          description: The id of user that is modifying a resource.
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Resource'
+        '401':
+          description: Unauthorized user
+        '404':
+          description: Resource not found
+        '422':
+          description: Validation error
+      security:
+        - api_key: []
+  '/resource/{resourceId}/delete/{userId}':
+    delete:
+      tags:
+        - resource
+      summary: Delete resource by ID
+      description: ''
+      operationId: deleteResource
+      produces:
+        - application/json
+      parameters:
+        - name: resourceId
+          in: path
+          description: ID of the resource that needs to be deleted
+          required: true
+          type: string
+        - in: path
+          name: userId
+          required: true
+          type: string
+          description: The id of user that is deleting a resource.
+      responses:
+        '400':
+          description: Invalid ID supplied
+        '401':
+          description: Unauthorized user
+        '404':
+          description: Resource not found
+      security:
+        - api_key: []
+  /user/register:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: Register user with basic authorizations.
+      operationId: createUser
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Created user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '422':
+          description: Validation error
+        default:
+          description: Successful operation
+      security:
+        - api_key: []
+  /user/username:
+    get:
+      tags:
+        - user
+      summary: Logs user into the system
+      description: ''
+      operationId: loginUser
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: query
+          description: The user name for username
+          required: true
+          type: string
+        - name: password
+          in: query
+          description: The password for username in clear text
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when token expires
+        '400':
+          description: Invalid username/password supplied
+      security:
+        - api_key: []
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Logs out current logged in user session
+      description: ''
+      operationId: logoutUser
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+  '/user/{username}':
+    get:
+      tags:
+        - user
+      summary: Get user by user name
+      description: ''
+      operationId: getUserByName
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: path
+          description: 'The name that needs to be fetched. Use user1 for testing. '
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+  '/user/{userId}/update':
+    put:
+      tags:
+        - user
+      summary: Updated user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: name that need to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Updated user object
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '400':
+          description: Invalid user supplied
+        '404':
+          description: User not found
+      security:
+        - api_key: []
+  '/user/delete/{userId}':
+    delete:
+      tags:
+        - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      produces:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          description: The userId of user that needs to be deleted
+          required: true
+          type: string
+      responses:
+        '404':
+          description: User not found
+      security:
+        - api_key: []
+  /user/reset:
+    get:
+      tags:
+        - user
+      summary: Resets password for user
+      description: ''
+      operationId: resetUser
+      produces:
+        - application/json
+      parameters:
+        - name: username
+          in: query
+          description: The user username for reset password
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: User not found
+      security:
+        - api_key: []
+securityDefinitions:
+  lime_auth:
+    type: oauth2
+    authorizationUrl: 'http://LIME_DOMAIN/oauth/dialog'
+    flow: implicit
+    scopes:
+      'write:resources': add/modify resources in your account
+      'read:resources': read your resources
+  api_key:
+    type: apiKey
+    name: api_key
+    in: header
+definitions:
+  Resource:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      category:
+        type: string
+      unit:
+        type: string
+      quantity:
+        type: number
+        format: big-decimal
+      image:
+        type: string
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      surName:
+        type: string
+      email:
+        type: string
+      username:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      joinedAt:
+        type: string
+        format: date-time
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      category:
+        type: string
+      unit:
+        type: string
+      expectedValue:
+        type: integer
+        format: int64
+      image:
+        type: string
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'

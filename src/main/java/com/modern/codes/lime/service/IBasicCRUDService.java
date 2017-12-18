@@ -10,6 +10,7 @@ public interface IBasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDReposito
     void delete(String id);
     T_POJO save(T_POJO t);
     boolean exists(String id);
+    boolean exists(T_POJO t);
     long count();
     boolean equals(T_POJO t, T_POJO y);
     void deleteAll();

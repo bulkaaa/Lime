@@ -2,7 +2,14 @@ package com.modern.codes.lime.dao;
 import com.modern.codes.lime.model.User;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface IUserDAO extends IBasicCRUDRepository<User, String>, IUserCustomDAO{
+import java.util.Date;
+import java.util.List;
 
+@Repository
+public interface IUserDAO extends IBasicCRUDRepository<User, String> {
+    List<User> findByName(String name);
+    List<User> findBySurname(String surname);
+    User findByUsername(String username);
+    List<User> findByJoinedAtBetween(Date begin, Date end);
+    List<User> findByNameAndSurname(String name, String surname);
 }

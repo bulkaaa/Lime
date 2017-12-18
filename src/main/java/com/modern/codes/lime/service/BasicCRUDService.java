@@ -1,13 +1,12 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.ParseTools;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.dao.IBasicCRUDRepository;
 import com.modern.codes.lime.exception.IllegalDataException;
 import com.modern.codes.lime.exception.NotFoundException;
 import com.modern.codes.lime.pojo.BasicPOJO;
 import org.springframework.transaction.TransactionSystemException;
 
-import javax.transaction.TransactionRolledbackException;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +45,15 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
     @Override
     public boolean exists(String id){
         return dao.exists(id);
+    }
+
+    @Override
+    public boolean exists(Object t) {
+        try{
+            return exists(((BasicPOJO)t).getId());
+        } catch (TransactionSystemException rollbackException) {
+            throw rollbackException;
+        }
     }
 
     @Override

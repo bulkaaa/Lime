@@ -12,6 +12,7 @@ public interface ISupplierService {
     void delete(String id);
     SupplierPOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -19,6 +20,16 @@ public interface ISupplierService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+
+
+    List<SupplierPOJO> findByEmailAddress(String emailAddress);
+    List<SupplierPOJO> findByPostalCode(String postalCode);
+    List<SupplierPOJO> findByCity(String city);
+    List<SupplierPOJO> findByCountry(String country);
+    List<SupplierPOJO> findByName(String name);
+    List<SupplierPOJO> findByTelephone(String telephone);
+
+
     static List<SupplierPOJO> filterByName(List<SupplierPOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }
@@ -53,12 +64,12 @@ public interface ISupplierService {
         return filterByResource(list.stream(), resourceName).collect(Collectors.toList());
     }
     static Stream<SupplierPOJO> filterByResource(Stream<SupplierPOJO> stream, String resourceName){
-        return stream.filter(t -> !IResourceService.filterByName(t.getResources(), resourceName).isEmpty());
+        return stream.filter(t -> !IResourceService.filterByName(t.getPOJOResources(), resourceName).isEmpty());
     }
     static List<SupplierPOJO> filterByResource(List<SupplierPOJO> list, ResourcePOJO resource){
         return filterByResource(list.stream(), resource).collect(Collectors.toList());
     }
     static Stream<SupplierPOJO> filterByResource(Stream<SupplierPOJO> stream, ResourcePOJO resource){
-        return stream.filter(t -> t.getResources().contains(resource));
+        return stream.filter(t -> t.getPOJOResources().contains(resource));
     }
 }

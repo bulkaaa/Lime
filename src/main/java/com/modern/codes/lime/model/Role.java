@@ -23,6 +23,7 @@ import java.util.List;
  */
 @ApiModel(description = "Model representation of a user role in Lime")
 @Entity
+
 public class Role {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -36,11 +37,6 @@ public class Role {
     @JsonBackReference
     private List<User> users;
 
-    @ManyToMany
-    @JoinTable(name = "roles_privileges", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
-    @JsonManagedReference
-    private List<Privilege> privileges;
 
     public List<User> getUsers() { return users; }
 
@@ -60,13 +56,5 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Privilege> getPrivileges() {
-        return privileges;
-    }
-
-    public void setPrivileges(List<Privilege> privileges) {
-        this.privileges = privileges;
     }
 }

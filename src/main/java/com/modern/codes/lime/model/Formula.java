@@ -37,7 +37,7 @@ public class Formula implements Serializable {
     private Resource resource;
 
     @ManyToOne
-    @JoinColumn(name = "_id", referencedColumnName="ID")
+    @JoinColumn(name = "product_id", referencedColumnName="ID")
     @JsonManagedReference
     private Product product;
 
@@ -46,19 +46,19 @@ public class Formula implements Serializable {
     private Double value;
 
 
-    public Resource getResources() {
+    public Resource getResource() {
         return resource;
     }
 
-    public void setResources(Resource resources) {
+    public void setResource(Resource resources) {
         this.resource = resources;
     }
 
-    public Product getProducts() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProducts(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

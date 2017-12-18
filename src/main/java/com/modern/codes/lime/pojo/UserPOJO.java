@@ -1,54 +1,62 @@
 package com.modern.codes.lime.pojo;
 
-import com.modern.codes.lime.ParseTools;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.Role;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.util.Date;
 import java.util.List;
 
 public class UserPOJO extends BasicPOJO {
-
     private String name;
     private String surname;
     private Date joinedAt;
     private List<Role> roles;
     private List<Job> jobs;
-    private String login;
+    private String username;
     private String password;
+    private boolean enabled = true;
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public UserPOJO() {
     }
 
-    public UserPOJO(String name, String surname, String login, String password) {
+    public UserPOJO(String name, String surname, String username, String password) {
         this.name = name;
         this.surname = surname;
-        this.login = login;
+        this.username = username;
         this.password = password;
     }
 
-    public List<Role> getDBRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setDBRoles(List<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
-    public List<RolePOJO> getRoles() {
+    public List<RolePOJO> getPOJORoles() {
         return ParseTools.parseList(roles, RolePOJO.class);
     }
 
-    public void setRoles(List<RolePOJO> roles) {
+    public void setPOJORoles(List<RolePOJO> roles) {
         this.roles = ParseTools.parseList(roles, Role.class);
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -57,6 +65,11 @@ public class UserPOJO extends BasicPOJO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public void setPlainPassword(String password) {
+        this.password = (new BCryptPasswordEncoder()).encode(password);
     }
 
     public Date getJoinedAt() {
@@ -83,26 +96,46 @@ public class UserPOJO extends BasicPOJO {
         return surname;
     }
 
-    public String getDescription() {
-        return surname;
-    }
+    public List<JobPOJO> getPOJOJobs() { return ParseTools.parseList(jobs, JobPOJO.class); }
 
-    public void setDescription(String description) {
-        this.surname = description;
-    }
-
-    public List<JobPOJO> getJobs() { return ParseTools.parseList(jobs, JobPOJO.class); }
-
-    public void setJobs(List<JobPOJO> jobs) {
+    public void setPOJOJobs(List<JobPOJO> jobs) {
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
-    public List<Job> getDBJobs() {
+    public List<Job> getJobs() {
         return jobs;
     }
 
-    public void setDBJobs(List<Job> jobs) {
+    public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !UserPOJO.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final UserPOJO other = (UserPOJO) obj;
+        return  (this.id == null && other.id == null) ||
+                (this.id != null && this.id.equals(other.id)) &&
+                (this.name == null && other.name == null) ||
+                (this.name != null && this.name.equals(other.name)) &&
+                (this.surname == null && other.surname == null) ||
+                (this.surname != null && this.surname.equals(other.surname)) &&
+                (this.joinedAt == null && other.joinedAt == null) ||
+                (this.joinedAt != null && this.joinedAt.equals(other.joinedAt)) &&
+                (this.username == null && other.username == null) ||
+                (this.username != null && this.username.equals(other.username)) &&
+                (this.jobs == null && other.jobs == null) ||
+                (this.jobs != null && this.jobs.equals(other.jobs)) &&
+                (this.roles == null && other.roles == null) ||
+                (this.roles != null && this.roles.equals(other.roles));
+    }
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
+    }
 }
