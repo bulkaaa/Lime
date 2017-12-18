@@ -7,6 +7,16 @@ import java.util.List;
 
 
 @Repository
-public interface ISupplierDAO extends IBasicCRUDRepository<Supplier, String>, ISupplierCustomDAO{
+public interface ISupplierDAO extends IBasicCRUDRepository<Supplier, String> {
+    List<Supplier> findByEmailAddress(String emailAddress);
 
+    List<Supplier> findByPostalCode(String postalCode);
+
+    List<Supplier> findByCity(String city);
+
+    List<Supplier> findByCountry(String country);
+
+    List<Supplier> findByName(String name);
+
+    List<Supplier> findByTelephone(String telephone);
 }

@@ -1,7 +1,6 @@
 package com.modern.codes.lime.pojo;
 
-import com.modern.codes.lime.ParseTools;
-import com.modern.codes.lime.model.Privilege;
+import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.model.User;
 
 import java.util.List;
@@ -12,15 +11,14 @@ public class RolePOJO extends BasicPOJO{
 
     private List<User> users;
 
-    private List<Privilege> privileges;
 
-    public List<User> getDBUsers() { return users; }
+    public List<User> getUsers() { return users; }
 
-    public void setDBUsers(List<User> users) { this.users = users; }
+    public void setUsers(List<User> users) { this.users = users; }
 
-    public List<UserPOJO> getUsers() { return ParseTools.parseList(users, UserPOJO.class); }
+    public List<UserPOJO> getPOJOUsers() { return ParseTools.parseList(users, UserPOJO.class); }
 
-    public void setUsers(List<UserPOJO> users) { this.users = ParseTools.parseList(users, User.class); }
+    public void setPOJOUsers(List<UserPOJO> users) { this.users = ParseTools.parseList(users, User.class); }
 
     public String getName() {
         return name;
@@ -30,21 +28,25 @@ public class RolePOJO extends BasicPOJO{
         this.name = name;
     }
 
-    public List<Privilege> getDBPrivileges() {
-        return privileges;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !RolePOJO.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final RolePOJO other = (RolePOJO) obj;
+        return  (this.id == null && other.id == null) ||
+                (this.id != null && this.id.equals(other.id)) &&
+                (this.name == null && other.name == null) ||
+                (this.name != null && this.name.equals(other.name)) &&
+                (this.users == null && other.users == null) ||
+                (this.users != null && this.users.equals(other.users));
     }
-
-    public void setDBPrivileges(List<Privilege> privileges) {
-        this.privileges = privileges;
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
     }
-
-    public List<PrivilegePOJO> getPrivileges() {
-        return ParseTools.parseList(privileges, PrivilegePOJO.class);
-    }
-
-    public void setPrivileges(List<PrivilegePOJO> privileges) {
-        this.privileges = ParseTools.parseList(privileges, Privilege.class);
-    }
-
 
 }

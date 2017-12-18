@@ -1,6 +1,5 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.pojo.PrivilegePOJO;
 import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
 
@@ -13,6 +12,7 @@ public interface IRoleService {
     void delete(String id);
     RolePOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -20,6 +20,8 @@ public interface IRoleService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+    List<RolePOJO> findByName(String name);
+
     static List<RolePOJO> filterByName(List<RolePOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }
@@ -30,18 +32,6 @@ public interface IRoleService {
         return filterByUser(list.stream(), user).collect(Collectors.toList());
     }
     static Stream<RolePOJO> filterByUser(Stream<RolePOJO> stream, UserPOJO user){
-        return stream.filter(t -> t.getUsers().contains(user));
-    }
-    static List<RolePOJO> filterByPrivilege(List<RolePOJO> list, PrivilegePOJO privilege){
-        return filterByPrivilege(list.stream(), privilege).collect(Collectors.toList());
-    }
-    static Stream<RolePOJO> filterByPrivilege(Stream<RolePOJO> stream, PrivilegePOJO privilege){
-        return stream.filter(t -> t.getPrivileges().contains(privilege));
-    }
-    static List<RolePOJO> filterByPrivilege(List<RolePOJO> list, String privilegeName){
-        return filterByPrivilege(list.stream(), privilegeName).collect(Collectors.toList());
-    }
-    static Stream<RolePOJO> filterByPrivilege(Stream<RolePOJO> stream, String privilegeName){
-        return stream.filter(t -> !IPrivilegeService.filterByName(t.getPrivileges(), privilegeName).isEmpty());
+        return stream.filter(t -> t.getPOJOUsers().contains(user));
     }
 }

@@ -1,7 +1,9 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.model.ProductCategory;
 import com.modern.codes.lime.pojo.ProductPOJO;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,6 +13,7 @@ public interface IProductService {
     void delete(String id);
     ProductPOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -18,6 +21,11 @@ public interface IProductService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+
+    List<ProductPOJO> findByName(String name);
+    List<ProductPOJO> findByAddedAtBetween(Date begin, Date end);
+    List<ProductPOJO> findByCategoryName(String categoryName);
+
     static List<ProductPOJO> filterByName(List<ProductPOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }

@@ -1,5 +1,6 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.model.ResourceCategory;
 import com.modern.codes.lime.model.Unit;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.pojo.SupplierPOJO;
@@ -13,6 +14,7 @@ public interface IResourceService {
     void delete(String id);
     ResourcePOJO save(Object t);
     boolean exists(String id);
+    boolean exists(Object t);
     long count();
     boolean equals(Object t, Object y);
     void deleteAll();
@@ -20,6 +22,9 @@ public interface IResourceService {
     void delete(Object t);
     void save(List l);
     void delete(List l);
+
+    List<ResourcePOJO> findByName(String name);
+    List<ResourcePOJO>findByCategoryName(String categoryName);
 
     static List<ResourcePOJO> filterByName(List<ResourcePOJO> list, String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
@@ -43,12 +48,12 @@ public interface IResourceService {
         return filterBySupplier(list.stream(), supplierName).collect(Collectors.toList());
     }
     static Stream<ResourcePOJO> filterBySupplier(Stream<ResourcePOJO> stream, String supplierName){
-        return stream.filter(t -> t.getSupplier().getName().equals(supplierName));
+        return stream.filter(t -> t.getPOJOSupplier().getName().equals(supplierName));
     }
     static List<ResourcePOJO> filterBySupplier(List<ResourcePOJO> list, SupplierPOJO supplier){
         return filterBySupplier(list.stream(), supplier).collect(Collectors.toList());
     }
     static Stream<ResourcePOJO> filterBySupplier(Stream<ResourcePOJO> stream, SupplierPOJO supplier) {
-        return stream.filter(t -> t.getSupplier().equals(supplier));
+        return stream.filter(t -> t.getPOJOSupplier().equals(supplier));
     }
 }

@@ -1,4 +1,4 @@
-package com.modern.codes.lime;
+package com.modern.codes.lime.tools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.modern.codes.lime.exception.IllegalDataException;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Service
 public class ParseTools {
+    private ParseTools(){}
     private static ModelMapper modelMapper = new ModelMapper();
     private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static Logger logger = LoggerFactory.getLogger(ParseTools.class);

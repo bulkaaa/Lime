@@ -3,10 +3,8 @@ package com.modern.codes.lime.model;
 import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.CascadeType;
+import org.springframework.transaction.annotation.Transactional;import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,10 +30,11 @@ import java.util.List;
  */
 
 @Entity
+@Transactional
 public class User {
 
-    public static final int MAX_LENGTH_NAME = 25;
-    public static final int MAX_LENGTH_SURNAME = 250;
+    private static final int MAX_LENGTH_NAME = 25;
+    private static final int MAX_LENGTH_SURNAME = 250;
     public static final int MAX_LENGTH_EMAIL = 240;
 
     @Id
@@ -44,7 +43,6 @@ public class User {
     @ApiModelProperty(value = "The unqiue id of the resource", required = true)
     @JsonProperty("id")
     private String id;
-
     @ApiModelProperty(value = "The name of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
     @Size(max = MAX_LENGTH_NAME)
@@ -73,14 +71,18 @@ public class User {
     @JsonBackReference
     private List<Job> jobs;
 
-    @ApiModelProperty(value = "The login of the user of the \"ChemicalLabs\"", required = true)
+    @ApiModelProperty(value = "The username of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
-    private String login;
+    private String username;
 
     @ApiModelProperty(value = "The password of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
     @JsonIgnore
     private String password;
+
+
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled = true;
 
     @PrePersist
     public void updateTimeStamps() {
@@ -89,12 +91,15 @@ public class User {
         }
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     @JsonManagedReference
     private List<Role> roles;
 
+    public boolean getEnabled() {
+        return enabled;
+    }
 
     public String getId()   { return id; }
 
@@ -133,16 +138,21 @@ public class User {
         this.jobs = jobs;
     }
 
-    public String getLogin() {
-        return login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
 
     public String getPassword() {
         return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public void setPassword(String password) {
