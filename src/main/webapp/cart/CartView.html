@@ -6,34 +6,53 @@
         <div class="total-price">add</div>
         <div class="total-price">total quantity</div>
     </div>-->
-
+    <div ng-repeat="item in items">
         <div class="item row">
         <div class="buttons">
             <span class="delete-btn"></span>
         </div>
         <div class="image">
-            <img src="libs/img/BlueTestTube.jpg" alt="">
+            <img ng-src="{{ item.image }}" />`
         </div>
         <div class="description">
-            <span>resource1</span>
+           </br>
+            <span>{{item.name}}</span>
             <span></span>
         </div>
+            <div class="description">
+                </br>
+                <span>{{item.description}}</span>
+                <span></span>
+            </div>
         <div class="quantity">
             <button class="plus-btn cart-button" type="button" name="button">
                 <img src="images/plus.svg" alt="">
             </button>
-            <input type="input" name="name" value="1">
+            <input type="input" name="name" value="{{item.value}}">
             <button class="minus-btn cart-button" type="button" name="button">
                 <img src="images/minus.svg" alt="">
             </button>
         </div>
-        <div class="total-price">56</div>
-        <div class="total-price"><i class="fa fa-pencil-square-o"></i></div>
+        <div class="total-price">{{item.value}}</div>
+        <div class="total-price"><i class="fa fa-pencil-square-o" ng-click="open()"></i></div>
 
+            <div modal="showModal" close="cancel()">
+                <div class="modal-header">
+                    <h4>Modal Dialog</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Example paragraph with some text.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" ng-click="ok()">Okay</button>
+                    <button class="btn" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
 
+        </div>
     </div>
 
-    <div class="item row">
+   <!-- <div class="item row">
         <div class="buttons">
             <span class="delete-btn"></span>
         </div>
@@ -86,5 +105,5 @@
         </div>
         <div class="total-price">67</div>
         <div class="total-price"><i class="fa fa-pencil-square-o"></i></div>
-    </div>
+    </div>-->
 </div>
