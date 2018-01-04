@@ -46,7 +46,7 @@ public class ProductController {
             @ApiParam(value = "Product object") @RequestBody final @Validated ProductPOJO product,
             BindingResult bindingResult, UriComponentsBuilder b) {
 
-        LOG.info("Location creation request received: {}", product);
+        LOG.info("Product creation request received: {}", product);
 
         if (product == null || bindingResult.hasErrors())
             throw new InvalidRequestException(String.format("Invalid product creation request, form data contains %s error(s).",
