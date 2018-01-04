@@ -14,7 +14,6 @@ import java.util.List;
 
 @ApiModel(description = "Model representation of a resource category used in Lime")
 @Entity
-@Transactional
 public class ResourceCategory  implements Serializable {
 
     private static final int MAX_LENGTH_NAME = 50;
