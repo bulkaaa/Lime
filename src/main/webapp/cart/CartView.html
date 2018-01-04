@@ -1,30 +1,50 @@
 <div class="shopping-cart">
-    <div class="title">Mange Resources</div>
-  <!--  <div class="item row">
-        <div class="button"><div class="image"></div>image</div>
-        <div class="total-price">description</div>
-        <div class="total-price">add</div>
-        <div class="total-price">total quantity</div>
-    </div>-->
-    <div ng-repeat="item in items">
-        <div class="item row">
-        <div class="buttons">
-            <span class="delete-btn"></span>
+    <div class="title">Manage Resources</div>
+    <div class="row btn-row">
+            <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
+            <button type="button" class="btn btn-info" ng-click="addRecord()"><i class="glyphicon glyphicon-plus">
+            </i> Add New Resource</button>
+            </div>
+    </div>
+    <div class="item row item-border">
+        <div class="col-md-12 col-sm-12">
+        <div class="description col-md-2 col-sm-2">
+        </br>
+            <div>image</div>
+        <span></span>
         </div>
-        <div class="image">
-            <img ng-src="{{ item.image }}" />`
-        </div>
-        <div class="description">
-           </br>
-            <span>{{item.name}}</span>
+        <div class="description col-md-2 col-sm-2">
+            </br>
+            <span>resource name</span>
             <span></span>
         </div>
-            <div class="description">
-                </br>
-                <span>{{item.description}}</span>
-                <span></span>
-            </div>
-        <div class="quantity">
+        <div class="description col-md-4 col-sm-4">
+            </br>
+            <span>resource description</span>
+            <span></span>
+        </div>
+        <div class="total-price col-md-2 col-sm-2">quantity</div>
+        <div class="total-price col-md-2 col-sm-2">action</div>
+        </div>
+    </div>
+
+    <div ng-repeat="item in items">
+        <div id="{{item.id}}" class="item row">
+            <div class="col-md-12 col-sm-12">
+                <div class="image col-md-2 col-sm-2">
+                    <img ng-src="{{ item.image }}"/>
+                </div>
+                <div class="description col-md-2 col-sm-2">
+                   </br>
+                    <span>{{item.name}}</span>
+                    <span></span>
+                </div>
+                <div class="description col-md-4 col-sm-4">
+                    </br>
+                    <span>{{item.description}}</span>
+                    <span></span>
+                </div>
+       <!-- <div class="quantity">
             <button class="plus-btn cart-button" type="button" name="button">
                 <img src="images/plus.svg" alt="">
             </button>
@@ -32,78 +52,20 @@
             <button class="minus-btn cart-button" type="button" name="button">
                 <img src="images/minus.svg" alt="">
             </button>
-        </div>
-        <div class="total-price">{{item.value}}</div>
-        <div class="total-price"><i class="fa fa-pencil-square-o" ng-click="open()"></i></div>
-
-            <div modal="showModal" close="cancel()">
-                <div class="modal-header">
-                    <h4>Modal Dialog</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Example paragraph with some text.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-success" ng-click="ok()">Okay</button>
-                    <button class="btn" ng-click="cancel()">Cancel</button>
+        </div>-->
+                <div class="total-price col-md-2 col-sm-2">{{item.value}}</div>
+                <div class="total-price col-md-2 col-sm-2"><!--<i class="fa fa-search" ng-click="viewRecord()"></i><i class="fa fa-pencil-square-o" ng-click="editRecord()"></i>-->
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item.id, item)"><i class="fa fa-pencil-square-o">
+                        </i></button>
+                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)"><i class="fa fa-trash">
+                        </i></button>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
-
-   <!-- <div class="item row">
-        <div class="buttons">
-            <span class="delete-btn"></span>
-        </div>
-
-        <div class="image">
-            <img src="libs/img/PinkTestTube.jpg" alt="">
-        </div>
-        <div class="description">
-            <span>resource2</span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="quantity">
-            <button class="plus-btn cart-button" type="button" name="button">
-                <img src="images/plus.svg" alt="">
-            </button>
-            <input type="text" name="name" value="1">
-            <button class="minus-btn cart-button" type="button" name="button">
-                <img src="images/minus.svg" alt="">
-            </button>
-        </div>
-        <div class="total-price">89</div>
-        <div class="total-price"><i class="fa fa-pencil-square-o"></i></div>
-    </div>
-
-    <div class="item row">
-        <div class="buttons">
-            <span class="delete-btn"></span>
-        </div>
-
-        <div class="image">
-            <img src="libs/img/OrangeTestTube.png" alt="">
-        </div>
-
-        <div class="description">
-            <span>resource3</span>
-            <span></span>
-            <span></span>
-        </div>
-
-        <div class="quantity">
-            <button class="plus-btn cart-button" type="button" name="button">
-                <img src="images/plus.svg" alt="">
-            </button>
-            <input type="text" name="name" value="1">
-            <button class="minus-btn cart-button" type="button" name="button">
-                <img src="images/minus.svg" alt="">
-            </button>
-        </div>
-        <div class="total-price">67</div>
-        <div class="total-price"><i class="fa fa-pencil-square-o"></i></div>
-    </div>-->
 </div>

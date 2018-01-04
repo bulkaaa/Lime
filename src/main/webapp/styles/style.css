@@ -17,12 +17,14 @@ section.featured h2.slogan {
 
 }
 
-
+.navbar-header li{
+cursor: pointer;
+}
 
 .page-container{
     padding-left: 225px;
 }
-#nav_top{
+/*#nav_top{
     background-color: #373737;
     font-weight:600;
     color:  #71AF14 !important;
@@ -32,7 +34,8 @@ section.featured h2.slogan {
 
  #nav_top a{
     color:  #71AF14 !important;
- }
+    cursor: pointer;
+ }*/
 
  .footer{
     position: fixed;
@@ -96,6 +99,7 @@ section.featured h2.slogan {
     padding-bottom: 20px;
     line-height: 20px;
     color: #fff;
+    cursor: pointer;
 }
 
 .top-nav>li>a:hover,
@@ -201,3 +205,4 @@ section.featured h2.slogan {
 .navbar-brand {
     padding: 5px 15px;
 }
+
