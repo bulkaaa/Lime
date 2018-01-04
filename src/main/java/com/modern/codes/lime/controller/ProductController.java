@@ -5,7 +5,6 @@ import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.pojo.ProductPOJO;
 import com.modern.codes.lime.service.ProductService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -44,7 +43,7 @@ public class ProductController {
             @ApiResponse(code = 422, message = "In case of validation errors of product object")})
     @ResponseBody
     public ProductPOJO create(
-            @RequestParam(value = "Product object") @RequestBody final @Validated ProductPOJO product,
+            @ApiParam(value = "Product object") @RequestBody final @Validated ProductPOJO product,
             BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Location creation request received: {}", product);
