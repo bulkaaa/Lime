@@ -43,7 +43,7 @@ $scope.editRecord = function(item){
    }
 
 $scope.updateRecord = function(item) {
-      $http.put("/resource/edit", JSON.stringify(item))
+      $http.put("/resource/update", JSON.stringify(item))
              .then(
                  function(response){
                    if (response.data){
