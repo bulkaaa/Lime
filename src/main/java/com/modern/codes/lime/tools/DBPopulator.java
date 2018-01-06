@@ -200,16 +200,19 @@ public class DBPopulator {
         userA.setJoinedAt(ParseTools.parseDate("2017-05-05 12:00:00"));
         userA.setName("Maciej");
         userA.setSurname("Glowala");
+        userA.setEmailAddress("glowalam@student.mini.pw.pl");
         userB.setPlainPassword("passB");
         userB.setUsername("loginB");
         userB.setJoinedAt(ParseTools.parseDate("2017-05-06 12:00:00"));
         userB.setName("Klaudia");
         userB.setSurname("Jarosz");
+        userB.setEmailAddress("jaroszk@student.mini.pw.pl");
         userC.setPlainPassword("passC");
         userC.setUsername("loginC");
         userC.setJoinedAt(ParseTools.parseDate("2017-05-06 12:00:00"));
         userC.setName("Aleksandra");
         userC.setSurname("Bulka");
+        userC.setEmailAddress("bulkaa@student.mini.pw.pl");
     }
     public void setRoles(){
         roleA = new RolePOJO();

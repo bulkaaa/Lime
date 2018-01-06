@@ -16,6 +16,7 @@ public class UserPOJO extends BasicPOJO {
     private String username;
     private String password;
     private boolean enabled = true;
+    private String emailAddress;
 
     public boolean getEnabled() {
         return enabled;
@@ -98,6 +99,13 @@ public class UserPOJO extends BasicPOJO {
 
     public List<JobPOJO> getPOJOJobs() { return ParseTools.parseList(jobs, JobPOJO.class); }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
     public void setPOJOJobs(List<JobPOJO> jobs) {
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
