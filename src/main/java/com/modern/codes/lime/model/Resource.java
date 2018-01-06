@@ -21,7 +21,6 @@ import java.util.List;
  */
 @ApiModel(description = "Model representation of a resource used in Lime")
 @Entity
-@Transactional
 public class Resource implements Serializable{
 
     private static final long serialVersionUID = 8269473897901383543L;
@@ -46,6 +45,7 @@ public class Resource implements Serializable{
     private String description;
 
     @ApiModelProperty(value = "The unit in which resource is measured", required = true)
+    @Enumerated(EnumType.STRING)
     @NotNull
     @JsonProperty("unit")
     private Unit unit;
