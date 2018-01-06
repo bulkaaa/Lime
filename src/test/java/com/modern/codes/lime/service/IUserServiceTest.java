@@ -52,6 +52,7 @@ public class IUserServiceTest extends IBasicCRUDServiceTest<User, UserPOJO, IUse
         obj.setSurname("surn");
         obj.setUsername("logtest0");
         obj.setPassword("pass");
+        obj.setEmailAddress("user@mini.pw.edu.pl");
         service.save(obj);
         UserPOJO fObj = service.findByUsername("logtest0");
         assertEquals(obj.getUsername(), fObj.getUsername());
@@ -67,10 +68,12 @@ public class IUserServiceTest extends IBasicCRUDServiceTest<User, UserPOJO, IUse
         obj.setSurname("surn");
         obj.setUsername("logtest0");
         obj.setPassword("pass");
+        obj.setEmailAddress("user@mini.pw.edu.pl");
         obj2.setName("Nam2");
         obj2.setSurname("surn2");
         obj2.setUsername("logtest02");
         obj2.setPassword("pass2");
+        obj2.setEmailAddress("user2@mini.pw.edu.pl");
         list.add(obj);
         list.add(obj2);
         service.save(list);
