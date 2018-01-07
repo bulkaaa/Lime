@@ -3,7 +3,8 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
 		$scope.item = item;
 		$scope.item.name = item.name;
 		$scope.item.description = item.description;
-        $scope.item.value = parseInt(item.value);
+        $scope.item.quantity = parseInt(item.quantity);
+        $scope.item.unit = item.unit;
         $scope.item.image = item.image;
     }
 	$scope.update = function () {
@@ -24,11 +25,11 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
                 return;
             }
 		$scope.updateRecord($scope.item);
-	}
+	};
 
     $scope.cancelModal = function(){
                modalInstance.close();
-    }
+    };
 
 	init();
 
