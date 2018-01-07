@@ -22,7 +22,6 @@ import java.util.List;
  */
 @ApiModel(description = "Model representation of a product in Lime")
 @Entity
-@Transactional
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 8269473897901384963L;
