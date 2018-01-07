@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/product")
-public class ProductController {
+public class ProductController extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 
@@ -68,6 +68,7 @@ public class ProductController {
         ParseTools.parseToJson(productService.findByName(name), Product.class);
         return ParseTools.parseToJson(productService.findByName(name), Product.class);
     }
+
 
 
 } 

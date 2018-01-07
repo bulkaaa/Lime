@@ -18,7 +18,7 @@ app.controller('AddRecordController',  ['$scope', '$http','$uibModalInstance', f
 			$scope.newRecord.value = $scope.item.value;
 		}
 		$scope.cancelModal();
-		$scope.saveRecord($scope.newRecord);
+		$scope.saveRecord($scope.item);
 	};
 
 	 $scope.cancelModal = function(){

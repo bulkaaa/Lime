@@ -54,7 +54,6 @@ public class Product implements Serializable {
     @JsonProperty("unit")
     private Unit unit;
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, name = "added_at", updatable = false)
     private Date addedAt;
@@ -72,7 +71,6 @@ public class Product implements Serializable {
 
     @ApiModelProperty(value = "?", required = true)
     @NotNull
-
     private Double expectedValue;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
