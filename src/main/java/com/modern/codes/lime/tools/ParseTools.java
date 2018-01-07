@@ -61,12 +61,12 @@ public class ParseTools {
     }
     public static <T> String parseToJson(Object obj, Class<T> cl){
 
-        if(cl.toString().contains("POJO"))
+        if(obj.getClass().toString().contains("POJO"))
             obj = parse(obj, cl);
         if(obj instanceof List) {
             List<Object> list = (List<Object>)obj;
             if(!list.isEmpty() && list.get(0).getClass().toString().contains("POJO"))
-            obj = parseList(list, cl);
+                obj = parseList(list, cl);
         }
         try{
             return new ObjectMapper().writeValueAsString(obj);
