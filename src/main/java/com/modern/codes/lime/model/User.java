@@ -38,7 +38,6 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 @Entity
-@Transactional
 public class User {
 
     private static final int MAX_LENGTH_NAME = 25;

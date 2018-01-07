@@ -30,7 +30,6 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "Model representation of a job that is created by Lime user")
 @Entity
-@Transactional
 public class Job implements Serializable {
 
     private static final long serialVersionUID = 6863653782430587120L;

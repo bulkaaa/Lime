@@ -22,7 +22,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "Model representation of a Product category used in Lime")
 @Entity
-@Transactional
 public class ProductCategory  implements Serializable {
 
     private static final int MAX_LENGTH_NAME = 50;
