@@ -53,7 +53,7 @@ public class ProductController {
             throw new InvalidRequestException(String.format("Invalid product creation request, form data contains %s error(s).",
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
-        return ParseTools.parseToJson(productService.save(ParseTools.parse(product, ProductPOJO.class)), Product.class);
+        return ParseTools.parseToJson(productService.save(product), Product.class);
     }
 
     @RequestMapping(value = "/get-by-name", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
