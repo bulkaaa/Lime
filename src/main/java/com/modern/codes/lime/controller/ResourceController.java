@@ -1,6 +1,7 @@
 package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
+import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.service.ResourceService;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +27,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping(value = "/resource")
-public class ResourceController {
+public class ResourceController extends BaseController{
 
     private static final Logger LOG = LoggerFactory.getLogger(ResourceController.class);
 
@@ -36,12 +37,12 @@ public class ResourceController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a resource object", notes = "Creates a <b>resource</b> object "
-            +  "Saves it into DB.", response = ResourcePOJO.class)
+            +  "Saves it into DB.", response = Resource.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved resource object"),
             @ApiResponse(code = 422, message = "In case of validation errors of resource object")})
     @ResponseBody
-    public ResourcePOJO create(
-            @ApiParam(value = "Resource object") @RequestBody final @Validated ResourcePOJO resource,
+    public Resource create(
+            @ApiParam(value = "Resource object") @RequestBody final @Validated Resource resource,
             BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Resource creation request received: {}", resource);
@@ -55,12 +56,12 @@ public class ResourceController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Updates a resource object", notes = "Updates a <b>resource</b> object ", response = ResourcePOJO.class)
+    @ApiOperation(value = "Updates a resource object", notes = "Updates a <b>resource</b> object ", response = Resource.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved resource object"),
             @ApiResponse(code = 422, message = "In case of validation errors of resource object")})
     @ResponseBody
-    public ResourcePOJO update(
-            @ApiParam(value = "Resource object") @RequestBody final @Validated ResourcePOJO resource,
+    public Resource update(
+            @ApiParam(value = "Resource object") @RequestBody final @Validated Resource resource,
             BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Resource update request received: {}", resource);
@@ -77,12 +78,25 @@ public class ResourceController {
     @ApiOperation(value = "Delete a resource object", notes = "Deletes a <b>resource</b> object ", response = ResourcePOJO.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved resource object")})
     @ResponseBody
-    public void delete(
+    public Boolean delete(
             @ApiParam(value = "Resource object") @PathVariable final String resourceId) {
 
         LOG.info("Resource deletion request received for id: " + resourceId);
 
-        resourceService.delete(resourceId);
+            resourceService.delete(resourceId);
+            return true;
+    }
+
+    @RequestMapping(value = "/{resourceId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetch a resource object", notes = "Fetches a <b>resource</b> object by id ", response = ResourcePOJO.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved resource object")})
+    @ResponseBody
+    public ResourcePOJO getResource(
+            @ApiParam(value = "Resource object") @PathVariable final String resourceId) {
+
+        LOG.info("Resource fetch request received for id: " + resourceId);
+
+        return resourceService.findById(resourceId);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -95,4 +109,6 @@ public class ResourceController {
 
         return resourceService.findAll();
     }
+
+
 }
