@@ -1,18 +1,26 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Model representation of a job created by Lime user.
@@ -35,12 +43,12 @@ public class Job implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
-    @JsonManagedReference
+    @JsonBackReference(value="product-jobs")
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName="ID")
-    @JsonManagedReference
+    @JsonBackReference(value="user-jobs")
     private User user;
 
     @ApiModelProperty(value = "The details of the job", required = true)

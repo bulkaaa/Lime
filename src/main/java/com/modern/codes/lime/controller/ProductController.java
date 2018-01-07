@@ -39,12 +39,12 @@ public class ProductController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a product object", notes = "Creates a <b>product</b> object "
-            +  "Saves it into DB.", response = ProductPOJO.class)
+            +  "Saves it into DB.", response = Product.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved product object"),
             @ApiResponse(code = 422, message = "In case of validation errors of product object")})
     @ResponseBody
     public String create(
-            @ApiParam(value = "Product object") @RequestBody final @Validated ProductPOJO product,
+            @ApiParam(value = "Product object") @RequestBody final @Validated Product product,
             BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Product creation request received: {}", product);
@@ -53,7 +53,7 @@ public class ProductController {
             throw new InvalidRequestException(String.format("Invalid product creation request, form data contains %s error(s).",
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
-        return ParseTools.parseToJson(productService.save(product), Product.class);
+        return ParseTools.parseToJson(productService.save(ParseTools.parse(product, ProductPOJO.class)), Product.class);
     }
 
     @RequestMapping(value = "/get-by-name", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -65,7 +65,7 @@ public class ProductController {
     public @ResponseBody String getByName(@RequestParam(value="name") String name) {
 
         LOG.info("Product get-by-name request received: name = " + name);
-
+        ParseTools.parseToJson(productService.findByName(name), Product.class);
         return ParseTools.parseToJson(productService.findByName(name), Product.class);
     }
 

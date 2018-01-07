@@ -1,13 +1,20 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Model representation of a formula used in Lime.
@@ -30,12 +37,12 @@ public class Formula implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "resource_id", referencedColumnName="ID")
-    @JsonManagedReference
+    @JsonBackReference(value="resource-formulas")
     private Resource resource;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
-    @JsonManagedReference
+    @JsonBackReference(value="product-formulas")
     private Product product;
 
     @ApiModelProperty(value = "The quantity of resources needed for product", required = true)

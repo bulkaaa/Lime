@@ -61,7 +61,7 @@ public class Product implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName="ID")
-    @JsonManagedReference
+    @JsonBackReference(value="category-products")
     private ProductCategory category;
 
     @ApiModelProperty(value = "The image url of the product", required = true)
@@ -76,9 +76,9 @@ public class Product implements Serializable {
     private Double expectedValue;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference(value="product-jobs")
     private List<Job> jobs;
-    @JsonBackReference
+    @JsonManagedReference(value="product-formulas")
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Formula> formulas;
 

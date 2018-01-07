@@ -1,10 +1,9 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.*;
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.transaction.annotation.Transactional;import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;import javax.persistence.CascadeType;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,8 +18,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.List;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Model representation of user of Lime.
@@ -68,7 +76,7 @@ public class User {
     private Date joinedAt;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference(value="user-jobs")
     private List<Job> jobs;
 
     @ApiModelProperty(value = "The username of the user of the \"ChemicalLabs\"", required = true)
@@ -94,7 +102,6 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    @JsonManagedReference
     private List<Role> roles;
 
     public boolean getEnabled() {
