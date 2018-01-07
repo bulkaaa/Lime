@@ -56,7 +56,7 @@ public class Resource implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName="ID")
-    @JsonManagedReference
+    @JsonBackReference(value="category-resources")
     private ResourceCategory category;
 
     @ApiModelProperty(value = "The image url of the resource", required = true)
@@ -66,12 +66,12 @@ public class Resource implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", referencedColumnName="ID")
-    @JsonManagedReference
+    @JsonBackReference(value="supplier-resources")
     private Supplier supplier;
 
 
     @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference(value="resource-formulas")
     private List<Formula> formulas;
 
     /**
