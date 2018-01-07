@@ -1,13 +1,13 @@
 
-app.controller('ProductController', ['$scope', '$http', '$uibModal', function($scope, $http, $modal) {
+app.controller('UserController', ['$scope', '$http', '$uibModal', function($scope, $http, $modal) {
     var modalInstance = null;
 
     $scope.showAll = function() {
-        $http.get("/product/all")
+        $http.get("/user/all")
             .then(
                 function (response) {
                     if (response.data) {
-                        console.log("updated product successfully!");
+                        console.log("updated users successfully!");
                         $scope.items = response.data;
                     }
                 },
@@ -35,7 +35,7 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
     };
 
     $scope.editRecord = function(item){
-        $http.get("/product/" + item.id)
+        $http.get("/user/" + item.id)
             .then(function(response){
                 $scope.item = item;
                 modalInstance = $modal.open({
@@ -57,12 +57,11 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
             .then(
                 function(response){
                     if (response.data){
-                        console.log("updated product successfully!");
+                        console.log("updated user successfully!");
                         $scope.item.name = response.data.name;
                         $scope.item.description = response.data.description;
-                        $scope.item.expectedValue = response.data.expectedValue;
+                        $scope.item.quantity = response.data.quantity;
                         $scope.item.unit = response.data.unit;
-                        $scope.item.image = response.data.image;
                     }
                 },
                 function(response){
@@ -73,7 +72,7 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
 
     $scope.deleteRecord = function(id) {
         if (confirm('Are you sure you want to delete this record?')) {
-            $http.delete("/product/delete/" +id)
+            $http.delete("/user/delete/" +id)
                 .then(
                     function(response){
                         if (response.data){
@@ -106,17 +105,17 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
 
     $scope.saveRecord = function(item) {
 
-        $http.post("/product/create", JSON.stringify(item))
+        $http.post("/user/create", JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
-                        console.log("created PRODUCT successfully!");
+                        console.log("created user successfully!");
                         item = response.data;
                         $scope.items.push({
                             id: item.id,
                             name: item.name,
                             description: item.description,
-                            expectedValue: item.expectedValue,
+                            quantity: item.quantity,
                             image: item.image,
                             unit: item.unit
                         });

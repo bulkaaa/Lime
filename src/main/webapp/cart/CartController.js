@@ -65,6 +65,7 @@ app.controller('CartController', ['$scope', '$http', '$uibModal', function($scop
                             $scope.item.description = response.data.description;
                             $scope.item.quantity = response.data.quantity;
                             $scope.item.unit = response.data.unit;
+                            $scope.item.image = response.data.image;
                        }
                      },
                      function(response){
