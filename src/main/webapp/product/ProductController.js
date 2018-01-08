@@ -1,6 +1,7 @@
 
 app.controller('ProductController', ['$scope', '$http', '$uibModal', function($scope, $http, $modal) {
     var modalInstance = null;
+    $scope.product = true;
 
     $scope.showAll = function() {
         $http.get("/product/all")
@@ -35,7 +36,7 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
     };
 
     $scope.editRecord = function(item){
-        $http.get("/product/" + item.id)
+        $http.get("/product/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
                 modalInstance = $modal.open({

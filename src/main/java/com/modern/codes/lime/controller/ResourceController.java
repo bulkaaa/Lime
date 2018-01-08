@@ -95,7 +95,6 @@ public class ResourceController extends BaseController{
             @ApiParam(value = "Resource object") @PathVariable final String resourceId) {
 
         LOG.info("Resource fetch request received for id: " + resourceId);
-        ParseTools.parseToJson(resourceService.findById(resourceId), Resource.class);
         return ParseTools.parseToJson(resourceService.findById(resourceId), Resource.class);
 
     }
