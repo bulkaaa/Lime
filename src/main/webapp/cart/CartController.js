@@ -1,9 +1,7 @@
 
 app.controller('CartController', ['$scope', '$http', '$uibModal', function($scope, $http, $modal) {
      var modalInstance = null;
-
-
-
+    $scope.resource = true;
 
     $scope.showAll = function() {
         $http.get("/resource/all")
