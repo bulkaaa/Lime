@@ -59,9 +59,9 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', function($scop
                     if (response.data){
                         console.log("updated user successfully!");
                         $scope.item.name = response.data.name;
-                        $scope.item.description = response.data.description;
-                        $scope.item.quantity = response.data.quantity;
-                        $scope.item.unit = response.data.unit;
+                        $scope.item.surname = response.data.surname;
+                        $scope.item.roles = response.data.roles;
+                        $scope.item.emailAddress = response.data.emailAddress;
                     }
                 },
                 function(response){
@@ -114,10 +114,9 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', function($scop
                         $scope.items.push({
                             id: item.id,
                             name: item.name,
-                            description: item.description,
-                            quantity: item.quantity,
-                            image: item.image,
-                            unit: item.unit
+                            surname: item.surname,
+                            roles: item.roles,
+                            emailAddress: item.emailAddress,
                         });
                     }
                 },
