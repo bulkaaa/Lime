@@ -7,10 +7,12 @@ import com.modern.codes.lime.pojo.JobPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implements IJobService {
 
     private IJobDAO dao;

@@ -7,9 +7,11 @@ import com.modern.codes.lime.exception.NotFoundException;
 import com.modern.codes.lime.pojo.BasicPOJO;
 import org.springframework.transaction.TransactionSystemException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T, String>> implements IBasicCRUDService{
     private T_DAO dao;
     private Class<T> Ttype;

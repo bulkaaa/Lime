@@ -75,6 +75,7 @@ public class Product implements Serializable {
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value="product-jobs")
     private List<Job> jobs;
+
     @JsonManagedReference(value="product-formulas")
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Formula> formulas;
