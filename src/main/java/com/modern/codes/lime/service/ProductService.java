@@ -6,11 +6,13 @@ import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.pojo.ProductPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class ProductService extends BasicCRUDService<Product, ProductPOJO, IProductDAO> implements IProductService {
 
     IProductDAO dao;
