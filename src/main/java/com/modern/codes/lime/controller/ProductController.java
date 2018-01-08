@@ -3,6 +3,8 @@ package com.modern.codes.lime.controller;
 import java.util.List;
 import java.util.Locale;
 
+import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.pojo.ResourcePOJO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,19 @@ public class ProductController extends BaseController {
 
         return ParseTools.parseToJson(productService.save(product), Product.class);
     }
+
+
+    @RequestMapping(value = "/one/{productId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetch a product object", notes = "Fetches a <b>product</b> object by id ", response = ProductPOJO.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved product object")})
+    @ResponseBody
+    public String getProduct(
+            @ApiParam(value = "Product object") @PathVariable final String productId) {
+
+        LOG.info("Product fetch request received for id: " + productId);
+        return ParseTools.parseToJson(productService.findById(productId), Product.class);
+    }
+
     @RequestMapping(value = "/delete/{productId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Delete a product object", notes = "Deletes a <b>product</b> object ", response = ProductPOJO.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved product object")})
