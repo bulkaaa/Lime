@@ -1,5 +1,6 @@
 package com.modern.codes.lime.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -22,8 +24,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -38,18 +38,22 @@ import io.swagger.annotations.ApiModelProperty;
  */
 
 @Entity
-public class User {
+@Table(name="\"user\"")
+public class User implements Serializable{
+
+    private static final long serialVersionUID = 8269421897901384963L;
 
     private static final int MAX_LENGTH_NAME = 25;
     private static final int MAX_LENGTH_SURNAME = 250;
-    public static final int MAX_LENGTH_EMAIL = 240;
+    private static final int MAX_LENGTH_EMAIL = 240;
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @ApiModelProperty(value = "The unqiue id of the resource", required = true)
+    @ApiModelProperty(value = "The unqiue id of the user", required = true)
     @JsonProperty("id")
     private String id;
+
     @ApiModelProperty(value = "The name of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
     @Size(max = MAX_LENGTH_NAME)
@@ -69,15 +73,15 @@ public class User {
     private String emailAddress;
 
     @ApiModelProperty(value = "The datetime when the user joined the  \"ChemicalLabs\"", required = true)
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "joined_at", updatable = false)
+    @Column(name = "joined_at", updatable = false)
     private Date joinedAt;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference(value="user-jobs")
     private List<Job> jobs;
 
+  
     @ApiModelProperty(value = "The username of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
     private String username;
@@ -87,9 +91,14 @@ public class User {
     @JsonIgnore
     private String password;
 
-
     @Column(name = "enabled", nullable = false)
-    private boolean enabled = true;
+    private Boolean enabled = true;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+
 
     @PrePersist
     public void updateTimeStamps() {
@@ -98,16 +107,11 @@ public class User {
         }
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
-
-    public boolean getEnabled() {
-        return enabled;
-    }
-
     public String getId()   { return id; }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -121,10 +125,6 @@ public class User {
 
     public String getSurname() {
         return surname;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setJoinedAt(Date joinedAt) {
@@ -144,27 +144,33 @@ public class User {
         this.jobs = jobs;
     }
 
+ 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-
-    public String getPassword() {
-        return password;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+ 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    
     public List<Role> getRoles() {
         return roles;
     }
@@ -172,6 +178,7 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+    
 
     public String getEmailAddress() {
         return emailAddress;
@@ -180,4 +187,5 @@ public class User {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
+    
 }
