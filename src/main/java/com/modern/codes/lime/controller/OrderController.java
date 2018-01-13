@@ -18,6 +18,16 @@ import java.util.List;
 @RequestMapping(path="/order")
 public class OrderController {
 
+
+    //TODO
+    //When getting request from front-end to generate page -> return the list of resources (names)
+
+    //When user in front-end will select resource and amount
+    //Get from DB: Resource name, Supplier Name (join tables on supplier id) and Supplier Email
+
+    // do Order.SendEmail(SupplierEmail, "Order from LIME", Order.ConstructOrderMsg(SupplierName, ResourceName, Amount));
+
+    
     @Autowired
     Order ord;
     @GetMapping(path = "/test")
