@@ -1,6 +1,4 @@
 package com.modern.codes.lime.order;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -11,15 +9,8 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 import com.modern.codes.lime.model.Resource;
-import com.modern.codes.lime.pojo.ResourcePOJO;
 
-@Service
 public class Order {
-
-    @Autowired
-    public Order() {
-    }
-
 
     public static String ConstructOrderMsg(final String supplierName, final Map<Resource, Integer> map){
         final StringBuilder message = new StringBuilder("Dear " + supplierName + ", " + "\n\n We would like to order: \n");
@@ -104,5 +95,3 @@ public class Order {
                                    });
     }
 }
-
-
