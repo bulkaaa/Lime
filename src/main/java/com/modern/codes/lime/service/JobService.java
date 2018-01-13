@@ -37,4 +37,9 @@ public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implemen
     public List<JobPOJO> findByUserId(String id) {
         return ParseTools.parseList(dao.findByUserId(id), JobPOJO.class);
     }
+
+    @Override
+    public List<JobPOJO> findByProductId(String id) {
+        return ParseTools.parseList(dao.findByProductId(id), JobPOJO.class);
+    }
 }
