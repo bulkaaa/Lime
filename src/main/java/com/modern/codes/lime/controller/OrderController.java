@@ -23,6 +23,7 @@ public class OrderController {
     @GetMapping(path = "/test")
     public String sendTest(){
         String msg = ord.ConstructOrderMsg("Some Company", "Aloe", 8);
+        ord.SendEmail("aleksandrabulka1@gmail.com","Order Email form LIME", msg, "C:\\INPUT.csv");
         ord.SendEmail("aleksandrabulka1@gmail.com","Order Email form LIME", msg);
         return "Email Sent";
     }
