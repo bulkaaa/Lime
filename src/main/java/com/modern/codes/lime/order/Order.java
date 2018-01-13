@@ -18,11 +18,11 @@ public class Order {
     }
 
 
-    public String ConstructOrderMsg(String SupplierName, String ResourceName, Integer Amount){
+    public static String ConstructOrderMsg(String SupplierName, String ResourceName, Integer Amount){
        return "Dear " + SupplierName + ", " + "\n\n We would like to order " + Amount.toString() + " units of " + ResourceName + " for our laboratory. \n\n";
 
     }
-    public void SendEmail(String to, String subject, String content, String attachment){
+    public static void SendEmail(String to, String subject, String content, String attachment){
         final String username = "lime.lab.application@gmail.com";
         final String password = "lime1234";
 
@@ -69,7 +69,7 @@ public class Order {
             throw new RuntimeException(e);
         }
     }
-    public void SendEmail(String to, String subject, String content){
+    public static void SendEmail(String to, String subject, String content){
         final String username = "lime.lab.application@gmail.com";
         final String password = "lime1234";
 
