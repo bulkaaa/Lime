@@ -1,40 +1,70 @@
 package com.modern.codes.lime.controller;
 
-import com.modern.codes.lime.order.Order;
-import com.modern.codes.lime.tools.DBPopulator;
-import org.apache.commons.mail.EmailException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
-@RestController()
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.order.Order;
+import com.modern.codes.lime.service.IResourceService;
+import com.modern.codes.lime.tools.ParseTools;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@RestController
 @RequestMapping(path="/order")
 public class OrderController {
 
-
-    //TODO
-    //When getting request from front-end to generate page -> return the list of resources (names)
-
-    //When user in front-end will select resource and amount
-    //Get from DB: Resource name, Supplier Name (join tables on supplier id) and Supplier Email
-
-    // do Order.SendEmail(SupplierEmail, "Order from LIME", Order.ConstructOrderMsg(SupplierName, ResourceName, Amount));
-
-    
     @Autowired
-    Order ord;
+    IResourceService resourceService;
+    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
+
+    @RequestMapping(value = "/get-resources", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Fetch all resources")})
+    @ResponseBody
+    public String getResources() {
+        LOG.info("Fetch all resources request received");
+        ParseTools.parseToJson(resourceService.findAll(), Resource.class);
+        return ParseTools.parseToJson(resourceService.findAll(), Resource.class);
+    }
+
+
+    @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Order choosen resources with given amount", notes = "Post choosen List of resource ID "
+                                                              +  "Saves it into DB.", response = Boolean.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Resources orderer"),
+                            @ApiResponse(code = 422, message = "In case of validation errors")})
+    @ResponseBody
+    public Boolean order(
+            @ApiParam(value = "Map of Resources and amout") @RequestBody final @Validated Map<Resource, Integer> orderList,
+            BindingResult bindingResult, UriComponentsBuilder b) {
+        LOG.info("order request received map resource:amount \n {} ", orderList);
+        orderList.forEach((key, value) -> Order.SendEmail(key.getSupplier().getEmailAddress(), "Order from LIME", Order.ConstructOrderMsg(key.getSupplier().getName(), key.getName(), value)));
+        return true;
+    }
+
     @GetMapping(path = "/test")
     public String sendTest(){
-        String msg = ord.ConstructOrderMsg("Some Company", "Aloe", 8);
-        ord.SendEmail("aleksandrabulka1@gmail.com","Order Email form LIME", msg, "C:\\INPUT.csv");
-        ord.SendEmail("aleksandrabulka1@gmail.com","Order Email form LIME", msg);
+        String msg = Order.ConstructOrderMsg("Some Company", "Aloe", 8);
+        Order.SendEmail("aleksandrabulka1@gmail.com", "Order Email form LIME", msg, "C:\\INPUT.csv");
+        Order.SendEmail("aleksandrabulka1@gmail.com", "Order Email form LIME", msg);
         return "Email Sent";
     }
 }
