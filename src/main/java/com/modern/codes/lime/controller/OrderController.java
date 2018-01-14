@@ -54,8 +54,8 @@ public class OrderController {
                             @ApiResponse(code = 422, message = "In case of validation errors")})
     @ResponseBody
     public Boolean send(
-            @ApiParam(value = "Map of Resources and amout") @RequestBody final @Validated Map<Resource, Integer> orderList,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam(value = "Map of Resources and amout") final Map<Resource, Integer> orderList,
+            final BindingResult bindingResult, UriComponentsBuilder b) {
         LOG.info("order request received map resource:amount \n {} ", orderList);
         final Map<Supplier, Map<Resource, Integer>> supplierMap = new HashMap<>();
         orderList.forEach((key, value) -> {

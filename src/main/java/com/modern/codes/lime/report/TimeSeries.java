@@ -13,7 +13,7 @@ public class TimeSeries {
         this.label = label;
     }
 
-    TimeSeries() {
+    public TimeSeries() {
         label = null;
     }
 
