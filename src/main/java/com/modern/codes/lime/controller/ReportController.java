@@ -1,14 +1,10 @@
 package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.model.Product;
-import com.modern.codes.lime.model.Resource;
-import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.order.Order;
 import com.modern.codes.lime.report.*;
 import com.modern.codes.lime.service.IJobService;
 import com.modern.codes.lime.service.IProductService;
-import com.modern.codes.lime.service.JobService;
-import com.modern.codes.lime.tools.DBPopulator;
 import com.modern.codes.lime.tools.ParseTools;
 
 import org.slf4j.Logger;
@@ -27,12 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -64,7 +57,7 @@ public class ReportController {
 
     @ResponseBody
     public Boolean send(
-            @Validated @RequestBody @ApiParam(value = "Map of Resources and amout") final
+            @Validated @RequestBody @ApiParam(value = "List of products") final
                     List<Product> productList, @RequestParam(value="date") final Date date, @RequestParam(value="nodays") final Integer noDays,@RequestParam(value="email") final String email,
             @Validated final BindingResult bindingResult, @Validated final UriComponentsBuilder b) {
         LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n", productList, date, noDays, email);
