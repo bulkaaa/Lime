@@ -16,6 +16,22 @@ import java.util.Date;
 @RequestMapping(path="/report")
 public class ReportController {
 
+    //TODO
+    //When getting request from front-end to generate page -> return the list of products (names)
+
+    //When user in front-end will select Products and Date to start series (e.g. today) and how many days back we get, and email of receiver of report
+    //this means we send back to backend: List of Product ids, a Date, an Integer, and a String
+    //we can call them LIST, DATE, NO_DAYS, EMAIL
+
+    //Then I get from DB data for the given product IDs
+    //ArrayList<TimeSeries> seriesL = tsp.Extract(jobService, DATE, NO_DAYS, LIST);
+
+    //then I generate plot from them
+    //String filename = draw.plot(seriesL, new TimeSeries(), DATE, "Production in the Past" + NO_DAYS + "Days");
+
+    //And I send it
+    //  ord.SendEmail(EMAIL,"Report Email form LIME", "Please Find Report Attached", filename);
+
     @Autowired
     TSGenerator tsgen;
     @Autowired
