@@ -1,12 +1,12 @@
 app.controller('ReportController', ['$scope', '$http', '$uibModal', function($scope, $http, $modal) {
 
-$scope.products = function() {
+$scope.getProducts = function() {
         $http.get("/product/all")
             .then(
                 function (response) {
                     if (response.data) {
                         console.log("updated product successfully!");
-                        $scope.items = response.data;
+                        $scope.products = response.data;
                     }
                 },
                 function (response) {
@@ -14,16 +14,6 @@ $scope.products = function() {
                 }
             );
     };
-
-  $scope.roles = [
-    {id: 1, text: 'guest'},
-    {id: 2, text: 'user'},
-    {id: 3, text: 'customer'},
-    {id: 4, text: 'admin'}
-  ];
-  $scope.user = {
-    roles: [2, 4]
-  };
   $scope.checkAll = function() {
     $scope.user.roles = $scope.roles.map(function(item) { return item.id; });
   };
@@ -35,6 +25,7 @@ $scope.products = function() {
     $scope.user.roles.push(1);
   };
 
+$scope.getProducts();
 
 
-}])
+}]);
