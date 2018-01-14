@@ -17,12 +17,9 @@ $scope.getProducts = function() {
 
     $scope.generateReport = function () {
         var item = {};
-        item.productIds = $scope.list.products;
-        item.email = $scope.email;
-        item.date = new Date($scope.date);
-        item.noDays = $scope.noDays;
-
-        $http.post("/report/generate", JSON.stringify(item))
+        item = $scope.list.products;
+        var date = new Date($scope.date);
+        $http.post("/report/generate" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+date.getMonth()+1+"-"+date.getFullYear() + "&noDays=" + $scope.noDays, JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
