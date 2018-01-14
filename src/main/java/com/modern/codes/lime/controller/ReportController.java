@@ -2,6 +2,7 @@ package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.order.Order;
+import com.modern.codes.lime.pojo.ProductPOJO;
 import com.modern.codes.lime.report.*;
 import com.modern.codes.lime.service.IJobService;
 import com.modern.codes.lime.service.IProductService;
@@ -46,21 +47,15 @@ public class ReportController {
     @Autowired
     IProductService productService;
 
-    @RequestMapping(value = "/get-products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetches all products", notes = "Fetches all products from DB for reports", response = List.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Fetch all products")})
-    @ResponseBody
-    public String getProducts() {
-        LOG.info("Fetch all product request received in Report Controller");
-        return ParseTools.parseToJson(productService.findAll(), Product.class);
-    }
-
-    @ResponseBody
-    public Boolean send(
-            @Validated @RequestBody @ApiParam(value = "List of products") final
-                    List<Product> productList, @RequestParam(value="date") final Date date, @RequestParam(value="nodays") final Integer noDays,@RequestParam(value="email") final String email,
-            @Validated final BindingResult bindingResult, @Validated final UriComponentsBuilder b) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n", productList, date, noDays, email);
+    @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Generate report for products")
+    public Boolean generate(
+            @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds,
+            @RequestParam(value="date") final Date date,
+            @RequestParam(value="nodays") final Integer noDays,
+            @RequestParam(value="email") final String email,
+            final BindingResult bindingResult,  final UriComponentsBuilder b) {
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n", productIds, date, noDays, email);
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
         final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
