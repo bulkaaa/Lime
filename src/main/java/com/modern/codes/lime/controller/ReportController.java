@@ -51,15 +51,14 @@ public class ReportController {
     @ApiOperation(value = "Generate report for products")
     public Boolean generate(
             @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds,
-            @RequestParam(value="date") final Date date,
+            @RequestParam(value="date") final String date,
             @RequestParam(value="nodays") final Integer noDays,
-            @RequestParam(value="email") final String email,
-            final BindingResult bindingResult,  final UriComponentsBuilder b) {
+            @RequestParam(value="email") final String email) {
         LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n", productIds, date, noDays, email);
 
-        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
-        final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
-        Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", filename);
+        //final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
+        //final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
+      //  Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", filename);
 
         return true;
     }
