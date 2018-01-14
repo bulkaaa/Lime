@@ -75,6 +75,10 @@
                                 templateUrl: 'report/ReportView.html',
                                 controller: 'ReportController'
                             })
+                            .when('/prediction', {
+                                templateUrl: 'prediction/PredictionView.html',
+                                controller: 'PredictionController'
+                            })
                             .when('/welcome', {
                                 templateUrl: 'welcome-screen/WelcomeView.html'
 
@@ -106,6 +110,7 @@
 <script src="product/ProductController.js"></script>
 <script src="user/UserController.js"></script>
 <script src="report/ReportController.js"></script>
+<script src="prediction/PredictionController.js"></script>
 <script src="account/login/LoginController.js"></script>
 <script src="account/edit/EditAccountController.js"></script>
 <script src="account/reset/ResetPasswordController.js"></script>
