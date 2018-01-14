@@ -1,68 +1,51 @@
 package com.modern.codes.lime.report;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-@Service
+
 public class TimeSeries {
     private final ArrayList<Integer> TS = new ArrayList<Integer>();
+    private String label;
 
     public String getLabel() {
         return label;
     }
 
-    public void setLabel(String l) {
-        label = l;
+    public void setLabel(final String label) {
+        this.label = label;
     }
 
-    private String label;
-    @Autowired
-    public TimeSeries() {
+    TimeSeries() {
         label = null;
     }
 
-    public TimeSeries(String _label) {
-        label = _label;
+    TimeSeries(final String label) {
+        this.label = label;
     }
 
-
-    public void printTS() {
-        for (int i = 0; i< TS.size(); i++) {
-            Integer time = i;
-            Integer state = TS.get(i);
-            System.out.printf("%16d: %s%n", time, state);
-        }
-    }
     public Integer sum() {
         Integer sum = 0;
-        for(Integer d : TS)
+        for(final Integer d : TS)
             sum += d;
         return sum;
     }
 
-    public Integer sum(int n) {
-        ArrayList<Integer> TSLast = new ArrayList<Integer>(TS.subList(TS.size() - n, TS.size()));
+    public Integer sum(final int n) {
+        final ArrayList<Integer> TSLast = new ArrayList<Integer>(TS.subList(TS.size() - n, TS.size()));
         Integer sum = 0;
-        for(Integer d : TSLast)
+        for(final Integer d : TSLast)
             sum += d;
         return sum;
     }
 
 
-    public void add(Integer resource_cnt) {
+    public void add(final Integer resource_cnt) {
         TS.add(resource_cnt);
     }
 
-    public Integer get(Integer time) {
+    public Integer get(final Integer time) {
         return TS.get(time);
     }
 
     public int size() {
         return TS.size();
     }
-
-
-
 }
-

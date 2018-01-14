@@ -7,74 +7,57 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import com.modern.codes.lime.pojo.JobPOJO;
-import com.modern.codes.lime.pojo.ProductPOJO;
-import com.modern.codes.lime.service.JobService;
-import com.modern.codes.lime.service.ProductService;
-import org.omg.CORBA.portable.IDLEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-@Service
+
 public class TimeSeriesProduct {
-    @Autowired
-    public TimeSeriesProduct() {
-    }
 
-    public ArrayList<TimeSeries> Extract(JobService service, Date StartDate, Integer Days)
+    public static ArrayList<TimeSeries> Extract(final JobService service, final Date StartDate, final Integer Days)
     {
-        List<String> ids = getProductId(service);
-        ArrayList<TimeSeries> series = new ArrayList<TimeSeries>();
-        for (String id:ids){
-            List<JobPOJO> list = service.findByProductId(id);
+        final List<String> ids = getProductId(service);
+        final ArrayList<TimeSeries> series = new ArrayList<TimeSeries>();
+        for (final String id:ids){
+            final List<JobPOJO> list = service.findByProductId(id);
             if (!list.isEmpty()) {
-                TimeSeries ts = ExtractProduct(list, StartDate, Days);
-                String label = list.get(0).getPOJOProduct().getName();
+                final TimeSeries ts = ExtractProduct(list, StartDate, Days);
+                final String label = list.get(0).getPOJOProduct().getName();
                 ts.setLabel(label);
                 series.add(ts);
             }
         }
         return series;
-
     }
 
-    public TimeSeries ExtractProduct(List<JobPOJO> list, Date StartDate, Integer Days){
+    private static TimeSeries ExtractProduct(final List<JobPOJO> list, final Date StartDate, final Integer Days){
 
-        TimeSeries ts = new TimeSeries();
+        final TimeSeries ts = new TimeSeries();
         for (int i = 0 ;i < Days; i++){
-            List<JobPOJO> day = new ArrayList<JobPOJO>();
-            Calendar cal = Calendar.getInstance();
+            final Calendar cal = Calendar.getInstance();
             cal.setTime(StartDate);
             cal.add(Calendar.DATE, - Days + i );
-            Date dateBefore = cal.getTime();
+            final Date dateBefore = cal.getTime();
 
-            Calendar cal2 = Calendar.getInstance();
+            final Calendar cal2 = Calendar.getInstance();
             cal2.setTime(StartDate);
             cal2.add(Calendar.DATE, - Days + i + 1);
-            Date dateBeforeLimit = cal2.getTime();
-            for (JobPOJO job: list) {
+            final Date dateBeforeLimit = cal2.getTime();
+            final List<JobPOJO> day = new ArrayList<>();
+            for (final JobPOJO job: list) {
                 if (job.getEndDate().after(dateBefore) && job.getEndDate().before(dateBeforeLimit))  day.add(job);
             }
             double value = 0;
-            for (JobPOJO j : day) {
-                value = value + j.getResultValue();
-
+            for (final JobPOJO j : day) {
+                value += j.getResultValue();
             }
             ts.add((int) value);
         }
         return ts;
     }
 
-    public List<String> getProductId (JobService service){
-        List<String> IDList = new ArrayList<String>();
-        List<JobPOJO> list = service.findAll();
+    private static List<String> getProductId(final JobService service){
+        final List<String> IDList = new ArrayList<String>();
+        final List<JobPOJO> list = service.findAll();
         while (!list.isEmpty()){
-            String id = list.get(0).getProduct().getId();
-            System.out.println(id);
+            final String id = list.get(0).getProduct().getId();
             if(!IDList.contains(id)) IDList.add(id);
             list.remove(0);
         }
