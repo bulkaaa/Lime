@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@RestController()
+@RestController
 @RequestMapping(path="/report")
 public class ReportController {
 
@@ -22,8 +22,6 @@ public class ReportController {
     TSGenerator tsgen;
     @Autowired
     TimeSeries ts;
-    @Autowired
-    DrawSeries draw;
     @Autowired
     TimeSeriesProduct tsp;
     @Autowired
@@ -42,10 +40,10 @@ public class ReportController {
     @GetMapping(path = "/test")
     public String Test(){
        // ArrayList<TimeSeries> seriesL = new ArrayList<TimeSeries>();
-        ArrayList<TimeSeries> seriesFL = new ArrayList<TimeSeries>();
+        final ArrayList<TimeSeries> seriesFL = new ArrayList<TimeSeries>();
         //tsgen.loadSampleTSList(seriesL);
 
-        ArrayList<TimeSeries> seriesL = tsp.Extract(jobService, new Date(),8);
+        final ArrayList<TimeSeries> seriesL = tsp.Extract(jobService, new Date(), 8);
 //        for (TimeSeries series2:seriesL) {
 //            TimeSeries fcst = smoothing.calculateSmoothing(series2, 5);
 //            fcst.setLabel(series2.getLabel()+ " Forecast");
@@ -53,8 +51,8 @@ public class ReportController {
 //        };
 
 
-        String filename = draw.plot(seriesL, seriesFL, new Date());
-      Order.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
+        final String filename = DrawSeries.plot(seriesL, seriesFL, new Date());
+        Order.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
 
         return "Email Sent";
     }
