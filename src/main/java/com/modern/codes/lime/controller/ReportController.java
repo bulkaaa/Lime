@@ -29,8 +29,6 @@ public class ReportController {
     @Autowired
     JobService jobService;
     @Autowired
-    Order ord;
-    @Autowired
     Smoothing smoothing;
 
     @Autowired
@@ -56,7 +54,7 @@ public class ReportController {
 
 
         String filename = draw.plot(seriesL, seriesFL, new Date());
-      ord.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
+      Order.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
 
         return "Email Sent";
     }
