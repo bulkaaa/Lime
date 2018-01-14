@@ -25,23 +25,7 @@ public class TimeSeriesProduct {
     public TimeSeriesProduct() {
     }
 
-    public ArrayList<TimeSeries> Extract(JobService service, Date StartDate, Integer Days, ArrayList<String> ListOfIds) {
-        List<String> ids = ListOfIds;
-        ArrayList<TimeSeries> series = new ArrayList<TimeSeries>();
-        for (String id : ids) {
-            List<JobPOJO> list = service.findByProductId(id);
-            if (!list.isEmpty()) {
-                TimeSeries ts = ExtractProduct(list, StartDate, Days);
-                String label = list.get(0).getPOJOProduct().getName();
-                ts.setLabel(label);
-                series.add(ts);
-            }
-        }
-        return series;
-    }
-
-
-        public ArrayList<TimeSeries> Extract(JobService service, Date StartDate, Integer Days)
+    public ArrayList<TimeSeries> Extract(JobService service, Date StartDate, Integer Days)
     {
         List<String> ids = getProductId(service);
         ArrayList<TimeSeries> series = new ArrayList<TimeSeries>();

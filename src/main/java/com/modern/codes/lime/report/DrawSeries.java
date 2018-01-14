@@ -23,15 +23,15 @@ public class DrawSeries {
     public DrawSeries() {
     }
 
-    public static String plot(ArrayList<TimeSeries> timeSeriesList, ArrayList<TimeSeries> timeSeriesForecastList, Date toDay, String title) {
-        XYChart chart = new XYChartBuilder().width(600).height(400).title(title).xAxisTitle("Time").yAxisTitle("Production").build();
+    public static String plot(ArrayList<TimeSeries> timeSeriesList, ArrayList<TimeSeries> timeSeriesForecastList, Date toDay) {
+        XYChart chart = new XYChartBuilder().width(600).height(400).title("TimeSeries").xAxisTitle("Time").yAxisTitle("Production").build();
 
         chart.getStyler().setLegendPosition(Styler.LegendPosition.OutsideE);
         chart.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
         chart.getStyler().setDatePattern("dd-MMM-YY");
         Calendar call = Calendar.getInstance();
         call.setTime(toDay);
-        call.add(Calendar.DATE, -timeSeriesList.get(0).size());
+        call.add(Calendar.DATE, -timeSeriesList.get(0).size()+ 1);
         Date firstDay = call.getTime();
 
         for (TimeSeries timeSeries: timeSeriesForecastList) {
