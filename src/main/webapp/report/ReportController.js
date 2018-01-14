@@ -17,12 +17,12 @@ $scope.getProducts = function() {
 
     $scope.generateReport = function () {
         var item = {};
-        item.productIds = $scope.products;
+        item.productIds = $scope.list.products;
         item.email = $scope.email;
         item.date = new Date($scope.date);
         item.noDays = $scope.noDays;
 
-        $http.post("/resource/generate", JSON.stringify(item))
+        $http.post("/report/generate", JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
