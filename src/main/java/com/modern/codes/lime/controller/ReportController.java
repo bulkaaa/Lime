@@ -26,8 +26,6 @@ public class ReportController {
     TimeSeriesProduct tsp;
     @Autowired
     JobService jobService;
-    @Autowired
-    Smoothing smoothing;
 
     @Autowired
     DBPopulator pop;
