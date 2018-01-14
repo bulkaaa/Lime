@@ -18,24 +18,10 @@ import java.util.List;
 @RequestMapping(path="/report")
 public class ReportController {
 
-
-    //TODO
-    //When getting request from front-end to generate page -> return the list of products (names)
-
-    //When user in front-end will select Products and Date to start series (e.g. today) and how many days back we get
-    //this means we send back to backend: List of Product ids, a Date, an Integer
-    //we can call them LIST, DATE, NO_DAYS
-
-    //Then I get from DB data for the given product IDs
-    //ArrayList<TimeSeries> seriesL = tsp.Extract(jobService, DATE, NO_DAYS, LIST);
-
-    //then I generate plot from them
-    //String filename = draw.plot(seriesL, new TimeSeries(), DATE, "Production in the Past" + NO_DAYS + "Days");
-
-    //And I send it
-    //  ord.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
-
-
+    @Autowired
+    TSGenerator tsgen;
+    @Autowired
+    TimeSeries ts;
     @Autowired
     DrawSeries draw;
     @Autowired
@@ -55,11 +41,9 @@ public class ReportController {
     }
     @GetMapping(path = "/test")
     public String Test(){
-        Integer no_days = 8;
+       // ArrayList<TimeSeries> seriesL = new ArrayList<TimeSeries>();
         ArrayList<TimeSeries> seriesFL = new ArrayList<TimeSeries>();
-        ArrayList<TimeSeries> seriesL = tsp.Extract(jobService, new Date(),no_days);
-        String filename = draw.plot(seriesL, seriesFL, new Date(), "Production in the Past "+no_days.toString()+" Days");
-        ord.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
+        //tsgen.loadSampleTSList(seriesL);
 
         ArrayList<TimeSeries> seriesL = tsp.Extract(jobService, new Date(),8);
 //        for (TimeSeries series2:seriesL) {
