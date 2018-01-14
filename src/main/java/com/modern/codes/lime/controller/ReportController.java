@@ -52,14 +52,6 @@ public class ReportController {
 
     @Autowired
     IProductService productService;
-    @Autowired
-    DBPopulator pop;
-
-    @GetMapping(path = "/populate")
-    public String populate(){
-        pop.populate();
-        return "DB reset completed";
-    }
 
     @RequestMapping(value = "/get-products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all products", notes = "Fetches all products from DB for reports", response = List.class)
