@@ -42,8 +42,8 @@ public class ProductController extends BaseController {
             @ApiResponse(code = 422, message = "In case of validation errors of product object")})
     @ResponseBody
     public String create(
-            @ApiParam(value = "Product object") @RequestBody final @Validated Product product,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam(value = "Product object") final Product product,
+            final BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Product creation request received: {}", product);
 
@@ -60,8 +60,8 @@ public class ProductController extends BaseController {
             @ApiResponse(code = 422, message = "In case of validation errors of product object")})
     @ResponseBody
     public String update(
-            @ApiParam(value = "Product object") @RequestBody final @Validated Product product,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam(value = "Product object") final Product product,
+            final BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Product update request received: {}", product);
 
@@ -106,21 +106,20 @@ public class ProductController extends BaseController {
 
         LOG.info("Fetch all product request received");
 
-        ParseTools.parseToJson(productService.findAll(), Product.class);
         return ParseTools.parseToJson(productService.findAll(), Product.class);
     }
 
 
+    @ResponseBody
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Saved product object"), @ApiResponse(code = 404,
+                                                                                                    message = "In case of no product object was found in DB for given name")})
+    @ApiOperation(value = "Fetch products by name",
+                  notes = "Searches for all <b>product</b> objects in DB "
+                          + "Returns list of product objects for given name.")
     @RequestMapping(value = "/get-by-name", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetch products by name", notes = "Searches for all <b>product</b> objects in DB "
-            +  "Returns list of product objects for given name.")
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved product object"),
-            @ApiResponse(code = 404, message = "In case of no product object was found in DB for given name")})
-
-    public @ResponseBody String getByName(@RequestParam(value="name") String name) {
+    public String getByName(@RequestParam(value="name") final String name) {
 
         LOG.info("Product get-by-name request received: name = " + name);
-        ParseTools.parseToJson(productService.findByName(name), Product.class);
         return ParseTools.parseToJson(productService.findByName(name), Product.class);
     }
 

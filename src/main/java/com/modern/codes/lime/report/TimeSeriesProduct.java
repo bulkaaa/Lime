@@ -1,7 +1,7 @@
 package com.modern.codes.lime.report;
 
 import com.modern.codes.lime.pojo.JobPOJO;
-import com.modern.codes.lime.service.JobService;
+import com.modern.codes.lime.service.IJobService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TimeSeriesProduct {
 
-    public static ArrayList<TimeSeries> Extract(final JobService service, final Date StartDate, final Integer Days)
+    public static ArrayList<TimeSeries> Extract(final IJobService service, final Date StartDate, final Integer Days)
     {
         final List<String> ids = getProductId(service);
         final ArrayList<TimeSeries> series = new ArrayList<TimeSeries>();
@@ -53,7 +53,7 @@ public class TimeSeriesProduct {
         return ts;
     }
 
-    private static List<String> getProductId(final JobService service){
+    private static List<String> getProductId(final IJobService service){
         final List<String> IDList = new ArrayList<String>();
         final List<JobPOJO> list = service.findAll();
         while (!list.isEmpty()){
