@@ -1,5 +1,7 @@
 package com.modern.codes.lime.controller;
 
+import com.modern.codes.lime.exception.InvalidRequestException;
+import com.modern.codes.lime.exception.UnprocessableEntityException;
 import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.order.Order;
 import com.modern.codes.lime.pojo.ProductPOJO;
@@ -23,10 +25,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -50,15 +55,23 @@ public class ReportController {
     @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Generate report for products")
     public Boolean generate(
-            @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds,
-            @RequestParam(value="date") final String date,
-            @RequestParam(value="nodays") final Integer noDays,
-            @RequestParam(value="email") final String email) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n", productIds, date, noDays, email);
+            @RequestParam final String email,
+            @RequestParam final String startDate,
+            @RequestParam final Integer noDays,
+            @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds) {
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n", startDate, noDays, email);
 
-        //final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
-        //final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
-      //  Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", filename);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
+        try {
+            date = formatter.parse(startDate);
+        } catch (ParseException e) {
+            throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
+        }
+
+        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
+        final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
+        Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", filename);
 
         return true;
     }
