@@ -1,65 +1,85 @@
 package com.modern.codes.lime.controller;
 
+import com.modern.codes.lime.model.Product;
+import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.order.Order;
 import com.modern.codes.lime.report.*;
+import com.modern.codes.lime.service.IJobService;
+import com.modern.codes.lime.service.IProductService;
 import com.modern.codes.lime.service.JobService;
 import com.modern.codes.lime.tools.DBPopulator;
+import com.modern.codes.lime.tools.ParseTools;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(path="/report")
 public class ReportController {
 
     //TODO
-    //When getting request from front-end to generate page -> return the list of products (names)
+    private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
 
-    //When user in front-end will select Products and Date to start series (e.g. today) and how many days back we get, and email of receiver of report
-    //this means we send back to backend: List of Product ids, a Date, an Integer, and a String
-    //we can call them LIST, DATE, NO_DAYS, EMAIL
-
-    //Then I get from DB data for the given product IDs
-    //ArrayList<TimeSeries> seriesL = tsp.Extract(jobService, DATE, NO_DAYS, LIST);
-
-    //then I generate plot from them
-    //String filename = draw.plot(seriesL, new TimeSeries(), DATE, "Production in the Past" + NO_DAYS + "Days");
-
-    //And I send it
-    //  ord.SendEmail(EMAIL,"Report Email form LIME", "Please Find Report Attached", filename);
 
     @Autowired
-    TSGenerator tsgen;
-    @Autowired
-    JobService jobService;
+    IJobService jobService;
 
     @Autowired
-    DBPopulator pop;
+    IProductService productService;
 
-    @GetMapping(path = "/populate")
-    public String populate(){
-        pop.populate();
-        return "DB reset completed";
+    @RequestMapping(value = "/get-products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetches all products", notes = "Fetches all products from DB for reports", response = List.class)
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Fetch all products")})
+    @ResponseBody
+    public String getProducts() {
+        LOG.info("Fetch all product request received in Report Controller");
+        return ParseTools.parseToJson(productService.findAll(), Product.class);
+    }
+
+    @ResponseBody
+    public Boolean send(
+            @Validated @RequestBody @ApiParam(value = "Map of Resources and amout") final
+                    List<Product> productList, @RequestParam(value="date") final Date date, @RequestParam(value="nodays") final Integer noDays,@RequestParam(value="email") final String email,
+            @Validated final BindingResult bindingResult, @Validated final UriComponentsBuilder b) {
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n", productList, date, noDays, email);
+
+        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
+        final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
+        Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", filename);
+
+        return true;
     }
     @GetMapping(path = "/test")
     public String Test(){
-       // ArrayList<TimeSeries> seriesL = new ArrayList<TimeSeries>();
         final ArrayList<TimeSeries> seriesFL = new ArrayList<TimeSeries>();
-        //tsgen.loadSampleTSList(seriesL);
-
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, new Date(), 8);
-//        for (TimeSeries series2:seriesL) {
-//            TimeSeries fcst = smoothing.calculateSmoothing(series2, 5);
-//            fcst.setLabel(series2.getLabel()+ " Forecast");
-//            seriesFL.add(fcst);
-//        };
-
-
-        final String filename = DrawSeries.plot(seriesL, seriesFL, new Date());
+        final String filename = DrawSeries.plot(seriesL, seriesFL, new Date(),"Production");
         Order.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
 
         return "Email Sent";

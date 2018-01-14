@@ -74,7 +74,7 @@ public class Smoothing {
         }
 
         for (int i = 0; i < days; i++){
-            SmoothTS.add(SmoothTS.get(ts.size() - 1) + (i + 1) * TrendTS.get(ts.size() - 1));
+            SmoothTS.add(Math.max(SmoothTS.get(ts.size() - 1) + (i + 1) * TrendTS.get(ts.size() - 1),0));
         }
         return SmoothTS;
     }

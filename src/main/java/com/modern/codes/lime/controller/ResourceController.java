@@ -43,8 +43,8 @@ public class ResourceController extends BaseController{
             @ApiResponse(code = 422, message = "In case of validation errors of resource object")})
     @ResponseBody
     public String create(
-            @ApiParam(value = "Resource object") @RequestBody final @Validated Resource resource,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam(value = "Resource object") final Resource resource,
+            final BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Resource creation request received: {}", resource);
 
@@ -61,8 +61,8 @@ public class ResourceController extends BaseController{
             @ApiResponse(code = 422, message = "In case of validation errors of resource object")})
     @ResponseBody
     public String update(
-            @ApiParam(value = "Resource object") @RequestBody final @Validated Resource resource,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam(value = "Resource object") final Resource resource,
+            final BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Resource update request received: {}", resource);
 
