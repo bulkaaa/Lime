@@ -36,7 +36,12 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">Unit <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
-                    <input type="text"  ng-model="item.unit" placeholder="Unit" class="form-control">
+                    <select type="text" ng-model="item.unit" placeholder="Unit" class="form-control">
+                        <option value="KG">KG</option>
+                        <option value="FEET">FEET</option>
+                        <option value="BAR">BAR</option>
+                        <option value="LITER">LITER</option>
+                    </select>
                 </div>
                 <span class="help-button" uib-tooltip="Please enter value" tooltip-placement="left">?</span>
             </div>
