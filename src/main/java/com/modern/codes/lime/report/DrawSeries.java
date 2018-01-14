@@ -12,10 +12,10 @@ import java.util.List;
 public class DrawSeries {
 
     public static String plot(final ArrayList<TimeSeries> timeSeriesList,
-                              final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay) {
+                              final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, String header) {
         final XYChart chart = new XYChartBuilder().width(600)
                                                   .height(400)
-                                                  .title("TimeSeries")
+                                                  .title(header)
                                                   .xAxisTitle("Time")
                                                   .yAxisTitle("Production")
                                                   .build();

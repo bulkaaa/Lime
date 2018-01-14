@@ -46,8 +46,7 @@ public class ReportController {
     //TODO
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
 
-    @Autowired
-    TSGenerator tsgen;
+
     @Autowired
     IJobService jobService;
 
@@ -79,26 +78,16 @@ public class ReportController {
         LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n", productList, date, noDays, email);
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
-        final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date);
+        final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
         Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", filename);
 
         return true;
     }
     @GetMapping(path = "/test")
     public String Test(){
-       // ArrayList<TimeSeries> seriesL = new ArrayList<TimeSeries>();
         final ArrayList<TimeSeries> seriesFL = new ArrayList<TimeSeries>();
-        //tsgen.loadSampleTSList(seriesL);
-
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, new Date(), 8);
-//        for (TimeSeries series2:seriesL) {
-//            TimeSeries fcst = smoothing.calculateSmoothing(series2, 5);
-//            fcst.setLabel(series2.getLabel()+ " Forecast");
-//            seriesFL.add(fcst);
-//        };
-
-
-        final String filename = DrawSeries.plot(seriesL, seriesFL, new Date());
+        final String filename = DrawSeries.plot(seriesL, seriesFL, new Date(),"Production");
         Order.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
 
         return "Email Sent";
