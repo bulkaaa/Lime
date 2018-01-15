@@ -7,10 +7,12 @@ import com.modern.codes.lime.pojo.JobPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
 @Service
+@Transactional
 public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implements IJobService {
 
     private IJobDAO dao;
@@ -34,5 +36,10 @@ public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implemen
     @Override
     public List<JobPOJO> findByUserId(String id) {
         return ParseTools.parseList(dao.findByUserId(id), JobPOJO.class);
+    }
+
+    @Override
+    public List<JobPOJO> findByProductId(String id) {
+        return ParseTools.parseList(dao.findByProductId(id), JobPOJO.class);
     }
 }

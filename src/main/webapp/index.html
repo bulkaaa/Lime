@@ -14,7 +14,7 @@
 <script src="libs/angular.min.js"></script>
 <script src="libs/angular-route.min.js"></script>
 <script src="libs/angular-cookies.min.js"></script>
-<!--<script src="libs/angular-ui-bootstrap-modal.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/checklist-model/0.11.0/checklist-model.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.1/ui-bootstrap-tpls.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -31,7 +31,7 @@
 
 <script type="text/javascript">
 
-    var app = angular.module("myApp", ['ngRoute', 'ngCookies','ui.bootstrap.modal', 'smart-table', 'ui.bootstrap']);
+    var app = angular.module("myApp", ['ngRoute', 'ngCookies','ui.bootstrap.modal', 'smart-table', 'ui.bootstrap', 'checklist-model']);
     app.config(function($routeProvider) {
                         $routeProvider
                             .when('/', {
@@ -59,9 +59,25 @@
                                 templateUrl: 'account/reset/ResetPasswordView.html',
                                 controller: 'ResetPasswordController'
                             })
-                            .when('/cart', {
+                            .when('/resources', {
                                 templateUrl: 'cart/CartView.html',
                                 controller: 'CartController'
+                            })
+                            .when('/product', {
+                                templateUrl: 'product/ProductView.html',
+                                controller: 'ProductController'
+                            })
+                            .when('/user', {
+                                templateUrl: 'user/UserView.html',
+                                controller: 'UserController'
+                            })
+                            .when('/report', {
+                                templateUrl: 'report/ReportView.html',
+                                controller: 'ReportController'
+                            })
+                            .when('/prediction', {
+                                templateUrl: 'prediction/PredictionView.html',
+                                controller: 'PredictionController'
                             })
                             .when('/welcome', {
                                 templateUrl: 'welcome-screen/WelcomeView.html'
@@ -91,6 +107,10 @@
 </script>
 <script src="home/HomeController.js"></script>
 <script src="cart/CartController.js"></script>
+<script src="product/ProductController.js"></script>
+<script src="user/UserController.js"></script>
+<script src="report/ReportController.js"></script>
+<script src="prediction/PredictionController.js"></script>
 <script src="account/login/LoginController.js"></script>
 <script src="account/edit/EditAccountController.js"></script>
 <script src="account/reset/ResetPasswordController.js"></script>

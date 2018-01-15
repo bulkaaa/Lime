@@ -1,9 +1,7 @@
 
 app.controller('CartController', ['$scope', '$http', '$uibModal', function($scope, $http, $modal) {
      var modalInstance = null;
-
-
-
+    $scope.resource = true;
 
     $scope.showAll = function() {
         $http.get("/resource/all")
@@ -65,6 +63,7 @@ app.controller('CartController', ['$scope', '$http', '$uibModal', function($scop
                             $scope.item.description = response.data.description;
                             $scope.item.quantity = response.data.quantity;
                             $scope.item.unit = response.data.unit;
+                            $scope.item.image = response.data.image;
                        }
                      },
                      function(response){

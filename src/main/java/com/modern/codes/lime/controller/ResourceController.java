@@ -4,6 +4,7 @@ import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.service.ResourceService;
+import com.modern.codes.lime.tools.ParseTools;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -41,9 +42,9 @@ public class ResourceController extends BaseController{
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved resource object"),
             @ApiResponse(code = 422, message = "In case of validation errors of resource object")})
     @ResponseBody
-    public Resource create(
-            @ApiParam(value = "Resource object") @RequestBody final @Validated Resource resource,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+    public String create(
+            @Validated @RequestBody @ApiParam(value = "Resource object") final Resource resource,
+            final BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Resource creation request received: {}", resource);
 
@@ -51,8 +52,7 @@ public class ResourceController extends BaseController{
             throw new InvalidRequestException(String.format("Invalid resource creation request, form data contains %s error(s).",
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
-        resourceService.save(resource);
-        return resource;
+        return ParseTools.parseToJson(resourceService.save(resource), Resource.class);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -60,9 +60,9 @@ public class ResourceController extends BaseController{
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved resource object"),
             @ApiResponse(code = 422, message = "In case of validation errors of resource object")})
     @ResponseBody
-    public Resource update(
-            @ApiParam(value = "Resource object") @RequestBody final @Validated Resource resource,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+    public String update(
+            @Validated @RequestBody @ApiParam(value = "Resource object") final Resource resource,
+            final BindingResult bindingResult, UriComponentsBuilder b) {
 
         LOG.info("Resource update request received: {}", resource);
 
@@ -70,8 +70,7 @@ public class ResourceController extends BaseController{
             throw new InvalidRequestException(String.format("Invalid resource update request, form data contains %s error(s).",
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
-        resourceService.save(resource);
-        return resource;
+        return ParseTools.parseToJson(resourceService.save(resource), Resource.class);
     }
 
     @RequestMapping(value = "/delete/{resourceId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -83,6 +82,7 @@ public class ResourceController extends BaseController{
 
         LOG.info("Resource deletion request received for id: " + resourceId);
 
+        
             resourceService.delete(resourceId);
             return true;
     }
@@ -91,23 +91,25 @@ public class ResourceController extends BaseController{
     @ApiOperation(value = "Fetch a resource object", notes = "Fetches a <b>resource</b> object by id ", response = ResourcePOJO.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved resource object")})
     @ResponseBody
-    public ResourcePOJO getResource(
+    public String getResource(
             @ApiParam(value = "Resource object") @PathVariable final String resourceId) {
 
         LOG.info("Resource fetch request received for id: " + resourceId);
+        return ParseTools.parseToJson(resourceService.findById(resourceId), Resource.class);
 
-        return resourceService.findById(resourceId);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
             @ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch all resources")})
     @ResponseBody
-    public List<ResourcePOJO> getAll() {
+    public String getAll() {
 
         LOG.info("Fetch all resources request received");
 
-        return resourceService.findAll();
+        ParseTools.parseToJson(resourceService.findAll(), Resource.class);
+        return ParseTools.parseToJson(resourceService.findAll(), Resource.class);
+
     }
 
 
