@@ -34,6 +34,7 @@ public class OrderController {
 
     @Autowired
     IResourceService resourceService;
+
     private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
     @RequestMapping(value = "/get-resources", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
