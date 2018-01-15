@@ -13,9 +13,9 @@ spring:
 #    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
 #    username: limeadmin
 #    password: LIMEadmin12#$
-    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
-    username: root
-    password: test
+#    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
+#    username: root
+#    password: test
     tomcat:
       test-while-idle: true
       validation-query: SELECT 1
