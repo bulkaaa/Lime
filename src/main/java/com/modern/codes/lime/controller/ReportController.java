@@ -70,7 +70,7 @@ public class ReportController {
         }
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
+        final String filename = DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days");
         Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", filename);
 
         return true;
