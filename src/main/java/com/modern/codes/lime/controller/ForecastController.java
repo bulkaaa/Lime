@@ -1,65 +1,65 @@
 package com.modern.codes.lime.controller;
 
-        import com.modern.codes.lime.model.Product;
-        import com.modern.codes.lime.order.Order;
-        import com.modern.codes.lime.report.*;
-        import com.modern.codes.lime.service.IJobService;
-        import com.modern.codes.lime.service.IProductService;
-        import com.modern.codes.lime.service.JobService;
-        import com.modern.codes.lime.tools.DBPopulator;
-        import com.modern.codes.lime.tools.ParseTools;
+import com.modern.codes.lime.exception.InvalidRequestException;
+import com.modern.codes.lime.model.Product;
+import com.modern.codes.lime.order.Order;
+import com.modern.codes.lime.report.*;
+import com.modern.codes.lime.service.IJobService;
+import com.modern.codes.lime.service.IProductService;
+import com.modern.codes.lime.tools.ParseTools;
 
-        import org.slf4j.Logger;
-        import org.slf4j.LoggerFactory;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.MediaType;
-        import org.springframework.validation.BindingResult;
-        import org.springframework.validation.annotation.Validated;
-        import org.springframework.web.bind.annotation.GetMapping;
-        import org.springframework.web.bind.annotation.RequestBody;
-        import org.springframework.web.bind.annotation.RequestMapping;
-        import org.springframework.web.bind.annotation.RequestMethod;
-        import org.springframework.web.bind.annotation.RequestParam;
-        import org.springframework.web.bind.annotation.ResponseBody;
-        import org.springframework.web.bind.annotation.RestController;
-        import org.springframework.web.util.UriComponentsBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
-        import java.util.ArrayList;
-        import java.util.Collections;
-        import java.util.Date;
-        import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
-        import io.swagger.annotations.ApiOperation;
-        import io.swagger.annotations.ApiParam;
-        import io.swagger.annotations.ApiResponse;
-        import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(path="/forecast")
-public class ForecastController {
+public class ForecastController extends BaseController{
     private static final Logger LOG = LoggerFactory.getLogger(ForecastController.class);
 
     @Autowired
     IJobService jobService;
-    @Autowired
-    IProductService productService;
 
-    @RequestMapping(value = "/get-products", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetches all products", notes = "Fetches all products from DB for reports", response = List.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Fetch all products")})
+    @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getProducts() {
-        LOG.info("Fetch all product request received in Forecast Controller");
-        return ParseTools.parseToJson(productService.findAll(), Product.class);
-    }
+    public Boolean generateForecast(
+            @RequestBody @ApiParam(value = "Map of Resources and amount") @Validated final List<String> productIds,
+            @RequestParam final String startDate,
+            @RequestParam final Integer noDays,
+            @RequestParam final Integer noDaysForecast,
+            @RequestParam final String email) {
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: {} \n", productIds, startDate, noDays, noDaysForecast, email);
 
-    @ResponseBody
-    public Boolean send(
-            @Validated @RequestBody @ApiParam(value = "Map of Resources and amout") final
-            List<Product> productList, @RequestParam(value="date") final Date date, @RequestParam(value="nodays") final Integer noDays,
-            @RequestParam(value="nodays-forecast") final Integer noDaysForecast, @RequestParam(value="email") final String email,
-            @Validated final BindingResult bindingResult, @Validated final UriComponentsBuilder b) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: {} \n", productList, date, noDays, noDaysForecast, email);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
+        try {
+            date = formatter.parse(startDate);
+        } catch (ParseException e) {
+            throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
+        }
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
         final ArrayList<TimeSeries> seriesFL = new ArrayList<>();
