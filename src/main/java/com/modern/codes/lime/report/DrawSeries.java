@@ -27,7 +27,7 @@ public class DrawSeries {
              .setDatePattern("dd-MMM-YY");
         final Date firstDay = getDate(timeSeriesList, toDay);
 
-        //ProcessDataInTimeSeries(timeSeriesForecastList, chart, firstDay);
+        ProcessDataInTimeSeries(timeSeriesForecastList, chart, firstDay);
         ProcessDataInTimeSeries(timeSeriesList, chart, firstDay);
 
         // Save it
