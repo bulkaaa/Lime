@@ -11,6 +11,22 @@ import java.util.List;
 
 public class TimeSeriesProduct {
 
+    public static ArrayList<TimeSeries> Extract(final IJobService service, final Date StartDate, final Integer Days, final List<String> ProductsIds)
+    {
+        final List<String> ids = ProductsIds;
+        final ArrayList<TimeSeries> series = new ArrayList<TimeSeries>();
+        for (final String id:ids){
+            final List<JobPOJO> list = service.findByProductId(id);
+            if (!list.isEmpty()) {
+                final TimeSeries ts = ExtractProduct(list, StartDate, Days);
+                final String label = list.get(0).getPOJOProduct().getName();
+                ts.setLabel(label);
+                series.add(ts);
+            }
+        }
+        return series;
+    }
+
     public static ArrayList<TimeSeries> Extract(final IJobService service, final Date StartDate, final Integer Days)
     {
         final List<String> ids = getProductId(service);

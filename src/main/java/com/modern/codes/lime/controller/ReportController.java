@@ -69,7 +69,7 @@ public class ReportController {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
 
-        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
+        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
         final String filename = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days");
         Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", filename);
 
