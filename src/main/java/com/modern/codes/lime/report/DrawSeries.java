@@ -1,18 +1,24 @@
 package com.modern.codes.lime.report;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class DrawSeries {
 
-    public static String plot(final ArrayList<TimeSeries> timeSeriesList,
-                              final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, String header) {
+    private static final Logger LOG = LoggerFactory.getLogger(DrawSeries.class);
+
+    public static byte[] plot(final ArrayList<TimeSeries> timeSeriesList,
+                                                      final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, final String header, final String filename) {
         final XYChart chart = new XYChartBuilder().width(600)
                                                   .height(400)
                                                   .title(header)
@@ -31,13 +37,14 @@ public class DrawSeries {
         ProcessDataInTimeSeries(timeSeriesList, chart, firstDay);
 
         // Save it
-        final String filename = "./Sample_Chart";
         try {
             BitmapEncoder.saveBitmap(chart, filename, BitmapEncoder.BitmapFormat.PNG);
+            return Base64.getEncoder().encode(
+                    BitmapEncoder.getBitmapBytes(chart, BitmapEncoder.BitmapFormat.PNG));
         } catch (final IOException e) {
-            e.printStackTrace();
+            LOG.error("IO error while generating chart: " + filename);
         }
-        return filename + ".png";
+        return ArrayUtils.EMPTY_BYTE_ARRAY;
     }
 
     private static void ProcessDataInTimeSeries(final ArrayList<TimeSeries> timeSeriesList, final XYChart chart,
