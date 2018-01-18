@@ -2,9 +2,13 @@ package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.order.Order;
-import com.modern.codes.lime.report.*;
+import com.modern.codes.lime.report.DrawSeries;
+import com.modern.codes.lime.report.TimeSeries;
+import com.modern.codes.lime.report.TimeSeriesProduct;
 import com.modern.codes.lime.service.IJobService;
 import com.modern.codes.lime.service.IProductService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping(path="/report")

@@ -1,8 +1,6 @@
 package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
-import com.modern.codes.lime.model.Supplier;
-
 import com.modern.codes.lime.pojo.SupplierPOJO;
 import com.modern.codes.lime.service.SupplierService;
 import io.swagger.annotations.ApiOperation;
@@ -15,7 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
