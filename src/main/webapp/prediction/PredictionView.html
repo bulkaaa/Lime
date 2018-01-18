@@ -38,13 +38,17 @@
                 <div class="form-group">
                     <label class="col-md-4 col-sm-4 control-label"></label>
                     <div class="col-md-6 col-sm-6">
-                        <span><button class="btn btn-success" ng-click="generateForecast()">Generate Forecast</button></span>
+                        <div class="row">
+                            <span><button class="btn btn-success" ng-click="generateForecast()">Generate Forecast</button></span>
+                            <span><button class="btn btn-success" ng-click="generateReport()">Send Forecast</button></span>
+                        </div>
                     </div>
                 </div>
             </form>
 
         </div>
         <div class="col-md-6 col-sm-6">
+            <img ng-src="data:image/png;base64,{{image}}">
         </div>
     </div>
 </div>
