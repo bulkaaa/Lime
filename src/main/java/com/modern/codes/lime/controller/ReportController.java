@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -58,7 +57,7 @@ public class ReportController {
         }
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
-        final byte [] bytes = DrawSeries.plot(seriesL, new ArrayList<>(Collections.singletonList(new TimeSeries())), date, "Production in past "+noDays+" days", "Sample_Chart");
+        final byte [] bytes = DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days", "Sample_Chart");
 
         return ResponseEntity
                 .ok()
