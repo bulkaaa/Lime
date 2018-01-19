@@ -50,7 +50,7 @@ public class ReportController {
             @RequestParam final String startDate,
             @RequestParam final Integer noDays,
             @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds) {
-        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n", startDate, noDays);
+        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n", startDate, noDays, productIds);
 
         Date date;
         try {
@@ -59,7 +59,7 @@ public class ReportController {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
 
-        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
+        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
         final byte [] bytes = DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days", "Sample_Chart");
 
         return ResponseEntity
@@ -75,7 +75,7 @@ public class ReportController {
             @RequestParam final String email,
             @RequestParam final Integer noDays,
             @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {}", startDate, noDays, email);
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n", startDate, noDays, email, productIds);
 
         Date date;
         try {
@@ -84,7 +84,7 @@ public class ReportController {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
 
-        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
+        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
         DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days", "Sample_Chart");
         Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", "Sample_Chart");
 

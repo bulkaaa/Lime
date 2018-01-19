@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-dialog-service/5.3.0/dialogs.min.css">
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="cart/cart.css" />
     <link rel="stylesheet" href="libs/css/font-awesome.min.css">
@@ -18,6 +19,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.8/smart-table.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.1/ui-bootstrap-tpls.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.angularjs.org/1.4.8/angular-sanitize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-dialog-service/5.3.0/dialogs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-dialog-service/5.3.0/dialogs-default-translations.min.js"></script>
 
 
 <script src="app.js"></script>
@@ -31,59 +35,59 @@
 
 <script type="text/javascript">
 
-    var app = angular.module("myApp", ['ngRoute', 'ngCookies','ui.bootstrap.modal', 'smart-table', 'ui.bootstrap', 'checklist-model']);
+    var app = angular.module("myApp", ['ngRoute', 'ngCookies', 'ngSanitize', 'ui.bootstrap.modal', 'smart-table', 'ui.bootstrap', 'checklist-model', 'dialogs.main']);
     app.config(function($routeProvider) {
-                        $routeProvider
-                            .when('/', {
-                                templateUrl: 'home/HomeView.html',
-                                controller: 'HomeController',
-                                controllerAs: 'vm'
-                            })
-                            .when('/login', {
-                                templateUrl: 'account/login/LoginView.html',
-                                controller: 'LoginController',
-                                controllerAs: 'vm'
+        $routeProvider
+            .when('/', {
+                templateUrl: 'home/HomeView.html',
+                controller: 'HomeController',
+                controllerAs: 'vm'
+            })
+            .when('/login', {
+                templateUrl: 'account/login/LoginView.html',
+                controller: 'LoginController',
+                controllerAs: 'vm'
 
-                            })
-                            .when('/register', {
-                                templateUrl: 'account/register/RegisterView.html',
-                                controller: 'RegisterController',
-                                controllerAs: 'vm'
+            })
+            .when('/register', {
+                templateUrl: 'account/register/RegisterView.html',
+                controller: 'RegisterController',
+                controllerAs: 'vm'
 
-                            })
-                            .when('/editaccount', {
-                                templateUrl: 'account/edit/EditAccountView.html',
-                                controller: 'EditAccountController'
-                            })
-                            .when('/reset', {
-                                templateUrl: 'account/reset/ResetPasswordView.html',
-                                controller: 'ResetPasswordController'
-                            })
-                            .when('/resources', {
-                                templateUrl: 'cart/CartView.html',
-                                controller: 'CartController'
-                            })
-                            .when('/product', {
-                                templateUrl: 'product/ProductView.html',
-                                controller: 'ProductController'
-                            })
-                            .when('/user', {
-                                templateUrl: 'user/UserView.html',
-                                controller: 'UserController'
-                            })
-                            .when('/report', {
-                                templateUrl: 'report/ReportView.html',
-                                controller: 'ReportController'
-                            })
-                            .when('/prediction', {
-                                templateUrl: 'prediction/PredictionView.html',
-                                controller: 'PredictionController'
-                            })
-                            .when('/welcome', {
-                                templateUrl: 'welcome-screen/WelcomeView.html'
+            })
+            .when('/editaccount', {
+                templateUrl: 'account/edit/EditAccountView.html',
+                controller: 'EditAccountController'
+            })
+            .when('/reset', {
+                templateUrl: 'account/reset/ResetPasswordView.html',
+                controller: 'ResetPasswordController'
+            })
+            .when('/resources', {
+                templateUrl: 'cart/CartView.html',
+                controller: 'CartController'
+            })
+            .when('/product', {
+                templateUrl: 'product/ProductView.html',
+                controller: 'ProductController'
+            })
+            .when('/user', {
+                templateUrl: 'user/UserView.html',
+                controller: 'UserController'
+            })
+            .when('/report', {
+                templateUrl: 'report/ReportView.html',
+                controller: 'ReportController'
+            })
+            .when('/prediction', {
+                templateUrl: 'prediction/PredictionView.html',
+                controller: 'PredictionController'
+            })
+            .when('/welcome', {
+                templateUrl: 'welcome-screen/WelcomeView.html'
 
-                            })
-                    })
+            })
+    })
 
 
     app.run(function($rootScope, $location, $cookies, $http) {
@@ -120,6 +124,7 @@
 <script src="modals/AddRecordController.js"></script>
 <script src="app-services/AuthenticationService.js"></script>
 <script src="app-services/FlashService.js"></script>
+<script src="app-services/DialogService.js"></script>
 <script src="app-services/UserServiceLocalStorage.js"></script>
 <!--<script src="app-services/UserService.js"></script>-->
 

@@ -1,5 +1,4 @@
-
-app.controller('ProductController', ['$scope', '$http', '$uibModal', function($scope, $http, $modal) {
+app.controller('ProductController', ['$scope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $http, $modal, $dialogs, DialogService) {
     var modalInstance = null;
     $scope.product = true;
 
@@ -8,12 +7,13 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
             .then(
                 function (response) {
                     if (response.data) {
-                        console.log("updated product successfully!");
                         $scope.items = response.data;
+                        if (!$scope.items.length)
+                            $dialogs.notify('Currently there are no products added in LIME', "You can add products here by clicking on 'Add New Product' button");
                     }
                 },
                 function (response) {
-                    alert("failure message: " + JSON.stringify(response));
+                    DialogService.generalServerError();
                 }
             );
     };
@@ -67,13 +67,14 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
                     }
                 },
                 function(response){
-                    alert( "failure message: " + JSON.stringify(response));
+                    DialogService.handle(response, 'product', 'update');
                 }
             );
     };
 
     $scope.deleteRecord = function(id) {
-        if (confirm('Are you sure you want to delete this record?')) {
+        let dlg = $dialogs.confirm('Are you sure you want to delete this record?');
+        dlg.result.then(function(btn){
             $http.delete("/product/delete/" +id)
                 .then(
                     function(response){
@@ -83,10 +84,11 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
                         }
                     },
                     function(response){
-                        alert( "failure message: " + JSON.stringify(response));
+                        DialogService.generalServerError();
                     }
                 );
-        }
+        });
+
     };
 
     $scope.deleteRow = function(id) {
@@ -124,7 +126,7 @@ app.controller('ProductController', ['$scope', '$http', '$uibModal', function($s
                     }
                 },
                 function(response){
-                    alert( "failure message: " + JSON.stringify(response));
+                    DialogService.handle(response, 'product', 'create');
                 }
             );
     }
