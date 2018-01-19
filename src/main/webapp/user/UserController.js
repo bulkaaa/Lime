@@ -1,5 +1,4 @@
-
-app.controller('UserController', ['$scope', '$http', '$uibModal', function($scope, $http, $modal) {
+app.controller('UserController', ['$scope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $http, $modal, $dialogs, DialogService) {
     var modalInstance = null;
 
     $scope.showAll = function() {
@@ -12,7 +11,7 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', function($scop
                     }
                 },
                 function (response) {
-                    alert("failure message: " + JSON.stringify(response));
+                    DialogService.generalServerError();
                 }
             );
     };
@@ -53,7 +52,7 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', function($scop
     };
 
     $scope.updateRecord = function(item) {
-        $http.put("/product/update", JSON.stringify(item))
+        $http.put("/user/update", JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
@@ -65,26 +64,28 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', function($scop
                     }
                 },
                 function(response){
-                    alert( "failure message: " + JSON.stringify(response));
+                    DialogService.handle(response, 'user', 'update');
                 }
             );
     };
 
     $scope.deleteRecord = function(id) {
-        if (confirm('Are you sure you want to delete this record?')) {
-            $http.delete("/user/delete/" +id)
+        let dlg = $dialogs.confirm('Are you sure you want to delete this record?');
+        dlg.result.then(function(btn) {
+            $http.delete("/user/delete/" + id)
                 .then(
-                    function(response){
-                        if (response.data){
+                    function (response) {
+                        if (response.data) {
                             console.log(response);
                             $scope.deleteRow(id);
                         }
                     },
-                    function(response){
-                        alert( "failure message: " + JSON.stringify(response));
+                    function (response) {
+                        DialogService.generalServerError();
                     }
                 );
-        }
+        });
+
     };
 
     $scope.deleteRow = function(id) {
@@ -121,7 +122,7 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', function($scop
                     }
                 },
                 function(response){
-                    alert( "failure message: " + JSON.stringify(response));
+                    DialogService.handle(response, 'user', 'create');
                 }
             );
     }
