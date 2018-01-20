@@ -50,14 +50,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/dev/hello-world").hasAnyRole("MANAGER")
                 .anyRequest().permitAll()
                 .and()
-                // .formLogin().loginPage("/login")
-                // .successHandler(successHandler())
-                // .failureHandler(failureHandler())
-                // .and()
-                // .exceptionHandling()
-                // .accessDeniedHandler(accessDeniedHandler())
+                .formLogin().loginPage("/#!/login")
+                .successHandler(successHandler())
+                .failureHandler(failureHandler())
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler());
                 // .authenticationEntryPoint(authenticationEntryPoint());
-               .formLogin();
+               // .formLogin();
 
     }
     private AuthenticationSuccessHandler successHandler() {
