@@ -86,7 +86,7 @@ public class ReportController {
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
         DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days", "Sample_Chart");
-        Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", "Sample_Chart");
+        Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", "./Sample_Chart.png");
 
     }
 

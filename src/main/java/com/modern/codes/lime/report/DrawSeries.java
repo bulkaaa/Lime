@@ -38,7 +38,7 @@ public class DrawSeries {
 
         // Save it
         try {
-            BitmapEncoder.saveBitmap(chart, filename, BitmapEncoder.BitmapFormat.PNG);
+            BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapEncoder.BitmapFormat.PNG);
             return Base64.getEncoder().encode(
                     BitmapEncoder.getBitmapBytes(chart, BitmapEncoder.BitmapFormat.PNG));
         } catch (final IOException e) {
