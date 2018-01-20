@@ -94,7 +94,7 @@ public class ForecastController extends BaseController{
             seriesFL.add(forecast);
         }
         DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart");
-        Order.SendEmail(email,"Forecast Email from LIME", "Please Find Report Attached", "Sample_Chart");
+        Order.SendEmail(email,"Forecast Email from LIME", "Please Find Report Attached", "./Sample_Chart.png");
     }
 
     @GetMapping(path = "/test")
