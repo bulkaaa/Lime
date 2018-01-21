@@ -95,6 +95,7 @@ app.controller('CartController', ['$scope', '$http', '$uibModal', 'dialogs', 'Di
     };
 
     $scope.addRecord = function(){
+        $scope.item={};
         modalInstance = $modal.open({
             templateUrl: 'modals/add-record.html',
             controller: 'AddRecordController',

@@ -10,18 +10,14 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
 	$scope.update = function () {
 		$scope.cancelModal();
 		if(/*!angular.isDefined($scope.record.name) ||*/ $scope.item.name === '') {
-                alert('item name is empty');
                 return;
             }
             else if(/*!angular.isDefined($scope.record.description) ||*/ $scope.item.description === '') {
-                alert('item description is empty');
                 return;
             }else if(/*!angular.isDefined($scope.record.value) ||*/ $scope.item.value === '') {
-                alert('item value is empty');
                 return;
             }
             else if(/*!angular.isDefined($scope.record.value) ||*/ $scope.item.image === '') {
-                alert('item image is empty');
                 return;
             }
 		$scope.updateRecord($scope.item);

@@ -5,14 +5,13 @@ app.controller('PredictionController', ['$scope', '$http', 'dialogs', 'DialogSer
             .then(
                 function (response) {
                     if (response.data) {
-                        console.log("fetched product successfully!");
                         $scope.products = response.data;
                         if (!$scope.products.length)
                             $dialogs.notify('Currently there are no products added in LIME', "You can add products by clicking on 'Add New Product' button on 'Products' view");
                     }
                 },
                 function (response) {
-                    alert("failure message: " + JSON.stringify(response));
+                    DialogService.generalServerError();
                 }
             );
     };
@@ -32,7 +31,7 @@ app.controller('PredictionController', ['$scope', '$http', 'dialogs', 'DialogSer
                     }
                 },
                 function(response){
-                    alert( "failure message: " + JSON.stringify(response));
+                    DialogService.generalServerError();
                 }
             );
     };
@@ -50,7 +49,7 @@ app.controller('PredictionController', ['$scope', '$http', 'dialogs', 'DialogSer
                     }
                 },
                 function(response){
-                    alert( "failure message: " + JSON.stringify(response));
+                    DialogService.generalServerError();
                 }
             );
     };

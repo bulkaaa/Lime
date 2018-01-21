@@ -3,14 +3,11 @@ app.controller('AddRecordController',  ['$scope', '$http','$uibModalInstance', f
 		$scope.newRecord = {};
 
 		if(/*!angular.isDefined($scope.employee_name) ||*/ $scope.item.name === '') {
-			alert('resource name is empty');
 			return;
 		}
 		else if(/*!angular.isDefined($scope.employee_age) || */$scope.item.description === '') {
-			alert('resource description is empty');
 			return;
 		}else if(/*!angular.isDefined($scope.employee.salary) ||*/ $scope.item.value === '') {
-			alert('resource value is empty');
 			return;
 		} else {
 			$scope.newRecord.name = $scope.item.name;
