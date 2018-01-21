@@ -1,6 +1,13 @@
 package com.modern.codes.lime.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.pojo.JobPOJO;
@@ -44,15 +51,28 @@ public class DevController {
 
     @GetMapping(path = "/GetResourcesForJob")
     public void resdev(){
-        final JobPOJO job = jobService.findAll().get(0);
-
-        // get list of ALL Resources to do this job
-        final List<FormulaPOJO> formula = formulaService.findByProductId(job.getPOJOProduct().getId());
-        // get name of FIRST resource needed to do this job
-        String name = formula.get(0).getPOJOResource().getName();
-        // get value needed of FIRST resource to do this job
-        double value = formula.get(0).getValue();
-
+        try {
+            final Map<String,Double> valueMap = new HashMap<>();
+            final List<String> resourceIds = new ArrayList<>();
+            resourceIds.add("4858b21b-75c8-4d01-8076-3434bf9d721c"); //egg
+            resourceIds.add("914c96b9-f598-45cd-9406-60ca175b42e5"); //flour
+            final Date startDate = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse("January 1, 2018");
+            final Date endDate = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse("January 29, 2018");
+            final List<JobPOJO> jobList = jobService.findByEndDateBetween(startDate, endDate);
+            jobList.forEach(job ->{
+                final List<FormulaPOJO> formula = formulaService.findByProductId(job.getPOJOProduct().getId());
+                final List<FormulaPOJO> filteredFormula = IFormulaService.filterByResources(formula, resourceIds);
+                filteredFormula.forEach(y -> {
+                    final ResourcePOJO resource = y.getPOJOResource();
+                    Double value = valueMap.get(resource.getName());
+                    if (null == value)
+                        value = 0.0;
+                    value += y.getValue();
+                    valueMap.put(resource.getName(), value);
+                });
+            });
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
     }
-
 }

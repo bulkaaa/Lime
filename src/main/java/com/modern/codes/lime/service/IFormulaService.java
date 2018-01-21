@@ -27,28 +27,34 @@ public interface IFormulaService {
     List<FormulaPOJO> findByProductId(String id);
 
 
-    static List<FormulaPOJO> filterByResource(List<FormulaPOJO> list, String resourceName){
+    static List<FormulaPOJO> filterByResource(final List<FormulaPOJO> list, final String resourceName){
         return filterByResource(list.stream(), resourceName).collect(Collectors.toList());
     }
-    static Stream<FormulaPOJO> filterByResource(Stream<FormulaPOJO> stream, String resourceName) {
+    static Stream<FormulaPOJO> filterByResource(final Stream<FormulaPOJO> stream, final String resourceName) {
         return stream.filter(t -> t.getPOJOResource().getName().equals(resourceName));
     }
-    static List<FormulaPOJO> filterByResource(List<FormulaPOJO> list, ResourcePOJO resource){
+    static List<FormulaPOJO> filterByResource(final List<FormulaPOJO> list, final ResourcePOJO resource){
         return filterByResource(list.stream(), resource).collect(Collectors.toList());
     }
-    static Stream<FormulaPOJO> filterByResource(Stream<FormulaPOJO> stream, ResourcePOJO resource){
+    static Stream<FormulaPOJO> filterByResource(final Stream<FormulaPOJO> stream, final ResourcePOJO resource){
         return stream.filter(t -> t.getPOJOResource().equals(resource));
     }
-    static List<FormulaPOJO> filterByProduct(List<FormulaPOJO> list, String productName){
+    static List<FormulaPOJO> filterByResources(final List<FormulaPOJO> list, final List<String> resources){
+        return filterByResources(list.stream(), resources).collect(Collectors.toList());
+    }
+    static Stream<FormulaPOJO> filterByResources(final Stream<FormulaPOJO> stream, final List<String> resources){
+        return stream.filter(t -> resources.contains(t.getPOJOResource().getId()));
+    }
+    static List<FormulaPOJO> filterByProduct(final List<FormulaPOJO> list, final String productName){
         return filterByProduct(list.stream(), productName).collect(Collectors.toList());
     }
-    static Stream<FormulaPOJO> filterByProduct(Stream<FormulaPOJO> stream, String productName){
+    static Stream<FormulaPOJO> filterByProduct(final Stream<FormulaPOJO> stream, final String productName){
         return stream.filter(t -> t.getPOJOProduct().getName().equals(productName));
     }
-    static List<FormulaPOJO> filterByProduct(List<FormulaPOJO> list, ProductPOJO product){
+    static List<FormulaPOJO> filterByProduct(final List<FormulaPOJO> list, final ProductPOJO product){
         return filterByProduct(list.stream(), product).collect(Collectors.toList());
     }
-    static Stream<FormulaPOJO> filterByProduct(Stream<FormulaPOJO> stream, ProductPOJO product){
+    static Stream<FormulaPOJO> filterByProduct(final Stream<FormulaPOJO> stream, final ProductPOJO product){
         return stream.filter(t -> t.getPOJOProduct().equals(product));
     }
 }
