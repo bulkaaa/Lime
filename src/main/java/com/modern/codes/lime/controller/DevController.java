@@ -47,11 +47,12 @@ public class DevController {
         final JobPOJO job = jobService.findAll().get(0);
 
         // get list of ALL Resources to do this job
-        final List<FormulaPOJO> formula = formulaService.findByProductId(job.getId());
+        final List<FormulaPOJO> formula = formulaService.findByProductId(job.getPOJOProduct().getId());
         // get name of FIRST resource needed to do this job
         String name = formula.get(0).getPOJOResource().getName();
         // get value needed of FIRST resource to do this job
         double value = formula.get(0).getValue();
+
     }
 
 }
