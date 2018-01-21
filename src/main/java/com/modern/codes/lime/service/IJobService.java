@@ -31,29 +31,36 @@ public interface IJobService {
 
 
 
-    static List<JobPOJO> filterByUser(List<JobPOJO> list, String userName){
+    static List<JobPOJO> filterByUser(final List<JobPOJO> list, final String userName){
         return filterByUser(list.stream(), userName).collect(Collectors.toList());
     }
-    static Stream<JobPOJO> filterByUser(Stream<JobPOJO> stream, String userName){
+    static Stream<JobPOJO> filterByUser(final Stream<JobPOJO> stream, final String userName){
         return stream.filter(t -> t.getPOJOUser().getName().equals(userName));
     }
-    static List<JobPOJO> filterByUser(List<JobPOJO> list, UserPOJO user){
+    static List<JobPOJO> filterByUser(final List<JobPOJO> list, final UserPOJO user){
         return filterByUser(list.stream(), user).collect(Collectors.toList());
     }
-    static Stream<JobPOJO> filterByUser(Stream<JobPOJO> stream, UserPOJO user){
+    static Stream<JobPOJO> filterByUser(final Stream<JobPOJO> stream, final UserPOJO user){
         return stream.filter(t -> t.getPOJOUser().equals(user));
     }
 
-    static List<JobPOJO> filterByProduct(List<JobPOJO> list, String productName){
+    static List<JobPOJO> filterByProduct(final List<JobPOJO> list, final String productName){
         return filterByProduct(list.stream(), productName).collect(Collectors.toList());
     }
-    static Stream<JobPOJO> filterByProduct(Stream<JobPOJO> stream, String productName){
+    static Stream<JobPOJO> filterByProduct(final Stream<JobPOJO> stream, final String productName){
         return stream.filter(t -> t.getPOJOProduct().getName().equals(productName));
     }
-    static List<JobPOJO> filterByProduct(List<JobPOJO> list, ProductPOJO product){
+    static List<JobPOJO> filterByProduct(final List<JobPOJO> list, final ProductPOJO product){
         return filterByProduct(list.stream(), product).collect(Collectors.toList());
     }
-    static Stream<JobPOJO> filterByProduct(Stream<JobPOJO> stream, ProductPOJO product){
+    static Stream<JobPOJO> filterByProduct(final Stream<JobPOJO> stream, final ProductPOJO product){
         return stream.filter(t -> t.getPOJOProduct().equals(product));
     }
+    static List<JobPOJO> filterByDateBetween(final List<JobPOJO> list, final Date startDate, final Date endDate){
+        return filterByDateBetween(list.stream(), startDate, endDate).collect(Collectors.toList());
+    }
+    static Stream<JobPOJO> filterByDateBetween(final Stream<JobPOJO> stream, final Date startDate, final Date endDate){
+        return stream.filter(t -> t.getEndDate().before(endDate) && t.getEndDate().after(startDate));
+    }
+
 }
