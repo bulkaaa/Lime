@@ -3,6 +3,7 @@ package com.modern.codes.lime.controller;
 import java.util.List;
 import java.util.Locale;
 
+import com.modern.codes.lime.model.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserController extends BaseController {
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
@@ -48,16 +49,22 @@ public class UserController {
                            @ApiResponse(code = 422, message = "In case of validation errors of User object")})
     @ResponseBody
     public String create(
-            @Validated @RequestBody @ApiParam(value = "User object") final User User,
+            @Validated @RequestBody @ApiParam(value = "User object") final User user,
             final BindingResult bindingResult, UriComponentsBuilder b) {
 
-        LOG.info("User creation request received: {}", User);
+        LOG.info("User creation request received: {}", user);
 
-        if (User == null || bindingResult.hasErrors())
+        if (user == null || bindingResult.hasErrors())
             throw new InvalidRequestException(String.format("Invalid User creation request, form data contains %s error(s).",
                                                             bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        if( user.getRoles() != null)
+            user.getRoles().forEach(role -> {
+                List<User> users = roleService.findById(role.getId()).getUsers();
+                users.add(user);
+                role.setUsers(users);
+            });
 
-        return ParseTools.parseToJson(userService.save(User), User.class);
+        return ParseTools.parseToJson(userService.save(user), User.class);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,16 +73,22 @@ public class UserController {
                             @ApiResponse(code = 422, message = "In case of validation errors of User object")})
     @ResponseBody
     public String update(
-            @Validated @RequestBody @ApiParam(value = "User object") final User User,
+            @Validated @RequestBody @ApiParam(value = "User object") final User user,
             final BindingResult bindingResult, UriComponentsBuilder b) {
 
-        LOG.info("User update request received: {}", User);
+        LOG.info("User update request received: {}", user);
 
-        if (User == null || bindingResult.hasErrors())
+        if (user == null || bindingResult.hasErrors())
             throw new InvalidRequestException(String.format("Invalid User update request, form data contains %s error(s).",
                                                             bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        if( user.getRoles() != null)
+            user.getRoles().forEach(role -> {
+                List<User> users = roleService.findById(role.getId()).getUsers();
+                users.add(user);
+                role.setUsers(users);
+            });
 
-        return ParseTools.parseToJson(userService.save(User), User.class);
+        return ParseTools.parseToJson(userService.save(user), User.class);
     }
 
 
@@ -95,12 +108,12 @@ public class UserController {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved User object")})
     @ResponseBody
     public Boolean delete(
-            @ApiParam(value = "User object") @PathVariable final String productId) {
+            @ApiParam(value = "User object") @PathVariable final String userId) {
 
-        LOG.info("User deletion request received for id: " + productId);
+        LOG.info("User deletion request received for id: " + userId);
 
 
-        userService.delete(productId);
+        userService.delete(userId);
         return true;
     }
 
@@ -130,13 +143,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/get-roles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetches all users", notes = "Fetches all users from DB ", response = List.class)
+    @ApiOperation(value = "Fetches all roles", notes = "Fetches all roles from DB ", response = List.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch all roles")})
     @ResponseBody
     public String getRoles() {
 
         LOG.info("Fetch all Roles request received");
 
-        return ParseTools.parseToJson(roleService.findAll(), User.class);
+        return ParseTools.parseToJson(roleService.findAll(), Role.class);
     }
 }

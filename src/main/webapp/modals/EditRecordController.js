@@ -20,6 +20,9 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
             else if(/*!angular.isDefined($scope.record.value) ||*/ $scope.item.image === '') {
                 return;
             }
+         if($scope.list && $scope.list.roles){
+            $scope.item.roles = $scope.list.roles;
+         }
 		$scope.updateRecord($scope.item);
 	};
 

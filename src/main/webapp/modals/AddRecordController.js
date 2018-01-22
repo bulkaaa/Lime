@@ -15,8 +15,12 @@ app.controller('AddRecordController',  ['$scope', '$http','$uibModalInstance', f
 			$scope.newRecord.value = $scope.item.value;
 		}
 		$scope.cancelModal();
+         if($scope.list && $scope.list.roles){
+            $scope.item.roles = $scope.list.roles;
+         }
+
 		$scope.saveRecord($scope.item);
-	};
+	 };
 
 	 $scope.cancelModal = function(){
          modalInstance.close();

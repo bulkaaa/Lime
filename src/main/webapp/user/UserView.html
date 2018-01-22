@@ -18,7 +18,12 @@
                 <span>surname</span>
                 <span></span>
             </div>
-            <div class="description col-md-4 col-sm-4">
+            <div class="description col-md-2 col-sm-2">
+                </br>
+                <span>username</span>
+                <span></span>
+            </div>
+            <div class="description col-md-2 col-sm-2">
                 </br>
                 <span>email</span>
                 <span></span>
@@ -31,15 +36,21 @@
     <div ng-repeat="item in items">
         <div id="{{item.id}}" class="item row">
             <div class="col-md-12 col-sm-12">
-                <div class="image col-md-2 col-sm-2">
-                    <span>{{ item.name }}</span>
+                <div class="description col-md-2 col-sm-2">
+                    </br>
+                    <span>{{item.name}}</span>
                 </div>
                 <div class="description col-md-2 col-sm-2">
                     </br>
                     <span>{{item.surname}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-4 col-sm-4">
+                <div class="description col-md-2 col-sm-2">
+                    </br>
+                    <span>{{item.username}}</span>
+                    <span></span>
+                </div>
+                <div class="description col-md-2 col-sm-2">
                     </br>
                     <span>{{item.emailAddress}}</span>
                     <span></span>

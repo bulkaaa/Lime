@@ -1,13 +1,20 @@
 app.controller('UserController', ['$scope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $http, $modal, $dialogs, DialogService) {
     var modalInstance = null;
+    $scope.users = true;
 
     $scope.showAll = function() {
         $http.get("/user/all")
             .then(
                 function (response) {
                     if (response.data) {
-                        console.log("updated users successfully!");
-                        $scope.items = response.data;
+                        var items = response.data;
+                        for(var i = 0; i<items.length; i++){
+                            var roles = "";
+                                for(var j = 0; j<items[i].roles.length; j++ )
+                                    roles += items[i].roles[j].name + " ";
+                            items[i].roles = roles;
+                         }
+                        $scope.items = items;
                     }
                 },
                 function (response) {
@@ -34,9 +41,27 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', 'dialogs', 'Di
     };
 
     $scope.editRecord = function(item){
-        $http.get("/user/" + item.id)
+        $http.get("/user/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
+                item = response.data;
+                $http.get("/user/get-roles")
+                    .then(
+                        function (response) {
+                            if (response.data) {
+                                $scope.list.roles = [];
+                                $scope.roles = response.data.slice();
+                                for(i =0; i< $scope.roles.length; i++)
+                                   for(j =0; j< item.roles.length; j++)
+                                        if($scope.roles[i].id == item.roles[j].id)
+                                             $scope.list.roles.push($scope.roles[i]);
+                            }
+                        },
+                        function (response) {
+                            DialogService.generalServerError();
+                        }
+                    );
+
                 modalInstance = $modal.open({
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
@@ -56,10 +81,16 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', 'dialogs', 'Di
             .then(
                 function(response){
                     if (response.data){
-                        console.log("updated user successfully!");
+                        item = response.data;
+                        var roles = "";
+                        for(var j = 0; j<item.roles.length; j++ )
+                            roles += item.roles[j].name + " ";
+
                         $scope.item.name = response.data.name;
                         $scope.item.surname = response.data.surname;
-                        $scope.item.roles = response.data.roles;
+                        $scope.item.username = response.data.username;
+                        $scope.item.roles = roles;
+                        $scope.item.password = response.data.password;
                         $scope.item.emailAddress = response.data.emailAddress;
                     }
                 },
@@ -94,6 +125,19 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', 'dialogs', 'Di
     };
 
     $scope.addRecord = function(){
+        $scope.item={};
+
+        $http.get("/user/get-roles")
+            .then(
+                function (response) {
+                    if (response.data) {
+                        $scope.roles = response.data.slice();
+                    }
+                },
+                function (response) {
+                    DialogService.generalServerError();
+                }
+            );
         modalInstance = $modal.open({
             templateUrl: 'modals/add-record.html',
             controller: 'AddRecordController',
@@ -112,12 +156,17 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', 'dialogs', 'Di
                     if (response.data){
                         console.log("created user successfully!");
                         item = response.data;
+                        var roles = "";
+                        for(var j = 0; j<item.roles.length; j++ )
+                            roles += item.roles[j].name + " ";
                         $scope.items.push({
                             id: item.id,
                             name: item.name,
                             surname: item.surname,
-                            roles: item.roles,
+                            password: item.password,
+                            roles: roles,
                             emailAddress: item.emailAddress,
+                            username: item.username,
                         });
                     }
                 },
@@ -126,5 +175,9 @@ app.controller('UserController', ['$scope', '$http', '$uibModal', 'dialogs', 'Di
                 }
             );
     }
+
+    $scope.list = {
+            roles: []
+        };
 
 }]);

@@ -18,13 +18,13 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -70,6 +70,7 @@ public class User implements Serializable{
     @NotEmpty
     @Email
     @Size(max = MAX_LENGTH_EMAIL)
+    @Column(unique=true)
     private String emailAddress;
 
     @ApiModelProperty(value = "The datetime when the user joined the  \"ChemicalLabs\"", required = true)
@@ -84,17 +85,17 @@ public class User implements Serializable{
   
     @ApiModelProperty(value = "The username of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
+    @Column(unique=true)
     private String username;
 
     @ApiModelProperty(value = "The password of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
-    @JsonIgnore
     private String password;
 
     @Column(name = "enabled", nullable = false)
     private Boolean enabled = true;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;

@@ -419,6 +419,7 @@ public class DBPopulator {
         jobListC.add(jobE);
         roleListA.add(roleA);
         roleListB.add(roleB);
+        roleListB.add(roleA);
         roleListC.add(roleC);
         userC.setPOJOJobs(jobListC);
         userC.setPOJORoles(roleListC);
@@ -433,6 +434,7 @@ public class DBPopulator {
         userListB.add(userB);
         userListC.add(userC);
         roleA.setPOJOUsers(userListA);
+        roleB.setPOJOUsers(userListB);
         roleB.setPOJOUsers(userListB);
         roleC.setPOJOUsers(userListC);
     }

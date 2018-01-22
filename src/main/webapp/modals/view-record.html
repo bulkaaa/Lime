@@ -7,16 +7,22 @@
         <dl class="dl-horizontal">
             <dt>Name</dt>
             <dd>{{item.name}}</dd>
-            <dt>Description</dt>
+            <dt ng-if="users">Surname</dt>
+            <dd> {{item.surname}}</dd>
+            <dt ng-if="users">Email</dt>
+            <dd> {{item.emailAddress}}</dd>
+            <dt ng-if="users">Roles</dt>
+            <dd> {{item.roles}}</dd>
+            <dt ng-if="resource || product">Description</dt>
             <dd>{{item.description}}</dd>
-            <dt ng-show="resource">Quantity</dt>
+            <dt ng-if="resource">Quantity</dt>
             <dd>{{item.quantity}}</dd>
-            <dt ng-show="product">Expected Value</dt>
+            <dt ng-if="product">Expected Value</dt>
             <dd>{{item.expectedValue}}</dd>
-            <dt>Unit</dt>
+            <dt ng-if="resource || product">Unit</dt>
             <dd>{{item.unit}}</dd>
-            <dt>Image</dt>
-            <dd ><img src="{{ item.image }}" style="max-height:60px; max-width:60px;" /></dd>
+            <dt ng-if="resource || product">Image</dt>
+            <dd><img src="{{ item.image }}" style="max-height:60px; max-width:60px;" /></dd>
         </dl>
     </div>
     <div class="modal-footer">
