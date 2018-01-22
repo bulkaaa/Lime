@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.ProductPOJO;
+import com.modern.codes.lime.service.IRoleService;
 import com.modern.codes.lime.service.IUserService;
 import com.modern.codes.lime.tools.ParseTools;
 
@@ -36,6 +37,8 @@ public class UserController {
 
     @Autowired
     IUserService userService;
+    @Autowired
+    IRoleService roleService;
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -126,4 +129,14 @@ public class UserController {
         return ParseTools.parseToJson(userService.findByName(name), User.class);
     }
 
+    @RequestMapping(value = "/get-roles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetches all users", notes = "Fetches all users from DB ", response = List.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch all roles")})
+    @ResponseBody
+    public String getRoles() {
+        
+        LOG.info("Fetch all Roles request received");
+
+        return ParseTools.parseToJson(roleService.findAll(), User.class);
+    }
 }
