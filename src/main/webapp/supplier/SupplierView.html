@@ -1,0 +1,101 @@
+<div class="shopping-cart">
+    <div class="title">Manage Suppliers</div>
+    <div class="row btn-row">
+        <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
+            <button type="button" class="btn btn-info" ng-click="addRecord()"><i class="glyphicon glyphicon-plus">
+            </i> Add New Supplier</button>
+        </div>
+    </div>
+    <div class="item row item-border">
+        <div class="col-md-12 col-sm-12">
+            <div class="description col-md-2 col-sm-2">
+                </br>
+                <div>name</div>
+                <span></span>
+            </div>
+            <div class="description col-md-2 col-sm-2">
+                </br>
+                <span>telephone</span>
+                <span></span>
+            </div>
+            <div class="description col-md-1 col-sm-1">
+                </br>
+                <span>city</span>
+                <span></span>
+            </div>
+            <div class="description col-md-1 col-sm-1">
+                </br>
+                <span>country</span>
+                <span></span>
+            </div>
+            <div class="description col-md-1 col-sm-1">
+                </br>
+                <span>postal code</span>
+                <span></span>
+            </div>
+            <div class="description col-md-1 col-sm-1">
+                </br>
+                <span>street</span>
+                <span></span>
+            </div>
+            <div class="description col-md-2 col-sm-2">
+                </br>
+                <span>email</span>
+                <span></span>
+            </div>
+            <div class="total-price col-md-2 col-sm-2">action</div>
+        </div>
+    </div>
+
+    <div ng-repeat="item in items">
+        <div id="{{item.id}}" class="item row">
+            <div class="col-md-12 col-sm-12">
+                <div class="description col-md-2 col-sm-2">
+                    </br>
+                    <span>{{item.name}}</span>
+                </div>
+                <div class="description col-md-2 col-sm-2">
+                    </br>
+                    <span>{{item.telephone}}</span>
+                    <span></span>
+                </div>
+                <div class="description col-md-1 col-sm-1">
+                    </br>
+                    <span>{{item.city}}</span>
+                    <span></span>
+                </div>
+                <div class="description col-md-1 col-sm-1">
+                    </br>
+                    <span>{{item.country}}</span>
+                    <span></span>
+                </div>
+                <div class="description col-md-1 col-sm-1">
+                    </br>
+                    <span>{{item.postalcode}}</span>
+                    <span></span>
+                </div>
+                <div class="description col-md-1 col-sm-1">
+                    </br>
+                    <span>{{item.street}}</span>
+                    <span></span>
+                </div>
+                <div class="description col-md-2 col-sm-2">
+                    </br>
+                    <span>{{item.emailAddress}}</span>
+                    <span></span>
+                </div>
+                <div class="total-price col-md-2 col-sm-2">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item)"><i class="fa fa-pencil-square-o">
+                        </i></button>
+                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)"><i class="fa fa-trash">
+                        </i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
