@@ -1,8 +1,11 @@
 package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
+import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.pojo.SupplierPOJO;
 import com.modern.codes.lime.service.SupplierService;
+import com.modern.codes.lime.tools.ParseTools;
+
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -39,7 +42,7 @@ public class SupplierController extends BaseController{
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved supplier object"),
             @ApiResponse(code = 422, message = "In case of validation errors of supplier object")})
     @ResponseBody
-    public SupplierPOJO create(
+    public String create(
             @ApiParam(value = "Supplier object") @RequestBody final @Validated SupplierPOJO supplier,
             BindingResult bindingResult, UriComponentsBuilder b) {
 
@@ -50,7 +53,7 @@ public class SupplierController extends BaseController{
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
         supplierService.save(supplier);
-        return supplier;
+        return ParseTools.parseToJson(supplier, Supplier.class);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -58,7 +61,7 @@ public class SupplierController extends BaseController{
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved supplier object"),
             @ApiResponse(code = 422, message = "In case of validation errors of supplier object")})
     @ResponseBody
-    public SupplierPOJO update(
+    public String update(
             @ApiParam(value = "Supplier object") @RequestBody final @Validated SupplierPOJO supplier,
             BindingResult bindingResult, UriComponentsBuilder b) {
 
@@ -69,7 +72,7 @@ public class SupplierController extends BaseController{
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
         supplierService.save(supplier);
-        return supplier;
+        return ParseTools.parseToJson(supplier, Supplier.class);
     }
 
     @RequestMapping(value = "/delete/{supplierId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -88,11 +91,11 @@ public class SupplierController extends BaseController{
     @ApiOperation(value = "Fetches all suppliers", notes = "Fetches all suppliers from DB ", response = List.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch all suppliers")})
     @ResponseBody
-    public List<SupplierPOJO> getAll() {
+    public String getAll() {
 
         LOG.info("Fetch all supplier request received");
 
-        return supplierService.findAll();
+        return ParseTools.parseToJson(supplierService.findAll(), Supplier.class);
     }
 
 }
