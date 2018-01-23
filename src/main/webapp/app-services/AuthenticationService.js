@@ -13,12 +13,15 @@
         return service;
 
         function Login(username, password, callback) {
-
+            var credentials = {};
+            credentials.username = username;
+            credentials.password = password;
+            credentials.submit = "Login";
             $timeout(function () {
                 var response;
-                UserService.GetByUsername(username)
-                    .then(function (user) {
-                        if (user !== null && user.password === password) {
+                UserService.Login(credentials)
+                    .then(function (res) {
+                        if (res !== null && res.success) {
                             response = { success: true };
                         } else {
                             response = { success: false, message: 'Username or password is incorrect' };

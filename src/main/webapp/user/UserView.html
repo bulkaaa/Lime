@@ -2,7 +2,7 @@
     <div class="title">Manage Users</div>
     <div class="row btn-row">
         <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
-            <button type="button" class="btn btn-info" ng-click="addRecord()"><i class="glyphicon glyphicon-plus">
+            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
             </i> Add New User</button>
         </div>
     </div>
@@ -61,9 +61,9 @@
                         <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
                             <i class="fa fa-search"></i>
                         </button>
-                        <button type="button" class="btn btn-default" ng-click="editRecord(item)"><i class="fa fa-pencil-square-o">
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
                         </i></button>
-                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)"><i class="fa fa-trash">
+                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-trash">
                         </i></button>
                     </div>
                 </div>

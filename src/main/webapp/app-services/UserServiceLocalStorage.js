@@ -1,4 +1,4 @@
-    angular
+  /*  angular
         .module('myApp')
         .factory('UserService', UserService);
 
@@ -112,4 +112,4 @@
         function setUsers(users) {
             localStorage.users = JSON.stringify(users);
         }
-    }
+    }*/

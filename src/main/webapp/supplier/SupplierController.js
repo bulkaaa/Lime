@@ -1,4 +1,4 @@
-app.controller('SupplierController', ['$scope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $http, $modal, $dialogs, DialogService) {
+app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
     var modalInstance = null;
     $scope.suppliers = true;
 
