@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -100,5 +101,18 @@ public class JobController extends BaseController {
 
         LOG.info("Fetch all job request received");
         return ParseTools.parseToJson(jobService.findAll(), Job.class);
+    }
+
+    @ResponseBody
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Saved job object"), @ApiResponse(code = 404,
+                                                                                                    message = "In case of no job object was found in DB for given name")})
+    @ApiOperation(value = "Fetch jobs by userId",
+                  notes = "Searches for all <b>jobs</b> objects in DB "
+                          + "Returns list of jobs objects for given userId.")
+    @RequestMapping(value = "/get-by-userId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getByName(@RequestParam(value="userId") final String userId) {
+
+        LOG.info("Jobs get-by-userId request received: userId = " + userId);
+        return ParseTools.parseToJson(jobService.findByUserId(userId), Job.class);
     }
 }
