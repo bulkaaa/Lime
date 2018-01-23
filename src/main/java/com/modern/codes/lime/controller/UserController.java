@@ -1,5 +1,6 @@
 package com.modern.codes.lime.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Locale;
 
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -40,7 +40,6 @@ public class UserController extends BaseController {
     IUserService userService;
     @Autowired
     IRoleService roleService;
-
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a User object", notes = "Creates a <b>User</b> object "
@@ -130,16 +129,16 @@ public class UserController extends BaseController {
 
 
     @ResponseBody
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Saved User object"), @ApiResponse(code = 404,
-                                                                                                    message = "In case of no User object was found in DB for given name")})
-    @ApiOperation(value = "Fetch userss by name",
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Fetch users by username"), @ApiResponse(code = 404,
+                                                                                                    message = "In case of no User object was found in DB for given username")})
+    @ApiOperation(value = "Fetch users by username",
                   notes = "Searches for all <b>User</b> objects in DB "
-                          + "Returns list of User objects for given name.")
-    @RequestMapping(value = "/get-by-name", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getByName(@RequestParam(value="name") final String name) {
+                          + "Returns list of User objects for given username.")
+    @RequestMapping(value = "/get-by-username/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getByName(@PathVariable(value="username") final String username) {
 
-        LOG.info("User get-by-name request received: name = " + name);
-        return ParseTools.parseToJson(userService.findByName(name), User.class);
+        LOG.info("User get-by-name request received: name = " + username);
+        return ParseTools.parseToJson(userService.findByUsername(username), User.class);
     }
 
     @RequestMapping(value = "/get-roles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

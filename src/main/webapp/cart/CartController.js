@@ -1,4 +1,4 @@
-app.controller('CartController', ['$scope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $http, $modal, $dialogs, DialogService) {
+app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
     var modalInstance = null;
     $scope.resource = true;
 
