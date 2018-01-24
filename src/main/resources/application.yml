@@ -9,13 +9,7 @@
 
 spring:
   datasource:
-
-#    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
-#    username: limeadmin
-#    password: LIMEadmin12#$
-    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
-    username: root
-    password: test
+    url: mysql://b7b40aab110c35:0ddc09e5@us-cdbr-iron-east-05.cleardb.net/heroku_cd26d1e63353c07?reconnect=true
     tomcat:
       test-while-idle: true
       validation-query: SELECT 1
