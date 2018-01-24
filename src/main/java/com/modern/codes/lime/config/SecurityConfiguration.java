@@ -45,9 +45,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.authorizeRequests()
-                // .antMatchers("/dev/**").hasAnyRole("ADMIN", "MANAGER")
-                .antMatchers("/dev/hello-world2").hasAnyRole("STAFF")
-                .antMatchers("/dev/hello-world").hasAnyRole("MANAGER")
+                .antMatchers("/forecast/**").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/order/**").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/report/**").hasAnyRole("ADMIN", "MANAGER")
+                .antMatchers("/job/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/product/create").hasAnyRole("ADMIN")
+                .antMatchers("/product/update").hasAnyRole("ADMIN")
+                .antMatchers("/product/delete/**").hasAnyRole("ADMIN")
+                .antMatchers("/product/one/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/product/all").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/product/get-by-name").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/resource/create").hasAnyRole("ADMIN")
+                .antMatchers("/resource/update").hasAnyRole("ADMIN")
+                .antMatchers("/resource/delete/**").hasAnyRole("ADMIN")
+                .antMatchers("/resource/one/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/resource/all").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/supplier/create").hasAnyRole("ADMIN")
+                .antMatchers("/supplier/update").hasAnyRole("ADMIN")
+                .antMatchers("/supplier/delete/**").hasAnyRole("ADMIN")
+                .antMatchers("/supplier/one/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/supplier/all").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/user/create").hasAnyRole("ADMIN")
+                .antMatchers("/user/update").hasAnyRole("ADMIN")
+                .antMatchers("/user/delete/**").hasAnyRole("ADMIN")
+                .antMatchers("/user/one/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/user/all").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/user/get-by-username/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
+                .antMatchers("/user/get-roles/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -55,10 +79,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureHandler(failureHandler())
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler());
-                // .authenticationEntryPoint(authenticationEntryPoint());
-               // .formLogin();*/
-
+                .accessDeniedHandler(accessDeniedHandler())
+                .authenticationEntryPoint(authenticationEntryPoint());
     }
     private AuthenticationSuccessHandler successHandler() {
         return (httpServletRequest, httpServletResponse, authentication) -> {

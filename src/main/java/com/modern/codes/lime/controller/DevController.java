@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController()
-@RequestMapping(path="/dev")
+@RequestMapping(path="/de")
 public class DevController {
 
     @Autowired
@@ -39,14 +39,6 @@ public class DevController {
     public String populate(){
         pop.populate();
         return "DB reset completed";
-    }
-    @GetMapping(path = "/hello-world")
-    public String hello(){
-        return "hello world";
-    }
-    @GetMapping(path = "/hello-world2")
-    public String hello2(){
-        return "hello worl2d";
     }
 
     @GetMapping(path = "/GetResourcesForJob")

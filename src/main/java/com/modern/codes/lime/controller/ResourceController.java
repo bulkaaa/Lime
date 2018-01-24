@@ -87,7 +87,7 @@ public class ResourceController extends BaseController{
             return true;
     }
 
-    @RequestMapping(value = "/{resourceId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/one/{resourceId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetch a resource object", notes = "Fetches a <b>resource</b> object by id ", response = ResourcePOJO.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved resource object")})
     @ResponseBody
@@ -109,8 +109,5 @@ public class ResourceController extends BaseController{
 
         ParseTools.parseToJson(resourceService.findAll(), Resource.class);
         return ParseTools.parseToJson(resourceService.findAll(), Resource.class);
-
     }
-
-
 }
