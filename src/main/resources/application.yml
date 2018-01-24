@@ -3,10 +3,11 @@
 # ===============================
 
 # Set here configurations for the database connection
-#DB Management
-#lisqlme@gmail.com
-#lisqlmeadmin
-
+# push command: git push heroku LimeAppHeroku:master
+# heroku credentials:
+#   username:limemini102@gmail.com
+#   password:LIMEmini102!@
+# gmail password: limeminipassword
 spring:
   datasource:
     url: mysql://b7b40aab110c35:0ddc09e5@us-cdbr-iron-east-05.cleardb.net/heroku_cd26d1e63353c07?reconnect=true
