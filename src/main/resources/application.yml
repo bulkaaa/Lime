@@ -26,10 +26,13 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
-  datasource:
-    platform: postgres
-    url: jdbc:postgresql://localhost:5432/lime
-    username: postgres
-    password: test
-    driverClassName: org.postgresql.Driver
+      ddl-auto: update
+      naming.strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+server:
+    port: 8080
+    address: localhost
+    session:
+      timeout: 120
