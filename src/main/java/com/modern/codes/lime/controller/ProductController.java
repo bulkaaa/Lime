@@ -2,7 +2,11 @@ package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Product;
+import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.pojo.ProductPOJO;
+import com.modern.codes.lime.service.IFormulaService;
+import com.modern.codes.lime.service.IProductService;
 import com.modern.codes.lime.service.ProductService;
 import com.modern.codes.lime.tools.ParseTools;
 import io.swagger.annotations.ApiOperation;
@@ -24,8 +28,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/product")
@@ -34,8 +40,10 @@ public class ProductController extends BaseController {
     private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
-    ProductService productService;
+    IProductService productService;
 
+    @Autowired
+    IFormulaService formulaService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a product object", notes = "Creates a <b>product</b> object "
@@ -44,16 +52,19 @@ public class ProductController extends BaseController {
             @ApiResponse(code = 422, message = "In case of validation errors of product object")})
     @ResponseBody
     public String create(
-            @Validated @RequestBody @ApiParam(value = "Product object") final Product product,
-            final BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam(value = "Product object") final Product iProduct,
+            @Validated @RequestBody @ApiParam(value = "Product object") final Map<Resource, Double> iFormula,
+            final BindingResult bindingResult, final UriComponentsBuilder b) {
 
-        LOG.info("Product creation request received: {}", product);
+        LOG.info("Product creation request received: {}", iProduct);
 
-        if (product == null || bindingResult.hasErrors())
+        if (iProduct == null || bindingResult.hasErrors())
             throw new InvalidRequestException(String.format("Invalid product creation request, form data contains %s error(s).",
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
-        return ParseTools.parseToJson(productService.save(product), Product.class);
+        final ProductPOJO product = productService.save(iProduct);
+        addFormula(iFormula, product);
+        return ParseTools.parseToJson(product, Product.class);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -62,18 +73,20 @@ public class ProductController extends BaseController {
             @ApiResponse(code = 422, message = "In case of validation errors of product object")})
     @ResponseBody
     public String update(
-            @Validated @RequestBody @ApiParam(value = "Product object") final Product product,
+            @Validated @RequestBody @ApiParam(value = "Product object") final Product iProduct,
+            @Validated @RequestBody @ApiParam(value = "Product object") final Map<Resource, Double> iFormula,
             final BindingResult bindingResult, UriComponentsBuilder b) {
 
-        LOG.info("Product update request received: {}", product);
+        LOG.info("Product update request received: {}", iProduct);
 
-        if (product == null || bindingResult.hasErrors())
+        if (iProduct == null || bindingResult.hasErrors())
             throw new InvalidRequestException(String.format("Invalid product update request, form data contains %s error(s).",
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
-
+        formulaService.delete(formulaService.findByProductId(iProduct.getId()));
+        final ProductPOJO product = productService.save(iProduct);
+        addFormula(iFormula, product);
         return ParseTools.parseToJson(productService.save(product), Product.class);
     }
-
 
     @RequestMapping(value = "/one/{productId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetch a product object", notes = "Fetches a <b>product</b> object by id ", response = ProductPOJO.class)
@@ -91,11 +104,10 @@ public class ProductController extends BaseController {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved product object")})
     @ResponseBody
     public Boolean delete(
-            @ApiParam(value = "Product object") @PathVariable final String productId) {
+            @ApiParam("Product object") @PathVariable final String productId) {
 
         LOG.info("Product deletion request received for id: " + productId);
-
-
+        formulaService.delete(formulaService.findByProductId(productId));
         productService.delete(productId);
         return true;
     }
@@ -105,12 +117,10 @@ public class ProductController extends BaseController {
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch all products")})
     @ResponseBody
     public String getAll() {
-
         LOG.info("Fetch all product request received");
 
         return ParseTools.parseToJson(productService.findAll(), Product.class);
     }
-
 
     @ResponseBody
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Saved product object"), @ApiResponse(code = 404,
@@ -124,7 +134,17 @@ public class ProductController extends BaseController {
         LOG.info("Product get-by-name request received: name = " + name);
         return ParseTools.parseToJson(productService.findByName(name), Product.class);
     }
-
-
-
+    private void addFormula(
+            @ApiParam("Product object") @RequestBody @Validated final Map<Resource, Double> iFormula,
+            final ProductPOJO product) {
+        final List<FormulaPOJO> formula = new ArrayList<>();
+        iFormula.forEach((key,value) -> {
+            final FormulaPOJO form = new FormulaPOJO();
+            form.setPOJOProduct(product);
+            form.setResource(key);
+            form.setValue(value);
+            formula.add(form);
+        });
+        formulaService.save(formula);
+    }
 } 

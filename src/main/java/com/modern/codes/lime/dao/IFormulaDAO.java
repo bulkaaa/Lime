@@ -10,4 +10,5 @@ import java.util.List;
 public interface IFormulaDAO extends IBasicCRUDRepository<Formula, String> {
     List<Formula> findByProductName(String productName);
     List<Formula> findByProductId(String id);
+    List<Formula> findByResourceId(String id);
 }

@@ -25,6 +25,7 @@ public interface IFormulaService {
     void delete(List l);
     List<FormulaPOJO> findByProductName(String productName);
     List<FormulaPOJO> findByProductId(String id);
+    List<FormulaPOJO> findByResourceId(String id);
 
 
     static List<FormulaPOJO> filterByResource(final List<FormulaPOJO> list, final String resourceName){
