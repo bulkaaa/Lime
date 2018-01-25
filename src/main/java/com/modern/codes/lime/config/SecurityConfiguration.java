@@ -74,7 +74,42 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // .antMatchers("/user/get-roles/**").hasAnyRole("ADMIN", "MANAGER", "STAFF")
                 .anyRequest().permitAll()
                 .and()
-                .formLogin();
+                .formLogin()
+                .successHandler(successHandler())
+                .failureHandler(failureHandler())
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler())
+                .authenticationEntryPoint(authenticationEntryPoint());
+    }
+    private AuthenticationSuccessHandler successHandler() {
+        return (httpServletRequest, httpServletResponse, authentication) -> {
+            httpServletResponse.getWriter().append("successful operation");
+            httpServletResponse.setIntHeader("X-Rate-Limit", 1000);
+            httpServletResponse.addDateHeader("X-Expires-After", System.currentTimeMillis() + 7200000);
+            httpServletResponse.setStatus(200);
+        };
+    }
+
+    private AuthenticationFailureHandler failureHandler() {
+        return (httpServletRequest, httpServletResponse, e) -> {
+            httpServletResponse.getWriter().append("Authentication failure");
+            httpServletResponse.setStatus(401);
+        };
+    }
+
+    private AccessDeniedHandler accessDeniedHandler() {
+        return (httpServletRequest, httpServletResponse, e) -> {
+            httpServletResponse.getWriter().append("Access denied");
+            httpServletResponse.setStatus(403);
+        };
+    }
+
+    private AuthenticationEntryPoint authenticationEntryPoint() {
+        return (httpServletRequest, httpServletResponse, e) -> {
+            httpServletResponse.getWriter().append("Not authenticated");
+            httpServletResponse.setStatus(401);
+        };
     }
 
     private PasswordEncoder getPasswordEncoder() {
