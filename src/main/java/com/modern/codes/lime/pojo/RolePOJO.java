@@ -24,12 +24,12 @@ public class RolePOJO extends BasicPOJO{
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (obj == null || !RolePOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }

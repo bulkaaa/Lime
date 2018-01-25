@@ -20,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.User;
+import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
 import com.modern.codes.lime.service.IRoleService;
 import com.modern.codes.lime.service.IUserService;
@@ -55,13 +56,6 @@ public class UserController extends BaseController {
         if (user == null || bindingResult.hasErrors())
             throw new InvalidRequestException(String.format("Invalid User creation request, form data contains %s error(s).",
                                                             bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
-        if( user.getRoles() != null)
-            user.getRoles().forEach(role -> {
-                List<User> users = roleService.findById(role.getId()).getUsers();
-                users.add(user);
-                role.setUsers(users);
-            });
-
         return ParseTools.parseToJson(userService.save(user), User.class);
     }
 
@@ -79,12 +73,6 @@ public class UserController extends BaseController {
         if (user == null || bindingResult.hasErrors())
             throw new InvalidRequestException(String.format("Invalid User update request, form data contains %s error(s).",
                                                             bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
-        if( user.getRoles() != null)
-            user.getRoles().forEach(role -> {
-                List<User> users = roleService.findById(role.getId()).getUsers();
-                users.add(user);
-                role.setUsers(users);
-            });
 
         return ParseTools.parseToJson(userService.save(user), User.class);
     }
@@ -109,7 +97,6 @@ public class UserController extends BaseController {
             @ApiParam(value = "User object") @PathVariable final String userId) {
 
         LOG.info("User deletion request received for id: " + userId);
-
 
         userService.delete(userId);
         return true;
