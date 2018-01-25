@@ -3,6 +3,8 @@ package com.modern.codes.lime.controller;
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.pojo.ResourcePOJO;
+import com.modern.codes.lime.service.IFormulaService;
+import com.modern.codes.lime.service.IResourceService;
 import com.modern.codes.lime.service.ResourceService;
 import com.modern.codes.lime.tools.ParseTools;
 import io.swagger.annotations.ApiOperation;
@@ -33,7 +35,9 @@ public class ResourceController extends BaseController{
     private static final Logger LOG = LoggerFactory.getLogger(ResourceController.class);
 
     @Autowired
-    ResourceService resourceService;
+    IResourceService resourceService;
+    @Autowired
+    IFormulaService formulaService;
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -81,10 +85,9 @@ public class ResourceController extends BaseController{
             @ApiParam(value = "Resource object") @PathVariable final String resourceId) {
 
         LOG.info("Resource deletion request received for id: " + resourceId);
-
-        
-            resourceService.delete(resourceId);
-            return true;
+        formulaService.delete(formulaService.findByResourceId(resourceId));
+        resourceService.delete(resourceId);
+        return true;
     }
 
     @RequestMapping(value = "/one/{resourceId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

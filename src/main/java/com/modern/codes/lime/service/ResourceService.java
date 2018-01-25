@@ -28,4 +28,9 @@ public class ResourceService extends BasicCRUDService<Resource, ResourcePOJO, IR
     public List<ResourcePOJO> findByCategoryName(String categoryName) {
         return ParseTools.parseList(dao.findByCategoryName(categoryName), ResourcePOJO.class);
     }
+
+    @Override
+    public List<ResourcePOJO> findBySupplierId(final String supplierId) {
+        return ParseTools.parseList(dao.findBySupplierId(supplierId), ResourcePOJO.class);
+    }
 }

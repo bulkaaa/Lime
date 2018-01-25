@@ -2,7 +2,10 @@ package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Supplier;
+import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.pojo.SupplierPOJO;
+import com.modern.codes.lime.service.IResourceService;
+import com.modern.codes.lime.service.ISupplierService;
 import com.modern.codes.lime.service.SupplierService;
 import com.modern.codes.lime.tools.ParseTools;
 
@@ -33,8 +36,9 @@ public class SupplierController extends BaseController{
     private static final Logger LOG = LoggerFactory.getLogger(SupplierController.class);
 
     @Autowired
-    SupplierService supplierService;
-
+    ISupplierService supplierService;
+    @Autowired
+    IResourceService resourceService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a supplier object", notes = "Creates a <b>supplier</b> object "
@@ -83,7 +87,9 @@ public class SupplierController extends BaseController{
             @ApiParam(value = "Supplier object") @PathVariable final String supplierId) {
 
         LOG.info("Supplier deletion request received for id: " + supplierId);
-
+        final List<ResourcePOJO> resources = resourceService.findBySupplierId(supplierId);
+        resources.forEach(r -> r.setSupplier(null));
+        resourceService.save(resources);
         supplierService.delete(supplierId);
     }
 

@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface IResourceDAO extends IBasicCRUDRepository<Resource, String> {
     List<Resource> findByName(String name);
-    List<Resource>findByCategoryName(String categoryName);
+    List<Resource> findByCategoryName(String categoryName);
+    List<Resource> findBySupplierId(String supplierId);
 }
