@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,22 +45,22 @@ public class ReportController {
 
 
     @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Generate report for products")
+    @ApiOperation("Generate report for products")
     public ResponseEntity<byte[]> generate(
             @RequestParam final String startDate,
             @RequestParam final Integer noDays,
-            @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds) {
+            @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
         LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n", startDate, noDays, productIds);
 
-        Date date;
+        final Date date;
         try {
             date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        final byte [] bytes = DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days", "Sample_Chart");
+        final byte [] bytes = DrawSeries.plot(seriesL, new ArrayList<>(), date, "Production in past "+noDays+" days", "Sample_Chart");
 
         return ResponseEntity
                 .ok()
@@ -71,23 +69,23 @@ public class ReportController {
     }
 
     @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Generate and send report for products")
+    @ApiOperation("Generate and send report for products")
     public void send(
             @RequestParam final String startDate,
             @RequestParam final String email,
             @RequestParam final Integer noDays,
-            @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds) {
+            @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
         LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n", startDate, noDays, email, productIds);
 
-        Date date;
+        final Date date;
         try {
             date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days", "Sample_Chart");
+        DrawSeries.plot(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days", "Sample_Chart");
         Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", "./Sample_Chart.png");
 
 

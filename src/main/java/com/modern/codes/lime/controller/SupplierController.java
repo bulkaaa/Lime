@@ -6,7 +6,6 @@ import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.pojo.SupplierPOJO;
 import com.modern.codes.lime.service.IResourceService;
 import com.modern.codes.lime.service.ISupplierService;
-import com.modern.codes.lime.service.SupplierService;
 import com.modern.codes.lime.tools.ParseTools;
 
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +30,7 @@ import java.util.List;
 import java.util.Locale;
 
 @RestController
-@RequestMapping(value = "/supplier")
+@RequestMapping("/supplier")
 public class SupplierController extends BaseController{
     private static final Logger LOG = LoggerFactory.getLogger(SupplierController.class);
 
@@ -43,12 +42,12 @@ public class SupplierController extends BaseController{
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a supplier object", notes = "Creates a <b>supplier</b> object "
             +  "Saves it into DB.", response = SupplierPOJO.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved supplier object"),
+    @ApiResponses({ @ApiResponse(code = 200, message = "Saved supplier object"),
             @ApiResponse(code = 422, message = "In case of validation errors of supplier object")})
     @ResponseBody
     public String create(
-            @ApiParam(value = "Supplier object") @RequestBody final @Validated SupplierPOJO supplier,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam("Supplier object") final SupplierPOJO supplier,
+            final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("Supplier creation request received: {}", supplier);
 
@@ -62,12 +61,12 @@ public class SupplierController extends BaseController{
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a supplier object", notes = "Updates a <b>supplier</b> object ", response = SupplierPOJO.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved supplier object"),
+    @ApiResponses({@ApiResponse(code = 200, message = "Saved supplier object"),
             @ApiResponse(code = 422, message = "In case of validation errors of supplier object")})
     @ResponseBody
     public String update(
-            @ApiParam(value = "Supplier object") @RequestBody final @Validated SupplierPOJO supplier,
-            BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam("Supplier object") final SupplierPOJO supplier,
+            final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("Supplier update request received: {}", supplier);
 
@@ -81,10 +80,10 @@ public class SupplierController extends BaseController{
 
     @RequestMapping(value = "/delete/{supplierId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Delete a supplier object", notes = "Deletes a <b>supplier</b> object ", response = SupplierPOJO.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved supplier object")})
+    @ApiResponses(@ApiResponse(code = 200, message = "Saved supplier object"))
     @ResponseBody
     public void delete(
-            @ApiParam(value = "Supplier object") @PathVariable final String supplierId) {
+            @ApiParam("Supplier object") @PathVariable final String supplierId) {
 
         LOG.info("Supplier deletion request received for id: " + supplierId);
         final List<ResourcePOJO> resources = resourceService.findBySupplierId(supplierId);
@@ -95,7 +94,7 @@ public class SupplierController extends BaseController{
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all suppliers", notes = "Fetches all suppliers from DB ", response = List.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch all suppliers")})
+    @ApiResponses(@ApiResponse(code = 200, message = "Fetch all suppliers"))
     @ResponseBody
     public String getAll() {
 
@@ -103,5 +102,4 @@ public class SupplierController extends BaseController{
 
         return ParseTools.parseToJson(supplierService.findAll(), Supplier.class);
     }
-
 }

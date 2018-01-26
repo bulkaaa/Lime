@@ -33,7 +33,7 @@ public abstract class BaseController {
     @Autowired
     MessageSource messageSource;
 
-    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ExceptionHandler(InvalidRequestException.class)
     @ResponseBody
     public ValidParam handleInvalidRequestException(InvalidRequestException ex) {

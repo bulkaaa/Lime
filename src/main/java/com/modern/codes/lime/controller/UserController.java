@@ -20,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.User;
-import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
 import com.modern.codes.lime.service.IRoleService;
 import com.modern.codes.lime.service.IUserService;
@@ -32,7 +31,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping("/user")
 public class UserController extends BaseController {
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
@@ -44,12 +43,12 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a User object", notes = "Creates a <b>User</b> object "
                                                               + "Saves it into DB.", response = User.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Saved User object"),
+    @ApiResponses({@ApiResponse(code = 200, message = "Saved User object"),
                            @ApiResponse(code = 422, message = "In case of validation errors of User object")})
     @ResponseBody
     public String create(
-            @Validated @RequestBody @ApiParam(value = "User object") final User user,
-            final BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam("User object") final User user,
+            final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("User creation request received: {}", user);
 
@@ -61,12 +60,12 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a User object", notes = "Updates a <b>User</b> object ", response = User.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved User object"),
+    @ApiResponses({@ApiResponse(code = 200, message = "Saved User object"),
                             @ApiResponse(code = 422, message = "In case of validation errors of User object")})
     @ResponseBody
     public String update(
-            @Validated @RequestBody @ApiParam(value = "User object") final User user,
-            final BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam("User object") final User user,
+            final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("User update request received: {}", user);
 
@@ -80,10 +79,10 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/one/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetch a User object", notes = "Fetches a <b>User</b> object by id ", response = UserPOJO.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved User object")})
+    @ApiResponses(@ApiResponse(code = 200, message = "Saved User object"))
     @ResponseBody
     public String getUser(
-            @ApiParam(value = "User object") @PathVariable final String userId) {
+            @ApiParam("User object") @PathVariable final String userId) {
 
         LOG.info("User fetch request received for id: " + userId);
         return ParseTools.parseToJson(userService.findById(userId), User.class);
@@ -91,10 +90,10 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/delete/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Delete a User object", notes = "Deletes a <b>User</b> object ", response = UserPOJO.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Saved User object")})
+    @ApiResponses(@ApiResponse(code = 200, message = "Saved User object"))
     @ResponseBody
     public Boolean delete(
-            @ApiParam(value = "User object") @PathVariable final String userId) {
+            @ApiParam("User object") @PathVariable final String userId) {
 
         LOG.info("User deletion request received for id: " + userId);
 
@@ -104,7 +103,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all users", notes = "Fetches all users from DB ", response = List.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch all users")})
+    @ApiResponses(@ApiResponse(code = 200, message = "Fetch all users"))
     @ResponseBody
     public String getAll() {
 
@@ -115,13 +114,12 @@ public class UserController extends BaseController {
 
 
     @ResponseBody
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Fetch users by username"), @ApiResponse(code = 404,
-                                                                                                    message = "In case of no User object was found in DB for given username")})
+    @ApiResponses({@ApiResponse(code = 200, message = "Fetch users by username"), @ApiResponse(code = 404, message = "In case of no User object was found in DB for given username")})
     @ApiOperation(value = "Fetch users by username",
                   notes = "Searches for all <b>User</b> objects in DB "
                           + "Returns list of User objects for given username.")
     @RequestMapping(value = "/get-by-username/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getByName(@PathVariable(value="username") final String username) {
+    public String getByName(@PathVariable("username") final String username) {
 
         LOG.info("User get-by-name request received: name = " + username);
         return ParseTools.parseToJson(userService.findByUsername(username), User.class);
@@ -129,7 +127,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/get-roles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all roles", notes = "Fetches all roles from DB ", response = List.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Fetch all roles")})
+    @ApiResponses(@ApiResponse(code = 200, message = "Fetch all roles"))
     @ResponseBody
     public String getRoles() {
 

@@ -1,7 +1,6 @@
 package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.model.Resource;
-import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.order.Order;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.pojo.SupplierPOJO;
@@ -39,7 +38,7 @@ public class OrderController {
 
     @RequestMapping(value = "/get-resources", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Fetch all resources")})
+    @ApiResponses(@ApiResponse(code = 200, message = "Fetch all resources"))
     @ResponseBody
     public String getResources() {
         LOG.info("Fetch all resources request received");
@@ -51,12 +50,12 @@ public class OrderController {
     @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Order choosen resources with given amount", notes = "Post choosen List of resource ID "
                                                               +  "Saves it into DB.", response = Boolean.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Resources orderer"),
+    @ApiResponses({ @ApiResponse(code = 200, message = "Resources orderer"),
                             @ApiResponse(code = 422, message = "In case of validation errors")})
     @ResponseBody
     public Boolean send(
-            @Validated @RequestBody @ApiParam(value = "Map of Resources and amout") final Map<String, Integer> orderList,
-            final BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam("Map of Resources and amout") final Map<String, Integer> orderList,
+            final BindingResult bindingResult, final UriComponentsBuilder b) {
         LOG.info("order request received map resource:amount \n {} ", orderList);
         final Map<SupplierPOJO, Map<ResourcePOJO, Integer>> supplierMap = new HashMap<>();
         orderList.forEach((key, value) -> {

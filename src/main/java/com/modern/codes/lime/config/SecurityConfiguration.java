@@ -25,15 +25,15 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private CustomUserDetailsService userDetailsService;
+    private final CustomUserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfiguration(CustomUserDetailsService userDetailsService){
+    public SecurityConfiguration(final CustomUserDetailsService userDetailsService){
         this.userDetailsService = userDetailsService;
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsService)
         .passwordEncoder(getPasswordEncoder());
@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
 
         http.csrf().disable();
         http.authorizeRequests()
@@ -115,12 +115,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private PasswordEncoder getPasswordEncoder() {
         return new PasswordEncoder() {
             @Override
-            public String encode(CharSequence charSequence) {
+            public String encode(final CharSequence charSequence) {
                 return charSequence.toString();
             }
 
             @Override
-            public boolean matches(CharSequence charSequence, String s) {
+            public boolean matches(final CharSequence charSequence, final String s) {
                 return true;
             }
         };

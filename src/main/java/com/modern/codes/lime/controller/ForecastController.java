@@ -46,7 +46,7 @@ public class ForecastController extends BaseController{
             @RequestParam final Integer noDaysForecast) {
         LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n", productIds, startDate, noDays, noDaysForecast);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date;
         try {
             date = formatter.parse(startDate);
@@ -61,7 +61,7 @@ public class ForecastController extends BaseController{
             forecast.setLabel(series.getLabel() + " Forecast");
             seriesFL.add(forecast);
         }
-        byte[] bytes = DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart");
+        final byte[] bytes = DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart");
 
         return ResponseEntity
                 .ok()
@@ -79,7 +79,7 @@ public class ForecastController extends BaseController{
             @RequestParam final String email) {
         LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: {} \n", productIds, startDate, noDays, noDaysForecast, email);
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date;
         try {
             date = formatter.parse(startDate);
