@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.URL;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -59,7 +58,7 @@ public class Product implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName="ID")
-    @JsonBackReference(value="category-products")
+    @JsonBackReference("category-products")
     private ProductCategory category;
 
     @ApiModelProperty(value = "The image url of the product", required = true)
@@ -73,10 +72,10 @@ public class Product implements Serializable {
     private Double expectedValue;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference(value="product-jobs")
+    @JsonManagedReference("product-jobs")
     private List<Job> jobs;
 
-    @JsonManagedReference(value="product-formulas")
+    @JsonManagedReference("product-formulas")
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Formula> formulas;
 
@@ -102,7 +101,7 @@ public class Product implements Serializable {
      * @param id
      *            entity id
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -121,7 +120,7 @@ public class Product implements Serializable {
      * @param name
      *            The product name
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -140,7 +139,7 @@ public class Product implements Serializable {
      * @param description
      *            The product description
      */
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -157,7 +156,7 @@ public class Product implements Serializable {
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(final Unit unit) {
         this.unit = unit;
     }
 
@@ -165,7 +164,7 @@ public class Product implements Serializable {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(final List<Job> jobs) {
         this.jobs = jobs;
     }
 
@@ -173,7 +172,7 @@ public class Product implements Serializable {
         return category;
     }
 
-    public void setCategory(ProductCategory category) {
+    public void setCategory(final ProductCategory category) {
         this.category = category;
     }
 
@@ -181,7 +180,7 @@ public class Product implements Serializable {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(final String image) {
         this.image = image;
     }
 
@@ -189,15 +188,15 @@ public class Product implements Serializable {
         return expectedValue;
     }
 
-    public void setExpectedValue(Double expectedValue) {
+    public void setExpectedValue(final Double expectedValue) {
         this.expectedValue = expectedValue;
     }
 
-    public void setAddedAt(Date addedAt) {
+    public void setAddedAt(final Date addedAt) {
         this.addedAt = addedAt;
     }
 
-    public void setFormulas(List<Formula> formulas) {
+    public void setFormulas(final List<Formula> formulas) {
         this.formulas = formulas;
     }
     public static long getSerialVersionUID() {

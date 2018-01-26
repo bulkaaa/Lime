@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.URL;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -56,7 +55,7 @@ public class Resource implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName="ID")
-    @JsonBackReference(value="category-resources")
+    @JsonBackReference("category-resources")
     private ResourceCategory category;
 
     @ApiModelProperty(value = "The image url of the resource", required = true)
@@ -66,12 +65,12 @@ public class Resource implements Serializable{
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", referencedColumnName="ID")
-    @JsonBackReference(value="supplier-resources")
+    @JsonBackReference("supplier-resources")
     private Supplier supplier;
 
 
     @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference(value="resource-formulas")
+    @JsonManagedReference("resource-formulas")
     private List<Formula> formulas;
 
     /**
@@ -89,7 +88,7 @@ public class Resource implements Serializable{
      * @param id
      *            entity id
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -108,7 +107,7 @@ public class Resource implements Serializable{
      * @param name
      *            The resource name
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -127,7 +126,7 @@ public class Resource implements Serializable{
      * @param description
      *            The resource description
      */
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -146,7 +145,7 @@ public class Resource implements Serializable{
      * @param unit
      *            The resource unit
      */
-    public void setUnit(Unit unit) {
+    public void setUnit(final Unit unit) {
         this.unit = unit;
     }
 
@@ -154,7 +153,7 @@ public class Resource implements Serializable{
         return category;
     }
 
-    public void setCategory(ResourceCategory category) {
+    public void setCategory(final ResourceCategory category) {
         this.category = category;
     }
 
@@ -166,7 +165,7 @@ public class Resource implements Serializable{
         return quantity;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(final Double quantity) {
         this.quantity = quantity;
     }
 
@@ -174,7 +173,7 @@ public class Resource implements Serializable{
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(final String image) {
         this.image = image;
     }
 
@@ -182,7 +181,7 @@ public class Resource implements Serializable{
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public void setSupplier(final Supplier supplier) {
         this.supplier = supplier;
     }
 
@@ -190,7 +189,7 @@ public class Resource implements Serializable{
         return formulas;
     }
 
-    public void setFormulas(List<Formula> formulas) {
+    public void setFormulas(final List<Formula> formulas) {
         this.formulas = formulas;
     }
 }

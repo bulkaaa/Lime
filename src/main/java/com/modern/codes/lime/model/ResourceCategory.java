@@ -32,7 +32,7 @@ public class ResourceCategory  implements Serializable {
     private String id;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference(value="category-resources")
+    @JsonManagedReference("category-resources")
     private List<Resource> resources;
 
     @ApiModelProperty(value = "The name of the resource category. E.g \"vegetables\"", required = true)
@@ -44,7 +44,7 @@ public class ResourceCategory  implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class ResourceCategory  implements Serializable {
         return resources;
     }
 
-    public void setResources(List<Resource> resources) {
+    public void setResources(final List<Resource> resources) {
         this.resources = resources;
     }
 
@@ -60,7 +60,7 @@ public class ResourceCategory  implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 }

@@ -11,20 +11,20 @@ import java.util.List;
 public class CustomUserDetails implements UserDetails {
 
     private static final long serialVersionUID = -3962786160780714576L;
-    private Collection<? extends GrantedAuthority> authorities;
-    private String password;
-    private String username;
-    private boolean enabled;
+    private final Collection<? extends GrantedAuthority> authorities;
+    private final String password;
+    private final String username;
+    private final boolean enabled;
 
-    public CustomUserDetails(User user) {
+    public CustomUserDetails(final User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.authorities = translate(user.getRoles());
         this.enabled = user.getEnabled();
     }
 
-    private Collection<? extends GrantedAuthority> translate(List<Role> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
+    private Collection<? extends GrantedAuthority> translate(final List<Role> roles) {
+        final List<GrantedAuthority> authorities = new ArrayList<>();
         roles.forEach(x -> authorities.add(new SimpleGrantedAuthority(x.getName())));
         return authorities;
     }

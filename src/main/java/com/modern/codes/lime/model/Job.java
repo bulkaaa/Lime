@@ -14,7 +14,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -42,12 +41,12 @@ public class Job implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
-    @JsonBackReference(value="product-jobs")
+    @JsonBackReference("product-jobs")
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName="ID")
-    @JsonBackReference(value="user-jobs")
+    @JsonBackReference("user-jobs")
     private User user;
 
     @ApiModelProperty(value = "The details of the job", required = true)
@@ -83,7 +82,7 @@ public class Job implements Serializable {
 
     public void setId(String id) { this.id = id; }
 
-    public void setProduct(Product product) {
+    public void setProduct(final Product product) {
         this.product = product;
     }
 
@@ -91,7 +90,7 @@ public class Job implements Serializable {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
@@ -99,7 +98,7 @@ public class Job implements Serializable {
         return details;
     }
 
-    public void setDetails(String details) {
+    public void setDetails(final String details) {
         this.details = details;
     }
 
@@ -107,7 +106,7 @@ public class Job implements Serializable {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(final Date startDate) {
         this.startDate = startDate;
     }
 
@@ -115,7 +114,7 @@ public class Job implements Serializable {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(final Date endDate) {
         this.endDate = endDate;
     }
 
@@ -123,7 +122,7 @@ public class Job implements Serializable {
         return resultValue;
     }
 
-    public void setResultValue(Double resultValue) {
+    public void setResultValue(final Double resultValue) {
         this.resultValue = resultValue;
     }
 }

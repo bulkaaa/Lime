@@ -17,14 +17,14 @@ public class ValidationError implements Serializable {
 
     private static final long serialVersionUID = -5228076972000583809L;
 
-    @ApiModelProperty(value = "The field name on which the validation error occurred.")
-    private String field = null;
-    @ApiModelProperty(value = "The validation rule code that raised the error.")
-    private String code = null;
-    @ApiModelProperty(value = "A textual hint on why the validation failed.")
-    private String hint = null;
+    @ApiModelProperty("The field name on which the validation error occurred.")
+    private final String field;
+    @ApiModelProperty("The validation rule code that raised the error.")
+    private final String code;
+    @ApiModelProperty("A textual hint on why the validation failed.")
+    private final String hint;
 
-    public ValidationError(String field, String code, String hint) {
+    public ValidationError(final String field, final String code, final String hint) {
         this.field = field;
         this.code = code;
         this.hint = hint;

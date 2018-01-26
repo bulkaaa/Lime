@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -86,14 +85,14 @@ public class Supplier implements Serializable{
     private String telephone;
 
     @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference(value="supplier-resources")
+    @JsonManagedReference("supplier-resources")
     private List<Resource> resources;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -101,7 +100,7 @@ public class Supplier implements Serializable{
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -109,7 +108,7 @@ public class Supplier implements Serializable{
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress) {
+    public void setEmailAddress(final String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
@@ -117,7 +116,7 @@ public class Supplier implements Serializable{
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
+    public void setPostalCode(final String postalCode) {
         this.postalCode = postalCode;
     }
 
@@ -125,7 +124,7 @@ public class Supplier implements Serializable{
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
         this.city = city;
     }
 
@@ -133,7 +132,7 @@ public class Supplier implements Serializable{
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(final String country) {
         this.country = country;
     }
 
@@ -141,7 +140,7 @@ public class Supplier implements Serializable{
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(final String street) {
         this.street = street;
     }
 
@@ -149,7 +148,7 @@ public class Supplier implements Serializable{
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
+    public void setTelephone(final String telephone) {
         this.telephone = telephone;
     }
 
@@ -157,7 +156,7 @@ public class Supplier implements Serializable{
         return resources;
     }
 
-    public void setResources(List<Resource> resources) {
+    public void setResources(final List<Resource> resources) {
         this.resources = resources;
     }
 }

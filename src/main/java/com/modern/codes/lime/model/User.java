@@ -18,7 +18,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -79,7 +78,7 @@ public class User implements Serializable{
     private Date joinedAt;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference(value="user-jobs")
+    @JsonManagedReference("user-jobs")
     private List<Job> jobs;
 
   
@@ -110,11 +109,11 @@ public class User implements Serializable{
 
     public String getId()   { return id; }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -122,13 +121,13 @@ public class User implements Serializable{
         return name;
     }
 
-    public void setSurname(String surname) { this.surname = surname; }
+    public void setSurname(final String surname) { this.surname = surname; }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setJoinedAt(Date joinedAt) {
+    public void setJoinedAt(final Date joinedAt) {
         this.joinedAt = joinedAt;
     }
 
@@ -141,12 +140,12 @@ public class User implements Serializable{
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(final List<Job> jobs) {
         this.jobs = jobs;
     }
 
  
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -154,7 +153,7 @@ public class User implements Serializable{
         return username;
     }
 
-    public void setEnabled(Boolean enabled) {
+    public void setEnabled(final Boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -162,8 +161,7 @@ public class User implements Serializable{
         return enabled;
     }
 
- 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -176,7 +174,7 @@ public class User implements Serializable{
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(final List<Role> roles) {
         this.roles = roles;
     }
     
@@ -185,7 +183,7 @@ public class User implements Serializable{
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress) {
+    public void setEmailAddress(final String emailAddress) {
         this.emailAddress = emailAddress;
     }
     

@@ -1,9 +1,5 @@
 package com.modern.codes.lime.model;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.Size;
-
 /**
  *
  * @author jaroszk
@@ -17,7 +13,7 @@ public enum Unit {
         if (null != val) {
             try{
                 return Unit.valueOf(val);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 return UNKNOWN;
             }
         } else {

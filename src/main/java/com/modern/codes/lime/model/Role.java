@@ -39,13 +39,13 @@ public class Role {
 
     public List<User> getUsers() { return users; }
 
-    public void setUsers(List<User> users) { this.users = users; }
+    public void setUsers(final List<User> users) { this.users = users; }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -53,7 +53,7 @@ public class Role {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 }

@@ -37,12 +37,12 @@ public class Formula implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "resource_id", referencedColumnName="ID")
-    @JsonBackReference(value="resource-formulas")
+    @JsonBackReference("resource-formulas")
     private Resource resource;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
-    @JsonBackReference(value="product-formulas")
+    @JsonBackReference("product-formulas")
     private Product product;
 
     @ApiModelProperty(value = "The quantity of resources needed for product", required = true)
@@ -54,7 +54,7 @@ public class Formula implements Serializable {
         return resource;
     }
 
-    public void setResource(Resource resources) {
+    public void setResource(final Resource resources) {
         this.resource = resources;
     }
 
@@ -62,7 +62,7 @@ public class Formula implements Serializable {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(final Product product) {
         this.product = product;
     }
 
@@ -70,7 +70,7 @@ public class Formula implements Serializable {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(final Double value) {
         this.value = value;
     }
 
@@ -78,7 +78,7 @@ public class Formula implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 }

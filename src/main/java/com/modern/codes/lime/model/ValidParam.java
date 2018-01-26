@@ -15,15 +15,15 @@ import java.util.List;
 
 public class ValidParam implements Serializable {
 
-    @ApiModelProperty(value = "A list of form attributes that failed to validate.")
-    @JsonProperty(value = "validationErrors")
+    @ApiModelProperty("A list of form attributes that failed to validate.")
+    @JsonProperty("validationErrors")
     private  List<ValidationError> validationErrors;
 
     public List<ValidationError> getValidationErrors() {
         return this.validationErrors;
     }
 
-    public void setValidationErrors(List<ValidationError> validationErrors) {
+    public void setValidationErrors(final List<ValidationError> validationErrors) {
         this.validationErrors = validationErrors;
     }
 

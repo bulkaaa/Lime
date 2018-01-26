@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -33,7 +32,7 @@ public class ProductCategory  implements Serializable {
     private String id;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference(value="category-products")
+    @JsonManagedReference("category-products")
     private List<Product> products;
     @ApiModelProperty(value = "The name of the Product category. E.g \"vegetables\"", required = true)
     @NotNull
@@ -45,7 +44,7 @@ public class ProductCategory  implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -53,7 +52,7 @@ public class ProductCategory  implements Serializable {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(final List<Product> products) {
         this.products = products;
     }
 
@@ -61,7 +60,7 @@ public class ProductCategory  implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 }
