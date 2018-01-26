@@ -40,30 +40,29 @@ public class IUserServiceTest extends IBasicCRUDServiceTest<User, UserPOJO, IUse
 
     @Test
     public void findUserByNameAndUserName(){
-        List<UserPOJO> list = serv.findByNameAndSurname("Maciej", "Glowala");
-        assertEquals(list.get(0).getUsername(), "loginA");
+        final List<UserPOJO> list = serv.findByNameAndSurname("Maciej", "Glowala");
+        assertEquals("loginA", list.get(0).getUsername());
     }
 
     @Test
     public void addUser(){
-        long count = service.count();
-        UserPOJO obj = new UserPOJO();
+        final long count = service.count();
+        final UserPOJO obj = new UserPOJO();
         obj.setName("Nam");
         obj.setSurname("surn");
         obj.setUsername("logtest0");
         obj.setPassword("pass");
         obj.setEmailAddress("user@mini.pw.edu.pl");
         service.save(obj);
-        UserPOJO fObj = service.findByUsername("logtest0");
+        final UserPOJO fObj = service.findByUsername("logtest0");
         assertEquals(obj.getUsername(), fObj.getUsername());
         assertEquals(count + 1, service.count());
     }
     @Test
     public void addUserByList(){
-        long count = service.count();
-        UserPOJO obj = new UserPOJO();
-        UserPOJO obj2 = new UserPOJO();
-        List<UserPOJO> list = new ArrayList<>();
+        final long count = service.count();
+        final UserPOJO obj = new UserPOJO();
+        final UserPOJO obj2 = new UserPOJO();
         obj.setName("Nam");
         obj.setSurname("surn");
         obj.setUsername("logtest0");
@@ -74,18 +73,19 @@ public class IUserServiceTest extends IBasicCRUDServiceTest<User, UserPOJO, IUse
         obj2.setUsername("logtest02");
         obj2.setPassword("pass2");
         obj2.setEmailAddress("user2@mini.pw.edu.pl");
+        final List<UserPOJO> list = new ArrayList<>();
         list.add(obj);
         list.add(obj2);
         service.save(list);
-        UserPOJO fObj = service.findByUsername("logtest0");
+        final UserPOJO fObj = service.findByUsername("logtest0");
         assertEquals(obj.getUsername(), fObj.getUsername());
-        UserPOJO fObj2 = service.findByUsername("logtest02");
+        final UserPOJO fObj2 = service.findByUsername("logtest02");
         assertEquals(obj2.getUsername(), fObj2.getUsername());
         assertEquals(count + 2, service.count());
     }
     @Test
     public void updateTest(){
-        UserPOJO obj = service.findAll().get(0);
+        final UserPOJO obj = service.findAll().get(0);
         assertNotEquals("0test", obj.getName());
         obj.setName("0test");
         service.save(obj);
@@ -93,7 +93,7 @@ public class IUserServiceTest extends IBasicCRUDServiceTest<User, UserPOJO, IUse
     }
     @Test
     public void updateByListTest(){
-        List<UserPOJO> list = service.findAll();
+        final List<UserPOJO> list = service.findAll();
         assertNotEquals("0test", list.get(0).getName());
         assertNotEquals("1test", list.get(1).getName());
         list.get(0).setName("0test");

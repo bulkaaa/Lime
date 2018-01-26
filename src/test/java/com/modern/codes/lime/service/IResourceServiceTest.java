@@ -41,8 +41,8 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
 
     @Test
     public void addResource(){
-        long count = service.count();
-        ResourcePOJO obj = new ResourcePOJO();
+        final long count = service.count();
+        final ResourcePOJO obj = new ResourcePOJO();
         obj.setName("Resource");
         obj.setQuantity(10101.00);
         obj.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
@@ -54,10 +54,9 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
     }
     @Test
     public void addResourceByList(){
-        long count = service.count();
-        ResourcePOJO obj = new ResourcePOJO();
-        ResourcePOJO obj2 = new ResourcePOJO();
-        List<ResourcePOJO> list = new ArrayList<>();
+        final long count = service.count();
+        final ResourcePOJO obj = new ResourcePOJO();
+        final ResourcePOJO obj2 = new ResourcePOJO();
         obj.setName("Resource");
         obj.setQuantity(10101.00);
         obj.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
@@ -69,6 +68,7 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
         obj2.setDescription("desc");
         obj2.setUnit(Unit.KG);
 
+        final List<ResourcePOJO> list = new ArrayList<>();
         list.add(obj);
         list.add(obj2);
         service.save(list);
@@ -78,7 +78,7 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
     }
     @Test
     public void updateTest(){
-        ResourcePOJO obj = service.findAll().get(0);
+        final ResourcePOJO obj = service.findAll().get(0);
         assertNotEquals("0test", obj.getName());
         obj.setName("0test");
         service.save(obj);
@@ -86,7 +86,7 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
     }
     @Test
     public void updateByListTest(){
-        List<ResourcePOJO> list = service.findAll();
+        final List<ResourcePOJO> list = service.findAll();
         assertNotEquals("0test", list.get(0).getName());
         assertNotEquals("1test", list.get(1).getName());
         list.get(0).setName("0test");

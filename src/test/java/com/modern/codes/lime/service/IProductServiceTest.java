@@ -41,8 +41,8 @@ public class IProductServiceTest extends IBasicCRUDServiceTest<Product, ProductP
 
     @Test
     public void addProduct(){
-        long count = service.count();
-        ProductPOJO obj = new ProductPOJO();
+        final long count = service.count();
+        final ProductPOJO obj = new ProductPOJO();
         obj.setName("obj1");
         obj.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj.setExpectedValue(102132.00);
@@ -54,10 +54,10 @@ public class IProductServiceTest extends IBasicCRUDServiceTest<Product, ProductP
     }
     @Test
     public void addProductByList(){
-        long count = service.count();
-        ProductPOJO obj = new ProductPOJO();
-        ProductPOJO obj2 = new ProductPOJO();
-        List<ProductPOJO> list = new ArrayList<>();
+        final long count = service.count();
+        final ProductPOJO obj = new ProductPOJO();
+        final ProductPOJO obj2 = new ProductPOJO();
+        final List<ProductPOJO> list = new ArrayList<>();
         obj.setName("obj1");
         obj.setExpectedValue(102132.00);
         obj.setDescription("desc00");
@@ -77,7 +77,7 @@ public class IProductServiceTest extends IBasicCRUDServiceTest<Product, ProductP
     }
     @Test
     public void updateTest(){
-        ProductPOJO obj = service.findAll().get(0);
+        final ProductPOJO obj = service.findAll().get(0);
         assertNotEquals("0test", obj.getName());
         obj.setName("0test");
         service.save(obj);
@@ -85,7 +85,7 @@ public class IProductServiceTest extends IBasicCRUDServiceTest<Product, ProductP
     }
     @Test
     public void updateByListTest(){
-        List<ProductPOJO> list = service.findAll();
+        final List<ProductPOJO> list = service.findAll();
         assertNotEquals("0test", list.get(0).getName());
         assertNotEquals("1test", list.get(1).getName());
         list.get(0).setName("0test");
