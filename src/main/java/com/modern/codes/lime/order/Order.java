@@ -8,7 +8,6 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 
 public class Order {

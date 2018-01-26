@@ -14,7 +14,7 @@ public class ProductCategoryPOJO extends BasicPOJO {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(final List<Product> products) {
         this.products = products;
     }
 
@@ -22,7 +22,7 @@ public class ProductCategoryPOJO extends BasicPOJO {
         return ParseTools.parseList(products, ProductPOJO.class);
     }
 
-    public void setPOJOProducts(List<ProductPOJO> products) {
+    public void setPOJOProducts(final List<ProductPOJO> products) {
         this.products = ParseTools.parseList(products, Product.class);
     }
 
@@ -30,13 +30,13 @@ public class ProductCategoryPOJO extends BasicPOJO {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !ProductCategoryPOJO.class.isAssignableFrom(obj.getClass())) {
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !ProductCategoryPOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final ProductCategoryPOJO other = (ProductCategoryPOJO) obj;

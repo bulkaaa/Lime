@@ -19,7 +19,7 @@ public class SupplierPOJO extends BasicPOJO{
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -27,7 +27,7 @@ public class SupplierPOJO extends BasicPOJO{
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress) {
+    public void setEmailAddress(final String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
@@ -35,7 +35,7 @@ public class SupplierPOJO extends BasicPOJO{
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
+    public void setPostalCode(final String postalCode) {
         this.postalCode = postalCode;
     }
 
@@ -43,7 +43,7 @@ public class SupplierPOJO extends BasicPOJO{
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
         this.city = city;
     }
 
@@ -51,7 +51,7 @@ public class SupplierPOJO extends BasicPOJO{
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(final String country) {
         this.country = country;
     }
 
@@ -59,7 +59,7 @@ public class SupplierPOJO extends BasicPOJO{
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(final String street) {
         this.street = street;
     }
 
@@ -67,7 +67,7 @@ public class SupplierPOJO extends BasicPOJO{
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
+    public void setTelephone(final String telephone) {
         this.telephone = telephone;
     }
 
@@ -75,7 +75,7 @@ public class SupplierPOJO extends BasicPOJO{
         return resources;
     }
 
-    public void setResources(List<Resource> resources) {
+    public void setResources(final List<Resource> resources) {
         this.resources = resources;
     }
 
@@ -83,12 +83,12 @@ public class SupplierPOJO extends BasicPOJO{
         return ParseTools.parseList(resources, ResourcePOJO.class);
     }
 
-    public void setPOJOResources(List<ResourcePOJO> resources) {
+    public void setPOJOResources(final List<ResourcePOJO> resources) {
         this.resources = ParseTools.parseList(resources, Resource.class);
     }
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !SupplierPOJO.class.isAssignableFrom(obj.getClass())) {
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !SupplierPOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final SupplierPOJO other = (SupplierPOJO) obj;

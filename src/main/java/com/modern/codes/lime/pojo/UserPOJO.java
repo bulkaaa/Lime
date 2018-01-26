@@ -22,14 +22,14 @@ public class UserPOJO extends BasicPOJO {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
         this.enabled = enabled;
     }
 
     public UserPOJO() {
     }
 
-    public UserPOJO(String name, String surname, String username, String password) {
+    public UserPOJO(final String name, final String surname, final String username, final String password) {
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -40,7 +40,7 @@ public class UserPOJO extends BasicPOJO {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(final List<Role> roles) {
         this.roles = roles;
     }
 
@@ -48,7 +48,7 @@ public class UserPOJO extends BasicPOJO {
         return ParseTools.parseList(roles, RolePOJO.class);
     }
 
-    public void setPOJORoles(List<RolePOJO> roles) {
+    public void setPOJORoles(final List<RolePOJO> roles) {
         this.roles = ParseTools.parseList(roles, Role.class);
     }
 
@@ -56,7 +56,7 @@ public class UserPOJO extends BasicPOJO {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -64,12 +64,12 @@ public class UserPOJO extends BasicPOJO {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
 
-    public void setPlainPassword(String password) {
+    public void setPlainPassword(final String password) {
         this.password = (new BCryptPasswordEncoder()).encode(password);
     }
 
@@ -77,11 +77,11 @@ public class UserPOJO extends BasicPOJO {
         return joinedAt;
     }
 
-    public void setJoinedAt(Date joinedAt) {
+    public void setJoinedAt(final Date joinedAt) {
         this.joinedAt = joinedAt;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -89,7 +89,7 @@ public class UserPOJO extends BasicPOJO {
         return name;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(final String surname) {
         this.surname = surname;
     }
 
@@ -103,10 +103,10 @@ public class UserPOJO extends BasicPOJO {
         return emailAddress;
     }
 
-    public void setEmailAddress(String emailAddress) {
+    public void setEmailAddress(final String emailAddress) {
         this.emailAddress = emailAddress;
     }
-    public void setPOJOJobs(List<JobPOJO> jobs) {
+    public void setPOJOJobs(final List<JobPOJO> jobs) {
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
@@ -114,13 +114,13 @@ public class UserPOJO extends BasicPOJO {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(final List<Job> jobs) {
         this.jobs = jobs;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !UserPOJO.class.isAssignableFrom(obj.getClass())) {
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !UserPOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final UserPOJO other = (UserPOJO) obj;

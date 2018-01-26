@@ -25,7 +25,7 @@ public class ProductPOJO extends BasicPOJO{
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -33,7 +33,7 @@ public class ProductPOJO extends BasicPOJO{
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -41,7 +41,7 @@ public class ProductPOJO extends BasicPOJO{
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(final Unit unit) {
         this.unit = unit;
     }
 
@@ -49,7 +49,7 @@ public class ProductPOJO extends BasicPOJO{
         return addedAt;
     }
 
-    public void setAddedAt(Date addedAt) {
+    public void setAddedAt(final Date addedAt) {
         this.addedAt = addedAt;
     }
 
@@ -57,23 +57,22 @@ public class ProductPOJO extends BasicPOJO{
         return category;
     }
 
-    public void setCategory(ProductCategory category) {
+    public void setCategory(final ProductCategory category) {
         this.category = category;
     }
     public ProductCategoryPOJO getPOJOCategory() {
         return ParseTools.parse(category, ProductCategoryPOJO.class);
     }
 
-    public void setPOJOCategory(ProductCategoryPOJO category) {
+    public void setPOJOCategory(final ProductCategoryPOJO category) {
         this.category = ParseTools.parse(category, ProductCategory.class);
     }
-
 
     public String getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(final String image) {
         this.image = image;
     }
 
@@ -81,7 +80,7 @@ public class ProductPOJO extends BasicPOJO{
         return expectedValue;
     }
 
-    public void setExpectedValue(Double expectedValue) {
+    public void setExpectedValue(final Double expectedValue) {
         this.expectedValue = expectedValue;
     }
 
@@ -89,7 +88,7 @@ public class ProductPOJO extends BasicPOJO{
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(final List<Job> jobs) {
         this.jobs = jobs;
     }
 
@@ -97,7 +96,7 @@ public class ProductPOJO extends BasicPOJO{
         return ParseTools.parseList(jobs, JobPOJO.class);
     }
 
-    public void setPOJOJobs(List<JobPOJO> jobs) {
+    public void setPOJOJobs(final List<JobPOJO> jobs) {
         this.jobs = ParseTools.parseList(jobs, Job.class);
     }
 
@@ -105,7 +104,7 @@ public class ProductPOJO extends BasicPOJO{
         return formulas;
     }
 
-    public void setFormulas(List<Formula> formulas) {
+    public void setFormulas(final List<Formula> formulas) {
         this.formulas = formulas;
     }
 
@@ -113,12 +112,12 @@ public class ProductPOJO extends BasicPOJO{
         return ParseTools.parseList(formulas, FormulaPOJO.class);
     }
 
-    public void setPOJOFormulas(List<FormulaPOJO> formulas) {
+    public void setPOJOFormulas(final List<FormulaPOJO> formulas) {
         this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !ProductPOJO.class.isAssignableFrom(obj.getClass())) {
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !ProductPOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final ProductPOJO other = (ProductPOJO) obj;
@@ -150,5 +149,4 @@ public class ProductPOJO extends BasicPOJO{
         hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
-    
 }

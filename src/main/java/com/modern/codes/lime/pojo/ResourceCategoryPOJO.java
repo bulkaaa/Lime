@@ -14,7 +14,7 @@ public class ResourceCategoryPOJO extends BasicPOJO {
         return resources;
     }
 
-    public void setResources(List<Resource> resources) {
+    public void setResources(final List<Resource> resources) {
         this.resources = resources;
     }
 
@@ -22,7 +22,7 @@ public class ResourceCategoryPOJO extends BasicPOJO {
         return ParseTools.parseList(resources, ResourcePOJO.class);
     }
 
-    public void setPOJOResources(List<ResourcePOJO> resources) {
+    public void setPOJOResources(final List<ResourcePOJO> resources) {
         this.resources = ParseTools.parseList(resources, Resource.class);
     }
 
@@ -30,13 +30,13 @@ public class ResourceCategoryPOJO extends BasicPOJO {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !ResourceCategoryPOJO.class.isAssignableFrom(obj.getClass())) {
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !ResourceCategoryPOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final ResourceCategoryPOJO other = (ResourceCategoryPOJO) obj;

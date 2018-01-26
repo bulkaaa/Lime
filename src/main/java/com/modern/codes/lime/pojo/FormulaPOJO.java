@@ -14,7 +14,7 @@ public class FormulaPOJO extends BasicPOJO{
         return resource;
     }
 
-    public void setResource(Resource resource) {
+    public void setResource(final Resource resource) {
         this.resource = resource;
     }
 
@@ -22,7 +22,7 @@ public class FormulaPOJO extends BasicPOJO{
         return ParseTools.parse(resource, ResourcePOJO.class);
     }
 
-    public void setPOJOResource(ResourcePOJO resources) {
+    public void setPOJOResource(final ResourcePOJO resources) {
         this.resource = ParseTools.parse(resources, Resource.class);
     }
 
@@ -30,7 +30,7 @@ public class FormulaPOJO extends BasicPOJO{
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(final Product product) {
         this.product = product;
     }
 
@@ -38,7 +38,7 @@ public class FormulaPOJO extends BasicPOJO{
         return ParseTools.parse(product, ProductPOJO.class);
     }
 
-    public void setPOJOProduct(ProductPOJO product) {
+    public void setPOJOProduct(final ProductPOJO product) {
         this.product = ParseTools.parse(product, Product.class);
     }
 
@@ -46,13 +46,13 @@ public class FormulaPOJO extends BasicPOJO{
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(final Double value) {
         this.value = value;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !FormulaPOJO.class.isAssignableFrom(obj.getClass())) {
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !FormulaPOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final FormulaPOJO other = (FormulaPOJO) obj;

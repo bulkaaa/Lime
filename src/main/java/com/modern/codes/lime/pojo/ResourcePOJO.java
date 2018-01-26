@@ -23,7 +23,7 @@ public class ResourcePOJO extends BasicPOJO{
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -31,7 +31,7 @@ public class ResourcePOJO extends BasicPOJO{
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -39,7 +39,7 @@ public class ResourcePOJO extends BasicPOJO{
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(final Unit unit) {
         this.unit = unit;
     }
 
@@ -47,7 +47,7 @@ public class ResourcePOJO extends BasicPOJO{
         return quantity;
     }
 
-    public void setQuantity(Double quantity) {
+    public void setQuantity(final Double quantity) {
         this.quantity = quantity;
     }
 
@@ -55,14 +55,14 @@ public class ResourcePOJO extends BasicPOJO{
         return category;
     }
 
-    public void setCategory(ResourceCategory category) {
+    public void setCategory(final ResourceCategory category) {
         this.category = category;
     }
     public ResourceCategoryPOJO getPOJOCategory() {
         return ParseTools.parse(category, ResourceCategoryPOJO.class);
     }
 
-    public void setPOJOCategory(ResourceCategoryPOJO category) {
+    public void setPOJOCategory(final ResourceCategoryPOJO category) {
         this.category = ParseTools.parse(category, ResourceCategory.class);
     }
 
@@ -70,7 +70,7 @@ public class ResourcePOJO extends BasicPOJO{
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(final String image) {
         this.image = image;
     }
 
@@ -78,7 +78,7 @@ public class ResourcePOJO extends BasicPOJO{
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public void setSupplier(final Supplier supplier) {
         this.supplier = supplier;
     }
 
@@ -86,7 +86,7 @@ public class ResourcePOJO extends BasicPOJO{
         return ParseTools.parse(supplier, SupplierPOJO.class);
     }
 
-    public void setPOJOSupplier(SupplierPOJO supplier) {
+    public void setPOJOSupplier(final SupplierPOJO supplier) {
         this.supplier = ParseTools.parse(supplier, Supplier.class);
     }
 
@@ -95,7 +95,7 @@ public class ResourcePOJO extends BasicPOJO{
         return formulas;
     }
 
-    public void setFormulas(List<Formula> formulas) {
+    public void setFormulas(final List<Formula> formulas) {
         this.formulas = formulas;
     }
 
@@ -103,13 +103,13 @@ public class ResourcePOJO extends BasicPOJO{
         return ParseTools.parseList(formulas, FormulaPOJO.class);
     }
 
-    public void setPOJOFormulas(List<FormulaPOJO> formulas) {
+    public void setPOJOFormulas(final List<FormulaPOJO> formulas) {
         this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !ResourcePOJO.class.isAssignableFrom(obj.getClass())) {
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !ResourcePOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final ResourcePOJO other = (ResourcePOJO) obj;

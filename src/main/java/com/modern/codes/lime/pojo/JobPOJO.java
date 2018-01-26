@@ -14,7 +14,7 @@ public class JobPOJO extends BasicPOJO{
     private Date endDate;
     private Double resultValue;
 
-    public void setProduct(Product product) {
+    public void setProduct(final Product product) {
         this.product = product;
     }
     public Product getProduct() {
@@ -24,7 +24,7 @@ public class JobPOJO extends BasicPOJO{
         return ParseTools.parse(product, ProductPOJO.class);
     }
 
-    public void setPOJOProduct(ProductPOJO product) {
+    public void setPOJOProduct(final ProductPOJO product) {
         this.product = ParseTools.parse(product, Product.class);
     }
 
@@ -32,7 +32,7 @@ public class JobPOJO extends BasicPOJO{
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
@@ -40,7 +40,7 @@ public class JobPOJO extends BasicPOJO{
         return ParseTools.parse(user, UserPOJO.class);
     }
 
-    public void setPOJOUser(UserPOJO user) {
+    public void setPOJOUser(final UserPOJO user) {
         this.user = ParseTools.parse(user, User.class);
     }
 
@@ -48,7 +48,7 @@ public class JobPOJO extends BasicPOJO{
         return details;
     }
 
-    public void setDetails(String details) {
+    public void setDetails(final String details) {
         this.details = details;
     }
 
@@ -56,7 +56,7 @@ public class JobPOJO extends BasicPOJO{
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(final Date startDate) {
         this.startDate = startDate;
     }
 
@@ -64,7 +64,7 @@ public class JobPOJO extends BasicPOJO{
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(final Date endDate) {
         this.endDate = endDate;
     }
 
@@ -72,13 +72,13 @@ public class JobPOJO extends BasicPOJO{
         return resultValue;
     }
 
-    public void setResultValue(Double resultValue) {
+    public void setResultValue(final Double resultValue) {
         this.resultValue = resultValue;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !JobPOJO.class.isAssignableFrom(obj.getClass())) {
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !JobPOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final JobPOJO other = (JobPOJO) obj;

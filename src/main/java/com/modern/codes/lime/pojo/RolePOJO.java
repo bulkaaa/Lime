@@ -14,11 +14,11 @@ public class RolePOJO extends BasicPOJO{
 
     public List<User> getUsers() { return users; }
 
-    public void setUsers(List<User> users) { this.users = users; }
+    public void setUsers(final List<User> users) { this.users = users; }
 
     public List<UserPOJO> getPOJOUsers() { return ParseTools.parseList(users, UserPOJO.class); }
 
-    public void setPOJOUsers(List<UserPOJO> users) { this.users = ParseTools.parseList(users, User.class); }
+    public void setPOJOUsers(final List<UserPOJO> users) { this.users = ParseTools.parseList(users, User.class); }
 
     public String getName() {
         return name;
@@ -30,7 +30,7 @@ public class RolePOJO extends BasicPOJO{
 
     @Override
     public boolean equals(final Object obj) {
-        if (obj == null || !RolePOJO.class.isAssignableFrom(obj.getClass())) {
+        if ((obj == null) || !RolePOJO.class.isAssignableFrom(obj.getClass())) {
             return false;
         }
         final RolePOJO other = (RolePOJO) obj;
