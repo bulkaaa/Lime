@@ -30,6 +30,7 @@ public interface IUserService {
     UserPOJO findByUsername(String username);
     List<UserPOJO> findByJoinedAtBetween(Date begin, Date end);
     List<UserPOJO> findByNameAndSurname(String name, String surname);
+    UserPOJO findByUsernameOrEmail(String username, String email);
     PasswordEncoder getPasswordEncoder();
 
     static List<UserPOJO> filterByName(List<UserPOJO> list, String name){
