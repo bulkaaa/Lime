@@ -3,19 +3,18 @@ package com.modern.codes.lime.controller;
 import java.util.List;
 import java.util.Locale;
 
+import com.modern.codes.lime.model.User;
+import com.modern.codes.lime.pojo.UserPOJO;
+import com.modern.codes.lime.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
@@ -47,6 +46,21 @@ public class JobController extends BaseController {
     @Autowired
     IResourceService resourceService;
 
+
+    @Autowired
+    IUserService userService;
+
+    NotificationController notification;
+
+    @GetMapping(path = "/act-user")
+    public String getUser(){
+        return ParseTools.parseToJson(getActualUser(), User.class);
+    }
+
+     private UserPOJO getActualUser(){
+        return userService.findByUsername(((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+     }
+
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a job object", notes = "Creates a <b>job</b> object "
                                                               +  "Saves it into DB.", response = Job.class)
@@ -68,10 +82,12 @@ public class JobController extends BaseController {
             formulaService.findByProductId(job.getProduct()
                                               .getId()).forEach(f -> {
                                                   final ResourcePOJO resource = f.getPOJOResource();
-                                                  // MIEJSCE DLA SPRAWDZENIE DLA NOTYFIKACJI!!!
+                                                  final UserPOJO self =  getActualUser();
+                                                  Boolean action = NotificationController.checkAhead(resource,self.getEmailAddress(),f.getValue());
                                                   resource.setQuantity(resource.getQuantity() - f.getValue());
                                                   resourceService.save(resource);
             });
+            notification.checkUsedResources();
             return response;
         }
         catch (final Exception e)
