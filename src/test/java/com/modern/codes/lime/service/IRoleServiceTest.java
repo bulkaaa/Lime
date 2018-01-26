@@ -40,8 +40,8 @@ public class IRoleServiceTest extends IBasicCRUDServiceTest<Role, RolePOJO, IRol
 
     @Test
     public void addRole(){
-        long count = service.count();
-        RolePOJO obj = new RolePOJO();
+        final long count = service.count();
+        final RolePOJO obj = new RolePOJO();
         obj.setName("Konserwator powierzchni plaskich");
         service.save(obj);
         assertEquals(obj.getName(), service.findByName("Konserwator powierzchni plaskich").get(0).getName());
@@ -49,10 +49,10 @@ public class IRoleServiceTest extends IBasicCRUDServiceTest<Role, RolePOJO, IRol
     }
     @Test
     public void addRoleByList(){
-        long count = service.count();
-        RolePOJO obj = new RolePOJO();
-        RolePOJO obj2 = new RolePOJO();
-        List<RolePOJO> list = new ArrayList<>();
+        final long count = service.count();
+        final RolePOJO obj = new RolePOJO();
+        final RolePOJO obj2 = new RolePOJO();
+        final List<RolePOJO> list = new ArrayList<>();
         obj.setName("Konserwator powierzchni plaskich");
         obj2.setName("Kolejarz");
         list.add(obj);
@@ -64,7 +64,7 @@ public class IRoleServiceTest extends IBasicCRUDServiceTest<Role, RolePOJO, IRol
     }
     @Test
     public void updateTest(){
-        RolePOJO obj = service.findAll().get(0);
+        final RolePOJO obj = service.findAll().get(0);
         assertNotEquals("0test", obj.getName());
         obj.setName("0test");
         service.save(obj);
@@ -72,7 +72,7 @@ public class IRoleServiceTest extends IBasicCRUDServiceTest<Role, RolePOJO, IRol
     }
     @Test
     public void updateByListTest(){
-        List<RolePOJO> list = service.findAll();
+        final List<RolePOJO> list = service.findAll();
         assertNotEquals("0test", list.get(0).getName());
         assertNotEquals("1test", list.get(1).getName());
         list.get(0).setName("0test");

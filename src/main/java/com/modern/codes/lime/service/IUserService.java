@@ -2,8 +2,6 @@ package com.modern.codes.lime.service;
 
 import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
@@ -33,28 +31,28 @@ public interface IUserService {
     UserPOJO findByUsernameOrEmail(String username, String email);
     PasswordEncoder getPasswordEncoder();
 
-    static List<UserPOJO> filterByName(List<UserPOJO> list, String name){
+    static List<UserPOJO> filterByName(final List<UserPOJO> list, final String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }
-    static Stream<UserPOJO> filterByName(Stream<UserPOJO> stream, String name){
+    static Stream<UserPOJO> filterByName(final Stream<UserPOJO> stream, final String name){
         return stream.filter(t -> t.getName().equals(name));
     }
-    static List<UserPOJO> filterBySurname(List<UserPOJO> list, String surname){
+    static List<UserPOJO> filterBySurname(final List<UserPOJO> list, final String surname){
         return filterBySurname(list.stream(), surname).collect(Collectors.toList());
     }
-    static Stream<UserPOJO> filterBySurname(Stream<UserPOJO> stream, String surname){
+    static Stream<UserPOJO> filterBySurname(final Stream<UserPOJO> stream, final String surname){
         return stream.filter(t -> t.getName().equals(surname));
     }
-    static List<UserPOJO> filterByRole(List<UserPOJO> list, String roleName){
+    static List<UserPOJO> filterByRole(final List<UserPOJO> list, final String roleName){
         return filterByRole(list.stream(), roleName).collect(Collectors.toList());
     }
-    static Stream<UserPOJO> filterByRole(Stream<UserPOJO> stream, String roleName){
+    static Stream<UserPOJO> filterByRole(final Stream<UserPOJO> stream, final String roleName){
         return stream.filter(t -> !IRoleService.filterByName(t.getPOJORoles(), roleName).isEmpty());
     }
-    static List<UserPOJO> filterByRole(List<UserPOJO> list, RolePOJO role){
+    static List<UserPOJO> filterByRole(final List<UserPOJO> list, final RolePOJO role){
         return filterByRole(list.stream(), role).collect(Collectors.toList());
     }
-    static Stream<UserPOJO> filterByRole(Stream<UserPOJO> stream, RolePOJO role){
+    static Stream<UserPOJO> filterByRole(final Stream<UserPOJO> stream, final RolePOJO role){
         return stream.filter(t -> t.getPOJORoles().contains(role));
     }
 }

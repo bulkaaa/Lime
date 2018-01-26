@@ -1,6 +1,5 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.JobPOJO;
 import com.modern.codes.lime.pojo.ProductPOJO;
 import com.modern.codes.lime.pojo.UserPOJO;

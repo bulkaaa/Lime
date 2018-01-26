@@ -42,8 +42,8 @@ public class IJobServiceTest extends IBasicCRUDServiceTest<Job, JobPOJO, IJobDAO
 
     @Test
     public void addJob(){
-        long count = service.count();
-        JobPOJO obj = new JobPOJO();
+        final long count = service.count();
+        final JobPOJO obj = new JobPOJO();
         obj.setEndDate(new Date());
         obj.setStartDate(new Date());
         obj.setResultValue(12.00);
@@ -53,10 +53,9 @@ public class IJobServiceTest extends IBasicCRUDServiceTest<Job, JobPOJO, IJobDAO
     }
     @Test
     public void addJobByList(){
-        long count = service.count();
-        JobPOJO obj = new JobPOJO();
-        JobPOJO obj2 = new JobPOJO();
-        List<JobPOJO> list = new ArrayList<>();
+        final long count = service.count();
+        final JobPOJO obj = new JobPOJO();
+        final JobPOJO obj2 = new JobPOJO();
         obj.setEndDate(new Date());
         obj.setStartDate(new Date());
         obj.setResultValue(12.00);
@@ -65,6 +64,7 @@ public class IJobServiceTest extends IBasicCRUDServiceTest<Job, JobPOJO, IJobDAO
         obj2.setStartDate(new Date());
         obj2.setResultValue(12.00);
         obj2.setDetails("Details2");
+        final List<JobPOJO> list = new ArrayList<>();
         list.add(obj);
         list.add(obj2);
         service.save(list);
@@ -72,7 +72,7 @@ public class IJobServiceTest extends IBasicCRUDServiceTest<Job, JobPOJO, IJobDAO
     }
     @Test
     public void updateTest(){
-        JobPOJO obj = service.findAll().get(0);
+        final JobPOJO obj = service.findAll().get(0);
         assertNotEquals("0test", obj.getDetails());
         obj.setDetails("0test");
         service.save(obj);
@@ -80,7 +80,7 @@ public class IJobServiceTest extends IBasicCRUDServiceTest<Job, JobPOJO, IJobDAO
     }
     @Test
     public void updateByListTest(){
-        List<JobPOJO> list = service.findAll();
+        final List<JobPOJO> list = service.findAll();
         assertNotEquals("0test", list.get(0).getDetails());
         assertNotEquals("1test", list.get(1).getDetails());
         list.get(0).setDetails("0test");

@@ -12,25 +12,25 @@ import java.util.List;
 @Service
 public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IFormulaDAO> implements IFormulaService {
 
-    private IFormulaDAO dao;
+    private final IFormulaDAO dao;
     @Autowired
-    public FormulaService(IFormulaDAO dao) {
+    public FormulaService(final IFormulaDAO dao) {
         super(dao, Formula.class, FormulaPOJO.class);
         this.dao = dao;
     }
 
     @Override
-    public List<FormulaPOJO> findByProductName(String productName) {
+    public List<FormulaPOJO> findByProductName(final String productName) {
         return ParseTools.parseList(dao.findByProductName(productName), FormulaPOJO.class);
     }
 
     @Override
-    public List<FormulaPOJO> findByProductId(String id) {
+    public List<FormulaPOJO> findByProductId(final String id) {
         return ParseTools.parseList(dao.findByProductId(id), FormulaPOJO.class);
     }
 
     @Override
-    public List<FormulaPOJO> findByResourceId(String id) {
+    public List<FormulaPOJO> findByResourceId(final String id) {
         return ParseTools.parseList(dao.findByResourceId(id), FormulaPOJO.class);
     }
 }

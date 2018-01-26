@@ -40,18 +40,18 @@ public class IFormulaServiceTest extends IBasicCRUDServiceTest<Formula, FormulaP
 
     @Test
     public void addFormula(){
-        long count = service.count();
-        FormulaPOJO obj = new FormulaPOJO();
+        final long count = service.count();
+        final FormulaPOJO obj = new FormulaPOJO();
         obj.setValue(20.000);
         service.save(obj);
         assertEquals(count + 1, service.count());
     }
     @Test
     public void addFormulaByList(){
-        long count = service.count();
-        FormulaPOJO obj = new FormulaPOJO();
-        FormulaPOJO obj2 = new FormulaPOJO();
-        List<FormulaPOJO> list = new ArrayList<>();
+        final long count = service.count();
+        final FormulaPOJO obj = new FormulaPOJO();
+        final FormulaPOJO obj2 = new FormulaPOJO();
+        final List<FormulaPOJO> list = new ArrayList<>();
         obj.setValue(20.000);
         obj2.setValue(21.000);
         list.add(obj);
@@ -61,7 +61,7 @@ public class IFormulaServiceTest extends IBasicCRUDServiceTest<Formula, FormulaP
     }
     @Test
     public void updateTest(){
-        FormulaPOJO obj = service.findAll().get(0);
+        final FormulaPOJO obj = service.findAll().get(0);
         assertNotEquals("0test", obj.getValue());
         obj.setValue(10101010.00);
         service.save(obj);
@@ -69,7 +69,7 @@ public class IFormulaServiceTest extends IBasicCRUDServiceTest<Formula, FormulaP
     }
     @Test
     public void updateByListTest(){
-        List<FormulaPOJO> list = service.findAll();
+        final List<FormulaPOJO> list = service.findAll();
         assertNotEquals("0test", list.get(0).getValue());
         assertNotEquals("1test", list.get(1).getValue());
         list.get(0).setValue(10101010.00);

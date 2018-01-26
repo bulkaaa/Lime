@@ -1,7 +1,5 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.model.Formula;
-import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.pojo.ProductPOJO;
 import com.modern.codes.lime.pojo.ResourcePOJO;

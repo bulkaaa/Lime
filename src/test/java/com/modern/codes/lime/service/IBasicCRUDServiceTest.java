@@ -16,33 +16,33 @@ public class IBasicCRUDServiceTest<T, T_POJO, T_DAO extends IBasicCRUDRepository
 
     @Test
     public void findAllTest(){
-        List<T_POJO> list = service.findAll();
+        final List<T_POJO> list = service.findAll();
         assertEquals(service.count(), list.size());
     }
     @Test
     public void deleteByIdTest(){
-        T_POJO obj = service.findAll().get(0);
+        final T_POJO obj = service.findAll().get(0);
         service.delete(((BasicPOJO)obj).getId());
-        T_POJO next_obj = service.findAll().get(0);
+        final T_POJO next_obj = service.findAll().get(0);
         assertNotEquals(((BasicPOJO)obj).getId(), ((BasicPOJO)next_obj).getId());
     }
     @Test
     public void deleteByObjectTest(){
-        T_POJO obj = service.findAll().get(0);
+        final T_POJO obj = service.findAll().get(0);
         service.delete(obj);
-        T_POJO next_obj = service.findAll().get(0);
+        final T_POJO next_obj = service.findAll().get(0);
         assertNotEquals(((BasicPOJO)obj).getId(), ((BasicPOJO)next_obj).getId());
     }
     @Test
     public void deleteAllTest(){
         service.deleteAll();
-        List<T_POJO> list = service.findAll();
+        final List<T_POJO> list = service.findAll();
         assertEquals(0, list.size());
     }
     @Test
     public void deleteByListTest(){
         List<T_POJO> obj_list = service.findAll();
-        T_POJO obj = obj_list.get(obj_list.size() - 1);
+        final T_POJO obj = obj_list.get(obj_list.size() - 1);
         obj_list.remove(obj);
         service.delete(obj_list);
         obj_list = service.findAll();
@@ -51,28 +51,28 @@ public class IBasicCRUDServiceTest<T, T_POJO, T_DAO extends IBasicCRUDRepository
 
     @Test
     public void existsTest(){
-        T_POJO obj = service.findAll().get(0);
+        final T_POJO obj = service.findAll().get(0);
         assertTrue(service.exists(((BasicPOJO)obj).getId()));
     }
     @Test
     public void countTest(){
-        List<T_POJO> obj_list = service.findAll();
+        final List<T_POJO> obj_list = service.findAll();
         assertEquals(obj_list.size(), service.count());
     }
     @Test
     public void equalsTest(){
-        T_POJO obj = service.findAll().get(0);
-        T_POJO obj2 = service.findAll().get(0);
+        final T_POJO obj = service.findAll().get(0);
+        final T_POJO obj2 = service.findAll().get(0);
         assertEquals(obj,obj2);
     }
 
     @Test
     public void findByIdTest(){
-        T_POJO obj = service.findAll().get(0);
-        T_POJO obj2 = service.findById(((BasicPOJO)obj).getId());
+        final T_POJO obj = service.findAll().get(0);
+        final T_POJO obj2 = service.findById(((BasicPOJO)obj).getId());
         assertEquals(obj,obj2);
     }
-    void setService(T_SERVICE service){
+    void setService(final T_SERVICE service){
         this.service = service;
     }
 }

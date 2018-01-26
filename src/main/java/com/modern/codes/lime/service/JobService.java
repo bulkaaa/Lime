@@ -15,31 +15,30 @@ import java.util.List;
 @Transactional
 public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implements IJobService {
 
-    private IJobDAO dao;
+    private final IJobDAO dao;
     @Autowired
-    public JobService(IJobDAO dao) {
+    public JobService(final IJobDAO dao) {
         super(dao, Job.class, JobPOJO.class);
         this.dao = dao;
     }
 
     @Override
-    public List<JobPOJO> findByStartDateBetween(Date begin, Date end) {
+    public List<JobPOJO> findByStartDateBetween(final Date begin, final Date end) {
         return ParseTools.parseList(dao.findByStartDateBetween(begin, end), JobPOJO.class);
     }
 
     @Override
-    public List<JobPOJO> findByEndDateBetween(Date begin, Date end) {
+    public List<JobPOJO> findByEndDateBetween(final Date begin, final Date end) {
         return ParseTools.parseList(dao.findByEndDateBetween(begin, end), JobPOJO.class);
-
     }
 
     @Override
-    public List<JobPOJO> findByUserId(String id) {
+    public List<JobPOJO> findByUserId(final String id) {
         return ParseTools.parseList(dao.findByUserId(id), JobPOJO.class);
     }
 
     @Override
-    public List<JobPOJO> findByProductId(String id) {
+    public List<JobPOJO> findByProductId(final String id) {
         return ParseTools.parseList(dao.findByProductId(id), JobPOJO.class);
     }
 }

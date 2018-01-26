@@ -22,16 +22,16 @@ public interface IRoleService {
     void delete(List l);
     List<RolePOJO> findByName(String name);
 
-    static List<RolePOJO> filterByName(List<RolePOJO> list, String name){
+    static List<RolePOJO> filterByName(final List<RolePOJO> list, final String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }
-    static Stream<RolePOJO> filterByName(Stream<RolePOJO> stream, String name){
+    static Stream<RolePOJO> filterByName(final Stream<RolePOJO> stream, final String name){
         return stream.filter(t -> t.getName().equals(name));
     }
-    static List<RolePOJO> filterByUser(List<RolePOJO> list, UserPOJO user){
+    static List<RolePOJO> filterByUser(final List<RolePOJO> list, final UserPOJO user){
         return filterByUser(list.stream(), user).collect(Collectors.toList());
     }
-    static Stream<RolePOJO> filterByUser(Stream<RolePOJO> stream, UserPOJO user){
+    static Stream<RolePOJO> filterByUser(final Stream<RolePOJO> stream, final UserPOJO user){
         return stream.filter(t -> t.getPOJOUsers().contains(user));
     }
 }

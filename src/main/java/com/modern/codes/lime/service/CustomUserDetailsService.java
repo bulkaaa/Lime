@@ -2,7 +2,6 @@ package com.modern.codes.lime.service;
 
 import com.modern.codes.lime.dao.IUserDAO;
 import com.modern.codes.lime.model.CustomUserDetails;
-import com.modern.codes.lime.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,16 +12,14 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
-    private IUserDAO dao;
+    private final IUserDAO dao;
     @Autowired
-    public CustomUserDetailsService(IUserDAO dao){
+    public CustomUserDetailsService(final IUserDAO dao){
         this.dao = dao;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        User user = dao.findByUsername(username);
-
-        return new CustomUserDetails(user);
+    public UserDetails loadUserByUsername(final String username) {
+        return new CustomUserDetails(dao.findByUsername(username));
     }
 }

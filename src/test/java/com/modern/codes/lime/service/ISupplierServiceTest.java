@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+
 @DataJpaTest
 @RunWith(SpringRunner.class)
 @ComponentScan(basePackages={"com.modern.codes.lime.tools"})
@@ -39,8 +40,8 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
 
     @Test
     public void addSupplier(){
-        long count = service.count();
-        SupplierPOJO obj = new SupplierPOJO();
+        final long count = service.count();
+        final SupplierPOJO obj = new SupplierPOJO();
         obj.setEmailAddress("EmailAdress@test.pl");
         obj.setCity("warsaw");
         obj.setCountry("PL");
@@ -54,10 +55,9 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
     }
     @Test
     public void addSupplierByList(){
-        long count = service.count();
-        SupplierPOJO obj = new SupplierPOJO();
-        SupplierPOJO obj2 = new SupplierPOJO();
-        List<SupplierPOJO> list = new ArrayList<>();
+        final long count = service.count();
+        final SupplierPOJO obj = new SupplierPOJO();
+        final SupplierPOJO obj2 = new SupplierPOJO();
         obj.setEmailAddress("EmailAdress@test.pl");
         obj.setCity("warsaw");
         obj.setCountry("PL");
@@ -72,6 +72,7 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
         obj2.setStreet("ulica2");
         obj2.setTelephone("1230120392");
         obj2.setName("Zdzisiek2");
+        final List<SupplierPOJO> list = new ArrayList<>();
         list.add(obj);
         list.add(obj2);
         service.save(list);
@@ -82,7 +83,7 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
     }
     @Test
     public void updateTest(){
-        SupplierPOJO obj = service.findAll().get(0);
+        final SupplierPOJO obj = service.findAll().get(0);
         assertNotEquals("0test", obj.getName());
         obj.setName("0test");
         service.save(obj);
@@ -90,7 +91,7 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
     }
     @Test
     public void updateByListTest(){
-        List<SupplierPOJO> list = service.findAll();
+        final List<SupplierPOJO> list = service.findAll();
         assertNotEquals("0test", list.get(0).getName());
         assertNotEquals("1test", list.get(1).getName());
         list.get(0).setName("0test");
@@ -99,5 +100,4 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
         assertEquals("0test", service.findById(list.get(0).getId()).getName());
         assertEquals("1test", service.findById(list.get(1).getId()).getName());
     }
-
 }
