@@ -19,6 +19,8 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
     };
 
     $scope.sendOrder = function () {
+        let dlg = $dialogs.confirm('Order will be send to resource suppliers. Are you sure?');
+        dlg.result.then(function(btn){
         var items = [];
         items = $scope.list.resources;
 
@@ -37,6 +39,7 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
                 .then(
                     function(response){
                         if (response.data){
+                            $dialogs.info('Order', 'Order was sent to resource suppliers');
                         }
                     },
                     function(response){
@@ -44,6 +47,7 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
                     }
                 );
 
+    });
     };
 
     $scope.list = {
