@@ -25,6 +25,7 @@ public interface IResourceService {
     List<ResourcePOJO> findByName(String name);
     List<ResourcePOJO> findByCategoryName(String categoryName);
     List<ResourcePOJO> findBySupplierId(String supplierId);
+    List<ResourcePOJO> findByCategoryId(String categoryId);
 
     static List<ResourcePOJO> filterByName(final List<ResourcePOJO> list, final String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
