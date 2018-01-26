@@ -26,16 +26,16 @@ public interface IProductService {
     List<ProductPOJO> findByAddedAtBetween(Date begin, Date end);
     List<ProductPOJO> findByCategoryName(String categoryName);
 
-    static List<ProductPOJO> filterByName(List<ProductPOJO> list, String name){
+    static List<ProductPOJO> filterByName(final List<ProductPOJO> list, final String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }
-    static Stream<ProductPOJO> filterByName(Stream<ProductPOJO> stream, String name){
+    static Stream<ProductPOJO> filterByName(final Stream<ProductPOJO> stream, final String name){
         return stream.filter(t -> t.getName().equals(name));
     }
-    static List<ProductPOJO> filterByCategory(List<ProductPOJO> list, String category){
+    static List<ProductPOJO> filterByCategory(final List<ProductPOJO> list, final ProductCategory category){
         return filterByCategory(list.stream(), category).collect(Collectors.toList());
     }
-    static Stream<ProductPOJO> filterByCategory(Stream<ProductPOJO> stream, String category){
+    static Stream<ProductPOJO> filterByCategory(final Stream<ProductPOJO> stream, final ProductCategory category){
         return stream.filter(t -> t.getCategory().equals(category));
     }
 }

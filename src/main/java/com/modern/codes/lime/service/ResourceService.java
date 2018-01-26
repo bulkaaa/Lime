@@ -12,20 +12,20 @@ import java.util.List;
 @Service
 public class ResourceService extends BasicCRUDService<Resource, ResourcePOJO, IResourceDAO> implements IResourceService {
 
-    IResourceDAO dao;
+    private final IResourceDAO dao;
     @Autowired
-    public ResourceService(IResourceDAO dao) {
+    public ResourceService(final IResourceDAO dao) {
         super(dao, Resource.class, ResourcePOJO.class);
         this.dao = dao;
     }
 
     @Override
-    public List<ResourcePOJO> findByName(String name) {
+    public List<ResourcePOJO> findByName(final String name) {
         return ParseTools.parseList(dao.findByName(name), ResourcePOJO.class);
     }
 
     @Override
-    public List<ResourcePOJO> findByCategoryName(String categoryName) {
+    public List<ResourcePOJO> findByCategoryName(final String categoryName) {
         return ParseTools.parseList(dao.findByCategoryName(categoryName), ResourcePOJO.class);
     }
 

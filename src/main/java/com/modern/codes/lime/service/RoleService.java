@@ -12,15 +12,15 @@ import java.util.List;
 @Service
 public class RoleService extends BasicCRUDService<Role, RolePOJO, IRoleDAO> implements IRoleService {
 
-    IRoleDAO dao;
+    private final IRoleDAO dao;
     @Autowired
-    public RoleService(IRoleDAO dao) {
+    public RoleService(final IRoleDAO dao) {
         super(dao, Role.class, RolePOJO.class);
         this.dao = dao;
     }
 
     @Override
-    public List<RolePOJO> findByName(String name) {
+    public List<RolePOJO> findByName(final String name) {
         return ParseTools.parseList(dao.findByName(name), RolePOJO.class);
     }
 }

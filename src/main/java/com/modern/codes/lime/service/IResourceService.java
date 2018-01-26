@@ -1,6 +1,5 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.model.ResourceCategory;
 import com.modern.codes.lime.model.Unit;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.pojo.SupplierPOJO;
@@ -27,34 +26,34 @@ public interface IResourceService {
     List<ResourcePOJO> findByCategoryName(String categoryName);
     List<ResourcePOJO> findBySupplierId(String supplierId);
 
-    static List<ResourcePOJO> filterByName(List<ResourcePOJO> list, String name){
+    static List<ResourcePOJO> filterByName(final List<ResourcePOJO> list, final String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());
     }
-    static Stream<ResourcePOJO> filterByName(Stream<ResourcePOJO> stream, String name){
+    static Stream<ResourcePOJO> filterByName(final Stream<ResourcePOJO> stream, final String name){
         return stream.filter(t -> t.getName().equals(name));
     }
-    static List<ResourcePOJO> filterByUnit(List<ResourcePOJO> list, Unit unit){
+    static List<ResourcePOJO> filterByUnit(final List<ResourcePOJO> list, final Unit unit){
         return filterByUnit(list.stream(), unit).collect(Collectors.toList());
     }
-    static Stream<ResourcePOJO> filterByUnit(Stream<ResourcePOJO> stream,Unit unit){
+    static Stream<ResourcePOJO> filterByUnit(final Stream<ResourcePOJO> stream, final Unit unit){
         return stream.filter(t -> t.getUnit().equals(unit));
     }
-    static List<ResourcePOJO> filterByCategory(List<ResourcePOJO> list, String category){
+    static List<ResourcePOJO> filterByCategory(final List<ResourcePOJO> list, final String category){
         return filterByName(list.stream(), category).collect(Collectors.toList());
     }
-    static Stream<ResourcePOJO> filterByCategory(Stream<ResourcePOJO> stream, String category){
+    static Stream<ResourcePOJO> filterByCategory(final Stream<ResourcePOJO> stream, final String category){
         return stream.filter(t -> t.getName().equals(category));
     }
-    static List<ResourcePOJO> filterBySupplier(List<ResourcePOJO> list, String supplierName){
+    static List<ResourcePOJO> filterBySupplier(final List<ResourcePOJO> list, final String supplierName){
         return filterBySupplier(list.stream(), supplierName).collect(Collectors.toList());
     }
-    static Stream<ResourcePOJO> filterBySupplier(Stream<ResourcePOJO> stream, String supplierName){
+    static Stream<ResourcePOJO> filterBySupplier(final Stream<ResourcePOJO> stream, final String supplierName){
         return stream.filter(t -> t.getPOJOSupplier().getName().equals(supplierName));
     }
-    static List<ResourcePOJO> filterBySupplier(List<ResourcePOJO> list, SupplierPOJO supplier){
+    static List<ResourcePOJO> filterBySupplier(final List<ResourcePOJO> list, final SupplierPOJO supplier){
         return filterBySupplier(list.stream(), supplier).collect(Collectors.toList());
     }
-    static Stream<ResourcePOJO> filterBySupplier(Stream<ResourcePOJO> stream, SupplierPOJO supplier) {
+    static Stream<ResourcePOJO> filterBySupplier(final Stream<ResourcePOJO> stream, final SupplierPOJO supplier) {
         return stream.filter(t -> t.getPOJOSupplier().equals(supplier));
     }
 }

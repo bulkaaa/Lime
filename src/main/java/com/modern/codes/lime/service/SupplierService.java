@@ -12,40 +12,40 @@ import java.util.List;
 @Service
 public class SupplierService extends BasicCRUDService<Supplier, SupplierPOJO, ISupplierDAO> implements ISupplierService {
 
-    ISupplierDAO dao;
+    private final ISupplierDAO dao;
     @Autowired
-    public SupplierService(ISupplierDAO dao) {
+    public SupplierService(final ISupplierDAO dao) {
         super(dao, Supplier.class, SupplierPOJO.class);
         this.dao = dao;
     }
 
     @Override
-    public List<SupplierPOJO> findByEmailAddress(String emailAddress) {
+    public List<SupplierPOJO> findByEmailAddress(final String emailAddress) {
         return ParseTools.parseList(dao.findByEmailAddress(emailAddress), SupplierPOJO.class);
     }
 
     @Override
-    public List<SupplierPOJO> findByPostalCode(String postalCode) {
+    public List<SupplierPOJO> findByPostalCode(final String postalCode) {
         return ParseTools.parseList(dao.findByPostalCode(postalCode), SupplierPOJO.class);
     }
 
     @Override
-    public List<SupplierPOJO> findByCity(String city) {
+    public List<SupplierPOJO> findByCity(final String city) {
         return ParseTools.parseList(dao.findByCity(city), SupplierPOJO.class);
     }
 
     @Override
-    public List<SupplierPOJO> findByCountry(String country) {
+    public List<SupplierPOJO> findByCountry(final String country) {
         return ParseTools.parseList(dao.findByCountry(country), SupplierPOJO.class);
     }
 
     @Override
-    public List<SupplierPOJO> findByName(String name) {
+    public List<SupplierPOJO> findByName(final String name) {
         return ParseTools.parseList(dao.findByName(name), SupplierPOJO.class);
     }
 
     @Override
-    public List<SupplierPOJO> findByTelephone(String telephone) {
+    public List<SupplierPOJO> findByTelephone(final String telephone) {
         return ParseTools.parseList(dao.findByTelephone(telephone), SupplierPOJO.class);
     }
 }

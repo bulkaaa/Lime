@@ -13,56 +13,48 @@ import java.util.Optional;
 
 @Transactional
 public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T, String>> implements IBasicCRUDService{
-    private T_DAO dao;
-    private Class<T> Ttype;
-    private Class<T_POJO> T_POJOtype;
+    private final T_DAO dao;
+    private final Class<T> Ttype;
+    private final Class<T_POJO> T_POJOtype;
 
-    BasicCRUDService(T_DAO dao, Class<T> Ttype, Class<T_POJO> T_POJOtype) {
+    BasicCRUDService(final T_DAO dao, final Class<T> Ttype, final Class<T_POJO> T_POJOtype) {
         this.dao = dao;
         this.Ttype = Ttype;
         this.T_POJOtype = T_POJOtype;
     }
     @Override
     public List<T_POJO> findAll(){
-        Optional<List<T>> t = Optional.ofNullable(dao.findAll());
+        final Optional<List<T>> t = Optional.ofNullable(dao.findAll());
         if(!t.isPresent())
             throw new NotFoundException(Ttype + " object could not be found in DB");
         return ParseTools.parseList(t.get(), T_POJOtype);
     }
     @Override
-    public void delete(String id){
+    public void delete(final String id){
         if(!exists(id))
             throw new NotFoundException(Ttype + " object could not be found in DB");
         dao.delete(id);
     }
 
     @Override
-    public T_POJO save(Object t) {
-        try {
-            return ParseTools.parse(dao.save(ParseTools.parse(t, Ttype)), T_POJOtype);
-        } catch (TransactionSystemException rollbackException) {
-            throw rollbackException;
-        }
+    public T_POJO save(final Object t) {
+        return ParseTools.parse(dao.save(ParseTools.parse(t, Ttype)), T_POJOtype);
     }
     @Override
-    public boolean exists(String id){
+    public boolean exists(final String id){
         return dao.exists(id);
     }
 
     @Override
-    public boolean exists(Object t) {
-        try{
-            return exists(((BasicPOJO)t).getId());
-        } catch (TransactionSystemException rollbackException) {
-            throw rollbackException;
-        }
+    public boolean exists(final Object t) {
+        return exists(((BasicPOJO)t).getId());
     }
 
     @Override
-    public boolean equals(Object t, Object y){
+    public boolean equals(final Object t, final Object y){
         try {
         return t == y;
-        }catch (Exception e){
+        }catch (final Exception e){
             throw new IllegalDataException("Trying to compare wrong type of objects it's " + t.getClass() + " and " + y.getClass() + " objects, should be " + T_POJOtype);
         }
     }
@@ -71,40 +63,28 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
         dao.deleteAll();
     }
     @Override
-    public T_POJO findById(String id){
+    public T_POJO findById(final String id){
         try{
         return ParseTools.parse(dao.findOne(id), T_POJOtype);
-        } catch (Exception e){
+        } catch (final Exception e){
             throw new NotFoundException(Ttype + " object could not be found in DB");
         }
     }
 
     @Override
-    public void delete(Object t) {
-        try {
-            if(!exists(((BasicPOJO)t).getId()))
-                throw new NotFoundException(Ttype + " object could not be found in DB");
-            dao.delete(ParseTools.parse(t, Ttype));
-        } catch (TransactionSystemException rollbackException) {
-            throw rollbackException;
-        }
+    public void delete(final Object t) {
+        if(!exists(((BasicPOJO)t).getId()))
+            throw new NotFoundException(Ttype + " object could not be found in DB");
+        dao.delete(ParseTools.parse(t, Ttype));
     }
 
     @Override
-    public void save(List l) {
-        try {
-            dao.save(ParseTools.parseList(l, Ttype));
-        } catch (TransactionSystemException rollbackException) {
-            throw rollbackException;
-        }
+    public void save(final List l) {
+        dao.save(ParseTools.parseList(l, Ttype));
     }
     @Override
-    public void delete(List l) {
-        try {
-            dao.delete(ParseTools.parseList(l, Ttype));
-        } catch (TransactionSystemException rollbackException) {
-            throw rollbackException;
-        }
+    public void delete(final List l) {
+        dao.delete(ParseTools.parseList(l, Ttype));
     }
 
     @Override
