@@ -92,7 +92,12 @@ public class UserController extends BaseController {
             @ApiParam("User object") @PathVariable final String userId) {
 
         LOG.info("User fetch request received for id: " + userId);
-        return ParseTools.parseToJson(userService.findById(userId), User.class);
+        try{
+            return ParseTools.parseToJson(userService.findById(userId), User.class);
+        }
+        catch (final Exception e){
+            return "NO SUCH ID IN DB";
+        }
     }
 
     @RequestMapping(value = "/delete/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
