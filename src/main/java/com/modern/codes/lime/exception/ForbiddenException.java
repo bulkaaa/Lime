@@ -16,7 +16,7 @@ public class ForbiddenException extends RuntimeException {
      * @param message
      *            message
      */
-    public ForbiddenException(String message) {
+    public ForbiddenException(final String message) {
         super(message);
     }
 

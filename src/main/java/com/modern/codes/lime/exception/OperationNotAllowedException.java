@@ -16,7 +16,7 @@ public class OperationNotAllowedException extends RuntimeException {
      * @param message
      *            message
      */
-    public OperationNotAllowedException(String message) {
+    public OperationNotAllowedException(final String message) {
         super(message);
     }
 

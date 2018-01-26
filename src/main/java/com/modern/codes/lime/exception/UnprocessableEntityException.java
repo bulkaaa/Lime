@@ -27,7 +27,7 @@ public class UnprocessableEntityException extends RuntimeException {
      * @param locale
      *            Locale object
      */
-    public UnprocessableEntityException(String message, Errors errors, Locale locale) {
+    public UnprocessableEntityException(final String message, final Errors errors, final Locale locale) {
         super(message);
         this.errors = errors;
         this.locale = locale;

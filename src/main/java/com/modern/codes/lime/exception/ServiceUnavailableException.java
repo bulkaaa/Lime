@@ -14,7 +14,7 @@ public class ServiceUnavailableException extends RuntimeException {
      *
      * @param message message
      */
-    public ServiceUnavailableException(String message) {
+    public ServiceUnavailableException(final String message) {
         super(message);
     }
 }

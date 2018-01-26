@@ -16,7 +16,7 @@ public class IllegalDataException extends RuntimeException {
      * @param message
      *            message
      */
-    public IllegalDataException(String message) {
+    public IllegalDataException(final String message) {
         super(message);
     }
 

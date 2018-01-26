@@ -27,7 +27,7 @@ public class InvalidRequestException extends RuntimeException {
      * @param locale
      *            Locale object
      */
-    public InvalidRequestException(String message, Errors errors, Locale locale) {
+    public InvalidRequestException(final String message, final Errors errors, final Locale locale) {
         super(message);
         this.errors = errors;
         this.locale = locale;

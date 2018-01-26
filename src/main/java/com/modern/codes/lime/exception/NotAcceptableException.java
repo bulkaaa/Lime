@@ -16,7 +16,7 @@ public class NotAcceptableException extends RuntimeException {
      * @param message
      *            message
      */
-    public NotAcceptableException(String message) {
+    public NotAcceptableException(final String message) {
         super(message);
     }
 

@@ -34,8 +34,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            AccessDeniedException
      */
     @ExceptionHandler(AccessDeniedException.class)
-    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public void handleAccessDeniedException(AccessDeniedException ex) {
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public void handleAccessDeniedException(final AccessDeniedException ex) {
         LOG.info(ex.getMessage());
     }
 
@@ -46,8 +46,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            ForbiddenException
      */
     @ExceptionHandler(ForbiddenException.class)
-    @ResponseStatus(value = HttpStatus.FORBIDDEN)
-    public void handleForbiddenException(ForbiddenException ex) {
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public void handleForbiddenException(final ForbiddenException ex) {
         LOG.warn(ex.getMessage());
     }
 
@@ -58,8 +58,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            NotFoundException
      */
     @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public void handleNotFoundException(NotFoundException ex) {
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void handleNotFoundException(final NotFoundException ex) {
         LOG.warn(ex.getMessage());
     }
 
@@ -70,8 +70,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            OperationNotAllowedException
      */
     @ExceptionHandler(OperationNotAllowedException.class)
-    @ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
-    public void handleOperationNotAllowedException(OperationNotAllowedException ex) {
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public void handleOperationNotAllowedException(final OperationNotAllowedException ex) {
         LOG.warn(ex.getMessage());
     }
 
@@ -82,8 +82,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            NotAcceptableException
      */
     @ExceptionHandler(NotAcceptableException.class)
-    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
-    public void handleNotAcceptableException(NotAcceptableException ex) {
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public void handleNotAcceptableException(final NotAcceptableException ex) {
         LOG.warn(ex.getMessage());
     }
 
@@ -94,8 +94,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            UnprocessableEntityException
      */
     @ExceptionHandler(UnprocessableEntityException.class)
-    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
-    public void handleUnprocessableEntityException(UnprocessableEntityException ex) {
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public void handleUnprocessableEntityException(final UnprocessableEntityException ex) {
         LOG.warn(ex.getMessage());
     }
 
@@ -106,8 +106,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            IllegalStateException
      */
     @ExceptionHandler(IllegalStateException.class)
-    @ResponseStatus(value = HttpStatus.PRECONDITION_REQUIRED)
-    public void handleIllegalStateException(IllegalStateException ex) {
+    @ResponseStatus(HttpStatus.PRECONDITION_REQUIRED)
+    public void handleIllegalStateException(final IllegalStateException ex) {
         LOG.warn(ex.getMessage());
     }
 
@@ -118,8 +118,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            ServiceUnavailableException
      */
     @ExceptionHandler(ServiceUnavailableException.class)
-    @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
-    public void handleServiceUnavailableException(ServiceUnavailableException ex) {
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public void handleServiceUnavailableException(final ServiceUnavailableException ex) {
         LOG.warn(ex.getMessage());
     }
 
@@ -131,8 +131,8 @@ public class GlobalExceptionHandlingControllerAdvice {
      *            Exception
      */
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
-    public void handleException(Exception ex) {
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public void handleException(final Exception ex) {
         LOG.error(ex.getMessage(), ex);
     }
 }
