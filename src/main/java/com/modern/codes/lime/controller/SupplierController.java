@@ -102,4 +102,14 @@ public class SupplierController extends BaseController{
 
         return ParseTools.parseToJson(supplierService.findAll(), Supplier.class);
     }
+    @RequestMapping(value = "/one/{supplierId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetch a supplier object", notes = "Fetches a <b>suppliere</b> object by id ", response = SupplierPOJO.class)
+    @ApiResponses(@ApiResponse(code = 200, message = "Saved supplier object"))
+    @ResponseBody
+    public String getSupplier(
+            @ApiParam("Supplier object") @PathVariable final String supplierId) {
+
+        LOG.info("Supplier fetch request received for id: " + supplierId);
+        return ParseTools.parseToJson(supplierService.findById(supplierId), Supplier.class);
+    }
 }
