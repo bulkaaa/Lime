@@ -6,7 +6,7 @@ import java.util.List;
 
 @Repository
 public interface IProductCategoryDAO extends IBasicCRUDRepository<ProductCategory, String> {
-    List<ProductCategory> findByName(String name);
-    ProductCategory findByProductsName(String productName);
-    ProductCategory findByProductsId(String productId);
+    List<ProductCategory> findByName(final String name);
+    ProductCategory findByProductsName(final String productName);
+    ProductCategory findByProductsId(final String productId);
 }

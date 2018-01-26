@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface IRoleDAO extends IBasicCRUDRepository<Role, String> {
-    List<Role> findByName(String name);
+    List<Role> findByName(final String name);
 }
