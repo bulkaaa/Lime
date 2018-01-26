@@ -3,6 +3,8 @@ package com.modern.codes.lime.controller;
 import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.order.Order;
+import com.modern.codes.lime.pojo.ResourcePOJO;
+import com.modern.codes.lime.pojo.SupplierPOJO;
 import com.modern.codes.lime.service.IResourceService;
 import com.modern.codes.lime.tools.ParseTools;
 import io.swagger.annotations.ApiOperation;
@@ -53,20 +55,23 @@ public class OrderController {
                             @ApiResponse(code = 422, message = "In case of validation errors")})
     @ResponseBody
     public Boolean send(
-            @Validated @RequestBody @ApiParam(value = "Map of Resources and amout") final Map<Resource, Integer> orderList,
+            @Validated @RequestBody @ApiParam(value = "Map of Resources and amout") final Map<String, Integer> orderList,
             final BindingResult bindingResult, UriComponentsBuilder b) {
         LOG.info("order request received map resource:amount \n {} ", orderList);
-        final Map<Supplier, Map<Resource, Integer>> supplierMap = new HashMap<>();
+        final Map<SupplierPOJO, Map<ResourcePOJO, Integer>> supplierMap = new HashMap<>();
         orderList.forEach((key, value) -> {
-            Map<Resource, Integer> suppVal = supplierMap.get(key.getSupplier());
-            if(null != suppVal){
-                suppVal.put(key,value);
-                //supplierMap.put(key.getSupplier(), suppVal);
-            }
-            else{
-                suppVal = new HashMap<>();
-                suppVal.put(key, value);
-                supplierMap.put(key.getSupplier(), suppVal);
+            final ResourcePOJO resource = resourceService.findById(key);
+            if(resource.getSupplier() != null){
+                Map<ResourcePOJO, Integer> suppVal = supplierMap.get(resource.getPOJOSupplier());
+                if(null != suppVal){
+                    suppVal.put(resource,value);
+                    //supplierMap.put(resource.getPOJOSupplier(), suppVal);
+                }
+                else{
+                    suppVal = new HashMap<>();
+                    suppVal.put(resource, value);
+                    supplierMap.put(resource.getPOJOSupplier(), suppVal);
+                }
             }
         });
           supplierMap.forEach((key, value) -> Order.SendEmail(key.getEmailAddress(), "Order from LIME", Order.ConstructOrderMsg(key.getName(), value)));

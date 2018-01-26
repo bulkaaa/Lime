@@ -9,10 +9,11 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.pojo.ResourcePOJO;
 
 public class Order {
 
-    public static String ConstructOrderMsg(final String supplierName, final Map<Resource, Integer> map){
+    public static String ConstructOrderMsg(final String supplierName, final Map<ResourcePOJO, Integer> map){
         final StringBuilder message = new StringBuilder("Dear " + supplierName + ", " + "\n\n We would like to order: \n");
         map.forEach((key, value) -> message.append(key.getName())
                                            .append(" : ")
