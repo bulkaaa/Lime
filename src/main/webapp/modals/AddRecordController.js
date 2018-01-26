@@ -19,6 +19,10 @@ app.controller('AddRecordController',  ['$scope', '$http','$uibModalInstance', f
             $scope.item.roles = $scope.list.roles;
          }
 
+         if($scope.list && $scope.list.suppliers){
+             $scope.item.supplier = $scope.list.suppliers[0];
+          }
+
 		$scope.saveRecord($scope.item);
 	 };
 

@@ -57,10 +57,11 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
                 function(response){
                     if (response.data){
                         item = response.data;
-
                         $scope.item.name = response.data.name;
-                        $scope.item.surname = response.data.surname;
                         $scope.item.emailAddress = response.data.emailAddress;
+                        $scope.item.name = response.data.name;
+                        $scope.item.name = response.data.name;
+                        $scope.item.name = response.data.name;
                     }
                 },
                 function(response){
@@ -95,18 +96,6 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
 
     $scope.addRecord = function(){
         $scope.item={};
-
-        $http.get("/supplier/get-roles")
-            .then(
-                function (response) {
-                    if (response.data) {
-                        $scope.roles = response.data.slice();
-                    }
-                },
-                function (response) {
-                    DialogService.generalServerError();
-                }
-            );
         modalInstance = $modal.open({
             templateUrl: 'modals/add-record.html',
             controller: 'AddRecordController',
