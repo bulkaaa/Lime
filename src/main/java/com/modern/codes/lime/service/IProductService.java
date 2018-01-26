@@ -25,6 +25,7 @@ public interface IProductService {
     List<ProductPOJO> findByName(String name);
     List<ProductPOJO> findByAddedAtBetween(Date begin, Date end);
     List<ProductPOJO> findByCategoryName(String categoryName);
+    List<ProductPOJO> findByCategoryId(String categoryId);
 
     static List<ProductPOJO> filterByName(final List<ProductPOJO> list, final String name){
         return filterByName(list.stream(), name).collect(Collectors.toList());

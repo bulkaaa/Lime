@@ -33,7 +33,7 @@ import java.util.Locale;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/product")
+@RequestMapping("/product")
 public class ProductController extends BaseController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
