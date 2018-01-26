@@ -12,4 +12,5 @@ public interface IUserDAO extends IBasicCRUDRepository<User, String> {
     User findByUsername(final String username);
     List<User> findByJoinedAtBetween(final Date begin, final Date end);
     List<User> findByNameAndSurname(final String name, final String surname);
+    User findByUsernameOrEmailAddress(String username, String email);
 }

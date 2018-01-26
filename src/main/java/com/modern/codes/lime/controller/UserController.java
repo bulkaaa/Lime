@@ -3,6 +3,7 @@ package com.modern.codes.lime.controller;
 import java.util.List;
 import java.util.Locale;
 
+import com.modern.codes.lime.exception.AlreadyExistsException;
 import com.modern.codes.lime.model.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +45,8 @@ public class UserController extends BaseController {
     @ApiOperation(value = "Creates a User object", notes = "Creates a <b>User</b> object "
                                                               + "Saves it into DB.", response = User.class)
     @ApiResponses({@ApiResponse(code = 200, message = "Saved User object"),
-                           @ApiResponse(code = 422, message = "In case of validation errors of User object")})
+                                 @ApiResponse(code = 409, message = "User given username or email already exists"),
+                                 @ApiResponse(code = 422, message = "In case of validation errors of User object")})
     @ResponseBody
     public String create(
             @Validated @RequestBody @ApiParam("User object") final User user,
@@ -55,6 +57,11 @@ public class UserController extends BaseController {
         if (user == null || bindingResult.hasErrors())
             throw new InvalidRequestException(String.format("Invalid User creation request, form data contains %s error(s).",
                                                             bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+
+        if (userService.findByUsernameOrEmail(user.getUsername(), user.getEmailAddress()) != null)
+            throw new AlreadyExistsException(
+                    String.format("Invalid User creation request, username: %s or email: %s already registered.", user.getUsername(), user.getEmailAddress()));
+
         return ParseTools.parseToJson(userService.save(user), User.class);
     }
 
