@@ -35,6 +35,18 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
     };
 
     $scope.editRecord = function(item){
+
+        $http.get("/supplier/all")
+                        .then(
+                            function (response) {
+                                if (response.data) {
+                                   $scope.suppliersList = response.data;
+                                }
+                            },
+                            function (response) {
+                                DialogService.generalServerError();
+                            }
+                        );
         $http.get("resource/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
@@ -63,6 +75,7 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
                         $scope.item.quantity = response.data.quantity;
                         $scope.item.unit = response.data.unit;
                         $scope.item.image = response.data.image;
+                        $scope.item.supplier = response.data.supplier;
                     }
                 },
                 function(response){
@@ -96,6 +109,17 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
 
     $scope.addRecord = function(){
         $scope.item={};
+        $http.get("/supplier/all")
+                .then(
+                    function (response) {
+                        if (response.data) {
+                           $scope.suppliersList = response.data;
+                        }
+                    },
+                    function (response) {
+                        DialogService.generalServerError();
+                    }
+                );
         modalInstance = $modal.open({
             templateUrl: 'modals/add-record.html',
             controller: 'AddRecordController',
@@ -121,6 +145,7 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
                             quantity: item.quantity,
                             image: item.image,
                             unit: item.unit
+
                         });
                     }
                 },
@@ -129,5 +154,9 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
                 }
             );
     }
+
+     $scope.list = {
+            suppliers: []
+        };
 
 }]);

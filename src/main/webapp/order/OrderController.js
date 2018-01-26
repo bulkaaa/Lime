@@ -39,7 +39,7 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
                 .then(
                     function(response){
                         if (response.data){
-                            $dialogs.info('Order', 'Order was sent to resource suppliers');
+                            $dialogs.notify('Order', 'Order was sent to resource suppliers');
                         }
                     },
                     function(response){

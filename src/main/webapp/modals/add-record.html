@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
         <form class="form-horizontal" name="form" role="form">
-            <div ng-if="resource || product || users" class="form-group" ng-class="{ 'has-error': form.name.$touched && form.name.$error.required }">
+            <div ng-if="resource || product || users || suppliers" class="form-group" ng-class="{ 'has-error': form.name.$touched && form.name.$error.required }">
                 <label class="col-sm-3 control-label">Name <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
                     <input type="text" name="name" ng-model="item.name" placeholder="Name" class="form-control" required>
@@ -83,13 +83,63 @@
                 </div>
                 <span class="help-button" uib-tooltip="Please enter item image" tooltip-placement="left">?</span>
             </div>
-            <div ng-if="users" class="form-group" ng-class="{ 'has-error': form.email.$touched && form.email.$error.required }">
+            <div ng-if="resource" class="form-group" ng-class="{ 'has-error': form.supplier.$touched && form.supplier.$error.required }">
+                <label class="col-sm-3 control-label">Supplier email: <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <div class="row" ng-repeat="supplier in suppliersList">
+                        <input type="checkbox" checklist-model="list.suppliers" ng-required="list.suppliers.length==0" checklist-value="supplier" ng-checked="false"> {{supplier.emailAddress}}
+                    </div>
+                    <span ng-show="form.supplier.$touched && form.supplier.$error.required" class="help-block">Supplier email is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter supplier email" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="users || suppliers" class="form-group" ng-class="{ 'has-error': form.email.$touched && form.email.$error.required }">
                 <label class="col-sm-3 control-label">Email <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
                     <input type="email" name="emailAddress" ng-model="item.emailAddress" placeholder="Email" class="form-control" required>
                     <span ng-show="form.emailAddress.$touched && form.emailAddress.$error.required" class="help-block">Email is required</span>
                 </div>
                 <span class="help-button" uib-tooltip="Please enter email" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="suppliers" class="form-group" ng-class="{ 'has-error': form.telephone.$touched && form.telephone.$error.required }">
+                <label class="col-sm-3 control-label">Telephone <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <input type="tel" name="telephone" ng-model="item.telephone" placeholder="telephone" class="form-control" required>
+                    <span ng-show="form.telephone.$touched && form.telephone.$error.required" class="help-block">Telephone is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter telephone" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="suppliers" class="form-group" ng-class="{ 'has-error': form.city.$touched && form.city.$error.required }">
+                <label class="col-sm-3 control-label">City <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <input type="text" name="city" ng-model="item.city" placeholder="City" class="form-control" required>
+                    <span ng-show="form.city.$touched && form.city.$error.required" class="help-block">City is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter city" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="suppliers" class="form-group" ng-class="{ 'has-error': form.country.$touched && form.country.$error.required }">
+                <label class="col-sm-3 control-label">Country <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <input type="text" name="country" ng-model="item.country" placeholder="country" class="form-control" required>
+                    <span ng-show="form.country.$touched && form.country.$error.required" class="help-block">Country is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter country" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="suppliers" class="form-group" ng-class="{ 'has-error': form.postalCode.$touched && form.postalCode.$error.required }">
+                <label class="col-sm-3 control-label">Postal Code <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <input type="text" name="postalCode" ng-model="item.postalCode" placeholder="postalCode" class="form-control" required>
+                    <span ng-show="form.postalCode.$touched && form.postalCode.$error.required" class="help-block">Postal code is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter postal code" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="suppliers" class="form-group" ng-class="{ 'has-error': form.street.$touched && form.street.$error.required }">
+                <label class="col-sm-3 control-label">Street <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <input type="text" name="street" ng-model="item.street" placeholder="street" class="form-control" required>
+                    <span ng-show="form.street.$touched && form.street.$error.required" class="help-block">Street is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter street" tooltip-placement="left">?</span>
             </div>
             <div ng-if="users" class="form-group" ng-class="{ 'has-error': form.password.$touched && form.password.$error.required }">
                 <label class="col-sm-3 control-label">Password <sup class="sup-color">*</sup></label>
