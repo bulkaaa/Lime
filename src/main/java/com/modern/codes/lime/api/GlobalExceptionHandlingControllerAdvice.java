@@ -1,5 +1,6 @@
 package com.modern.codes.lime.api;
 
+import com.modern.codes.lime.exception.AlreadyExistsException;
 import com.modern.codes.lime.exception.ForbiddenException;
 import com.modern.codes.lime.exception.NotAcceptableException;
 import com.modern.codes.lime.exception.NotFoundException;
@@ -84,6 +85,18 @@ public class GlobalExceptionHandlingControllerAdvice {
     @ExceptionHandler(NotAcceptableException.class)
     @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
     public void handleNotAcceptableException(NotAcceptableException ex) {
+        LOG.warn(ex.getMessage());
+    }
+
+    /**
+     * Exception handler for <i>AlreadyExistsException</i>, translating error into HTTP status code 409.
+     *
+     * @param ex
+     *            AlreadyExistsException
+     */
+    @ExceptionHandler(AlreadyExistsException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    public void handleAlreadyExistsException(AlreadyExistsException ex) {
         LOG.warn(ex.getMessage());
     }
 
