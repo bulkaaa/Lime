@@ -36,8 +36,6 @@ public class ResourceController extends BaseController{
 
     @Autowired
     IResourceService resourceService;
-    @Autowired
-    IFormulaService formulaService;
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -85,7 +83,6 @@ public class ResourceController extends BaseController{
             @ApiParam(value = "Resource object") @PathVariable final String resourceId) {
 
         LOG.info("Resource deletion request received for id: " + resourceId);
-        formulaService.delete(formulaService.findByResourceId(resourceId));
         resourceService.delete(resourceId);
         return true;
     }

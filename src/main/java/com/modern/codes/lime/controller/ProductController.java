@@ -107,7 +107,6 @@ public class ProductController extends BaseController {
             @ApiParam("Product object") @PathVariable final String productId) {
 
         LOG.info("Product deletion request received for id: " + productId);
-        formulaService.delete(formulaService.findByProductId(productId));
         productService.delete(productId);
         return true;
     }
