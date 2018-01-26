@@ -35,7 +35,7 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
     };
 
     $scope.editRecord = function(item){
-        $http.get("resource/" + item.id)
+        $http.get("resource/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
                 modalInstance = $modal.open({
