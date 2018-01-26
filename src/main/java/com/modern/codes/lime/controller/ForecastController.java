@@ -36,11 +36,10 @@ public class ForecastController extends BaseController{
     @Autowired
     IJobService jobService;
 
-
     @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<byte[]>  generateForecast(
-            @RequestBody @ApiParam(value = "List of product ids") final List<String> productIds,
+            @RequestBody @ApiParam("List of product ids") final List<String> productIds,
             @RequestParam final String startDate,
             @RequestParam final Integer noDays,
             @RequestParam final Integer noDaysForecast) {
@@ -50,7 +49,7 @@ public class ForecastController extends BaseController{
         Date date;
         try {
             date = formatter.parse(startDate);
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
 
@@ -72,7 +71,7 @@ public class ForecastController extends BaseController{
     @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void  sendForecast(
-            @RequestBody @ApiParam(value = "List of product ids") final List<String> productIds,
+            @RequestBody @ApiParam("List of product ids") final List<String> productIds,
             @RequestParam final String startDate,
             @RequestParam final Integer noDays,
             @RequestParam final Integer noDaysForecast,
@@ -83,7 +82,7 @@ public class ForecastController extends BaseController{
         Date date;
         try {
             date = formatter.parse(startDate);
-        } catch (ParseException e) {
+        } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays);
@@ -95,26 +94,5 @@ public class ForecastController extends BaseController{
         }
         DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart");
         Order.SendEmail(email,"Forecast Email from LIME", "Please Find Report Attached", "./Sample_Chart.png");
-    }
-
-    @GetMapping(path = "/test")
-    public String Test() {
-        final Integer days_past = 8;
-        final Integer days_forecast = 2;
-        final ArrayList<TimeSeries> seriesFL = new ArrayList<>();
-        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, new Date(), days_past);
-
-       for (final TimeSeries series : seriesL) {
-            final TimeSeries fcst = Smoothing.calculateSmoothing(series, days_forecast);
-            fcst.setLabel(series.getLabel() + " Forecast");
-            seriesFL.add(fcst);
-        }
-
-        //final String filename = DrawSeries.plot(seriesL, seriesFL, new Date(), "Production in the Past" + days_past + "Days and forecast for the next " + days_forecast);
-
-        final String email = "aleksandrabulka1@gmail.com";
-        //Order.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", filename);
-
-        return "Email Sent";
     }
 }
