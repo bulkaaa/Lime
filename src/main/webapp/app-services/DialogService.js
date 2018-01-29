@@ -9,6 +9,7 @@ function DialogService($rootScope, $timeout, $q, $dialogs) {
     service.generalServerError = generalServerError;
     service.validationError = validationError;
     service.handle = handle;
+    service.loginFirstError = loginFirstError;
     return service;
 
 
@@ -28,6 +29,10 @@ function DialogService($rootScope, $timeout, $q, $dialogs) {
     function alreadyExistsError(response, name, uniqueFields){
         let errorMessage = "Please check your input";
         $dialogs.error(name + " with such " + uniqueFields +" already exists", errorMessage);
+    }
+
+    function loginFirstError(){
+        $dialogs.notify("Unauthorized", "Please log in first");
     }
 
     function handle(response, name, action, uniqueFields){
