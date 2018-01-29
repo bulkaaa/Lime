@@ -26,27 +26,27 @@
         }
 
         function GetAll() {
-            return $http.get('/user/all').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get('/user/all').then(handleSuccess, handleError);
         }
 
         function GetById(id) {
-            return $http.get('/user/one/' + id).then(handleSuccess, handleError('Error getting user by id'));
+            return $http.get('/user/one/' + id).then(handleSuccess, handleError);
         }
 
         function GetByUsername(username) {
-            return $http.get('/user/get-by-username/' + username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.get('/user/get-by-username/' + username).then(handleSuccess, handleError);
         }
 
         function Create(user) {
-            return $http.post('/user/create', user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post('/user/create', user).then(handleSuccess, handleError);
         }
 
         function Update(user) {
-            return $http.put('/user/update', user).then(handleSuccess, handleError('Error updating user'));
+            return $http.put('/user/update', user).then(handleSuccess, handleError);
         }
 
         function Delete(id) {
-            return $http.delete('/user/delete/' + id).then(handleSuccess, handleError('Error deleting user'));
+            return $http.delete('/user/delete/' + id).then(handleSuccess, handleError);
         }
 
         // private functions
@@ -55,9 +55,7 @@
             return { success: true, data: res.data };
         }
 
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
+        function handleError(res) {
+                return { success: false, response: res };
         }
     }

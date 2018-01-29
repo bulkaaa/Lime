@@ -80,6 +80,10 @@ public class UserController extends BaseController {
             throw new InvalidRequestException(String.format("Invalid User update request, form data contains %s error(s).",
                                                             bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
+        if (userService.findByUsernameOrEmail(user.getUsername(), user.getEmailAddress()) != null)
+            throw new AlreadyExistsException(
+                    String.format("Invalid User creation request, username: %s or email: %s already registered.", user.getUsername(), user.getEmailAddress()));
+
         return ParseTools.parseToJson(userService.save(user), User.class);
     }
 

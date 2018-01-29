@@ -95,7 +95,7 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
                     }
                 },
                 function(response){
-                    DialogService.handle(response, 'user', 'update');
+                    DialogService.handle(response, 'user', 'update', 'email or username');
                 }
             );
     };
@@ -171,10 +171,10 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
                     }
                 },
                 function(response){
-                    DialogService.handle(response, 'user', 'create');
+                    DialogService.handle(response, 'user', 'create', 'email or username');
                 }
             );
-    }
+    };
 
     $scope.list = {
             roles: []

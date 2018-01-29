@@ -2,8 +2,8 @@ angular
         .module('myApp')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
-    function RegisterController(UserService, $location, $rootScope, FlashService) {
+    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService', 'DialogService'];
+    function RegisterController(UserService, $location, $rootScope, FlashService, DialogService) {
         var vm = this;
 
         vm.register = register;
@@ -16,7 +16,7 @@ angular
                         FlashService.Success('Registration successful', true);
                         $location.path('/login');
                     } else {
-                        FlashService.Error(response.message);
+                        DialogService.handle(response.response, "User", "register", "email or username");
                         vm.dataLoading = false;
                     }
                 });
