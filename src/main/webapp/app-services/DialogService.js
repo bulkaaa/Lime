@@ -25,9 +25,16 @@ function DialogService($rootScope, $timeout, $q, $dialogs) {
         $dialogs.error("Failed to "+action+" " + name + " .", errorMessage);
     }
 
-    function handle(response, name, action){
+    function alreadyExistsError(response, name, uniqueFields){
+        let errorMessage = "Please check your input";
+        $dialogs.error(name + " with such " + uniqueFields +" already exists", errorMessage);
+    }
+
+    function handle(response, name, action, uniqueFields){
         if (response.status === 422 )
             validationError(response, name, action);
+        else if(response.status === 409)
+            alreadyExistsError(response, name, uniqueFields);
         else
             generalServerError();
     }

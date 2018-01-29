@@ -2,16 +2,16 @@
     <div class="container">
         <div class="col-sm-8 col-sm-offset-2">
             <h2>Edit Account</h2>
-            <form name="form" ng-submit="vm.register()" role="form">
-                <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
-                    <label for="username">First name</label>
-                    <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.firstName" required />
-                    <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
+            <form name="form" ng-submit="vm.edit()" role="form">
+                <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                    <label for="name">First name</label>
+                    <input type="text" name="name" id="name" class="form-control" ng-model="vm.user.name" required />
+                    <span ng-show="form.name.$dirty && form.name.$error.required" class="help-block">First name is required</span>
                 </div>
-                <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
-                    <label for="username">Last name</label>
-                    <input type="text" name="lastName" id="Text1" class="form-control" ng-model="vm.user.lastName" required />
-                    <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
+                <div class="form-group" ng-class="{ 'has-error': form.surname.$dirty && form.surname.$error.required }">
+                    <label for="surname">Last name</label>
+                    <input type="text" name="surname" id="surname" class="form-control" ng-model="vm.user.surname" required />
+                    <span ng-show="form.surname.$dirty && form.surname.$error.required" class="help-block">Last name is required</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
                     <label for="username">Username</label>
@@ -19,9 +19,9 @@
                     <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
-                    <label for="username">Email</label>
-                    <input type="text" name="email" id="email" class="form-control" ng-model="vm.user.email" required />
-                    <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">Email is required</span>
+                    <label for="emailAddress">Email</label>
+                    <input type="text" name="emailAddress" id="emailAddress" class="form-control" ng-model="vm.user.emailAddress" required />
+                    <span ng-show="form.emailAddress.$dirty && form.emailAddress.$error.required" class="help-block">Email is required</span>
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
                     <label for="password">Password</label>

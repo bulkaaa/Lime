@@ -55,7 +55,8 @@
             })
             .when('/editaccount', {
                 templateUrl: 'account/edit/EditAccountView.html',
-                controller: 'EditAccountController'
+                controller: 'EditAccountController',
+                controllerAs: 'vm'
             })
             .when('/reset', {
                 templateUrl: 'account/reset/ResetPasswordView.html',

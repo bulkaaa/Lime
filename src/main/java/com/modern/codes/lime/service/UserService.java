@@ -52,8 +52,8 @@ public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> impl
     }
 
     @Override
-    public UserPOJO findByUsernameOrEmail(final String username, final String email) {
-        return ParseTools.parse(dao.findByUsernameOrEmailAddress(username,email), UserPOJO.class);
+    public  List<UserPOJO> findByUsernameOrEmail(final String username, final String email) {
+        return ParseTools.parseList(dao.findByUsernameOrEmailAddress(username,email), UserPOJO.class);
     }
 
     @Bean
