@@ -22,7 +22,7 @@
                 url: '/login',
                 data:  $.param(user),
                 headers:  {'Content-Type': 'application/x-www-form-urlencoded' }
-            }).then(handleSuccess, handleError('User login error'));
+            }).then(handleSuccess, handleError);
         }
 
         function GetAll() {
@@ -56,6 +56,6 @@
         }
 
         function handleError(res) {
-                return { success: false, response: res };
+                return { success: false, data: res };
         }
     }
