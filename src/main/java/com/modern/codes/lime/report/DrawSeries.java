@@ -19,7 +19,7 @@ public class DrawSeries {
 
     public static byte[] plot(final ArrayList<TimeSeries> timeSeriesList,
                                                       final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, final String header, final String filename) {
-        final XYChart chart = new XYChartBuilder().width(600)
+        final CategoryChart chart = new CategoryChartBuilder().width(600)
                                                   .height(400)
                                                   .title(header)
                                                   .xAxisTitle("Time")
@@ -27,8 +27,8 @@ public class DrawSeries {
                                                   .build();
         chart.getStyler()
              .setLegendPosition(Styler.LegendPosition.OutsideE);
-        chart.getStyler()
-             .setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
+        //chart.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
+        chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Line);
         chart.getStyler()
              .setDatePattern("dd-MMM-YY");
         final Date firstDay = getDate(timeSeriesList, toDay);
@@ -47,7 +47,7 @@ public class DrawSeries {
         return ArrayUtils.EMPTY_BYTE_ARRAY;
     }
 
-    private static void ProcessDataInTimeSeries(final ArrayList<TimeSeries> timeSeriesList, final XYChart chart,
+    private static void ProcessDataInTimeSeries(final ArrayList<TimeSeries> timeSeriesList, final CategoryChart chart,
                                                 final Date firstDay) {
         for (final TimeSeries timeSeries : timeSeriesList) {
             final List<Date> xData = new ArrayList<>();
