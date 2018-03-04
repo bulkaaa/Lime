@@ -59,7 +59,8 @@ public class ForecastController extends BaseController{
             forecast.setLabel(series.getLabel() + " Forecast");
             seriesFL.add(forecast);
         }
-        final byte[] bytes = DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart");
+        final String type = "Line";
+        final byte[] bytes = DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", type);
 
         return ResponseEntity
                 .ok()
@@ -91,7 +92,8 @@ public class ForecastController extends BaseController{
             forecast.setLabel(series.getLabel() + " Forecast");
             seriesFL.add(forecast);
         }
-        DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart");
+        final String type = "Line";
+        DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", type);
         Order.SendEmail(email,"Forecast Email from LIME", "Please Find Report Attached", "./Sample_Chart.png");
     }
 }

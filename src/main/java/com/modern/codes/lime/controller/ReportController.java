@@ -59,8 +59,9 @@ public class ReportController {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
 
+        final String type = "Line";
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        final byte [] bytes = DrawSeries.plot(seriesL, new ArrayList<>(), date, "Production in past "+noDays+" days", "Sample_Chart");
+        final byte [] bytes = DrawSeries.plot(seriesL, new ArrayList<>(), date, "Production in past "+noDays+" days", "Sample_Chart", type);
 
         return ResponseEntity
                 .ok()
@@ -83,9 +84,9 @@ public class ReportController {
         } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
-
+        final String type = "Line";
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        DrawSeries.plot(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days", "Sample_Chart");
+        DrawSeries.plot(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days", "Sample_Chart",type);
         Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", "./Sample_Chart.png");
 
 

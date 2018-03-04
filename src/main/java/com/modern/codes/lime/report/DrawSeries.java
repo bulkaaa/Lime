@@ -18,7 +18,7 @@ public class DrawSeries {
     private static final Logger LOG = LoggerFactory.getLogger(DrawSeries.class);
 
     public static byte[] plot(final ArrayList<TimeSeries> timeSeriesList,
-                                                      final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, final String header, final String filename) {
+                                                      final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, final String header, final String filename, final String type) {
         final CategoryChart chart = new CategoryChartBuilder().width(600)
                                                   .height(400)
                                                   .title(header)
@@ -27,8 +27,9 @@ public class DrawSeries {
                                                   .build();
         chart.getStyler()
              .setLegendPosition(Styler.LegendPosition.OutsideE);
-        //chart.getStyler().setDefaultSeriesRenderStyle(XYSeries.XYSeriesRenderStyle.Line);
-        chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Line);
+        if (type == "Line") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Line);
+        if (type == "Bar") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Bar);
+        if (type == "Stick") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Stick);
         chart.getStyler()
              .setDatePattern("dd-MMM-YY");
         final Date firstDay = getDate(timeSeriesList, toDay);
