@@ -6,6 +6,7 @@ import org.knowm.xchart.style.Styler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -16,6 +17,16 @@ import java.util.List;
 public class DrawSeries {
 
     private static final Logger LOG = LoggerFactory.getLogger(DrawSeries.class);
+
+    public static byte[] plotChart(final ArrayList<TimeSeries> timeSeriesList,
+                              final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, final String header, final String filename, final String type) {
+
+        byte[] ReturnArray;
+        if  (type == "Pie") ReturnArray = plotPie(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type);
+        else ReturnArray = plot(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type);
+
+        return ReturnArray;
+    }
 
     public static byte[] plot(final ArrayList<TimeSeries> timeSeriesList,
                                                       final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, final String header, final String filename, final String type) {
@@ -30,12 +41,38 @@ public class DrawSeries {
         if (type == "Line") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Line);
         if (type == "Bar") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Bar);
         if (type == "Stick") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Stick);
+
         chart.getStyler()
              .setDatePattern("dd-MMM-YY");
         final Date firstDay = getDate(timeSeriesList, toDay);
 
         ProcessDataInTimeSeries(timeSeriesForecastList, chart, firstDay);
         ProcessDataInTimeSeries(timeSeriesList, chart, firstDay);
+
+        // Save it
+        try {
+            BitmapEncoder.saveBitmap(chart, "./Sample_Chart", BitmapEncoder.BitmapFormat.PNG);
+            return Base64.getEncoder().encode(
+                    BitmapEncoder.getBitmapBytes(chart, BitmapEncoder.BitmapFormat.PNG));
+        } catch (final IOException e) {
+            LOG.error("IO error while generating chart: " + filename);
+        }
+        return ArrayUtils.EMPTY_BYTE_ARRAY;
+    }
+
+    public static byte[] plotPie(final ArrayList<TimeSeries> timeSeriesList,
+                              final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, final String header, final String filename, final String type) {
+        // Create Chart
+        PieChart chart = new PieChartBuilder().width(800).height(600).title(header).build();
+
+        // Customize Chart
+        Color[] sliceColors = new Color[] { new Color(224, 68, 14), new Color(230, 105, 62), new Color(236, 143, 110), new Color(243, 180, 159), new Color(246, 199, 182) };
+        chart.getStyler().setSeriesColors(sliceColors);
+
+        final Date firstDay = getDate(timeSeriesList, toDay);
+
+        ProcessDataInTimeSeriesPie(timeSeriesForecastList, chart, firstDay);
+        ProcessDataInTimeSeriesPie(timeSeriesList, chart, firstDay);
 
         // Save it
         try {
@@ -61,7 +98,23 @@ public class DrawSeries {
                 xData.add(dateBefore);
                 yData.add(timeSeries.get(i));
             }
+
             chart.addSeries(timeSeries.getLabel(), xData, yData);
+        }
+    }
+
+    private static void ProcessDataInTimeSeriesPie(final ArrayList<TimeSeries> timeSeriesList, final PieChart chart,
+                                                final Date firstDay) {
+        for (final TimeSeries timeSeries : timeSeriesList) {
+            Integer sum = 0;
+            final Calendar cal = Calendar.getInstance();
+            for (int i = 0; i < timeSeries.size(); i++) {
+                cal.setTime(firstDay);
+                cal.add(Calendar.DATE, +i);
+                sum = sum + timeSeries.get(i);
+            }
+            chart.addSeries(timeSeries.getLabel(), sum);
+
         }
     }
 

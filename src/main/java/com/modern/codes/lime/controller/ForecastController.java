@@ -60,7 +60,7 @@ public class ForecastController extends BaseController{
             seriesFL.add(forecast);
         }
         final String type = "Line";
-        final byte[] bytes = DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", type);
+        final byte[] bytes = DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", type);
 
         return ResponseEntity
                 .ok()
@@ -93,7 +93,7 @@ public class ForecastController extends BaseController{
             seriesFL.add(forecast);
         }
         final String type = "Line";
-        DrawSeries.plot(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", type);
+        DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", type);
         Order.SendEmail(email,"Forecast Email from LIME", "Please Find Report Attached", "./Sample_Chart.png");
     }
 }
