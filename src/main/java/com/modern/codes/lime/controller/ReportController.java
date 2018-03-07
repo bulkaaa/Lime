@@ -49,8 +49,9 @@ public class ReportController {
     public ResponseEntity<byte[]> generate(
             @RequestParam final String startDate,
             @RequestParam final Integer noDays,
+            @RequestParam final String chartType,
             @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
-        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n", startDate, noDays, productIds);
+        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n chartType: [] \n", startDate, noDays, productIds, chartType);
 
         final Date date;
         try {
@@ -59,9 +60,8 @@ public class ReportController {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
 
-        final String type = "Pie";
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        final byte [] bytes = DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past "+noDays+" days", "Sample_Chart", type);
+        final byte [] bytes = DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past "+noDays+" days", "Sample_Chart", chartType);
 
         return ResponseEntity
                 .ok()
@@ -75,8 +75,9 @@ public class ReportController {
             @RequestParam final String startDate,
             @RequestParam final String email,
             @RequestParam final Integer noDays,
+            @RequestParam final String chartType,
             @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n", startDate, noDays, email, productIds);
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n chartType: [] \n", startDate, noDays, email, productIds, chartType);
 
         final Date date;
         try {
@@ -84,9 +85,9 @@ public class ReportController {
         } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
-        final String type = "Pie";
+        
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days", "Sample_Chart",type);
+        DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days", "Sample_Chart",chartType);
         Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", "./Sample_Chart.png");
 
 

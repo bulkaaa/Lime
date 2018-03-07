@@ -20,7 +20,7 @@ app.controller('ReportController', ['$scope', '$http', 'DialogService', function
         var item = {};
         item = $scope.list.products;
         var date = new Date($scope.date);
-        var url = "/report/generate" + "?startDate=" + date.getDate()+"-"+date.getMonth()+1+"-"+date.getFullYear() + "&noDays=" + $scope.noDays;
+        var url = "/report/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
         var promise = DialogService.dialogWait();
         $http.post(url, JSON.stringify(item))
             .then(
@@ -42,7 +42,7 @@ app.controller('ReportController', ['$scope', '$http', 'DialogService', function
         var item = {};
         item = $scope.list.products;
         var date = new Date($scope.date);
-        var url = "/report/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+date.getMonth()+1+"-"+date.getFullYear() + "&noDays=" + $scope.noDays;
+        var url = "/report/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
         var promise = DialogService.dialogWait();
         $http.post(url, JSON.stringify(item))
             .then(
