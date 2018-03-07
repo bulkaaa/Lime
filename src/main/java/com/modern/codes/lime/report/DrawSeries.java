@@ -22,7 +22,9 @@ public class DrawSeries {
                               final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay, final String header, final String filename, final String type) {
 
         byte[] ReturnArray;
-        if  (type == "Pie") ReturnArray = plotPie(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type);
+        LOG.info("Generating Chart type: {}", type);
+
+        if  (type.equals("Pie")) ReturnArray = plotPie(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type);
         else ReturnArray = plot(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type);
 
         return ReturnArray;
@@ -38,9 +40,9 @@ public class DrawSeries {
                                                   .build();
         chart.getStyler()
              .setLegendPosition(Styler.LegendPosition.OutsideE);
-        if (type == "Line") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Line);
-        if (type == "Bar") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Bar);
-        if (type == "Stick") chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Stick);
+        if (type.equals("Line")) chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Line);
+        if (type.equals("Bar")) chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Bar);
+        if (type.equals("Stick")) chart.getStyler().setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Stick);
 
         chart.getStyler()
              .setDatePattern("dd-MMM-YY");
