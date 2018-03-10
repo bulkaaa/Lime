@@ -14,10 +14,14 @@ public class ResourcePOJO extends BasicPOJO{
     private String description;
     private Unit unit;
     private Double quantity;
+    private Double critical_value;
+    private Boolean notifications_on;
+    private Boolean ordering_on;
     private ResourceCategory category;
     private String image;
     private Supplier supplier;
     private List<Formula> formulas;
+
 
     public String getName() {
         return name;
@@ -50,6 +54,18 @@ public class ResourcePOJO extends BasicPOJO{
     public void setQuantity(final Double quantity) {
         this.quantity = quantity;
     }
+
+    public Double getCritical_value() { return critical_value; }
+
+    public void setCritical_value(Double critical_value) { this.critical_value = critical_value; }
+
+    public Boolean getNotifications_on() { return notifications_on; }
+
+    public void setNotifications_on(Boolean notifications_on) { this.notifications_on = notifications_on; }
+
+    public Boolean getOrdering_on() { return ordering_on; }
+
+    public void setOrdering_on(Boolean ordering_on) { this.ordering_on = ordering_on; }
 
     public ResourceCategory getCategory() {
         return category;

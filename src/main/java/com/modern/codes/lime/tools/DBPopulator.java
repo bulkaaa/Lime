@@ -266,6 +266,30 @@ public class DBPopulator {
         resourceE.setImage("https://tinyurl.com/ya9ene6r");
         resourceF.setImage("https://tinyurl.com/ya9ene6r");
         resourceG.setImage("https://tinyurl.com/ya9ene6r");
+
+        resourceA.setCritical_value(0.0);
+        resourceB.setCritical_value(0.0);
+        resourceC.setCritical_value(0.0);
+        resourceD.setCritical_value(0.0);
+        resourceE.setCritical_value(0.0);
+        resourceF.setCritical_value(0.0);
+        resourceG.setCritical_value(0.0);
+
+        resourceA.setOrdering_on(false);
+        resourceB.setOrdering_on(false);
+        resourceC.setOrdering_on(false);
+        resourceD.setOrdering_on(false);
+        resourceE.setOrdering_on(false);
+        resourceF.setOrdering_on(false);
+        resourceG.setOrdering_on(false);
+
+        resourceA.setNotifications_on(false);
+        resourceB.setNotifications_on(false);
+        resourceC.setNotifications_on(false);
+        resourceD.setNotifications_on(false);
+        resourceE.setNotifications_on(false);
+        resourceF.setNotifications_on(false);
+        resourceG.setNotifications_on(false);
     }
 
     public void setProducts(){

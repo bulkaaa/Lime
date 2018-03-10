@@ -53,6 +53,18 @@ public class Resource implements Serializable{
     @NotNull
     private Double quantity;
 
+    @ApiModelProperty(value = "The critical value of the resource", required = true)
+    @NotNull
+    private Double critical_value;
+
+    @ApiModelProperty(value = "The notifications for the low level of this resource are on if set to true", required = true)
+    @NotNull
+    private Boolean notifications_on;
+
+    @ApiModelProperty(value = "The automatic ordering of this resource is on if set to true", required = true)
+    @NotNull
+    private Boolean ordering_on;
+
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName="ID")
     @JsonBackReference("category-resources")
@@ -168,6 +180,18 @@ public class Resource implements Serializable{
     public void setQuantity(final Double quantity) {
         this.quantity = quantity;
     }
+
+    public Double getCritical_value() { return critical_value; }
+
+    public void setCritical_value(Double critical_value) { this.critical_value = critical_value; }
+
+    public Boolean getNotifications_on() { return notifications_on; }
+
+    public void setNotifications_on(Boolean notifications_on) { this.notifications_on = notifications_on; }
+
+    public Boolean getOrdering_on() {return ordering_on; }
+
+    public void setOrdering_on(Boolean ordering_on) { this.ordering_on = ordering_on; }
 
     public String getImage() {
         return image;

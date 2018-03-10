@@ -131,13 +131,16 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
     };
 
     $scope.saveRecord = function(item) {
-
+        item.critical_value = 0;
+        item.notifications_on = false;
+        item.ordering_on = false;
         $http.post("/resource/create", JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
                         console.log("created resource successfully!");
                         item = response.data;
+
                         $scope.items.push({
                             id: item.id,
                             name: item.name,
@@ -145,7 +148,6 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
                             quantity: item.quantity,
                             image: item.image,
                             unit: item.unit
-
                         });
                     }
                 },
