@@ -1,0 +1,39 @@
+<div class="shopping-cart">
+    <div class="title">Manage Notifications for Resources</div>
+
+    <div class="item row item-border">
+            <div class="description col-md-2 col-sm-2">
+                </br>
+                <span>resource name</span>
+                <span></span>
+            </div>
+            <div class="total-price col-md-1 col-sm-1">critical value</div>
+            <div class="total-price col-md-1 col-sm-1">notifications on</div>
+
+        </div>
+    </div>
+
+    <div ng-repeat="item in items">
+        <div id="{{item.id}}" class="item row">
+            <div class="col-md-12 col-sm-12">
+
+                <div class="description col-md-2 col-sm-2">
+                    </br>
+                    <span>{{item.name}}</span>
+                    <span></span>
+                </div>
+
+                <div class="total-price col-md-1 col-sm-1">{{item.critical_value}}</div>
+                <div class="total-price col-md-1 col-sm-1">{{item.notifications_on}}</div>
+                <div class="total-price col-md-2 col-sm-2">
+                    <div class="btn-group" role="group">
+
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        </i></button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

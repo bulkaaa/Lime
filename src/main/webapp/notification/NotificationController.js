@@ -1,6 +1,61 @@
-app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$location', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $location, $modal, $dialogs, DialogService) {
+app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
+        var modalInstance = null;
+        $scope.resource = true;
 
-    DialogService.generalServerError();
-    $location.path('/welcome');
+        $scope.showAll = function() {
+            $http.get("/resource/all")
+                .then(
+                    function (response) {
+                        if (response.data) {
+                            console.log("updated record successfully!");
+                            $scope.items = response.data;
+                        }
+                    },
+                    function (response) {
+                        DialogService.generalServerError();
+                    }
+                );
+        };
 
-}]);
+        $scope.showAll();
+
+
+        $scope.editRecord = function(item){
+
+            $http.get("resource/one/" + item.id)
+                .then(function(resource){
+                    $scope.item = item;
+                    modalInstance = $modal.open({
+                        templateUrl: 'modals/edit-record.html',
+                        controller: 'EditRecordController',
+                        scope: $scope,
+                        size: '',
+                        resolve: {
+                            item: function () {
+                                return response.data;
+                            }
+                        }
+                    });
+                });
+        };
+
+        $scope.updateRecord = function(item) {
+            $http.put("/resource/update", JSON.stringify(item))
+                .then(
+                    function(response){
+                        if (response.data){
+                            console.log("updated record successfully!");
+                            $scope.item.critical_value = response.data.critical_value;
+                            $scope.item.notifications_on = response.data.notifications_on;
+                        }
+                    },
+                    function(response){
+                        DialogService.handle(response,'resource', 'update');
+                    }
+                );
+        };
+
+
+
+
+    }]);

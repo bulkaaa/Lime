@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController()
-@RequestMapping(path="/not")
+@RequestMapping(path="/notification")
 public class NotificationController {
 
     @Autowired
