@@ -85,7 +85,7 @@ public class ReportController {
         } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
-        
+
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
         DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days", "Sample_Chart",chartType);
         Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", "./Sample_Chart.png");

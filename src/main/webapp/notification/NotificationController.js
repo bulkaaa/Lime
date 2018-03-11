@@ -57,5 +57,4 @@ app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uib
 
 
 
-
     }]);
