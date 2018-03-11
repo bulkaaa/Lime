@@ -48,19 +48,21 @@ public class NotificationController {
        final List<ResourcePOJO> resources = resourceService.findAll();
         resources.forEach(y -> {
             final Double value = y.getQuantity();
-            if (value == 0.0) send(y.getName());
+            if (value == y.getCritical_value() && y.getNotifications_on()==true) send(y.getName());
         });
     }
 
     public static Boolean checkAhead(final ResourcePOJO res, final String email, final double use) {
-       if (res.getQuantity() <= 0.0) {
+       if (res.getQuantity() <= res.getCritical_value() && res.getNotifications_on()==true) {
            Order.SendEmail(email, "Notification from LIME",
-                   "Dear user,\nthe Resource you will need to perform the job: "+res.getName()+" is finished.\nPlease visit LIME application to Order more.");
+                   "Dear user,\nthe inventory of the Resource you will need to perform the job: "+res.getName()+" " +
+                           "is below its critical value.\nPlease visit LIME application to Order more.");
        return false;
        }
-       else if ((res.getQuantity() - use) <= 0.0) {
+       else if ((res.getQuantity() - use) <= res.getCritical_value() && res.getNotifications_on()==true) {
            Order.SendEmail(email, "Notification from LIME",
-                   "Dear user,\nthe Resource you will need to perform the job: "+res.getName()+" will finish after the current job will be done.\nPlease visit LIME application to Order more.");
+                   "Dear user,\nthe inventory of the Resource you will need to perform the job: "+res.getName()+" " +
+                           "will reach its critical value after the current job will be done.\nPlease visit LIME application to Order more.");
            return false;
 
        }
@@ -72,7 +74,8 @@ public class NotificationController {
             final List <UserPOJO> users = userService.findAll();
             users.forEach(y -> {
             Order.SendEmail(y.getEmailAddress(), "Notification from LIME",
-                  "Dear user, the Resource: "+ResourceName+" is finished.\nPlease visit LIME Application to order more.");
+                  "Dear user, the inventory of the Resource: "+ResourceName+" is below its critical value." +
+                          "\nPlease visit LIME Application to order more.");
             });
             return true;
     }
