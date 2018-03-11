@@ -1,6 +1,6 @@
 app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
         var modalInstance = null;
-        $scope.resource = true;
+        $scope.notifications = true;
 
         $scope.showAll = function() {
             $http.get("/resource/all")
@@ -23,7 +23,7 @@ app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uib
         $scope.editRecord = function(item){
 
             $http.get("resource/one/" + item.id)
-                .then(function(resource){
+                .then(function(response){
                     $scope.item = item;
                     modalInstance = $modal.open({
                         templateUrl: 'modals/edit-record.html',

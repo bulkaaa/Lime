@@ -6,6 +6,8 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
         $scope.item.quantity = parseInt(item.quantity);
         $scope.item.unit = item.unit;
         $scope.item.image = item.image;
+        $scope.item.critical_value = item.critical_value;
+        $scope.item.notifications_on = item.notifications_on;
     }
 	$scope.update = function () {
 		$scope.cancelModal();
