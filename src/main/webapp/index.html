@@ -82,13 +82,21 @@
                 templateUrl: 'user/UserView.html',
                 controller: 'UserController'
             })
-            .when('/report', {
-                templateUrl: 'report/ReportView.html',
-                controller: 'ReportController'
+            .when('/report-products', {
+                templateUrl: 'report-products/ReportProductsView.html',
+                controller: 'ReportProductsController'
             })
-            .when('/prediction', {
-                templateUrl: 'prediction/PredictionView.html',
-                controller: 'PredictionController'
+            .when('/report-resources', {
+                templateUrl: 'report-resources/ReportResourcesView.html',
+                controller: 'ReportResourcesController'
+            })
+            .when('/prediction-products', {
+                templateUrl: 'prediction-products/PredictionProductsView.html',
+                controller: 'PredictionProductsController'
+            })
+            .when('/prediction-resources', {
+                templateUrl: 'prediction-resources/PredictionResourcesView.html',
+                controller: 'PredictionResourcesController'
             })
              .when('/supplier', {
                 templateUrl: 'supplier/SupplierView.html',
@@ -139,8 +147,10 @@
 <script src="cart/CartController.js"></script>
 <script src="product/ProductController.js"></script>
 <script src="user/UserController.js"></script>
-<script src="report/ReportController.js"></script>
-<script src="prediction/PredictionController.js"></script>
+<script src="report-products/ReportProductsController.js"></script>
+<script src="prediction-products/PredictionProductsController.js"></script>
+<script src="report-resources/ReportResourcesController.js"></script>
+<script src="prediction-resources/PredictionResourcesController.js"></script>
 <script src="supplier/SupplierController.js"></script>
 <script src="account/login/LoginController.js"></script>
 <script src="account/logout/LogoutController.js"></script>

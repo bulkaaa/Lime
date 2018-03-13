@@ -41,8 +41,9 @@ public class ForecastController extends BaseController{
             @RequestBody @ApiParam("List of product ids") final List<String> productIds,
             @RequestParam final String startDate,
             @RequestParam final Integer noDays,
-            @RequestParam final Integer noDaysForecast) {
-        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n", productIds, startDate, noDays, noDaysForecast);
+            @RequestParam final Integer noDaysForecast,
+            @RequestParam final String chartType) {
+        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n  chartType: [] \n", productIds, startDate, noDays, noDaysForecast, chartType);
 
         final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date;
@@ -59,8 +60,7 @@ public class ForecastController extends BaseController{
             forecast.setLabel(series.getLabel() + " Forecast");
             seriesFL.add(forecast);
         }
-        final String type = "Line";
-        final byte[] bytes = DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", type);
+        final byte[] bytes = DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", chartType);
 
         return ResponseEntity
                 .ok()
@@ -75,8 +75,9 @@ public class ForecastController extends BaseController{
             @RequestParam final String startDate,
             @RequestParam final Integer noDays,
             @RequestParam final Integer noDaysForecast,
-            @RequestParam final String email) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: {} \n", productIds, startDate, noDays, noDaysForecast, email);
+            @RequestParam final String email,
+            @RequestParam final String chartType) {
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: {} \n chartType: [] \n", productIds, startDate, noDays, noDaysForecast, email, chartType);
 
         final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date date;
@@ -92,8 +93,8 @@ public class ForecastController extends BaseController{
             forecast.setLabel(series.getLabel() + " Forecast");
             seriesFL.add(forecast);
         }
-        final String type = "Line";
-        DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", type);
+
+        DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past " + noDays + " Days and forecast for the next " + noDaysForecast + " days.", "Sample_Chart", chartType);
         Order.SendEmail(email,"Forecast Email from LIME", "Please Find Report Attached", "./Sample_Chart.png");
     }
 }

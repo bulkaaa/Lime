@@ -55,6 +55,17 @@ app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uib
                 );
         };
 
+        $scope.NotificationsOn = function(){
+            angular.forEach($scope.items ,function(value, key){
+                 value.notifications_on = 'true';
+            })
+        };
+
+        $scope.NotificationsOff = function(){
+            angular.forEach($scope.items ,function(value, key){
+                 value.notifications_on = 'false';
+            })
+        };
 
 
     }]);

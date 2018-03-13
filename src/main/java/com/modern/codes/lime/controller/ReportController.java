@@ -61,7 +61,7 @@ public class ReportController {
         }
 
         final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        final byte [] bytes = DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past "+noDays+" days", "Sample_Chart", chartType);
+        final byte [] bytes = DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past "+ noDays+" days", "Sample_Chart", chartType);
 
         return ResponseEntity
                 .ok()

@@ -1,13 +1,13 @@
-app.controller('ReportController', ['$scope', '$http', 'DialogService', function($scope, $http, DialogService) {
+app.controller('ReportResourcesController', ['$scope', '$http', 'DialogService', function($scope, $http, DialogService) {
 
-    $scope.getProducts = function() {
-        $http.get("/product/all")
+    $scope.getResources = function() {
+        $http.get("/resource/all")
             .then(
                 function (response) {
                     if (response.data) {
-                        $scope.products = response.data;
-                        if (!$scope.products.length)
-                            $dialogs.notify('Currently there are no products added in LIME', "You can add products by clicking on 'Add New Product' button on 'Products' view");
+                        $scope.resources = response.data;
+                        if (!$scope.resources.length)
+                            $dialogs.notify('Currently there are no resources added in LIME', "You can add products by clicking on 'Add New Resource' button on 'Products' view");
                     }
                 },
                 function (response) {
@@ -18,7 +18,7 @@ app.controller('ReportController', ['$scope', '$http', 'DialogService', function
 
     $scope.generateReport = function () {
         var item = {};
-        item = $scope.list.products;
+        item = $scope.list.resources;
         var date = new Date($scope.date);
         var url = "/report/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
         var promise = DialogService.dialogWait();
@@ -40,7 +40,7 @@ app.controller('ReportController', ['$scope', '$http', 'DialogService', function
 
     $scope.sendReport = function () {
         var item = {};
-        item = $scope.list.products;
+        item = $scope.list.resources;
         var date = new Date($scope.date);
         var url = "/report/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
         var promise = DialogService.dialogWait();
@@ -60,9 +60,9 @@ app.controller('ReportController', ['$scope', '$http', 'DialogService', function
     };
 
     $scope.list = {
-        products: []
+        resources: []
     };
-    $scope.getProducts();
+    $scope.getResources();
 
 
 }]);

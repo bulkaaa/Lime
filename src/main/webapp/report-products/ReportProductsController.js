@@ -1,4 +1,4 @@
-app.controller('PredictionController', ['$scope', '$http', 'dialogs', 'DialogService', function($scope, $http, $dialogs, DialogService) {
+app.controller('ReportProductsController', ['$scope', '$http', 'DialogService', function($scope, $http, DialogService) {
 
     $scope.getProducts = function() {
         $http.get("/product/all")
@@ -16,12 +16,13 @@ app.controller('PredictionController', ['$scope', '$http', 'dialogs', 'DialogSer
             );
     };
 
-    $scope.generateForecast = function () {
+    $scope.generateReport = function () {
         var item = {};
         item = $scope.list.products;
         var date = new Date($scope.date);
+        var url = "/report/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
         var promise = DialogService.dialogWait();
-        $http.post("/forecast/generate" + "?startDate=" + date.getDate()+"-"+date.getMonth()+1+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&noDaysForecast=" + $scope.noDaysForecast, JSON.stringify(item))
+        $http.post(url, JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
@@ -36,16 +37,20 @@ app.controller('PredictionController', ['$scope', '$http', 'dialogs', 'DialogSer
             );
     };
 
-    $scope.sendForecast = function () {
+
+    $scope.sendReport = function () {
         var item = {};
         item = $scope.list.products;
         var date = new Date($scope.date);
-
-        DialogService.dialogWait();
-        $http.post("/forecast/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+date.getMonth()+1+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&noDaysForecast=" + $scope.noDaysForecast, JSON.stringify(item))
+        var url = "/report/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
+        var promise = DialogService.dialogWait();
+        $http.post(url, JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
+                        promise.then(function(result) {
+                            $scope.image = response.data;
+                        });
                     }
                 },
                 function(response){
