@@ -106,9 +106,13 @@
                 templateUrl: 'order/OrderView.html',
                 controller: 'OrderController'
             })
-            .when('/plan', {
-                templateUrl: 'plan/PlanView.html',
-                controller: 'PlanController'
+            .when('/formula', {
+                templateUrl: 'formula/FormulaView.html',
+                controller: 'FormulaController'
+            })
+             .when('/job', {
+                templateUrl: 'job/JobView.html',
+                controller: 'JobController'
             })
             .when('/notification', {
                 templateUrl: 'notification/NotificationView.html',
@@ -147,6 +151,8 @@
 <script src="cart/CartController.js"></script>
 <script src="product/ProductController.js"></script>
 <script src="user/UserController.js"></script>
+<script src="formula/FormulaController.js"></script>
+<script src="job/JobController.js"></script>
 <script src="report-products/ReportProductsController.js"></script>
 <script src="prediction-products/PredictionProductsController.js"></script>
 <script src="report-resources/ReportResourcesController.js"></script>
@@ -158,7 +164,6 @@
 <script src="account/reset/ResetPasswordController.js"></script>
 <script src="notification/NotificationController.js"></script>
 <script src="order/OrderController.js"></script>
-<script src="plan/PlanController.js"></script>
 <script src="account/register/RegisterController.js"></script>
 <script src="modals/ViewRecordController.js"></script>
 <script src="modals/EditRecordController.js"></script>
