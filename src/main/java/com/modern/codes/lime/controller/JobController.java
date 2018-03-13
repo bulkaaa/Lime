@@ -46,7 +46,6 @@ public class JobController extends BaseController {
     @Autowired
     IResourceService resourceService;
 
-
     @Autowired
     IUserService userService;
 

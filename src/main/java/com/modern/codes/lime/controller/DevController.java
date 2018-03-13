@@ -1,6 +1,7 @@
 package com.modern.codes.lime.controller;
 
 import com.modern.codes.lime.model.CustomUserDetails;
+import com.modern.codes.lime.model.Job;
 import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.UserPOJO;
 import com.modern.codes.lime.service.IUserService;
@@ -8,12 +9,18 @@ import com.modern.codes.lime.tools.DBPopulator;
 import com.modern.codes.lime.tools.ParseTools;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController()
 @RequestMapping(path="/dev")
@@ -39,4 +46,9 @@ public class DevController {
                                                                                       .getAuthentication()
                                                                                       .getPrincipal()).getUsername());
     }
-}
+
+
+
+
+
+    }

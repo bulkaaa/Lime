@@ -36,3 +36,6 @@ server:
     address: localhost
     session:
       timeout: 120
+storage:
+  properties:
+    location: pics
