@@ -3,7 +3,7 @@ package com.modern.codes.lime.model;
 public enum FileExtension {
     JPG(0),
     PNG(1),
-    GIFF(2);
+    GIF(2);
 
     private final int id;
     FileExtension(final int id) { this.id = id; }
