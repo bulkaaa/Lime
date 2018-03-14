@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
         <form class="form-horizontal" name="form" role="form">
-            <div ng-if="resource || product || users || suppliers" class="form-group" ng-class="{ 'has-error': form.name.$touched && form.name.$error.required }">
+            <div ng-if="resource || product || users || suppliers || job" class="form-group" ng-class="{ 'has-error': form.name.$touched && form.name.$error.required }">
                 <label class="col-sm-3 control-label">Name <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
                     <input type="text" name="name" ng-model="item.name" placeholder="Name" class="form-control" required>
@@ -29,7 +29,7 @@
                 </div>
                 <span class="help-button" uib-tooltip="Please enter surname" tooltip-placement="left">?</span>
             </div>
-            <div ng-if="resource || product" class="form-group" ng-class="{ 'has-error': form.description.$touched && form.description.$error.required }">
+            <div ng-if="resource || product || job" class="form-group" ng-class="{ 'has-error': form.description.$touched && form.description.$error.required }">
                 <label class="col-sm-3 control-label">Description <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
                     <input type="text" name="description" ng-model="item.description" placeholder="Description" class="form-control" required>
@@ -158,6 +158,30 @@
                     <span ng-show="form.roles.$touched && form.roles.$error.required" class="help-block">Role is required</span>
                 </div>
                 <span class="help-button" uib-tooltip="Please enter role" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="job" class="form-group" ng-class="{ 'has-error': form.startDate.$touched && form.startDate.$error.required }">
+                <label class="col-sm-3 control-label">Start date <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <input type="date" name="startDate" ng-model="item.startDate" placeholder="startDate" class="form-control" required>
+                    <span ng-show="form.startDate.$touched && form.startDate.$error.required" class="help-block">Start date is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter start date" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="job" class="form-group" ng-class="{ 'has-error': form.endDate.$touched && form.endDate.$error.required }">
+                <label class="col-sm-3 control-label">End date <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <input type="date" name="endDate" ng-model="item.endDate" placeholder="endDate" class="form-control" required>
+                    <span ng-show="form.endDate.$touched && form.endDate.$error.required" class="help-block">End date is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter end date" tooltip-placement="left">?</span>
+            </div>
+            <div ng-if="job" class="form-group" ng-class="{ 'has-error': form.resultValue.$touched && form.resultValue.$error.required }">
+                <label class="col-sm-3 control-label">Result Value <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <input type="number" name="resultValue" min="0" max="10000" step ="1" ng-model="item.resultValue" placeholder="result value" class="form-control" required>
+                    <span ng-show="form.resultValue.$touched && form.resultValue.$error.required" class="help-block">Result Value is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter result value" tooltip-placement="left">?</span>
             </div>
         </form>
     </div>

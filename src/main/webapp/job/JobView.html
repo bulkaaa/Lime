@@ -1,0 +1,53 @@
+<div class="shopping-cart">
+    <div class="title">Manage Jobs</div>
+    <div class="row btn-row">
+        <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
+            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
+            </i> Add New Job</button>
+        </div>
+    </div>
+    <div class="item row item-border">
+        <div class="col-md-12 col-sm-12">
+            <div class="description col-md-3 col-sm-3">
+                </br>
+                <div>product name</div>
+                <span></span>
+            </div>
+            <div class="description col-md-3 col-sm-3">
+                </br>
+                <span>description</span>
+                <span></span>
+            </div>
+            <div class="description col-md-2 col-sm-2">
+                </br>
+                <span>start date</span>
+                <span></span>
+            </div>
+            <div class="total-price col-md-2 col-sm-2">end date</div>
+            <div class="total-price col-md-2 col-sm-2">result quantity</div>
+        </div>
+    </div>
+
+    <div ng-repeat="item in items">
+        <div id="{{item.id}}" class="item row">
+            <div class="col-md-12 col-sm-12">
+                <div class="description col-md-3 col-sm-3">
+                </br>
+                    {{item.productName}}
+                </div>
+                <div class="description col-md-3 col-sm-3">
+                    </br>
+                    <span>{{item.details}}</span>
+                    <span></span>
+                </div>
+                <div class="description col-md-2 col-sm-2">
+                    </br>
+                    <span>{{item.startDate}}</span>
+                    <span></span>
+                </div>
+                <div class="total-price col-md-2 col-sm-2">{{item.endDate}}</div>
+                <div class="total-price col-md-2 col-sm-2">{{item.resultValue}}</div>
+            </div>
+        </div>
+    </div>
+</div>
