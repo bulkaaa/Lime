@@ -2,19 +2,8 @@ app.controller('AddRecordController',  ['$scope', '$http','$uibModalInstance', f
 	$scope.saveEmp = function () {
 		$scope.newRecord = {};
 
-		if(/*!angular.isDefined($scope.employee_name) ||*/ $scope.item.name === '') {
-			return;
-		}
-		else if(/*!angular.isDefined($scope.employee_age) || */$scope.item.description === '') {
-			return;
-		}else if(/*!angular.isDefined($scope.employee.salary) ||*/ $scope.item.value === '') {
-			return;
-		} else {
-			$scope.newRecord.name = $scope.item.name;
-			$scope.newRecord.description = $scope.item.description;
-			$scope.newRecord.value = $scope.item.value;
-		}
 		$scope.cancelModal();
+
          if($scope.list && $scope.list.roles){
             $scope.item.roles = $scope.list.roles;
          }
@@ -23,6 +12,10 @@ app.controller('AddRecordController',  ['$scope', '$http','$uibModalInstance', f
              $scope.item.supplier = $scope.list.suppliers[0];
           }
 
+         if($scope.item.startDate && $scope.item.endDate){
+               $scope.item.startDate = new Date($scope.item.startDate).getTime();
+               $scope.item.endDate = new Date($scope.item.endDate).getTime();
+         }
 		$scope.saveRecord($scope.item);
 	 };
 

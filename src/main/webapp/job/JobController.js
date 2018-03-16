@@ -9,6 +9,10 @@ var modalInstance = null;
                 function (response) {
                     if (response.data) {
                         $scope.items = response.data;
+                        angular.forEach($scope.items ,function(value, key){
+                                        value.startDate = new Date(value.startDate).toLocaleString();
+                                        value.endDate = new Date(value.endDate).toLocaleString();
+                                    });
                         if (!$scope.items.length)
                             $dialogs.notify('Currently there are no products added in LIME', "You can add products here by clicking on 'Add New Product' button");
                     }
@@ -36,6 +40,8 @@ var modalInstance = null;
 
     $scope.saveRecord = function(item) {
 
+        //item.startDate = new Date(item.startDate).getTime();
+        //item.endDate = new Date(item.endDate).getTime();
         $http.post("/job/create", JSON.stringify(item))
             .then(
                 function(response){
@@ -44,11 +50,11 @@ var modalInstance = null;
                         item = response.data;
                         $scope.items.push({
                             id: item.id,
-                            productName: item.product,
-                            jobDescription: item.details,
+                            productName: item.product.name,
+                            details: item.details,
                             resultValue: item.resultValue,
-                            startDate: item.startDate,
-                            endDate: item.endDate,
+                            startDate: new Date(item.startDate).toLocaleString(),
+                            endDate: new Date(item.endDate).toLocaleString(),
                         });
                     }
                 },
