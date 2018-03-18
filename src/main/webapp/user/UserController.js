@@ -126,7 +126,7 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
 
     $scope.addRecord = function(){
         $scope.item={};
-
+        $scope.list.roles = [];
         $http.get("/user/get-roles")
             .then(
                 function (response) {
