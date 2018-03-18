@@ -1,6 +1,9 @@
 <div class="shopping-cart">
     <div class="title">Manage Suppliers</div>
     <div class="row btn-row">
+        <text> Search by all values:</text>
+        </br>
+        <input type="text" id="filter_input">
         <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
             <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
             </i> Add New Supplier</button>
@@ -48,40 +51,40 @@
     </div>
 
     <div ng-repeat="item in items">
-        <div id="{{item.id}}" class="item row">
+        <div id="{{item.id}}" class="item filter-row row">
             <div class="col-md-12 col-sm-12">
                 <div class="description col-md-2 col-sm-2">
                     </br>
-                    <span>{{item.name}}</span>
+                    <span class="filter">{{item.name}}</span>
                 </div>
                 <div class="description col-md-2 col-sm-2">
                     </br>
-                    <span>{{item.telephone}}</span>
+                    <span class="filter">{{item.telephone}}</span>
                     <span></span>
                 </div>
                 <div class="description col-md-1 col-sm-1">
                     </br>
-                    <span>{{item.city}}</span>
+                    <span class="filter">{{item.city}}</span>
                     <span></span>
                 </div>
                 <div class="description col-md-1 col-sm-1">
                     </br>
-                    <span>{{item.country}}</span>
+                    <span class="filter">{{item.country}}</span>
                     <span></span>
                 </div>
                 <div class="description col-md-1 col-sm-1">
                     </br>
-                    <span>{{item.postalCode}}</span>
+                    <span class="filter">{{item.postalCode}}</span>
                     <span></span>
                 </div>
                 <div class="description col-md-1 col-sm-1">
                     </br>
-                    <span>{{item.street}}</span>
+                    <span class="filter">{{item.street}}</span>
                     <span></span>
                 </div>
                 <div class="description col-md-2 col-sm-2">
                     </br>
-                    <span>{{item.emailAddress}}</span>
+                    <span class="filter">{{item.emailAddress}}</span>
                     <span></span>
                 </div>
                 <div class="total-price col-md-2 col-sm-2">

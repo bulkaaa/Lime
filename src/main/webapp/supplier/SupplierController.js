@@ -128,5 +128,24 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
             );
     }
 
+    $('#filter_input').keyup(function(event){
+        var txt = $(this).val()
+        var rows = $('.filter-row')
+
+        rows.each(function(){
+            var cells = $(this).find('.filter')
+            var counter = 0;
+            cells.each(function(){
+                var x = this.innerHTML;
+
+                if(x.toLowerCase().includes(txt.toLowerCase()))
+                    counter++;
+            })
+            if(counter > 0)
+                $(this).show();
+            else
+                $(this).hide();
+        })
+    })
 
 }]);

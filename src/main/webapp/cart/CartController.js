@@ -169,7 +169,7 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
 
         cells.each(function(){
             var x = this.innerHTML;
-            if(x.includes(txt)){
+            if(x.toLowerCase().includes(txt.toLowerCase())){
                 $(this).parents('.row').show();
             } else {
                 $(this).parents('.row').hide();
