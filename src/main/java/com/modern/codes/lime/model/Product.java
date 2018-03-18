@@ -61,9 +61,8 @@ public class Product implements Serializable {
     @JsonBackReference("category-products")
     private ProductCategory category;
 
-    @ApiModelProperty(value = "The image url of the product", required = true)
+    @ApiModelProperty(value = "The image name of the product", required = true)
     @NotNull
-    @URL
     private String image;
 
 

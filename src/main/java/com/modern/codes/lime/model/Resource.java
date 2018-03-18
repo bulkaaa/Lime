@@ -70,9 +70,8 @@ public class Resource implements Serializable{
     @JsonBackReference("category-resources")
     private ResourceCategory category;
 
-    @ApiModelProperty(value = "The image url of the resource", required = true)
+    @ApiModelProperty(value = "The image name of the resource", required = true)
     @NotNull
-    @URL
     private String image;
 
     @ManyToOne
