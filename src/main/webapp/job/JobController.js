@@ -2,6 +2,9 @@ app.controller('JobController', ['$scope', '$rootScope', '$http', '$uibModal', '
 
 var modalInstance = null;
     $scope.job = true;
+        $scope.list = {
+                products: []
+            };
 
     $scope.showAll = function() {
         $http.get("/job/all")
@@ -28,6 +31,18 @@ var modalInstance = null;
 
     $scope.addRecord = function(){
         $scope.item={};
+        $scope.list.products = [];
+                $http.get("/product/all")
+                    .then(
+                        function (response) {
+                            if (response.data) {
+                                $scope.products = response.data.slice();
+                            }
+                        },
+                        function (response) {
+                            DialogService.generalServerError();
+                        }
+                    );
         modalInstance = $modal.open({
             templateUrl: 'modals/add-record.html',
             controller: 'AddRecordController',
@@ -42,11 +57,11 @@ var modalInstance = null;
 
         //item.startDate = new Date(item.startDate).getTime();
         //item.endDate = new Date(item.endDate).getTime();
+
         $http.post("/job/create", JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
-                        console.log("created PRODUCT successfully!");
                         item = response.data;
                         $scope.items.push({
                             id: item.id,
@@ -59,7 +74,7 @@ var modalInstance = null;
                     }
                 },
                 function(response){
-                    DialogService.handle(response, 'product', 'create');
+                    DialogService.handle(response, 'job', 'create');
                 }
             );
     }
