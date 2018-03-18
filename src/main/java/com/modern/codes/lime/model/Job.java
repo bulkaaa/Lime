@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModel;
@@ -41,7 +42,7 @@ public class Job implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
-    @JsonBackReference("product-jobs")
+    @JsonManagedReference("product-jobs")
     private Product product;
 
     @ManyToOne
@@ -69,6 +70,7 @@ public class Job implements Serializable {
     @ApiModelProperty(value = "?", required = true)
     @NotNull
     private Double resultValue;
+
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

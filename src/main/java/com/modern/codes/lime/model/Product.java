@@ -72,7 +72,7 @@ public class Product implements Serializable {
     private Double expectedValue;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("product-jobs")
+    @JsonBackReference("product-jobs")
     private List<Job> jobs;
 
     @JsonManagedReference("product-formulas")
