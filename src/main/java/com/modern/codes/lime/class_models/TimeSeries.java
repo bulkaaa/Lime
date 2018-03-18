@@ -1,8 +1,8 @@
-package com.modern.codes.lime.report;
+package com.modern.codes.lime.class_models;
 import java.util.ArrayList;
 
 public class TimeSeries {
-    private final ArrayList<Integer> TS = new ArrayList<Integer>();
+    private final ArrayList<Integer> TS = new ArrayList<>();
     private String label;
 
     public String getLabel() {
@@ -17,7 +17,7 @@ public class TimeSeries {
         label = null;
     }
 
-    TimeSeries(final String label) {
+    public TimeSeries(final String label) {
         this.label = label;
     }
 
@@ -29,7 +29,7 @@ public class TimeSeries {
     }
 
     public Integer sum(final int n) {
-        final ArrayList<Integer> TSLast = new ArrayList<Integer>(TS.subList(TS.size() - n, TS.size()));
+        final ArrayList<Integer> TSLast = new ArrayList<>(TS.subList(TS.size() - n, TS.size()));
         Integer sum = 0;
         for(final Integer d : TSLast)
             sum += d;
