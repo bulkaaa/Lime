@@ -30,11 +30,10 @@ import java.util.Locale;
 @RequestMapping("/resource")
 public class ResourceController extends BaseController{
 
-    private static final Logger LOG = LoggerFactory.getLogger(ResourceController.class);
-
     @Autowired
-    IResourceService resourceService;
-
+    public ResourceController(final IResourceService resourceService){
+        this.resourceService = resourceService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a resource object", notes = "Creates a <b>resource</b> object "
@@ -104,7 +103,34 @@ public class ResourceController extends BaseController{
 
         LOG.info("Fetch all resources request received");
 
-        ParseTools.parseToJson(resourceService.findAll(), Resource.class);
         return ParseTools.parseToJson(resourceService.findAll(), Resource.class);
     }
+
+
+    @RequestMapping(value = "/toggle-notification/{toggle}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
+    @ApiResponses(@ApiResponse(code = 200, message = "Fetch all resources"))
+    @ResponseBody
+    public void toggleNotification( @ApiParam("Resource object") @PathVariable final boolean toggle) {
+
+        final List<ResourcePOJO> resources = resourceService.findAll();
+        resources.forEach(res -> res.setNotifications_on(toggle));
+        resourceService.save(resources);
+    }
+
+    @RequestMapping(value = "/toggle-order/{toggle}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
+    @ApiResponses(@ApiResponse(code = 200, message = "Fetch all resources"))
+    @ResponseBody
+    public void toggleOrder( @ApiParam("Resource object") @PathVariable final boolean toggle) {
+
+        final List<ResourcePOJO> resources = resourceService.findAll();
+        resources.forEach(res -> res.setOrdering_on(toggle));
+        resourceService.save(resources);
+    }
+
+
+    private final IResourceService resourceService;
+
+    private static final Logger LOG = LoggerFactory.getLogger(ResourceController.class);
 }

@@ -77,7 +77,7 @@ public class NotificationController {
                                     + "LIME application to Order more.");
                 return false;
             }
-        } catch (MessagingException e) {
+        } catch (final MessagingException e) {
             e.printStackTrace();
         }
         return true;
@@ -99,7 +99,7 @@ public class NotificationController {
         return true;
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(Notification.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NotificationController.class);
 
     private final UserService userService;
     private final ResourceService resourceService;
