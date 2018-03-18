@@ -2,6 +2,11 @@ package com.modern.codes.lime.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.management.Notification;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,13 +26,13 @@ import com.modern.codes.lime.tools.MailTools;
 public class NotificationController {
 
     @Autowired
-    UserService userService;
-    @Autowired
-    ResourceService resourceService;
-    @Autowired
-    IJobService jobService;
-    @Autowired
-    IFormulaService formulaService;
+    public NotificationController(final UserService userService, final ResourceService resourceService,
+                                  final IJobService jobService, final IFormulaService formulaService){
+        this.userService = userService;
+        this.resourceService = resourceService;
+        this.jobService = jobService;
+        this.formulaService = formulaService;
+    }
 
     private void updateUsedResources(final String jobId) {
         final JobPOJO job = jobService.findById(jobId);
@@ -53,36 +58,52 @@ public class NotificationController {
     }
 
     public static Boolean checkAhead(final ResourcePOJO res, final String email, final double use) {
-        if (res.getQuantity() <= res.getCritical_value() && res.getNotifications_on() == true) {
-            MailTools.SendEmail(email, "Notification from LIME",
-                                "Dear user,\nthe inventory of the Resource you will need to perform the job: "
-                                + res.getName()
-                                + ' '
-                                + "is below its critical value.\nPlease visit LIME application to Order more.");
-            return false;
-        } else if ((res.getQuantity() - use) <= res.getCritical_value() && res.getNotifications_on() == true) {
-            MailTools.SendEmail(email, "Notification from LIME",
-                                "Dear user,\nthe inventory of the Resource you will need to perform the job: "
-                                + res.getName()
-                                + ' '
-                                + "will reach its critical value after the current job will be done.\nPlease visit "
-                                + "LIME application to Order more.");
-            return false;
+        try {
+            if (res.getQuantity() <= res.getCritical_value() && res.getNotifications_on() == true) {
 
-        } else {
-            return true;
+                    MailTools.SendEmail(email, "Notification from LIME",
+                                        "Dear user,\nthe inventory of the Resource you will need to perform the job: "
+                                        + res.getName()
+                                        + ' '
+                                        + "is below its critical value.\nPlease visit LIME application to Order more.");
+
+                return false;
+            } else if ((res.getQuantity() - use) <= res.getCritical_value() && res.getNotifications_on() == true) {
+                MailTools.SendEmail(email, "Notification from LIME",
+                                    "Dear user,\nthe inventory of the Resource you will need to perform the job: "
+                                    + res.getName()
+                                    + ' '
+                                    + "will reach its critical value after the current job will be done.\nPlease visit "
+                                    + "LIME application to Order more.");
+                return false;
+            }
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
+        return true;
     }
 
     private Boolean send(final String ResourceName) {
         final List<UserPOJO> users = userService.findAll();
         users.forEach(y -> {
-            MailTools.SendEmail(y.getEmailAddress(), "Notification from LIME",
-                                "Dear user, the inventory of the Resource: "
-                                + ResourceName
-                                + " is below its critical value."
-                                + "\nPlease visit LIME Application to order more.");
+            try {
+                MailTools.SendEmail(y.getEmailAddress(), "Notification from LIME",
+                                    "Dear user, the inventory of the Resource: "
+                                    + ResourceName
+                                    + " is below its critical value."
+                                    + "\nPlease visit LIME Application to order more.");
+            } catch (final MessagingException e) {
+                LOG.error("FAILED TO SEND MESSAGE", e);
+            }
         });
         return true;
     }
+
+    private static final Logger LOG = LoggerFactory.getLogger(Notification.class);
+
+    private final UserService userService;
+    private final ResourceService resourceService;
+    private final IJobService jobService;
+    private final IFormulaService formulaService;
+
 }

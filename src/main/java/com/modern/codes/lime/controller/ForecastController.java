@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,13 +65,17 @@ public class ForecastController extends BaseController {
                 + "{} \n chartType: [] \n",
                 productIds, startDate, noDays, noDaysForecast, email, chartType);
 
-        final byte[] img = plot(startDate, noDays, noDaysForecast, chartType);
+        final byte[] bytes = plot(startDate, noDays, noDaysForecast, chartType);
 
-        MailTools.SendEmail(email, "Forecast Email from LIME", "Please Find Report Attached", "./Sample_Chart.png");
+        try {
+            MailTools.SendEmail(email, "Forecast Email from LIME", "Please Find Report Attached", bytes);
+        } catch (final MessagingException e) {
+            LOG.error("FAILED TO SEND REPORT.", e);
+        }
     }
 
-    private byte [] plot(final @RequestParam String startDate, final @RequestParam Integer noDays,
-                      final @RequestParam Integer noDaysForecast, final @RequestParam String chartType) {
+    private byte [] plot(@RequestParam final String startDate, @RequestParam final Integer noDays,
+                         @RequestParam final Integer noDaysForecast, @RequestParam final String chartType) {
         final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         final Date date;
         try {

@@ -1,10 +1,12 @@
 package com.modern.codes.lime.controller;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-import com.modern.codes.lime.exception.AlreadyExistsException;
-import com.modern.codes.lime.model.Role;
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+import com.modern.codes.lime.exception.AlreadyExistsException;
 import com.modern.codes.lime.exception.InvalidRequestException;
+import com.modern.codes.lime.model.Role;
 import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.UserPOJO;
 import com.modern.codes.lime.service.IRoleService;
 import com.modern.codes.lime.service.IUserService;
+import com.modern.codes.lime.tools.MailTools;
 import com.modern.codes.lime.tools.ParseTools;
 
 import io.swagger.annotations.ApiOperation;
@@ -42,27 +49,37 @@ public class UserController extends BaseController {
     IRoleService roleService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Creates a User object", notes = "Creates a <b>User</b> object "
-                                                              + "Saves it into DB.", response = User.class)
+    @ApiOperation(value = "Creates a User object",
+                  notes = "Creates a <b>User</b> object " + "Saves it into DB.",
+                  response = User.class)
     @ApiResponses({@ApiResponse(code = 200, message = "Saved User object"),
-                                 @ApiResponse(code = 409, message = "User given username or email already exists"),
-                                 @ApiResponse(code = 422, message = "In case of validation errors of User object")})
+                   @ApiResponse(code = 409, message = "User given username or email already exists"),
+                   @ApiResponse(code = 422, message = "In case of validation errors of User object")})
     @ResponseBody
-    public String create(
-            @Validated @RequestBody @ApiParam("User object") final User user,
-            final BindingResult bindingResult, final UriComponentsBuilder b) {
+    public String create(@Validated @RequestBody @ApiParam("User object") final User user,
+                         final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("User creation request received: {}", user);
 
-        if (user == null || bindingResult.hasErrors())
-            throw new InvalidRequestException(String.format("Invalid User creation request, form data contains %s error(s).",
-                                                            bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        if (user == null || bindingResult.hasErrors()) {
+            throw new InvalidRequestException(
+                    String.format("Invalid User creation request, form data contains %s error(s).",
+                                  bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        }
 
-        try{
-            return ParseTools.parseToJson(userService.save(user), User.class);
+        try {
+            final String userJson = ParseTools.parseToJson(userService.save(user), User.class);
+            MailTools.SendEmail(user.getEmailAddress(), "Welcome to LIME",
+                                prepareWelcomeEmailBody(user.getUsername(), user.getPassword(), user.getName(), user
+                                        .getSurname()));
+            return userJson;
+        } catch (final MessagingException e){
+            LOG.error("FAILED TO SEND WELCOME MESSAGE", e);
+            return null;
         } catch (final Exception e) {
-            throw new AlreadyExistsException(
-                String.format("Invalid User creation request, username: %s or email: %s already registered.", user.getUsername(), user.getEmailAddress()));
+        throw new AlreadyExistsException(
+                String.format("Invalid User creation request, username: %s or email: %s already registered.",
+                              user.getUsername(), user.getEmailAddress()));
 
         }
     }
@@ -70,50 +87,51 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a User object", notes = "Updates a <b>User</b> object ", response = User.class)
     @ApiResponses({@ApiResponse(code = 200, message = "Saved User object"),
-                            @ApiResponse(code = 422, message = "In case of validation errors of User object")})
+                   @ApiResponse(code = 422, message = "In case of validation errors of User object")})
     @ResponseBody
-    public String update(
-            @Validated @RequestBody @ApiParam("User object") final User user,
-            final BindingResult bindingResult, final UriComponentsBuilder b) {
+    public String update(@Validated @RequestBody @ApiParam("User object") final User user,
+                         final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("User update request received: {}", user);
 
-        if (user == null || bindingResult.hasErrors())
+        if (user == null || bindingResult.hasErrors()) {
             throw new InvalidRequestException(
-                    String.format("Invalid User update request, form data contains %s error(s).", bindingResult
-                            .getErrorCount()), bindingResult, Locale.ENGLISH);
+                    String.format("Invalid User update request, form data contains %s error(s).",
+                                  bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        }
         try {
             return ParseTools.parseToJson(userService.save(user), User.class);
         } catch (final Exception e) {
             throw new AlreadyExistsException(
-                    String.format("Invalid User creation request, username: %s or email: %s already registered.", user.getUsername(), user.getEmailAddress()));
+                    String.format("Invalid User creation request, username: %s or email: %s already registered.",
+                                  user.getUsername(), user.getEmailAddress()));
 
         }
     }
 
-
     @RequestMapping(value = "/one/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetch a User object", notes = "Fetches a <b>User</b> object by id ", response = UserPOJO.class)
+    @ApiOperation(value = "Fetch a User object",
+                  notes = "Fetches a <b>User</b> object by id ",
+                  response = UserPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved User object"))
     @ResponseBody
-    public String getUser(
-            @ApiParam("User object") @PathVariable final String userId) {
+    public String getUser(@ApiParam("User object") @PathVariable final String userId) {
 
         LOG.info("User fetch request received for id: " + userId);
-        try{
+        try {
             return ParseTools.parseToJson(userService.findById(userId), User.class);
-        }
-        catch (final Exception e){
+        } catch (final Exception e) {
             return "NO SUCH ID IN DB";
         }
     }
 
-    @RequestMapping(value = "/delete/{userId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/delete/{userId}",
+                    method = RequestMethod.DELETE,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Delete a User object", notes = "Deletes a <b>User</b> object ", response = UserPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved User object"))
     @ResponseBody
-    public Boolean delete(
-            @ApiParam("User object") @PathVariable final String userId) {
+    public Boolean delete(@ApiParam("User object") @PathVariable final String userId) {
 
         LOG.info("User deletion request received for id: " + userId);
 
@@ -132,13 +150,15 @@ public class UserController extends BaseController {
         return ParseTools.parseToJson(userService.findAll(), User.class);
     }
 
-
     @ResponseBody
-    @ApiResponses({@ApiResponse(code = 200, message = "Fetch users by username"), @ApiResponse(code = 404, message = "In case of no User object was found in DB for given username")})
+    @ApiResponses({@ApiResponse(code = 200, message = "Fetch users by username"),
+                   @ApiResponse(code = 404, message = "In case of no User object was found in DB for given username")})
     @ApiOperation(value = "Fetch users by username",
                   notes = "Searches for all <b>User</b> objects in DB "
                           + "Returns list of User objects for given username.")
-    @RequestMapping(value = "/get-by-username/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/get-by-username/{username}",
+                    method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
     public String getByName(@PathVariable("username") final String username) {
 
         LOG.info("User get-by-name request received: name = " + username);
@@ -154,5 +174,21 @@ public class UserController extends BaseController {
         LOG.info("Fetch all Roles request received");
 
         return ParseTools.parseToJson(roleService.findAll(), Role.class);
+    }
+
+    private String prepareWelcomeEmailBody(final String username, final String password, final String name,
+                                           final String surname) {
+        try {
+            final URL url = Resources.getResource("WelcomeEmail.html");
+            final String email = Resources.toString(url, Charsets.UTF_8);
+            email.replace("name_input", name);
+            email.replace("surname_input", name);
+            email.replace("username_input", name);
+            email.replace("password_input", name);
+            return email;
+        } catch (final IOException e) {
+            LOG.error("Error parsing Welcome Email.");
+            return null;
+        }
     }
 }

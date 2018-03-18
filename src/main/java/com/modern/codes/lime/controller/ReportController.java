@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,16 @@ public class ReportController {
                 + "chartType: [] \n",
                 startDate, noDays, productIds, chartType);
 
+        final byte[] bytes = getBytes(startDate, noDays, chartType, productIds);
+
+        return ResponseEntity.ok()
+                             .contentType(MediaType.IMAGE_PNG)
+                             .body(bytes);
+    }
+
+    private byte[] getBytes(final @RequestParam String startDate, final @RequestParam Integer noDays,
+                            final @RequestParam String chartType,
+                            final @RequestBody @ApiParam("Products ids list") List<String> productIds) {
         final Date date;
         try {
             date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
@@ -54,13 +66,8 @@ public class ReportController {
         }
 
         final ArrayList<TimeSeries> seriesL = timeSeriesService.Extract(date, noDays, productIds);
-        final byte[] bytes =
-                DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days",
-                                     "Sample_Chart", chartType);
-
-        return ResponseEntity.ok()
-                             .contentType(MediaType.IMAGE_PNG)
-                             .body(bytes);
+        return DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days",
+                                    "Sample_Chart", chartType);
     }
 
     @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -73,17 +80,12 @@ public class ReportController {
                 + " chartType: [] \n",
                 startDate, noDays, email, productIds, chartType);
 
-        final Date date;
+        final byte[] bytes = getBytes(startDate, noDays, chartType, productIds);
         try {
-            date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
-        } catch (final ParseException e) {
-            throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
+            MailTools.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", bytes);
+        } catch (final MessagingException e) {
+            LOG.error("FAILED TO SEND REPORT", e);
         }
-
-        final ArrayList<TimeSeries> seriesL = timeSeriesService.Extract(date, noDays, productIds);
-        DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days", "Sample_Chart",
-                             chartType);
-        MailTools.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", "./Sample_Chart.png");
 
     }
 

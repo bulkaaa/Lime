@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +36,9 @@ import io.swagger.annotations.ApiResponses;
 public class OrderController {
 
     @Autowired
-    IResourceService resourceService;
-
-    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
+    public OrderController(final IResourceService resourceService){
+        this.resourceService = resourceService;
+    }
 
     @RequestMapping(value = "/get-resources", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
@@ -74,8 +76,14 @@ public class OrderController {
                 }
             }
         });
-        supplierMap.forEach((key, value) -> MailTools.SendEmail(key.getEmailAddress(), "Order from LIME",
-                                                                ConstructOrderMsg(key.getName(), value)));
+        supplierMap.forEach((key, value) -> {
+            try {
+                MailTools.SendEmail(key.getEmailAddress(), "Order from LIME",
+                                                                        ConstructOrderMsg(key.getName(), value));
+            } catch (final MessagingException e) {
+                LOG.error("Failed to send order messages", e);
+            }
+        });
         return true;
     }
 
@@ -92,4 +100,10 @@ public class OrderController {
         message.append("Regards, \nLIME team.\n");
         return message.toString();
     }
+
+
+
+    private final IResourceService resourceService;
+
+    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 }
