@@ -1,6 +1,9 @@
 <div class="shopping-cart">
     <div class="title">Manage Products</div>
     <div class="row btn-row">
+        <text> Search by name:</text>
+         </br>
+        <input type="text" id="filter_input">
         <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
             <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
             </i> Add New Product</button>
@@ -37,7 +40,7 @@
                 </div>
                 <div class="description col-md-2 col-sm-2">
                     </br>
-                    <span>{{item.name}}</span>
+                    <span class="name">{{item.name}}</span>
                     <span></span>
                 </div>
                 <div class="description col-md-4 col-sm-4">

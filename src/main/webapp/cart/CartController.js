@@ -161,4 +161,21 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
             suppliers: []
         };
 
+
+
+    $('#filter_input').keyup(function(event){
+        var txt = $(this).val()
+        var cells = $('.name')
+
+        cells.each(function(){
+            var x = this.innerHTML;
+            if(x.includes(txt)){
+                $(this).parents('.row').show();
+            } else {
+                $(this).parents('.row').hide();
+            }
+        })
+    })
+
+
 }]);

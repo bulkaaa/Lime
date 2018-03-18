@@ -53,6 +53,7 @@ app.controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal
             });
     };
 
+
     $scope.updateRecord = function(item) {
         $http.put("/product/update", JSON.stringify(item))
             .then(
@@ -131,5 +132,22 @@ app.controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal
                 }
             );
     }
+
+
+
+    $('#filter_input').keyup(function(event){
+        var txt = $(this).val()
+        var cells = $('.name')
+
+        cells.each(function(){
+            var x = this.innerHTML;
+            if(x.includes(txt)){
+                $(this).parents('.row').show();
+            } else {
+                $(this).parents('.row').hide();
+            }
+        })
+    })
+
 
 }]);
