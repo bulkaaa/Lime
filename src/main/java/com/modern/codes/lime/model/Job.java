@@ -46,7 +46,7 @@ public class Job implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName="ID")
-    @JsonBackReference("user-jobs")
+    @JsonManagedReference("user-jobs")
     private User user;
 
     @ApiModelProperty(value = "The details of the job", required = true)
