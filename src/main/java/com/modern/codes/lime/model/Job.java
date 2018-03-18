@@ -42,7 +42,6 @@ public class Job implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
-    @JsonManagedReference("product-jobs")
     private Product product;
 
     @ManyToOne
