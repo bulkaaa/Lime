@@ -1,7 +1,10 @@
 package com.modern.codes.lime.service;
 
+import org.springframework.stereotype.Service;
+
 import com.modern.codes.lime.class_models.TimeSeries;
 
+@Service
 public class SmoothingService implements ISmoothingService{
 
     @Override

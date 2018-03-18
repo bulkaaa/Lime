@@ -23,6 +23,7 @@ import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.class_models.DrawSeries;
 import com.modern.codes.lime.service.ISmoothingService;
 import com.modern.codes.lime.class_models.TimeSeries;
+import com.modern.codes.lime.service.ITimeSeriesService;
 import com.modern.codes.lime.service.TimeSeriesService;
 import com.modern.codes.lime.service.IJobService;
 import com.modern.codes.lime.tools.MailTools;
@@ -32,10 +33,6 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping(path = "/forecast")
 public class ForecastController extends BaseController {
-    private static final Logger LOG = LoggerFactory.getLogger(ForecastController.class);
-
-    @Autowired
-    IJobService jobService;
 
     @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -48,30 +45,11 @@ public class ForecastController extends BaseController {
                 + "chartType: [] \n",
                 productIds, startDate, noDays, noDaysForecast, chartType);
 
-        final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date date;
-        try {
-            date = formatter.parse(startDate);
-        } catch (final ParseException e) {
-            throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
-        }
-
-        final ArrayList<TimeSeries> seriesL = TimeSeriesService.Extract(jobService, date, noDays);
-        final ArrayList<TimeSeries> seriesFL = new ArrayList<>();
-        for (final TimeSeries series : seriesL) {
-            final TimeSeries forecast = ISmoothingService.calculateSmoothing(series, noDaysForecast);
-            forecast.setLabel(series.getLabel() + " Forecast");
-            seriesFL.add(forecast);
-        }
-        final byte[] bytes = DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past "
-                                                                           + noDays
-                                                                           + " Days and forecast for the next "
-                                                                           + noDaysForecast
-                                                                           + " days.", "Sample_Chart", chartType);
+        final byte[] img = plot(startDate, noDays, noDaysForecast, chartType);
 
         return ResponseEntity.ok()
                              .contentType(MediaType.IMAGE_PNG)
-                             .body(bytes);
+                             .body(img);
     }
 
     @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -85,26 +63,43 @@ public class ForecastController extends BaseController {
                 + "{} \n chartType: [] \n",
                 productIds, startDate, noDays, noDaysForecast, email, chartType);
 
+        final byte[] img = plot(startDate, noDays, noDaysForecast, chartType);
+
+        MailTools.SendEmail(email, "Forecast Email from LIME", "Please Find Report Attached", "./Sample_Chart.png");
+    }
+
+    private byte [] plot(final @RequestParam String startDate, final @RequestParam Integer noDays,
+                      final @RequestParam Integer noDaysForecast, final @RequestParam String chartType) {
         final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date date;
+        final Date date;
         try {
             date = formatter.parse(startDate);
         } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
-        final ArrayList<TimeSeries> seriesL = TimeSeriesService.Extract(jobService, date, noDays);
+        final ArrayList<TimeSeries> seriesL = iTimeSeriesService.Extract(jobService, date, noDays);
         final ArrayList<TimeSeries> seriesFL = new ArrayList<>();
         for (final TimeSeries series : seriesL) {
-            final TimeSeries forecast = ISmoothingService.calculateSmoothing(series, noDaysForecast);
+            final TimeSeries forecast = iSmoothingService.calculateSmoothing(series, noDaysForecast);
             forecast.setLabel(series.getLabel() + " Forecast");
             seriesFL.add(forecast);
         }
 
-        DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past "
-                                                      + noDays
-                                                      + " Days and forecast for the next "
-                                                      + noDaysForecast
-                                                      + " days.", "Sample_Chart", chartType);
-        MailTools.SendEmail(email, "Forecast Email from LIME", "Please Find Report Attached", "./Sample_Chart.png");
+        return DrawSeries.plotChart(seriesL, seriesFL, date, "Production in the Past "
+                                                                            + noDays
+                                                                            + " Days and forecast for the next "
+                                                                            + noDaysForecast
+                                                                            + " days.", "Sample_Chart", chartType);
     }
+
+    private static final Logger LOG = LoggerFactory.getLogger(ForecastController.class);
+
+    @Autowired
+    IJobService jobService;
+
+    @Autowired
+    ISmoothingService iSmoothingService;
+
+    @Autowired
+    ITimeSeriesService iTimeSeriesService;
 }
