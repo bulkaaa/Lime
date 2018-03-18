@@ -55,12 +55,6 @@
                 controllerAs: 'vm'
 
             })
-            .when('/register', {
-                templateUrl: 'account/register/RegisterView.html',
-                controller: 'RegisterController',
-                controllerAs: 'vm'
-
-            })
             .when('/editaccount', {
                 templateUrl: 'account/edit/EditAccountView.html',
                 controller: 'EditAccountController',
@@ -136,7 +130,7 @@
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 DialogService.loginFirstError();
@@ -164,7 +158,6 @@
 <script src="account/reset/ResetPasswordController.js"></script>
 <script src="notification/NotificationController.js"></script>
 <script src="order/OrderController.js"></script>
-<script src="account/register/RegisterController.js"></script>
 <script src="modals/ViewRecordController.js"></script>
 <script src="modals/EditRecordController.js"></script>
 <script src="modals/AddRecordController.js"></script>
