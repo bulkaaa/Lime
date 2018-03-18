@@ -58,11 +58,13 @@ public class UserController extends BaseController {
             throw new InvalidRequestException(String.format("Invalid User creation request, form data contains %s error(s).",
                                                             bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
-        if (userService.findByUsernameOrEmail(user.getUsername(), user.getEmailAddress()) != null)
+        try{
+            return ParseTools.parseToJson(userService.save(user), User.class);
+        } catch (final Exception e) {
             throw new AlreadyExistsException(
-                    String.format("Invalid User creation request, username: %s or email: %s already registered.", user.getUsername(), user.getEmailAddress()));
+                String.format("Invalid User creation request, username: %s or email: %s already registered.", user.getUsername(), user.getEmailAddress()));
 
-        return ParseTools.parseToJson(userService.save(user), User.class);
+        }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -77,10 +79,16 @@ public class UserController extends BaseController {
         LOG.info("User update request received: {}", user);
 
         if (user == null || bindingResult.hasErrors())
-            throw new InvalidRequestException(String.format("Invalid User update request, form data contains %s error(s).",
-                                                            bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+            throw new InvalidRequestException(
+                    String.format("Invalid User update request, form data contains %s error(s).", bindingResult
+                            .getErrorCount()), bindingResult, Locale.ENGLISH);
+        try {
+            return ParseTools.parseToJson(userService.save(user), User.class);
+        } catch (final Exception e) {
+            throw new AlreadyExistsException(
+                    String.format("Invalid User creation request, username: %s or email: %s already registered.", user.getUsername(), user.getEmailAddress()));
 
-        return ParseTools.parseToJson(userService.save(user), User.class);
+        }
     }
 
 
