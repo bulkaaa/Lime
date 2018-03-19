@@ -11,17 +11,7 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
     }
 	$scope.update = function () {
 		$scope.cancelModal();
-		if(/*!angular.isDefined($scope.record.name) ||*/ $scope.item.name === '') {
-                return;
-            }
-            else if(/*!angular.isDefined($scope.record.description) ||*/ $scope.item.description === '') {
-                return;
-            }else if(/*!angular.isDefined($scope.record.value) ||*/ $scope.item.value === '') {
-                return;
-            }
-            else if(/*!angular.isDefined($scope.record.value) ||*/ $scope.item.image === '') {
-                return;
-            }
+
          if($scope.list && $scope.list.roles){
             $scope.item.roles = $scope.list.roles;
          }

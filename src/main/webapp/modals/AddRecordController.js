@@ -21,7 +21,6 @@ app.controller('AddRecordController',  ['$scope', '$http','$uibModalInstance', f
                $scope.item.endDate = new Date($scope.item.endDate).getTime();
          }
 
-
 		$scope.saveRecord($scope.item);
 	 };
 

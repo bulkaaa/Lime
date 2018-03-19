@@ -160,13 +160,19 @@
                 <span class="help-button" uib-tooltip="Please enter role" tooltip-placement="left">?</span>
             </div>
             <div ng-if="notifications" class="form-group">
-                <label class="col-sm-3 control-label">Critical value <sup class="sup-color">*</sup></label>
+                <label class="col-sm-3 control-label">Resource name <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
-                    <input type="number" name="critical_value" min="0" max="10000" step ="1" ng-model="item.critical_value" placeholder="expected value" class="form-control" required>
-                    <span ng-show="form.critical_value.$touched && form.critical_value.$error.required" class="help-block">Critical Value is required</span>
+                    <label  ng-model="item.name" class="form-control" >{{item.name}}</label>
                 </div>
-                    <span class="help-button" uib-tooltip="Please enter critical value" tooltip-placement="left">?</span>
             </div>
+            <div ng-if="notifications" class="form-group">
+            <label class="col-sm-3 control-label">Critical value <sup class="sup-color">*</sup></label>
+            <div class="col-sm-8">
+                <input type="number" name="critical_value" min="0" max="10000" step ="1" ng-model="item.critical_value" placeholder="expected value" class="form-control" required>
+                <span ng-show="form.critical_value.$touched && form.critical_value.$error.required" class="help-block">Critical Value is required</span>
+            </div>
+            <span class="help-button" uib-tooltip="Please enter critical value" tooltip-placement="left">?</span>
+        </div>
             <div ng-if="notifications" class="form-group">
                 <label class="col-sm-3 control-label">Notifications on <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">

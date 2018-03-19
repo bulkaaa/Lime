@@ -1,13 +1,12 @@
 <div class="shopping-cart">
     <div class="title">Manage Resources</div>
     <div class="row btn-row">
-        <text> Search by name:</text>
-        </br>
-        <input type="text" id="filter_input">
-            <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
+            <text class="col-sm-2 col-md-2"> Search by name: </text>
+             <div class="col-sm-2 col-md-2"> <input id="filter_input" class="form-control" ></div>
+        <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
             <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
             </i> Add New Resource</button>
-            </div>
+         </div>
     </div>
     <div class="item row item-border">
         <div class="col-md-12 col-sm-12">

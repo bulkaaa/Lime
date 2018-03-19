@@ -55,9 +55,6 @@ var modalInstance = null;
 
     $scope.saveRecord = function(item) {
 
-        //item.startDate = new Date(item.startDate).getTime();
-        //item.endDate = new Date(item.endDate).getTime();
-
         $http.post("/job/create", JSON.stringify(item))
             .then(
                 function(response){

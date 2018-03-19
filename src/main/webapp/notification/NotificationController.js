@@ -56,15 +56,31 @@ app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uib
         };
 
         $scope.NotificationsOn = function(){
-            angular.forEach($scope.items ,function(value, key){
-                 value.notifications_on = 'true';
-            })
+            $http.get("/resource/toggle-notification/true")
+                .then(
+                    function (response) {
+                    angular.forEach($scope.items ,function(value, key){
+                         value.notifications_on = 'true';
+                         })
+                    },
+                    function (response) {
+                        DialogService.generalServerError();
+                    }
+                );
         };
 
         $scope.NotificationsOff = function(){
-            angular.forEach($scope.items ,function(value, key){
-                 value.notifications_on = 'false';
-            })
+           $http.get("/resource/toggle-notification/false")
+               .then(
+                   function (response) {
+                   angular.forEach($scope.items ,function(value, key){
+                        value.notifications_on = 'false';
+                        })
+                   },
+                   function (response) {
+                       DialogService.generalServerError();
+                   }
+               );
         };
 
 

@@ -50,6 +50,32 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
     });
     };
 
+    $scope.NotificationsOn = function(){
+                $http.get("/resource/toggle-order/true")
+                    .then(
+                        function (response) {
+                        console.log("orders on");
+                        },
+                        function (response) {
+                            DialogService.generalServerError();
+                        }
+                    );
+            };
+
+            $scope.NotificationsOff = function(){
+               $http.get("/resource/toggle-order/false")
+                   .then(
+                       function (response) {
+                         console.log("orders off");
+                       },
+                       function (response) {
+                           DialogService.generalServerError();
+                       }
+                   );
+            };
+
+
+
     $scope.list = {
         resources: []
     };
