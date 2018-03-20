@@ -77,11 +77,12 @@ public class JobController extends BaseController {
                                                             bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
         try {
+            final UserPOJO self =  getActualUser();
+            job.setUser(ParseTools.parse(self, User.class));
             final String response = ParseTools.parseToJson(jobService.save(job), Job.class);
             formulaService.findByProductId(job.getProduct()
                                               .getId()).forEach(f -> {
                                                   final ResourcePOJO resource = f.getPOJOResource();
-                                                  final UserPOJO self =  getActualUser();
                                                   Boolean action = NotificationController.checkAhead(resource,self.getEmailAddress(),f.getValue());
                                                   resource.setQuantity(resource.getQuantity() - f.getValue());
                                                   resourceService.save(resource);
