@@ -1,0 +1,494 @@
+\documentclass[a4paper,11pt,twoside]{report}
+% THIS FILE SHOULD BE COMPILED BY pdfLaTeX
+
+% ----------------------   PREAMBLE PART ------------------------------
+
+% ------------------------ ENCODING & LANGUAGES ----------------------
+
+\usepackage[utf8]{inputenc}
+%\usepackage[MeX]{polski} % Not needed unless You have a name with polish symbols or sth
+\usepackage[T1]{fontenc}
+\usepackage[english, polish]{babel}
+
+
+\usepackage{amsmath, amsfonts, amsthm, latexsym} % MOSTLY MATHEMATICAL SYMBOLS
+
+\usepackage[final]{pdfpages} % INPUTING TITLE PDF PAGE - GENERATE IT FIRST!
+%\usepackage[backend=bibtex, style=verbose-trad2]{biblatex}
+
+% ---------------- MARGINS, INDENTATION, LINESPREAD ------------------
+
+\usepackage[inner=20mm, outer=20mm, bindingoffset=10mm, top=25mm, bottom=25mm]{geometry} % MARGINS
+
+
+\linespread{1.5}
+\allowdisplaybreaks         % ALLOWS BREAKING PAGE IN MATH MODE
+
+\usepackage{indentfirst}    % IT MAKES THE FIRST PARAGRAPH INDENTED; NOT NEEDED
+\setlength{\parindent}{5mm} % WIDTH OF AN INDENTATION
+
+
+%---------------- RUNNING HEAD - CHAPTER NAMES, PAGE NUMBERS ETC. -------------------
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+% PAGINATION: LEFT ALIGNMENT ON EVEN PAGES, RIGHT ALIGNMENT ON ODD PAGES 
+\fancyfoot[LE,RO]{\thepage} 
+% RIGHT HEADER: zawartość \rightmark do lewego, wewnętrznego (marginesu) 
+\fancyhead[LO]{\sc \nouppercase{\rightmark}}
+% lewa pagina: zawartość \leftmark do prawego, wewnętrznego (marginesu) 
+\fancyhead[RE]{\sc \leftmark}
+
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+
+% HEAD RULE - IT'S A LINE WHICH SEPARATES HEADER AND FOOTER FROM CONTENT
+\renewcommand{\headrulewidth}{0 pt} % 0 MEANS NO RULE, 0.5 MEANS FINE RULE, THE BIGGER VALUE THE THICKER RULE
+
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[LE,RO]{\thepage}
+  
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0.0pt}
+}
+
+
+
+% --------------------------- CHAPTER HEADERS ---------------------
+
+\usepackage{titlesec}
+\titleformat{\chapter}
+  {\normalfont\Large \bfseries}
+  {\thechapter.}{1ex}{\Large}
+
+\titleformat{\section}
+  {\normalfont\large\bfseries}
+  {\thesection.}{1ex}{}
+\titlespacing{\section}{0pt}{30pt}{20pt} 
+
+    
+\titleformat{\subsection}
+  {\normalfont \bfseries}
+  {\thesubsection.}{1ex}{}
+
+
+% ----------------------- TABLE OF CONTENTS SETUP ---------------------------
+
+\def\cleardoublepage{\clearpage\if@twoside
+\ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+
+% THIS MAKES DOTS IN TOC FOR CHAPTERS
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\l@chapter}
+  {\hfil}
+  {\leaders\hbox{\normalfont$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill}
+  {}{}
+\makeatother
+
+\usepackage{titletoc}
+\makeatletter
+\titlecontents{chapter}% <section-type>
+  [0pt]% <left>
+  {}% <above-code>
+  {\bfseries \thecontentslabel.\quad}% <numbered-entry-format>
+  {\bfseries}% <numberless-entry-format>
+  {\bfseries\leaders\hbox{\normalfont$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill\contentspage}% <filler-page-format>
+
+\titlecontents{section}
+  [1em]
+  {}
+  {\thecontentslabel.\quad}
+  {}
+  {\leaders\hbox{\normalfont$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill\contentspage}
+
+\titlecontents{subsection}
+  [2em]
+  {}
+  {\thecontentslabel.\quad}
+  {}
+  {\leaders\hbox{\normalfont$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfill\contentspage}
+\makeatother
+
+
+
+% ---------------------- TABLES AD FIGURES NUMBERING ----------------------
+
+\renewcommand*{\thetable}{\arabic{chapter}.\arabic{table}}
+\renewcommand*{\thefigure}{\arabic{chapter}.\arabic{figure}}
+
+
+% ------------- DEFINING ENVIRONMENTS FOR THEOREMS, DEFINITIONS ETC. ---------------
+
+\makeatletter
+\newtheoremstyle{definition}
+{3ex}%                           % Space above
+{3ex}%                           % Space below
+{\upshape}%                      % Body font
+{}%                              % Indent amount
+{\bfseries}%                     % Theorem head font
+{.}%                             % Punctuation after theorem head
+{.5em}%                          % Space after theorem head, ' ', or \newline
+{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\makeatother
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+% --------------------- END OF PREAMBLE PART (MOSTLY) --------------------------
+
+
+
+
+
+% -------------------------- USER SETTINGS ---------------------------
+
+\newcommand{\tytul}{System zarządzania zasobami małego laboratorium chemicznego}
+\renewcommand{\title}{A System for Resources Management in a Small Chemical Laboratory}
+\newcommand{\type}{Engineer} % Master OR Engineer
+\newcommand{\supervisor}{dr inż. Agnieszka Jastrzębska} % TITLE AND NAME OF THE SUPERVISOR
+
+
+
+\begin{document}
+\sloppy
+\selectlanguage{english}
+
+\includepdf[pages=-]{titlepage} % THIS INPUTS THE TITLE PAGE
+
+
+% ------------------ PAGE WITH SIGNATURES --------------------------------
+
+\thispagestyle{empty}\newpage
+\null
+
+\vfill
+
+\begin{center}
+\begin{tabular}[t]{ccc}
+............................................. & \hspace*{100pt} & .............................................\\
+supervisor's signature & \hspace*{100pt} & author's signature
+\end{tabular}
+\end{center}
+
+
+
+% ---------------------------- ABSTRACTS -----------------------------
+
+{
+\begin{abstract}
+
+\begin{center}
+\title
+\end{center}
+
+Firstly we will write an abstract of our work in English.\\
+
+\noindent \textbf{Keywords:} keyword1, keyword2, ...
+\end{abstract}
+}
+
+\null\thispagestyle{empty}\newpage
+
+
+{\selectlanguage{polish}
+\begin{abstract}
+
+\begin{center}
+\tytul
+\end{center}
+
+Teraz to samo ale po polsku
+\\
+
+\noindent \textbf{Słowa kluczowe:} slowo1, slowo2, ...
+\end{abstract}
+}
+
+
+% --------------------------- DECLARATION ------------------------------------
+
+
+\null\thispagestyle{empty}\newpage
+
+\null \hfill Warsaw, ..................\\
+
+\par\vspace{5cm}
+
+\begin{center}
+Declaration
+\end{center}
+
+I hereby declare that the thesis entitled ,,\title '', submitted for the \type ~degree, supervised  by \supervisor , is entirely my original work apart from the recognized reference.
+\vspace{2cm}
+
+\begin{flushright}
+  \begin{minipage}{50mm}
+    \begin{center}
+      ..............................................
+
+    \end{center}
+  \end{minipage}
+\end{flushright}
+
+\thispagestyle{empty}
+\newpage
+
+\null\thispagestyle{empty}\newpage
+% ------------------- 4. Spis treści ---------------------
+% \selectlanguage{english} - for English
+\pagenumbering{gobble}
+\tableofcontents
+\thispagestyle{empty}
+\newpage % IF YOU HAVE EVEN QUANTITY OD PAGES OF TOC, THEN REMOVE IT OR ADD \null\newpage FOR DOUBLE BLANK PAGE BEFORE INTRODUCTION
+
+
+% -------------------- THE BODY OF THE THESIS --------------------------------
+
+\null\thispagestyle{empty}\newpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\setcounter{page}{11}
+
+
+\chapter*{Introduction}
+\markboth{}{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+What is the thesis about? What is the content of it? What is the Author's contribution in it?
+
+Our Introduction to the project
+
+\chapter{Work Division Plan}
+
+\section{Example section}
+
+\begin{definition}[Definition]
+A \emph{definition} is a statement of the meaning of a term (a word, phrase, or other set of symbols).
+\end{definition}
+
+\subsection{Example subsection}
+
+
+\section{Floats -- tables and figures}
+
+This is example section but I will leave it so there is an example for table and figure
+
+\begin{table}% Koniecznie label po caption, inaczej jest zła numeracja
+\caption[Short caption]{Additional options}
+\label{opcje}
+\centering
+\begin{tabular}{|c|p{0.8\textwidth}|}
+\hline
+symbol & effect \\ \hline
+\texttt{h} & Place the float here, i.e., approximately at the same point it occurs in the source text (however, not exactly at the spot) \\
+\texttt{t} & Position at the top of the page \\
+\texttt{b} & Position at the bottom of the page \\
+\texttt{p} & Put on a special page for floats only \\
+\texttt{!} & Override internal parameters LaTeX uses for determining "good" float positions \\ 
+\texttt{H} & Places the float at precisely the location in the \LaTeX ~ code. Requires the float package,[1] i.e., \texttt{\textbackslash usepackage\{float\}}. This is somewhat equivalent to !ht.\\ \hline
+\end{tabular}
+\end{table}
+
+Place labels after captions or you get the wrong labelling.
+
+In Table \ref{opcje} there are additional options for \texttt{table} and \texttt{figure} environments.
+
+\begin{figure}[h!]
+
+\begin{center}
+    \setlength{\unitlength}{1mm}
+
+    \begin{picture}(40, 30)
+        \put(20,1){\line(0,1){20}} % linia
+
+        % dół
+        \put(20,1){\circle*{2}}
+        \put(25,1){0}
+
+        % góra
+        \put(20,21){\circle*{2}}
+        \put(25,21){1}
+    \end{picture}
+
+\end{center}
+\caption{Example figure - I am leaving it so we will know how to caption}
+\end{figure}
+
+
+
+
+
+
+\chapter{Work Schedule}
+
+This is optional - the schedule of our work
+
+
+\section{Initial Schedule}
+
+
+
+
+\chapter{Requirement Specification}
+
+Requirements - to source from documentation (1)
+
+
+\section{Functional Requirements}
+
+\section{Non-functional Requirements}
+
+\section{User Stories}
+
+\section{Use Cases}
+
+
+
+\chapter{Development Model and Methodology}
+
+This is optional but since we have a development Methodology described already in documentation (2)
+
+\section{Methodology}
+
+Waterfall Description from documentation will go there
+
+\section{Development Model}
+
+
+
+
+\chapter{System Architecture}
+
+High level, description of the MVC and how we realized it should go there
+
+
+
+
+\chapter{Technical Analysis}
+
+More detailed - all the classes and functions
+
+
+\section{General Program Workflow}
+
+
+\section{Program Interface}
+
+
+\section{System Classes}
+
+
+\section{Database Design}
+
+
+\section{Prediction Model}
+
+
+
+\chapter{Experimental Evaluation}
+
+This is important - these are various tests, trying to cover all the possible thing user can do in the application
+
+
+\section{Evaluation Plan}
+
+
+
+\chapter{Acceptance Tests}
+
+This is optional - the schedule of our work
+
+
+\section{Test Plan}
+
+
+
+
+% ----------------------- Conclusions ------------------
+\chapter*{Conclusions}
+
+1 Page of Our Conclusions of Writing This Project
+\thispagestyle{empty}
+
+
+
+
+% ------------------------------- BIBLIOGRAPHY ---------------------------
+% LEXICOGRAPHICAL ORDER BY AUTHORS' LAST NAMES
+% FOR AMBITIOUS ONES - USE BIBTEX
+
+
+\begin{thebibliography}{20} % IF YOU HAVE MORE REFERENCES, WRITE THE BIGGER NUMBER
+
+\bibitem[1]{Ktos} A. Author, \emph{Title of a book}, Publisher, year, page--page.
+\bibitem[2]{Innyktos} J. Bobkowski, S. Dobkowski, Title of an article, \emph{Magazine X, No. 7}, year, PAGE--PAGE.
+\bibitem[3]{B} C. Brink, Power structures, \emph{Algebra Universalis 30(2)}, 1993, 177--216.
+\bibitem[4]{H} F. Burris, H. P. Sankappanavar, \emph{A Course of Universal Algebra}, Springer-Verlag, New York, 1981.
+\end{thebibliography}
+\pagenumbering{gobble}
+\thispagestyle{empty}
+
+
+
+% ----------------------- GLOSSARY ------------------
+\chapter*{Glossary}
+
+Glossary of used terms - examples
+
+\begin{tabular}{cl}
+nzw. & nadzwyczajny \\
+* & operator gwiazdka \\
+$\widetilde{}$ & tylda
+\end{tabular}
+\\
+
+\thispagestyle{empty}
+
+
+% ----------------------------  LIST OF FIGURES --------------------------------
+\listoffigures
+\thispagestyle{empty}
+If you don't need it, delete it.
+
+
+% -----------------------------  LIST OF TABLES --------------------------------
+\renewcommand{\listtablename}{List of tables}
+\listoftables
+\thispagestyle{empty}
+If you don't need it, delete it.
+
+% -----------------------------  LIST OF APPENDICES ---------------------------
+\chapter*{List of appendices}
+\begin{enumerate}
+\item Appendix A. User Manual
+\item Appendix B. Testing Scenarios
+\end{enumerate}
+\thispagestyle{empty}
+
+
+% -----------------------------  APPENDIX A ---------------------------
+\chapter*{A. User Manual}
+
+There we will have manual
+\thispagestyle{empty}
+
+% -----------------------------  APPENDIX B ---------------------------
+\chapter*{B. Testing Scenarios}
+
+Testing Scenarios
+\thispagestyle{empty}
+
+
+
+\end{document}
