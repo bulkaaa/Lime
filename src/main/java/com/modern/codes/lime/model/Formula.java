@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -42,7 +43,7 @@ public class Formula implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName="ID")
-    @JsonBackReference("product-formulas")
+    @JsonIgnore
     private Product product;
 
     @ApiModelProperty(value = "The quantity of resources needed for product", required = true)
