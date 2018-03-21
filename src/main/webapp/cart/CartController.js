@@ -1,4 +1,20 @@
-app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}])
+
+.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
     var modalInstance = null;
     $scope.resource = true;
 
@@ -130,31 +146,57 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
         });
     };
 
+    function getImage(image){
+        $http.get("/file_management/"+image)
+                    .then(
+                        function (response) {
+                            if (response.data) {
+                                return response.data;
+                            }
+                        },
+                        function (response) {
+                            DialogService.generalServerError();
+                        }
+                    );
+    }
+
     $scope.saveRecord = function(item) {
+        var file = $scope.item.image;
         item.critical_value = 0;
         item.notifications_on = false;
         item.ordering_on = false;
-        $http.post("/resource/create", JSON.stringify(item))
-            .then(
-                function(response){
-                    if (response.data){
-                        console.log("created resource successfully!");
-                        item = response.data;
+        var fd = new FormData();
+        fd.append('file', file);
+            $http.post("/file_management/", fd, {
+                headers: {'Content-Type': undefined },
+                transformRequest: angular.identity})
+                    .then(
+                        function(response){
+                         $http.post("/resource/create", JSON.stringify(item))
+                                    .then(
+                                        function(response){
+                                                item = response.data;
+                                                $scope.items.push({
+                                                    id: item.id,
+                                                    name: item.name,
+                                                    description: item.description,
+                                                    quantity: item.quantity,
+                                                    image: item.image,
+                                                    unit: item.unit
+                                                });
+                                        },
+                                        function(response){
+                                            DialogService.handle(response, 'resource', 'create');
+                                        }
+                                    );
 
-                        $scope.items.push({
-                            id: item.id,
-                            name: item.name,
-                            description: item.description,
-                            quantity: item.quantity,
-                            image: item.image,
-                            unit: item.unit
-                        });
+                        },
+                     function(response){
+                        DialogService.handle(response, 'resource', 'image');
                     }
-                },
-                function(response){
-                    DialogService.handle(response, 'resource', 'create');
-                }
-            );
+                );
+
+
     }
 
      $scope.list = {
