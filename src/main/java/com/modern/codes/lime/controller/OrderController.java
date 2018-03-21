@@ -87,7 +87,7 @@ public class OrderController {
         return true;
     }
 
-    private static String ConstructOrderMsg(final String supplierName, final Map<ResourcePOJO, Integer> map){
+    public static String ConstructOrderMsg(final String supplierName, final Map<ResourcePOJO, Integer> map){
         final StringBuilder message = new StringBuilder("Dear " + supplierName + ", " + "\n\nWe would like to order: \n");
         map.forEach((key, value) -> message.append(key.getName())
                                            .append(" : ")

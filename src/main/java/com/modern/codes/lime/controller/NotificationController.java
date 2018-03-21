@@ -1,20 +1,19 @@
 package com.modern.codes.lime.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.management.Notification;
 
+import com.modern.codes.lime.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.modern.codes.lime.pojo.FormulaPOJO;
-import com.modern.codes.lime.pojo.JobPOJO;
-import com.modern.codes.lime.pojo.ResourcePOJO;
-import com.modern.codes.lime.pojo.UserPOJO;
 import com.modern.codes.lime.service.IFormulaService;
 import com.modern.codes.lime.service.IJobService;
 import com.modern.codes.lime.service.ResourceService;
@@ -51,9 +50,14 @@ public class NotificationController {
         final List<ResourcePOJO> resources = resourceService.findAll();
         resources.forEach(y -> {
             final Double value = y.getQuantity();
-            if (value == y.getCritical_value() && y.getNotifications_on() == true) {
+            if (value <= y.getCritical_value() && y.getNotifications_on() == true) {
                 send(y.getName());
+
             }
+            if (value <= y.getCritical_value() && y.getOrdering_on() == true) {
+                sendAutomaticOrder(y);
+            }
+
         });
     }
 
@@ -96,6 +100,18 @@ public class NotificationController {
                 LOG.error("FAILED TO SEND MESSAGE", e);
             }
         });
+        return true;
+    }
+
+    private Boolean sendAutomaticOrder(final ResourcePOJO resource) {
+        final Map<ResourcePOJO, Integer> map = new HashMap<>();
+        map.put(resource, 30);
+        try {
+            MailTools.SendEmail(resource.getPOJOSupplier().getEmailAddress(), "Order from LIME",
+                    OrderController.ConstructOrderMsg(resource.getName(), map));
+        }  catch (final MessagingException e) {
+            LOG.error("Failed to send order messages", e);
+        }
         return true;
     }
 
