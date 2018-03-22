@@ -6,8 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Base64;
 import java.util.stream.Stream;
 
+
+import com.google.common.io.ByteStreams;
+import io.vavr.control.Try;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -101,6 +106,11 @@ public class StorageService implements IStorageService {
         catch (final MalformedURLException e) {
             throw new StorageFileNotFoundException("Could not read file: " + filename, e);
         }
+    }
+    @Override
+    public byte[] loadAsBytes(final String filename) {
+       return Try.of( () -> Base64.getEncoder().encode(ByteStreams.toByteArray(this.loadAsResource(filename).getInputStream())))
+                .getOrElse(ArrayUtils.EMPTY_BYTE_ARRAY);
     }
 
     @Override

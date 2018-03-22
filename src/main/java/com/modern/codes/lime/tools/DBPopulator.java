@@ -259,13 +259,13 @@ public class DBPopulator {
         resourceG.setQuantity((double)30);
         resourceG.setDescription("Description for resource G");
 
-        resourceA.setImage("https://tinyurl.com/ya9ene6r");
-        resourceB.setImage("https://tinyurl.com/ya9ene6r");
-        resourceC.setImage("https://tinyurl.com/ya9ene6r");
-        resourceD.setImage("https://tinyurl.com/ya9ene6r");
-        resourceE.setImage("https://tinyurl.com/ya9ene6r");
-        resourceF.setImage("https://tinyurl.com/ya9ene6r");
-        resourceG.setImage("https://tinyurl.com/ya9ene6r");
+        resourceA.setImage("kotek.jpg");
+        resourceB.setImage("kotek.jpg");
+        resourceC.setImage("kotek.jpg");
+        resourceD.setImage("kotek.jpg");
+        resourceE.setImage("kotek.jpg");
+        resourceF.setImage("kotek.jpg");
+        resourceG.setImage("kotek.jpg");
 
         resourceA.setCritical_value(0.0);
         resourceB.setCritical_value(0.0);
@@ -317,10 +317,10 @@ public class DBPopulator {
         productD.setExpectedValue((double)20);
         productD.setDescription("Description for product D");
         productD.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
-        productA.setImage("https://tinyurl.com/ya9ene6r");
-        productB.setImage("https://tinyurl.com/ya9ene6r");
-        productC.setImage("https://tinyurl.com/ya9ene6r");
-        productD.setImage("https://tinyurl.com/ya9ene6r");
+        productA.setImage("kotek.jpg");
+        productB.setImage("kotek.jpg");
+        productC.setImage("kotek.jpg");
+        productD.setImage("kotek.jpg");
     }
 
     public void setJobs() {

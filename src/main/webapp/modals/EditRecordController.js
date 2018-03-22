@@ -15,6 +15,9 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
          if($scope.list && $scope.list.roles){
             $scope.item.roles = $scope.list.roles;
          }
+         if($scope.item.image.name)
+            $scope.item.image = $scope.item.image.name;
+
 		$scope.updateRecord($scope.item);
 	};
 

@@ -32,7 +32,7 @@
             <dt ng-if="resource || product">Unit</dt>
             <dd>{{item.unit}}</dd>
             <dt ng-if="resource || product">Image</dt>
-            <dd><img src="{{ item.image }}" style="max-height:60px; max-width:60px;" /></dd>
+            <dd><img ng-src="data:image/png;base64,{{item.image}}" style="max-height:60px; max-width:60px;" /></dd>
             <dt ng-if="resource">Supplier email</dt>
             <dd>{{item.supplier.emailAddress}}</dd>
         </dl>

@@ -20,7 +20,7 @@ app.controller('ReportResourcesController', ['$scope', '$http', 'DialogService',
         var item = {};
         item = $scope.list.resources;
         var date = new Date($scope.date);
-        var url = "/class_models/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
+        var url = "/report/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
         var promise = DialogService.dialogWait();
         $http.post(url, JSON.stringify(item))
             .then(
@@ -42,7 +42,7 @@ app.controller('ReportResourcesController', ['$scope', '$http', 'DialogService',
         var item = {};
         item = $scope.list.resources;
         var date = new Date($scope.date);
-        var url = "/class_models/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
+        var url = "/report/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
         var promise = DialogService.dialogWait();
         $http.post(url, JSON.stringify(item))
             .then(

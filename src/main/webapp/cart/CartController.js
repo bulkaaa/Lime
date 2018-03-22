@@ -23,8 +23,19 @@ app.directive('fileModel', ['$parse', function ($parse) {
             .then(
                 function (response) {
                     if (response.data) {
-                        console.log("updated record successfully!");
                         $scope.items = response.data;
+                        angular.forEach($scope.items ,function(value, key){
+                         var path = "/file_management/" + value.image;
+                             $http.get(path)
+                                 .then(
+                                     function (res) {
+                                         value.image = res.data;
+                                     },
+                                     function (response) {
+                                         DialogService.generalServerError();
+                                     }
+                                 )
+                        })
                     }
                 },
                 function (response) {
@@ -85,13 +96,23 @@ app.directive('fileModel', ['$parse', function ($parse) {
             .then(
                 function(response){
                     if (response.data){
-                        console.log("updated record successfully!");
+                        var path = "/file_management/" + response.data.image;
                         $scope.item.name = response.data.name;
                         $scope.item.description = response.data.description;
                         $scope.item.quantity = response.data.quantity;
                         $scope.item.unit = response.data.unit;
-                        $scope.item.image = response.data.image;
                         $scope.item.supplier = response.data.supplier;
+                        if(!$scope.item.image){
+                        $http.get(path)
+                             .then(
+                                 function (res) {
+                                     $scope.item.image = res.data;
+                                 },
+                                 function (response) {
+                                     DialogService.generalServerError();
+                                 }
+                             )
+                        }
                     }
                 },
                 function(response){
@@ -150,31 +171,18 @@ app.directive('fileModel', ['$parse', function ($parse) {
     $scope.img = null;
 
     function getImage(image){
-    var path = "/file_management/" + image;
-        $http.get(path)
-                    .then(
-                        function (response) {
-                             //var bytearray = new Uint8Array(response.data);
-                            var blob = new Blob([response.data], {type: 'image/jpg'});
-                             //return arrayBufferToBase64(response.data);
-                            // console.log(typeof(response.data));
-                            //image = btoa(String.fromCharCode.apply(null, response.data.ClassImage.data));
-                            //return blob;
-                           //var dataNow64bit = arrayBufferToBase64(blob);
-                           var reader = new FileReader();
-                            reader.readAsDataURL(blob);
-                            reader.onloadend = function() {
-                                var base64data = reader.result;
-                            }
-                            //image = reader.result;
-                          //$scope.item.image = image;
-                            $scope.img = reader.result;
-                        },
-                        function (response) {
-                            DialogService.generalServerError();
-                        }
-                    );
+     var path = "/file_management/" + image;
+            $http.get(path)
+                .then(
+                    function (res) {
+                        return res.data;
+                    },
+                    function (response) {
+                        DialogService.generalServerError();
+                    }
+                )
     }
+
 
     $scope.saveRecord = function(item) {
         var file = $scope.item.image;
@@ -196,19 +204,14 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                                 var path = "/file_management/" + item.image;
                                                 $http.get(path)
                                                         .then(
-                                                            function (response) {
-                                                                var blob = new Blob([response.data], {type: 'image/jpg'});
-                                                                var reader = new FileReader();
-                                                                reader.readAsDataURL(blob);
-                                                                reader.onloadend = function() {
-                                                                     $scope.img = reader.result;
-                                                                 }
+                                                            function (res) {
+                                                                item.image = res.data;
                                                                 $scope.items.push({
                                                                     id: item.id,
                                                                     name: item.name,
                                                                     description: item.description,
                                                                     quantity: item.quantity,
-                                                                    image: $sanitize($scope.img),
+                                                                    image: item.image,
                                                                     unit: item.unit,
                                                                 });
 
@@ -217,14 +220,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                                                 DialogService.generalServerError();
                                                             }
                                                         )
-                                               /* $scope.items.push({
-                                                    id: item.id,
-                                                    name: item.name,
-                                                    description: item.description,
-                                                    quantity: item.quantity,
-                                                    image: $scope.img,
-                                                    unit: item.unit,
-                                                });*/
                                         },
                                         function(response){
                                             DialogService.handle(response, 'resource', 'create');

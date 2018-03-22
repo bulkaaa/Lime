@@ -41,6 +41,7 @@ dependencies {
     testCompile (group :'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.9.RELEASE')
     testCompile (group: 'com.h2database', name: 'h2', version: '1.4.196')
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile (group: 'io.vavr', name: 'vavr', version: '0.9.0')
 
 }
 

@@ -20,7 +20,7 @@ app.controller('ReportProductsController', ['$scope', '$http', 'DialogService', 
         var item = {};
         item = $scope.list.products;
         var date = new Date($scope.date);
-        var url = "/class_models/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
+        var url = "/report/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&chartType=" + $scope.chartType;
         var promise = DialogService.dialogWait();
         $http.post(url, JSON.stringify(item))
             .then(

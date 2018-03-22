@@ -1,5 +1,6 @@
 package com.modern.codes.lime.controller;
 
+import com.google.common.io.ByteStreams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -26,11 +27,11 @@ public class FileUploadController {
 
     @GetMapping("/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable final String filename) {
+    public ResponseEntity<byte[]> serveFile(@PathVariable final String filename) {
 
-        final Resource file = storageService.loadAsResource(filename);
+        final byte [] file = storageService.loadAsBytes(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                                          "attachment; filename=\"" + file.getFilename() + '"').body(file);
+                                          "attachment; filename=\"" + filename + '"').body(file);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

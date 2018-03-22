@@ -55,9 +55,10 @@ public class ReportController {
                              .body(bytes);
     }
 
-    private byte[] getBytes(final @RequestParam String startDate, final @RequestParam Integer noDays,
-                            final @RequestParam String chartType,
-                            final @RequestBody @ApiParam("Products ids list") List<String> productIds) {
+    // FIXME: move to service layer, change name
+    private byte[] getBytes(final String startDate, final Integer noDays,
+                            final String chartType,
+                            final List<String> productIds) {
         final Date date;
         try {
             date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);

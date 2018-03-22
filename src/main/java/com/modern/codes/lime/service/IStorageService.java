@@ -18,6 +18,8 @@ public interface IStorageService {
 
     Resource loadAsResource(String filename);
 
+    byte[] loadAsBytes(String filename);
+
     void deleteAll();
 
     public void delete(final String filename);
