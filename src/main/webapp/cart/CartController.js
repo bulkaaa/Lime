@@ -14,7 +14,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
     };
 }])
 
-.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
+.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', '$sanitize', function($scope, $rootScope, $http, $modal, $dialogs, DialogService, $sanitize) {
     var modalInstance = null;
     $scope.resource = true;
 
@@ -146,13 +146,29 @@ app.directive('fileModel', ['$parse', function ($parse) {
         });
     };
 
+
+    $scope.img = null;
+
     function getImage(image){
-        $http.get("/file_management/"+image)
+    var path = "/file_management/" + image;
+        $http.get(path)
                     .then(
                         function (response) {
-                            if (response.data) {
-                                return response.data;
+                             //var bytearray = new Uint8Array(response.data);
+                            var blob = new Blob([response.data], {type: 'image/jpg'});
+                             //return arrayBufferToBase64(response.data);
+                            // console.log(typeof(response.data));
+                            //image = btoa(String.fromCharCode.apply(null, response.data.ClassImage.data));
+                            //return blob;
+                           //var dataNow64bit = arrayBufferToBase64(blob);
+                           var reader = new FileReader();
+                            reader.readAsDataURL(blob);
+                            reader.onloadend = function() {
+                                var base64data = reader.result;
                             }
+                            //image = reader.result;
+                          //$scope.item.image = image;
+                            $scope.img = reader.result;
                         },
                         function (response) {
                             DialogService.generalServerError();
@@ -162,6 +178,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
     $scope.saveRecord = function(item) {
         var file = $scope.item.image;
+        item.image = $scope.item.image.name;
         item.critical_value = 0;
         item.notifications_on = false;
         item.ordering_on = false;
@@ -176,14 +193,38 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                     .then(
                                         function(response){
                                                 item = response.data;
-                                                $scope.items.push({
+                                                var path = "/file_management/" + item.image;
+                                                $http.get(path)
+                                                        .then(
+                                                            function (response) {
+                                                                var blob = new Blob([response.data], {type: 'image/jpg'});
+                                                                var reader = new FileReader();
+                                                                reader.readAsDataURL(blob);
+                                                                reader.onloadend = function() {
+                                                                     $scope.img = reader.result;
+                                                                 }
+                                                                $scope.items.push({
+                                                                    id: item.id,
+                                                                    name: item.name,
+                                                                    description: item.description,
+                                                                    quantity: item.quantity,
+                                                                    image: $sanitize($scope.img),
+                                                                    unit: item.unit,
+                                                                });
+
+                                                            },
+                                                            function (response) {
+                                                                DialogService.generalServerError();
+                                                            }
+                                                        )
+                                               /* $scope.items.push({
                                                     id: item.id,
                                                     name: item.name,
                                                     description: item.description,
                                                     quantity: item.quantity,
-                                                    image: item.image,
-                                                    unit: item.unit
-                                                });
+                                                    image: $scope.img,
+                                                    unit: item.unit,
+                                                });*/
                                         },
                                         function(response){
                                             DialogService.handle(response, 'resource', 'create');

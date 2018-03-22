@@ -24,7 +24,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-dialog-service/5.3.0/dialogs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-dialog-service/5.3.0/dialogs-default-translations.min.js"></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
 
 <div ng-include src="'shared/header.html'"></div>
 
@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 
-    var app = angular.module("myApp", ['ngRoute', 'ngCookies', 'ngSanitize', 'ui.bootstrap.modal', 'smart-table', 'ui.bootstrap', 'checklist-model', 'dialogs.main']);
+    var app = angular.module("myApp", ['ngSanitize', 'ngRoute', 'ngCookies', 'ngSanitize', 'ui.bootstrap.modal', 'smart-table', 'ui.bootstrap', 'checklist-model', 'dialogs.main']);
     app.config(function($routeProvider) {
         $routeProvider
             .when('/', {
