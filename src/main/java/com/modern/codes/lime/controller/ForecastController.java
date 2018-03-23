@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(path = "/forecast")
 public class ForecastController extends BaseController {
 
-    @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<byte[]> generateForecast(
             @RequestBody @ApiParam("List of product ids") final List<String> productIds,
@@ -54,7 +54,7 @@ public class ForecastController extends BaseController {
                              .body(img);
     }
 
-    @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void sendForecast(@RequestBody @ApiParam("List of product ids") final List<String> productIds,
                              @RequestParam final String startDate, @RequestParam final Integer noDays,

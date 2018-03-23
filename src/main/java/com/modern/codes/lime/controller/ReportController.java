@@ -38,7 +38,7 @@ public class ReportController {
         this.timeSeriesService = timeSeriesService;
     }
 
-    @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Generate class_models for products")
     public ResponseEntity<byte[]> generate(@RequestParam final String startDate, @RequestParam final Integer noDays,
                                            @RequestParam final String chartType,
@@ -71,7 +71,7 @@ public class ReportController {
                                     "Sample_Chart", chartType);
     }
 
-    @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Generate and send class_models for products")
     public void send(@RequestParam final String startDate, @RequestParam final String email,
                      @RequestParam final Integer noDays, @RequestParam final String chartType,
