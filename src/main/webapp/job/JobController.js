@@ -53,27 +53,40 @@ var modalInstance = null;
         });
     };
 
-    $scope.saveRecord = function(item) {
 
-        $http.post("/job/create", JSON.stringify(item))
-            .then(
-                function(response){
-                    if (response.data){
-                        item = response.data;
-                        $scope.items.push({
-                            id: item.id,
-                            productName: item.product.name,
-                            details: item.details,
-                            resultValue: item.resultValue,
-                            startDate: new Date(item.startDate).toLocaleString(),
-                            endDate: new Date(item.endDate).toLocaleString(),
-                        });
+    $scope.getUser = function() {
+     $http.get("/job/act-user")
+                .then(
+                    function(response){
+                       $scope.item.user.username = response.data.user.username;
+                    },
+                    function(response){
+                        DialogService.handle(response, 'job', 'create');
                     }
-                },
-                function(response){
-                    DialogService.handle(response, 'job', 'create');
-                }
-            );
+                );
     }
+
+    $scope.saveRecord = function(item) {
+                        $http.post("/job/create", JSON.stringify(item))
+                            .then(
+                                function(response){
+                                    if (response.data){
+                                        item = response.data;
+                                        $scope.items.push({
+                                            id: item.id,
+                                            productName: item.product.name,
+                                            details: item.details,
+                                            resultValue: item.resultValue,
+                                            startDate: new Date(item.startDate).toLocaleString(),
+                                            endDate: new Date(item.endDate).toLocaleString(),
+                                            username: item.username,
+                                        });
+                                    }
+                                },
+                                function(response){
+                                    DialogService.handle(response, 'job', 'create');
+                                }
+                            );
+                }
 
 }]);

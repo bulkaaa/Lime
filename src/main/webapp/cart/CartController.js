@@ -55,7 +55,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
             size: 'md',
             resolve: {
                 item: function () {
-                    return item; //response.data;
+                    return item;
                 }
             }
         });
@@ -130,8 +130,8 @@ app.directive('fileModel', ['$parse', function ($parse) {
                              },
                              function(response){
                                 DialogService.handle(response,'resource', 'update');
-                               }
-                        );
+                             }
+                    );
     };
 
     $scope.deleteRecord = function(id) {
@@ -232,13 +232,12 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                                             function (response) {
                                                                 DialogService.generalServerError();
                                                             }
-                                                        )
+                                                        );
                                         },
                                         function(response){
                                             DialogService.handle(response, 'resource', 'create');
                                         }
                                     );
-
                         },
                      function(response){
                         DialogService.handle(response, 'resource', 'image');

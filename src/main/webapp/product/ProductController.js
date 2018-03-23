@@ -1,4 +1,22 @@
-app.controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
+app.directive('fileModel', ['$parse', function ($parse) {
+       return {
+           restrict: 'A',
+           link: function(scope, element, attrs) {
+               var model = $parse(attrs.fileModel);
+               var modelSetter = model.assign;
+
+               element.bind('change', function(){
+                   scope.$apply(function(){
+                       modelSetter(scope, element[0].files[0]);
+                   });
+               });
+           }
+       };
+   }])
+
+
+
+.controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
     var modalInstance = null;
     $scope.product = true;
 
@@ -10,6 +28,18 @@ app.controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal
                         $scope.items = response.data;
                         if (!$scope.items.length)
                             $dialogs.notify('Currently there are no products added in LIME', "You can add products here by clicking on 'Add New Product' button");
+                            angular.forEach($scope.items ,function(value, key){
+                                     var path = "/file_management/" + value.image;
+                                         $http.get(path)
+                                             .then(
+                                                 function (res) {
+                                                     value.image = res.data;
+                                                 },
+                                                 function (response) {
+                                                     DialogService.generalServerError();
+                                                 }
+                                             )
+                            })
                     }
                 },
                 function (response) {
@@ -29,7 +59,7 @@ app.controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal
             size: 'md',
             resolve: {
                 item: function () {
-                    return item; //response.data;
+                    return item;
                 }
             }
         });
@@ -55,22 +85,48 @@ app.controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal
 
 
     $scope.updateRecord = function(item) {
-        $http.put("/product/update", JSON.stringify(item))
-            .then(
-                function(response){
-                    if (response.data){
-                        console.log("updated product successfully!");
-                        $scope.item.name = response.data.name;
-                        $scope.item.description = response.data.description;
-                        $scope.item.expectedValue = response.data.expectedValue;
-                        $scope.item.unit = response.data.unit;
-                        $scope.item.image = response.data.image;
-                    }
-                },
-                function(response){
-                    DialogService.handle(response, 'product', 'update');
-                }
-            );
+            var file = item.image;
+            item.image = item.image.name;
+            item.quantity = 10;
+            item.notifications_on = false;
+            item.critical_value = 5;
+            var fd = new FormData();
+            fd.append('file', file);
+                $http.post("/file_management/", fd, {
+                    headers: {'Content-Type': undefined },
+                    transformRequest: angular.identity})
+                        .then(function(response){
+                            $http.put("/product/update", JSON.stringify(item))
+                                .then(
+                                    function(response){
+                                        if (response.data){
+                                            var path = "/file_management/" + response.data.image;
+                                            $scope.item.name = response.data.name;
+                                            $scope.item.description = response.data.description;
+                                            $scope.item.expectedValue = response.data.expectedValue;
+                                            $scope.item.unit = response.data.unit;
+                                             if($scope.item.image){
+                                             $http.get(path)
+                                                    .then(
+                                                        function (res) {
+                                                            $scope.item.image = res.data;
+                                                        },
+                                                        function (response) {
+                                                            DialogService.generalServerError();
+                                                        }
+                                                    )
+                                             }
+                                        }
+                                    },
+                                    function(response){
+                                        DialogService.handle(response, 'product', 'update');
+                                    }
+                                );
+                            },
+                            function(response){
+                                DialogService.handle(response,'product', 'update');
+                            }
+                        );
     };
 
     $scope.deleteRecord = function(id) {
@@ -110,27 +166,50 @@ app.controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal
     };
 
     $scope.saveRecord = function(item) {
-
-        $http.post("/product/create", JSON.stringify(item))
-            .then(
-                function(response){
-                    if (response.data){
-                        console.log("created PRODUCT successfully!");
-                        item = response.data;
-                        $scope.items.push({
-                            id: item.id,
-                            name: item.name,
-                            description: item.description,
-                            expectedValue: item.expectedValue,
-                            image: item.image,
-                            unit: item.unit
-                        });
-                    }
-                },
-                function(response){
-                    DialogService.handle(response, 'product', 'create');
-                }
-            );
+        var file = $scope.item.image;
+        item.image = $scope.item.image.name;
+        item.quantity = 10;
+        item.notifications_on = false;
+        item.critical_value = 5;
+        var fd = new FormData();
+         fd.append('file', file);
+                    $http.post("/file_management/", fd, {
+                        headers: {'Content-Type': undefined },
+                        transformRequest: angular.identity})
+                            .then(
+                                function(response){
+                                    $http.post("/product/create", JSON.stringify(item))
+                                        .then(
+                                            function(response){
+                                                    item = response.data;
+                                                    var path = "/file_management/" + item.image;
+                                                    $http.get(path)
+                                                            .then(
+                                                                function (response) {
+                                                                    item.image = response.data;
+                                                                    $scope.items.push({
+                                                                        id: item.id,
+                                                                        name: item.name,
+                                                                        description: item.description,
+                                                                        expectedValue: item.expectedValue,
+                                                                        image: item.image,
+                                                                        unit: item.unit,
+                                                                    });
+                                                                },
+                                                                function(response){
+                                                                    DialogService.handle(response, 'product', 'create');
+                                                                }
+                                                            );
+                                            },
+                                            function(response){
+                                                DialogService.handle(response, 'resource', 'create');
+                                            }
+                                    );
+                                },
+                                function(response){
+                                    DialogService.handle(response, 'resource', 'image');
+                                }
+                            );
     }
 
 
