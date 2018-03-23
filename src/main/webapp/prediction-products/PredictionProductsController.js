@@ -21,7 +21,7 @@ app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'D
         item = $scope.list.products;
         var date = new Date($scope.date);
         var promise = DialogService.dialogWait();
-        $http.post("/forecast/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&noDaysForecast=" + $scope.noDaysForecast + "&chartType=" + $scope.chartType, JSON.stringify(item))
+        $http.post("/forecast/product/generate" + "?startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&noDaysForecast=" + $scope.noDaysForecast + "&chartType=" + $scope.chartType, JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
@@ -42,7 +42,7 @@ app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'D
         var date = new Date($scope.date);
 
         DialogService.dialogWait();
-        $http.post("/forecast/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&noDaysForecast=" + $scope.noDaysForecast + "&chartType=" + $scope.chartType, JSON.stringify(item))
+        $http.post("/forecast/product/send" + "?email=" + $scope.email + "&startDate=" + date.getDate()+"-"+(parseInt(date.getMonth())+1)+"-"+date.getFullYear() + "&noDays=" + $scope.noDays + "&noDaysForecast=" + $scope.noDaysForecast + "&chartType=" + $scope.chartType, JSON.stringify(item))
             .then(
                 function(response){
                     if (response.data){
