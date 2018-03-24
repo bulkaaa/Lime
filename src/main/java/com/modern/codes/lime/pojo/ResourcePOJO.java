@@ -46,7 +46,7 @@ public class ResourcePOJO extends BasicPOJO {
         return critical_value;
     }
 
-    public void setCritical_value(Double critical_value) {
+    public void setCritical_value(final Double critical_value) {
         this.critical_value = critical_value;
     }
 
@@ -54,7 +54,7 @@ public class ResourcePOJO extends BasicPOJO {
         return notifications_on;
     }
 
-    public void setNotifications_on(Boolean notifications_on) {
+    public void setNotifications_on(final Boolean notifications_on) {
         this.notifications_on = notifications_on;
     }
 
@@ -62,7 +62,7 @@ public class ResourcePOJO extends BasicPOJO {
         return ordering_on;
     }
 
-    public void setOrdering_on(Boolean ordering_on) {
+    public void setOrdering_on(final Boolean ordering_on) {
         this.ordering_on = ordering_on;
     }
 

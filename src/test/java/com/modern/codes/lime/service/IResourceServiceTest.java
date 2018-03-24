@@ -42,6 +42,9 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
         obj.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj.setDescription("desc");
         obj.setUnit(Unit.KG);
+        obj.setNotifications_on(true);
+        obj.setOrdering_on(true);
+        obj.setCritical_value(100.00);
         service.save(obj);
         assertEquals(obj.getName(), service.findByName("Resource")
                                            .get(0)
@@ -59,11 +62,17 @@ public class IResourceServiceTest extends IBasicCRUDServiceTest<Resource, Resour
         obj.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj.setDescription("desc");
         obj.setUnit(Unit.KG);
+        obj.setNotifications_on(true);
+        obj.setOrdering_on(true);
+        obj.setCritical_value(100.00);
         obj2.setName("Resource2");
         obj2.setQuantity(10101.00);
         obj2.setImage("https://i.ytimg.com/vi/oUKDWoqBrf8/maxresdefault.jpg");
         obj2.setDescription("desc");
         obj2.setUnit(Unit.KG);
+        obj2.setNotifications_on(true);
+        obj2.setOrdering_on(true);
+        obj2.setCritical_value(100.00);
 
         final List<ResourcePOJO> list = new ArrayList<>();
         list.add(obj);
