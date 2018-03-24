@@ -25,68 +25,10 @@ import io.swagger.annotations.ApiModelProperty;
  * Model representation of a supplier in Lime.
  *
  * @author jaroszk
- *
  */
 @ApiModel(description = "Model representation of a supplier used in Lime")
 @Entity
-public class Supplier implements Serializable{
-
-    private static final long serialVersionUID = 8269473897901383432L;
-
-    private static final int MAX_LENGTH_NAME = 50;
-    private static final int MAX_LENGTH_POSTAL_CODE = 10;
-    private static final int MAX_LENGTH_CITY = 40;
-    private static final int MAX_LENGTH_STREET = 35;
-    private static final int MAX_LENGTH_COUNTRY = 3;
-    private static final int MAX_LENGTH_TELEPHONE = 30;
-    private static final int MAX_LENGTH_EMAIL = 240;
-
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @ApiModelProperty(value = "The unqiue id of the supplier", required = true)
-    private String id;
-
-    @ApiModelProperty(value = "The name of the supplier.", required = true)
-    @NotNull
-    @Size(max = MAX_LENGTH_NAME)
-    private String name;
-
-    @ApiModelProperty(value = "The E-Mail address of the supplier.", required = true)
-    @NotEmpty
-    @Email
-    @Size(max = MAX_LENGTH_EMAIL)
-    private String emailAddress;
-
-    @ApiModelProperty(value = "ZIP code of the supplier.", required = true)
-    @NotEmpty
-    @Size(max = MAX_LENGTH_POSTAL_CODE)
-    //@Pattern("\d{2}-\d{3}")
-    private String postalCode;
-
-    @ApiModelProperty(value = "City of the supplier.", required = true)
-    @NotEmpty
-    @Size(max = MAX_LENGTH_CITY)
-    private String city;
-
-    @ApiModelProperty(value = "Country the supplier.", required = true, allowableValues = "PL")
-    @NotEmpty
-    @Size(max = MAX_LENGTH_COUNTRY)
-    private String country;
-
-    @ApiModelProperty(value = "Street of the supplier.", required = true)
-    @NotEmpty
-    @Size(max = MAX_LENGTH_STREET)
-    private String street;
-
-    @ApiModelProperty(value = "The telephone number of supplier.", required = true)
-    @NotEmpty
-    @Size(max = MAX_LENGTH_TELEPHONE)
-    private String telephone;
-
-    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("supplier-resources")
-    private List<Resource> resources;
+public class Supplier implements Serializable {
 
     public String getId() {
         return id;
@@ -159,4 +101,50 @@ public class Supplier implements Serializable{
     public void setResources(final List<Resource> resources) {
         this.resources = resources;
     }
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @ApiModelProperty(value = "The unqiue id of the supplier", required = true)
+    private String id;
+    @ApiModelProperty(value = "The name of the supplier.", required = true)
+    @NotNull
+    @Size(max = MAX_LENGTH_NAME)
+    private String name;
+    @ApiModelProperty(value = "The E-Mail address of the supplier.", required = true)
+    @NotEmpty
+    @Email
+    @Size(max = MAX_LENGTH_EMAIL)
+    private String emailAddress;
+    @ApiModelProperty(value = "ZIP code of the supplier.", required = true)
+    @NotEmpty
+    @Size(max = MAX_LENGTH_POSTAL_CODE)
+    //@Pattern("\d{2}-\d{3}")
+    private String postalCode;
+    @ApiModelProperty(value = "City of the supplier.", required = true)
+    @NotEmpty
+    @Size(max = MAX_LENGTH_CITY)
+    private String city;
+    @ApiModelProperty(value = "Country the supplier.", required = true, allowableValues = "PL")
+    @NotEmpty
+    @Size(max = MAX_LENGTH_COUNTRY)
+    private String country;
+    @ApiModelProperty(value = "Street of the supplier.", required = true)
+    @NotEmpty
+    @Size(max = MAX_LENGTH_STREET)
+    private String street;
+    @ApiModelProperty(value = "The telephone number of supplier.", required = true)
+    @NotEmpty
+    @Size(max = MAX_LENGTH_TELEPHONE)
+    private String telephone;
+    @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("supplier-resources")
+    private List<Resource> resources;
+    private static final long serialVersionUID = 8269473897901383432L;
+    private static final int MAX_LENGTH_NAME = 50;
+    private static final int MAX_LENGTH_POSTAL_CODE = 10;
+    private static final int MAX_LENGTH_CITY = 40;
+    private static final int MAX_LENGTH_STREET = 35;
+    private static final int MAX_LENGTH_COUNTRY = 3;
+    private static final int MAX_LENGTH_TELEPHONE = 30;
+    private static final int MAX_LENGTH_EMAIL = 240;
 }

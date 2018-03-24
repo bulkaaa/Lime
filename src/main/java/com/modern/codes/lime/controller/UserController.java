@@ -7,7 +7,6 @@ import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -68,8 +67,8 @@ public class UserController extends BaseController {
         try {
             final String userJson = ParseTools.parseToJson(userService.save(user), User.class);
             MailService.SendEmail(user.getEmailAddress(), "Welcome to LIME",
-                                  mailService.prepareWelcomeEmailBody(user.getUsername(), user.getPassword(), user.getName(),
-                                                          user.getSurname()));
+                                  mailService.prepareWelcomeEmailBody(user.getUsername(), user.getPassword(),
+                                                                      user.getName(), user.getSurname()));
             return userJson;
         } catch (final MessagingException e) {
             LOG.error("FAILED TO SEND WELCOME MESSAGE", e);

@@ -1,18 +1,19 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.tools.ParseTools;
-import com.modern.codes.lime.dao.ISupplierDAO;
-import com.modern.codes.lime.model.Supplier;
-import com.modern.codes.lime.pojo.SupplierPOJO;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.modern.codes.lime.dao.ISupplierDAO;
+import com.modern.codes.lime.model.Supplier;
+import com.modern.codes.lime.pojo.SupplierPOJO;
+import com.modern.codes.lime.tools.ParseTools;
 
 @Service
-public class SupplierService extends BasicCRUDService<Supplier, SupplierPOJO, ISupplierDAO> implements ISupplierService {
+public class SupplierService extends BasicCRUDService<Supplier, SupplierPOJO, ISupplierDAO>
+        implements ISupplierService {
 
-    private final ISupplierDAO dao;
     @Autowired
     public SupplierService(final ISupplierDAO dao) {
         super(dao, Supplier.class, SupplierPOJO.class);
@@ -48,4 +49,5 @@ public class SupplierService extends BasicCRUDService<Supplier, SupplierPOJO, IS
     public List<SupplierPOJO> findByTelephone(final String telephone) {
         return ParseTools.parseList(dao.findByTelephone(telephone), SupplierPOJO.class);
     }
+    private final ISupplierDAO dao;
 }

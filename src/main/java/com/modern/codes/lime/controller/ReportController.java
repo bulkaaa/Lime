@@ -6,7 +6,6 @@ import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,19 +24,19 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(path = "/report")
 public class ReportController {
 
-    public ReportController(final IReportService reportService){
+    public ReportController(final IReportService reportService) {
         this.reportService = reportService;
     }
 
-    @RequestMapping(value = "/product/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/generate",
+                    method = RequestMethod.POST,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Generate class_models for products")
     public ResponseEntity<byte[]> generate(@RequestParam final String startDate, @RequestParam final Integer noDays,
                                            @RequestParam final String chartType,
                                            @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
-        LOG.info(
-                "Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n "
-                + "chartType: [] \n",
-                startDate, noDays, productIds, chartType);
+        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n "
+                 + "chartType: [] \n", startDate, noDays, productIds, chartType);
 
         final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
 
@@ -46,16 +45,13 @@ public class ReportController {
                              .body(bytes);
     }
 
-
     @RequestMapping(value = "/product/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Generate and send class_models for products")
     public void send(@RequestParam final String startDate, @RequestParam final String email,
                      @RequestParam final Integer noDays, @RequestParam final String chartType,
                      @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
-        LOG.info(
-                "Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n"
-                + " chartType: [] \n",
-                startDate, noDays, email, productIds, chartType);
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n"
+                 + " chartType: [] \n", startDate, noDays, email, productIds, chartType);
 
         final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
         try {

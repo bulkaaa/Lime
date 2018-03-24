@@ -21,24 +21,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "Model representation of a resource category used in Lime")
 @Entity
-public class ResourceCategory  implements Serializable {
-
-    private static final int MAX_LENGTH_NAME = 50;
-    private static final long serialVersionUID = -334555207904101780L;
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @ApiModelProperty(value = "The unique id of the resource category", required = true)
-    private String id;
-
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("category-resources")
-    private List<Resource> resources;
-
-    @ApiModelProperty(value = "The name of the resource category. E.g \"vegetables\"", required = true)
-    @NotNull
-    @Size(max = MAX_LENGTH_NAME)
-    private String name;
+public class ResourceCategory implements Serializable {
 
     public String getId() {
         return id;
@@ -63,4 +46,18 @@ public class ResourceCategory  implements Serializable {
     public void setName(final String name) {
         this.name = name;
     }
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @ApiModelProperty(value = "The unique id of the resource category", required = true)
+    private String id;
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("category-resources")
+    private List<Resource> resources;
+    @ApiModelProperty(value = "The name of the resource category. E.g \"vegetables\"", required = true)
+    @NotNull
+    @Size(max = MAX_LENGTH_NAME)
+    private String name;
+    private static final int MAX_LENGTH_NAME = 50;
+    private static final long serialVersionUID = -334555207904101780L;
 }

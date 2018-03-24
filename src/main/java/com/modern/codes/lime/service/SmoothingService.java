@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.modern.codes.lime.class_models.TimeSeries;
 
 @Service
-public class SmoothingService implements ISmoothingService{
+public class SmoothingService implements ISmoothingService {
 
     @Override
     public TimeSeries calculateSmoothing(TimeSeries series, final int days_ahead) {

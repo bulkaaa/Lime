@@ -28,19 +28,6 @@ public class NotificationService implements INotificationService {
         this.formulaService = formulaService;
     }
 
-    private void updateUsedResources(final String jobId) {
-        final JobPOJO job = jobService.findById(jobId);
-        final List<FormulaPOJO> formula = formulaService.findByProductId(job.getPOJOProduct()
-                                                                            .getId());
-        formula.forEach(y -> {
-            final ResourcePOJO resource = y.getPOJOResource();
-            Double value = resource.getQuantity();
-            value = value - y.getValue();
-            resource.setQuantity(value);
-        });
-        checkUsedResources();
-    }
-
     @Override
     public void checkUsedResources() {
         final List<ResourcePOJO> resources = resourceService.findAll();
@@ -63,19 +50,20 @@ public class NotificationService implements INotificationService {
             if (res.getQuantity() <= res.getCritical_value() && res.getNotifications_on() == true) {
 
                 MailService.SendEmail(email, "Notification from LIME",
-                                    "Dear user,\nthe inventory of the Resource you will need to perform the job: "
-                                    + res.getName()
-                                    + ' '
-                                    + "is below its critical value.\nPlease visit LIME application to Order more.");
+                                      "Dear user,\nthe inventory of the Resource you will need to perform the job: "
+                                      + res.getName()
+                                      + ' '
+                                      + "is below its critical value.\nPlease visit LIME application to Order more.");
 
                 return false;
             } else if ((res.getQuantity() - use) <= res.getCritical_value() && res.getNotifications_on() == true) {
                 MailService.SendEmail(email, "Notification from LIME",
-                                    "Dear user,\nthe inventory of the Resource you will need to perform the job: "
-                                    + res.getName()
-                                    + ' '
-                                    + "will reach its critical value after the current job will be done.\nPlease visit "
-                                    + "LIME application to Order more.");
+                                      "Dear user,\nthe inventory of the Resource you will need to perform the job: "
+                                      + res.getName()
+                                      + ' '
+                                      + "will reach its critical value after the current job will be done.\nPlease "
+                                      + "visit "
+                                      + "LIME application to Order more.");
                 return false;
             }
         } catch (final MessagingException e) {
@@ -84,15 +72,28 @@ public class NotificationService implements INotificationService {
         return true;
     }
 
+    private void updateUsedResources(final String jobId) {
+        final JobPOJO job = jobService.findById(jobId);
+        final List<FormulaPOJO> formula = formulaService.findByProductId(job.getPOJOProduct()
+                                                                            .getId());
+        formula.forEach(y -> {
+            final ResourcePOJO resource = y.getPOJOResource();
+            Double value = resource.getQuantity();
+            value = value - y.getValue();
+            resource.setQuantity(value);
+        });
+        checkUsedResources();
+    }
+
     private Boolean send(final String ResourceName) {
         final List<UserPOJO> users = userService.findAll();
         users.forEach(y -> {
             try {
                 MailService.SendEmail(y.getEmailAddress(), "Notification from LIME",
-                                    "Dear user, the inventory of the Resource: "
-                                    + ResourceName
-                                    + " is below its critical value."
-                                    + "\nPlease visit LIME Application to order more.");
+                                      "Dear user, the inventory of the Resource: "
+                                      + ResourceName
+                                      + " is below its critical value."
+                                      + "\nPlease visit LIME Application to order more.");
             } catch (final MessagingException e) {
                 LOG.error("FAILED TO SEND MESSAGE", e);
             }
@@ -112,12 +113,10 @@ public class NotificationService implements INotificationService {
         }
         return true;
     }
-
-    private static final Logger LOG = LoggerFactory.getLogger(NotificationService.class);
-
     private final UserService userService;
     private final ResourceService resourceService;
     private final IJobService jobService;
     private final IFormulaService formulaService;
+    private static final Logger LOG = LoggerFactory.getLogger(NotificationService.class);
 
 }

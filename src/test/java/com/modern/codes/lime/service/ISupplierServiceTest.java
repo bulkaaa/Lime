@@ -1,9 +1,11 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.dao.ISupplierDAO;
-import com.modern.codes.lime.model.Supplier;
-import com.modern.codes.lime.pojo.SupplierPOJO;
-import com.modern.codes.lime.tools.DBPopulator;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,26 +14,18 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import com.modern.codes.lime.dao.ISupplierDAO;
+import com.modern.codes.lime.model.Supplier;
+import com.modern.codes.lime.pojo.SupplierPOJO;
+import com.modern.codes.lime.tools.DBPopulator;
 
 @DataJpaTest
 @RunWith(SpringRunner.class)
-@ComponentScan(basePackages={"com.modern.codes.lime.tools"})
-@ComponentScan(basePackages={"com.modern.codes.lime.service"})
+@ComponentScan(basePackages = {"com.modern.codes.lime.tools"})
+@ComponentScan(basePackages = {"com.modern.codes.lime.service"})
 public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, SupplierPOJO, ISupplierDAO, SupplierService> {
-    @Autowired
-    private ISupplierService service;
-    @Autowired
-    private SupplierService serv;
-    @Autowired
-    DBPopulator pop;
-
     @Before
-    public void setServiceAndResetDB(){
+    public void setServiceAndResetDB() {
         super.setService(serv);
         pop.clearDB();
         pop.setSuppliers();
@@ -39,7 +33,7 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
     }
 
     @Test
-    public void addSupplier(){
+    public void addSupplier() {
         final long count = service.count();
         final SupplierPOJO obj = new SupplierPOJO();
         obj.setEmailAddress("EmailAdress@test.pl");
@@ -50,11 +44,14 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
         obj.setTelephone("123012039");
         obj.setName("Zdzisiek");
         service.save(obj);
-        assertEquals(obj.getName(), service.findByName("Zdzisiek").get(0).getName());
+        assertEquals(obj.getName(), service.findByName("Zdzisiek")
+                                           .get(0)
+                                           .getName());
         assertEquals(count + 1, service.count());
     }
+
     @Test
-    public void addSupplierByList(){
+    public void addSupplierByList() {
         final long count = service.count();
         final SupplierPOJO obj = new SupplierPOJO();
         final SupplierPOJO obj2 = new SupplierPOJO();
@@ -76,28 +73,50 @@ public class ISupplierServiceTest extends IBasicCRUDServiceTest<Supplier, Suppli
         list.add(obj);
         list.add(obj2);
         service.save(list);
-        assertEquals(obj2.getName(), service.findByName("Zdzisiek2").get(0).getName());
-        assertEquals(obj.getName(), service.findByName("Zdzisiek").get(0).getName());
+        assertEquals(obj2.getName(), service.findByName("Zdzisiek2")
+                                            .get(0)
+                                            .getName());
+        assertEquals(obj.getName(), service.findByName("Zdzisiek")
+                                           .get(0)
+                                           .getName());
         assertEquals(count + 2, service.count());
 
     }
+
     @Test
-    public void updateTest(){
-        final SupplierPOJO obj = service.findAll().get(0);
+    public void updateTest() {
+        final SupplierPOJO obj = service.findAll()
+                                        .get(0);
         assertNotEquals("0test", obj.getName());
         obj.setName("0test");
         service.save(obj);
-        assertEquals("0test", service.findById(obj.getId()).getName());
+        assertEquals("0test", service.findById(obj.getId())
+                                     .getName());
     }
+
     @Test
-    public void updateByListTest(){
+    public void updateByListTest() {
         final List<SupplierPOJO> list = service.findAll();
-        assertNotEquals("0test", list.get(0).getName());
-        assertNotEquals("1test", list.get(1).getName());
-        list.get(0).setName("0test");
-        list.get(1).setName("1test");
+        assertNotEquals("0test", list.get(0)
+                                     .getName());
+        assertNotEquals("1test", list.get(1)
+                                     .getName());
+        list.get(0)
+            .setName("0test");
+        list.get(1)
+            .setName("1test");
         service.save(list);
-        assertEquals("0test", service.findById(list.get(0).getId()).getName());
-        assertEquals("1test", service.findById(list.get(1).getId()).getName());
+        assertEquals("0test", service.findById(list.get(0)
+                                                   .getId())
+                                     .getName());
+        assertEquals("1test", service.findById(list.get(1)
+                                                   .getId())
+                                     .getName());
     }
+    @Autowired
+    DBPopulator pop;
+    @Autowired
+    private ISupplierService service;
+    @Autowired
+    private SupplierService serv;
 }

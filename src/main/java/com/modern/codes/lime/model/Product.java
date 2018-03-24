@@ -1,81 +1,41 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.*;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.validator.constraints.URL;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Model representation of a product added in Lime.
  *
  * @author jaroszk
- *
  */
 @ApiModel(description = "Model representation of a product in Lime")
 @Entity
 public class Product implements Serializable {
-
-    private static final long serialVersionUID = 8269473897901384963L;
-
-
-    private static final int MAX_LENGTH_NAME = 50;
-    private static final int MAX_LENGTH_DESC = 250;
-
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @ApiModelProperty(value = "The unqiue id of the product", required = true)
-    private String id;
-
-    @ApiModelProperty(value = "The name of the product. E.g \"Lime basic\"", required = true)
-    @NotNull
-    @Size(max = MAX_LENGTH_NAME)
-    @JsonProperty("name")
-    private String name;
-
-    @ApiModelProperty(value = "The long description of the product", required = true)
-    @NotNull
-    @Size(max = MAX_LENGTH_DESC)
-    @JsonProperty("description")
-    private String description;
-
-    @ApiModelProperty(value = "The unit in which product is measured", required = true)
-    @NotNull
-    @JsonProperty("unit")
-    private Unit unit;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false, name = "added_at", updatable = false)
-    private Date addedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName="ID")
-    @JsonBackReference("category-products")
-    private ProductCategory category;
-
-    @ApiModelProperty(value = "The image name of the product", required = true)
-    @NotNull
-    private String image;
-
-
-    @ApiModelProperty(value = "?", required = true)
-    @NotNull
-    private Double expectedValue;
-
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Job> jobs;
-
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Formula> formulas;
 
     @PrePersist
     public void updateTimeStamps() {
@@ -96,8 +56,7 @@ public class Product implements Serializable {
     /**
      * Set the id of the entity.
      *
-     * @param id
-     *            entity id
+     * @param id entity id
      */
     public void setId(final String id) {
         this.id = id;
@@ -115,8 +74,7 @@ public class Product implements Serializable {
     /**
      * Set the product name.
      *
-     * @param name
-     *            The product name
+     * @param name The product name
      */
     public void setName(final String name) {
         this.name = name;
@@ -134,8 +92,7 @@ public class Product implements Serializable {
     /**
      * Set the product description.
      *
-     * @param description
-     *            The product description
+     * @param description The product description
      */
     public void setDescription(final String description) {
         this.description = description;
@@ -148,6 +105,10 @@ public class Product implements Serializable {
      */
     public Date getAddedAt() {
         return addedAt;
+    }
+
+    public void setAddedAt(final Date addedAt) {
+        this.addedAt = addedAt;
     }
 
     public Unit getUnit() {
@@ -190,18 +151,55 @@ public class Product implements Serializable {
         this.expectedValue = expectedValue;
     }
 
-    public void setAddedAt(final Date addedAt) {
-        this.addedAt = addedAt;
+    public List<Formula> getFormulas() {
+        return formulas;
     }
 
     public void setFormulas(final List<Formula> formulas) {
         this.formulas = formulas;
     }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
-
-    public List<Formula> getFormulas() {
-        return formulas;
-    }
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @ApiModelProperty(value = "The unqiue id of the product", required = true)
+    private String id;
+    @ApiModelProperty(value = "The name of the product. E.g \"Lime basic\"", required = true)
+    @NotNull
+    @Size(max = MAX_LENGTH_NAME)
+    @JsonProperty("name")
+    private String name;
+    @ApiModelProperty(value = "The long description of the product", required = true)
+    @NotNull
+    @Size(max = MAX_LENGTH_DESC)
+    @JsonProperty("description")
+    private String description;
+    @ApiModelProperty(value = "The unit in which product is measured", required = true)
+    @NotNull
+    @JsonProperty("unit")
+    private Unit unit;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, name = "added_at", updatable = false)
+    private Date addedAt;
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "ID")
+    @JsonBackReference("category-products")
+    private ProductCategory category;
+    @ApiModelProperty(value = "The image name of the product", required = true)
+    @NotNull
+    private String image;
+    @ApiModelProperty(value = "?", required = true)
+    @NotNull
+    private Double expectedValue;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Job> jobs;
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Formula> formulas;
+    private static final long serialVersionUID = 8269473897901384963L;
+    private static final int MAX_LENGTH_NAME = 50;
+    private static final int MAX_LENGTH_DESC = 250;
 }

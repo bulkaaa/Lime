@@ -1,26 +1,22 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.model.Resource;
-import com.modern.codes.lime.pojo.ProductPOJO;
-import com.modern.codes.lime.tools.ParseTools;
-import com.modern.codes.lime.dao.IFormulaDAO;
-import com.modern.codes.lime.model.Formula;
-import com.modern.codes.lime.pojo.FormulaPOJO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.modern.codes.lime.dao.IFormulaDAO;
+import com.modern.codes.lime.model.Formula;
+import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.pojo.FormulaPOJO;
+import com.modern.codes.lime.pojo.ProductPOJO;
+import com.modern.codes.lime.tools.ParseTools;
 
 @Service
 public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IFormulaDAO> implements IFormulaService {
 
-    private final IFormulaDAO dao;
     @Autowired
     public FormulaService(final IFormulaDAO dao) {
         super(dao, Formula.class, FormulaPOJO.class);
@@ -43,10 +39,9 @@ public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IForm
     }
 
     @Override
-    public void addFormula(final Map<Resource, Double> iFormula,
-            final ProductPOJO product) {
+    public void addFormula(final Map<Resource, Double> iFormula, final ProductPOJO product) {
         final List<FormulaPOJO> formula = new ArrayList<>();
-        iFormula.forEach((key,value) -> {
+        iFormula.forEach((key, value) -> {
             final FormulaPOJO form = new FormulaPOJO();
             form.setPOJOProduct(product);
             form.setResource(key);
@@ -55,4 +50,5 @@ public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IForm
         });
         save(ParseTools.parseList(formula, FormulaPOJO.class));
     }
+    private final IFormulaDAO dao;
 }

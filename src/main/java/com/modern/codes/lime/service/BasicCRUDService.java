@@ -1,38 +1,38 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.tools.ParseTools;
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
 import com.modern.codes.lime.dao.IBasicCRUDRepository;
 import com.modern.codes.lime.exception.IllegalDataException;
 import com.modern.codes.lime.exception.NotFoundException;
 import com.modern.codes.lime.pojo.BasicPOJO;
-import org.springframework.transaction.TransactionSystemException;
-
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import com.modern.codes.lime.tools.ParseTools;
 
 @Transactional
-public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T, String>> implements IBasicCRUDService{
-    private final T_DAO dao;
-    private final Class<T> Ttype;
-    private final Class<T_POJO> T_POJOtype;
-
+public class BasicCRUDService<T, T_POJO, T_DAO extends IBasicCRUDRepository<T, String>> implements IBasicCRUDService {
     BasicCRUDService(final T_DAO dao, final Class<T> Ttype, final Class<T_POJO> T_POJOtype) {
         this.dao = dao;
         this.Ttype = Ttype;
         this.T_POJOtype = T_POJOtype;
     }
+
     @Override
-    public List<T_POJO> findAll(){
+    public List<T_POJO> findAll() {
         final Optional<List<T>> t = Optional.ofNullable(dao.findAll());
-        if(!t.isPresent())
+        if (!t.isPresent()) {
             throw new NotFoundException(Ttype + " object could not be found in DB");
+        }
         return ParseTools.parseList(t.get(), T_POJOtype);
     }
+
     @Override
-    public void delete(final String id){
-        if(!exists(id))
+    public void delete(final String id) {
+        if (!exists(id)) {
             throw new NotFoundException(Ttype + " object could not be found in DB");
+        }
         dao.delete(id);
     }
 
@@ -40,41 +40,55 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
     public T_POJO save(final Object t) {
         return ParseTools.parse(dao.save(ParseTools.parse(t, Ttype)), T_POJOtype);
     }
+
     @Override
-    public boolean exists(final String id){
+    public boolean exists(final String id) {
         return dao.exists(id);
     }
 
     @Override
     public boolean exists(final Object t) {
-        return exists(((BasicPOJO)t).getId());
+        return exists(((BasicPOJO) t).getId());
     }
 
     @Override
-    public boolean equals(final Object t, final Object y){
+    public long count() {
+        return dao.count();
+    }
+
+    @Override
+    public boolean equals(final Object t, final Object y) {
         try {
-        return t == y;
-        }catch (final Exception e){
-            throw new IllegalDataException("Trying to compare wrong type of objects it's " + t.getClass() + " and " + y.getClass() + " objects, should be " + T_POJOtype);
+            return t == y;
+        } catch (final Exception e) {
+            throw new IllegalDataException("Trying to compare wrong type of objects it's "
+                                           + t.getClass()
+                                           + " and "
+                                           + y.getClass()
+                                           + " objects, should be "
+                                           + T_POJOtype);
         }
     }
+
     @Override
-    public void deleteAll(){
+    public void deleteAll() {
         dao.deleteAll();
     }
+
     @Override
-    public T_POJO findById(final String id){
-        try{
-        return ParseTools.parse(dao.findOne(id), T_POJOtype);
-        } catch (final Exception e){
+    public T_POJO findById(final String id) {
+        try {
+            return ParseTools.parse(dao.findOne(id), T_POJOtype);
+        } catch (final Exception e) {
             throw new NotFoundException(Ttype + " object could not be found in DB");
         }
     }
 
     @Override
     public void delete(final Object t) {
-        if(!exists(((BasicPOJO)t).getId()))
+        if (!exists(((BasicPOJO) t).getId())) {
             throw new NotFoundException(Ttype + " object could not be found in DB");
+        }
         dao.delete(ParseTools.parse(t, Ttype));
     }
 
@@ -82,13 +96,12 @@ public class BasicCRUDService <T, T_POJO,  T_DAO extends IBasicCRUDRepository<T,
     public void save(final List l) {
         dao.save(ParseTools.parseList(l, Ttype));
     }
+
     @Override
     public void delete(final List l) {
         dao.delete(ParseTools.parseList(l, Ttype));
     }
-
-    @Override
-    public long count() {
-        return dao.count();
-    }
+    private final T_DAO dao;
+    private final Class<T> Ttype;
+    private final Class<T_POJO> T_POJOtype;
 }

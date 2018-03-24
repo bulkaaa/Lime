@@ -6,7 +6,6 @@ import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,16 +28,16 @@ public class ForecastController extends BaseController {
         this.forecastService = forecastService;
     }
 
-    @RequestMapping(value = "/product/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/product/generate",
+                    method = RequestMethod.POST,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<byte[]> generateForecast(
             @RequestBody @ApiParam("List of product ids") final List<String> productIds,
             @RequestParam final String startDate, @RequestParam final Integer noDays,
             @RequestParam final Integer noDaysForecast, @RequestParam final String chartType) {
-        LOG.info(
-                "Generate request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n  "
-                + "chartType: [] \n",
-                productIds, startDate, noDays, noDaysForecast, chartType);
+        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n  "
+                 + "chartType: [] \n", productIds, startDate, noDays, noDaysForecast, chartType);
 
         final byte[] img = forecastService.plotForecast(startDate, noDays, noDaysForecast, chartType);
 
@@ -53,10 +52,8 @@ public class ForecastController extends BaseController {
                              @RequestParam final String startDate, @RequestParam final Integer noDays,
                              @RequestParam final Integer noDaysForecast, @RequestParam final String email,
                              @RequestParam final String chartType) {
-        LOG.info(
-                "Send request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: "
-                + "{} \n chartType: [] \n",
-                productIds, startDate, noDays, noDaysForecast, email, chartType);
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: "
+                 + "{} \n chartType: [] \n", productIds, startDate, noDays, noDaysForecast, email, chartType);
 
         final byte[] bytes = forecastService.plotForecast(startDate, noDays, noDaysForecast, chartType);
 
@@ -66,8 +63,6 @@ public class ForecastController extends BaseController {
             LOG.error("FAILED TO SEND REPORT.", e);
         }
     }
-
-    private static final Logger LOG = LoggerFactory.getLogger(ForecastController.class);
-
     private IForecastService forecastService;
+    private static final Logger LOG = LoggerFactory.getLogger(ForecastController.class);
 }

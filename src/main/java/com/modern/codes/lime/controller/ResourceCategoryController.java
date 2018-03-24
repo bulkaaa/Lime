@@ -41,42 +41,51 @@ public class ResourceCategoryController extends BaseController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Creates a Resource category object", notes = "Creates a <b>Resource category</b> object "
-                                                                       +  "Saves it into DB.", response = ResourceCategory.class)
-    @ApiResponses({ @ApiResponse(code = 200, message = "Saved Resource category object"),
-                    @ApiResponse(code = 422, message = "In case of validation errors of Resource category object")})
+    @ApiOperation(value = "Creates a Resource category object",
+                  notes = "Creates a <b>Resource category</b> object " + "Saves it into DB.",
+                  response = ResourceCategory.class)
+    @ApiResponses({@ApiResponse(code = 200, message = "Saved Resource category object"),
+                   @ApiResponse(code = 422, message = "In case of validation errors of Resource category object")})
     @ResponseBody
-    public String create(
-            @Validated @RequestBody @ApiParam("Resource object") final Resource iProductCategory,
-            final BindingResult bindingResult, final UriComponentsBuilder b) {
+    public String create(@Validated @RequestBody @ApiParam("Resource object") final Resource iProductCategory,
+                         final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("Resource Category creation request received: {}", iProductCategory);
 
-        if (iProductCategory == null || bindingResult.hasErrors())
-            throw new InvalidRequestException(String.format("Invalid Resource category creation request, form data contains %s error(s).",
-                                                            bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        if (iProductCategory == null || bindingResult.hasErrors()) {
+            throw new InvalidRequestException(
+                    String.format("Invalid Resource category creation request, form data contains %s error(s).",
+                                  bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        }
         return ParseTools.parseToJson(iProductCategory, ResourceCategory.class);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Updates a Resource category category object", notes = "Updates a <b>Resource category</b> object ", response = ResourceCategory.class)
+    @ApiOperation(value = "Updates a Resource category category object",
+                  notes = "Updates a <b>Resource category</b> object ",
+                  response = ResourceCategory.class)
     @ApiResponses({@ApiResponse(code = 200, message = "Saved Resource category object"),
                    @ApiResponse(code = 422, message = "In case of validation errors of Resource category object")})
     @ResponseBody
-    public String update(
-            @Validated @RequestBody @ApiParam("Resource category object") final Resource iProductCategory,
-            final BindingResult bindingResult, final UriComponentsBuilder b) {
+    public String update(@Validated @RequestBody @ApiParam("Resource category object") final Resource iProductCategory,
+                         final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("Resource category update request received: {}", iProductCategory);
-        if (iProductCategory == null || bindingResult.hasErrors())
-            throw new InvalidRequestException(String.format("Invalid Resource category update request, form data contains %s error(s).",
-                                                            bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        if (iProductCategory == null || bindingResult.hasErrors()) {
+            throw new InvalidRequestException(
+                    String.format("Invalid Resource category update request, form data contains %s error(s).",
+                                  bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
+        }
 
         return ParseTools.parseToJson(resourceCategoryService.save(iProductCategory), ResourceCategory.class);
     }
 
-    @RequestMapping(value = "/one/{resourceCategoryId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetch a Resource category object", notes = "Fetches a <b>Resource category</b> object by id ", response = ResourceCategoryPOJO.class)
+    @RequestMapping(value = "/one/{resourceCategoryId}",
+                    method = RequestMethod.GET,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetch a Resource category object",
+                  notes = "Fetches a <b>Resource category</b> object by id ",
+                  response = ResourceCategoryPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved Resource category object"))
     @ResponseBody
     public String getProductCategory(
@@ -86,25 +95,34 @@ public class ResourceCategoryController extends BaseController {
         return ParseTools.parseToJson(resourceCategoryService.findById(resourceCategoryId), ResourceCategory.class);
     }
 
-    @RequestMapping(value = "/delete/{resourceCategoryId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Delete a Resource category object", notes = "Deletes a <b>Resource category</b> object ", response = ResourceCategoryPOJO.class)
+    @RequestMapping(value = "/delete/{resourceCategoryId}",
+                    method = RequestMethod.DELETE,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Delete a Resource category object",
+                  notes = "Deletes a <b>Resource category</b> object ",
+                  response = ResourceCategoryPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved Resource category object"))
     @ResponseBody
-    public Boolean delete(
-            @ApiParam("Resource category object") @PathVariable final String resourceCategoryId) {
+    public Boolean delete(@ApiParam("Resource category object") @PathVariable final String resourceCategoryId) {
 
         LOG.info("Resource category deletion request received for id: " + resourceCategoryId);
 
-        // KLAUDIA CO ZWRÓCIć KIEDY NIE MOŻEMY USUNĄć BO NIEKTÓRE RESOURCEC MAJĄ TE KATEGORIE, RESOURCE NIE MOŻE ZOSTAć BEZ KATEGORII,
-        // NA FRONCIE MUSI POJAWIć SIĘ INFORMACJA ŻE UŻYTKOWNIK MUSI NAJPIERW ZMIENIć KATEGORIĘ RESOURCE ABY USUNĄć TĘ KATEGORIĘ.
-        if(resourceService.findByCategoryId(resourceCategoryId).isEmpty())
+        // KLAUDIA CO ZWRÓCIć KIEDY NIE MOŻEMY USUNĄć BO NIEKTÓRE RESOURCEC MAJĄ TE KATEGORIE, RESOURCE NIE MOŻE
+        // ZOSTAć BEZ KATEGORII,
+        // NA FRONCIE MUSI POJAWIć SIĘ INFORMACJA ŻE UŻYTKOWNIK MUSI NAJPIERW ZMIENIć KATEGORIĘ RESOURCE ABY USUNĄć
+        // TĘ KATEGORIĘ.
+        if (resourceService.findByCategoryId(resourceCategoryId)
+                           .isEmpty()) {
             return false;
+        }
         resourceCategoryService.delete(resourceCategoryId);
         return true;
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetches all Resource categories", notes = "Fetches all Resource categories from DB ", response = List.class)
+    @ApiOperation(value = "Fetches all Resource categories",
+                  notes = "Fetches all Resource categories from DB ",
+                  response = List.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Fetch all Resource categories"))
     @ResponseBody
     public String getAll() {
@@ -114,7 +132,8 @@ public class ResourceCategoryController extends BaseController {
     }
 
     @ResponseBody
-    @ApiResponses({@ApiResponse(code = 200, message = "Saved Resource category object"), @ApiResponse(code = 404, message = "In case of no Resource category object was found in DB for given name")})
+    @ApiResponses({@ApiResponse(code = 200, message = "Saved Resource category object"), @ApiResponse(code = 404,
+                                                                                                      message = "In case of no Resource category object was found in DB for given name")})
     @ApiOperation(value = "Fetch products category by name",
                   notes = "Searches for all <b>Resource category</b> objects in DB "
                           + "Returns list of Resource category objects for given name.")
@@ -124,10 +143,7 @@ public class ResourceCategoryController extends BaseController {
         LOG.info("Resource category get-by-name request received: name = " + name);
         return ParseTools.parseToJson(resourceCategoryService.findByName(name), ResourceCategory.class);
     }
-
-
-    private static final Logger LOG = LoggerFactory.getLogger(ResourceCategoryController.class);
-
     private final IResourceCategoryService resourceCategoryService;
     private final IResourceService resourceService;
+    private static final Logger LOG = LoggerFactory.getLogger(ResourceCategoryController.class);
 }

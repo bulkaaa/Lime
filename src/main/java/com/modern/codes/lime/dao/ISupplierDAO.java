@@ -1,10 +1,10 @@
 package com.modern.codes.lime.dao;
 
-import com.modern.codes.lime.model.Supplier;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+import com.modern.codes.lime.model.Supplier;
 
 @Repository
 public interface ISupplierDAO extends IBasicCRUDRepository<Supplier, String> {

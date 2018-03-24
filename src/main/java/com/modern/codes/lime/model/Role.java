@@ -18,28 +18,18 @@ import io.swagger.annotations.ApiModelProperty;
  * Model representation of a user role in Lime.
  *
  * @author jaroszk
- *
  */
 @ApiModel(description = "Model representation of a user role in Lime")
 @Entity
 
 public class Role {
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @ApiModelProperty(value = "The unqiue id of the user role", required = true)
-    private String id;
+    public List<User> getUsers() {
+        return users;
+    }
 
-    private String name;
-
-    @ManyToMany(mappedBy = "roles")
-    @JsonIgnore
-    private List<User> users;
-
-
-    public List<User> getUsers() { return users; }
-
-    public void setUsers(final List<User> users) { this.users = users; }
+    public void setUsers(final List<User> users) {
+        this.users = users;
+    }
 
     public String getId() {
         return id;
@@ -56,4 +46,13 @@ public class Role {
     public void setName(final String name) {
         this.name = name;
     }
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @ApiModelProperty(value = "The unqiue id of the user role", required = true)
+    private String id;
+    private String name;
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
+    private List<User> users;
 }

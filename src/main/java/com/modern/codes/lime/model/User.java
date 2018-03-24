@@ -26,7 +26,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -35,71 +34,11 @@ import io.swagger.annotations.ApiModelProperty;
  * Model representation of user of Lime.
  *
  * @author jaroszk
- *
  */
 
 @Entity
-@Table(name="\"user\"")
-public class User implements Serializable{
-
-    private static final long serialVersionUID = 8269421897901384963L;
-
-    private static final int MAX_LENGTH_NAME = 25;
-    private static final int MAX_LENGTH_SURNAME = 250;
-    private static final int MAX_LENGTH_EMAIL = 240;
-
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @ApiModelProperty(value = "The unqiue id of the user", required = true)
-    @JsonProperty("id")
-    private String id;
-
-    @ApiModelProperty(value = "The name of the user of the \"ChemicalLabs\"", required = true)
-    @NotNull
-    @Size(max = MAX_LENGTH_NAME)
-    @JsonProperty("name")
-    private String name;
-
-    @ApiModelProperty(value = "The surname of the user", required = true)
-    @NotNull
-    @Size(max = MAX_LENGTH_SURNAME)
-    @JsonProperty("surname")
-    private String surname;
-
-    @ApiModelProperty(value = "The E-Mail address of the supplier.", required = true)
-    @NotEmpty
-    @Email
-    @Size(max = MAX_LENGTH_EMAIL)
-    @Column(unique=true)
-    private String emailAddress;
-
-    @ApiModelProperty(value = "The datetime when the user joined the  \"ChemicalLabs\"", required = true)
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "joined_at", updatable = false)
-    private Date joinedAt;
-    
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Job> jobs;
-
-    @ApiModelProperty(value = "The username of the user of the \"ChemicalLabs\"", required = true)
-    @NotNull
-    @Column(unique=true)
-    private String username;
-
-    @ApiModelProperty(value = "The password of the user of the \"ChemicalLabs\"", required = true)
-    @NotNull
-    private String password;
-
-    @Column(name = "enabled", nullable = false)
-    private Boolean enabled = true;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
-
+@Table(name = "\"user\"")
+public class User implements Serializable {
 
     @PrePersist
     public void updateTimeStamps() {
@@ -108,33 +47,37 @@ public class User implements Serializable{
         }
     }
 
-    public String getId()   { return id; }
+    public String getId() {
+        return id;
+    }
 
     public void setId(final String id) {
         this.id = id;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setSurname(final String surname) { this.surname = surname; }
+    public void setName(final String name) {
+        this.name = name;
+    }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setJoinedAt(final Date joinedAt) {
-        this.joinedAt = joinedAt;
+    public void setSurname(final String surname) {
+        this.surname = surname;
     }
 
     public Date getJoinedAt() {
 
         return joinedAt;
+    }
+
+    public void setJoinedAt(final Date joinedAt) {
+        this.joinedAt = joinedAt;
     }
 
     public List<Job> getJobs() {
@@ -145,32 +88,30 @@ public class User implements Serializable{
         this.jobs = jobs;
     }
 
- 
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
     public String getUsername() {
         return username;
     }
 
-    public void setEnabled(final Boolean enabled) {
-        this.enabled = enabled;
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
     public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setPassword(final String password) {
-        this.password = password;
+    public void setEnabled(final Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getPassword() {
         return password;
     }
 
-    
+    public void setPassword(final String password) {
+        this.password = password;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
@@ -178,7 +119,6 @@ public class User implements Serializable{
     public void setRoles(final List<Role> roles) {
         this.roles = roles;
     }
-    
 
     public String getEmailAddress() {
         return emailAddress;
@@ -187,5 +127,52 @@ public class User implements Serializable{
     public void setEmailAddress(final String emailAddress) {
         this.emailAddress = emailAddress;
     }
-    
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @ApiModelProperty(value = "The unqiue id of the user", required = true)
+    @JsonProperty("id")
+    private String id;
+    @ApiModelProperty(value = "The name of the user of the \"ChemicalLabs\"", required = true)
+    @NotNull
+    @Size(max = MAX_LENGTH_NAME)
+    @JsonProperty("name")
+    private String name;
+    @ApiModelProperty(value = "The surname of the user", required = true)
+    @NotNull
+    @Size(max = MAX_LENGTH_SURNAME)
+    @JsonProperty("surname")
+    private String surname;
+    @ApiModelProperty(value = "The E-Mail address of the supplier.", required = true)
+    @NotEmpty
+    @Email
+    @Size(max = MAX_LENGTH_EMAIL)
+    @Column(unique = true)
+    private String emailAddress;
+    @ApiModelProperty(value = "The datetime when the user joined the  \"ChemicalLabs\"", required = true)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "joined_at", updatable = false)
+    private Date joinedAt;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Job> jobs;
+    @ApiModelProperty(value = "The username of the user of the \"ChemicalLabs\"", required = true)
+    @NotNull
+    @Column(unique = true)
+    private String username;
+    @ApiModelProperty(value = "The password of the user of the \"ChemicalLabs\"", required = true)
+    @NotNull
+    private String password;
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled = true;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+               joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private List<Role> roles;
+    private static final long serialVersionUID = 8269421897901384963L;
+    private static final int MAX_LENGTH_NAME = 25;
+    private static final int MAX_LENGTH_SURNAME = 250;
+    private static final int MAX_LENGTH_EMAIL = 240;
+
 }

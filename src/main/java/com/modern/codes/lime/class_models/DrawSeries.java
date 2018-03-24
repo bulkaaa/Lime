@@ -21,8 +21,6 @@ import org.slf4j.LoggerFactory;
 
 public class DrawSeries {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DrawSeries.class);
-
     public static byte[] plotChart(final ArrayList<TimeSeries> timeSeriesList,
                                    final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay,
                                    final String header, final String filename, final String type) {
@@ -30,8 +28,8 @@ public class DrawSeries {
         LOG.info("Generating Chart type: {}", type);
 
         return "Pie".equals(type)
-                                   ? plotPie(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type)
-                                   : plot(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type);
+               ? plotPie(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type)
+               : plot(timeSeriesList, timeSeriesForecastList, toDay, header, filename, type);
     }
 
     private static byte[] plot(final ArrayList<TimeSeries> timeSeriesList,
@@ -86,8 +84,9 @@ public class DrawSeries {
                                                     .build();
 
         // Customize Chart
-        final Color[] sliceColors = {new Color(224, 68, 14), new Color(230, 105, 62), new Color(236, 143, 110),
-                                     new Color(243, 180, 159), new Color(246, 199, 182)};
+        final Color[] sliceColors =
+                {new Color(224, 68, 14), new Color(230, 105, 62), new Color(236, 143, 110), new Color(243, 180, 159),
+                 new Color(246, 199, 182)};
         chart.getStyler()
              .setSeriesColors(sliceColors);
 
@@ -147,4 +146,5 @@ public class DrawSeries {
                                                .size() + 1);
         return call.getTime();
     }
+    private static final Logger LOG = LoggerFactory.getLogger(DrawSeries.class);
 }

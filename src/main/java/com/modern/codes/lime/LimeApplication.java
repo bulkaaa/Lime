@@ -9,7 +9,7 @@ import com.modern.codes.lime.config.StorageProperties;
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 public class LimeApplication {
-	public static void main(final String[] args) {
-		SpringApplication.run(LimeApplication.class, args);
-	}
+    public static void main(final String[] args) {
+        SpringApplication.run(LimeApplication.class, args);
+    }
 }

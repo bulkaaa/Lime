@@ -1,19 +1,11 @@
 package com.modern.codes.lime.pojo;
 
-import com.modern.codes.lime.tools.ParseTools;
-import com.modern.codes.lime.model.Resource;
 import java.util.List;
 
-public class SupplierPOJO extends BasicPOJO{
+import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.tools.ParseTools;
 
-    private String name;
-    private String emailAddress;
-    private String postalCode;
-    private String city;
-    private String country;
-    private String street;
-    private String telephone;
-    private List<Resource> resources;
+public class SupplierPOJO extends BasicPOJO {
 
     public String getName() {
         return name;
@@ -86,31 +78,7 @@ public class SupplierPOJO extends BasicPOJO{
     public void setPOJOResources(final List<ResourcePOJO> resources) {
         this.resources = ParseTools.parseList(resources, Resource.class);
     }
-    @Override
-    public boolean equals(final Object obj) {
-        if ((obj == null) || !SupplierPOJO.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
-        final SupplierPOJO other = (SupplierPOJO) obj;
-        return  (this.id == null && other.id == null) ||
-                (this.id != null && this.id.equals(other.id)) &&
-                (this.name == null && other.name == null) ||
-                (this.name != null && this.name.equals(other.name)) &&
-                (this.city == null && other.city == null) ||
-                (this.city != null && this.city.equals(other.city)) &&
-                (this.country == null && other.country == null) ||
-                (this.country != null && this.country.equals(other.country)) &&
-                (this.emailAddress == null && other.emailAddress == null) ||
-                (this.emailAddress != null && this.emailAddress.equals(other.emailAddress)) &&
-                (this.postalCode == null && other.postalCode == null) ||
-                (this.postalCode != null && this.postalCode.equals(other.postalCode)) &&
-                (this.resources == null && other.resources == null) ||
-                (this.resources != null && this.resources.equals(other.resources)) &&
-                (this.street == null && other.street == null) ||
-                (this.street != null && this.street.equals(other.street)) &&
-                (this.telephone == null && other.telephone == null) ||
-                (this.telephone != null && this.telephone.equals(other.telephone));
-    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -118,5 +86,41 @@ public class SupplierPOJO extends BasicPOJO{
         hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !SupplierPOJO.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final SupplierPOJO other = (SupplierPOJO) obj;
+        return (this.id == null && other.id == null)
+               || (this.id != null && this.id.equals(other.id)) && (this.name
+                                                                    == null
+                                                                    && other.name
+                                                                       == null)
+               || (this.name != null && this.name.equals(other.name)) && (this.city == null && other.city == null)
+               || (this.city != null && this.city.equals(other.city)) && (this.country == null && other.country == null)
+               || (this.country != null && this.country.equals(other.country)) && (this.emailAddress == null
+                                                                                   && other.emailAddress == null)
+               || (this.emailAddress != null && this.emailAddress.equals(other.emailAddress)) && (this.postalCode
+                                                                                                  == null
+                                                                                                  && other.postalCode
+                                                                                                     == null)
+               || (this.postalCode != null && this.postalCode.equals(other.postalCode)) && (this.resources == null
+                                                                                            && other.resources == null)
+               || (this.resources != null && this.resources.equals(other.resources)) && (this.street == null
+                                                                                         && other.street == null)
+               || (this.street != null && this.street.equals(other.street)) && (this.telephone == null
+                                                                                && other.telephone == null)
+               || (this.telephone != null && this.telephone.equals(other.telephone));
+    }
+    private String name;
+    private String emailAddress;
+    private String postalCode;
+    private String city;
+    private String country;
+    private String street;
+    private String telephone;
+    private List<Resource> resources;
 
 }

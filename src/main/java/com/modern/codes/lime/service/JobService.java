@@ -1,21 +1,22 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.tools.ParseTools;
-import com.modern.codes.lime.dao.IJobDAO;
-import com.modern.codes.lime.model.Job;
-import com.modern.codes.lime.pojo.JobPOJO;
+import java.util.Date;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
+import com.modern.codes.lime.dao.IJobDAO;
+import com.modern.codes.lime.model.Job;
+import com.modern.codes.lime.pojo.JobPOJO;
+import com.modern.codes.lime.tools.ParseTools;
 
 @Service
 @Transactional
 public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implements IJobService {
 
-    private final IJobDAO dao;
     @Autowired
     public JobService(final IJobDAO dao) {
         super(dao, Job.class, JobPOJO.class);
@@ -41,4 +42,5 @@ public class JobService extends BasicCRUDService<Job, JobPOJO, IJobDAO> implemen
     public List<JobPOJO> findByProductId(final String id) {
         return ParseTools.parseList(dao.findByProductId(id), JobPOJO.class);
     }
+    private final IJobDAO dao;
 }

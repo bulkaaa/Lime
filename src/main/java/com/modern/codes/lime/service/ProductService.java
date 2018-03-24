@@ -1,21 +1,21 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.tools.ParseTools;
-import com.modern.codes.lime.dao.IProductDAO;
-import com.modern.codes.lime.model.Product;
-import com.modern.codes.lime.pojo.ProductPOJO;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
+import com.modern.codes.lime.dao.IProductDAO;
+import com.modern.codes.lime.model.Product;
+import com.modern.codes.lime.pojo.ProductPOJO;
+import com.modern.codes.lime.tools.ParseTools;
 
 @Service
 @Transactional
 public class ProductService extends BasicCRUDService<Product, ProductPOJO, IProductDAO> implements IProductService {
 
-    private final IProductDAO dao;
     @Autowired
     public ProductService(final IProductDAO dao) {
         super(dao, Product.class, ProductPOJO.class);
@@ -41,4 +41,5 @@ public class ProductService extends BasicCRUDService<Product, ProductPOJO, IProd
     public List<ProductPOJO> findByCategoryId(final String categoryId) {
         return ParseTools.parseList(dao.findByCategoryId(categoryId), ProductPOJO.class);
     }
+    private final IProductDAO dao;
 }

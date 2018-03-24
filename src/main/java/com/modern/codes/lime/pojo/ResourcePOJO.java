@@ -1,27 +1,14 @@
 package com.modern.codes.lime.pojo;
 
-import com.modern.codes.lime.model.ResourceCategory;
-import com.modern.codes.lime.tools.ParseTools;
-import com.modern.codes.lime.model.Formula;
-import com.modern.codes.lime.model.Supplier;
-import com.modern.codes.lime.model.Unit;
-
 import java.util.List;
 
-public class ResourcePOJO extends BasicPOJO{
+import com.modern.codes.lime.model.Formula;
+import com.modern.codes.lime.model.ResourceCategory;
+import com.modern.codes.lime.model.Supplier;
+import com.modern.codes.lime.model.Unit;
+import com.modern.codes.lime.tools.ParseTools;
 
-    private String name;
-    private String description;
-    private Unit unit;
-    private Double quantity;
-    private Double critical_value;
-    private Boolean notifications_on;
-    private Boolean ordering_on;
-    private ResourceCategory category;
-    private String image;
-    private Supplier supplier;
-    private List<Formula> formulas;
-
+public class ResourcePOJO extends BasicPOJO {
 
     public String getName() {
         return name;
@@ -55,17 +42,29 @@ public class ResourcePOJO extends BasicPOJO{
         this.quantity = quantity;
     }
 
-    public Double getCritical_value() { return critical_value; }
+    public Double getCritical_value() {
+        return critical_value;
+    }
 
-    public void setCritical_value(Double critical_value) { this.critical_value = critical_value; }
+    public void setCritical_value(Double critical_value) {
+        this.critical_value = critical_value;
+    }
 
-    public Boolean getNotifications_on() { return notifications_on; }
+    public Boolean getNotifications_on() {
+        return notifications_on;
+    }
 
-    public void setNotifications_on(Boolean notifications_on) { this.notifications_on = notifications_on; }
+    public void setNotifications_on(Boolean notifications_on) {
+        this.notifications_on = notifications_on;
+    }
 
-    public Boolean getOrdering_on() { return ordering_on; }
+    public Boolean getOrdering_on() {
+        return ordering_on;
+    }
 
-    public void setOrdering_on(Boolean ordering_on) { this.ordering_on = ordering_on; }
+    public void setOrdering_on(Boolean ordering_on) {
+        this.ordering_on = ordering_on;
+    }
 
     public ResourceCategory getCategory() {
         return category;
@@ -74,6 +73,7 @@ public class ResourcePOJO extends BasicPOJO{
     public void setCategory(final ResourceCategory category) {
         this.category = category;
     }
+
     public ResourceCategoryPOJO getPOJOCategory() {
         return ParseTools.parse(category, ResourceCategoryPOJO.class);
     }
@@ -106,7 +106,6 @@ public class ResourcePOJO extends BasicPOJO{
         this.supplier = ParseTools.parse(supplier, Supplier.class);
     }
 
-
     public List<Formula> getFormulas() {
         return formulas;
     }
@@ -124,35 +123,50 @@ public class ResourcePOJO extends BasicPOJO{
     }
 
     @Override
-    public boolean equals(final Object obj) {
-        if ((obj == null) || !ResourcePOJO.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
-        final ResourcePOJO other = (ResourcePOJO) obj;
-        return  (this.id == null && other.id == null) ||
-                (this.id != null && this.id.equals(other.id)) &&
-                (this.name == null && other.name == null) ||
-                (this.name != null && this.name.equals(other.name)) &&
-                (this.category == null && other.category == null) ||
-                (this.category != null && this.category.equals(other.category)) &&
-                (this.description == null && other.description == null) ||
-                (this.description != null && this.description.equals(other.description)) &&
-                (this.formulas == null && other.formulas == null) ||
-                (this.formulas != null && this.formulas.equals(other.formulas)) &&
-                (this.image == null && other.image == null) ||
-                (this.image != null && this.image.equals(other.image)) &&
-                (this.quantity == null && other.quantity == null) ||
-                (this.quantity != null && this.quantity.equals(other.quantity)) &&
-                (this.supplier == null && other.supplier == null) ||
-                (this.supplier != null && this.supplier.equals(other.supplier)) &&
-                (this.unit == null && other.unit == null) ||
-                (this.unit != null && this.unit.equals(other.unit));
-    }
-    @Override
     public int hashCode() {
         int hash = 3;
         hash = 53 * hash + (this.name != null ? this.name.hashCode() : 0);
         hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if ((obj == null) || !ResourcePOJO.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        final ResourcePOJO other = (ResourcePOJO) obj;
+        return (this.id == null && other.id == null)
+               || (this.id != null && this.id.equals(other.id)) && (this.name
+                                                                    == null
+                                                                    && other.name
+                                                                       == null)
+               || (this.name != null && this.name.equals(other.name)) && (this.category == null
+                                                                          && other.category == null)
+               || (this.category != null && this.category.equals(other.category)) && (this.description == null
+                                                                                      && other.description == null)
+               || (this.description != null && this.description.equals(other.description)) && (this.formulas == null
+                                                                                               && other.formulas
+                                                                                                  == null)
+               || (this.formulas != null && this.formulas.equals(other.formulas)) && (this.image == null
+                                                                                      && other.image == null)
+               || (this.image != null && this.image.equals(other.image)) && (this.quantity == null
+                                                                             && other.quantity == null)
+               || (this.quantity != null && this.quantity.equals(other.quantity)) && (this.supplier == null
+                                                                                      && other.supplier == null)
+               || (this.supplier != null && this.supplier.equals(other.supplier)) && (this.unit == null
+                                                                                      && other.unit == null)
+               || (this.unit != null && this.unit.equals(other.unit));
+    }
+    private String name;
+    private String description;
+    private Unit unit;
+    private Double quantity;
+    private Double critical_value;
+    private Boolean notifications_on;
+    private Boolean ordering_on;
+    private ResourceCategory category;
+    private String image;
+    private Supplier supplier;
+    private List<Formula> formulas;
 }

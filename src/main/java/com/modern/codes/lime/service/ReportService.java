@@ -14,9 +14,8 @@ import com.modern.codes.lime.class_models.DrawSeries;
 import com.modern.codes.lime.class_models.TimeSeries;
 import com.modern.codes.lime.exception.InvalidRequestException;
 
-
 @Service
-public class ReportService implements IReportService{
+public class ReportService implements IReportService {
 
     @Autowired
     public ReportService(final ITimeSeriesService timeSeriesService) {

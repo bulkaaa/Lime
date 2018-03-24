@@ -1,31 +1,22 @@
 package com.modern.codes.lime.exception;
 
-import org.springframework.validation.Errors;
-
 import java.util.Locale;
+
+import org.springframework.validation.Errors;
 
 /**
  * thrown when a request is invalid in the current context.
  *
  * @author jaroszk
- *
  */
 public class InvalidRequestException extends RuntimeException {
-
-    private static final long serialVersionUID = -3445333324593174117L;
-
-    private final Errors errors;
-    private final Locale locale;
 
     /**
      * Constructor accepting an error message, an Errors object and a Locale object.
      *
-     * @param message
-     *            message
-     * @param errors
-     *            Errors object
-     * @param locale
-     *            Locale object
+     * @param message message
+     * @param errors  Errors object
+     * @param locale  Locale object
      */
     public InvalidRequestException(final String message, final Errors errors, final Locale locale) {
         super(message);
@@ -50,5 +41,8 @@ public class InvalidRequestException extends RuntimeException {
     public Locale getLocale() {
         return locale;
     }
+    private final Errors errors;
+    private final Locale locale;
+    private static final long serialVersionUID = -3445333324593174117L;
 
 }

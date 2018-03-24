@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.modern.codes.lime.pojo.JobPOJO;
 import com.modern.codes.lime.class_models.TimeSeries;
+import com.modern.codes.lime.pojo.JobPOJO;
 
 @Service
 public class TimeSeriesService implements ITimeSeriesService {
