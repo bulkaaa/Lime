@@ -1,5 +1,7 @@
 package com.modern.codes.lime.controller;
 
+import static com.modern.codes.lime.service.MailService.ConstructOrderMsg;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +25,7 @@ import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.pojo.SupplierPOJO;
 import com.modern.codes.lime.service.IResourceService;
-import com.modern.codes.lime.tools.MailTools;
+import com.modern.codes.lime.service.MailService;
 import com.modern.codes.lime.tools.ParseTools;
 
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +37,6 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping(path = "/order")
 public class OrderController {
 
-    @Autowired
     public OrderController(final IResourceService resourceService){
         this.resourceService = resourceService;
     }
@@ -78,30 +79,14 @@ public class OrderController {
         });
         supplierMap.forEach((key, value) -> {
             try {
-                MailTools.SendEmail(key.getEmailAddress(), "Order from LIME",
-                                                                        ConstructOrderMsg(key.getName(), value));
+                MailService.SendEmail(key.getEmailAddress(), "Order from LIME",
+                                      ConstructOrderMsg(key.getName(), value));
             } catch (final MessagingException e) {
                 LOG.error("Failed to send order messages", e);
             }
         });
         return true;
     }
-
-    public static String ConstructOrderMsg(final String supplierName, final Map<ResourcePOJO, Integer> map){
-        final StringBuilder message = new StringBuilder("Dear " + supplierName + ", " + "\n\nWe would like to order: \n");
-        map.forEach((key, value) -> message.append(key.getName())
-                                           .append(" : ")
-                                           .append(value)
-                                           .append(' ')
-                                           .append(key
-                                                           .getUnit())
-                                           .append('\n'));
-
-        message.append("Regards, \nLIME team.\n");
-        return message.toString();
-    }
-
-
 
     private final IResourceService resourceService;
 

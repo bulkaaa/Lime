@@ -1,11 +1,6 @@
 package com.modern.codes.lime.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.mail.MessagingException;
 
@@ -20,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.modern.codes.lime.exception.InvalidRequestException;
-import com.modern.codes.lime.class_models.DrawSeries;
-import com.modern.codes.lime.class_models.TimeSeries;
-import com.modern.codes.lime.service.ITimeSeriesService;
-import com.modern.codes.lime.tools.MailTools;
+import com.modern.codes.lime.service.IReportService;
+import com.modern.codes.lime.service.MailService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,9 +25,8 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping(path = "/report")
 public class ReportController {
 
-    @Autowired
-    public ReportController(final ITimeSeriesService timeSeriesService){
-        this.timeSeriesService = timeSeriesService;
+    public ReportController(final IReportService reportService){
+        this.reportService = reportService;
     }
 
     @RequestMapping(value = "/product/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,28 +39,13 @@ public class ReportController {
                 + "chartType: [] \n",
                 startDate, noDays, productIds, chartType);
 
-        final byte[] bytes = getBytes(startDate, noDays, chartType, productIds);
+        final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
 
         return ResponseEntity.ok()
                              .contentType(MediaType.IMAGE_PNG)
                              .body(bytes);
     }
 
-    // FIXME: move to service layer, change name
-    private byte[] getBytes(final String startDate, final Integer noDays,
-                            final String chartType,
-                            final List<String> productIds) {
-        final Date date;
-        try {
-            date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
-        } catch (final ParseException e) {
-            throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
-        }
-
-        final ArrayList<TimeSeries> seriesL = timeSeriesService.Extract(date, noDays, productIds);
-        return DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days",
-                                    "Sample_Chart", chartType);
-    }
 
     @RequestMapping(value = "/product/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Generate and send class_models for products")
@@ -81,18 +57,16 @@ public class ReportController {
                 + " chartType: [] \n",
                 startDate, noDays, email, productIds, chartType);
 
-        final byte[] bytes = getBytes(startDate, noDays, chartType, productIds);
+        final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
         try {
-            MailTools.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", bytes);
+            MailService.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", bytes);
         } catch (final MessagingException e) {
             LOG.error("FAILED TO SEND REPORT", e);
         }
 
     }
 
-    private final ITimeSeriesService timeSeriesService;
+    private final IReportService reportService;
 
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
-
-
 }

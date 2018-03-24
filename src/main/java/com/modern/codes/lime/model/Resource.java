@@ -81,7 +81,7 @@ public class Resource implements Serializable{
 
 
     @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("resource-formulas")
+    @JsonIgnore
     private List<Formula> formulas;
 
     /**

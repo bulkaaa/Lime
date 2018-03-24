@@ -1,5 +1,8 @@
-package com.modern.codes.lime.tools;
+package com.modern.codes.lime.service;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -16,7 +19,18 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
-public class MailTools {
+import org.slf4j.IMarkerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
+import com.modern.codes.lime.pojo.ResourcePOJO;
+
+@Service
+public class MailService implements IMailService {
+
     public static void SendEmail(final String to, final String subject, final String content, final byte[] attachment)
             throws MessagingException {
         final Session session = getSession();
@@ -73,6 +87,39 @@ public class MailTools {
             }
         });
     }
+
+    public static String ConstructOrderMsg(final String supplierName, final Map<ResourcePOJO, Integer> map){
+        final StringBuilder message = new StringBuilder("Dear " + supplierName + ", " + "\n\nWe would like to order: \n");
+        map.forEach((key, value) -> message.append(key.getName())
+                                           .append(" : ")
+                                           .append(value)
+                                           .append(' ')
+                                           .append(key
+                                                           .getUnit())
+                                           .append('\n'));
+
+        message.append("Regards, \nLIME team.\n");
+        return message.toString();
+    }
+
+    @Override
+    public String prepareWelcomeEmailBody(final String username, final String password, final String name,
+                                          final String surname) {
+        try {
+            final URL url = Resources.getResource("WelcomeEmail.html");
+            final String email = Resources.toString(url, Charsets.UTF_8);
+            email.replace("name_input", name);
+            email.replace("surname_input", name);
+            email.replace("username_input", name);
+            email.replace("password_input", name);
+            return email;
+        } catch (final IOException e) {
+            LOG.error("Error parsing Welcome Email.");
+            return null;
+        }
+    }
+
+    private static final Logger LOG = LoggerFactory.getLogger(MailService.class);
 
     private static final String MAIL_SMTP_AUTH = "true";
     private static final String MAIL_SMTP_STARTTLS_ENDABLE = "true";

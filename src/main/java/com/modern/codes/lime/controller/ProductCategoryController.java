@@ -33,13 +33,11 @@ import java.util.Locale;
 @RequestMapping("/product-category")
 public class ProductCategoryController extends BaseController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ProductCategoryController.class);
-
-    @Autowired
-    IProductCategoryService productCategoryService;
-
-    @Autowired
-    IProductService productService;
+    public ProductCategoryController(final IProductCategoryService productCategoryService,
+                                     final IProductService productService) {
+        this.productCategoryService = productCategoryService;
+        this.productService = productService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a product category object", notes = "Creates a <b>product category</b> object "
@@ -125,4 +123,10 @@ public class ProductCategoryController extends BaseController {
         LOG.info("Product category get-by-name request received: name = " + name);
         return ParseTools.parseToJson(productCategoryService.findByName(name), ProductCategory.class);
     }
+
+
+    private static final Logger LOG = LoggerFactory.getLogger(ProductCategoryController.class);
+
+    private final IProductCategoryService productCategoryService;
+    private final IProductService productService;
 }

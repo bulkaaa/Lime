@@ -1,10 +1,12 @@
 package com.modern.codes.lime.service;
 
+import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.pojo.ProductPOJO;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -56,4 +58,6 @@ public interface IFormulaService {
     static Stream<FormulaPOJO> filterByProduct(final Stream<FormulaPOJO> stream, final ProductPOJO product){
         return stream.filter(t -> t.getPOJOProduct().equals(product));
     }
+
+    void addFormula(Map<Resource, Double> iFormula, ProductPOJO product);
 }

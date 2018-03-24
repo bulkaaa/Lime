@@ -32,12 +32,11 @@ import java.util.Locale;
 @RestController
 @RequestMapping("/supplier")
 public class SupplierController extends BaseController{
-    private static final Logger LOG = LoggerFactory.getLogger(SupplierController.class);
 
-    @Autowired
-    ISupplierService supplierService;
-    @Autowired
-    IResourceService resourceService;
+    public SupplierController(final ISupplierService supplierService, final IResourceService resourceService) {
+        this.supplierService = supplierService;
+        this.resourceService = resourceService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a supplier object", notes = "Creates a <b>supplier</b> object "
@@ -112,4 +111,10 @@ public class SupplierController extends BaseController{
         LOG.info("Supplier fetch request received for id: " + supplierId);
         return ParseTools.parseToJson(supplierService.findById(supplierId), Supplier.class);
     }
+
+    private final ISupplierService supplierService;
+    private final IResourceService resourceService;
+
+    private static final Logger LOG = LoggerFactory.getLogger(SupplierController.class);
+
 }

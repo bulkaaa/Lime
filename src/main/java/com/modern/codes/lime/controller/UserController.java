@@ -1,7 +1,5 @@
 package com.modern.codes.lime.controller;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
@@ -21,16 +19,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
 import com.modern.codes.lime.exception.AlreadyExistsException;
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Role;
 import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.UserPOJO;
+import com.modern.codes.lime.service.IMailService;
 import com.modern.codes.lime.service.IRoleService;
 import com.modern.codes.lime.service.IUserService;
-import com.modern.codes.lime.tools.MailTools;
+import com.modern.codes.lime.service.MailService;
 import com.modern.codes.lime.tools.ParseTools;
 
 import io.swagger.annotations.ApiOperation;
@@ -41,12 +38,13 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {
-    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    IUserService userService;
-    @Autowired
-    IRoleService roleService;
+    public UserController(final IUserService userService, final IRoleService roleService,
+                          final IMailService mailService) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.mailService = mailService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a User object",
@@ -69,17 +67,17 @@ public class UserController extends BaseController {
 
         try {
             final String userJson = ParseTools.parseToJson(userService.save(user), User.class);
-            MailTools.SendEmail(user.getEmailAddress(), "Welcome to LIME",
-                                prepareWelcomeEmailBody(user.getUsername(), user.getPassword(), user.getName(), user
-                                        .getSurname()));
+            MailService.SendEmail(user.getEmailAddress(), "Welcome to LIME",
+                                  mailService.prepareWelcomeEmailBody(user.getUsername(), user.getPassword(), user.getName(),
+                                                          user.getSurname()));
             return userJson;
-        } catch (final MessagingException e){
+        } catch (final MessagingException e) {
             LOG.error("FAILED TO SEND WELCOME MESSAGE", e);
             return null;
         } catch (final Exception e) {
-        throw new AlreadyExistsException(
-                String.format("Invalid User creation request, username: %s or email: %s already registered.",
-                              user.getUsername(), user.getEmailAddress()));
+            throw new AlreadyExistsException(
+                    String.format("Invalid User creation request, username: %s or email: %s already registered.",
+                                  user.getUsername(), user.getEmailAddress()));
 
         }
     }
@@ -176,19 +174,10 @@ public class UserController extends BaseController {
         return ParseTools.parseToJson(roleService.findAll(), Role.class);
     }
 
-    private String prepareWelcomeEmailBody(final String username, final String password, final String name,
-                                           final String surname) {
-        try {
-            final URL url = Resources.getResource("WelcomeEmail.html");
-            final String email = Resources.toString(url, Charsets.UTF_8);
-            email.replace("name_input", name);
-            email.replace("surname_input", name);
-            email.replace("username_input", name);
-            email.replace("password_input", name);
-            return email;
-        } catch (final IOException e) {
-            LOG.error("Error parsing Welcome Email.");
-            return null;
-        }
-    }
+    private final IUserService userService;
+    private final IRoleService roleService;
+    private final IMailService mailService;
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
+
 }

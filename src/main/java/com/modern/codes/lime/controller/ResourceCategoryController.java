@@ -1,19 +1,10 @@
 package com.modern.codes.lime.controller;
 
-import com.modern.codes.lime.exception.InvalidRequestException;
-import com.modern.codes.lime.model.Resource;
-import com.modern.codes.lime.model.ResourceCategory;
-import com.modern.codes.lime.pojo.ResourceCategoryPOJO;
-import com.modern.codes.lime.service.IResourceCategoryService;
-import com.modern.codes.lime.service.IResourceService;
-import com.modern.codes.lime.tools.ParseTools;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import java.util.List;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -26,20 +17,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
-import java.util.Locale;
+import com.modern.codes.lime.exception.InvalidRequestException;
+import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.model.ResourceCategory;
+import com.modern.codes.lime.pojo.ResourceCategoryPOJO;
+import com.modern.codes.lime.service.IResourceCategoryService;
+import com.modern.codes.lime.service.IResourceService;
+import com.modern.codes.lime.tools.ParseTools;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/resource-category")
 public class ResourceCategoryController extends BaseController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ProductCategoryController.class);
-
-    @Autowired
-    IResourceCategoryService resourceCategoryService;
-
-    @Autowired
-    IResourceService resourceService;
+    public ResourceCategoryController(final IResourceCategoryService resourceCategoryService,
+                                      final IResourceService resourceService) {
+        this.resourceCategoryService = resourceCategoryService;
+        this.resourceService = resourceService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a Resource category object", notes = "Creates a <b>Resource category</b> object "
@@ -125,4 +124,10 @@ public class ResourceCategoryController extends BaseController {
         LOG.info("Resource category get-by-name request received: name = " + name);
         return ParseTools.parseToJson(resourceCategoryService.findByName(name), ResourceCategory.class);
     }
+
+
+    private static final Logger LOG = LoggerFactory.getLogger(ResourceCategoryController.class);
+
+    private final IResourceCategoryService resourceCategoryService;
+    private final IResourceService resourceService;
 }

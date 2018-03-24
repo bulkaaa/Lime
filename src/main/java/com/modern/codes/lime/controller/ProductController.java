@@ -36,13 +36,10 @@ import java.util.Map;
 @RequestMapping("/product")
 public class ProductController extends BaseController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
-
-    @Autowired
-    IProductService productService;
-
-    @Autowired
-    IFormulaService formulaService;
+    public ProductController(final IProductService productService, final IFormulaService formulaService) {
+        this.productService = productService;
+        this.formulaService = formulaService;
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a product object", notes = "Creates a <b>product</b> object "
@@ -62,7 +59,7 @@ public class ProductController extends BaseController {
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
 
         final ProductPOJO product = productService.save(iProduct);
-        addFormula(iFormula, product);
+        formulaService.addFormula(iFormula, product);
         return ParseTools.parseToJson(product, Product.class);
     }
 
@@ -83,7 +80,7 @@ public class ProductController extends BaseController {
                     bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
         formulaService.delete(formulaService.findByProductId(iProduct.getId()));
         final ProductPOJO product = productService.save(iProduct);
-        addFormula(iFormula, product);
+        formulaService.addFormula(iFormula, product);
         return ParseTools.parseToJson(productService.save(product), Product.class);
     }
 
@@ -131,17 +128,9 @@ public class ProductController extends BaseController {
         LOG.info("Product get-by-name request received: name = " + name);
         return ParseTools.parseToJson(productService.findByName(name), Product.class);
     }
-    private void addFormula(
-            @ApiParam("Product object") @RequestBody @Validated final Map<Resource, Double> iFormula,
-            final ProductPOJO product) {
-        final List<FormulaPOJO> formula = new ArrayList<>();
-        iFormula.forEach((key,value) -> {
-            final FormulaPOJO form = new FormulaPOJO();
-            form.setPOJOProduct(product);
-            form.setResource(key);
-            form.setValue(value);
-            formula.add(form);
-        });
-        formulaService.save(formula);
-    }
+
+    private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
+
+    private final IProductService productService;
+    private final IFormulaService formulaService;
 } 

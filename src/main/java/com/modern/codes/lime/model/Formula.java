@@ -38,7 +38,6 @@ public class Formula implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "resource_id", referencedColumnName="ID")
-    @JsonBackReference("resource-formulas")
     private Resource resource;
 
     @ManyToOne

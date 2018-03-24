@@ -30,7 +30,6 @@ import java.util.Locale;
 @RequestMapping("/resource")
 public class ResourceController extends BaseController{
 
-    @Autowired
     public ResourceController(final IResourceService resourceService){
         this.resourceService = resourceService;
     }

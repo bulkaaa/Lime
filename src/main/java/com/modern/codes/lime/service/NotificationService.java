@@ -1,32 +1,27 @@
-package com.modern.codes.lime.controller;
+package com.modern.codes.lime.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
-import javax.management.Notification;
 
-import com.modern.codes.lime.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-import com.modern.codes.lime.service.IFormulaService;
-import com.modern.codes.lime.service.IJobService;
-import com.modern.codes.lime.service.ResourceService;
-import com.modern.codes.lime.service.UserService;
-import com.modern.codes.lime.tools.MailTools;
+import com.modern.codes.lime.pojo.FormulaPOJO;
+import com.modern.codes.lime.pojo.JobPOJO;
+import com.modern.codes.lime.pojo.ResourcePOJO;
+import com.modern.codes.lime.pojo.UserPOJO;
 
-@RestController()
-@RequestMapping(path = "/notification")
-public class NotificationController {
+@Service
+public class NotificationService implements INotificationService {
 
     @Autowired
-    public NotificationController(final UserService userService, final ResourceService resourceService,
-                                  final IJobService jobService, final IFormulaService formulaService){
+    public NotificationService(final UserService userService, final ResourceService resourceService,
+                               final IJobService jobService, final IFormulaService formulaService) {
         this.userService = userService;
         this.resourceService = resourceService;
         this.jobService = jobService;
@@ -46,6 +41,7 @@ public class NotificationController {
         checkUsedResources();
     }
 
+    @Override
     public void checkUsedResources() {
         final List<ResourcePOJO> resources = resourceService.findAll();
         resources.forEach(y -> {
@@ -61,19 +57,20 @@ public class NotificationController {
         });
     }
 
-    public static Boolean checkAhead(final ResourcePOJO res, final String email, final double use) {
+    @Override
+    public Boolean checkAhead(final ResourcePOJO res, final String email, final double use) {
         try {
             if (res.getQuantity() <= res.getCritical_value() && res.getNotifications_on() == true) {
 
-                    MailTools.SendEmail(email, "Notification from LIME",
-                                        "Dear user,\nthe inventory of the Resource you will need to perform the job: "
-                                        + res.getName()
-                                        + ' '
-                                        + "is below its critical value.\nPlease visit LIME application to Order more.");
+                MailService.SendEmail(email, "Notification from LIME",
+                                    "Dear user,\nthe inventory of the Resource you will need to perform the job: "
+                                    + res.getName()
+                                    + ' '
+                                    + "is below its critical value.\nPlease visit LIME application to Order more.");
 
                 return false;
             } else if ((res.getQuantity() - use) <= res.getCritical_value() && res.getNotifications_on() == true) {
-                MailTools.SendEmail(email, "Notification from LIME",
+                MailService.SendEmail(email, "Notification from LIME",
                                     "Dear user,\nthe inventory of the Resource you will need to perform the job: "
                                     + res.getName()
                                     + ' '
@@ -91,7 +88,7 @@ public class NotificationController {
         final List<UserPOJO> users = userService.findAll();
         users.forEach(y -> {
             try {
-                MailTools.SendEmail(y.getEmailAddress(), "Notification from LIME",
+                MailService.SendEmail(y.getEmailAddress(), "Notification from LIME",
                                     "Dear user, the inventory of the Resource: "
                                     + ResourceName
                                     + " is below its critical value."
@@ -107,15 +104,16 @@ public class NotificationController {
         final Map<ResourcePOJO, Integer> map = new HashMap<>();
         map.put(resource, 30);
         try {
-            MailTools.SendEmail(resource.getPOJOSupplier().getEmailAddress(), "Order from LIME",
-                    OrderController.ConstructOrderMsg(resource.getName(), map));
-        }  catch (final MessagingException e) {
+            MailService.SendEmail(resource.getPOJOSupplier()
+                                          .getEmailAddress(), "Order from LIME",
+                                  MailService.ConstructOrderMsg(resource.getName(), map));
+        } catch (final MessagingException e) {
             LOG.error("Failed to send order messages", e);
         }
         return true;
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(NotificationController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NotificationService.class);
 
     private final UserService userService;
     private final ResourceService resourceService;

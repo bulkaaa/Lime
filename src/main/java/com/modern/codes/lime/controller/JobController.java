@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.UserPOJO;
+import com.modern.codes.lime.service.INotificationService;
 import com.modern.codes.lime.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,21 +36,15 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/job")
 public class JobController extends BaseController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JobController.class);
-
-    @Autowired
-    IJobService jobService;
-
-    @Autowired
-    IFormulaService formulaService;
-
-    @Autowired
-    IResourceService resourceService;
-
-    @Autowired
-    IUserService userService;
-
-    NotificationController notification;
+    public JobController(final IJobService jobService, final IFormulaService formulaService,
+                         final IResourceService resourceService, final IUserService userService,
+                         final INotificationService notificationService) {
+        this.jobService = jobService;
+        this.formulaService = formulaService;
+        this.resourceService = resourceService;
+        this.userService = userService;
+        this.notificationService = notificationService;
+    }
 
     @GetMapping(path = "/act-user")
     public String getUser(){
@@ -83,11 +78,11 @@ public class JobController extends BaseController {
             formulaService.findByProductId(job.getProduct()
                                               .getId()).forEach(f -> {
                                                   final ResourcePOJO resource = f.getPOJOResource();
-                                                  Boolean action = NotificationController.checkAhead(resource,self.getEmailAddress(),f.getValue());
+                                                  Boolean action = notificationService.checkAhead(resource, self.getEmailAddress(), f.getValue());
                                                   resource.setQuantity(resource.getQuantity() - f.getValue());
                                                   resourceService.save(resource);
             });
-            notification.checkUsedResources();
+            notificationService.checkUsedResources();
             return response;
         }
         catch (final Exception e)
@@ -131,4 +126,12 @@ public class JobController extends BaseController {
         LOG.info("Jobs get-by-userId request received: userId = " + userId);
         return ParseTools.parseToJson(jobService.findByUserId(userId), Job.class);
     }
+
+    private static final Logger LOG = LoggerFactory.getLogger(JobController.class);
+
+    private final IJobService jobService;
+    private final IFormulaService formulaService;
+    private final IResourceService resourceService;
+    private final IUserService userService;
+    private final INotificationService notificationService;
 }
