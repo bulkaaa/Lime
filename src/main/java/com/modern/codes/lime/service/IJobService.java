@@ -30,7 +30,7 @@ public interface IJobService {
 
     void delete(Object t);
 
-    void save(List l);
+    List<JobPOJO> save(List l);
 
     void delete(List l);
 

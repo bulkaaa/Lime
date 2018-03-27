@@ -13,4 +13,6 @@ public interface IFormulaDAO extends IBasicCRUDRepository<Formula, String> {
     List<Formula> findByProductId(String id);
 
     List<Formula> findByResourceId(String id);
+
+    void deleteByProductId(String id);
 }

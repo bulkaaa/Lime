@@ -93,8 +93,8 @@ public class BasicCRUDService<T, T_POJO, T_DAO extends IBasicCRUDRepository<T, S
     }
 
     @Override
-    public void save(final List l) {
-        dao.save(ParseTools.parseList(l, Ttype));
+    public List<T_POJO> save(final List l) {
+        return (List<T_POJO>)dao.save(ParseTools.parseList(l, Ttype));
     }
 
     @Override

@@ -28,7 +28,7 @@ public interface ISupplierService {
 
     void delete(Object t);
 
-    void save(List l);
+    List<SupplierPOJO> save(List l);
 
     void delete(List l);
 

@@ -28,7 +28,7 @@ public interface IBasicCRUDService<T, T_POJO, T_DAO extends IBasicCRUDRepository
 
     void delete(T_POJO t);
 
-    void save(List<T_POJO> l);
+    List<T_POJO> save(List<T_POJO> l);
 
     void delete(List<T_POJO> l);
 }

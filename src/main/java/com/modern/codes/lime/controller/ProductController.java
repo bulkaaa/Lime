@@ -2,7 +2,6 @@ package com.modern.codes.lime.controller;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Product;
-import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.pojo.ProductPOJO;
-import com.modern.codes.lime.service.IFormulaService;
 import com.modern.codes.lime.service.IProductService;
 import com.modern.codes.lime.tools.ParseTools;
 
@@ -35,9 +32,8 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("/product")
 public class ProductController extends BaseController {
 
-    public ProductController(final IProductService productService, final IFormulaService formulaService) {
+    public ProductController(final IProductService productService) {
         this.productService = productService;
-        this.formulaService = formulaService;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,7 +44,6 @@ public class ProductController extends BaseController {
                    @ApiResponse(code = 422, message = "In case of validation errors of product object")})
     @ResponseBody
     public String create(@Validated @RequestBody @ApiParam("Product object") final Product iProduct,
-                         @Validated @RequestBody @ApiParam("Product object") final Map<Resource, Double> iFormula,
                          final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("Product creation request received: {}", iProduct);
@@ -60,7 +55,6 @@ public class ProductController extends BaseController {
         }
 
         final ProductPOJO product = productService.save(iProduct);
-        formulaService.addFormula(iFormula, product);
         return ParseTools.parseToJson(product, Product.class);
     }
 
@@ -72,7 +66,6 @@ public class ProductController extends BaseController {
                    @ApiResponse(code = 422, message = "In case of validation errors of product object")})
     @ResponseBody
     public String update(@Validated @RequestBody @ApiParam("Product object") final Product iProduct,
-                         @Validated @RequestBody @ApiParam("Product object") final Map<Resource, Double> iFormula,
                          final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("Product update request received: {}", iProduct);
@@ -82,9 +75,7 @@ public class ProductController extends BaseController {
                     String.format("Invalid product update request, form data contains %s error(s).",
                                   bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
         }
-        formulaService.delete(formulaService.findByProductId(iProduct.getId()));
         final ProductPOJO product = productService.save(iProduct);
-        formulaService.addFormula(iFormula, product);
         return ParseTools.parseToJson(productService.save(product), Product.class);
     }
 
@@ -138,6 +129,5 @@ public class ProductController extends BaseController {
         return ParseTools.parseToJson(productService.findByName(name), Product.class);
     }
     private final IProductService productService;
-    private final IFormulaService formulaService;
     private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 } 

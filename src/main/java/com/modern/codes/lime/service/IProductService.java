@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.model.ProductCategory;
 import com.modern.codes.lime.pojo.ProductPOJO;
 
@@ -29,7 +30,7 @@ public interface IProductService {
 
     void delete(Object t);
 
-    void save(List l);
+    List<ProductPOJO> save(List l);
 
     void delete(List l);
 

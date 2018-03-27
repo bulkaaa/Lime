@@ -25,7 +25,7 @@ public interface IResourceCategoryService {
 
     void delete(Object t);
 
-    void save(List l);
+    List<ResourceCategoryPOJO> save(List l);
 
     void delete(List l);
 

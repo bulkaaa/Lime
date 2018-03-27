@@ -24,8 +24,8 @@ app.controller('FormulaController', ['$scope', '$rootScope', '$http', '$uibModal
     $scope.viewRecord = function(item){
 
         modalInstance = $modal.open({
-            templateUrl: 'modals/view-record.html',
-            controller: 'ViewRecordController',
+            templateUrl: 'modals/view-formula.html',
+            controller: 'ViewFormulaController',
             scope: $scope,
             size: 'md',
             resolve: {
@@ -72,25 +72,6 @@ app.controller('FormulaController', ['$scope', '$rootScope', '$http', '$uibModal
                     DialogService.handle(response, 'product', 'update');
                 }
             );
-    };
-
-    $scope.deleteRecord = function(id) {
-        let dlg = $dialogs.confirm('Are you sure you want to delete this record?');
-        dlg.result.then(function(btn){
-            $http.delete("/product/delete/" +id)
-                .then(
-                    function(response){
-                        if (response.data){
-                            console.log(response);
-                            $scope.deleteRow(id);
-                        }
-                    },
-                    function(response){
-                        DialogService.generalServerError();
-                    }
-                );
-        });
-
     };
 
     $scope.deleteRow = function(id) {

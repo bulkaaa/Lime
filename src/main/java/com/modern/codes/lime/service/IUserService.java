@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.modern.codes.lime.pojo.JobPOJO;
 import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
 
@@ -31,7 +32,7 @@ public interface IUserService {
 
     void delete(Object t);
 
-    void save(List l);
+    List<UserPOJO> save(List l);
 
     void delete(List l);
 

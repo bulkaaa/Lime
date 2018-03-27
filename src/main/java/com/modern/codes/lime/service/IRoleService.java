@@ -28,7 +28,7 @@ public interface IRoleService {
 
     void delete(Object t);
 
-    void save(List l);
+    List<RolePOJO> save(List l);
 
     void delete(List l);
 

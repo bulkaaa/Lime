@@ -29,7 +29,7 @@ public interface IResourceService {
 
     void delete(Object t);
 
-    void save(List l);
+    List<ResourcePOJO> save(List l);
 
     void delete(List l);
 

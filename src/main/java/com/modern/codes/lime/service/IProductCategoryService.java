@@ -2,6 +2,7 @@ package com.modern.codes.lime.service;
 
 import java.util.List;
 
+import com.modern.codes.lime.model.ProductCategory;
 import com.modern.codes.lime.pojo.ProductCategoryPOJO;
 
 public interface IProductCategoryService {
@@ -25,7 +26,7 @@ public interface IProductCategoryService {
 
     void delete(Object t);
 
-    void save(List l);
+    List<ProductCategoryPOJO> save(List l);
 
     void delete(List l);
 

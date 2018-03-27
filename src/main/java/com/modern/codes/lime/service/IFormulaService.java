@@ -31,7 +31,9 @@ public interface IFormulaService {
 
     void delete(Object t);
 
-    void save(List l);
+    void deleteByProductId(String id);
+
+    List<FormulaPOJO> save(List l);
 
     void delete(List l);
 
@@ -41,7 +43,6 @@ public interface IFormulaService {
 
     List<FormulaPOJO> findByResourceId(String id);
 
-    void addFormula(Map<Resource, Double> iFormula, ProductPOJO product);
 
     static List<FormulaPOJO> filterByResource(final List<FormulaPOJO> list, final String resourceName) {
         return filterByResource(list.stream(), resourceName).collect(Collectors.toList());

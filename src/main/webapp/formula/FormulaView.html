@@ -10,14 +10,9 @@
     </div>
     <div class="item row item-border">
         <div class="col-md-12 col-sm-12">
-            <div class="description col-md-3 col-sm-3">
+            <div class="description col-md-10 col-sm-10">
                 </br>
-                <div>product name</div>
-                <span></span>
-            </div>
-            <div class="description col-md-7 col-sm-7">
-                </br>
-                <span>resources and quantity</span>
+                <div>product</div>
                 <span></span>
             </div>
             <div class="total-price col-md-2 col-sm-2">action</div>
@@ -27,14 +22,8 @@
     <div ng-repeat="item in items">
         <div id="{{item.id}}" class="item row">
             <div class="col-md-12 col-sm-12">
-                <div class="description col-md-3 col-sm-3 name">
+                <div class="description col-md-10 col-sm-10 name">
                     <span>{{item.name}}</span>
-                </div>
-                <div class="description col-md-7 col-sm-7">
-                    <div ng-repeat="formula in item.formulas">
-                        <span>{{formula.id}}</span>
-                        <span>{{formula.value}}</span>
-                    </div>
                 </div>
                 <div class="total-price col-md-2 col-sm-2">
                     <div class="btn-group" role="group">
@@ -42,8 +31,6 @@
                             <i class="fa fa-search"></i>
                         </button>
                         <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
-                        </i></button>
-                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-trash">
                         </i></button>
                     </div>
                 </div>
