@@ -1,6 +1,7 @@
 package com.modern.codes.lime.service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,7 +23,6 @@ import com.google.common.io.ByteStreams;
 import com.modern.codes.lime.config.StorageProperties;
 import com.modern.codes.lime.exception.StorageException;
 import com.modern.codes.lime.exception.StorageFileNotFoundException;
-import com.modern.codes.lime.model.FileExtension;
 
 import io.vavr.control.Try;
 
@@ -87,20 +87,26 @@ public class StorageService implements IStorageService {
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {
-                throw new StorageFileNotFoundException("Could not read file: " + filename);
-
+               return loadAsResource("no_image.jpg");
             }
         } catch (final MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file: " + filename, e);
+            return loadAsResource("no_image.jpg");
         }
     }
 
     @Override
     public byte[] loadAsBytes(final String filename) {
-        return Try.of(() -> Base64.getEncoder()
-                                  .encode(ByteStreams.toByteArray(this.loadAsResource(filename)
-                                                                      .getInputStream())))
-                  .getOrElse(ArrayUtils.EMPTY_BYTE_ARRAY);
+        try {
+            final InputStream is = this.loadAsResource(filename).getInputStream();
+            final byte[] bytes = ByteStreams.toByteArray(is);
+            is.close();
+            return Try.of(() -> Base64.getEncoder()
+                                      .encode(bytes))
+                      .getOrElse(ArrayUtils.EMPTY_BYTE_ARRAY);
+        } catch (final IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -109,19 +115,17 @@ public class StorageService implements IStorageService {
     }
 
     public void delete(final String filename) {
-        deleteFile(filename, FileExtension.getFirst());
+        deleteFile(filename);
     }
 
-    private Boolean deleteFile(final String filename, final FileExtension fe) {
-        if (fe == null) {
-            return false;
-        }
-        final Path file = load(filename + '.' + fe);
+    private Boolean deleteFile(final String filename) {
         try {
+            final Path file = load(filename);
+
             Files.delete(file);
             return true;
         } catch (final IOException e) {
-            return deleteFile(filename, fe.getNext());
+            return false;
         }
     }
     private final Path rootLocation;

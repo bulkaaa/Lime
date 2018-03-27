@@ -1,4 +1,4 @@
-app.controller('AddFormulaController',  ['$scope', '$http','$uibModalInstance', function($scope, $http, modalInstance) {
+app.controller('EditFormulaController',  ['$scope', '$http','$uibModalInstance', function($scope, $http, modalInstance) {
     $scope.saveEmp = function () {
         $scope.newRecord = {};
 

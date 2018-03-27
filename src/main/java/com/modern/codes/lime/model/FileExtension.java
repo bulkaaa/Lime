@@ -11,23 +11,6 @@ public enum FileExtension {
         return id;
     }
 
-    public FileExtension getNext() {
-        return get(this.id + 1);
-    }
-
-    public static FileExtension getFirst() {
-        return get(0);
-    }
-
-    public static FileExtension get(final int id) {
-        for (final FileExtension fileExtension : values()) {
-            if (fileExtension.getValue() == id) {
-                return fileExtension;
-            }
-        }
-        return null;
-    }
-
     public static boolean exist(final String str) {
         for (final FileExtension fe : values()) {
             if (fe.name()

@@ -206,13 +206,13 @@ public class DBPopulator {
         resourceG.setQuantity((double) 30);
         resourceG.setDescription("Description for resource G");
 
-        resourceA.setImage("kotek.jpg");
-        resourceB.setImage("kotek.jpg");
-        resourceC.setImage("kotek.jpg");
-        resourceD.setImage("kotek.jpg");
-        resourceE.setImage("kotek.jpg");
-        resourceF.setImage("kotek.jpg");
-        resourceG.setImage("kotek.jpg");
+        resourceA.setImage("no_image.jpg");
+        resourceB.setImage("no_image.jpg");
+        resourceC.setImage("no_image.jpg");
+        resourceD.setImage("no_image.jpg");
+        resourceE.setImage("no_image.jpg");
+        resourceF.setImage("no_image.jpg");
+        resourceG.setImage("no_image.jpg");
 
         resourceA.setCritical_value(0.0);
         resourceB.setCritical_value(0.0);
@@ -264,10 +264,10 @@ public class DBPopulator {
         productD.setExpectedValue((double) 20);
         productD.setDescription("Description for product D");
         productD.setAddedAt(ParseTools.parseDate("2017-05-01 12:00:00"));
-        productA.setImage("kotek.jpg");
-        productB.setImage("kotek.jpg");
-        productC.setImage("kotek.jpg");
-        productD.setImage("kotek.jpg");
+        productA.setImage("no_image.jpg");
+        productB.setImage("no_image.jpg");
+        productC.setImage("no_image.jpg");
+        productD.setImage("no_image.jpg");
     }
 
     public void setJobs() {

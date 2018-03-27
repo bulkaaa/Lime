@@ -18,8 +18,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 .controller('ProductController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
     var modalInstance = null;
-    $scope.product = true;
-
     $scope.showAll = function() {
         $http.get("/product/all")
             .then(
@@ -51,7 +49,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
     $scope.showAll();
 
     $scope.viewRecord = function(item){
-
+        $scope.switchToProduct()
         modalInstance = $modal.open({
             templateUrl: 'modals/view-record.html',
             controller: 'ViewRecordController',
@@ -66,6 +64,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
     };
 
     $scope.editRecord = function(item){
+        $scope.switchToProduct()
         $http.get("/product/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
@@ -85,7 +84,9 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 
     $scope.updateRecord = function(item) {
+        $scope.switchToProduct()
             var file = item.image;
+          //  var ext = string.substring(item.image.name.lastIndexOf("."));
             item.image = item.image.name;
             item.quantity = 10;
             item.notifications_on = false;
@@ -130,6 +131,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
     };
 
     $scope.deleteRecord = function(id) {
+        $scope.switchToProduct()
         let dlg = $dialogs.confirm('Are you sure you want to delete this record?');
         dlg.result.then(function(btn){
             $http.delete("/product/delete/" +id)
@@ -153,7 +155,59 @@ app.directive('fileModel', ['$parse', function ($parse) {
         document.getElementById(id).remove();
     };
 
+
+
+    $scope.viewFormula = function(item){
+        $scope.switchToFormula()
+
+        modalInstance = $modal.open({
+            templateUrl: 'modals/view-record.html',
+            controller: 'ViewRecordController',
+            scope: $scope,
+            size: 'md',
+            resolve: {
+                item: function () {
+                    return item; //response.data;
+                }
+            }
+        });
+    };
+
+    $scope.editFormula = function(item){
+        $scope.switchToFormula()
+        $http.get("/product/one/" + item.id)
+            .then(function(response){
+                $scope.item = item;
+                $http.get("/resource/all")
+                    .then(
+                        function (response) {
+                            if (response.data) {
+                                $scope.resources = response.data.slice();
+                            }
+                        },
+                        function (response) {
+                            DialogService.generalServerError();
+                        }
+                    );
+
+                modalInstance = $modal.open({
+                    templateUrl: 'modals/edit-formula.html',
+                    controller: 'EditFormulaController',
+                    scope: $scope,
+                    size: '',
+                    resolve: {
+                        item: function () {
+                            return response.data;
+                        }
+                    }
+                });
+            });
+    };
+
+
+
     $scope.addRecord = function(){
+        $scope.switchToProduct()
         $scope.item={};
         modalInstance = $modal.open({
             templateUrl: 'modals/add-record.html',
@@ -164,6 +218,17 @@ app.directive('fileModel', ['$parse', function ($parse) {
             }
         });
     };
+
+    $scope.switchToProduct = function(){
+        $scope.product = true;
+        $scope.formula = false;
+    }
+
+
+    $scope.switchToFormula = function(){
+        $scope.product = false;
+        $scope.formula = true;
+    }
 
     $scope.saveRecord = function(item) {
         var file = $scope.item.image;

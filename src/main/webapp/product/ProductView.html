@@ -20,9 +20,14 @@
                 <span>product name</span>
                 <span></span>
             </div>
-            <div class="description col-md-4 col-sm-4">
+            <div class="description col-md-2 col-sm-2">
                 </br>
                 <span>product description</span>
+                <span></span>
+            </div>
+            <div class="total-price col-md-2 col-sm-2">
+                </br>
+                <span>formula</span>
                 <span></span>
             </div>
             <div class="total-price col-md-1 col-sm-1">expected value</div>
@@ -42,13 +47,23 @@
                     <span class="name">{{item.name}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-4 col-sm-4">
+                <div class="description col-md-2 col-sm-2">
                     </br>
                     <span>{{item.description}}</span>
                     <span></span>
                 </div>
+                <div class="total-price col-md-2 col-sm-2">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-info" ng-click="viewFormula(item)">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="editFormula(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        </i></button>
+                    </div>
+                </div>
                 <div class="total-price col-md-1 col-sm-1">{{item.expectedValue}}</div>
                 <div class="total-price col-md-1 col-sm-1">{{item.unit}}</div>
+
                 <div class="total-price col-md-2 col-sm-2">
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
