@@ -211,14 +211,14 @@ app.directive('fileModel', ['$parse', function ($parse) {
     $scope.updateFormula = function(item){
             $scope.switchToProduct()
             var items = [];
-            items = $scope.resourcesList;
+            items = $scope.list.resources;
             var formulas = [];
 
             angular.forEach(items, function (value, key) {
                 var inp = angular.element('#' + value.id).val();
                 if(inp > 0){
                      formulas.push({
-                        product: item,
+                        product: {id: item.id},
                         resource: value,
                         value: inp
                      });

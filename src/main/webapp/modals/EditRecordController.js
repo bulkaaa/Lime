@@ -15,6 +15,9 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
          if($scope.list && $scope.list.roles){
             $scope.item.roles = $scope.list.roles;
          }
+         if($scope.list && $scope.list.suppliers){
+             $scope.item.suppliers = $scope.list.suppliers;
+         }
 
 		$scope.updateRecord($scope.item);
 	};

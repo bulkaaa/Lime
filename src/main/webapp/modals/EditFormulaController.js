@@ -5,6 +5,10 @@ app.controller('EditFormulaController',  ['$scope', '$http','$uibModalInstance',
 	$scope.updateFormu = function () {
 		$scope.cancelModal();
 
+         if($scope.list && $scope.list.resources){
+            $scope.item.resources = $scope.list.resources;
+         }
+
 		$scope.updateFormula($scope.item);
 	};
 
@@ -12,6 +16,9 @@ app.controller('EditFormulaController',  ['$scope', '$http','$uibModalInstance',
                modalInstance.close();
     };
 
+    $scope.isChecked = (resource) => {
+       return $scope.list.resources.indexOf(resource) == -1
+    }
 	init();
 
 }]);

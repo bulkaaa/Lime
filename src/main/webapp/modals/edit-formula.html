@@ -8,10 +8,10 @@
             <div class="row" ng-repeat="resource in resourcesList" ng-if="formula" >
                 <div class="form-group m">
                     <div class="col-sm-6">
-                        <input type="checkbox" checklist-model="resources.list" ng-required="list.resourcesList.length==0" checklist-value="resource"> {{resource.name}}
+                        <input type="checkbox" checklist-model="list.resources" ng-required="list.resourcesList.length==0" checklist-value="resource"> {{resource.name}}
                     </div>
                     <div class="col-md-5 col-sm-5">
-                        <input id="{{resource.id}}" type="number" min="0" max="1000" step ="0.1" class="form-control">
+                        <input id="{{resource.id}}" type="number" min="0" max="1000" step ="0.1" class="form-control" ng-disabled="isChecked(resource)">
                      </div>
                 </div>
             </div>

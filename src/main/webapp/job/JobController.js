@@ -70,30 +70,26 @@ var modalInstance = null;
 
 
     $scope.saveRecord = function(item) {
-                        /* $http.get("/job/act-user")
-                                        .then(
-                                            function(response){
-                                               item.username = response.data;*/
-                                                                       $http.post("/job/create", JSON.stringify(item))
-                                                                           .then(
-                                                                               function(response){
-                                                                                   if (response.data){
-                                                                                       item = response.data;
-                                                                                       $scope.items.push({
-                                                                                           id: item.id,
-                                                                                           productName: item.product.name,
-                                                                                           details: item.details,
-                                                                                           resultValue: item.resultValue,
-                                                                                           startDate: new Date(item.startDate).toLocaleString(),
-                                                                                           endDate: new Date(item.endDate).toLocaleString(),
-                                                                                           //username: item.user.username,
-                                                                                       });
-                                                                                   }
-                                                                               },
-                                                                               function(response){
-                                                                                   DialogService.handle(response, 'job', 'create');
-                                                                               }
-                                                                           )
+       $http.post("/job/create", JSON.stringify(item))
+           .then(
+               function(response){
+                   if (response.data){
+                       item = response.data;
+                       $scope.items.push({
+                           id: item.id,
+                           productName: item.product.name,
+                           details: item.details,
+                           resultValue: item.resultValue,
+                           startDate: new Date(item.startDate).toLocaleString(),
+                           endDate: new Date(item.endDate).toLocaleString(),
+                           //username: item.user.username,
+                       });
+                   }
+               },
+               function(response){
+                   DialogService.handle(response, 'job', 'create');
+               }
+           )
 
                                           /*  },
                                             function(response){
