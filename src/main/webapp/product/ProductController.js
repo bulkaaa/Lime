@@ -212,18 +212,24 @@ app.directive('fileModel', ['$parse', function ($parse) {
             $scope.switchToProduct()
             var items = [];
             items = $scope.resourcesList;
-            var map = {};
+            var formulas = [];
 
             angular.forEach(items, function (value, key) {
                 var inp = angular.element('#' + value.id).val();
-                if(inp > 0)
-                    map[value.id] = angular.element('#' + value.id).val();
+                if(inp > 0){
+                     formulas.push({
+                        product: item,
+                        resource: value,
+                        value: inp
+                     });
+                }
+
             });
 
-            if(Object.keys(map).length === 0)
+            if(Object.keys(formulas).length === 0)
                 $dialogs.error('Ups... Validation error', 'Please check your input');
             else
-                $http.post("/formula/update", JSON.stringify(map))
+                $http.put("/formula/update", JSON.stringify(formulas))
                     .then(
                         function(response){
                             if (response.data){
