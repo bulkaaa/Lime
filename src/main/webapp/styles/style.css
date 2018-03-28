@@ -209,3 +209,22 @@ cursor: pointer;
 .margins{
 margin: 20px 20px 20px 20px;
 }
+
+.m-xs {
+  margin: 5px;
+}
+.m-sm {
+  margin: 10px;
+}
+.m {
+  margin: 15px;
+}
+.m-md {
+  margin: 20px;
+}
+.m-lg {
+  margin: 30px;
+}
+.m-xl {
+  margin: 50px;
+}

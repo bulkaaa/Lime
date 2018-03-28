@@ -3,14 +3,20 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelModal()"><span aria-hidden="true">×</span></button>
         <h4 class="modal-title">{{item.name}} formula: </h4>
     </div>
-    <div class="modal-body">
+    <div class="modal-body m-md">
         <form class="form-horizontal" name="form" role="form">
-            <div class="row" ng-repeat="resource in resources" ng-if="formula">
-                <div class="col-sm-8">
-                    <input type="checkbox" checklist-model="resources" ng-required="list.resources.length==0" checklist-value="resource" ng-checked="false"> {{resource.name}}
+            <div class="row" ng-repeat="resource in resourcesList" ng-if="formula" >
+                <div class="form-group m">
+                    <div class="col-sm-6">
+                        <input type="checkbox" checklist-model="resources.list" ng-required="list.resourcesList.length==0" checklist-value="resource"> {{resource.name}}
+                    </div>
+                    <div class="col-md-5 col-sm-5">
+                        <input id="{{resource.id}}" type="number" min="0" max="1000" step ="0.1" class="form-control">
+                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer model-grey-color">
+                <button class="btn btn-success" ng-click="updateFormu()" ng-disabled="form.$invalid"><i class="glyphicon glyphicon-floppy-save"></i> Update</button>
                 <button class="btn btn-danger" data-dismiss="modal" ng-click="cancelModal()"><i class="fa fa-close"></i> Close</button>
             </div>
         </form>

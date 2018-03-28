@@ -1,18 +1,17 @@
-app.controller('EditFormulaController',  ['$scope', '$http','$uibModalInstance', function($scope, $http, modalInstance) {
-    $scope.saveEmp = function () {
-        $scope.newRecord = {};
+app.controller('EditFormulaController',  ['$scope', '$http','$uibModalInstance', 'item', function($scope, $http, modalInstance, item) {
+	function init(){
+		$scope.item = item;
+    }
+	$scope.updateFormu = function () {
+		$scope.cancelModal();
 
-        $scope.cancelModal();
-
-        console.log(scope.resources)
-        // if($scope.resources && $scope.list.resources){
-        //     $scope.item.resources = $scope.list.resources;
-        // }
-        $scope.saveRecord($scope.item);
-    };
+		$scope.updateFormula($scope.item);
+	};
 
     $scope.cancelModal = function(){
-        modalInstance.close();
-    }
+               modalInstance.close();
+    };
+
+	init();
 
 }]);

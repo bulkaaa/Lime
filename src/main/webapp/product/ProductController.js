@@ -173,6 +173,10 @@ app.directive('fileModel', ['$parse', function ($parse) {
         });
     };
 
+     $scope.list = {
+            resources: []
+        };
+
     $scope.editFormula = function(item){
         $scope.switchToFormula()
         $http.get("/product/one/" + item.id)
@@ -182,7 +186,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     .then(
                         function (response) {
                             if (response.data) {
-                                $scope.resources = response.data.slice();
+                                $scope.resourcesList = response.data;
                             }
                         },
                         function (response) {
@@ -203,6 +207,34 @@ app.directive('fileModel', ['$parse', function ($parse) {
                 });
             });
     };
+
+    $scope.updateFormula = function(item){
+            $scope.switchToProduct()
+            var items = [];
+            items = $scope.resourcesList;
+            var map = {};
+
+            angular.forEach(items, function (value, key) {
+                var inp = angular.element('#' + value.id).val();
+                if(inp > 0)
+                    map[value.id] = angular.element('#' + value.id).val();
+            });
+
+            if(Object.keys(map).length === 0)
+                $dialogs.error('Ups... Validation error', 'Please check your input');
+            else
+                $http.post("/formula/update", JSON.stringify(map))
+                    .then(
+                        function(response){
+                            if (response.data){
+
+                            }
+                        },
+                        function(response){
+                            DialogService.handle(response, 'formula', 'edit');
+                        }
+                    );
+    }
 
 
 
