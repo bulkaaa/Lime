@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
 import com.modern.codes.lime.model.Formula;
+import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.service.IFormulaService;
 import com.modern.codes.lime.tools.ParseTools;
 
@@ -33,24 +35,15 @@ public class FormulaController extends BaseController {
         this.formulaService = formulaService;
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Creates a formula objects from a given list",
-                  notes = "Creates a <b>formula</b> objects " + "Saves it into DB.",
-                  response = Formula.class)
-    @ApiResponses({@ApiResponse(code = 200, message = "Saved formula object"),
-                   @ApiResponse(code = 422, message = "In case of validation errors of formula object")})
+
+    @RequestMapping(value = "/one/{productId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Fetch a job object", notes = "Fetches a <b>job</b> object by id ", response = FormulaPOJO.class)
+    @ApiResponses(@ApiResponse(code = 200, message = "Saved job object"))
     @ResponseBody
-    public String create(@Validated @RequestBody @ApiParam("Formula object") final List<Formula> iFormula,
-                         final BindingResult bindingResult, final UriComponentsBuilder b) {
+    public String getProduct(@ApiParam("job object") @PathVariable final String productId) {
 
-        LOG.info("Formula creation request received: {}", iFormula);
-
-        if (iFormula == null || bindingResult.hasErrors()) {
-            throw new InvalidRequestException(
-                    String.format("Invalid formula creation request, form data contains %s error(s).",
-                                  bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
-        }
-        return ParseTools.parseToJson(formulaService.save(iFormula), Formula.class);
+        LOG.info("job fetch request received for id: " + productId);
+        return ParseTools.parseToJson(formulaService.findByProductId(productId), Formula.class);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -10,7 +10,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.Base64;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -24,7 +23,6 @@ import com.modern.codes.lime.config.StorageProperties;
 import com.modern.codes.lime.exception.StorageException;
 import com.modern.codes.lime.exception.StorageFileNotFoundException;
 
-import io.vavr.control.Try;
 
 @Service
 public class StorageService implements IStorageService {
@@ -96,16 +94,11 @@ public class StorageService implements IStorageService {
 
     @Override
     public byte[] loadAsBytes(final String filename) {
-        try {
-            final InputStream is = this.loadAsResource(filename).getInputStream();
+        try (InputStream is = this.loadAsResource(filename).getInputStream()){
             final byte[] bytes = ByteStreams.toByteArray(is);
-            is.close();
-            return Try.of(() -> Base64.getEncoder()
-                                      .encode(bytes))
-                      .getOrElse(ArrayUtils.EMPTY_BYTE_ARRAY);
+            return Base64.getEncoder().encode(bytes);
         } catch (final IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new StorageFileNotFoundException("Error loading picture as bytes.", e);
         }
     }
 

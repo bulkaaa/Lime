@@ -67,7 +67,6 @@ public class Formula implements Serializable {
     private Resource resource;
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "ID")
-    @JsonIgnore
     private Product product;
     @ApiModelProperty(value = "The quantity of resources needed for product", required = true)
     @NotNull

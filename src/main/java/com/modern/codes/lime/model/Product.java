@@ -198,6 +198,7 @@ public class Product implements Serializable {
     @JsonIgnore
     private List<Job> jobs;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Formula> formulas;
     private static final long serialVersionUID = 8269473897901384963L;
     private static final int MAX_LENGTH_NAME = 50;
