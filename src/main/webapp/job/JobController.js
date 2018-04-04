@@ -29,6 +29,8 @@ var modalInstance = null;
     $scope.showAll();
 
 
+
+
     $scope.addRecord = function(){
         $scope.item={};
         $scope.list.products = [];
@@ -58,7 +60,7 @@ var modalInstance = null;
      $http.get("/job/act-user")
                 .then(
                     function(response){
-                       $scope.item.user.username = response.data.user.username;
+                      var user = response.data;
                     },
                     function(response){
                         DialogService.handle(response, 'job', 'create');
@@ -66,27 +68,35 @@ var modalInstance = null;
                 );
     }
 
+
     $scope.saveRecord = function(item) {
-                        $http.post("/job/create", JSON.stringify(item))
-                            .then(
-                                function(response){
-                                    if (response.data){
-                                        item = response.data;
-                                        $scope.items.push({
-                                            id: item.id,
-                                            productName: item.product.name,
-                                            details: item.details,
-                                            resultValue: item.resultValue,
-                                            startDate: new Date(item.startDate).toLocaleString(),
-                                            endDate: new Date(item.endDate).toLocaleString(),
-                                            username: item.username,
-                                        });
-                                    }
-                                },
-                                function(response){
-                                    DialogService.handle(response, 'job', 'create');
-                                }
-                            );
+       $http.post("/job/create", JSON.stringify(item))
+           .then(
+               function(response){
+                   if (response.data){
+                       item = response.data;
+                       $scope.items.push({
+                           id: item.id,
+                           productName: item.product.name,
+                           details: item.details,
+                           resultValue: item.resultValue,
+                           startDate: new Date(item.startDate).toLocaleString(),
+                           endDate: new Date(item.endDate).toLocaleString(),
+                           //username: item.user.username,
+                       });
+                   }
+               },
+               function(response){
+                   DialogService.handle(response, 'job', 'create');
+               }
+           )
+
+                                          /*  },
+                                            function(response){
+                                                DialogService.handle(response, 'job', 'create');
+                                            }
+                                        )*/
+
                 }
 
 }]);
