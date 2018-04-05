@@ -159,18 +159,31 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
     $scope.viewFormula = function(item){
         $scope.switchToFormula()
+        var formulas = [];
+        $http.get("/formula/one/" + item.id)
+                    .then(
+                        function (response) {
+                             formulas = response.data;
+                                     modalInstance = $modal.open({
+                                         templateUrl: 'modals/view-record.html',
+                                         controller: 'ViewRecordController',
+                                         scope: $scope,
+                                         size: 'md',
+                                         resolve: {
+                                             formulas: function () {
+                                                 return formulas;
+                                             },
+                                             item: function () {
+                                                return item;
+                                             }
+                                         }
+                                     });
+                        },
+                        function (response) {
+                             DialogService.generalServerError();
+                         }
+                    )
 
-        modalInstance = $modal.open({
-            templateUrl: 'modals/view-record.html',
-            controller: 'ViewRecordController',
-            scope: $scope,
-            size: 'md',
-            resolve: {
-                item: function () {
-                    return item; //response.data;
-                }
-            }
-        });
     };
 
      $scope.list = {
