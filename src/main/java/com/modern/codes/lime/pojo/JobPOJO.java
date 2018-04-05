@@ -6,67 +6,150 @@ import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Job pojo.
+ */
 public class JobPOJO extends BasicPOJO {
+    /**
+     * Gets product.
+     *
+     * @return the product
+     */
     public Product getProduct() {
         return product;
     }
 
+    /**
+     * Sets product.
+     *
+     * @param product the product
+     */
     public void setProduct(final Product product) {
         this.product = product;
     }
 
+    /**
+     * Gets pojo product.
+     *
+     * @return the pojo product
+     */
     public ProductPOJO getPOJOProduct() {
         return ParseTools.parse(product, ProductPOJO.class);
     }
 
+    /**
+     * Sets pojo product.
+     *
+     * @param product the product
+     */
     public void setPOJOProduct(final ProductPOJO product) {
         this.product = ParseTools.parse(product, Product.class);
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Sets user.
+     *
+     * @param user the user
+     */
     public void setUser(final User user) {
         this.user = user;
     }
 
+    /**
+     * Gets pojo user.
+     *
+     * @return the pojo user
+     */
     public UserPOJO getPOJOUser() {
         return ParseTools.parse(user, UserPOJO.class);
     }
 
+    /**
+     * Sets pojo user.
+     *
+     * @param user the user
+     */
     public void setPOJOUser(final UserPOJO user) {
         this.user = ParseTools.parse(user, User.class);
     }
 
+    /**
+     * Gets details.
+     *
+     * @return the details
+     */
     public String getDetails() {
         return details;
     }
 
+    /**
+     * Sets details.
+     *
+     * @param details the details
+     */
     public void setDetails(final String details) {
         this.details = details;
     }
 
+    /**
+     * Gets start date.
+     *
+     * @return the start date
+     */
     public Date getStartDate() {
         return startDate;
     }
 
+    /**
+     * Sets start date.
+     *
+     * @param startDate the start date
+     */
     public void setStartDate(final Date startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     * Gets end date.
+     *
+     * @return the end date
+     */
     public Date getEndDate() {
         return endDate;
     }
 
+    /**
+     * Sets end date.
+     *
+     * @param endDate the end date
+     */
     public void setEndDate(final Date endDate) {
         this.endDate = endDate;
     }
 
+    /**
+     * Gets result value.
+     *
+     * @return the result value
+     */
     public Double getResultValue() {
         return resultValue;
     }
 
+    /**
+     * Sets result value.
+     *
+     * @param resultValue the result value
+     */
     public void setResultValue(final Double resultValue) {
         this.resultValue = resultValue;
     }
@@ -101,6 +184,7 @@ public class JobPOJO extends BasicPOJO {
                                                                                    && other.resultValue == null)
                || (this.resultValue != null && this.resultValue.equals(other.resultValue));
     }
+
     private Product product;
     private User user;
     private String details;

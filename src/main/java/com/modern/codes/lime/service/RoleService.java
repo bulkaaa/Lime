@@ -10,9 +10,17 @@ import com.modern.codes.lime.model.Role;
 import com.modern.codes.lime.pojo.RolePOJO;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Role service.
+ */
 @Service
 public class RoleService extends BasicCRUDService<Role, RolePOJO, IRoleDAO> implements IRoleService {
 
+    /**
+     * Instantiates a new Role service.
+     *
+     * @param dao the dao
+     */
     @Autowired
     public RoleService(final IRoleDAO dao) {
         super(dao, Role.class, RolePOJO.class);
@@ -23,5 +31,6 @@ public class RoleService extends BasicCRUDService<Role, RolePOJO, IRoleDAO> impl
     public List<RolePOJO> findByName(final String name) {
         return ParseTools.parseList(dao.findByName(name), RolePOJO.class);
     }
+
     private final IRoleDAO dao;
 }

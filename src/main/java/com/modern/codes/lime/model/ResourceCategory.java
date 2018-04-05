@@ -19,33 +19,67 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * The type Resource category.
+ */
 @ApiModel(description = "Model representation of a resource category used in Lime")
 @Entity
 public class ResourceCategory implements Serializable {
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Gets resources.
+     *
+     * @return the resources
+     */
     public List<Resource> getResources() {
         return resources;
     }
 
+    /**
+     * Sets resources.
+     *
+     * @param resources the resources
+     */
     public void setResources(final List<Resource> resources) {
         this.resources = resources;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(final String name) {
         this.name = name;
     }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

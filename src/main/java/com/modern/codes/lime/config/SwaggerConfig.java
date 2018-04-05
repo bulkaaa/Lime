@@ -17,11 +17,15 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  *
  * @author jaroszk
  */
-
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
+    /**
+     * Api docket.
+     *
+     * @return the docket
+     */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()
@@ -37,15 +41,25 @@ public class SwaggerConfig {
                                    .version(apiVersion)
                                    .build();
     }
+
     //    @Value("${info.build.version}")
     private String apiVersion;
     //    @Value("${info.build.name}")
     private String apiTitle;
     //    @Value("${info.build.artifact}")
     private String apiGroupName;
+    /**
+     * The constant SWAGGER_UI_ENDPOINT.
+     */
     // Swagger UI
     public static final String SWAGGER_UI_ENDPOINT = "/swagger-ui.html";
+    /**
+     * The constant SWAGGER_RESOURCES_ENDPOINT.
+     */
     public static final String SWAGGER_RESOURCES_ENDPOINT = "/swagger-resources";
+    /**
+     * The constant SWAGGER_API_DOCS_ENDPOINT.
+     */
     public static final String SWAGGER_API_DOCS_ENDPOINT = "/v2/api-docs";
 
 }

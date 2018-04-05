@@ -10,10 +10,18 @@ import com.modern.codes.lime.model.ProductCategory;
 import com.modern.codes.lime.pojo.ProductCategoryPOJO;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Product category service.
+ */
 @Service
 public class ProductCategoryService extends BasicCRUDService<ProductCategory, ProductCategoryPOJO, IProductCategoryDAO>
         implements IProductCategoryService {
 
+    /**
+     * Instantiates a new Product category service.
+     *
+     * @param dao the dao
+     */
     @Autowired
     public ProductCategoryService(final IProductCategoryDAO dao) {
         super(dao, ProductCategory.class, ProductCategoryPOJO.class);
@@ -34,5 +42,6 @@ public class ProductCategoryService extends BasicCRUDService<ProductCategory, Pr
     public ProductCategoryPOJO findByProductsId(final String productId) {
         return ParseTools.parse(dao.findByProductsId(productId), ProductCategoryPOJO.class);
     }
+
     private final IProductCategoryDAO dao;
 }

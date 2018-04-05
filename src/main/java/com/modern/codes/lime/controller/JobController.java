@@ -38,10 +38,22 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The type Job controller.
+ */
 @RestController
 @RequestMapping("/job")
 public class JobController extends BaseController {
 
+    /**
+     * Instantiates a new Job controller.
+     *
+     * @param jobService          the job service
+     * @param formulaService      the formula service
+     * @param resourceService     the resource service
+     * @param userService         the user service
+     * @param notificationService the notification service
+     */
     public JobController(final IJobService jobService, final IFormulaService formulaService,
                          final IResourceService resourceService, final IUserService userService,
                          final INotificationService notificationService) {
@@ -52,11 +64,24 @@ public class JobController extends BaseController {
         this.notificationService = notificationService;
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     @GetMapping(path = "/act-user")
     public String getUser() {
         return ParseTools.parseToJson(getActualUser(), User.class);
     }
 
+    /**
+     * Create string.
+     *
+     * @param job           the job
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a job object",
                   notes = "Creates a <b>job</b> object " + "Saves it into DB.",
@@ -97,6 +122,12 @@ public class JobController extends BaseController {
         }
     }
 
+    /**
+     * Gets product.
+     *
+     * @param jobId the job id
+     * @return the product
+     */
     @RequestMapping(value = "/one/{jobId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetch a job object", notes = "Fetches a <b>job</b> object by id ", response = JobPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved job object"))
@@ -107,6 +138,11 @@ public class JobController extends BaseController {
         return ParseTools.parseToJson(jobService.findById(jobId), Job.class);
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all products", notes = "Fetches all products from DB ", response = List.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Fetch all products"))
@@ -117,6 +153,12 @@ public class JobController extends BaseController {
         return ParseTools.parseToJson(jobService.findAll(), Job.class);
     }
 
+    /**
+     * Gets by name.
+     *
+     * @param userId the user id
+     * @return the by name
+     */
     @ResponseBody
     @ApiResponses({@ApiResponse(code = 200, message = "Saved job object"),
                    @ApiResponse(code = 404, message = "In case of no job object was found in DB for given name")})
@@ -135,6 +177,7 @@ public class JobController extends BaseController {
                                                                               .getAuthentication()
                                                                               .getPrincipal()).getUsername());
     }
+
     private final IJobService jobService;
     private final IFormulaService formulaService;
     private final IResourceService resourceService;

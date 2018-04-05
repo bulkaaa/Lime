@@ -28,14 +28,30 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The type Product controller.
+ */
 @RestController
 @RequestMapping("/product")
 public class ProductController extends BaseController {
 
+    /**
+     * Instantiates a new Product controller.
+     *
+     * @param productService the product service
+     */
     public ProductController(final IProductService productService) {
         this.productService = productService;
     }
 
+    /**
+     * Create string.
+     *
+     * @param iProduct      the product
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a product object",
                   notes = "Creates a <b>product</b> object " + "Saves it into DB.",
@@ -58,6 +74,14 @@ public class ProductController extends BaseController {
         return ParseTools.parseToJson(product, Product.class);
     }
 
+    /**
+     * Update string.
+     *
+     * @param iProduct      the product
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a product object",
                   notes = "Updates a <b>product</b> object ",
@@ -79,6 +103,12 @@ public class ProductController extends BaseController {
         return ParseTools.parseToJson(productService.save(product), Product.class);
     }
 
+    /**
+     * Gets product.
+     *
+     * @param productId the product id
+     * @return the product
+     */
     @RequestMapping(value = "/one/{productId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetch a product object",
                   notes = "Fetches a <b>product</b> object by id ",
@@ -91,6 +121,12 @@ public class ProductController extends BaseController {
         return ParseTools.parseToJson(productService.findById(productId), Product.class);
     }
 
+    /**
+     * Delete boolean.
+     *
+     * @param productId the product id
+     * @return the boolean
+     */
     @RequestMapping(value = "/delete/{productId}",
                     method = RequestMethod.DELETE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -106,6 +142,11 @@ public class ProductController extends BaseController {
         return true;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all products", notes = "Fetches all products from DB ", response = List.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Fetch all products"))
@@ -116,6 +157,12 @@ public class ProductController extends BaseController {
         return ParseTools.parseToJson(productService.findAll(), Product.class);
     }
 
+    /**
+     * Gets by name.
+     *
+     * @param name the name
+     * @return the by name
+     */
     @ResponseBody
     @ApiResponses({@ApiResponse(code = 200, message = "Saved product object"),
                    @ApiResponse(code = 404, message = "In case of no product object was found in DB for given name")})
@@ -128,6 +175,7 @@ public class ProductController extends BaseController {
         LOG.info("Product get-by-name request received: name = " + name);
         return ParseTools.parseToJson(productService.findByName(name), Product.class);
     }
+
     private final IProductService productService;
     private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
 } 

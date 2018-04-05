@@ -4,44 +4,97 @@ import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Formula pojo.
+ */
 public class FormulaPOJO extends BasicPOJO {
 
+    /**
+     * Gets resource.
+     *
+     * @return the resource
+     */
     public Resource getResource() {
         return resource;
     }
 
+    /**
+     * Sets resource.
+     *
+     * @param resource the resource
+     */
     public void setResource(final Resource resource) {
         this.resource = resource;
     }
 
+    /**
+     * Gets pojo resource.
+     *
+     * @return the pojo resource
+     */
     public ResourcePOJO getPOJOResource() {
         return ParseTools.parse(resource, ResourcePOJO.class);
     }
 
+    /**
+     * Sets pojo resource.
+     *
+     * @param resources the resources
+     */
     public void setPOJOResource(final ResourcePOJO resources) {
         this.resource = ParseTools.parse(resources, Resource.class);
     }
 
+    /**
+     * Gets product.
+     *
+     * @return the product
+     */
     public Product getProduct() {
         return product;
     }
 
+    /**
+     * Sets product.
+     *
+     * @param product the product
+     */
     public void setProduct(final Product product) {
         this.product = product;
     }
 
+    /**
+     * Gets pojo product.
+     *
+     * @return the pojo product
+     */
     public ProductPOJO getPOJOProduct() {
         return ParseTools.parse(product, ProductPOJO.class);
     }
 
+    /**
+     * Sets pojo product.
+     *
+     * @param product the product
+     */
     public void setPOJOProduct(final ProductPOJO product) {
         this.product = ParseTools.parse(product, Product.class);
     }
 
+    /**
+     * Gets value.
+     *
+     * @return the value
+     */
     public Double getValue() {
         return value;
     }
 
+    /**
+     * Sets value.
+     *
+     * @param value the value
+     */
     public void setValue(final Double value) {
         this.value = value;
     }
@@ -72,6 +125,7 @@ public class FormulaPOJO extends BasicPOJO {
                                                                                    && other.value == null)
                || (this.value != null && this.value.equals(other.value));
     }
+
     private Resource resource;
     private Product product;
     private Double value;

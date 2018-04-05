@@ -27,17 +27,32 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The type Formula controller.
+ */
 @RestController
 @RequestMapping("/formula")
 public class FormulaController extends BaseController {
 
+    /**
+     * Instantiates a new Formula controller.
+     *
+     * @param formulaService the formula service
+     */
     public FormulaController(final IFormulaService formulaService) {
         this.formulaService = formulaService;
     }
 
-
+    /**
+     * Gets product.
+     *
+     * @param productId the product id
+     * @return the product
+     */
     @RequestMapping(value = "/one/{productId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Fetch a job object", notes = "Fetches a <b>job</b> object by id ", response = FormulaPOJO.class)
+    @ApiOperation(value = "Fetch a job object",
+                  notes = "Fetches a <b>job</b> object by id ",
+                  response = FormulaPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved job object"))
     @ResponseBody
     public String getProduct(@ApiParam("job object") @PathVariable final String productId) {
@@ -46,6 +61,14 @@ public class FormulaController extends BaseController {
         return ParseTools.parseToJson(formulaService.findByProductId(productId), Formula.class);
     }
 
+    /**
+     * Update string.
+     *
+     * @param iFormula      the formula
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a formula object",
                   notes = "Updates a <b>formula</b> object ",
@@ -63,7 +86,9 @@ public class FormulaController extends BaseController {
                     String.format("Invalid formula update request, form data contains %s error(s).",
                                   bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
         }
-        formulaService.deleteByProductId(iFormula.get(0).getProduct().getId());
+        formulaService.deleteByProductId(iFormula.get(0)
+                                                 .getProduct()
+                                                 .getId());
         return ParseTools.parseToJson(formulaService.save(iFormula), Formula.class);
     }
 

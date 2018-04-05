@@ -14,9 +14,19 @@ import com.modern.codes.lime.class_models.DrawSeries;
 import com.modern.codes.lime.class_models.TimeSeries;
 import com.modern.codes.lime.exception.InvalidRequestException;
 
+/**
+ * The type Forecast service.
+ */
 @Service
 public class ForecastService implements IForecastService {
 
+    /**
+     * Instantiates a new Forecast service.
+     *
+     * @param timeSeriesService the time series service
+     * @param smoothingService  the smoothing service
+     * @param jobService        the job service
+     */
     @Autowired
     public ForecastService(final ITimeSeriesService timeSeriesService, final ISmoothingService smoothingService,
                            final IJobService jobService) {

@@ -3,8 +3,6 @@ package com.modern.codes.lime.service;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,10 +14,17 @@ import com.modern.codes.lime.model.User;
 import com.modern.codes.lime.pojo.UserPOJO;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type User service.
+ */
 @Service("userDetailsService")
-@Transactional
 public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> implements IUserService {
 
+    /**
+     * Instantiates a new User service.
+     *
+     * @param dao the dao
+     */
     @Autowired
     public UserService(final IUserDAO dao) {
         super(dao, User.class, UserPOJO.class);
@@ -60,5 +65,6 @@ public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> impl
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     private final IUserDAO dao;
 }

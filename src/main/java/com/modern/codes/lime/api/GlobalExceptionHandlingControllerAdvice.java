@@ -136,5 +136,6 @@ public class GlobalExceptionHandlingControllerAdvice {
     public void handleException(final Exception ex) {
         LOG.error(ex.getMessage(), ex);
     }
+
     private static final Logger LOG = LoggerFactory.getLogger(GlobalExceptionHandlingControllerAdvice.class);
 }

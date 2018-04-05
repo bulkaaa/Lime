@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import com.modern.codes.lime.class_models.TimeSeries;
 
+/**
+ * The type Smoothing service.
+ */
 @Service
 public class SmoothingService implements ISmoothingService {
 

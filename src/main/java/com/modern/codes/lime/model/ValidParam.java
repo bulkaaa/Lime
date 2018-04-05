@@ -14,13 +14,22 @@ import io.swagger.annotations.ApiModelProperty;
  *
  * @author jaroszk
  */
-
 public class ValidParam implements Serializable {
 
+    /**
+     * Gets validation errors.
+     *
+     * @return the validation errors
+     */
     public List<ValidationError> getValidationErrors() {
         return this.validationErrors;
     }
 
+    /**
+     * Sets validation errors.
+     *
+     * @param validationErrors the validation errors
+     */
     public void setValidationErrors(final List<ValidationError> validationErrors) {
         this.validationErrors = validationErrors;
     }
@@ -29,6 +38,7 @@ public class ValidParam implements Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
     @ApiModelProperty("A list of form attributes that failed to validate.")
     @JsonProperty("validationErrors")
     private List<ValidationError> validationErrors;

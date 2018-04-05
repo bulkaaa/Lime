@@ -18,14 +18,28 @@ import com.modern.codes.lime.exception.StorageFileNotFoundException;
 import com.modern.codes.lime.model.FileExtension;
 import com.modern.codes.lime.service.IStorageService;
 
+/**
+ * The type File upload controller.
+ */
 @Controller
 @RequestMapping(path = "/file_management")
 public class FileUploadController {
 
+    /**
+     * Instantiates a new File upload controller.
+     *
+     * @param storageService the storage service
+     */
     public FileUploadController(final IStorageService storageService) {
         this.storageService = storageService;
     }
 
+    /**
+     * Serve file response entity.
+     *
+     * @param filename the filename
+     * @return the response entity
+     */
     @GetMapping("/{filename:.+}")
     @ResponseBody
     public ResponseEntity<byte[]> serveFile(@PathVariable final String filename) {
@@ -36,6 +50,12 @@ public class FileUploadController {
                              .body(file);
     }
 
+    /**
+     * Handle file upload response entity.
+     *
+     * @param file the file
+     * @return the response entity
+     */
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> handleFileUpload(@RequestParam("file") final MultipartFile file) {
         final String extension = file.getOriginalFilename()
@@ -49,12 +69,23 @@ public class FileUploadController {
                              .body("\"OK\"");
     }
 
+    /**
+     * Handle storage file not found response entity.
+     *
+     * @param exc the exc
+     * @return the response entity
+     */
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(final StorageFileNotFoundException exc) {
         return ResponseEntity.notFound()
                              .build();
     }
 
+    /**
+     * Delete file.
+     *
+     * @param filename the filename
+     */
     @DeleteMapping("/{filename:.+}")
     @ResponseBody
     public void deleteFile(@PathVariable final String filename) {

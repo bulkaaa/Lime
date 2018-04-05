@@ -27,14 +27,30 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The type Resource controller.
+ */
 @RestController
 @RequestMapping("/resource")
 public class ResourceController extends BaseController {
 
+    /**
+     * Instantiates a new Resource controller.
+     *
+     * @param resourceService the resource service
+     */
     public ResourceController(final IResourceService resourceService) {
         this.resourceService = resourceService;
     }
 
+    /**
+     * Create string.
+     *
+     * @param resource      the resource
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a resource object",
                   notes = "Creates a <b>resource</b> object " + "Saves it into DB.",
@@ -56,6 +72,14 @@ public class ResourceController extends BaseController {
         return ParseTools.parseToJson(resourceService.save(resource), Resource.class);
     }
 
+    /**
+     * Update string.
+     *
+     * @param resource      the resource
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a resource object",
                   notes = "Updates a <b>resource</b> object ",
@@ -77,6 +101,12 @@ public class ResourceController extends BaseController {
         return ParseTools.parseToJson(resourceService.save(resource), Resource.class);
     }
 
+    /**
+     * Delete boolean.
+     *
+     * @param resourceId the resource id
+     * @return the boolean
+     */
     @RequestMapping(value = "/delete/{resourceId}",
                     method = RequestMethod.DELETE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -92,6 +122,12 @@ public class ResourceController extends BaseController {
         return true;
     }
 
+    /**
+     * Gets resource.
+     *
+     * @param resourceId the resource id
+     * @return the resource
+     */
     @RequestMapping(value = "/one/{resourceId}",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -106,6 +142,11 @@ public class ResourceController extends BaseController {
         return ParseTools.parseToJson(resourceService.findById(resourceId), Resource.class);
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Fetch all resources"))
@@ -117,6 +158,11 @@ public class ResourceController extends BaseController {
         return ParseTools.parseToJson(resourceService.findAll(), Resource.class);
     }
 
+    /**
+     * Toggle notification.
+     *
+     * @param toggle the toggle
+     */
     @RequestMapping(value = "/toggle-notification/{toggle}",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -130,6 +176,11 @@ public class ResourceController extends BaseController {
         resourceService.save(resources);
     }
 
+    /**
+     * Toggle order.
+     *
+     * @param toggle the toggle
+     */
     @RequestMapping(value = "/toggle-order/{toggle}",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)

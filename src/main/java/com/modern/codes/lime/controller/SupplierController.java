@@ -29,15 +29,32 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The type Supplier controller.
+ */
 @RestController
 @RequestMapping("/supplier")
 public class SupplierController extends BaseController {
 
+    /**
+     * Instantiates a new Supplier controller.
+     *
+     * @param supplierService the supplier service
+     * @param resourceService the resource service
+     */
     public SupplierController(final ISupplierService supplierService, final IResourceService resourceService) {
         this.supplierService = supplierService;
         this.resourceService = resourceService;
     }
 
+    /**
+     * Create string.
+     *
+     * @param supplier      the supplier
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a supplier object",
                   notes = "Creates a <b>supplier</b> object " + "Saves it into DB.",
@@ -60,6 +77,14 @@ public class SupplierController extends BaseController {
         return ParseTools.parseToJson(supplier, Supplier.class);
     }
 
+    /**
+     * Update string.
+     *
+     * @param supplier      the supplier
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a supplier object",
                   notes = "Updates a <b>supplier</b> object ",
@@ -82,6 +107,11 @@ public class SupplierController extends BaseController {
         return ParseTools.parseToJson(supplier, Supplier.class);
     }
 
+    /**
+     * Delete.
+     *
+     * @param supplierId the supplier id
+     */
     @RequestMapping(value = "/delete/{supplierId}",
                     method = RequestMethod.DELETE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -99,6 +129,11 @@ public class SupplierController extends BaseController {
         supplierService.delete(supplierId);
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all suppliers", notes = "Fetches all suppliers from DB ", response = List.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Fetch all suppliers"))
@@ -110,6 +145,12 @@ public class SupplierController extends BaseController {
         return ParseTools.parseToJson(supplierService.findAll(), Supplier.class);
     }
 
+    /**
+     * Gets supplier.
+     *
+     * @param supplierId the supplier id
+     * @return the supplier
+     */
     @RequestMapping(value = "/one/{supplierId}",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)

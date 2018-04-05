@@ -10,13 +10,26 @@ import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Formula service.
+ */
 @Service
 public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IFormulaDAO> implements IFormulaService {
 
+    /**
+     * Instantiates a new Formula service.
+     *
+     * @param dao the dao
+     */
     @Autowired
     public FormulaService(final IFormulaDAO dao) {
         super(dao, Formula.class, FormulaPOJO.class);
         this.dao = dao;
+    }
+
+    @Override
+    public void deleteByProductId(final String id) {
+        dao.deleteByProductId(id);
     }
 
     @Override
@@ -33,10 +46,5 @@ public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IForm
     public List<FormulaPOJO> findByResourceId(final String id) {
         return ParseTools.parseList(dao.findByResourceId(id), FormulaPOJO.class);
     }
-    @Override
-    public void deleteByProductId(final String id){
-        dao.deleteByProductId(id);
-    }
-
     private final IFormulaDAO dao;
 }

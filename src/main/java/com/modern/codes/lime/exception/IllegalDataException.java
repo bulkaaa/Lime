@@ -15,6 +15,7 @@ public class IllegalDataException extends RuntimeException {
     public IllegalDataException(final String message) {
         super(message);
     }
+
     private static final long serialVersionUID = 7063120525832668082L;
 
 }

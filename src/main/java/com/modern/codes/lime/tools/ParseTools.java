@@ -16,11 +16,22 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.modern.codes.lime.exception.IllegalDataException;
 
+/**
+ * The type Parse tools.
+ */
 @Service
 public class ParseTools {
     private ParseTools() {
     }
 
+    /**
+     * Parse t.
+     *
+     * @param <T> the type parameter
+     * @param obj the obj
+     * @param cl  the cl
+     * @return the t
+     */
     public static <T> T parse(final Object obj, final Class<T> cl) {
         if (null == obj) {
             return null;
@@ -32,6 +43,14 @@ public class ParseTools {
         }
     }
 
+    /**
+     * Parse list list.
+     *
+     * @param <T>  the type parameter
+     * @param list the list
+     * @param cl   the cl
+     * @return the list
+     */
     public static <T> List<T> parseList(final List<?> list, final Class<T> cl) {
         if (list == null) {
             return new ArrayList<>();
@@ -41,12 +60,26 @@ public class ParseTools {
                    .collect(Collectors.toList());
     }
 
+    /**
+     * Parse list object list.
+     *
+     * @param <T> the type parameter
+     * @param o   the o
+     * @param cl  the cl
+     * @return the list
+     */
     public static <T> List<T> parseListObject(final List<?> o, final Class<T> cl) {
         return o.stream()
                 .map(t -> convertInstanceOfObject(t, cl))
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Parse date date.
+     *
+     * @param date the date
+     * @return the date
+     */
     // Pattern "yyyy-MM-dd HH:mm:ss"
     public static Date parseDate(final String date) {
         try {
@@ -57,10 +90,24 @@ public class ParseTools {
         }
     }
 
+    /**
+     * Parse date string.
+     *
+     * @param date the date
+     * @return the string
+     */
     public static String parseDate(final Date date) {
         return date.toString();
     }
 
+    /**
+     * Parse to json string.
+     *
+     * @param <T> the type parameter
+     * @param obj the obj
+     * @param cl  the cl
+     * @return the string
+     */
     public static <T> String parseToJson(Object obj, Class<T> cl) {
 
         if (obj.getClass()
@@ -91,6 +138,7 @@ public class ParseTools {
             return null;
         }
     }
+
     private static final ModelMapper modelMapper = new ModelMapper();
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final Logger logger = LoggerFactory.getLogger(ParseTools.class);

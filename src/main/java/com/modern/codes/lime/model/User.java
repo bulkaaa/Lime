@@ -35,11 +35,13 @@ import io.swagger.annotations.ApiModelProperty;
  *
  * @author jaroszk
  */
-
 @Entity
 @Table(name = "\"user\"")
 public class User implements Serializable {
 
+    /**
+     * Update time stamps.
+     */
     @PrePersist
     public void updateTimeStamps() {
         if (joinedAt == null) {
@@ -47,86 +49,187 @@ public class User implements Serializable {
         }
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Gets surname.
+     *
+     * @return the surname
+     */
     public String getSurname() {
         return surname;
     }
 
+    /**
+     * Sets surname.
+     *
+     * @param surname the surname
+     */
     public void setSurname(final String surname) {
         this.surname = surname;
     }
 
+    /**
+     * Gets joined at.
+     *
+     * @return the joined at
+     */
     public Date getJoinedAt() {
 
         return joinedAt;
     }
 
+    /**
+     * Sets joined at.
+     *
+     * @param joinedAt the joined at
+     */
     public void setJoinedAt(final Date joinedAt) {
         this.joinedAt = joinedAt;
     }
 
+    /**
+     * Gets jobs.
+     *
+     * @return the jobs
+     */
     public List<Job> getJobs() {
         return jobs;
     }
 
+    /**
+     * Sets jobs.
+     *
+     * @param jobs the jobs
+     */
     public void setJobs(final List<Job> jobs) {
         this.jobs = jobs;
     }
 
+    /**
+     * Gets username.
+     *
+     * @return the username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets username.
+     *
+     * @param username the username
+     */
     public void setUsername(final String username) {
         this.username = username;
     }
 
+    /**
+     * Gets enabled.
+     *
+     * @return the enabled
+     */
     public Boolean getEnabled() {
         return enabled;
     }
 
+    /**
+     * Sets enabled.
+     *
+     * @param enabled the enabled
+     */
     public void setEnabled(final Boolean enabled) {
         this.enabled = enabled;
     }
 
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
     public void setPassword(final String password) {
         this.password = password;
     }
 
+    /**
+     * Gets roles.
+     *
+     * @return the roles
+     */
     public List<Role> getRoles() {
         return roles;
     }
 
+    /**
+     * Sets roles.
+     *
+     * @param roles the roles
+     */
     public void setRoles(final List<Role> roles) {
         this.roles = roles;
     }
 
+    /**
+     * Gets email address.
+     *
+     * @return the email address
+     */
     public String getEmailAddress() {
         return emailAddress;
     }
 
+    /**
+     * Sets email address.
+     *
+     * @param emailAddress the email address
+     */
     public void setEmailAddress(final String emailAddress) {
         this.emailAddress = emailAddress;
     }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

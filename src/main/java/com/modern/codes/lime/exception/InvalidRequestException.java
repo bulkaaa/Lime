@@ -41,6 +41,7 @@ public class InvalidRequestException extends RuntimeException {
     public Locale getLocale() {
         return locale;
     }
+
     private final Errors errors;
     private final Locale locale;
     private static final long serialVersionUID = -3445333324593174117L;

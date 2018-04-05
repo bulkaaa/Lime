@@ -23,10 +23,17 @@ import com.modern.codes.lime.config.StorageProperties;
 import com.modern.codes.lime.exception.StorageException;
 import com.modern.codes.lime.exception.StorageFileNotFoundException;
 
-
+/**
+ * The type Storage service.
+ */
 @Service
 public class StorageService implements IStorageService {
 
+    /**
+     * Instantiates a new Storage service.
+     *
+     * @param properties the properties
+     */
     @Autowired
     public StorageService(final StorageProperties properties) {
         this.rootLocation = Paths.get(properties.getLocation());
@@ -85,7 +92,7 @@ public class StorageService implements IStorageService {
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             } else {
-               return loadAsResource("no_image.jpg");
+                return loadAsResource("no_image.jpg");
             }
         } catch (final MalformedURLException e) {
             return loadAsResource("no_image.jpg");
@@ -94,9 +101,11 @@ public class StorageService implements IStorageService {
 
     @Override
     public byte[] loadAsBytes(final String filename) {
-        try (InputStream is = this.loadAsResource(filename).getInputStream()){
+        try (InputStream is = this.loadAsResource(filename)
+                                  .getInputStream()) {
             final byte[] bytes = ByteStreams.toByteArray(is);
-            return Base64.getEncoder().encode(bytes);
+            return Base64.getEncoder()
+                         .encode(bytes);
         } catch (final IOException e) {
             throw new StorageFileNotFoundException("Error loading picture as bytes.", e);
         }
@@ -121,5 +130,6 @@ public class StorageService implements IStorageService {
             return false;
         }
     }
+
     private final Path rootLocation;
 }

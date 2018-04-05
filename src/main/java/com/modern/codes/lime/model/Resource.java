@@ -106,73 +106,159 @@ public class Resource implements Serializable {
         this.unit = unit;
     }
 
+    /**
+     * Gets category.
+     *
+     * @return the category
+     */
     public ResourceCategory getCategory() {
         return category;
     }
 
+    /**
+     * Sets category.
+     *
+     * @param category the category
+     */
     public void setCategory(final ResourceCategory category) {
         this.category = category;
     }
 
+    /**
+     * Gets quantity.
+     *
+     * @return the quantity
+     */
     public Double getQuantity() {
         return quantity;
     }
 
+    /**
+     * Sets quantity.
+     *
+     * @param quantity the quantity
+     */
     public void setQuantity(final Double quantity) {
         this.quantity = quantity;
     }
 
+    /**
+     * Gets critical value.
+     *
+     * @return the critical value
+     */
     public Double getCritical_value() {
         return critical_value;
     }
 
+    /**
+     * Sets critical value.
+     *
+     * @param critical_value the critical value
+     */
     public void setCritical_value(Double critical_value) {
         this.critical_value = critical_value;
     }
 
+    /**
+     * Gets notifications on.
+     *
+     * @return the notifications on
+     */
     public Boolean getNotifications_on() {
         return notifications_on;
     }
 
+    /**
+     * Sets notifications on.
+     *
+     * @param notifications_on the notifications on
+     */
     public void setNotifications_on(Boolean notifications_on) {
         this.notifications_on = notifications_on;
     }
 
+    /**
+     * Gets ordering on.
+     *
+     * @return the ordering on
+     */
     public Boolean getOrdering_on() {
         return ordering_on;
     }
 
+    /**
+     * Sets ordering on.
+     *
+     * @param ordering_on the ordering on
+     */
     public void setOrdering_on(Boolean ordering_on) {
         this.ordering_on = ordering_on;
     }
 
+    /**
+     * Gets image.
+     *
+     * @return the image
+     */
     public String getImage() {
         return image;
     }
 
+    /**
+     * Sets image.
+     *
+     * @param image the image
+     */
     public void setImage(final String image) {
         this.image = image;
     }
 
+    /**
+     * Gets supplier.
+     *
+     * @return the supplier
+     */
     public Supplier getSupplier() {
         return supplier;
     }
 
+    /**
+     * Sets supplier.
+     *
+     * @param supplier the supplier
+     */
     public void setSupplier(final Supplier supplier) {
         this.supplier = supplier;
     }
 
+    /**
+     * Gets formulas.
+     *
+     * @return the formulas
+     */
     public List<Formula> getFormulas() {
         return formulas;
     }
 
+    /**
+     * Sets formulas.
+     *
+     * @param formulas the formulas
+     */
     public void setFormulas(final List<Formula> formulas) {
         this.formulas = formulas;
     }
 
+    /**
+     * Gets serial version uid.
+     *
+     * @return the serial version uid
+     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

@@ -30,16 +30,33 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The type Product category controller.
+ */
 @RestController
 @RequestMapping("/product-category")
 public class ProductCategoryController extends BaseController {
 
+    /**
+     * Instantiates a new Product category controller.
+     *
+     * @param productCategoryService the product category service
+     * @param productService         the product service
+     */
     public ProductCategoryController(final IProductCategoryService productCategoryService,
                                      final IProductService productService) {
         this.productCategoryService = productCategoryService;
         this.productService = productService;
     }
 
+    /**
+     * Create string.
+     *
+     * @param iProductCategory the product category
+     * @param bindingResult    the binding result
+     * @param b                the b
+     * @return the string
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a product category object",
                   notes = "Creates a <b>product category</b> object " + "Saves it into DB.",
@@ -60,6 +77,14 @@ public class ProductCategoryController extends BaseController {
         return ParseTools.parseToJson(iProductCategory, ProductCategory.class);
     }
 
+    /**
+     * Update string.
+     *
+     * @param iProductCategory the product category
+     * @param bindingResult    the binding result
+     * @param b                the b
+     * @return the string
+     */
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a product category category object",
                   notes = "Updates a <b>product category</b> object ",
@@ -80,6 +105,12 @@ public class ProductCategoryController extends BaseController {
         return ParseTools.parseToJson(productCategoryService.save(iProductCategory), ProductCategory.class);
     }
 
+    /**
+     * Gets product category.
+     *
+     * @param productCategoryId the product category id
+     * @return the product category
+     */
     @RequestMapping(value = "/one/{productCategoryId}",
                     method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -95,6 +126,12 @@ public class ProductCategoryController extends BaseController {
         return ParseTools.parseToJson(productCategoryService.findById(productCategoryId), ProductCategory.class);
     }
 
+    /**
+     * Delete boolean.
+     *
+     * @param productCategoryId the product category id
+     * @return the boolean
+     */
     @RequestMapping(value = "/delete/{productCategoryId}",
                     method = RequestMethod.DELETE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -119,6 +156,11 @@ public class ProductCategoryController extends BaseController {
         return true;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all product categories",
                   notes = "Fetches all product categories from DB ",
@@ -131,6 +173,12 @@ public class ProductCategoryController extends BaseController {
         return ParseTools.parseToJson(productCategoryService.findAll(), ProductCategory.class);
     }
 
+    /**
+     * Gets by name.
+     *
+     * @param name the name
+     * @return the by name
+     */
     @ResponseBody
     @ApiResponses({@ApiResponse(code = 200, message = "Saved product category object"), @ApiResponse(code = 404,
                                                                                                      message = "In case of no product category object was found in DB for given name")})
@@ -143,6 +191,7 @@ public class ProductCategoryController extends BaseController {
         LOG.info("Product category get-by-name request received: name = " + name);
         return ParseTools.parseToJson(productCategoryService.findByName(name), ProductCategory.class);
     }
+
     private final IProductCategoryService productCategoryService;
     private final IProductService productService;
     private static final Logger LOG = LoggerFactory.getLogger(ProductCategoryController.class);

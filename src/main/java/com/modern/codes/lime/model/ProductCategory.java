@@ -19,33 +19,67 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * The type Product category.
+ */
 @ApiModel(description = "Model representation of a Product category used in Lime")
 @Entity
 public class ProductCategory implements Serializable {
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Gets products.
+     *
+     * @return the products
+     */
     public List<Product> getProducts() {
         return products;
     }
 
+    /**
+     * Sets products.
+     *
+     * @param products the products
+     */
     public void setProducts(final List<Product> products) {
         this.products = products;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(final String name) {
         this.name = name;
     }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

@@ -1,7 +1,5 @@
 package com.modern.codes.lime.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,9 +10,16 @@ import com.modern.codes.lime.dao.IUserDAO;
 import com.modern.codes.lime.model.CustomUserDetails;
 import com.modern.codes.lime.model.User;
 
+/**
+ * The type Custom user details service.
+ */
 @Service
-@Transactional
 public class CustomUserDetailsService implements UserDetailsService {
+    /**
+     * Instantiates a new Custom user details service.
+     *
+     * @param dao the dao
+     */
     @Autowired
     public CustomUserDetailsService(final IUserDAO dao) {
         this.dao = dao;
@@ -28,5 +33,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         return new CustomUserDetails(user);
     }
+
     private final IUserDAO dao;
 }

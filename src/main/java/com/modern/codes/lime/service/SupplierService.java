@@ -10,10 +10,18 @@ import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.pojo.SupplierPOJO;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Supplier service.
+ */
 @Service
 public class SupplierService extends BasicCRUDService<Supplier, SupplierPOJO, ISupplierDAO>
         implements ISupplierService {
 
+    /**
+     * Instantiates a new Supplier service.
+     *
+     * @param dao the dao
+     */
     @Autowired
     public SupplierService(final ISupplierDAO dao) {
         super(dao, Supplier.class, SupplierPOJO.class);
@@ -49,5 +57,6 @@ public class SupplierService extends BasicCRUDService<Supplier, SupplierPOJO, IS
     public List<SupplierPOJO> findByTelephone(final String telephone) {
         return ParseTools.parseList(dao.findByTelephone(telephone), SupplierPOJO.class);
     }
+
     private final ISupplierDAO dao;
 }

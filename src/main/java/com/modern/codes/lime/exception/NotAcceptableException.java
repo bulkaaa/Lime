@@ -15,6 +15,7 @@ public class NotAcceptableException extends RuntimeException {
     public NotAcceptableException(final String message) {
         super(message);
     }
+
     private static final long serialVersionUID = 5991191955244366152L;
 
 }

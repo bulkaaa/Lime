@@ -20,14 +20,31 @@ import com.modern.codes.lime.service.MailService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+/**
+ * The type Report controller.
+ */
 @RestController
 @RequestMapping(path = "/report")
 public class ReportController {
 
+    /**
+     * Instantiates a new Report controller.
+     *
+     * @param reportService the report service
+     */
     public ReportController(final IReportService reportService) {
         this.reportService = reportService;
     }
 
+    /**
+     * Generate response entity.
+     *
+     * @param startDate  the start date
+     * @param noDays     the no days
+     * @param chartType  the chart type
+     * @param productIds the product ids
+     * @return the response entity
+     */
     @RequestMapping(value = "/product/generate",
                     method = RequestMethod.POST,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -45,6 +62,15 @@ public class ReportController {
                              .body(bytes);
     }
 
+    /**
+     * Send.
+     *
+     * @param startDate  the start date
+     * @param email      the email
+     * @param noDays     the no days
+     * @param chartType  the chart type
+     * @param productIds the product ids
+     */
     @RequestMapping(value = "/product/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation("Generate and send class_models for products")
     public void send(@RequestParam final String startDate, @RequestParam final String email,

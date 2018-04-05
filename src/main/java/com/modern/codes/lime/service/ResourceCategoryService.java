@@ -10,11 +10,19 @@ import com.modern.codes.lime.model.ResourceCategory;
 import com.modern.codes.lime.pojo.ResourceCategoryPOJO;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Resource category service.
+ */
 @Service
 public class ResourceCategoryService
         extends BasicCRUDService<ResourceCategory, ResourceCategoryPOJO, IResourceCategoryDAO>
         implements IResourceCategoryService {
 
+    /**
+     * Instantiates a new Resource category service.
+     *
+     * @param dao the dao
+     */
     @Autowired
     public ResourceCategoryService(final IResourceCategoryDAO dao) {
         super(dao, ResourceCategory.class, ResourceCategoryPOJO.class);
@@ -35,5 +43,6 @@ public class ResourceCategoryService
     public ResourceCategoryPOJO findByResourcesId(final String resourceId) {
         return ParseTools.parse(dao.findByResourcesId(resourceId), ResourceCategoryPOJO.class);
     }
+
     private final IResourceCategoryDAO dao;
 }

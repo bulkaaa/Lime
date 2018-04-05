@@ -3,16 +3,28 @@ package com.modern.codes.lime.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import com.modern.codes.lime.dao.IBasicCRUDRepository;
 import com.modern.codes.lime.exception.IllegalDataException;
 import com.modern.codes.lime.exception.NotFoundException;
 import com.modern.codes.lime.pojo.BasicPOJO;
 import com.modern.codes.lime.tools.ParseTools;
 
-@Transactional
+/**
+ * The type Basic crud service.
+ *
+ * @param <T>      the type parameter
+ * @param <T_POJO> the type parameter
+ * @param <T_DAO>  the type parameter
+ */
+
 public class BasicCRUDService<T, T_POJO, T_DAO extends IBasicCRUDRepository<T, String>> implements IBasicCRUDService {
+    /**
+     * Instantiates a new Basic crud service.
+     *
+     * @param dao        the dao
+     * @param Ttype      the ttype
+     * @param T_POJOtype the t poj otype
+     */
     BasicCRUDService(final T_DAO dao, final Class<T> Ttype, final Class<T_POJO> T_POJOtype) {
         this.dao = dao;
         this.Ttype = Ttype;
@@ -94,13 +106,14 @@ public class BasicCRUDService<T, T_POJO, T_DAO extends IBasicCRUDRepository<T, S
 
     @Override
     public List<T_POJO> save(final List l) {
-        return (List<T_POJO>)dao.save(ParseTools.parseList(l, Ttype));
+        return (List<T_POJO>) dao.save(ParseTools.parseList(l, Ttype));
     }
 
     @Override
     public void delete(final List l) {
         dao.delete(ParseTools.parseList(l, Ttype));
     }
+
     private final T_DAO dao;
     private final Class<T> Ttype;
     private final Class<T_POJO> T_POJOtype;

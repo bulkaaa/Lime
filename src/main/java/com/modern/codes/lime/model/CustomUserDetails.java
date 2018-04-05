@@ -8,8 +8,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * The type Custom user details.
+ */
 public class CustomUserDetails implements UserDetails {
 
+    /**
+     * Instantiates a new Custom user details.
+     *
+     * @param user the user
+     */
     public CustomUserDetails(final User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
@@ -57,6 +65,7 @@ public class CustomUserDetails implements UserDetails {
         roles.forEach(x -> authorities.add(new SimpleGrantedAuthority(x.getName())));
         return authorities;
     }
+
     private final Collection<? extends GrantedAuthority> authorities;
     private final String password;
     private final String username;

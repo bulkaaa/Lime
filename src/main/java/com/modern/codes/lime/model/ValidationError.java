@@ -15,20 +15,42 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Model representation of field validation errors")
 public class ValidationError implements Serializable {
 
+    /**
+     * Instantiates a new Validation error.
+     *
+     * @param field the field
+     * @param code  the code
+     * @param hint  the hint
+     */
     public ValidationError(final String field, final String code, final String hint) {
         this.field = field;
         this.code = code;
         this.hint = hint;
     }
 
+    /**
+     * Gets field.
+     *
+     * @return the field
+     */
     public String getField() {
         return field;
     }
 
+    /**
+     * Gets code.
+     *
+     * @return the code
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * Gets hint.
+     *
+     * @return the hint
+     */
     public String getHint() {
         return hint;
     }
@@ -37,6 +59,7 @@ public class ValidationError implements Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
     @ApiModelProperty("The field name on which the validation error occurred.")
     private final String field;
     @ApiModelProperty("The validation rule code that raised the error.")

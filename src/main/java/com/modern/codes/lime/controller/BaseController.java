@@ -21,6 +21,12 @@ import com.modern.codes.lime.model.ValidationError;
  */
 public abstract class BaseController {
 
+    /**
+     * Handle invalid request exception valid param.
+     *
+     * @param ex the ex
+     * @return the valid param
+     */
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ExceptionHandler(InvalidRequestException.class)
     @ResponseBody
@@ -43,13 +49,16 @@ public abstract class BaseController {
 
         return response;
     }
+
+    /**
+     * The Message source.
+     */
     @Autowired
     MessageSource messageSource;
     /**
      * Exception handler for <i>InvalidRequestException</i>, translating error into HTTP status code 422 and returning
      * validation errors in the payload of the response.
      *
-     * @param ex
      * InvalidRequestException
      */
 

@@ -17,12 +17,20 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import com.modern.codes.lime.dao.IUserDAO;
 import com.modern.codes.lime.service.CustomUserDetailsService;
 
+/**
+ * The type Security configuration.
+ */
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 @EnableJpaRepositories(basePackageClasses = IUserDAO.class)
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Instantiates a new Security configuration.
+     *
+     * @param userDetailsService the user details service
+     */
     @Autowired
     public SecurityConfiguration(final CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -127,5 +135,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             }
         };
     }
+
     private final CustomUserDetailsService userDetailsService;
 }

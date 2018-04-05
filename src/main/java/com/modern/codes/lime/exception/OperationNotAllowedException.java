@@ -15,6 +15,7 @@ public class OperationNotAllowedException extends RuntimeException {
     public OperationNotAllowedException(final String message) {
         super(message);
     }
+
     private static final long serialVersionUID = -7174220178014196107L;
 
 }

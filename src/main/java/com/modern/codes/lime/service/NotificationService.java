@@ -16,9 +16,20 @@ import com.modern.codes.lime.pojo.JobPOJO;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import com.modern.codes.lime.pojo.UserPOJO;
 
+/**
+ * The type Notification service.
+ */
 @Service
 public class NotificationService implements INotificationService {
 
+    /**
+     * Instantiates a new Notification service.
+     *
+     * @param userService     the user service
+     * @param resourceService the resource service
+     * @param jobService      the job service
+     * @param formulaService  the formula service
+     */
     @Autowired
     public NotificationService(final UserService userService, final ResourceService resourceService,
                                final IJobService jobService, final IFormulaService formulaService) {
@@ -113,6 +124,7 @@ public class NotificationService implements INotificationService {
         }
         return true;
     }
+
     private final UserService userService;
     private final ResourceService resourceService;
     private final IJobService jobService;

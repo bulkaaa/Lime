@@ -13,16 +13,29 @@ import com.modern.codes.lime.service.IUserService;
 import com.modern.codes.lime.tools.DBPopulator;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Dev controller.
+ */
 @RestController()
 @RequestMapping(path = "/dev")
 public class DevController {
 
+    /**
+     * Populate string.
+     *
+     * @return the string
+     */
     @GetMapping(path = "/populate")
     public String populate() {
         pop.populate();
         return "DB reset completed";
     }
 
+    /**
+     * Gets user.
+     *
+     * @return the user
+     */
     @GetMapping(path = "/act-user")
     public String getUser() {
         return ParseTools.parseToJson(getActualUser(), User.class);
@@ -33,8 +46,15 @@ public class DevController {
                                                                               .getAuthentication()
                                                                               .getPrincipal()).getUsername());
     }
+
+    /**
+     * The Pop.
+     */
     @Autowired
     DBPopulator pop;
+    /**
+     * The User service.
+     */
     @Autowired
     IUserService userService;
 

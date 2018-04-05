@@ -34,10 +34,20 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The type User controller.
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController extends BaseController {
 
+    /**
+     * Instantiates a new User controller.
+     *
+     * @param userService the user service
+     * @param roleService the role service
+     * @param mailService the mail service
+     */
     public UserController(final IUserService userService, final IRoleService roleService,
                           final IMailService mailService) {
         this.userService = userService;
@@ -45,6 +55,14 @@ public class UserController extends BaseController {
         this.mailService = mailService;
     }
 
+    /**
+     * Create string.
+     *
+     * @param user          the user
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Creates a User object",
                   notes = "Creates a <b>User</b> object " + "Saves it into DB.",
@@ -81,6 +99,14 @@ public class UserController extends BaseController {
         }
     }
 
+    /**
+     * Update string.
+     *
+     * @param user          the user
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the string
+     */
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Updates a User object", notes = "Updates a <b>User</b> object ", response = User.class)
     @ApiResponses({@ApiResponse(code = 200, message = "Saved User object"),
@@ -106,6 +132,12 @@ public class UserController extends BaseController {
         }
     }
 
+    /**
+     * Gets user.
+     *
+     * @param userId the user id
+     * @return the user
+     */
     @RequestMapping(value = "/one/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetch a User object",
                   notes = "Fetches a <b>User</b> object by id ",
@@ -122,6 +154,12 @@ public class UserController extends BaseController {
         }
     }
 
+    /**
+     * Delete boolean.
+     *
+     * @param userId the user id
+     * @return the boolean
+     */
     @RequestMapping(value = "/delete/{userId}",
                     method = RequestMethod.DELETE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -136,6 +174,11 @@ public class UserController extends BaseController {
         return true;
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all users", notes = "Fetches all users from DB ", response = List.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Fetch all users"))
@@ -147,6 +190,12 @@ public class UserController extends BaseController {
         return ParseTools.parseToJson(userService.findAll(), User.class);
     }
 
+    /**
+     * Gets by name.
+     *
+     * @param username the username
+     * @return the by name
+     */
     @ResponseBody
     @ApiResponses({@ApiResponse(code = 200, message = "Fetch users by username"),
                    @ApiResponse(code = 404, message = "In case of no User object was found in DB for given username")})
@@ -162,6 +211,11 @@ public class UserController extends BaseController {
         return ParseTools.parseToJson(userService.findByUsername(username), User.class);
     }
 
+    /**
+     * Gets roles.
+     *
+     * @return the roles
+     */
     @RequestMapping(value = "/get-roles", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all roles", notes = "Fetches all roles from DB ", response = List.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Fetch all roles"))

@@ -26,9 +26,25 @@ import com.modern.codes.lime.service.RoleService;
 import com.modern.codes.lime.service.SupplierService;
 import com.modern.codes.lime.service.UserService;
 
+/**
+ * The type Db populator.
+ */
 @Service
 public class DBPopulator {
 
+    /**
+     * Instantiates a new Db populator.
+     *
+     * @param jobService              the job service
+     * @param formulaService          the formula service
+     * @param productService          the product service
+     * @param resourceService         the resource service
+     * @param roleService             the role service
+     * @param supplierService         the supplier service
+     * @param userService             the user service
+     * @param resourceCategoryService the resource category service
+     * @param productCategoryService  the product category service
+     */
     @Autowired
     public DBPopulator(JobService jobService, FormulaService formulaService, ProductService productService,
                        ResourceService resourceService, RoleService roleService, SupplierService supplierService,
@@ -45,6 +61,9 @@ public class DBPopulator {
         this.productCategoryService = productCategoryService;
     }
 
+    /**
+     * Populate.
+     */
     public void populate() {
         clearDB();
         setResourceCategories();
@@ -69,6 +88,9 @@ public class DBPopulator {
         saveToDB();
     }
 
+    /**
+     * Clear db.
+     */
     public void clearDB() {
         deleteUsers();
         deleteRoles();
@@ -81,42 +103,72 @@ public class DBPopulator {
         deleteProductCategories();
     }
 
+    /**
+     * Delete resource categories.
+     */
     public void deleteResourceCategories() {
         resourceCategoryService.deleteAll();
     }
 
+    /**
+     * Delete product categories.
+     */
     public void deleteProductCategories() {
         productCategoryService.deleteAll();
     }
 
+    /**
+     * Delete suppliers.
+     */
     public void deleteSuppliers() {
         supplierService.deleteAll();
     }
 
+    /**
+     * Delete resources.
+     */
     public void deleteResources() {
         resourceService.deleteAll();
     }
 
+    /**
+     * Delete products.
+     */
     public void deleteProducts() {
         productService.deleteAll();
     }
 
+    /**
+     * Delete formulas.
+     */
     public void deleteFormulas() {
         formulaService.deleteAll();
     }
 
+    /**
+     * Delete jobs.
+     */
     public void deleteJobs() {
         jobService.deleteAll();
     }
 
+    /**
+     * Delete roles.
+     */
     public void deleteRoles() {
         roleService.deleteAll();
     }
 
+    /**
+     * Delete users.
+     */
     public void deleteUsers() {
         userService.deleteAll();
     }
 
+    /**
+     * Sets suppliers.
+     */
     public void setSuppliers() {
         supA = new SupplierPOJO();
         supB = new SupplierPOJO();
@@ -136,6 +188,9 @@ public class DBPopulator {
         supB.setEmailAddress("Cezary@Pazura.co");
     }
 
+    /**
+     * Sets users.
+     */
     public void setUsers() {
         userA = new UserPOJO();
         userB = new UserPOJO();
@@ -160,6 +215,9 @@ public class DBPopulator {
         userC.setEmailAddress("bulkaa@student.mini.pw.pl");
     }
 
+    /**
+     * Sets roles.
+     */
     public void setRoles() {
         roleA = new RolePOJO();
         roleB = new RolePOJO();
@@ -169,6 +227,9 @@ public class DBPopulator {
         roleC.setName("ROLE_STAFF");
     }
 
+    /**
+     * Sets resources.
+     */
     public void setResources() {
         resourceA = new ResourcePOJO();
         resourceB = new ResourcePOJO();
@@ -239,6 +300,9 @@ public class DBPopulator {
         resourceG.setNotifications_on(false);
     }
 
+    /**
+     * Sets products.
+     */
     public void setProducts() {
         productA = new ProductPOJO();
         productB = new ProductPOJO();
@@ -270,6 +334,9 @@ public class DBPopulator {
         productD.setImage("no_image.jpg");
     }
 
+    /**
+     * Sets jobs.
+     */
     public void setJobs() {
         jobA = new JobPOJO();
         jobB = new JobPOJO();
@@ -298,6 +365,9 @@ public class DBPopulator {
         jobE.setDetails("Details for job E. Making donuts");
     }
 
+    /**
+     * Sets formulas.
+     */
     public void setFormulas() {
         formulaA = new FormulaPOJO();
         formulaB = new FormulaPOJO();
@@ -343,6 +413,9 @@ public class DBPopulator {
         formulaU.setValue((double) 1);
     }
 
+    /**
+     * Save formulas.
+     */
     public void saveFormulas() {
         formulaA = formulaService.save(formulaA);
         formulaB = formulaService.save(formulaB);
@@ -367,6 +440,9 @@ public class DBPopulator {
         formulaU = formulaService.save(formulaU);
     }
 
+    /**
+     * Save products.
+     */
     public void saveProducts() {
         productA = productService.save(productA);
         productB = productService.save(productB);
@@ -374,6 +450,9 @@ public class DBPopulator {
         productD = productService.save(productD);
     }
 
+    /**
+     * Save resources.
+     */
     public void saveResources() {
         resourceA = resourceService.save(resourceA);
         resourceB = resourceService.save(resourceB);
@@ -384,17 +463,26 @@ public class DBPopulator {
         resourceG = resourceService.save(resourceG);
     }
 
+    /**
+     * Save roles.
+     */
     public void saveRoles() {
         roleA = roleService.save(roleA);
         roleB = roleService.save(roleB);
         roleC = roleService.save(roleC);
     }
 
+    /**
+     * Save suppliers.
+     */
     public void saveSuppliers() {
         supA = supplierService.save(supA);
         supB = supplierService.save(supB);
     }
 
+    /**
+     * Save jobs.
+     */
     public void saveJobs() {
         jobA = jobService.save(jobA);
         jobB = jobService.save(jobB);
@@ -403,6 +491,9 @@ public class DBPopulator {
         jobE = jobService.save(jobE);
     }
 
+    /**
+     * Save users.
+     */
     public void saveUsers() {
         userA = userService.save(userA);
         userB = userService.save(userB);
@@ -676,6 +767,7 @@ public class DBPopulator {
         productCategoryA = productCategoryService.save(productCategoryA);
         productCategoryB = productCategoryService.save(productCategoryB);
     }
+
     private JobService jobService;
     private FormulaService formulaService;
     private ProductService productService;

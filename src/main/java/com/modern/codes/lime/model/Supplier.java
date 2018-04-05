@@ -30,77 +30,168 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 public class Supplier implements Serializable {
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Gets email address.
+     *
+     * @return the email address
+     */
     public String getEmailAddress() {
         return emailAddress;
     }
 
+    /**
+     * Sets email address.
+     *
+     * @param emailAddress the email address
+     */
     public void setEmailAddress(final String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
+    /**
+     * Gets postal code.
+     *
+     * @return the postal code
+     */
     public String getPostalCode() {
         return postalCode;
     }
 
+    /**
+     * Sets postal code.
+     *
+     * @param postalCode the postal code
+     */
     public void setPostalCode(final String postalCode) {
         this.postalCode = postalCode;
     }
 
+    /**
+     * Gets city.
+     *
+     * @return the city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Sets city.
+     *
+     * @param city the city
+     */
     public void setCity(final String city) {
         this.city = city;
     }
 
+    /**
+     * Gets country.
+     *
+     * @return the country
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     * Sets country.
+     *
+     * @param country the country
+     */
     public void setCountry(final String country) {
         this.country = country;
     }
 
+    /**
+     * Gets street.
+     *
+     * @return the street
+     */
     public String getStreet() {
         return street;
     }
 
+    /**
+     * Sets street.
+     *
+     * @param street the street
+     */
     public void setStreet(final String street) {
         this.street = street;
     }
 
+    /**
+     * Gets telephone.
+     *
+     * @return the telephone
+     */
     public String getTelephone() {
         return telephone;
     }
 
+    /**
+     * Sets telephone.
+     *
+     * @param telephone the telephone
+     */
     public void setTelephone(final String telephone) {
         this.telephone = telephone;
     }
 
+    /**
+     * Gets resources.
+     *
+     * @return the resources
+     */
     public List<Resource> getResources() {
         return resources;
     }
 
+    /**
+     * Sets resources.
+     *
+     * @param resources the resources
+     */
     public void setResources(final List<Resource> resources) {
         this.resources = resources;
     }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

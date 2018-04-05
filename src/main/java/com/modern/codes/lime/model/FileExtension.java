@@ -1,16 +1,39 @@
 package com.modern.codes.lime.model;
 
+/**
+ * The enum File extension.
+ */
 public enum FileExtension {
-    JPG(0), PNG(1), GIF(2);
+    /**
+     * Jpg file extension.
+     */
+    JPG(0), /**
+     * Png file extension.
+     */
+    PNG(1), /**
+     * Gif file extension.
+     */
+    GIF(2);
 
     FileExtension(final int id) {
         this.id = id;
     }
 
+    /**
+     * Gets value.
+     *
+     * @return the value
+     */
     public int getValue() {
         return id;
     }
 
+    /**
+     * Exist boolean.
+     *
+     * @param str the str
+     * @return the boolean
+     */
     public static boolean exist(final String str) {
         for (final FileExtension fe : values()) {
             if (fe.name()
@@ -20,5 +43,6 @@ public enum FileExtension {
         }
         return false;
     }
+
     private final int id;
 }

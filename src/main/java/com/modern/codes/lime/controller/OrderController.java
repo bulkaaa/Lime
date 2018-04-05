@@ -32,14 +32,27 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * The type Order controller.
+ */
 @RestController
 @RequestMapping(path = "/order")
 public class OrderController {
 
+    /**
+     * Instantiates a new Order controller.
+     *
+     * @param resourceService the resource service
+     */
     public OrderController(final IResourceService resourceService) {
         this.resourceService = resourceService;
     }
 
+    /**
+     * Gets resources.
+     *
+     * @return the resources
+     */
     @RequestMapping(value = "/get-resources", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Fetch all resources"))
@@ -50,6 +63,14 @@ public class OrderController {
         return ParseTools.parseToJson(resourceService.findAll(), Resource.class);
     }
 
+    /**
+     * Send boolean.
+     *
+     * @param orderList     the order list
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the boolean
+     */
     @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Order choosen resources with given amount",
                   notes = "Post choosen List of resource ID " + "Saves it into DB.",

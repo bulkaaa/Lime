@@ -37,6 +37,9 @@ import io.swagger.annotations.ApiModelProperty;
 @Entity
 public class Product implements Serializable {
 
+    /**
+     * Update time stamps.
+     */
     @PrePersist
     public void updateTimeStamps() {
         if (addedAt == null) {
@@ -107,61 +110,132 @@ public class Product implements Serializable {
         return addedAt;
     }
 
+    /**
+     * Sets added at.
+     *
+     * @param addedAt the added at
+     */
     public void setAddedAt(final Date addedAt) {
         this.addedAt = addedAt;
     }
 
+    /**
+     * Gets unit.
+     *
+     * @return the unit
+     */
     public Unit getUnit() {
         return unit;
     }
 
+    /**
+     * Sets unit.
+     *
+     * @param unit the unit
+     */
     public void setUnit(final Unit unit) {
         this.unit = unit;
     }
 
+    /**
+     * Gets jobs.
+     *
+     * @return the jobs
+     */
     public List<Job> getJobs() {
         return jobs;
     }
 
+    /**
+     * Sets jobs.
+     *
+     * @param jobs the jobs
+     */
     public void setJobs(final List<Job> jobs) {
         this.jobs = jobs;
     }
 
+    /**
+     * Gets category.
+     *
+     * @return the category
+     */
     public ProductCategory getCategory() {
         return category;
     }
 
+    /**
+     * Sets category.
+     *
+     * @param category the category
+     */
     public void setCategory(final ProductCategory category) {
         this.category = category;
     }
 
+    /**
+     * Gets image.
+     *
+     * @return the image
+     */
     public String getImage() {
         return image;
     }
 
+    /**
+     * Sets image.
+     *
+     * @param image the image
+     */
     public void setImage(final String image) {
         this.image = image;
     }
 
+    /**
+     * Gets expected value.
+     *
+     * @return the expected value
+     */
     public Double getExpectedValue() {
         return expectedValue;
     }
 
+    /**
+     * Sets expected value.
+     *
+     * @param expectedValue the expected value
+     */
     public void setExpectedValue(final Double expectedValue) {
         this.expectedValue = expectedValue;
     }
 
+    /**
+     * Gets formulas.
+     *
+     * @return the formulas
+     */
     public List<Formula> getFormulas() {
         return formulas;
     }
 
+    /**
+     * Sets formulas.
+     *
+     * @param formulas the formulas
+     */
     public void setFormulas(final List<Formula> formulas) {
         this.formulas = formulas;
     }
 
+    /**
+     * Gets serial version uid.
+     *
+     * @return the serial version uid
+     */
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")

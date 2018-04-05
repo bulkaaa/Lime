@@ -19,8 +19,22 @@ import org.knowm.xchart.style.Styler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The type Draw series.
+ */
 public class DrawSeries {
 
+    /**
+     * Plot chart byte [ ].
+     *
+     * @param timeSeriesList         the time series list
+     * @param timeSeriesForecastList the time series forecast list
+     * @param toDay                  the to day
+     * @param header                 the header
+     * @param filename               the filename
+     * @param type                   the type
+     * @return the byte [ ]
+     */
     public static byte[] plotChart(final ArrayList<TimeSeries> timeSeriesList,
                                    final ArrayList<TimeSeries> timeSeriesForecastList, final Date toDay,
                                    final String header, final String filename, final String type) {
@@ -146,5 +160,6 @@ public class DrawSeries {
                                                .size() + 1);
         return call.getTime();
     }
+
     private static final Logger LOG = LoggerFactory.getLogger(DrawSeries.class);
 }

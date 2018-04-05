@@ -26,6 +26,9 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 
+/**
+ * The type Mail service.
+ */
 @Service
 public class MailService implements IMailService {
 
@@ -46,6 +49,15 @@ public class MailService implements IMailService {
         }
     }
 
+    /**
+     * Send email.
+     *
+     * @param to         the to
+     * @param subject    the subject
+     * @param content    the content
+     * @param attachment the attachment
+     * @throws MessagingException the messaging exception
+     */
     public static void SendEmail(final String to, final String subject, final String content, final byte[] attachment)
             throws MessagingException {
         final Session session = getSession();
@@ -73,6 +85,14 @@ public class MailService implements IMailService {
 
     }
 
+    /**
+     * Send email.
+     *
+     * @param to      the to
+     * @param subject the subject
+     * @param content the content
+     * @throws MessagingException the messaging exception
+     */
     public static void SendEmail(final String to, final String subject, final String content)
             throws MessagingException {
         final Session session = getSession();
@@ -85,6 +105,13 @@ public class MailService implements IMailService {
         Transport.send(message);
     }
 
+    /**
+     * Construct order msg string.
+     *
+     * @param supplierName the supplier name
+     * @param map          the map
+     * @return the string
+     */
     public static String ConstructOrderMsg(final String supplierName, final Map<ResourcePOJO, Integer> map) {
         final StringBuilder message =
                 new StringBuilder("Dear " + supplierName + ", " + "\n\nWe would like to order: \n");
@@ -116,6 +143,7 @@ public class MailService implements IMailService {
             }
         });
     }
+
     private static final Logger LOG = LoggerFactory.getLogger(MailService.class);
 
     private static final String MAIL_SMTP_AUTH = "true";

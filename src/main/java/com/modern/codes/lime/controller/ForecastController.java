@@ -20,14 +20,32 @@ import com.modern.codes.lime.service.MailService;
 
 import io.swagger.annotations.ApiParam;
 
+/**
+ * The type Forecast controller.
+ */
 @RestController
 @RequestMapping(path = "/forecast")
 public class ForecastController extends BaseController {
 
+    /**
+     * Instantiates a new Forecast controller.
+     *
+     * @param forecastService the forecast service
+     */
     public ForecastController(final IForecastService forecastService) {
         this.forecastService = forecastService;
     }
 
+    /**
+     * Generate forecast response entity.
+     *
+     * @param productIds     the product ids
+     * @param startDate      the start date
+     * @param noDays         the no days
+     * @param noDaysForecast the no days forecast
+     * @param chartType      the chart type
+     * @return the response entity
+     */
     @RequestMapping(value = "/product/generate",
                     method = RequestMethod.POST,
                     produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,6 +64,16 @@ public class ForecastController extends BaseController {
                              .body(img);
     }
 
+    /**
+     * Send forecast.
+     *
+     * @param productIds     the product ids
+     * @param startDate      the start date
+     * @param noDays         the no days
+     * @param noDaysForecast the no days forecast
+     * @param email          the email
+     * @param chartType      the chart type
+     */
     @RequestMapping(value = "/product/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void sendForecast(@RequestBody @ApiParam("List of product ids") final List<String> productIds,
@@ -63,6 +91,7 @@ public class ForecastController extends BaseController {
             LOG.error("FAILED TO SEND REPORT.", e);
         }
     }
+
     private IForecastService forecastService;
     private static final Logger LOG = LoggerFactory.getLogger(ForecastController.class);
 }

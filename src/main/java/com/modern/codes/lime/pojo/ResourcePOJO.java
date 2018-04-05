@@ -8,116 +8,259 @@ import com.modern.codes.lime.model.Supplier;
 import com.modern.codes.lime.model.Unit;
 import com.modern.codes.lime.tools.ParseTools;
 
+/**
+ * The type Resource pojo.
+ */
 public class ResourcePOJO extends BasicPOJO {
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
     public void setDescription(final String description) {
         this.description = description;
     }
 
+    /**
+     * Gets unit.
+     *
+     * @return the unit
+     */
     public Unit getUnit() {
         return unit;
     }
 
+    /**
+     * Sets unit.
+     *
+     * @param unit the unit
+     */
     public void setUnit(final Unit unit) {
         this.unit = unit;
     }
 
+    /**
+     * Gets quantity.
+     *
+     * @return the quantity
+     */
     public Double getQuantity() {
         return quantity;
     }
 
+    /**
+     * Sets quantity.
+     *
+     * @param quantity the quantity
+     */
     public void setQuantity(final Double quantity) {
         this.quantity = quantity;
     }
 
+    /**
+     * Gets critical value.
+     *
+     * @return the critical value
+     */
     public Double getCritical_value() {
         return critical_value;
     }
 
+    /**
+     * Sets critical value.
+     *
+     * @param critical_value the critical value
+     */
     public void setCritical_value(final Double critical_value) {
         this.critical_value = critical_value;
     }
 
+    /**
+     * Gets notifications on.
+     *
+     * @return the notifications on
+     */
     public Boolean getNotifications_on() {
         return notifications_on;
     }
 
+    /**
+     * Sets notifications on.
+     *
+     * @param notifications_on the notifications on
+     */
     public void setNotifications_on(final Boolean notifications_on) {
         this.notifications_on = notifications_on;
     }
 
+    /**
+     * Gets ordering on.
+     *
+     * @return the ordering on
+     */
     public Boolean getOrdering_on() {
         return ordering_on;
     }
 
+    /**
+     * Sets ordering on.
+     *
+     * @param ordering_on the ordering on
+     */
     public void setOrdering_on(final Boolean ordering_on) {
         this.ordering_on = ordering_on;
     }
 
+    /**
+     * Gets category.
+     *
+     * @return the category
+     */
     public ResourceCategory getCategory() {
         return category;
     }
 
+    /**
+     * Sets category.
+     *
+     * @param category the category
+     */
     public void setCategory(final ResourceCategory category) {
         this.category = category;
     }
 
+    /**
+     * Gets pojo category.
+     *
+     * @return the pojo category
+     */
     public ResourceCategoryPOJO getPOJOCategory() {
         return ParseTools.parse(category, ResourceCategoryPOJO.class);
     }
 
+    /**
+     * Sets pojo category.
+     *
+     * @param category the category
+     */
     public void setPOJOCategory(final ResourceCategoryPOJO category) {
         this.category = ParseTools.parse(category, ResourceCategory.class);
     }
 
+    /**
+     * Gets image.
+     *
+     * @return the image
+     */
     public String getImage() {
         return image;
     }
 
+    /**
+     * Sets image.
+     *
+     * @param image the image
+     */
     public void setImage(final String image) {
         this.image = image;
     }
 
+    /**
+     * Gets supplier.
+     *
+     * @return the supplier
+     */
     public Supplier getSupplier() {
         return supplier;
     }
 
+    /**
+     * Sets supplier.
+     *
+     * @param supplier the supplier
+     */
     public void setSupplier(final Supplier supplier) {
         this.supplier = supplier;
     }
 
+    /**
+     * Gets pojo supplier.
+     *
+     * @return the pojo supplier
+     */
     public SupplierPOJO getPOJOSupplier() {
         return ParseTools.parse(supplier, SupplierPOJO.class);
     }
 
+    /**
+     * Sets pojo supplier.
+     *
+     * @param supplier the supplier
+     */
     public void setPOJOSupplier(final SupplierPOJO supplier) {
         this.supplier = ParseTools.parse(supplier, Supplier.class);
     }
 
+    /**
+     * Gets formulas.
+     *
+     * @return the formulas
+     */
     public List<Formula> getFormulas() {
         return formulas;
     }
 
+    /**
+     * Sets formulas.
+     *
+     * @param formulas the formulas
+     */
     public void setFormulas(final List<Formula> formulas) {
         this.formulas = formulas;
     }
 
+    /**
+     * Gets pojo formulas.
+     *
+     * @return the pojo formulas
+     */
     public List<FormulaPOJO> getPOJOFormulas() {
         return ParseTools.parseList(formulas, FormulaPOJO.class);
     }
 
+    /**
+     * Sets pojo formulas.
+     *
+     * @param formulas the formulas
+     */
     public void setPOJOFormulas(final List<FormulaPOJO> formulas) {
         this.formulas = ParseTools.parseList(formulas, Formula.class);
     }
@@ -158,6 +301,7 @@ public class ResourcePOJO extends BasicPOJO {
                                                                                       && other.unit == null)
                || (this.unit != null && this.unit.equals(other.unit));
     }
+
     private String name;
     private String description;
     private Unit unit;
