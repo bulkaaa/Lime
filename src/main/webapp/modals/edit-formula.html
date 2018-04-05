@@ -11,7 +11,7 @@
                         <input type="checkbox" checklist-model="list.resources" ng-required="list.resourcesList.length==0" checklist-value="resource"> {{resource.name}}
                     </div>
                     <div class="col-md-5 col-sm-5">
-                        <input id="{{resource.id}}" type="number" min="0" max="1000" step ="0.1" class="form-control" ng-disabled="isChecked(resource)">
+                        <input id="{{resource.id}}" type="number" min="0" max="1000" step ="0.1" class="form-control" ng-disabled="isChecked(resource)" ng-value="resource.name">
                      </div>
                 </div>
             </div>
