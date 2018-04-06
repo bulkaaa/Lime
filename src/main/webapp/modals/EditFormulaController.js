@@ -14,11 +14,13 @@ app.controller('EditFormulaController',  ['$scope', '$http','$uibModalInstance',
 
     $scope.cancelModal = function(){
                modalInstance.close();
+               $scope.list.resources.length = 0;
     };
 
-    $scope.isChecked = (resource) => {
-       return $scope.list.resources.indexOf(resource) == -1
+    $scope.isChecked = function(resource) {
+        return $scope.list.resources.findIndex(x=>x.id === resource.id) == -1;
     }
+
 	init();
 
 }]);

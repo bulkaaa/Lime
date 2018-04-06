@@ -53,6 +53,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
             controller: 'ViewRecordController',
             scope: $scope,
             size: 'md',
+            backdrop: 'static',
             resolve: {
                 item: function () {
                     return item;
@@ -81,6 +82,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
                     scope: $scope,
+                    backdrop: 'static',
                     size: '',
                     resolve: {
                         item: function () {
@@ -174,6 +176,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
             templateUrl: 'modals/add-record.html',
             controller: 'AddRecordController',
             scope: $scope,
+            backdrop: 'static',
             size: '',
             resolve: {
             }

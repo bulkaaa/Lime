@@ -46,7 +46,19 @@ app.directive('fileModel', ['$parse', function ($parse) {
             );
     };
 
+        $scope.switchToProduct = function(){
+            $scope.product = true;
+            $scope.formula = false;
+        }
+
+
+        $scope.switchToFormula = function(){
+            $scope.product = false;
+            $scope.formula = true;
+        }
+
     $scope.showAll();
+    $scope.switchToProduct();
 
     $scope.viewRecord = function(item){
         $scope.switchToProduct()
@@ -55,6 +67,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
             controller: 'ViewRecordController',
             scope: $scope,
             size: 'md',
+            backdrop: 'static',
             resolve: {
                 item: function () {
                     return item;
@@ -72,6 +85,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
                     scope: $scope,
+                    backdrop: 'static',
                     size: '',
                     resolve: {
                         item: function () {
@@ -158,31 +172,19 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 
     $scope.viewFormula = function(item){
-        $scope.switchToFormula()
-        var formulas = [];
-        $http.get("/formula/one/" + item.id)
-                    .then(
-                        function (response) {
-                             formulas = response.data;
-                                     modalInstance = $modal.open({
-                                         templateUrl: 'modals/view-record.html',
-                                         controller: 'ViewRecordController',
-                                         scope: $scope,
-                                         size: 'md',
-                                         resolve: {
-                                             formulas: function () {
-                                                 return formulas;
-                                             },
-                                             item: function () {
-                                                return item;
-                                             }
-                                         }
-                                     });
-                        },
-                        function (response) {
-                             DialogService.generalServerError();
-                         }
-                    )
+        $scope.switchToFormula();
+         modalInstance = $modal.open({
+             templateUrl: 'modals/view-record.html',
+             controller: 'ViewRecordController',
+             scope: $scope,
+             size: 'md',
+             backdrop: 'static',
+             resolve: {
+                 item: function () {
+                    return item;
+                 }
+             }
+         });
 
     };
 
@@ -200,6 +202,19 @@ app.directive('fileModel', ['$parse', function ($parse) {
                         function (response) {
                             if (response.data) {
                                 $scope.resourcesList = response.data;
+                                var formulas = [];
+                                $http.get("/formula/one/" + item.id)
+                                            .then(
+                                                function (response) {
+                                                 angular.forEach(response.data ,function(value, key){
+                                                     $scope.list.resources.push
+                                                     (value.resource);
+                                                     })
+                                                },
+                                                function(response)  {
+                                                      DialogService.generalServerError();
+                                                }
+                                            )
                             }
                         },
                         function (response) {
@@ -212,6 +227,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     controller: 'EditFormulaController',
                     scope: $scope,
                     size: '',
+                    backdrop: 'static',
                     resolve: {
                         item: function () {
                             return response.data;
@@ -265,21 +281,12 @@ app.directive('fileModel', ['$parse', function ($parse) {
             controller: 'AddRecordController',
             scope: $scope,
             size: '',
+            backdrop: 'static',
             resolve: {
             }
         });
     };
 
-    $scope.switchToProduct = function(){
-        $scope.product = true;
-        $scope.formula = false;
-    }
-
-
-    $scope.switchToFormula = function(){
-        $scope.product = false;
-        $scope.formula = true;
-    }
 
     $scope.saveRecord = function(item) {
         var file = $scope.item.image;
