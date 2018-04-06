@@ -10,7 +10,7 @@
 # gmail password: limeminipassword
 spring:
   datasource:
-    url: mysql://b7b40aab110c35:0ddc09e5@us-cdbr-iron-east-05.cleardb.net/heroku_cd26d1e63353c07?reconnect=true
+    url: jdbc:mysql://b7b40aab110c35:0ddc09e5@us-cdbr-iron-east-05.cleardb.net/heroku_cd26d1e63353c07?reconnect=true
   jpa:
     show-sql: true
     hibernate:
@@ -20,7 +20,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 server:
-    port: 8080
+    port: ${PORT:5000}
     address: localhost
     session:
       timeout: 720
