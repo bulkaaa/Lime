@@ -46,7 +46,19 @@ app.directive('fileModel', ['$parse', function ($parse) {
             );
     };
 
+        $scope.switchToProduct = function(){
+            $scope.product = true;
+            $scope.formula = false;
+        }
+
+
+        $scope.switchToFormula = function(){
+            $scope.product = false;
+            $scope.formula = true;
+        }
+
     $scope.showAll();
+    $scope.switchToProduct();
 
     $scope.viewRecord = function(item){
         $scope.switchToProduct()
@@ -55,6 +67,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
             controller: 'ViewRecordController',
             scope: $scope,
             size: 'md',
+            backdrop: 'static',
             resolve: {
                 item: function () {
                     return item;
@@ -72,6 +85,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
                     scope: $scope,
+                    backdrop: 'static',
                     size: '',
                     resolve: {
                         item: function () {
@@ -164,6 +178,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
              controller: 'ViewRecordController',
              scope: $scope,
              size: 'md',
+             backdrop: 'static',
              resolve: {
                  item: function () {
                     return item;
@@ -212,6 +227,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     controller: 'EditFormulaController',
                     scope: $scope,
                     size: '',
+                    backdrop: 'static',
                     resolve: {
                         item: function () {
                             return response.data;
@@ -265,21 +281,12 @@ app.directive('fileModel', ['$parse', function ($parse) {
             controller: 'AddRecordController',
             scope: $scope,
             size: '',
+            backdrop: 'static',
             resolve: {
             }
         });
     };
 
-    $scope.switchToProduct = function(){
-        $scope.product = true;
-        $scope.formula = false;
-    }
-
-
-    $scope.switchToFormula = function(){
-        $scope.product = false;
-        $scope.formula = true;
-    }
 
     $scope.saveRecord = function(item) {
         var file = $scope.item.image;
