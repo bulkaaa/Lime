@@ -95,7 +95,7 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
                     }
                 },
                 function(response){
-                    DialogService.handle(response, 'user', 'update');
+                    DialogService.handle(response, 'user', 'update', 'email or username');
                 }
             );
     };
@@ -126,7 +126,7 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
 
     $scope.addRecord = function(){
         $scope.item={};
-
+        $scope.list.roles = [];
         $http.get("/user/get-roles")
             .then(
                 function (response) {
@@ -171,13 +171,35 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
                     }
                 },
                 function(response){
-                    DialogService.handle(response, 'user', 'create');
+                    DialogService.handle(response, 'user', 'create', 'email or username');
                 }
             );
-    }
+    };
 
     $scope.list = {
             roles: []
         };
+
+
+    $('#filter_input').keyup(function(event){
+        var txt = $(this).val()
+        var rows = $('.filter-row')
+
+        rows.each(function(){
+            var cells = $(this).find('.filter')
+            var counter = 0;
+            cells.each(function(){
+                var x = this.innerHTML;
+
+                if(x.toLowerCase().includes(txt.toLowerCase()))
+                    counter++;
+            })
+            if(counter > 0)
+                $(this).show();
+            else
+                $(this).hide();
+        })
+    })
+
 
 }]);

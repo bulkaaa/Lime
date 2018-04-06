@@ -1,0 +1,71 @@
+<div class="shopping-cart">
+    <div class="title">Forecast</div>
+    <div class="row margins">
+        <div class="col-md-6 col-sm-6">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-md-4 col-sm-4 control-label"> Resource name</label>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row" ng-repeat="resource in resources">
+                            <input type="checkbox" checklist-model="list.resources" checklist-value="resource.id"> {{resource.name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 col-sm-4 control-label">Chart type</label>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <input type="radio" ng-model="chartType" value="Bar"> Bar Chart
+                        </div>
+                        <div class="row">
+                            <input type="radio" ng-model="chartType" value="Line"> Line Chart
+                        </div>
+                        <div class="row">
+                            <input type="radio" ng-model="chartType" value="Stick"> Stick Chart
+                        </div>
+                        <div class="row">
+                            <input type="radio" ng-model="chartType" value="Pie"> Pie Chart
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 col-sm-4 control-label">Start date</label>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="date" class="form-control" ng-model="date">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 col-sm-4 control-label">Number of days</label>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="number" min="1" max="1000" step ="1" class="form-control" ng-model="noDays">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 col-sm-4 control-label">Number of days forcasted</label>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="number" min="1" max="1000" step ="1" class="form-control" ng-model="noDaysForecast">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 col-sm-4 control-label">Email of receiver</label>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="email" class="form-control" ng-model="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 col-sm-4 control-label"></label>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="row">
+                            <span><button class="btn btn-success" ng-click="generateForecast()">Generate Forecast</button></span>
+                            <span><button class="btn btn-success" ng-click="sendForecast()">Send Forecast</button></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-md-6 col-sm-6 margins">
+            <img ng-src="data:image/png;base64,{{image}}" style="height:auto;width:auto;">
+        </div>
+    </div>
+</div>

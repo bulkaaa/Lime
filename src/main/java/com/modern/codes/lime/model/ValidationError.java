@@ -1,43 +1,56 @@
 package com.modern.codes.lime.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Model representation of field validation errors.
  *
  * @author jaroszk
- *
  */
 @ApiModel(description = "Model representation of field validation errors")
 public class ValidationError implements Serializable {
 
-    private static final long serialVersionUID = -5228076972000583809L;
-
-    @ApiModelProperty(value = "The field name on which the validation error occurred.")
-    private String field = null;
-    @ApiModelProperty(value = "The validation rule code that raised the error.")
-    private String code = null;
-    @ApiModelProperty(value = "A textual hint on why the validation failed.")
-    private String hint = null;
-
-    public ValidationError(String field, String code, String hint) {
+    /**
+     * Instantiates a new Validation error.
+     *
+     * @param field the field
+     * @param code  the code
+     * @param hint  the hint
+     */
+    public ValidationError(final String field, final String code, final String hint) {
         this.field = field;
         this.code = code;
         this.hint = hint;
     }
 
+    /**
+     * Gets field.
+     *
+     * @return the field
+     */
     public String getField() {
         return field;
     }
 
+    /**
+     * Gets code.
+     *
+     * @return the code
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * Gets hint.
+     *
+     * @return the hint
+     */
     public String getHint() {
         return hint;
     }
@@ -46,5 +59,13 @@ public class ValidationError implements Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+    @ApiModelProperty("The field name on which the validation error occurred.")
+    private final String field;
+    @ApiModelProperty("The validation rule code that raised the error.")
+    private final String code;
+    @ApiModelProperty("A textual hint on why the validation failed.")
+    private final String hint;
+    private static final long serialVersionUID = -5228076972000583809L;
 
 }

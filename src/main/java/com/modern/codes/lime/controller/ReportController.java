@@ -1,105 +1,94 @@
 package com.modern.codes.lime.controller;
 
-import com.modern.codes.lime.exception.InvalidRequestException;
-import com.modern.codes.lime.order.Order;
-import com.modern.codes.lime.report.DrawSeries;
-import com.modern.codes.lime.report.TimeSeries;
-import com.modern.codes.lime.report.TimeSeriesProduct;
-import com.modern.codes.lime.service.IJobService;
-import com.modern.codes.lime.service.IProductService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import java.util.List;
+
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import com.modern.codes.lime.service.IReportService;
+import com.modern.codes.lime.service.MailService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+/**
+ * The type Report controller.
+ */
 @RestController
-@RequestMapping(path="/report")
+@RequestMapping(path = "/report")
 public class ReportController {
 
-    //TODO
+    /**
+     * Instantiates a new Report controller.
+     *
+     * @param reportService the report service
+     */
+    public ReportController(final IReportService reportService) {
+        this.reportService = reportService;
+    }
+
+    /**
+     * Generate response entity.
+     *
+     * @param startDate  the start date
+     * @param noDays     the no days
+     * @param chartType  the chart type
+     * @param productIds the product ids
+     * @return the response entity
+     */
+    @RequestMapping(value = "/product/generate",
+                    method = RequestMethod.POST,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation("Generate class_models for products")
+    public ResponseEntity<byte[]> generate(@RequestParam final String startDate, @RequestParam final Integer noDays,
+                                           @RequestParam final String chartType,
+                                           @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
+        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n "
+                 + "chartType: [] \n", startDate, noDays, productIds, chartType);
+
+        final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
+
+        return ResponseEntity.ok()
+                             .contentType(MediaType.IMAGE_PNG)
+                             .body(bytes);
+    }
+
+    /**
+     * Send.
+     *
+     * @param startDate  the start date
+     * @param email      the email
+     * @param noDays     the no days
+     * @param chartType  the chart type
+     * @param productIds the product ids
+     */
+    @RequestMapping(value = "/product/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation("Generate and send class_models for products")
+    public void send(@RequestParam final String startDate, @RequestParam final String email,
+                     @RequestParam final Integer noDays, @RequestParam final String chartType,
+                     @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n"
+                 + " chartType: [] \n", startDate, noDays, email, productIds, chartType);
+
+        final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
+        try {
+            MailService.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", bytes);
+        } catch (final MessagingException e) {
+            LOG.error("FAILED TO SEND REPORT", e);
+        }
+
+    }
+
+    private final IReportService reportService;
+
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);
-
-
-    @Autowired
-    IJobService jobService;
-
-    @Autowired
-    IProductService productService;
-
-
-
-    @RequestMapping(value = "/generate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Generate report for products")
-    public ResponseEntity<byte[]> generate(
-            @RequestParam final String startDate,
-            @RequestParam final Integer noDays,
-            @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds) {
-        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n", startDate, noDays, productIds);
-
-        Date date;
-        try {
-            date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
-        } catch (ParseException e) {
-            throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
-        }
-
-        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        final byte [] bytes = DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days", "Sample_Chart");
-
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.IMAGE_PNG)
-                .body(bytes);
-    }
-
-    @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Generate and send report for products")
-    public void send(
-            @RequestParam final String startDate,
-            @RequestParam final String email,
-            @RequestParam final Integer noDays,
-            @RequestBody @ApiParam(value = "Products ids list") final List<String> productIds) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n", startDate, noDays, email, productIds);
-
-        Date date;
-        try {
-            date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
-        } catch (ParseException e) {
-            throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
-        }
-
-        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, date, noDays, productIds);
-        DrawSeries.plot(seriesL, new ArrayList<TimeSeries>(), date, "Production in past "+noDays+" days", "Sample_Chart");
-        Order.SendEmail(email,"Report Email form LIME", "Please Find Report Attached", "./Sample_Chart.png");
-
-
-    }
-
-    @GetMapping(path = "/test")
-    public String Test(){
-        final ArrayList<TimeSeries> seriesFL = new ArrayList<TimeSeries>();
-        final ArrayList<TimeSeries> seriesL = TimeSeriesProduct.Extract(jobService, new Date(), 8);
-        //final String filename = DrawSeries.plot(seriesL, seriesFL, new Date(),"Production");
-        //Order.SendEmail("aleksandrabulka1@gmail.com","Report Email form LIME", "Please Find Report Attached", filename);
-
-        return "Email Sent";
-    }
 }

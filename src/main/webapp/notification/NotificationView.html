@@ -1,0 +1,46 @@
+<div class="shopping-cart">
+    <div class="title">Manage Notifications for Resources</div>
+    <div class="row btn-row">
+        <div class="col-sm-3 col-md-3 offset-md-9 offset-sm-9 pull-right" >
+            Notifications are:
+            <div class="btn-group" id="status" data-toggle="buttons">
+                    <label class="btn btn-default btn-on-1 btn-sm" ng-click = NotificationsOn()>
+                        <input type="radio">ON</label>
+                    <label class="btn btn-default btn-off-1 btn-sm" ng-click = NotificationsOff()>
+                        <input type="radio">OFF</label>
+            </div>
+        </div>
+    </div>
+    <div class="item row item-border">
+        <div class="col-md-12 col-sm-12">
+            <div class="description col-md-3 col-sm-3">
+                </br>
+                <span>resource name</span>
+                <span></span>
+            </div>
+            <div class="total-price col-md-2 col-sm-2">critical value</div>
+            <div class="total-price col-md-2 col-sm-2">notifications on</div>
+            <div class="total-price col-md-2 col-sm-2 pull-right">edit</div>
+        </div>
+    </div>
+    <div ng-repeat="item in items">
+        <div id="{{item.id}}" class="item row">
+            <div class="col-md-12 col-sm-12">
+                <div class="description col-md-3 col-sm-3">
+                    </br>
+                    <span>{{item.name}}</span>
+                    <span></span>
+                </div>
+                <div class="total-price col-md-2 col-sm-2">{{item.critical_value}}</div>
+                <div class="total-price col-md-2 col-sm-2" id="item.notifications_on">{{item.notifications_on}}</div>
+                <div class="total-price col-md-2 col-sm-2 pull-right">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        </i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

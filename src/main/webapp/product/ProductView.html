@@ -1,6 +1,8 @@
 <div class="shopping-cart">
     <div class="title">Manage Products</div>
     <div class="row btn-row">
+        <text class="col-sm-2 col-md-2"> Search by name: </text>
+        <div class="col-sm-2 col-md-2"> <input id="filter_input" class="form-control" ></div>
         <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
             <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
             </i> Add New Product</button>
@@ -18,9 +20,13 @@
                 <span>product name</span>
                 <span></span>
             </div>
-            <div class="description col-md-4 col-sm-4">
+            <div class="description col-md-2 col-sm-2">
                 </br>
                 <span>product description</span>
+                <span></span>
+            </div>
+            <div class="total-price col-md-2 col-sm-2">
+                <span>formula</span>
                 <span></span>
             </div>
             <div class="total-price col-md-1 col-sm-1">expected value</div>
@@ -33,20 +39,30 @@
         <div id="{{item.id}}" class="item row">
             <div class="col-md-12 col-sm-12">
                 <div class="image col-md-2 col-sm-2">
-                    <img ng-src="{{ item.image }}"/>
+                    <img ng-src="data:image/png;base64,{{item.image}}">
                 </div>
                 <div class="description col-md-2 col-sm-2">
                     </br>
-                    <span>{{item.name}}</span>
+                    <span class="name">{{item.name}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-4 col-sm-4">
+                <div class="description col-md-2 col-sm-2">
                     </br>
                     <span>{{item.description}}</span>
                     <span></span>
                 </div>
+                <div class="total-price col-md-2 col-sm-2">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-info" ng-click="viewFormula(item)">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="editFormula(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        </i></button>
+                    </div>
+                </div>
                 <div class="total-price col-md-1 col-sm-1">{{item.expectedValue}}</div>
                 <div class="total-price col-md-1 col-sm-1">{{item.unit}}</div>
+
                 <div class="total-price col-md-2 col-sm-2">
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-info" ng-click="viewRecord(item)">

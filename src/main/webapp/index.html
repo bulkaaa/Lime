@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="cart/cart.css" />
     <link rel="stylesheet" href="libs/css/font-awesome.min.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>
 <body >
 
@@ -22,9 +23,8 @@
 <script src="https://code.angularjs.org/1.4.8/angular-sanitize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-dialog-service/5.3.0/dialogs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-dialog-service/5.3.0/dialogs-default-translations.min.js"></script>
-
-
-<script src="app.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
 
 <div ng-include src="'shared/header.html'"></div>
 
@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 
-    var app = angular.module("myApp", ['ngRoute', 'ngCookies', 'ngSanitize', 'ui.bootstrap.modal', 'smart-table', 'ui.bootstrap', 'checklist-model', 'dialogs.main']);
+    var app = angular.module("myApp", ['ngSanitize', 'ngRoute', 'ngCookies', 'ngSanitize', 'ui.bootstrap.modal', 'smart-table', 'ui.bootstrap', 'checklist-model', 'dialogs.main']);
     app.config(function($routeProvider) {
         $routeProvider
             .when('/', {
@@ -49,15 +49,16 @@
                 controllerAs: 'vm'
 
             })
-            .when('/register', {
-                templateUrl: 'account/register/RegisterView.html',
-                controller: 'RegisterController',
+            .when('/logout', {
+                templateUrl: 'welcome-screen/WelcomeView.html',
+                controller: 'LogoutController',
                 controllerAs: 'vm'
 
             })
             .when('/editaccount', {
                 templateUrl: 'account/edit/EditAccountView.html',
-                controller: 'EditAccountController'
+                controller: 'EditAccountController',
+                controllerAs: 'vm'
             })
             .when('/reset', {
                 templateUrl: 'account/reset/ResetPasswordView.html',
@@ -75,13 +76,21 @@
                 templateUrl: 'user/UserView.html',
                 controller: 'UserController'
             })
-            .when('/report', {
-                templateUrl: 'report/ReportView.html',
-                controller: 'ReportController'
+            .when('/report-products', {
+                templateUrl: 'report-products/ReportProductsView.html',
+                controller: 'ReportProductsController'
             })
-            .when('/prediction', {
-                templateUrl: 'prediction/PredictionView.html',
-                controller: 'PredictionController'
+            .when('/report-resources', {
+                templateUrl: 'report-resources/ReportResourcesView.html',
+                controller: 'ReportResourcesController'
+            })
+            .when('/prediction-products', {
+                templateUrl: 'prediction-products/PredictionProductsView.html',
+                controller: 'PredictionProductsController'
+            })
+            .when('/prediction-resources', {
+                templateUrl: 'prediction-resources/PredictionResourcesView.html',
+                controller: 'PredictionResourcesController'
             })
              .when('/supplier', {
                 templateUrl: 'supplier/SupplierView.html',
@@ -91,9 +100,13 @@
                 templateUrl: 'order/OrderView.html',
                 controller: 'OrderController'
             })
-            .when('/plan', {
-                templateUrl: 'plan/PlanView.html',
-                controller: 'PlanController'
+            .when('/formula', {
+                templateUrl: 'formula/FormulaView.html',
+                controller: 'FormulaController'
+            })
+             .when('/job', {
+                templateUrl: 'job/JobView.html',
+                controller: 'JobController'
             })
             .when('/notification', {
                 templateUrl: 'notification/NotificationView.html',
@@ -102,10 +115,13 @@
             .when('/welcome', {
                 templateUrl: 'welcome-screen/WelcomeView.html'
 
+            }).when('/file_management', {
+                templateUrl: 'file-management/UploadFileView.html'
+
             })
     })
 
-    app.run(function($rootScope, $location, $cookies, $http) {
+    app.run(['$rootScope', '$location', '$cookies', '$http', 'DialogService', function($rootScope, $location, $cookies, $http, DialogService) {
         // keep user logged in after page refresh
         $rootScope.globals = $cookies.getObject('globals') || {};
         if ($rootScope.globals.currentUser) {
@@ -114,13 +130,14 @@
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
+                DialogService.loginFirstError();
                 $location.path('/login');
             }
         });
-    });
+    }]);
 
 
 </script>
@@ -128,19 +145,22 @@
 <script src="cart/CartController.js"></script>
 <script src="product/ProductController.js"></script>
 <script src="user/UserController.js"></script>
-<script src="report/ReportController.js"></script>
-<script src="prediction/PredictionController.js"></script>
+<script src="job/JobController.js"></script>
+<script src="report-products/ReportProductsController.js"></script>
+<script src="prediction-products/PredictionProductsController.js"></script>
+<script src="report-resources/ReportResourcesController.js"></script>
+<script src="prediction-resources/PredictionResourcesController.js"></script>
 <script src="supplier/SupplierController.js"></script>
 <script src="account/login/LoginController.js"></script>
+<script src="account/logout/LogoutController.js"></script>
 <script src="account/edit/EditAccountController.js"></script>
 <script src="account/reset/ResetPasswordController.js"></script>
 <script src="notification/NotificationController.js"></script>
 <script src="order/OrderController.js"></script>
-<script src="plan/PlanController.js"></script>
-<script src="account/register/RegisterController.js"></script>
 <script src="modals/ViewRecordController.js"></script>
 <script src="modals/EditRecordController.js"></script>
 <script src="modals/AddRecordController.js"></script>
+<script src="modals/EditFormulaController.js"></script>
 <script src="app-services/AuthenticationService.js"></script>
 <script src="app-services/FlashService.js"></script>
 <script src="app-services/DialogService.js"></script>

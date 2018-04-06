@@ -1,0 +1,45 @@
+<div class="shopping-cart">
+    <div class="title">Generate Reports</div>
+    <div class="row margins">
+        <div class="col-sm-12 col-md-12">
+            <div class="col-sm-3 col-md-3 offset-md-9 offset-sm-9" >
+                Orders are:
+                <div class="btn-group" id="status" data-toggle="buttons">
+                    <label class="btn btn-default btn-on-1 btn-sm" ng-click = NotificationsOn()>
+                        <input type="radio">ON</label>
+                    <label class="btn btn-default btn-off-1 btn-sm" ng-click = NotificationsOff()>
+                        <input type="radio">OFF</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row margins">
+        <div class="col-md-12 col-sm-12">
+            <label class="col-md-6 col-sm-6 control-label"> Resource name</label>
+            <label class="col-md-6 col-sm-6 control-label">Quantity</label>
+            <div class="row margins">
+                <div class="col-md-12 col-sm-12">
+                    <form class="form-horizontal" name="form" role="form">
+                        <div class="form-group">
+                            <div class="row" ng-repeat="resource in resources">
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="checkbox" checklist-model="list.resources" checklist-value="resource" ng-required="list.resources.length==0"> {{resource.name}}
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <input id="{{resource.id}}" type="number" min="1" max="1000" step ="1" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row margins">
+                                <div class="form-group">
+                                    <div class="col-md-9 col-sm-9">
+                                        <span class=" pull-right"><button class="btn btn-success" ng-disabled="form.$invalid" ng-click="sendOrder()">Send Order</button></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

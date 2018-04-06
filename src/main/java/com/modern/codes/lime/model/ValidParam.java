@@ -1,29 +1,36 @@
 package com.modern.codes.lime.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.io.Serializable;
 import java.util.List;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Model representation of parameter validation errors.
  *
  * @author jaroszk
- *
  */
-
 public class ValidParam implements Serializable {
 
-    @ApiModelProperty(value = "A list of form attributes that failed to validate.")
-    @JsonProperty(value = "validationErrors")
-    private  List<ValidationError> validationErrors;
-
+    /**
+     * Gets validation errors.
+     *
+     * @return the validation errors
+     */
     public List<ValidationError> getValidationErrors() {
         return this.validationErrors;
     }
 
-    public void setValidationErrors(List<ValidationError> validationErrors) {
+    /**
+     * Sets validation errors.
+     *
+     * @param validationErrors the validation errors
+     */
+    public void setValidationErrors(final List<ValidationError> validationErrors) {
         this.validationErrors = validationErrors;
     }
 
@@ -31,5 +38,9 @@ public class ValidParam implements Serializable {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+    @ApiModelProperty("A list of form attributes that failed to validate.")
+    @JsonProperty("validationErrors")
+    private List<ValidationError> validationErrors;
 
 }

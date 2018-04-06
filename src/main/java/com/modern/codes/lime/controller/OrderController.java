@@ -1,17 +1,15 @@
 package com.modern.codes.lime.controller;
 
-import com.modern.codes.lime.model.Resource;
-import com.modern.codes.lime.model.Supplier;
-import com.modern.codes.lime.order.Order;
-import com.modern.codes.lime.service.IResourceService;
-import com.modern.codes.lime.tools.ParseTools;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import static com.modern.codes.lime.service.MailService.ConstructOrderMsg;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -22,22 +20,42 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.modern.codes.lime.model.Resource;
+import com.modern.codes.lime.pojo.ResourcePOJO;
+import com.modern.codes.lime.pojo.SupplierPOJO;
+import com.modern.codes.lime.service.IResourceService;
+import com.modern.codes.lime.service.MailService;
+import com.modern.codes.lime.tools.ParseTools;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+/**
+ * The type Order controller.
+ */
 @RestController
-@RequestMapping(path="/order")
+@RequestMapping(path = "/order")
 public class OrderController {
 
-    @Autowired
-    IResourceService resourceService;
+    /**
+     * Instantiates a new Order controller.
+     *
+     * @param resourceService the resource service
+     */
+    public OrderController(final IResourceService resourceService) {
+        this.resourceService = resourceService;
+    }
 
-    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
-
+    /**
+     * Gets resources.
+     *
+     * @return the resources
+     */
     @RequestMapping(value = "/get-resources", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Fetches all resources", notes = "Fetches all resources from DB ", response = List.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Fetch all resources")})
+    @ApiResponses(@ApiResponse(code = 200, message = "Fetch all resources"))
     @ResponseBody
     public String getResources() {
         LOG.info("Fetch all resources request received");
@@ -45,31 +63,52 @@ public class OrderController {
         return ParseTools.parseToJson(resourceService.findAll(), Resource.class);
     }
 
-
+    /**
+     * Send boolean.
+     *
+     * @param orderList     the order list
+     * @param bindingResult the binding result
+     * @param b             the b
+     * @return the boolean
+     */
     @RequestMapping(value = "/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Order choosen resources with given amount", notes = "Post choosen List of resource ID "
-                                                              +  "Saves it into DB.", response = Boolean.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Resources orderer"),
-                            @ApiResponse(code = 422, message = "In case of validation errors")})
+    @ApiOperation(value = "Order choosen resources with given amount",
+                  notes = "Post choosen List of resource ID " + "Saves it into DB.",
+                  response = Boolean.class)
+    @ApiResponses({@ApiResponse(code = 200, message = "Resources orderer"),
+                   @ApiResponse(code = 422, message = "In case of validation errors")})
     @ResponseBody
     public Boolean send(
-            @Validated @RequestBody @ApiParam(value = "Map of Resources and amout") final Map<Resource, Integer> orderList,
-            final BindingResult bindingResult, UriComponentsBuilder b) {
+            @Validated @RequestBody @ApiParam("Map of Resources and amout") final Map<String, Integer> orderList,
+            final BindingResult bindingResult, final UriComponentsBuilder b) {
         LOG.info("order request received map resource:amount \n {} ", orderList);
-        final Map<Supplier, Map<Resource, Integer>> supplierMap = new HashMap<>();
+        final Map<SupplierPOJO, Map<ResourcePOJO, Integer>> supplierMap = new HashMap<>();
         orderList.forEach((key, value) -> {
-            Map<Resource, Integer> suppVal = supplierMap.get(key.getSupplier());
-            if(null != suppVal){
-                suppVal.put(key,value);
-                //supplierMap.put(key.getSupplier(), suppVal);
-            }
-            else{
-                suppVal = new HashMap<>();
-                suppVal.put(key, value);
-                supplierMap.put(key.getSupplier(), suppVal);
+            final ResourcePOJO resource = resourceService.findById(key);
+            if (resource.getSupplier() != null) {
+                Map<ResourcePOJO, Integer> suppVal = supplierMap.get(resource.getPOJOSupplier());
+                if (null != suppVal) {
+                    suppVal.put(resource, value);
+                    //supplierMap.put(resource.getPOJOSupplier(), suppVal);
+                } else {
+                    suppVal = new HashMap<>();
+                    suppVal.put(resource, value);
+                    supplierMap.put(resource.getPOJOSupplier(), suppVal);
+                }
             }
         });
-          supplierMap.forEach((key, value) -> Order.SendEmail(key.getEmailAddress(), "Order from LIME", Order.ConstructOrderMsg(key.getName(), value)));
+        supplierMap.forEach((key, value) -> {
+            try {
+                MailService.SendEmail(key.getEmailAddress(), "Order from LIME",
+                                      ConstructOrderMsg(key.getName(), value));
+            } catch (final MessagingException e) {
+                LOG.error("Failed to send order messages", e);
+            }
+        });
         return true;
     }
+
+    private final IResourceService resourceService;
+
+    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 }

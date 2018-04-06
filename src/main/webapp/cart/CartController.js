@@ -1,4 +1,20 @@
-app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', function($scope, $rootScope, $http, $modal, $dialogs, DialogService) {
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}])
+
+.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', '$sanitize', function($scope, $rootScope, $http, $modal, $dialogs, DialogService, $sanitize) {
     var modalInstance = null;
     $scope.resource = true;
 
@@ -7,8 +23,19 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
             .then(
                 function (response) {
                     if (response.data) {
-                        console.log("updated record successfully!");
                         $scope.items = response.data;
+                        angular.forEach($scope.items ,function(value, key){
+                         var path = "/file_management/" + value.image;
+                             $http.get(path)
+                                 .then(
+                                     function (res) {
+                                         value.image = res.data;
+                                     },
+                                     function (response) {
+                                         DialogService.generalServerError();
+                                     }
+                                 )
+                        })
                     }
                 },
                 function (response) {
@@ -26,22 +53,36 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
             controller: 'ViewRecordController',
             scope: $scope,
             size: 'md',
+            backdrop: 'static',
             resolve: {
                 item: function () {
-                    return item; //response.data;
+                    return item;
                 }
             }
         });
     };
 
     $scope.editRecord = function(item){
-        $http.get("resource/" + item.id)
+
+        $http.get("/supplier/all")
+                        .then(
+                            function (response) {
+                                if (response.data) {
+                                   $scope.suppliersList = response.data;
+                                }
+                            },
+                            function (response) {
+                                DialogService.generalServerError();
+                            }
+                        );
+        $http.get("resource/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
                 modalInstance = $modal.open({
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
                     scope: $scope,
+                    backdrop: 'static',
                     size: '',
                     resolve: {
                         item: function () {
@@ -53,22 +94,46 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
     };
 
     $scope.updateRecord = function(item) {
-        $http.put("/resource/update", JSON.stringify(item))
-            .then(
-                function(response){
-                    if (response.data){
-                        console.log("updated record successfully!");
-                        $scope.item.name = response.data.name;
-                        $scope.item.description = response.data.description;
-                        $scope.item.quantity = response.data.quantity;
-                        $scope.item.unit = response.data.unit;
-                        $scope.item.image = response.data.image;
-                    }
-                },
-                function(response){
-                    DialogService.handle(response,'resource', 'update');
-                }
-            );
+        var file = item.image;
+        item.image = item.image.name;
+        var fd = new FormData();
+        fd.append('file', file);
+            $http.post("/file_management/", fd, {
+                headers: {'Content-Type': undefined },
+                transformRequest: angular.identity})
+                    .then(function(response){
+                        $http.put("/resource/update", JSON.stringify(item))
+                            .then(
+                                function(response){
+                                    if (response.data){
+                                        var path = "/file_management/" + response.data.image;
+                                        $scope.item.name = response.data.name;
+                                        $scope.item.description = response.data.description;
+                                        $scope.item.quantity = response.data.quantity;
+                                        $scope.item.unit = response.data.unit;
+                                        $scope.item.supplier = response.data.supplier;
+                                        if($scope.item.image){
+                                        $http.get(path)
+                                             .then(
+                                                 function (res) {
+                                                     $scope.item.image = res.data;
+                                                 },
+                                                 function (response) {
+                                                     DialogService.generalServerError();
+                                                 }
+                                             )
+                                        }
+                                    }
+                                },
+                                    function(response){
+                                        DialogService.handle(response,'resource', 'update');
+                                    }
+                                );
+                             },
+                             function(response){
+                                DialogService.handle(response,'resource', 'update');
+                             }
+                    );
     };
 
     $scope.deleteRecord = function(id) {
@@ -96,38 +161,114 @@ app.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 
 
     $scope.addRecord = function(){
         $scope.item={};
+        $http.get("/supplier/all")
+                .then(
+                    function (response) {
+                        if (response.data) {
+                           $scope.suppliersList = response.data;
+                        }
+                    },
+                    function (response) {
+                        DialogService.generalServerError();
+                    }
+                );
         modalInstance = $modal.open({
             templateUrl: 'modals/add-record.html',
             controller: 'AddRecordController',
             scope: $scope,
+            backdrop: 'static',
             size: '',
             resolve: {
             }
         });
     };
 
-    $scope.saveRecord = function(item) {
 
-        $http.post("/resource/create", JSON.stringify(item))
-            .then(
-                function(response){
-                    if (response.data){
-                        console.log("created resource successfully!");
-                        item = response.data;
-                        $scope.items.push({
-                            id: item.id,
-                            name: item.name,
-                            description: item.description,
-                            quantity: item.quantity,
-                            image: item.image,
-                            unit: item.unit
-                        });
+    $scope.img = null;
+
+    function getImage(image){
+     var path = "/file_management/" + image;
+            $http.get(path)
+                .then(
+                    function (res) {
+                        return res.data;
+                    },
+                    function (response) {
+                        DialogService.generalServerError();
                     }
-                },
-                function(response){
-                    DialogService.handle(response, 'resource', 'create');
-                }
-            );
+                )
     }
+
+
+    $scope.saveRecord = function(item) {
+        var file = $scope.item.image;
+        item.image = $scope.item.image.name;
+        item.critical_value = 0;
+        item.notifications_on = false;
+        item.ordering_on = false;
+        var fd = new FormData();
+        fd.append('file', file);
+            $http.post("/file_management/", fd, {
+                headers: {'Content-Type': undefined },
+                transformRequest: angular.identity})
+                    .then(
+                        function(response){
+                         $http.post("/resource/create", JSON.stringify(item))
+                                    .then(
+                                        function(response){
+                                                item = response.data;
+                                                var path = "/file_management/" + item.image;
+                                                $http.get(path)
+                                                        .then(
+                                                            function (res) {
+                                                                item.image = res.data;
+                                                                $scope.items.push({
+                                                                    id: item.id,
+                                                                    name: item.name,
+                                                                    description: item.description,
+                                                                    quantity: item.quantity,
+                                                                    image: item.image,
+                                                                    unit: item.unit,
+                                                                });
+
+                                                            },
+                                                            function (response) {
+                                                                DialogService.generalServerError();
+                                                            }
+                                                        );
+                                        },
+                                        function(response){
+                                            DialogService.handle(response, 'resource', 'create');
+                                        }
+                                    );
+                        },
+                     function(response){
+                        DialogService.handle(response, 'resource', 'image');
+                    }
+                );
+
+
+    }
+
+     $scope.list = {
+            suppliers: []
+        };
+
+
+
+    $('#filter_input').keyup(function(event){
+        var txt = $(this).val()
+        var cells = $('.name')
+
+        cells.each(function(){
+            var x = this.innerHTML;
+            if(x.toLowerCase().includes(txt.toLowerCase())){
+                $(this).parents('.row').show();
+            } else {
+                $(this).parents('.row').hide();
+            }
+        })
+    })
+
 
 }]);

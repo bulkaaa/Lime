@@ -1,28 +1,42 @@
 <div class="clearfix">
     <div class="modal-header model-grey-color">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancelModal()"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title">View: </h4>
+        <h4 class="modal-title">{{item.name}}: </h4>
     </div>
     <div class="modal-body">
         <dl class="dl-horizontal">
-            <dt>Name</dt>
-            <dd>{{item.name}}</dd>
             <dt ng-if="users">Surname</dt>
-            <dd> {{item.surname}}</dd>
-            <dt ng-if="users">Email</dt>
-            <dd> {{item.emailAddress}}</dd>
+            <dd ng-if="users"> {{item.surname}}</dd>
+            <dt ng-if="users || suppliers">Email</dt>
+            <dd ng-if="users || suppliers"> {{item.emailAddress}}</dd>
+            <dt ng-if="suppliers">Telephone</dt>
+            <dd ng-if="suppliers"> {{item.telephone}}</dd>
+            <dt ng-if="suppliers">City</dt>
+            <dd ng-if="suppliers"> {{item.city}}</dd>
+            <dt ng-if="suppliers">Country</dt>
+            <dd ng-if="suppliers"> {{item.country}}</dd>
+            <dt ng-if="suppliers">Street</dt>
+            <dd ng-if="suppliers"> {{item.street}}</dd>
+            <dt ng-if="suppliers">Postal code</dt>
+            <dd ng-if="suppliers"> {{item.postalCode}}</dd>
             <dt ng-if="users">Roles</dt>
-            <dd> {{item.roles}}</dd>
+            <dd ng-if="users"> {{item.roles}}</dd>
             <dt ng-if="resource || product">Description</dt>
-            <dd>{{item.description}}</dd>
+            <dd ng-if="resource || product">{{item.description}}</dd>
             <dt ng-if="resource">Quantity</dt>
-            <dd>{{item.quantity}}</dd>
+            <dd ng-if="resource">{{item.quantity}}</dd>
             <dt ng-if="product">Expected Value</dt>
-            <dd>{{item.expectedValue}}</dd>
+            <dd ng-if="product">{{item.expectedValue}}</dd>
             <dt ng-if="resource || product">Unit</dt>
-            <dd>{{item.unit}}</dd>
+            <dd ng-if="resource || product">{{item.unit}}</dd>
             <dt ng-if="resource || product">Image</dt>
-            <dd><img src="{{ item.image }}" style="max-height:60px; max-width:60px;" /></dd>
+            <dd ng-if="resource || product"><img ng-src="data:image/png;base64,{{item.image}}" style="max-height:60px; max-width:60px;" /></dd>
+            <dt ng-if="resource">Supplier email</dt>
+            <dd ng-if="resource">{{item.supplier.emailAddress}}</dd>
+            <div ng-repeat="formula_item in formulas">
+                <dt ng-if="formula">{{formula_item.resource.name}}</dt>
+                <dd ng-if="formula">{{formula_item.value}} {{formula_item.resource.unit}}</dd>
+            </div>
         </dl>
     </div>
     <div class="modal-footer">

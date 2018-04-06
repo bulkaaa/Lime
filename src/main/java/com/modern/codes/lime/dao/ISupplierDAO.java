@@ -1,22 +1,61 @@
 package com.modern.codes.lime.dao;
 
-import com.modern.codes.lime.model.Supplier;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 
+import com.modern.codes.lime.model.Supplier;
+
+/**
+ * The interface Supplier dao.
+ */
 @Repository
 public interface ISupplierDAO extends IBasicCRUDRepository<Supplier, String> {
-    List<Supplier> findByEmailAddress(String emailAddress);
+    /**
+     * Find by email address list.
+     *
+     * @param emailAddress the email address
+     * @return the list
+     */
+    List<Supplier> findByEmailAddress(final String emailAddress);
 
-    List<Supplier> findByPostalCode(String postalCode);
+    /**
+     * Find by postal code list.
+     *
+     * @param postalCode the postal code
+     * @return the list
+     */
+    List<Supplier> findByPostalCode(final String postalCode);
 
-    List<Supplier> findByCity(String city);
+    /**
+     * Find by city list.
+     *
+     * @param city the city
+     * @return the list
+     */
+    List<Supplier> findByCity(final String city);
 
-    List<Supplier> findByCountry(String country);
+    /**
+     * Find by country list.
+     *
+     * @param country the country
+     * @return the list
+     */
+    List<Supplier> findByCountry(final String country);
 
-    List<Supplier> findByName(String name);
+    /**
+     * Find by name list.
+     *
+     * @param name the name
+     * @return the list
+     */
+    List<Supplier> findByName(final String name);
 
-    List<Supplier> findByTelephone(String telephone);
+    /**
+     * Find by telephone list.
+     *
+     * @param telephone the telephone
+     * @return the list
+     */
+    List<Supplier> findByTelephone(final String telephone);
 }

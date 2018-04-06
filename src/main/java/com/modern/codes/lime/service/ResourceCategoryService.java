@@ -1,38 +1,48 @@
 package com.modern.codes.lime.service;
 
-import com.modern.codes.lime.tools.ParseTools;
-import com.modern.codes.lime.dao.IResourceCategoryDAO;
-import com.modern.codes.lime.model.ResourceCategory;
-import com.modern.codes.lime.pojo.ResourceCategoryPOJO;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.modern.codes.lime.dao.IResourceCategoryDAO;
+import com.modern.codes.lime.model.ResourceCategory;
+import com.modern.codes.lime.pojo.ResourceCategoryPOJO;
+import com.modern.codes.lime.tools.ParseTools;
 
-
+/**
+ * The type Resource category service.
+ */
 @Service
-public class ResourceCategoryService extends BasicCRUDService<ResourceCategory, ResourceCategoryPOJO, IResourceCategoryDAO> implements IResourceCategoryService {
+public class ResourceCategoryService
+        extends BasicCRUDService<ResourceCategory, ResourceCategoryPOJO, IResourceCategoryDAO>
+        implements IResourceCategoryService {
 
-    private IResourceCategoryDAO dao;
+    /**
+     * Instantiates a new Resource category service.
+     *
+     * @param dao the dao
+     */
     @Autowired
-    public ResourceCategoryService(IResourceCategoryDAO dao) {
+    public ResourceCategoryService(final IResourceCategoryDAO dao) {
         super(dao, ResourceCategory.class, ResourceCategoryPOJO.class);
         this.dao = dao;
     }
 
     @Override
-    public List<ResourceCategoryPOJO> findByName(String name)
-    {
+    public List<ResourceCategoryPOJO> findByName(final String name) {
         return ParseTools.parseList(dao.findByName(name), ResourceCategoryPOJO.class);
     }
 
     @Override
-    public ResourceCategoryPOJO findByResourcesName(String resourceName) {
+    public ResourceCategoryPOJO findByResourcesName(final String resourceName) {
         return ParseTools.parse(dao.findByResourcesName(resourceName), ResourceCategoryPOJO.class);
     }
 
     @Override
-    public ResourceCategoryPOJO findByResourcesId(String resourceId) {
+    public ResourceCategoryPOJO findByResourcesId(final String resourceId) {
         return ParseTools.parse(dao.findByResourcesId(resourceId), ResourceCategoryPOJO.class);
     }
+
+    private final IResourceCategoryDAO dao;
 }

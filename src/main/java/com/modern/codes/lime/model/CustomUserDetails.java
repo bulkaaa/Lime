@@ -1,32 +1,28 @@
 package com.modern.codes.lime.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+/**
+ * The type Custom user details.
+ */
 public class CustomUserDetails implements UserDetails {
 
-    private static final long serialVersionUID = -3962786160780714576L;
-    private Collection<? extends GrantedAuthority> authorities;
-    private String password;
-    private String username;
-    private boolean enabled;
-
-    public CustomUserDetails(User user) {
+    /**
+     * Instantiates a new Custom user details.
+     *
+     * @param user the user
+     */
+    public CustomUserDetails(final User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.authorities = translate(user.getRoles());
         this.enabled = user.getEnabled();
-    }
-
-    private Collection<? extends GrantedAuthority> translate(List<Role> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        roles.forEach(x -> authorities.add(new SimpleGrantedAuthority(x.getName())));
-        return authorities;
     }
 
     @Override
@@ -63,5 +59,17 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+
+    private Collection<? extends GrantedAuthority> translate(final List<Role> roles) {
+        final List<GrantedAuthority> authorities = new ArrayList<>();
+        roles.forEach(x -> authorities.add(new SimpleGrantedAuthority(x.getName())));
+        return authorities;
+    }
+
+    private final Collection<? extends GrantedAuthority> authorities;
+    private final String password;
+    private final String username;
+    private final boolean enabled;
+    private static final long serialVersionUID = -3962786160780714576L;
 
 }

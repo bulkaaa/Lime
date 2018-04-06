@@ -19,3 +19,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+server:
+    port: 8080
+    address: localhost
+    session:
+      timeout: 720
+storage:
+  properties:
+    location: pics
