@@ -209,7 +209,8 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                                  angular.forEach(response.data ,function(value, key){
                                                      $scope.list.resources.push
                                                      (value.resource);
-                                                     })
+                                                     });
+                                                 $scope.formula = response.data;
                                                 },
                                                 function(response)  {
                                                       DialogService.generalServerError();
@@ -237,17 +238,16 @@ app.directive('fileModel', ['$parse', function ($parse) {
             });
     };
 
-    $scope.updateFormula = function(item){
+    $scope.updateFormula = function(item, formulaList){
             $scope.switchToProduct()
-            var items = [];
-            items = $scope.list.resources;
             var formulas = [];
 
-            angular.forEach(items, function (value, key) {
+            angular.forEach(item.resources, function (value, key) {
                 var inp = angular.element('#' + value.id).val();
                 if(inp > 0){
                      formulas.push({
-                        product: {id: item.id},
+                        id: getFormulaId(item.id, value.id, formulaList),
+                        product: item,
                         resource: value,
                         value: inp
                      });
@@ -269,6 +269,16 @@ app.directive('fileModel', ['$parse', function ($parse) {
                             DialogService.handle(response, 'formula', 'edit');
                         }
                     );
+    }
+
+    getFormulaId = function(productId, resourceId, formulaList){
+        var id = '';
+        angular.forEach(formulaList, function (value, key) {
+            if ( value.product.id == productId && value.resource.id == resourceId){
+                id = value.id
+                }
+        });
+        return id;
     }
 
 

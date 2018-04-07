@@ -9,11 +9,13 @@ import com.modern.codes.lime.dao.IFormulaDAO;
 import com.modern.codes.lime.model.Formula;
 import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.tools.ParseTools;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * The type Formula service.
  */
 @Service
+@Transactional
 public class FormulaService extends BasicCRUDService<Formula, FormulaPOJO, IFormulaDAO> implements IFormulaService {
 
     /**
