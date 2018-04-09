@@ -16,13 +16,13 @@
     <div class="row margins">
         <div class="col-md-12 col-sm-12">
             <label class="col-md-6 col-sm-6 control-label"> Resource name</label>
-            <label class="col-md-6 col-sm-6 control-label">Quantity</label>
+            <label class="col-md-6 col-sm-6 control-label p-xs">Quantity</label>
             <div class="row margins">
                 <div class="col-md-12 col-sm-12">
                     <form class="form-horizontal" name="form" role="form">
                         <div class="form-group">
                             <div class="row" ng-repeat="resource in resources">
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-6 col-sm-6 p-xs">
                                     <input type="checkbox" checklist-model="list.resources" checklist-value="resource" ng-required="list.resources.length==0"> {{resource.name}}
                                 </div>
                                 <div class="col-md-3 col-sm-3">

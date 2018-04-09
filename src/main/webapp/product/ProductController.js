@@ -89,7 +89,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     size: '',
                     resolve: {
                         item: function () {
-                            return response.data;
+                            return item;
                         }
                     }
                 });
@@ -100,7 +100,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
     $scope.updateRecord = function(item) {
         $scope.switchToProduct()
             var file = item.image;
-          //  var ext = string.substring(item.image.name.lastIndexOf("."));
             item.image = item.image.name;
             item.quantity = 10;
             item.notifications_on = false;
@@ -277,6 +276,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
             if ( value.product.id == productId && value.resource.id == resourceId){
                 id = value.id
                 }
+
         });
         return id;
     }

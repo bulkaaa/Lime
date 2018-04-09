@@ -186,19 +186,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
     $scope.img = null;
 
-    function getImage(image){
-     var path = "/file_management/" + image;
-            $http.get(path)
-                .then(
-                    function (res) {
-                        return res.data;
-                    },
-                    function (response) {
-                        DialogService.generalServerError();
-                    }
-                )
-    }
-
 
     $scope.saveRecord = function(item) {
         var file = $scope.item.image;

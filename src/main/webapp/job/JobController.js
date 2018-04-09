@@ -56,19 +56,6 @@ var modalInstance = null;
     };
 
 
-    $scope.getUser = function() {
-     $http.get("/job/act-user")
-                .then(
-                    function(response){
-                      var user = response.data;
-                    },
-                    function(response){
-                        DialogService.handle(response, 'job', 'create');
-                    }
-                );
-    }
-
-
     $scope.saveRecord = function(item) {
        $http.post("/job/create", JSON.stringify(item))
            .then(
@@ -82,7 +69,6 @@ var modalInstance = null;
                            resultValue: item.resultValue,
                            startDate: new Date(item.startDate).toLocaleString(),
                            endDate: new Date(item.endDate).toLocaleString(),
-                           //username: item.user.username,
                        });
                    }
                },
@@ -90,13 +76,6 @@ var modalInstance = null;
                    DialogService.handle(response, 'job', 'create');
                }
            )
-
-                                          /*  },
-                                            function(response){
-                                                DialogService.handle(response, 'job', 'create');
-                                            }
-                                        )*/
-
-                }
+    }
 
 }]);

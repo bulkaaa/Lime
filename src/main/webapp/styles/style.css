@@ -210,12 +210,34 @@ cursor: pointer;
 margin: 20px 20px 20px 20px;
 }
 
+/* MARGINS & PADDINGS */
+.p-xxs {
+  padding: 5px;
+}
+.p-xs {
+  padding: 10px;
+}
+.p-sm {
+  padding: 15px;
+}
+.p-m {
+  padding: 20px;
+}
+.p-md {
+  padding: 25px;
+}
+.p-lg {
+  padding: 30px;
+}
+.p-xl {
+  padding: 40px;
+}
 .m-xs {
   margin: 5px;
 }
 .m-sm {
-  margin: 10px;
-}
+   margin: 10px;
+ }
 .m {
   margin: 15px;
 }
