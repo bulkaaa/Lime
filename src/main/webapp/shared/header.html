@@ -17,17 +17,14 @@
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
-            <li><a data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Stats"><i class="fa fa-bar-chart-o"></i>
-            </a>
-            </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown">My Account <b class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#!/login"><i class="fa fa-fw fa-user"></i> Login</a></li>
-                    <li><a href="#!/editaccount"><i class="fa fa-pencil-square-o"></i> Edit Profile</a></li>
-                    <li><a href="#!/reset"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#!/logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    <li ng-show="!(globals.currentUser)"><a href="#!/login"><i class="fa fa-fw fa-user"></i> Login</a></li>
+                    <li ng-show="globals.currentUser"><a href="#!/editaccount"><i class="fa fa-pencil-square-o"></i> Edit Profile</a></li>
+                    <li ng-show="!(globals.currentUser)"><a href="#!/reset"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
+                    <li ng-show="globals.currentUser" class="divider"></li>
+                    <li ng-show="globals.currentUser"><a href="#!/logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
                 </ul>
             </li>
         </ul>
