@@ -299,7 +299,6 @@ public class Resource implements Serializable {
     private String image;
     @ManyToOne
     @JoinColumn(name = "supplier_id", referencedColumnName = "ID")
-    @JsonBackReference("supplier-resources")
     private Supplier supplier;
     @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore

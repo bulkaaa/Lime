@@ -16,6 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import io.swagger.annotations.ApiModel;
@@ -228,7 +229,7 @@ public class Supplier implements Serializable {
     @Size(max = MAX_LENGTH_TELEPHONE)
     private String telephone;
     @OneToMany(mappedBy = "supplier", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("supplier-resources")
+    @JsonIgnore
     private List<Resource> resources;
     private static final long serialVersionUID = 8269473897901383432L;
     private static final int MAX_LENGTH_NAME = 50;
