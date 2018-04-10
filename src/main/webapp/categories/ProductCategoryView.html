@@ -1,0 +1,44 @@
+<div class="shopping-cart">
+    <div class="title">Manage Product Categories</div>
+    <div class="row btn-row">
+        <text class="col-sm-2 col-md-2"> Search by name: </text>
+        <div class="col-sm-2 col-md-2"> <input id="filter_input" class="form-control" ></div>
+        <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
+            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
+            </i> Add New Category</button>
+        </div>
+    </div>
+    <div class="item row item-border">
+        <div class="col-md-12 col-sm-12">
+            <div class="description col-md-9 col-sm-9">
+                </br>
+                <span>Category name</span>
+                <span></span>
+            </div>
+            <div class="total-price col-md-3 col-sm-3 ">action</div>
+        </div>
+    </div>
+
+    <div ng-repeat="item in items">
+        <div id="{{item.id}}" class="item row">
+            <div class="col-md-12 col-sm-12">
+                <div class="description col-md-9 col-sm-9">
+                    </br>
+                    <span class="name">{{item.name}}</span>
+                    <span></span>
+                </div>
+                <div class="total-price col-md-3 col-sm-3">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        </i></button>
+                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-trash">
+                        </i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

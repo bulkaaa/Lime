@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
         <form class="form-horizontal" name="form" role="form">
-            <div ng-if="resource || product || users || suppliers" class="form-group" ng-class="{ 'has-error': form.name.$touched && form.name.$error.required }">
+            <div ng-if="resource || product || users || suppliers || categoryResource || categoryProduct" class="form-group" ng-class="{ 'has-error': form.name.$touched && form.name.$error.required }">
                 <label class="col-sm-3 control-label">Name <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
                     <input type="text" name="name" ng-model="item.name" placeholder="Name" class="form-control" required>
@@ -88,7 +88,7 @@
                 <label class="col-sm-3 control-label">Supplier email: <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
                     <div class="row" ng-repeat="supplier in suppliersList">
-                        <input type="checkbox" checklist-model="list.suppliers" ng-required="list.suppliersList.length==0" checklist-value="supplier" ng-checked="false"> {{supplier.emailAddress}}
+                        <input type="checkbox" checklist-model="list.suppliers" ng-required="list.suppliers.length==0" checklist-value="supplier"> {{supplier.emailAddress}}
                     </div>
                     <span ng-show="form.supplier.$touched && form.supplier.$error.required" class="help-block">Supplier email is required</span>
                 </div>

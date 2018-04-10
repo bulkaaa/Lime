@@ -5,8 +5,12 @@
     </div>
     <div class="modal-body">
         <dl class="dl-horizontal">
+            <dt ng-if="users || suppliers || product || resource || categoryResource || categoryProduct">Name</dt>
+            <dd ng-if="users || suppliers || product || resource || categoryResource || categoryProduct"> {{item.name}}</dd>
             <dt ng-if="users">Surname</dt>
             <dd ng-if="users"> {{item.surname}}</dd>
+            <dt ng-if="users">Username</dt>
+            <dd ng-if="users"> {{item.username}}</dd>
             <dt ng-if="users || suppliers">Email</dt>
             <dd ng-if="users || suppliers"> {{item.emailAddress}}</dd>
             <dt ng-if="suppliers">Telephone</dt>

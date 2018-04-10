@@ -230,7 +230,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     backdrop: 'static',
                     resolve: {
                         item: function () {
-                            return response.data;
+                            return item;
                         }
                     }
                 });
