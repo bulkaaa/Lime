@@ -78,22 +78,34 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
     $scope.editRecord = function(item){
         $scope.switchToProduct()
-        $http.get("/product/one/" + item.id)
-            .then(function(response){
-                $scope.item = item;
-                modalInstance = $modal.open({
-                    templateUrl: 'modals/edit-record.html',
-                    controller: 'EditRecordController',
-                    scope: $scope,
-                    backdrop: 'static',
-                    size: '',
-                    resolve: {
-                        item: function () {
-                            return item;
-                        }
-                    }
-                });
-            });
+        $http.get("/product-category/all")
+                        .then(
+                            function (response) {
+                                if (response.data) {
+                                    $scope.categories = response.data;
+                                            $http.get("/product/one/" + item.id)
+                                                .then(function(response){
+                                                    $scope.item = item;
+                                                    modalInstance = $modal.open({
+                                                        templateUrl: 'modals/edit-record.html',
+                                                        controller: 'EditRecordController',
+                                                        scope: $scope,
+                                                        backdrop: 'static',
+                                                        size: '',
+                                                        resolve: {
+                                                            item: function () {
+                                                                return item;
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                }
+                            },
+                            function (response) {
+                                DialogService.generalServerError();
+                            }
+                        );
+
     };
 
 

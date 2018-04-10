@@ -75,6 +75,19 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                 DialogService.generalServerError();
                             }
                         );
+
+        $http.get("/resource-category/all")
+                                .then(
+                                    function (response) {
+                                        if (response.data) {
+                                          $scope.categories = response.data;
+                                          }
+                                    },
+                                    function (response) {
+                                         DialogService.generalServerError();
+                                    }
+                                );
+
         $http.get("resource/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
@@ -112,7 +125,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                         $scope.item.description = response.data.description;
                                         $scope.item.quantity = response.data.quantity;
                                         $scope.item.unit = response.data.unit;
-                                        $scope.item.supplier = response.data.supplier;
+
                                         if($scope.item.image){
                                         $http.get(path)
                                              .then(
