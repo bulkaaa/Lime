@@ -92,6 +92,14 @@
                 templateUrl: 'prediction-resources/PredictionResourcesView.html',
                 controller: 'PredictionResourcesController'
             })
+            .when('/category-products', {
+                templateUrl: 'categories/ProductCategoryView.html',
+                controller: 'ProductCategoryController'
+            })
+             .when('/category-resources', {
+                templateUrl: 'categories/ResourceCategoryView.html',
+                controller: 'ResourceCategoryController'
+            })
              .when('/supplier', {
                 templateUrl: 'supplier/SupplierView.html',
                 controller: 'SupplierController'
@@ -150,6 +158,8 @@
 <script src="prediction-products/PredictionProductsController.js"></script>
 <script src="report-resources/ReportResourcesController.js"></script>
 <script src="prediction-resources/PredictionResourcesController.js"></script>
+<script src="categories/ProductCategoryController.js"></script>
+<script src="categories/ResourceCategoryController.js"></script>
 <script src="supplier/SupplierController.js"></script>
 <script src="account/login/LoginController.js"></script>
 <script src="account/logout/LogoutController.js"></script>

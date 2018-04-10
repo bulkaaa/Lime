@@ -78,6 +78,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
         $http.get("resource/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
+                $scope.list.suppliers = item.supplier;
                 modalInstance = $modal.open({
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
@@ -86,7 +87,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     size: '',
                     resolve: {
                         item: function () {
-                            return response.data;
+                            return item;
                         }
                     }
                 });
@@ -143,7 +144,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
                 .then(
                     function(response){
                         if (response.data){
-                            console.log(response);
                             $scope.deleteRow(id);
                         }
                     },
