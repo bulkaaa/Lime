@@ -17,7 +17,9 @@
                 <label class="col-sm-3 control-label">Product name <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
                     <div class="row" ng-repeat="product in products">
-                        <input type="checkbox" checklist-model="list.products" ng-required="list.products.length==0" checklist-value="product" ng-checked="false"> {{product.name}}
+                        <div class="radio">
+                            <label><input id="radioId" type="radio" ng-model="radio.product" name="rdoResult" ng-value="{{product}}">{{product.name}}</label>
+                        </div>
                     </div>
                     <span ng-show="form.products.$touched && form.products.$error.required" class="help-block">Product name is required</span>
                 </div>
@@ -54,7 +56,7 @@
                     <span ng-show="form.quantity.$touched && form.quantity.$error.required" class="help-block">Quantity is required</span>
                 </div>
                 <span class="help-button" uib-tooltip="Please enter quantity" tooltip-placement="left">?</span>
-             </div>
+            </div>
             <div ng-if="product" class="form-group" ng-class="{ 'has-error': form.expectedValue.$touched && form.expectedValue.$error.required }">
                 <label class="col-sm-3 control-label">Expected Value <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
@@ -162,9 +164,9 @@
             <div ng-if="users" class="form-group">
                 <label class="col-sm-3 control-label">Roles <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
-                        <div class="row" ng-repeat="role in roles">
-                            <input type="checkbox" checklist-model="list.roles" ng-required="list.roles.length==0" checklist-value="role" ng-checked="false"> {{role.name}}
-                        </div>
+                    <div class="row" ng-repeat="role in roles">
+                        <input type="checkbox" checklist-model="list.roles" ng-required="list.roles.length==0" checklist-value="role" ng-checked="false"> {{role.name}}
+                    </div>
                     <span ng-show="form.roles.$touched && form.roles.$error.required" class="help-block">Role is required</span>
                 </div>
                 <span class="help-button" uib-tooltip="Please enter role" tooltip-placement="left">?</span>
