@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -86,7 +86,7 @@ public class ProductCategory implements Serializable {
     @ApiModelProperty(value = "The unique id of the Product category", required = true)
     private String id;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("category-products")
+    @JsonIgnore
     private List<Product> products;
     @ApiModelProperty(value = "The name of the Product category. E.g \"vegetables\"", required = true)
     @NotNull

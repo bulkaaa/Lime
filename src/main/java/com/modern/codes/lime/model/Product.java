@@ -21,7 +21,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -260,7 +259,6 @@ public class Product implements Serializable {
     private Date addedAt;
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "ID")
-    @JsonBackReference("category-products")
     private ProductCategory category;
     @ApiModelProperty(value = "The image name of the product", required = true)
     @NotNull

@@ -18,7 +18,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -292,7 +291,6 @@ public class Resource implements Serializable {
     private Boolean ordering_on;
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "ID")
-    @JsonBackReference("category-resources")
     private ResourceCategory category;
     @ApiModelProperty(value = "The image name of the resource", required = true)
     @NotNull

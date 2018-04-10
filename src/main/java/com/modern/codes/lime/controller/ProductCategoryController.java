@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.modern.codes.lime.exception.InvalidRequestException;
-import com.modern.codes.lime.model.Product;
 import com.modern.codes.lime.model.ProductCategory;
 import com.modern.codes.lime.pojo.ProductCategoryPOJO;
 import com.modern.codes.lime.service.IProductCategoryService;
@@ -64,7 +63,7 @@ public class ProductCategoryController extends BaseController {
     @ApiResponses({@ApiResponse(code = 200, message = "Saved product category object"),
                    @ApiResponse(code = 422, message = "In case of validation errors of product category object")})
     @ResponseBody
-    public String create(@Validated @RequestBody @ApiParam("Product object") final Product iProductCategory,
+    public String create(@Validated @RequestBody @ApiParam("Product object") final ProductCategory iProductCategory,
                          final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("Product Category creation request received: {}", iProductCategory);
@@ -92,8 +91,9 @@ public class ProductCategoryController extends BaseController {
     @ApiResponses({@ApiResponse(code = 200, message = "Saved product category object"),
                    @ApiResponse(code = 422, message = "In case of validation errors of product category object")})
     @ResponseBody
-    public String update(@Validated @RequestBody @ApiParam("Product categoryobject") final Product iProductCategory,
-                         final BindingResult bindingResult, final UriComponentsBuilder b) {
+    public String update(
+            @Validated @RequestBody @ApiParam("Product categoryobject") final ProductCategory iProductCategory,
+            final BindingResult bindingResult, final UriComponentsBuilder b) {
 
         LOG.info("Product category update request received: {}", iProductCategory);
         if (iProductCategory == null || bindingResult.hasErrors()) {
