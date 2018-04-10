@@ -47,7 +47,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
     $scope.showAll();
 
     $scope.viewRecord = function(item){
-
         modalInstance = $modal.open({
             templateUrl: 'modals/view-record.html',
             controller: 'ViewRecordController',
@@ -184,6 +183,17 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     function (response) {
                         DialogService.generalServerError();
                     }
+                );
+                $http.get("/resource-category/all")
+                        .then(
+                            function (response) {
+                                if (response.data) {
+                                  $scope.categories = response.data;
+                                  }
+                            },
+                            function (response) {
+                                 DialogService.generalServerError();
+                            }
                 );
         modalInstance = $modal.open({
             templateUrl: 'modals/add-record.html',

@@ -61,7 +61,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
     $scope.switchToProduct();
 
     $scope.viewRecord = function(item){
-        $scope.switchToProduct()
+        $scope.switchToProduct();
         modalInstance = $modal.open({
             templateUrl: 'modals/view-record.html',
             controller: 'ViewRecordController',
@@ -296,6 +296,17 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 
     $scope.addRecord = function(){
+     $http.get("/product-category/all")
+                .then(
+                    function (response) {
+                        if (response.data) {
+                          $scope.categories = response.data;
+                          }
+                    },
+                    function (response) {
+                         DialogService.generalServerError();
+                    }
+     );
         $scope.switchToProduct()
         $scope.item={};
         modalInstance = $modal.open({

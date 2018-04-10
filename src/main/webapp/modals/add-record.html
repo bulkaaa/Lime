@@ -203,6 +203,16 @@
                 </div>
                 <span class="help-button" uib-tooltip="Please enter result value" tooltip-placement="left">?</span>
             </div>
+            <div ng-if="resource || product" class="form-group" ng-class="{ 'has-error': form.category.$touched && form.category.$error.required }">
+                <label class="col-sm-3 control-label">Category <sup class="sup-color">*</sup></label>
+                <div class="col-sm-8">
+                    <select ng-model="item.category" name="category" placeholder="category" class="form-control" required>
+                        <option ng-repeat="category in categories" ng-value="category">{{category.name}}</option>
+                    </select>
+                    <span ng-show="form.category.$touched && form.category.$error.required" class="help-block">category is required</span>
+                </div>
+                <span class="help-button" uib-tooltip="Please enter category" tooltip-placement="left">?</span>
+            </div>
         </form>
     </div>
     <div class="modal-footer model-grey-color">
