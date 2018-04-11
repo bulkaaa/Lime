@@ -10,9 +10,12 @@
                     <div class="col-sm-6">
                         <input type="checkbox" checklist-model="list.resources" ng-required="list.resourcesList.length==0" checklist-value="resource"> {{resource.name}}
                     </div>
-                    <div class="col-md-5 col-sm-5">
+                    <div class="col-md-4 col-sm-4">
                         <input id="{{resource.id}}" type="number" min="0" max="1000" step ="0.1" ng-disabled="isUnchecked(resource)" ng-value="getValue(resource)" class="form-control">
-                     </div>
+                    </div>
+                    <div class="col-md-1 col-sm-1">
+                        {{resource.unit}}
+                    </div>
                 </div>
             </div>
             <div class="modal-footer model-grey-color">
