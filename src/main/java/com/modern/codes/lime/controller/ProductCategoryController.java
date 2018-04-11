@@ -143,7 +143,7 @@ public class ProductCategoryController extends BaseController {
     public Boolean delete(@ApiParam("Product category object") @PathVariable final String productCategoryId) {
 
         LOG.info("Product category deletion request received for id: " + productCategoryId);
-        
+
         if (!productService.findByCategoryId(productCategoryId)
                           .isEmpty()) {
             return false;

@@ -3,11 +3,5 @@
 <p ng-if="globals.currentUser.isAdmin">You can do whatever you want:)</p>
 <p ng-if="globals.currentUser.isStaff">Some functionalists might be disabled for this account type</p>
 
-<h3>All registered users:</h3>
-<ul>
-    <li ng-repeat="user in vm.allUsers">
-        {{user.username}} ({{user.name}} {{user.surname}})
-    </li>
-</ul>
 <p>&nbsp;</p>
 <p><a href="#!/login" class="btn btn-primary">Logout</a></p>

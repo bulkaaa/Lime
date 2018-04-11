@@ -12,6 +12,7 @@ import com.modern.codes.lime.pojo.UserPOJO;
 import com.modern.codes.lime.service.IUserService;
 import com.modern.codes.lime.tools.DBPopulator;
 import com.modern.codes.lime.tools.ParseTools;
+import com.modern.codes.lime.tools.StartUpPopulator;
 
 /**
  * The type Dev controller.
@@ -19,6 +20,12 @@ import com.modern.codes.lime.tools.ParseTools;
 @RestController()
 @RequestMapping(path = "/dev")
 public class DevController {
+
+    @Autowired
+    public DevController(final DBPopulator pop, final StartUpPopulator upPop) {
+        this.pop = pop;
+        this.upPop = upPop;
+    }
 
     /**
      * Populate string.
@@ -32,30 +39,34 @@ public class DevController {
     }
 
     /**
-     * Gets user.
+     * initialize basic db objects.
      *
-     * @return the user
+     * @return the string
      */
-    @GetMapping(path = "/act-user")
-    public String getUser() {
-        return ParseTools.parseToJson(getActualUser(), User.class);
+    @GetMapping("/startup")
+    public String startup(){
+        if(!isInitialized){
+            pop.clearDB();
+            upPop.createRoles();
+            upPop.addAdmin();
+            // DEVELOPERSKO ZAWSZE Włączone
+            // isInitialized = true;
+            return "Application initialized succesfully";
+        }
+        return "Application was arleady initialized";
     }
 
-    private UserPOJO getActualUser() {
-        return userService.findByUsername(((UserDetails) SecurityContextHolder.getContext()
-                                                                              .getAuthentication()
-                                                                              .getPrincipal()).getUsername());
-    }
+    private boolean isInitialized = false;
+    /**
+     * The Populator.
+     */
+    private final DBPopulator pop;
+
 
     /**
-     * The Pop.
+     * The Startup Populator.
      */
-    @Autowired
-    DBPopulator pop;
-    /**
-     * The User service.
-     */
-    @Autowired
-    IUserService userService;
+
+    private final StartUpPopulator upPop;
 
 }
