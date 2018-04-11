@@ -3,26 +3,14 @@
 # ===============================
 
 # Set here configurations for the database connection
-#DB Management
-#lisqlme@gmail.com
-#lisqlmeadmin
-
+# push command: git push heroku LimeAppHeroku:master
+# heroku credentials:
+#   username:limemini102@gmail.com
+#   password:LIMEmini102!@
+# gmail password: limeminipassword
 spring:
   datasource:
-
-#    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
-#    username: limeadmin
-#    password: LIMEadmin12#$
-    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
-    username: root
-    password: test
-    tomcat:
-      test-while-idle: true
-      validation-query: SELECT 1
-      max-wait: 20000
-      max-active: 50
-      max-idle: 20
-      min-idle: 15
+    url: jdbc:mysql://b3e56c4ac330ab:a3462a44@us-cdbr-iron-east-05.cleardb.net/heroku_8bd1755ae2a2862?reconnect=true
   jpa:
     show-sql: true
     hibernate:
@@ -32,8 +20,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 server:
-    port: 8080
-    address: localhost
     session:
       timeout: 720
 storage:
