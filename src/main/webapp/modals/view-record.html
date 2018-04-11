@@ -5,8 +5,10 @@
     </div>
     <div class="modal-body">
         <dl class="dl-horizontal">
-            <dt ng-if="users || suppliers || product || resource || categoryResource || categoryProduct">Name</dt>
-            <dd ng-if="users || suppliers || product || resource || categoryResource || categoryProduct"> {{item.name}}</dd>
+            <dt ng-if="users || suppliers || product || resource">Name</dt>
+            <dd ng-if="users || suppliers || product || resource"> {{item.name}}</dd>
+            <dt ng-if="product || resource">Category</dt>
+            <dd ng-if="product || resource"> {{item.category.name}}</dd>
             <dt ng-if="users">Surname</dt>
             <dd ng-if="users"> {{item.surname}}</dd>
             <dt ng-if="users">Username</dt>

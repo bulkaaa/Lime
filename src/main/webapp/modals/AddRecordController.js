@@ -7,10 +7,6 @@ app.controller('AddRecordController',  ['$scope', '$http','$uibModalInstance', f
             $scope.item.roles = $scope.list.roles;
         }
 
-        if($scope.list && $scope.list.products){
-            $scope.item.product = angular.element(document.getElementById('radioId')).scope().radio.product;
-        }
-
         if($scope.list && $scope.list.suppliers){
             $scope.item.supplier = $scope.list.suppliers[0];
         }

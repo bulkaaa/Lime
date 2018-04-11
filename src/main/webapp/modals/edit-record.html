@@ -88,7 +88,7 @@
                 <label class="col-sm-3 control-label">Supplier email: <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
                     <div class="row" ng-repeat="supplier in suppliersList">
-                        <input type="checkbox" checklist-model="list.suppliers" ng-required="list.suppliers.length==0" checklist-value="supplier"> {{supplier.emailAddress}}
+                        <input type="checkbox" checklist-model="list.suppliers" checklist-value="supplier" ng-required="list.suppliers.length==0"> {{supplier.emailAddress}}
                     </div>
                     <span ng-show="form.supplier.$touched && form.supplier.$error.required" class="help-block">Supplier email is required</span>
                 </div>

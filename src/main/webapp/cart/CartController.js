@@ -90,7 +90,8 @@ app.directive('fileModel', ['$parse', function ($parse) {
         $http.get("resource/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
-                $scope.list.suppliers = item.supplier;
+                $scope.list.suppliers.length = 0;
+                $scope.list.suppliers.push(item.supplier);
                 modalInstance = $modal.open({
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
@@ -124,7 +125,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                         $scope.item.description = response.data.description;
                                         $scope.item.quantity = response.data.quantity;
                                         $scope.item.unit = response.data.unit;
-
+                                        $scope.item.supplier = response.data.supplier
                                         if($scope.item.image){
                                         $http.get(path)
                                              .then(

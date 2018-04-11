@@ -67,31 +67,22 @@ app.controller('ProductCategoryController', ['$scope', '$rootScope', '$http', '$
     };
 
     $scope.deleteRecord = function(id) {
-     $http.get("/product-category/one/" + id)
-                .then(
-                    function(response){
-                        if(response.data.products.length !== 0){
-                        let dlg = $dialogs.confirm('Are you sure you want to delete this record?');
-                        dlg.result.then(function(btn) {
-                            $http.delete("/product-category/delete/" + id)
-                                .then(
-                                    function (response) {
-                                        if (response.data) {
-                                            console.log(response);
-                                            $scope.deleteRow(id);
-                                        }
-                                    },
-                                    function (response) {
-                                        DialogService.generalServerError();
-                                    }
-                                );
-                        });
+
+            let dlg = $dialogs.confirm('Are you sure you want to delete this record?');
+            dlg.result.then(function(btn) {
+                $http.delete("/product-category/delete/" + id)
+                    .then(
+                       function (response) {
+                           if(response.data == true)
+                               $scope.deleteRow(id);
+                           if(response.data == false)
+                               $dialogs.notify("Delete category", "You need to change category of products belonging to this category first")
+                        },
+                        function (response) {
+                            DialogService.generalServerError();
                         }
-                    },
-                    function(response){
-                        DialogService.generalServerError();
-                    }
-                 )
+                    );
+            });
      };
 
     $scope.deleteRow = function(id) {

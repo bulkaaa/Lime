@@ -1,5 +1,6 @@
 app.controller('ViewRecordController',  ['$scope', '$http', '$uibModalInstance', 'item', function($scope, $http, modalInstance, item) {
 	function init(){
+
         $scope.item = item;
         if($scope.formula)
             var formulas = [];

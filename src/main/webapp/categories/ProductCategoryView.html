@@ -29,9 +29,6 @@
                 </div>
                 <div class="total-price col-md-3 col-sm-3">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
-                            <i class="fa fa-search"></i>
-                        </button>
                         <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
                         </i></button>
                         <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-trash">

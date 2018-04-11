@@ -72,10 +72,10 @@ app.controller('ResourceCategoryController', ['$scope', '$rootScope', '$http', '
             $http.delete("/resource-category/delete/" + id)
                 .then(
                     function (response) {
-                        if (response.data) {
-                            console.log(response);
-                            $scope.deleteRow(id);
-                        }
+                    if(response.data == true)
+                        $scope.deleteRow(id);
+                    if(response.data == false)
+                        $dialogs.notify("Delete category", "You need to change category of products belonging to this category first")
                     },
                     function (response) {
                         DialogService.generalServerError();

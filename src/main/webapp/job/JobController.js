@@ -15,6 +15,8 @@ var modalInstance = null;
                         angular.forEach($scope.items ,function(value, key){
                                         value.startDate = new Date(value.startDate).toLocaleString();
                                         value.endDate = new Date(value.endDate).toLocaleString();
+                                        value.username = value.user.username;
+                                        value.productName = value.product.name;
                                     });
                         if (!$scope.items.length)
                             $dialogs.notify('Currently there are no products added in LIME', "You can add products here by clicking on 'Add New Product' button");
@@ -69,6 +71,7 @@ var modalInstance = null;
                            resultValue: item.resultValue,
                            startDate: new Date(item.startDate).toLocaleString(),
                            endDate: new Date(item.endDate).toLocaleString(),
+                           username: item.user.username
                        });
                    }
                },

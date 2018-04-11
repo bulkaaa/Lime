@@ -113,9 +113,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
         $scope.switchToProduct()
             var file = item.image;
             item.image = item.image.name;
-            item.quantity = 10;
-            item.notifications_on = false;
-            item.critical_value = 5;
             var fd = new FormData();
             fd.append('file', file);
                 $http.post("/file_management/", fd, {
@@ -163,7 +160,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
                 .then(
                     function(response){
                         if (response.data){
-                            console.log(response);
                             $scope.deleteRow(id);
                         }
                     },
