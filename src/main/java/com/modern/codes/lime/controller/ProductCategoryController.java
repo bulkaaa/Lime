@@ -143,11 +143,7 @@ public class ProductCategoryController extends BaseController {
     public Boolean delete(@ApiParam("Product category object") @PathVariable final String productCategoryId) {
 
         LOG.info("Product category deletion request received for id: " + productCategoryId);
-
-        // KLAUDIA CO ZWRÓCIć KIEDY NIE MOŻEMY USUNĄć BO NIEKTÓRE PRODUKTY MAJĄ TE KATEGORIE, PRODUKT NIE MOŻE ZOSTAć
-        // BEZ KATEGORII,
-        // NA FRONCIE MUSI POJAWIć SIĘ INFORMACJA ŻE UŻYTKOWNIK MUSI NAJPIERW ZMIENIć KATEGORIĘ PRODUKTU ABY USUNĄć
-        // TĘ KATEGORIĘ.
+        
         if (!productService.findByCategoryId(productCategoryId)
                           .isEmpty()) {
             return false;
