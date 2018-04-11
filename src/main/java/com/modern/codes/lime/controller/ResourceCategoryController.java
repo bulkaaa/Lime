@@ -144,11 +144,7 @@ public class ResourceCategoryController extends BaseController {
 
         LOG.info("Resource category deletion request received for id: " + resourceCategoryId);
 
-        // KLAUDIA CO ZWRÓCIć KIEDY NIE MOŻEMY USUNĄć BO NIEKTÓRE RESOURCEC MAJĄ TE KATEGORIE, RESOURCE NIE MOŻE
-        // ZOSTAć BEZ KATEGORII,
-        // NA FRONCIE MUSI POJAWIć SIĘ INFORMACJA ŻE UŻYTKOWNIK MUSI NAJPIERW ZMIENIć KATEGORIĘ RESOURCE ABY USUNĄć
-        // TĘ KATEGORIĘ.
-        if (resourceService.findByCategoryId(resourceCategoryId)
+        if (!resourceService.findByCategoryId(resourceCategoryId)
                            .isEmpty()) {
             return false;
         }

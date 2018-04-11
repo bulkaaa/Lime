@@ -148,7 +148,7 @@ public class ProductCategoryController extends BaseController {
         // BEZ KATEGORII,
         // NA FRONCIE MUSI POJAWIć SIĘ INFORMACJA ŻE UŻYTKOWNIK MUSI NAJPIERW ZMIENIć KATEGORIĘ PRODUKTU ABY USUNĄć
         // TĘ KATEGORIĘ.
-        if (productService.findByCategoryId(productCategoryId)
+        if (!productService.findByCategoryId(productCategoryId)
                           .isEmpty()) {
             return false;
         }
