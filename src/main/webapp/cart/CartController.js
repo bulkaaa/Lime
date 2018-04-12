@@ -67,7 +67,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                         .then(
                             function (response) {
                                 if (response.data) {
-                                   $scope.suppliersList = response.data;
+                                   $scope.suppliersList = response.data.slice();
                                 }
                             },
                             function (response) {
@@ -79,7 +79,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                 .then(
                                     function (response) {
                                         if (response.data) {
-                                          $scope.categories = response.data;
+                                          $scope.categories = response.data.slice();
                                           }
                                     },
                                     function (response) {
@@ -90,8 +90,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
         $http.get("resource/one/" + item.id)
             .then(function(response){
                 $scope.item = item;
-                $scope.list.suppliers.length = 0;
-                $scope.list.suppliers.push(item.supplier);
                 modalInstance = $modal.open({
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
@@ -121,6 +119,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                 function(response){
                                     if (response.data){
                                         var path = "/file_management/" + response.data.image;
+                                        $scope.item = response.data;
                                         $scope.item.name = response.data.name;
                                         $scope.item.description = response.data.description;
                                         $scope.item.quantity = response.data.quantity;
@@ -178,7 +177,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                 .then(
                     function (response) {
                         if (response.data) {
-                           $scope.suppliersList = response.data;
+                           $scope.suppliersList = response.data.slice();
                         }
                     },
                     function (response) {
@@ -260,10 +259,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 
     }
-
-     $scope.list = {
-            suppliers: []
-        };
 
 
 
