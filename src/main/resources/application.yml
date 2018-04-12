@@ -19,9 +19,13 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
+  session:
+    store-type: redis
 server:
-    session:
-      timeout: 720
+  port: 8080
+  address: localhost
+  session:
+    timeout: 25920000
 storage:
   properties:
     location: pics
