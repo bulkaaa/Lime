@@ -98,9 +98,7 @@
             <div ng-if="resource" class="form-group" ng-class="{ 'has-error': form.supplier.$touched && form.supplier.$error.required }">
                 <label class="col-sm-3 control-label">Supplier email: <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
-                    <div class="row" ng-repeat="supplier in suppliersList">
-                        <input type="checkbox" checklist-model="list.suppliers" checklist-value="supplier" ng-required="list.suppliers.length==0"> {{supplier.emailAddress}}
-                    </div>
+                    <select ng-model="item.supplier" ng-options="supplier.emailAddress for supplier in suppliersList track by supplier.id" class="form-control" required></select>
                     <span ng-show="form.supplier.$touched && form.supplier.$error.required" class="help-block">Supplier email is required</span>
                 </div>
                 <span class="help-button" uib-tooltip="Please enter supplier email" tooltip-placement="left">?</span>
@@ -206,9 +204,7 @@
             <div ng-if="resource || product" class="form-group" ng-class="{ 'has-error': form.category.$touched && form.category.$error.required }">
                 <label class="col-sm-3 control-label">Category <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
-                    <select ng-model="item.category" name="category" placeholder="category" class="form-control" required>
-                        <option ng-repeat="category in categories" ng-value="category">{{category.name}}</option>
-                    </select>
+                    <select ng-model="item.category" ng-options="category.name for category in categories track by category.id" class="form-control" required></select>
                     <span ng-show="form.category.$touched && form.category.$error.required" class="help-block">category is required</span>
                 </div>
                 <span class="help-button" uib-tooltip="Please enter category" tooltip-placement="left">?</span>
