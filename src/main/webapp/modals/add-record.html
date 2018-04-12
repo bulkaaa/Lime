@@ -16,11 +16,7 @@
             <div ng-if="job" class="form-group">
                 <label class="col-sm-3 control-label">Product name <sup class="sup-color">*</sup></label>
                 <div class="col-sm-8">
-                    <div class="row" ng-repeat="product in products">
-                        <div class="radio">
-                            <label><input type="radio" ng-model="item.product" ng-value="{{product}}">{{ product.name}}</label>
-                        </div>
-                    </div>
+                        <select ng-model="item.product" ng-options="product.name for product in products track by product.id" class="form-control" required></select>
                     <span ng-show="form.products.$touched && form.products.$error.required" class="help-block">Product name is required</span>
                 </div>
                 <span class="help-button" uib-tooltip="Please enter product name" tooltip-placement="left">?</span>
