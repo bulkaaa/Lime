@@ -144,7 +144,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                 );
                              },
                              function(response){
-                                DialogService.handle(response,'resource', 'update');
+                                DialogService.handle(response,'image', 'upload');
                              }
                     );
     };

@@ -1,4 +1,19 @@
-app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance', 'item', function($scope, $http, modalInstance, item) {
+app
+.directive('bindEvent', function() {
+      return {
+        restrict: 'EAC',
+        controller: function($scope, $element, $attrs) {
+
+          $element.on('customEvent', function() {
+            console.log('custom event is triggered');
+          });
+        }
+      };
+    })
+
+
+.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance', 'item', function($scope, $http, modalInstance, item) {
+
 	function init(){
 		$scope.item = item;
     }
@@ -10,6 +25,7 @@ app.controller('EditRecordController',  ['$scope', '$http', '$uibModalInstance',
          }
 
 		$scope.updateRecord($scope.item);
+        angular.element('input').triggerHandler( "customEvent" );
 
 	};
 
