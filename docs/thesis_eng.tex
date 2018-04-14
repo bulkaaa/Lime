@@ -192,9 +192,18 @@ supervisor's signature & \hspace*{100pt} & author's signature
 \title
 \end{center}
 
-Firstly we will write an abstract of our work in English.\\
+For the subject of our engeeniring thesis, we have resolved a problem of management of supplies in a small chemical laboratory. We have designed and implemented a system supporting management of resources (chemical reagents, instruments, etc.). The system keeps track of the state of resources in the laboratory, and stores the data in a database. The system has graphical user-friendly interface which facilitates displaying and modifying the gathered data. Multiple functionalities in the system allow the user to: 
+\begin{itemize}
+\item Classify the resource into groups
+\item Assign descriptions with multimedia content to resources
+\item	Define and generate reports and notifications. reports are displaying current state of resources as well as plot of activity in time, plot of demand for some resource in time, bar chart, pie chart, whereas notifications are alerts about low level of some chemical reagent, etc.
+\item For each resource, store suppliers’ contact data and order new resources directly from the application
+\item Predict future demand for resources based on available historical data
+\end{itemize}
+The implemented system is a Web Application. It consists of a client application – developed in AngularJS – and server – developed in SpringBoot Java. Elements of application exchange information using RESTful API. As per development tools, we used IntelliJ IDEA (a Java integrated development environment (IDE)).
+\\
 
-\noindent \textbf{Keywords:} keyword1, keyword2, ...
+\noindent \textbf{Keywords:} Resource Management, Database, Time Series Forecast, Web Application, Java, AngularJS, SpringBoot, RESTful API, IntelliJ IDEA
 \end{abstract}
 }
 
@@ -208,9 +217,19 @@ Firstly we will write an abstract of our work in English.\\
 \tytul
 \end{center}
 
+Jako temat pracy inżynierskiej, rozwiązalimy problem zarządzania zasobami w małym laboratorium chemicznym. Zaprojektowali\'smy i zaiplementowali\'smy system wspomagający rozporządzanie zasobami (reagentami chemicznymi, itd.) System zbiera informacje o stanie zasobów i przechowuje je w bazie danych. Aplikacja posada przyjazny dla użytkownika interfejs graficzny, co ułatwia wy\'swietlanie i modyfikacje zebranych danych. Pozostałe funkcjonalno\'sci systemu pozwalają na: 
+\begin{itemize}
+\item Klasyfikację zasobów w grupy
+\item Przypisanie zasobom opisów i multimediów (np. zdjęć)
+\item	Definiowanie i generowanie raportów i notyfikacji. Raporty przedstawiają obecny stan zasobów, jak również wykresy aktywnoci (produkcji) w czasie, wykresy zapotrzebowania na zasoby w czasie, wykresy słupkowe, wykresy kołowe. Notyfikacje to alerty o niskim poziomie zasobów.
+\item Dla każdego zasobu, przechowaywane są informacje o danych kontaktowych do dostawcy oraz umożliwione jest zamówienie nowych bezporednio z aplikacji.
+\item Przwewidywanie przyszłego zapotrzebowania na zasoby na podstawie danych historycznych
+\end{itemize}
+Zaimplementowany system jest aplikacją internetową. Składa się z aplikacji klieanta - zaimplementowanej w AngularJS – i serwera – zaimplementowanego przy użyciu SpringBoot Java. Alementy aplikacji wymieniając się danymi za pomocą RESTful API. jako narzędzie deweloperskie, korzystali\'smy z IntelliJ IDEA.
+\\
 
 
-\noindent \textbf{Słowa kluczowe:} slowo1, slowo2, ...
+\noindent \textbf{Słowa kluczowe:} Zarządzanie zasobami, Baza danych, Prognozowania na podstawie szeregu czasowego, Aplikacja internetowa, Java, AngularJS, SpringBoot, RESTful API, IntelliJ IDEA
 \end{abstract}
 }
 
@@ -264,16 +283,15 @@ I hereby declare that the thesis entitled ,,\title '', submitted for the \type ~
 \markboth{}{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
-
-For our engeeniring project, we have designed and implemented a system supporting management of supplies in a small chemical laboratory (chemical reagents, instruments, etc.). The system keeps track of the state of resources in the laboratory, and stores the data in a database. The system has graphical user-friendly interface which facilitates displaying and modifying the gathered data. Multiple functionalities in the system allow the user to: 
+The subject of the presented paper is the implementation of the system for management of supplies in a small chemical laboratory. The idea for such solution came from a real life situation, where an existing chemical laboratory needed an application to faciliate their work. Throught all phases of design and implementation, the real needs of these existing chemical laboratory were taken into consideration and many elements of the application originated from there. 
+For instance, when thinking of a database, we matched the design to what we knew would be stored in this database. For example there are tables to store different products and resources, but the relationship between those two table reflects the laboratories' formulas, that is, which products are made of which resources and in which proportion. 
+The following chapters will describe in depth:
 \begin{itemize}
-\item Classify the resource into groups
-\item Assign descriptions with multimedia content to resources
-\item	Define and generate reports and notifications displaying current state of resources as well as plot of activity in time, plot of demand for some resource in time, bar chart, pie chart, table with adjustable columns/rows, an alert about low level of some chemical reagent, etc.
-\item For each resource, store suppliers’ contact data and order new resources directly from the application
-\item Predict future demand for resources based on available historical data
+\item The set of initial requirements including business analysis and the background of the problem
+\item The detailed design of the application
+\item The technical information of how we realised this project, including development model and work division
+\item Some final conclusions along with post implementation valuation of our resulting application
 \end{itemize}
-The further describiton of the project is contained in the following chapters.
 
 
 
@@ -281,7 +299,7 @@ The further describiton of the project is contained in the following chapters.
 
 \chapter{Work Division Plan}
 
-The project was designed so as it could be completed by the group of three people. The tasks were divided equally. That being said, all three participants of the project contributed towards the building of the system, its design and the frame application. What is more, great emphasis has been put on collaboration and team work, resulting in members of the group often performing tasks outside their divised part, which contributed toward the project's final success.
+The project was designed so as it could be completed by the group of three people. The tasks were divided so that each memeber of the group was assigned a part, and these parts were thought to be equally time consuming. That being said, all three participants of the project contributed towards the building of the system, its design and the frame application. What is more, great emphasis has been put on collaboration and team work, resulting in members of the group often performing tasks outside their divised part, which contributed toward the project's final success.
 
 \section{Work Division}
 
@@ -294,17 +312,15 @@ The project was designed so as it could be completed by the group of three peopl
 \texttt{Name} & \texttt{Responsibility} \\ \hline
 \texttt{Klaudia Jarosz} & Implementation of the frame application\\ \cline{2-2}
 \texttt{} & Creating a database containg data about users, resources, suppliers and user's activity\\  \cline{2-2}
-\texttt{} & Design and implementation of a user-friendly interface \\ \cline{2-2}
-\texttt{} & Testing \\ \hline
+\texttt{} & Design and implementation of a user-friendly interface \\ \hline
 \texttt{Maciej Głowala} & Implementation of the frame application\\ \cline{2-2}
 \texttt{} & Handling users with different roles\\  \cline{2-2}
 \texttt{} & Saving and restoring system state \\ \cline{2-2}
-\texttt{} & Virtual server setup \\ \cline{2-2}
-\texttt{} & Testing \\ \hline
+\texttt{} & Virtual server setup \\ \hline
 \texttt{Aleksandra Bułka} & Implementation of the frame application\\ \cline{2-2}
 \texttt{} & Implementation of reports and notifications\\  \cline{2-2}
 \texttt{} & Forecasting module\\ \cline{2-2}
-\texttt{} & Testing \\ \hline
+\texttt{} & Ordering module \\ \hline
 
 
 \end{tabular}
@@ -314,16 +330,24 @@ The project was designed so as it could be completed by the group of three peopl
 % ----------------------- Business Analysis ------------------
 
 
-\chapter{Business Analysis}
+\chapter{Background of the Problem}
 
-TODO
-
-
-\section{Business Analysis}
+The idea of the L.I.M.E. project comes from the well-known problems of managing the warehouses and laboratories. Small companies tackles with many perplexities connected with governance of production and the resources.
 
 \section{Other Known Solutions}
 
+The known solutions for the problem:
 
+\begin{enumerate}
+
+\item World-Class Warehousing and Material Handling by Edward Frazelle
+\item Essentials of Inventory Management by Max Muller
+\item Warehouse Management: A Complete Guide to Improving Efficiency and Minimizing Costs in the Modern Warehouse by Gwynne Richards
+\item Inventory Accuracy: People, Processes, \& Technology by David J. Piasecki
+\item Introduction to Materials Management by Steve Chapman 
+\end{enumerate}
+
+Those problems may be hard to resolve. And there comes the L.I.M.E. which allows to register products and resources, managers and workers. Application delivers job records, predictions, and auto resource orders. It’s ideal for small companies, who wants to improve control of staff, products and resources.
 
 
 % ----------------------- Requirement Specification ------------------
@@ -334,7 +358,8 @@ TODO
 
 \section{Functional Requirements}
 
-The functional reuirements of the applications are different for different users of the application. The tables contained in the following chapters provide descriptions of use cases for different groups of application users.
+
+The functional requirements cases of the applications are different for different users of the application. The table contained in this chapter provide functional requirements for different groups of application users.
 The three groups of users of the application are:
 \begin{enumerate}
 
@@ -344,12 +369,69 @@ The three groups of users of the application are:
 
 \end{enumerate}
 
+\begin{longtable}{|p{3cm}||p{13cm}|}
+\caption[Functional Requirements]{Functional Requirements}
+\label{Functional Requirements}
+\tabularnewline
+
+\hline
+\texttt{Actor} & \texttt{Description} \\ \hline
+\texttt{Administrator} & Log in to the system, change and recover his password\\  \cline{2-2}
+\texttt{} & Create, modify and remove an account in the system, modify roles\\  \cline{2-2}
+\texttt{} & View, create, modify and remove resources and products and their groups\\ \cline{2-2}
+\texttt{} & Define, generate and send a report or prediction\\ \cline{2-2}
+\texttt{} & Define notifications, turn notifications on/off\\ \cline{2-2}
+\texttt{} & Order resources, turn on/off automatic ordering\\ \cline{2-2}
+\texttt{} & Save the current state of the system, schedule a system backup or restore it from backup\\ \hline
+\texttt{Manager} & Log in to the system, change and recover his password\\  \cline{2-2}
+\texttt{} & View, create, modify and remove resources and products and their groups\\ \cline{2-2}
+\texttt{} & Define, generate and send a report or prediction\\ \cline{2-2}
+\texttt{} & Define notifications, turn notifications on/off\\ \cline{2-2}
+\texttt{} & Order resources, turn on/off automatic ordering\\ \hline
+\texttt{User} & Log in to the system, change and recover his password\\  \cline{2-2}
+\texttt{} & View, create, modify and remove resources and products\\ \cline{2-2}
+\texttt{} & Define, generate and send a report or prediction\\ \cline{2-2}
+\texttt{} & Order resources\\ \hline
+
+
+\end{longtable}
+
+
+
+\section{Non-functional Requirements}
+
+\begin{table}[!h]% Koniecznie label po caption, inaczej jest zła numeracja
+\caption[Non-functional Requirements]{Non-functional requirements}
+\label{requirements}
+\centering
+\begin{tabular}{|p{3cm}|p{2cm}|p{11cm}|}
+\hline
+Area & Number & Details \\ \hline
+\texttt{Usability} & 1 & Application must be responsive. It must be working on PC, tablets and phones with resolution at least 720p.\\  \hline
+\texttt{Reliability} & 2 & Application must be of type High Availability. It should be available 24h/7d between 08:00 and 23:00. There could be service breaks during the week between 24:00 and 8:00. \\  \cline{2-3}
+\texttt{} & 3 & Application must have quick restart in case of app machine failures. \\ \hline
+\texttt{Recovery} & 4 & Application must have daily database recovery performed between 24:00 and 08:00. \\ \hline
+\texttt{Performance} & 5 & Application should respond no longer than 3 seconds while strain being on level 100 queries per minute. \\ \hline
+\texttt{Supportability} & 6 & Documentation should contain instruction for recovery data from database backup.  \\ \cline{2-3}
+\texttt{} & 7 & Application should keep backward compatibility between the released versions. \\ \hline
+\texttt{Security} & 8 & Application must have user levels security. It shall not pass a user who has inappropriate privileges. \\ \hline
+
+
+\end{tabular}
+\end{table}
+
+
+
+\section{Use Cases}
+
+The uses cases of the applications, similarily to functional requirements are different for different users of the application. The tables contained in the following chapters provide descriptions of use cases for different groups of application users.
+
 \subsection{Administrator}
 
 
 \begin{longtable}{|p{3cm}|p{3cm}|p{10cm}|}
-\caption[Functional Requirements for Administrator]{Functional Requirements for Administrator}
-\label{functional requirements administrator}
+\caption[Uses Cases for Administrator]{Uses Cases for Administrator}
+\label{Uses Cases Administrator}
 \tabularnewline
 
 \hline
@@ -408,8 +490,8 @@ The three groups of users of the application are:
 
 
 \begin{longtable}{|p{3cm}|p{3cm}|p{10cm}|}
-\caption[Functional Requirements for Manager]{Functional Requirements for Manager}
-\label{functional requirements manager}
+\caption[Uses Cases for Manager]{Uses Cases for Manager}
+\label{Use Cases Manager}
 \tabularnewline
 
 \hline
@@ -457,8 +539,8 @@ The three groups of users of the application are:
 
 
 \begin{longtable}{|p{3cm}|p{3cm}|p{10cm}|}
-\caption[Functional Requirements for User]{Functional Requirements for User}
-\label{functional requirements user}
+\caption[Uses Cases for User]{Uses Cases for User}
+\label{Uses Cases user}
 \tabularnewline
 
 \hline
@@ -491,38 +573,12 @@ The three groups of users of the application are:
 
 \end{longtable}
 
-\section{Non-functional Requirements}
-
-\begin{table}[!h]% Koniecznie label po caption, inaczej jest zła numeracja
-\caption[Non-functional Requirements]{Non-functional requirements}
-\label{requirements}
-\centering
-\begin{tabular}{|p{3cm}|p{2cm}|p{11cm}|}
-\hline
-Area & Number & Details \\ \hline
-\texttt{Usability} & 1 & Application must be responsive. It must be working on PC, tablets and phones with resolution at least 720p.\\  \hline
-\texttt{Reliability} & 2 & Application must be of type High Availability. It should be available 24h/7d between 08:00 and 23:00. There could be service breaks during the week between 24:00 and 8:00. \\  \cline{2-3}
-\texttt{} & 3 & Application must have quick restart in case of app machine failures. \\ \hline
-\texttt{Recovery} & 4 & Application must have daily database recovery performed between 24:00 and 08:00. \\ \hline
-\texttt{Performance} & 5 & Application should respond no longer than 3 seconds while strain being on level 100 queries per minute. \\ \hline
-\texttt{Supportability} & 6 & Documentation should contain instruction for recovery data from database backup.  \\ \cline{2-3}
-\texttt{} & 7 & Application should keep backward compatibility between the released versions.. \\ \hline
-\texttt{Security} & 8 & Application must have user levels security. It shall not pass a user who has inappropriate privileges. \\ \hline
-
-
-\end{tabular}
-\end{table}
-
-
-\section{User Stories}
-
-\section{Use Cases}
 
 
 
 % ----------------------- Development Model ------------------
 
-\chapter{Development Model and Methodology}
+\chapter{Development Methodology}
 
 
 \section{Methodology}
@@ -554,8 +610,6 @@ The reasons we have chosen this particular development model are presented below
 \item It was highly recommended by the coordinators of the Group Project
 \end{itemize}
 
-
-\section{Development Model}
 
 
 
@@ -603,6 +657,65 @@ Data access object (DAO) is an object that provides an abstract interface to som
 	The most important fact and advantage is the relatively simple and rigorous separation between two important parts of an application that can but should not know anything of each other, and which can be expected to evolve frequently and independently. Changing business logic can rely on the same DAO interface, while changes to persistence logic do not affect DAO clients as long as the interface remains correctly implemented. All details of storage are hidden from the rest of the application (see information hiding). Thus, possible changes to the persistence mechanism can be implemented by just modifying one DAO implementation while the rest of the application isn't affected.
 L.I.M.E. implements one template parent interface with methods which are used by all DAO classes. IBasicCrudRepository extends hibernate CrudRepository and inherits from it all CRUD database operations. Singular DAO classes implement service-specific methods which are defined in DAO interfaces.
 
+\subsection{Plain Old Java Object}
+
+Plain old Java object (POJO) is an ordinary Java object, not bound by any special restriction and not requiring any class path. 
+The main aim of the POJO classes is to differentiate business logic from database entity. It makes code cleaner and easier to read and understand.
+
+\begin{figure}[h!]
+
+\begin{center}
+
+\includegraphics[width=\textwidth]{pojo}
+
+\end{center}
+\caption{Plain Old Java Object in Backend Architecture}
+\end{figure}
+ 
+The POJO phenomenon has most likely gained widespread acceptance because of the need for a common and easily understood term that contrasts with complicated object frameworks.
+
+L.I.M.E implemens POJO classes for all existing entity class. Those classes are free from frameworks and complicated annotations. There is object mapper implemented, which maps directly Entity to POJO.
+
+
+\subsection{Dependency Injection}
+
+Dependency Injection is a kind of broader version of "inversion of control" (IoC) principle. It relates to the way in which an object obtains references to its dependencies - the object is passed its dependencies through constructor arguments or after construction through setter methods or interface methods. It is called dependency injection since the dependencies of an object are 'injected' into it, the term dependency is a little misleading here, since it is not a new 'dependency' which is injected but rather a 'provider' of that particular capability. For example, passing a database connection as an argument to a constructor instead of creating one internal would be categorized as dependency injection.
+The pattern seeks to establish a level of abstraction via a public interface and to remove dependencies on components by supplying a 'plugin' architecture. This means that the individual components are tied together by the architecture rather than being linked together themselves. The responsibility for object creation and linking is removed from the objects themselves and moved to a factory.
+
+
+\begin{figure}[h!]
+
+\begin{center}
+
+\includegraphics[width=\textwidth]{dependency}
+
+\end{center}
+\caption{Dependency Injection}
+\end{figure}
+ 
+The main advantage of Dependency Injection is fact that there is only one instance of each object shared through multiple controllers. What is more, it allows a client the flexibility of being configurable. Only the client's behavior is fixed. The client may act on anything that supports the intrinsic interface the client expects.
+Dependency injection can be used to externalize a system's configuration details into configuration files, allowing the system to be reconfigured without recompilation. Separate configurations can be written for different situations that require different implementations of components. This includes, but is not limited to, testing.
+	L.I.M.E. uses spring dependency injection. There are bean services, which implements the domain logic. Each service implements interface defining the methods. Interfaces and services corresponds to hibernate entities and fulfill the needs of application logic. Interface beans are autowired into the REST controllers.
+
+\subsection{RESTful API}
+
+REpresentational State Transfer (REST) is an architectural style that defines a set of constraints and properties based on HTTP. REST-compliant web services allow the requesting systems to access and manipulate textual representations of web resources by using a uniform and predefined set of stateless operations. Other kinds of web services, such as WSDL and SOAP, expose their own arbitrary sets of operations.
+In a RESTful web service, requests made to a resource's URI will elicit a response that may be in XML, HTML, JSON, or some other format. The response may confirm that some alteration has been made to the stored resource, and the response may provide hypertext links to other related resources or collections of resources. When HTTP is used, as is most common, the operations available are GET, POST, PUT, DELETE, and other predefined CRUD HTTP methods. 
+
+
+\begin{figure}[h!]
+
+\begin{center}
+
+\includegraphics[width=\textwidth]{rest}
+
+\end{center}
+\caption{RESTful API}
+\end{figure}
+ 
+L.I.M.E. implements RESTful controllers which are used to communicate with a client part of application. It communicates with JSON body type. There are CRUD used methods like PUT, DELETE, POST, GET to make action more readable and indicate what exactly it does. There are Controllers corresponding to view in a client part. .
+
+
 % ----------------------- Technical Analysis ------------------
 
 
@@ -610,8 +723,6 @@ L.I.M.E. implements one template parent interface with methods which are used by
 
 More detailed - all the classes and functions
 
-
-\section{General Program Workflow}
 
 
 \section{Program Interface}
@@ -622,30 +733,112 @@ More detailed - all the classes and functions
 
 \section{Database Design}
 
+\begin{figure}[hb!]
 
+\begin{center}
+
+\includegraphics[width=\textwidth]{DB4}
+
+\end{center}
+\caption{Database Design}
+\end{figure}
+
+The database consists of the following tables:
+
+\begin{enumerate}
+\item \textbf{Product} Stores information about products (complex structures of resources) with their properties:
+\begin{enumerate}
+\item \textbf{Product ID} ID of a product
+\item \textbf{Added At} Date of adding a product to a database
+\item \textbf{Describtion} Describtion of a product
+\item \textbf{Expected Value} Expected value - how much of a product shall be obtained after production
+\item \textbf{Image} Image for this product
+\item \textbf{Name} Name of a product
+\item \textbf{Unit} Unit of a measurement
+\item \textbf{Category ID} Assigns a product to a category
+\end{enumerate}
+
+\item \textbf{Product Category} Stores information about product categories: its name and ID
+
+\item \textbf{Job} Logs the jobs performed by the user and the following details:
+\begin{enumerate}
+\item \textbf{Job ID} ID of a job
+\item \textbf{Details}More details about the job
+\item \textbf{Result Value} Result value - how much of a product was actually obtained after production
+\item \textbf{Start Date} Start date of a job
+\item \textbf{End Date} End date of a job
+\item \textbf{Product ID} ID of a product that resulted from this job
+\item \textbf{User ID} Assigns a job to a user which have performed it
+\end{enumerate}
+
+\item \textbf{User}  This table stores properties of every user of the system, such as:
+\begin{enumerate}
+\item \textbf{User ID} ID of a user
+\item \textbf{Email address} Email address of this user
+\item \textbf{Enabled} Is this an active user of the system
+\item \textbf{Joined At} Date of joining the system
+\item \textbf{Name} Given Name
+\item \textbf{Surname} Surname
+\item \textbf{Username} Username chosen by the user
+\item \textbf{Password} User's password in encrypted form
+\end{enumerate}
+
+\item \textbf{User Roles} Assigns users to their roles (resolves the many-to-many relationship)
+
+\item \textbf{Role} Stores each role with its name and ID
+
+\item \textbf{Formula}  Resolves the many-to-many relation between resources and product, represents the quantity of resources used to make a product
+\begin{enumerate}
+\item \textbf{Formula ID} ID of a formula
+\item \textbf{Product ID} ID of a product
+\item \textbf{Resource ID} ID of a resource
+\item \textbf{Value} How much of a given resource is neede to make the given product
+\end{enumerate}
+
+\item \textbf{Resource}  Stores information about a basic laboratory resource and its properties, such as:
+\begin{enumerate}
+\item \textbf{Product ID} ID of a resource
+\item \textbf{Describtion} Describtion of a resource
+\item \textbf{Image} Image for the resource
+\item \textbf{Name} Name of a resource
+\item \textbf{Critical Value} critical value - how much of a resource shall be left for the notifications of the low level of resource to be triggered
+\item \textbf{Notifiactions On} Are the notifications about the low level of the resource turned on
+\item \textbf{Ordering On} Is automatic ordering of the resource turned on
+\item \textbf{Quantity} How much of a resource at the storage at the moment
+\item \textbf{Unit} Unit of a measurement
+\item \textbf{Category ID} Assigns a resource to a category
+\item \textbf{Supplier ID} Assigns a resource to a supplier
+\end{enumerate}
+
+\item \textbf{Resource Category} Stores information about resource categories: its name and ID
+
+\item \textbf{Supplier} Stores data about suppliers assigned to each resources
+\begin{enumerate}
+\item \textbf{Supplier ID} ID of a supplier
+\item \textbf{Email address} Email address of this supplier
+\item \textbf{Name} Name of the supplier
+\item \textbf{Street} Address of the supplier: street name and number
+\item \textbf{City} Address of the supplier: City
+\item \textbf{Postal Code} Address of the supplier: Postal Code
+\item \textbf{Country} Address of the supplier: Country
+\item \textbf{Telephone} Telephone number of this supplier
+\end{enumerate}
+
+\end{enumerate}
+ 
 \section{Prediction Model}
 
 
 
 % ----------------------- Experimental Evaluation ------------------
 
-\chapter{Experimental Evaluation}
-
-This is important - these are various tests, trying to cover all the possible thing user can do in the application
-
-
-\section{Evaluation Plan}
+\chapter{Post Execution Documentation}
 
 
 
-% ----------------------- Acceptance Tests ------------------
+\section{Evaluating Functional Requirements and Use Cases}
 
-\chapter{Acceptance Tests}
-
-This is for other tests
-
-
-\section{Test Plan}
+\section{Evaluating Non-Functional Requirements}
 
 
 
@@ -716,9 +909,9 @@ There we will have manual
 \thispagestyle{empty}
 
 % -----------------------------  APPENDIX B ---------------------------
-\chapter*{B. Testing Scenarios}
+\chapter*{B. Test Report}
 
-Testing Scenarios
+Testi Report
 \thispagestyle{empty}
 
 
