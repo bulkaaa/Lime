@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-dialog-service/5.3.0/dialogs.min.css">
     <link rel="stylesheet" href="styles/style.css" />
-    <link rel="stylesheet" href="cart/cart.css" />
+    <link rel="stylesheet" href="resource/resource.css" />
     <link rel="stylesheet" href="libs/css/font-awesome.min.css">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 </head>
@@ -65,8 +65,8 @@
                 controller: 'ResetPasswordController'
             })
             .when('/resources', {
-                templateUrl: 'cart/CartView.html',
-                controller: 'CartController'
+                templateUrl: 'resource/ResourceView.html',
+                controller: 'ResourceController'
             })
             .when('/product', {
                 templateUrl: 'product/ProductView.html',
@@ -150,7 +150,7 @@
 
 </script>
 <script src="home/HomeController.js"></script>
-<script src="cart/CartController.js"></script>
+<script src="resource/ResourceController.js"></script>
 <script src="product/ProductController.js"></script>
 <script src="user/UserController.js"></script>
 <script src="job/JobController.js"></script>

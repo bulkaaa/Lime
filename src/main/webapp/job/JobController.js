@@ -2,9 +2,6 @@ app.controller('JobController', ['$scope', '$rootScope', '$http', '$uibModal', '
 
 var modalInstance = null;
     $scope.job = true;
-        $scope.list = {
-                products: []
-            };
 
     $scope.showAll = function() {
         $http.get("/job/all")
@@ -35,7 +32,6 @@ var modalInstance = null;
 
     $scope.addRecord = function(){
         $scope.item={};
-        $scope.list.products = [];
                 $http.get("/product/all")
                     .then(
                         function (response) {

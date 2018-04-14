@@ -216,7 +216,7 @@ public class Supplier implements Serializable {
     @NotEmpty
     @Size(max = MAX_LENGTH_CITY)
     private String city;
-    @ApiModelProperty(value = "Country the supplier.", required = true, allowableValues = "PL")
+    @ApiModelProperty(value = "Country the supplier.", required = true)
     @NotEmpty
     @Size(max = MAX_LENGTH_COUNTRY)
     private String country;
@@ -236,7 +236,7 @@ public class Supplier implements Serializable {
     private static final int MAX_LENGTH_POSTAL_CODE = 10;
     private static final int MAX_LENGTH_CITY = 40;
     private static final int MAX_LENGTH_STREET = 35;
-    private static final int MAX_LENGTH_COUNTRY = 3;
+    private static final int MAX_LENGTH_COUNTRY = 100;
     private static final int MAX_LENGTH_TELEPHONE = 30;
     private static final int MAX_LENGTH_EMAIL = 240;
 }

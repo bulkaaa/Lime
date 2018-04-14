@@ -14,7 +14,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
     };
 }])
 
-.controller('CartController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', '$sanitize', function($scope, $rootScope, $http, $modal, $dialogs, DialogService, $sanitize) {
+.controller('ResourceController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', '$sanitize', function($scope, $rootScope, $http, $modal, $dialogs, DialogService, $sanitize) {
     var modalInstance = null;
     $scope.resource = true;
 
@@ -29,7 +29,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                              $http.get(path)
                                  .then(
                                      function (res) {
-                                         value.image = res.data;
+                                         value.realimage = res.data;
                                      },
                                      function (response) {
                                          DialogService.generalServerError();
@@ -107,46 +107,48 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
     $scope.updateRecord = function(item) {
         var file = item.image;
-        item.image = item.image.name;
-        var fd = new FormData();
-        fd.append('file', file);
+        if(file instanceof File){
+            item.image = item.image.name;
+            var fd = new FormData();
+            fd.append('file', file);
             $http.post("/file_management/", fd, {
                 headers: {'Content-Type': undefined },
                 transformRequest: angular.identity})
-                    .then(function(response){
-                        $http.put("/resource/update", JSON.stringify(item))
-                            .then(
-                                function(response){
-                                    if (response.data){
-                                        var path = "/file_management/" + response.data.image;
-                                        $scope.item = response.data;
-                                        $scope.item.name = response.data.name;
-                                        $scope.item.description = response.data.description;
-                                        $scope.item.quantity = response.data.quantity;
-                                        $scope.item.unit = response.data.unit;
-                                        $scope.item.supplier = response.data.supplier
-                                        if($scope.item.image){
-                                        $http.get(path)
-                                             .then(
-                                                 function (res) {
-                                                     $scope.item.image = res.data;
-                                                 },
-                                                 function (response) {
-                                                     DialogService.generalServerError();
-                                                 }
-                                             )
-                                        }
-                                    }
-                                },
-                                    function(response){
-                                        DialogService.handle(response,'resource', 'update');
-                                    }
-                                );
-                             },
-                             function(response){
-                                DialogService.handle(response,'resource', 'update');
-                             }
-                    );
+                .then(null,
+                    function(response){
+                        DialogService.handle(response,'image', 'upload');
+                    }
+                );
+        }
+
+        $http.put("/resource/update", JSON.stringify(item))
+            .then(
+                function(response){
+                    if (response.data){
+                        var path = "/file_management/" + response.data.image;
+                        $scope.item = response.data;
+                        $scope.item.name = response.data.name;
+                        $scope.item.description = response.data.description;
+                        $scope.item.quantity = response.data.quantity;
+                        $scope.item.unit = response.data.unit;
+                        $scope.item.supplier = response.data.supplier
+                        if($scope.item.image){
+                        $http.get(path)
+                             .then(
+                                 function (res) {
+                                     $scope.item.realimage = res.data;
+                                 },
+                                 function (response) {
+                                     DialogService.generalServerError();
+                                 }
+                             )
+                        }
+                    }
+                },
+                    function(response){
+                        DialogService.handle(response,'resource', 'update');
+                    }
+                );
     };
 
     $scope.deleteRecord = function(id) {

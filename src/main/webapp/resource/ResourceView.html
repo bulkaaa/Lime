@@ -35,11 +35,11 @@
         <div id="{{item.id}}" class="item row">
             <div class="col-md-12 col-sm-12">
                 <div class="image col-md-2 col-sm-2">
-                    <img ng-src="data:image/png;base64,{{item.image}}">
+                    <img ng-src="data:image/png;base64,{{item.realimage}}">
                 </div>
                 <div class="description col-md-2 col-sm-2">
                    </br>
-                    <span class="name">{{item.name}}</span>
+                    <span class="name" ng-bind="item.name">{{item.name}}</span>
                     <span></span>
                 </div>
                 <div class="description col-md-4 col-sm-4">
