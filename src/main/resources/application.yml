@@ -37,7 +37,7 @@ server:
   port: 8080
   address: localhost
   session:
-    timeout: 25920000
+    timeout: 43200
 storage:
   properties:
     location: pics
