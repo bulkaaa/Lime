@@ -134,6 +134,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                             $scope.item.description = response.data.description;
                             $scope.item.expectedValue = response.data.expectedValue;
                             $scope.item.unit = response.data.unit;
+                            $scope.item.category = response.data.category;
                              if($scope.item.image){
                              $http.get(path)
                                     .then(
@@ -327,12 +328,10 @@ app.directive('fileModel', ['$parse', function ($parse) {
                         $http.post("/file_management/", fd, {
                             headers: {'Content-Type': undefined },
                             transformRequest: angular.identity})
-         }
-
+        }
          item.quantity = 0;
          item.notifications_on = false;
          item.critical_value = 0;
-
              $http.post("/product/create", JSON.stringify(item))
                  .then(
                      function(response){

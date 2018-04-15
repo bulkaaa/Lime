@@ -131,7 +131,8 @@ app.directive('fileModel', ['$parse', function ($parse) {
                         $scope.item.description = response.data.description;
                         $scope.item.quantity = response.data.quantity;
                         $scope.item.unit = response.data.unit;
-                        $scope.item.supplier = response.data.supplier
+                        $scope.item.supplier = response.data.supplier;
+                        $scope.item.category = response.data.category;
                         if($scope.item.image){
                         $http.get(path)
                              .then(
@@ -213,18 +214,18 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 
     $scope.saveRecord = function(item) {
-        var file = $scope.item.image;
-        item.image = $scope.item.image.name;
-        item.critical_value = 0;
-        item.notifications_on = false;
-        item.ordering_on = false;
-        var fd = new FormData();
-        fd.append('file', file);
-            $http.post("/file_management/", fd, {
-                headers: {'Content-Type': undefined },
-                transformRequest: angular.identity})
-                    .then(
-                        function(response){
+        if ($scope.item.image){
+            var file = $scope.item.image;
+            item.image = $scope.item.image.name;
+            var fd = new FormData();
+            fd.append('file', file);
+                $http.post("/file_management/", fd, {
+                    headers: {'Content-Type': undefined },
+                    transformRequest: angular.identity})
+        }
+          item.critical_value = 0;
+          item.notifications_on = false;
+          item.ordering_on = false;
                          $http.post("/resource/create", JSON.stringify(item))
                                     .then(
                                         function(response){
@@ -253,13 +254,6 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                             DialogService.handle(response, 'resource', 'create');
                                         }
                                     );
-                        },
-                     function(response){
-                        DialogService.handle(response, 'resource', 'image');
-                    }
-                );
-
-
     }
 
 
