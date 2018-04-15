@@ -27,7 +27,7 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
             size: 'md',
             resolve: {
                 item: function () {
-                    return item; //response.data;
+                    return item;
                 }
             }
         });
@@ -40,6 +40,7 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
                 modalInstance = $modal.open({
                     templateUrl: 'modals/edit-record.html',
                     controller: 'EditRecordController',
+                    backdrop: 'static',
                     scope: $scope,
                     size: '',
                     resolve: {
@@ -59,9 +60,11 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
                         item = response.data;
                         $scope.item.name = response.data.name;
                         $scope.item.emailAddress = response.data.emailAddress;
-                        $scope.item.name = response.data.name;
-                        $scope.item.name = response.data.name;
-                        $scope.item.name = response.data.name;
+                        $scope.item.postalCode = response.data.postalCode;
+                        $scope.item.country = response.data.country;
+                        $scope.item.street = response.data.street;
+                        $scope.item.telephone = response.data.telephone;
+                        $scope.item.city = response.data.city;
                     }
                 },
                 function(response){

@@ -94,7 +94,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                                         size: '',
                                                         resolve: {
                                                             item: function () {
-                                                                return item;
+                                                                return response.data;
                                                             }
                                                         }
                                                     });
@@ -134,6 +134,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                             $scope.item.description = response.data.description;
                             $scope.item.expectedValue = response.data.expectedValue;
                             $scope.item.unit = response.data.unit;
+                            $scope.item.category = response.data.category;
                              if($scope.item.image){
                              $http.get(path)
                                     .then(
@@ -319,50 +320,45 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
 
     $scope.saveRecord = function(item) {
-        var file = $scope.item.image;
-        item.image = $scope.item.image.name;
-        item.quantity = 10;
-        item.notifications_on = false;
-        item.critical_value = 5;
-        var fd = new FormData();
-         fd.append('file', file);
-                    $http.post("/file_management/", fd, {
-                        headers: {'Content-Type': undefined },
-                        transformRequest: angular.identity})
-                            .then(
-                                function(response){
-                                    $http.post("/product/create", JSON.stringify(item))
-                                        .then(
-                                            function(response){
-                                                    item = response.data;
-                                                    var path = "/file_management/" + item.image;
-                                                    $http.get(path)
-                                                            .then(
-                                                                function (response) {
-                                                                    item.image = response.data;
-                                                                    $scope.items.push({
-                                                                        id: item.id,
-                                                                        name: item.name,
-                                                                        description: item.description,
-                                                                        expectedValue: item.expectedValue,
-                                                                        image: item.image,
-                                                                        unit: item.unit,
-                                                                    });
-                                                                },
-                                                                function(response){
-                                                                    DialogService.handle(response, 'product', 'create');
-                                                                }
-                                                            );
-                                            },
-                                            function(response){
-                                                DialogService.handle(response, 'resource', 'create');
-                                            }
-                                    );
-                                },
-                                function(response){
-                                    DialogService.handle(response, 'resource', 'image');
-                                }
-                            );
+        if ($scope.item.image){
+            var file = $scope.item.image;
+            item.image = $scope.item.image.name;
+            var fd = new FormData();
+             fd.append('file', file);
+                        $http.post("/file_management/", fd, {
+                            headers: {'Content-Type': undefined },
+                            transformRequest: angular.identity})
+        }
+         item.quantity = 0;
+         item.notifications_on = false;
+         item.critical_value = 0;
+             $http.post("/product/create", JSON.stringify(item))
+                 .then(
+                     function(response){
+                             item = response.data;
+                             var path = "/file_management/" + item.image;
+                             $http.get(path)
+                                     .then(
+                                         function (response) {
+                                             item.image = response.data;
+                                             $scope.items.push({
+                                                 id: item.id,
+                                                 name: item.name,
+                                                 description: item.description,
+                                                 expectedValue: item.expectedValue,
+                                                 image: item.image,
+                                                 unit: item.unit,
+                                             });
+                                         },
+                                         function(response){
+                                             DialogService.handle(response, 'product', 'create');
+                                         }
+                                     );
+                     },
+                     function(response){
+                         DialogService.handle(response, 'resource', 'create');
+                     }
+             );
     }
 
 

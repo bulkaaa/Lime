@@ -2,8 +2,8 @@ angular
     .module('myApp')
     .factory('DialogService', DialogService);
 
-DialogService.$inject = ['$rootScope', '$timeout', '$q','dialogs'];
-function DialogService($rootScope, $timeout, $q, $dialogs) {
+DialogService.$inject = ['$rootScope', '$timeout', '$q', '$location', 'dialogs'];
+function DialogService($rootScope, $timeout, $q, $location,  $dialogs) {
     service = {};
     service.dialogWait = dialogWait;
     service.generalServerError = generalServerError;
@@ -36,10 +36,15 @@ function DialogService($rootScope, $timeout, $q, $dialogs) {
     }
 
     function handle(response, name, action, uniqueFields){
-        if (response.status === 422 )
-            validationError(response, name, action);
+        if (response.status === 401){
+            loginFirstError();
+            $location.path('/login');
+        }
         else if(response.status === 409)
-            alreadyExistsError(response, name, uniqueFields);
+                alreadyExistsError(response, name, uniqueFields);
+        else if (response.status === 422 )
+            validationError(response, name, action);
+
         else
             generalServerError();
     }

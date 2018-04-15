@@ -22,7 +22,7 @@ spring:
     store-type: redis
 server:
   session:
-    timeout: 25920000
+    timeout: 43200
 storage:
   properties:
     location: pics
