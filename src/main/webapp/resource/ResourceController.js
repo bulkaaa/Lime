@@ -98,7 +98,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     size: '',
                     resolve: {
                         item: function () {
-                            return item;
+                            return response.data;
                         }
                     }
                 });
@@ -126,7 +126,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                 function(response){
                     if (response.data){
                         var path = "/file_management/" + response.data.image;
-                        $scope.item = response.data;
+                        item = response.data;
                         $scope.item.name = response.data.name;
                         $scope.item.description = response.data.description;
                         $scope.item.quantity = response.data.quantity;
