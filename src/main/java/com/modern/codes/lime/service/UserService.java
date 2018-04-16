@@ -60,6 +60,10 @@ public class UserService extends BasicCRUDService<User, UserPOJO, IUserDAO> impl
     public UserPOJO findByUsernameOrEmail(final String username, final String email) {
         return ParseTools.parse(dao.findByUsernameOrEmailAddress(username, email), UserPOJO.class);
     }
+    @Override
+    public UserPOJO findByEmailAddress(final String email) {
+        return ParseTools.parse(dao.findByEmailAddress(email), UserPOJO.class);
+    }
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {

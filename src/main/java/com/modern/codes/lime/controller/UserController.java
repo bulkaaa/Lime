@@ -2,6 +2,7 @@ package com.modern.codes.lime.controller;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.mail.MessagingException;
 
@@ -166,12 +167,44 @@ public class UserController extends BaseController {
     @ApiOperation(value = "Delete a User object", notes = "Deletes a <b>User</b> object ", response = UserPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved User object"))
     @ResponseBody
-    public Boolean delete(@ApiParam("User object") @PathVariable final String userId) {
+    public Boolean delete(@ApiParam("User ID") @PathVariable final String userId) {
 
         LOG.info("User deletion request received for id: " + userId);
 
         userService.delete(userId);
         return true;
+    }
+
+    /**
+     * Change password.
+     *
+     * @param email the user id
+     * @return the boolean
+     */
+    @RequestMapping(value = "/change_password/{email}",
+                    method = RequestMethod.DELETE,
+                    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Delete a User object", notes = "Deletes a <b>User</b> object ", response = UserPOJO.class)
+    @ApiResponses(@ApiResponse(code = 200, message = "Saved User object"))
+    @ResponseBody
+    public Boolean changePassword(@ApiParam("User email") @PathVariable final String email) {
+        try {
+            LOG.info("User deletion request received for id: " + email);
+
+            final UserPOJO user = userService.findByEmailAddress(email);
+            final String newPassword = UUID.randomUUID()
+                                           .toString();
+            user.setPlainPassword(newPassword);
+
+            MailService.SendEmail(email, "Lime password reset", "Hi!\n\n Your new password to lime account: "
+                                                                + newPassword
+                                                                + "\n\n Please do not share it! \n\n Reegards, \nTeam"
+                                                                + " of LimeLab.");
+            return true;
+        } catch (final MessagingException e) {
+            LOG.info("failed to change password " + e);
+            return false;
+        }
     }
 
     /**
