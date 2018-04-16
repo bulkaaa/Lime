@@ -17,20 +17,21 @@ import com.modern.codes.lime.class_models.TimeSeries;
 public class ISmoothingServiceTest {
 
     @Test
-    public void calculateSmoothingPositiveTest(){
-        //given
-        final TimeSeries givenTimeSeries = new TimeSeries();
+    public void calculateSmoothingCountTest(){
+        final TimeSeries givenTimeSeries = new TimeSeries(){};
+        final int days = 5;
+        //Creating sample series
+        givenTimeSeries.add(1.0);
+        givenTimeSeries.add(2.0);
+        givenTimeSeries.add(3.0);
+        givenTimeSeries.add(4.0);
+        givenTimeSeries.add(5.0);
 
-        //Dodaj co potrzebujesz do tego obiektu givenTimeSeries.
+        //Calculating forecast by Exponential Smoothing
+        final TimeSeries resultTimeSeries = service.calculateSmoothing(givenTimeSeries, days);
 
-        //when
-        final TimeSeries resultTimeSeries = service.calculateSmoothing(givenTimeSeries, 5);
-
-        //then
-
-        // porównaj wszystkie komponenty które miały się zmienić za pomocą tej metody.
-
-        assertEquals(2, resultTimeSeries.size());
+        //Check if proper number of data was appended to time series
+        assertEquals(givenTimeSeries.size() + days, resultTimeSeries.size());
     }
 
     @Autowired
