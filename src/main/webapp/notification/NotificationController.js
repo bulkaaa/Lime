@@ -3,13 +3,25 @@ app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uib
         $scope.notifications = true;
 
         $scope.showAll = function() {
+        let counter = 0;
             $http.get("/resource/all")
                 .then(
                     function (response) {
                         if (response.data) {
-                            console.log("updated record successfully!");
                             $scope.items = response.data;
-                        }
+                            angular.forEach($scope.items ,function(value, key){
+                            if (value.notifications_on)
+                                    counter++;
+                            });
+                            if(counter == $scope.items.length){
+                                 $('.OnButton').addClass('active');
+                                 $('.OffButton').removeClass('active');
+                             }
+                            if(counter !== $scope.items.length){
+                                  $('.OffButton').addClass('active');
+                                  $('.OnButton').removeClass('active');
+                             }
+                         }
                     },
                     function (response) {
                         DialogService.generalServerError();
