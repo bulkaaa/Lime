@@ -196,6 +196,7 @@ public class UserController extends BaseController {
                                            .toString();
             user.setPlainPassword(newPassword);
 
+            userService.save(user);
             MailService.SendEmail(email, "Lime password reset", "Hi!\n\n Your new password to lime account: "
                                                                 + newPassword
                                                                 + "\n\n Please do not share it! \n\n Reegards, \nTeam"
