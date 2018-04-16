@@ -81,7 +81,7 @@ public class TimeSeriesService implements ITimeSeriesService {
             for (final JobPOJO j : day) {
                 value += j.getResultValue();
             }
-            ts.add((int) value);
+            ts.add(value);
         }
         return ts;
     }
@@ -146,7 +146,7 @@ public class TimeSeriesService implements ITimeSeriesService {
                     }
                 }
             }
-            ts.add((int) value);
+            ts.add(value);
         }
         return ts;
     }

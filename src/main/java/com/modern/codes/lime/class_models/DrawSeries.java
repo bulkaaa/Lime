@@ -124,7 +124,7 @@ public class DrawSeries {
                                                 final Date firstDay) {
         for (final TimeSeries timeSeries : timeSeriesList) {
             final List<Date> xData = new ArrayList<>();
-            final List<Integer> yData = new ArrayList<>();
+            final List<Double> yData = new ArrayList<>();
             final Calendar cal = Calendar.getInstance();
             for (int i = 0; i < timeSeries.size(); i++) {
                 cal.setTime(firstDay);
@@ -141,7 +141,7 @@ public class DrawSeries {
     private static void ProcessDataInTimeSeriesPie(final ArrayList<TimeSeries> timeSeriesList, final PieChart chart,
                                                    final Date firstDay) {
         for (final TimeSeries timeSeries : timeSeriesList) {
-            Integer sum = 0;
+            Double sum = 0.0;
             final Calendar cal = Calendar.getInstance();
             for (int i = 0; i < timeSeries.size(); i++) {
                 cal.setTime(firstDay);
