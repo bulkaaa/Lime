@@ -3,11 +3,24 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
     var modalInstance = null;
 
     $scope.getResources = function() {
+        let counter = 0;
         $http.get("/resource/all")
             .then(
                 function (response) {
                     if (response.data) {
                         $scope.resources = response.data;
+                        angular.forEach($scope.resources ,function(value, key){
+                        if (value.ordering_on)
+                                counter++;
+                        });
+                        if(counter == $scope.resources.length){
+                             $('.OnButton').addClass('active');
+                             $('.OffButton').removeClass('active');
+                         }
+                        if(counter !== $scope.resources.length){
+                              $('.OffButton').addClass('active');
+                              $('.OnButton').removeClass('active');
+                         }
                         if (!$scope.resources.length)
                             $dialogs.notify('Currently there are no resources added in LIME', "You can add products here by clicking on 'Add New Product' button");
                     }
