@@ -50,6 +50,7 @@ public class IForecastServiceTest {
 
         //Create Byte from Products Series + Create Forecast
         final byte[] resultByte = service.plotForecast(givenDate, givenDays, givenForecastedDays, givenChart, givenIds);
+        assertEquals(21392,resultByte.length);
 
     }
 
@@ -68,6 +69,7 @@ public class IForecastServiceTest {
 
         //Create Byte from Resource Series + Create Forecast
         final byte[] resultByte = service.plotForecastResource(givenDate, givenDays, givenForecastedDays, givenChart, givenIds);
+        assertEquals(23968,resultByte.length);
 
     }
 

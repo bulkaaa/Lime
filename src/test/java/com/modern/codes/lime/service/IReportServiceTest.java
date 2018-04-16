@@ -28,8 +28,6 @@ public class IReportServiceTest {
 
     @Before
     public void ResetDB() {
-
-        pop.clearDB();
         pop.populate();
     }
 
@@ -49,7 +47,7 @@ public class IReportServiceTest {
         //Create Byte from Products Series
         final byte[] resultByte = service.getReportBytes(givenDate,givenDays,givenChart,givenIds);
 
-       // assertEquals(2,resultTimeSeries.size());
+        assertEquals(15088,resultByte.length);
     }
 
     @Test
@@ -67,6 +65,7 @@ public class IReportServiceTest {
 
         //Create Byte from Resource Series
         final byte[] resultByte = service.getReportBytesResource(givenDate,givenDays,givenChart,givenIds);
+        assertEquals(15788,resultByte.length);
 
     }
 
