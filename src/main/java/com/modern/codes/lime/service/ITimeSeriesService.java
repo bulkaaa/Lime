@@ -20,9 +20,6 @@ public interface ITimeSeriesService {
      */
     ArrayList<TimeSeries> Extract(Date StartDate, Integer Days, List<String> ProductsIds);
 
-    public ArrayList<TimeSeries> ExtractforResource(Date StartDate,
-                                                     Integer Days, List<String> ResourceIds);
-
     /**
      * Extract array list - this time for resources
      *
@@ -32,5 +29,8 @@ public interface ITimeSeriesService {
      * @param ResourceIds selected resources
      * @return the array list
      */
+    ArrayList<TimeSeries> ExtractforResource(Date StartDate, Integer Days, List<String> ResourceIds);
+
+
 
 }
