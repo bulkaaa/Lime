@@ -1,13 +1,18 @@
 package com.modern.codes.lime.service;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.modern.codes.lime.controller.ForecastController;
 import com.modern.codes.lime.model.Formula;
+import com.modern.codes.lime.model.Resource;
 import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.pojo.ResourcePOJO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.modern.codes.lime.class_models.TimeSeries;
@@ -23,6 +28,8 @@ public class TimeSeriesService implements ITimeSeriesService {
      * Instantiates a new Time series service.
      *
      * @param jobService the job service
+     * @param formulaService the formula service
+     * @param resourceService the resource service
      */
     TimeSeriesService(final IJobService jobService, final FormulaService formulaService,
                       final ResourceService resourceService) {
@@ -49,11 +56,6 @@ public class TimeSeriesService implements ITimeSeriesService {
         return series;
     }
 
-   /* public ArrayList<TimeSeries> Extract(final IJobService service, final Date StartDate,
-                                         final Integer Days) {
-        return Extract(StartDate, Days, getProductId(service));
-    }
-*/
     private static TimeSeries ExtractProduct(final List<JobPOJO> list, final Date StartDate, final Integer Days) {
 
         final TimeSeries ts = new TimeSeries();
@@ -84,21 +86,7 @@ public class TimeSeriesService implements ITimeSeriesService {
         return ts;
     }
 
-   /* private static List<String> getProductId(final IJobService service) {
-        final List<String> IDList = new ArrayList<>();
-        final List<JobPOJO> list = service.findAll();
-        while (!list.isEmpty()) {
-            final String id = list.get(0)
-                                  .getProduct()
-                                  .getId();
-            if (!IDList.contains(id)) {
-                IDList.add(id);
-            }
-            list.remove(0);
-        }
-        return IDList;
-    }
-*/
+
     @Override
     public ArrayList<TimeSeries> ExtractforResource(final Date StartDate,
                                                 final Integer Days, final List<String> ResourceIds)
@@ -127,30 +115,33 @@ public class TimeSeriesService implements ITimeSeriesService {
                                               final Integer Days){
 
         final TimeSeries ts = new TimeSeries();
-        for (int i = 0 ;i < Days; i++){
+        for (int i = 0; i < Days; i++) {
             final Calendar cal = Calendar.getInstance();
             cal.setTime(StartDate);
-            cal.add(Calendar.DATE, - Days + i );
+            cal.add(Calendar.DATE, -Days + i);
             final Date dateBefore = cal.getTime();
 
             final Calendar cal2 = Calendar.getInstance();
             cal2.setTime(StartDate);
-            cal2.add(Calendar.DATE, - Days + i + 1);
+            cal2.add(Calendar.DATE, -Days + i + 1);
             final Date dateBeforeLimit = cal2.getTime();
             final List<JobPOJO> day = new ArrayList<>();
-
-            //day - lists jobs this day
-
-
-            for (final JobPOJO job: list) {
-                if (job.getEndDate().after(dateBefore) && job.getEndDate().before(dateBeforeLimit))  day.add(job);
+            for (final JobPOJO job : list) {
+                if (job.getEndDate()
+                        .after(dateBefore) && job.getEndDate()
+                        .before(dateBeforeLimit)) {
+                    day.add(job);
+                }
             }
+
             double value = 0;
             for (final JobPOJO j : day) {
 
                 final List<FormulaPOJO> formulas = formulaService.findByProductId(j.getProduct().getId());
                 for (final FormulaPOJO f : formulas ) {
-                    if (f.getResource().getId() == ResID) {
+
+                    if (f.getPOJOResource().getId().equals(ResID)) {
+
                         value += f.getValue();
                     }
                 }
@@ -164,4 +155,5 @@ public class TimeSeriesService implements ITimeSeriesService {
     private final FormulaService formulaService;
     private final ResourceService resourceService;
 
+    private static final Logger LOG = LoggerFactory.getLogger(TimeSeriesService.class);
 }
