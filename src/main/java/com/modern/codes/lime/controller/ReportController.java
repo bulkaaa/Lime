@@ -63,6 +63,32 @@ public class ReportController {
     }
 
     /**
+     * Generate response entity.
+     *
+     * @param startDate  the start date
+     * @param noDays     the no days
+     * @param chartType  the chart type
+     * @param resourcesIds the resource ids
+     * @return the response entity
+     */
+    @RequestMapping(value = "/resource/generate",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation("Generate class_models for resources")
+    public ResponseEntity<byte[]> generate2(@RequestParam final String startDate, @RequestParam final Integer noDays,
+                                           @RequestParam final String chartType,
+                                           @RequestBody @ApiParam("Resource ids list") final List<String> resourcesIds) {
+        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n resourceIds: [] \n "
+                + "chartType: [] \n", startDate, noDays, resourcesIds, chartType);
+
+        final byte[] bytes = reportService.getReportBytesResource(startDate, noDays, chartType, resourcesIds);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_PNG)
+                .body(bytes);
+    }
+
+    /**
      * Send.
      *
      * @param startDate  the start date
@@ -88,6 +114,31 @@ public class ReportController {
 
     }
 
+    /**
+     * Send (for resources reports)
+     *
+     * @param startDate  the start date
+     * @param email      the email
+     * @param noDays     the no days
+     * @param chartType  the chart type
+     * @param resourceIds the resource ids
+     */
+    @RequestMapping(value = "/resource/send", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation("Generate and send class_models for resources")
+    public void send2(@RequestParam final String startDate, @RequestParam final String email,
+                     @RequestParam final Integer noDays, @RequestParam final String chartType,
+                     @RequestBody @ApiParam("Resources ids list") final List<String> resourceIds) {
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n resourceIds: [] \n"
+                + " chartType: [] \n", startDate, noDays, email, resourceIds, chartType);
+
+        final byte[] bytes = reportService.getReportBytesResource(startDate, noDays, chartType, resourceIds);
+        try {
+            MailService.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", bytes);
+        } catch (final MessagingException e) {
+            LOG.error("FAILED TO SEND REPORT", e);
+        }
+
+    }
     private final IReportService reportService;
 
     private static final Logger LOG = LoggerFactory.getLogger(ReportController.class);

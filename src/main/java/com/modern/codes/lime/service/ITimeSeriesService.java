@@ -20,13 +20,17 @@ public interface ITimeSeriesService {
      */
     ArrayList<TimeSeries> Extract(Date StartDate, Integer Days, List<String> ProductsIds);
 
+    public ArrayList<TimeSeries> ExtractforResource(Date StartDate,
+                                                     Integer Days, List<String> ResourceIds);
+
     /**
-     * Extract array list.
+     * Extract array list - this time for resources
      *
-     * @param service   the service
+     *
      * @param StartDate the start date
      * @param Days      the days
+     * @param ResourceIds selected resources
      * @return the array list
      */
-    ArrayList<TimeSeries> Extract(IJobService service, Date StartDate, Integer Days);
+
 }

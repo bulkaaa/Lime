@@ -45,5 +45,19 @@ public class ReportService implements IReportService {
                                     "Sample_Chart", chartType);
     }
 
+    @Override
+    public byte[] getReportBytesResource(final String startDate, final Integer noDays, final String chartType,
+                                 final List<String> resourceIds) {
+        final Date date;
+        try {
+            date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
+        } catch (final ParseException e) {
+            throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
+        }
+
+        final ArrayList<TimeSeries> seriesL = timeSeriesService.ExtractforResource(date, noDays, resourceIds);
+        return DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Resource Use in past " + noDays + " days",
+                "Sample_Chart", chartType);
+    }
     private final ITimeSeriesService timeSeriesService;
 }

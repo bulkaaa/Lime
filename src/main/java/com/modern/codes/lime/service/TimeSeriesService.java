@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.modern.codes.lime.model.Formula;
+import com.modern.codes.lime.pojo.FormulaPOJO;
+import com.modern.codes.lime.pojo.ResourcePOJO;
 import org.springframework.stereotype.Service;
 
 import com.modern.codes.lime.class_models.TimeSeries;
@@ -21,8 +24,12 @@ public class TimeSeriesService implements ITimeSeriesService {
      *
      * @param jobService the job service
      */
-    TimeSeriesService(final IJobService jobService) {
+    TimeSeriesService(final IJobService jobService, final FormulaService formulaService,
+                      final ResourceService resourceService) {
         this.jobService = jobService;
+        this.formulaService = formulaService;
+        this.resourceService = resourceService;
+
     }
 
     @Override
@@ -42,11 +49,11 @@ public class TimeSeriesService implements ITimeSeriesService {
         return series;
     }
 
-    @Override
-    public ArrayList<TimeSeries> Extract(final IJobService service, final Date StartDate, final Integer Days) {
+   /* public ArrayList<TimeSeries> Extract(final IJobService service, final Date StartDate,
+                                         final Integer Days) {
         return Extract(StartDate, Days, getProductId(service));
     }
-
+*/
     private static TimeSeries ExtractProduct(final List<JobPOJO> list, final Date StartDate, final Integer Days) {
 
         final TimeSeries ts = new TimeSeries();
@@ -77,7 +84,7 @@ public class TimeSeriesService implements ITimeSeriesService {
         return ts;
     }
 
-    private static List<String> getProductId(final IJobService service) {
+   /* private static List<String> getProductId(final IJobService service) {
         final List<String> IDList = new ArrayList<>();
         final List<JobPOJO> list = service.findAll();
         while (!list.isEmpty()) {
@@ -91,6 +98,70 @@ public class TimeSeriesService implements ITimeSeriesService {
         }
         return IDList;
     }
+*/
+    @Override
+    public ArrayList<TimeSeries> ExtractforResource(final Date StartDate,
+                                                final Integer Days, final List<String> ResourceIds)
+    {
+        final List<String> ids = ResourceIds;
+
+        final ArrayList<TimeSeries> series = new ArrayList<TimeSeries>();
+        final List<JobPOJO> list = jobService.findAll();
+        if (!list.isEmpty()) {
+            //List of Jobs ALL JOBS JUST ALL
+            for (final String resID : ResourceIds) {
+                final TimeSeries ts = ExtractResource(list, resID, StartDate, Days);
+                final String label = resourceService.findById(resID).getName();
+                ts.setLabel(label);
+                series.add(ts);
+            }
+        }
+
+    return series;
+}
+
+
+
+    private TimeSeries ExtractResource(final List<JobPOJO> list,
+                                              final String ResID, final Date StartDate,
+                                              final Integer Days){
+
+        final TimeSeries ts = new TimeSeries();
+        for (int i = 0 ;i < Days; i++){
+            final Calendar cal = Calendar.getInstance();
+            cal.setTime(StartDate);
+            cal.add(Calendar.DATE, - Days + i );
+            final Date dateBefore = cal.getTime();
+
+            final Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(StartDate);
+            cal2.add(Calendar.DATE, - Days + i + 1);
+            final Date dateBeforeLimit = cal2.getTime();
+            final List<JobPOJO> day = new ArrayList<>();
+
+            //day - lists jobs this day
+
+
+            for (final JobPOJO job: list) {
+                if (job.getEndDate().after(dateBefore) && job.getEndDate().before(dateBeforeLimit))  day.add(job);
+            }
+            double value = 0;
+            for (final JobPOJO j : day) {
+
+                final List<FormulaPOJO> formulas = formulaService.findByProductId(j.getProduct().getId());
+                for (final FormulaPOJO f : formulas ) {
+                    if (f.getResource().getId() == ResID) {
+                        value += f.getValue();
+                    }
+                }
+            }
+            ts.add((int) value);
+        }
+        return ts;
+    }
 
     private final IJobService jobService;
+    private final FormulaService formulaService;
+    private final ResourceService resourceService;
+
 }
