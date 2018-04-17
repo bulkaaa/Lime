@@ -219,7 +219,7 @@ cursor: pointer;
    .img_responsive{
     height: auto;
     width: auto;
-    max-height: 60px;
+    max-height: 50px;
     max-width: 250px;
    }
 

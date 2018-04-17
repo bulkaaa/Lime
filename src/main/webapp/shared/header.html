@@ -18,7 +18,8 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">My Account <b class="fa fa-angle-down"></b></a>
+                <a class="dropdown-toggle" ng-show="globals.currentUser" data-toggle="dropdown">My Account <b class="fa fa-angle-down"></b></a>
+                <a class="dropdown-toggle" ng-show="!(globals.currentUser)" data-toggle="dropdown">Log in <b class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
                     <li ng-show="!(globals.currentUser)"><a href="#!/login"><i class="fa fa-fw fa-user"></i> Login</a></li>
                     <li ng-show="globals.currentUser"><a href="#!/editaccount"><i class="fa fa-pencil-square-o"></i> Edit Profile</a></li>
@@ -29,18 +30,18 @@
             </li>
         </ul>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse col-lg-2">
-            <ul class="nav navbar-nav side-nav">
-                <li>
+        <div class="collapse navbar-collapse navbar-ex1-collapse col-lg-2" >
+            <ul class="nav navbar-nav side-nav" ng-show="globals.currentUser">
+                <li ng-show="globals.currentUser.isAdmin || globals.currentUser.isManager">
                     <a href="#!/resources"><i class="fa fa-eyedropper"></i> RESOURCES </a>
                 </li>
-                <li>
+                <li ng-show="globals.currentUser.isAdmin || globals.currentUser.isManager">
                     <a href="#!/product"><i class="fa fa-flask"></i> PRODUCTS </a>
                 </li>
-                <li>
+                <li ng-show="globals.currentUser.isAdmin || globals.currentUser.isManager">
                     <a href="#!/order"><i class="fa fa-shopping-cart"></i> MANAGE ORDERS </a>
                 </li>
-                <li>
+                <li ng-show="globals.currentUser.isAdmin || globals.currentUser.isManager">
                     <a data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-file"></i> REPORTS <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                     <ul id="submenu-1" class="collapse">
                         <li><a href="#!/report-products"><i class="fa fa-angle-double-right"></i> GENERATION - PRODUCTS</a></li>
@@ -49,23 +50,23 @@
                         <li><a href="#!/prediction-resources"><i class="fa fa-angle-double-right"></i> PREDICTION  - RESOURCES</a></li>
                     </ul>
                 </li>
-                <li>
+                <li ng-show="globals.currentUser.isAdmin">
                     <a data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-file"></i> MANAGE CATEGORIES <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                     <ul id="submenu-2" class="collapse">
                         <li><a href="#!/category-products"><i class="fa fa-angle-double-right"></i> PRODUCTS</a></li>
                         <li><a href="#!/category-resources"><i class="fa fa-angle-double-right"></i> RESOURCES</a></li>
                     </ul>
                 </li>
-                <li>
+                <li ng-show="globals.currentUser.isAdmin || globals.currentUser.isManager">
                     <a href="#!/notification"><i class="fa fa-paper-plane-o"></i> NOTIFICATIONS</a>
                 </li>
-                <li>
+                <li ng-show="globals.currentUser.isAdmin || globals.currentUser.isManager">
                     <a href="#!/supplier"><i class="fa fa-truck"></i> SUPPLIERS</a>
                 </li>
                 <li>
                     <a href="#!/job"><i class="fa fa-hourglass-start"></i> MANAGE JOBS</a>
                 </li>
-                <li>
+                <li ng-show="globals.currentUser.isAdmin">
                     <a  href="#!/user"><i class="fa fa-id-card-o"></i> MANAGE USERS</a>
                 </li>
             </ul>
