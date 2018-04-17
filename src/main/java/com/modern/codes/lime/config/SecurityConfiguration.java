@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -40,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsService)
-            .passwordEncoder(getPasswordEncoder());
+            .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -121,20 +122,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             httpServletResponse.getWriter()
                                .append("Not authenticated");
             httpServletResponse.setStatus(401);
-        };
-    }
-
-    private PasswordEncoder getPasswordEncoder() {
-        return new PasswordEncoder() {
-            @Override
-            public String encode(final CharSequence charSequence) {
-                return charSequence.toString();
-            }
-
-            @Override
-            public boolean matches(final CharSequence charSequence, final String s) {
-                return true;
-            }
         };
     }
 
