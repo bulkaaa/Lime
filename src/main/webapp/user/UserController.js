@@ -18,7 +18,7 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                     DialogService.handle(response, 'users', 'all');
                 }
             );
     };

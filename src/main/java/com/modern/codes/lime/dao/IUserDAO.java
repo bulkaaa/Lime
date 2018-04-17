@@ -62,4 +62,6 @@ public interface IUserDAO extends IBasicCRUDRepository<User, String> {
      * @return the user
      */
     User findByUsernameOrEmailAddress(String username, String email);
+
+    User findByEmailAddress(String email);
 }

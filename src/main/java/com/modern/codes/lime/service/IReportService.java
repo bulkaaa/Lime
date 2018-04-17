@@ -16,4 +16,15 @@ public interface IReportService {
      * @return the byte [ ]
      */
     byte[] getReportBytes(String startDate, Integer noDays, String chartType, List<String> productIds);
+
+    /**
+     * Get report bytes byte [ ].
+     *
+     * @param startDate  the start date
+     * @param noDays     the no days
+     * @param chartType  the chart type
+     * @param resourceIds the resource ids
+     * @return the byte [ ]
+     */
+    byte[] getReportBytesResource(String startDate, Integer noDays, String chartType, List<String> resourceIds);
 }

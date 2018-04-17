@@ -39,7 +39,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                     DialogService.handle(response, 'resource', 'all');
                 }
             );
     };
@@ -240,8 +240,10 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                                                     name: item.name,
                                                                     description: item.description,
                                                                     quantity: item.quantity,
-                                                                    image: item.image,
+                                                                    realimage: item.image,
                                                                     unit: item.unit,
+                                                                    category: item.category,
+                                                                    supplier: item.supplier,
                                                                 });
 
                                                             },

@@ -40,7 +40,7 @@ public class TSGenerator {
             final Random r = new Random();
             final int lowerBound = 0;
             final int upperBound = 100;
-            final int result = r.nextInt(upperBound - lowerBound) + (i * i) + k;
+            final Double result = (double)(r.nextInt(upperBound - lowerBound) + (i * i) + k);
 
             series.add(result);
         }

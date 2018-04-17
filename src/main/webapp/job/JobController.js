@@ -20,7 +20,7 @@ var modalInstance = null;
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'job', 'all');
                 }
             );
     };

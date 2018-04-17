@@ -155,6 +155,15 @@ public interface IUserService {
     UserPOJO findByUsernameOrEmail(String username, String email);
 
     /**
+     * Find by email user pojo.
+     *
+     * @param email    the email
+     * @return the user pojo
+     */
+
+    UserPOJO findByEmailAddress(String email);
+
+    /**
      * Gets password encoder.
      *
      * @return the password encoder

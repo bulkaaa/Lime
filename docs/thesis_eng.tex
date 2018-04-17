@@ -721,15 +721,182 @@ L.I.M.E. implements RESTful controllers which are used to communicate with a cli
 
 \chapter{Technical Analysis}
 
-More detailed - all the classes and functions
 
+\section{Client-Server Architecture}
 
+Client/server architecture is a producer/consumer computing architecture where the server acts as the producer and the client as a consumer. The server houses and provides high-end, computing-intensive services to the client on demand.
+L.I.M.E. implements client-service architecture. There are 2 applications in the project:
+\begin{enumerate}
+\item Server implemented in JAVA,
+\item GUI implemented with AngularJS
+\end{enumerate}
+Communication between client and server is done with RESTful API. Server accepts request from authenticated users sent from GUI. Then process it, saves data in database and sends answer.
 
+\begin{figure}[h]
+
+\begin{center}
+
+\includegraphics[width=\textwidth]{CS}
+
+\end{center}
+\caption{Client-Server Architecture}
+\end{figure}
+
+\section{Login}
+ L.I.M.E. application have got system to recognize users and its roles. It is implemented using Spring Security. When the user logs in GUI application sends login request to server and the server application checks if the user exist and it’s roles. In the response, it passes the authorization data which is valid for 12 hours (session timeout). Each request from GUI to Server contains a header with the authorization data, so server can recognize which user sends request and if has appropriate roles.
 \section{Program Interface}
 
 
 \section{System Classes}
 
+The Application is composed with the following packages, and the package contain the following classes and interfaces:
+
+\begin{enumerate} 
+\item Lime	 
+\begin{enumerate} 
+\item \textbf{LimeApplication}	The Main Class for Lime Application.
+\end{enumerate} 
+\item Api	 
+\begin{enumerate} 
+\item \textbf{GlobalExceptionHandlingControllerAdvice} Performs exception handling for all REST API controller.
+\end{enumerate} 
+\item ClassModels	 
+\begin{enumerate} 
+\item \textbf{DrawSeries} The class for Plotting Time Series into a Chart
+\item \textbf{TimeSeries} The class of Time Series
+\end{enumerate} 
+\item Config	 
+\begin{enumerate} 
+\item \textbf{SecurityConfiguration} The type Security configuration.
+\item \textbf{StorageProperties} The type Storage properties.
+\item \textbf{SwaggerConfig} Main configuration class to enable the Swagger UI frontend.
+\end{enumerate} 
+\item Controller	 
+\begin{enumerate} 
+\item \textbf{BaseController} The Basic type of controller
+\item \textbf{DevController} The type Dev controller.
+\item \textbf{FileUploadController} The type File upload controller.
+\item \textbf{ForecastController} The type Forecast controller.
+\item \textbf{FormulaController} The type Formula controller.
+\item \textbf{JobController} The type Job controller.
+\item \textbf{OrderController} The type Order controller.
+\item \textbf{ProductCategoryController} The type Product category controller.
+\item \textbf{ProductController} The type Product controller.
+\item \textbf{ReportController} The type Report controller.
+\item \textbf{ResourceCategoryController} The type Resource category controller.
+\item \textbf{ResourceController} The type Resource controller.
+\item \textbf{SupplierController} The type Supplier controller.
+\item \textbf{UserController} The type User controller.
+
+\end{enumerate} 
+\item Dao	 
+\begin{enumerate} 
+\item \textbf{IBasicCRUDRepository<T,ID extends java.io.Serializable>} The interface Basic crud repository.
+\item \textbf{IFormulaDAO} The interface Formula dao.
+\item \textbf{IJobDAO} The interface Job dao.
+\item \textbf{IProductCategoryDAO} The interface Product category dao.
+\item \textbf{IProductDAO} The interface Product dao.
+\item \textbf{IResourceCategoryDAO} The interface Resource category dao.
+\item \textbf{IResourceDAO} The interface Resource dao.
+\item \textbf{IRoleDAO} The interface Role dao.
+\item \textbf{ISupplierDAO} The interface Supplier dao.
+\item \textbf{IUserDAO} The interface User dao.
+
+\end{enumerate} 
+\item Exception	 
+\begin{enumerate} 
+\item \textbf{AlreadyExistsException} thrown when an entity with at leas one unique field already exists .
+\item \textbf{ForbiddenException} thrown when eg. an authentication attempt is not allowed with the given credentials (not details returned).
+\item \textbf{IllegalDataException} thrown when the given data is not valid in the current context.
+\item \textbf{InvalidRequestException} thrown when a request is invalid in the current context.
+\item \textbf{NotAcceptableException} exception, thrown when given data is not acceptable.
+\item \textbf{NotFoundException} thrown when an entity is not found where it is expected.
+\item \textbf{OperationNotAllowedException} thrown when a contract management API call is not allowed.
+\item \textbf{ServiceUnavailableException} The type Service unavailable exception.
+\item \textbf{StorageException} The type Storage exception.
+\item \textbf{StorageFileNotFoundException} The type Storage file not found exception.
+\item \textbf{UnprocessableEntityException} thrown when an entity contains validation errors.
+
+\end{enumerate} 
+\item Model	 
+\begin{enumerate} 
+\item \textbf{CustomUserDetails} The type Custom user details.
+\item \textbf{Formula} Model representation of a formula used in Lime.
+\item \textbf{Job} Model representation of a job created by Lime user.
+\item \textbf{Product} Model representation of a product added in Lime.
+\item \textbf{ProductCategory} The type Product category.
+\item \textbf{Resource} Model representation of a resource used in Lime.
+\item \textbf{ResourceCategory} The type Resource category.
+\item \textbf{Role} Model representation of a user role in Lime.
+\item \textbf{Supplier} Model representation of a supplier in Lime.
+\item \textbf{User} Model representation of user of Lime.
+
+\end{enumerate} 
+\item Pojo	 
+\begin{enumerate} 
+\item \textbf{BasicPOJO} The type Basic pojo.
+\item \textbf{FormulaPOJO} The type Formula pojo.
+\item \textbf{JobPOJO} The type Job pojo.
+\item \textbf{ProductCategoryPOJO} The type Product category pojo.
+\item \textbf{ProductPOJO} The type Product pojo.
+\item \textbf{ResourceCategoryPOJO} The type Resource category pojo.
+\item \textbf{ResourcePOJO} The type Resource pojo.
+\item \textbf{RolePOJO} The type Role pojo.
+\item \textbf{SupplierPOJO} The type Supplier pojo.
+\item \textbf{UserPOJO} The type User pojo.
+
+\end{enumerate} 
+\item Service	 
+\begin{enumerate} 
+\item \textbf{IBasicCRUDService} The interface Basic crud service.
+\item \textbf{IForecastService} The interface Forecast service.
+\item \textbf{IFormulaService} The interface Formula service.
+\item \textbf{IJobService} The interface Job service.
+\item \textbf{IMailService} The interface Mail service.
+\item \textbf{INotificationService} The interface Notification service.
+\item \textbf{IProductCategoryService} The interface Product category service.
+\item \textbf{IProductService} The interface Product service.
+\item \textbf{IReportService} The interface Report service.
+\item \textbf{IResourceCategoryService} The interface Resource category service.
+\item \textbf{IResourceService} The interface Resource service.
+\item \textbf{IRoleService} The interface Role service.
+\item \textbf{ISmoothingService} The interface Smoothing service.
+\item \textbf{IStorageService} The interface Storage service.
+\item \textbf{ISupplierService} The interface Supplier service.
+\item \textbf{ITimeSeriesService} The interface Time series service.
+\item \textbf{IUserService} The interface User service.
+
+\end{enumerate} 
+\begin{enumerate} 
+\item \textbf{BasicCRUDService} The type Basic crud service.
+\item \textbf{CustomUserDetailsService} The type Custom user details service.
+\item \textbf{ForecastService} The type Forecast service.
+\item \textbf{FormulaService} The type Formula service.
+\item \textbf{JobService} The type Job service.
+\item \textbf{MailService} The type Mail service.
+\item \textbf{NotificationService} The type Notification service.
+\item \textbf{ProductCategoryService} The type Product category service.
+\item \textbf{ProductService} The type Product service.
+\item \textbf{ReportService} The type Report service.
+\item \textbf{ResourceCategoryService} The type Resource category service.
+\item \textbf{ResourceService} The type Resource service.
+\item \textbf{RoleService} The type Role service.
+\item \textbf{SmoothingService} The type Smoothing service.
+\item \textbf{StorageService} The type Storage service.
+\item \textbf{SupplierService} The type Supplier service.
+\item \textbf{TimeSeriesService} The type Time series service.
+\item \textbf{UserService} The type User service.
+
+\end{enumerate} 
+\item Tools
+\begin{enumerate} 
+\item \textbf{DBPopulator} The type Database populator.
+\item \textbf{ParseTools} The type Parse tools.
+\item \textbf{StartUpPopulator} 
+\item \textbf{TSGenerator} The type Time Series generator.
+
+\end{enumerate}
+\end{enumerate}
 
 \section{Database Design}
 
@@ -737,7 +904,7 @@ More detailed - all the classes and functions
 
 \begin{center}
 
-\includegraphics[width=\textwidth]{DB4}
+\includegraphics{DB4}
 
 \end{center}
 \caption{Database Design}
@@ -828,25 +995,136 @@ The database consists of the following tables:
  
 \section{Prediction Model}
 
+The prediction of the future values of production of products and usage of resources is one of the key features of the application.
+For the prediction model, many known models for time series prediction were researched, until we found the one that was appropriate to use in the application. The Exponential Smoothing Method was chosen for the following reasons:
+\begin{enumerate}
+\item The set of variables is rather small and rather simple - no reason to use more sophisticated methods.
+\item The prediction model was to be implemented from scratch and Exponential Smoothing. Many more complicated methods could have been imported into the application using libraries, but the decision was that it would be more challenging for the project to take one of the less complicated methods and implement every step of it on our own.
+\end{enumerate}
+
+\begin{definition}[Mean Squared Error]
+Parę uporządkowaną $(A,F)$, gdzie $A\neq \emptyset$ jest zbiorem, a $F$ jest rodziną operacji określonych na $A$, nazywamy \textit{algebrą} (lub \textit{$F$-algebrą}). Zbiór $A$ nazywa się \textit{zbiorem elementów}, \textit{nośnikiem} lub \textit{uniwersum} algebry $(A,F)$, a $F$ \textit{zbiorem operacji elementarnych}.
+\end{definition}
+The alpha and beta coefficients used for the calculation of smoothing are being optimized so that the Mean Squared Error is minimized.
 
 
 % ----------------------- Experimental Evaluation ------------------
 
 \chapter{Post Execution Documentation}
 
+In this section the final application was tested against the set of initial requirements. for every requirement given in Chapter 3, discussed is how the particular requirement is implemented in the application.
+
+\section{Evaluating Functional Requirements}
+
+The following sections will discuss how the functional requirements were implemented, separately for every group of users (Administrator, Mangaer and User)
+
+\subsection{Administrator}
+
+\begin{longtable}{|p{4cm}|p{12cm}|}
+\caption[Evaluating Functional Requirements for Administrator]{Evaluating Functional Requirements for Administrator}
+\label{Evaluating Functional Requirements for Administrator}
+\centering
+\tabularnewline
+
+\hline
+\texttt{Functional Requirement} & \texttt{Implementation} \\ \hline
+Log in to the system and change his & L.I.M.E. application recognize users and its roles. It is implemented using spring security. Password can be changed by administrator of the system. \\ \hline
+Create, modify and remove an account in the system, modify its roles & Administrator can create account via manage users view. It is possible to chose within 3 roles: administrator, manager, staff. It is also possible to edit or remove an account in the same subpage \\ \hline
+View, create, modify and remove resources and products & Administrator can create products and recources in products view and resources view respectively. It is also possible to modify and remove objects in the same subpage. \\ \hline
+View, create, modify and remove groups of resources and products & Administrator can create groups of products and recources choosing products or resources in manage groups respectively. It is also possible to modify and remove objects in the same subpage. \\ \hline
+View, create, modify formula of the product & Administrator can create formula for the given product choosing resources and putting the needed value. It is possible creade and modify formula in products view. \\ \hline
+Denfine, generate and send a report & Administrator can define and generate raport depending on date range and resources or products. It can be done in reports view, product and resource subpage respectively. \\ \hline
+Denfine, generate and send a prediction & Administrator can define and generate prediction depending on date range and respoures or products. It can be done in prediction view, product and resource subpage respectively. \\ \hline
+Define notifications, turn notifications on & Administrator can define critical value of the resource in notifications view. It will notify with email that resource exceed critical value. It can be set on/off separately for each object or for all with one button. \\ \hline
+Create job, declare time range of the job & Administrator can create job of an product and declare time range within the job was done. It can be done in job view \\ \hline
+Order resources, turn on/off automatic ordering & Administrator can order the resources - supplier will be notified with a mail. It is possible to group resources and send one order. It is possible to turn on/off automatic orders - order will perform when the resource exceed critical value. It can be done in manage orders view. \\ \hline
 
 
-\section{Evaluating Functional Requirements and Use Cases}
+\end{longtable}
+
+\subsection{Manager}
+
+\begin{longtable}{|p{4cm}|p{12cm}|}
+\caption[Evaluating Functional Requirements for Manager]{Evaluating Functional Requirements for Manager}
+\label{Evaluating Functional Requirements for Manager}
+\centering
+\tabularnewline
+
+\hline
+\texttt{Functional Requirement} & \texttt{Implementation} \\ \hline
+
+Log in to the system & L.I.M.E. application recognize users and its roles. It is implemented using spring security. Password can be changed by administrator of the system. \\ \hline
+View, create, modify and remove resources and products & Manager can create products and recources in products view and  resources view respectively. It is also possible to modify and remove objects in the same subpage. \\ \hline
+Define, generate and send a report & Manager can define and generate raport depending on date range and resoures or products. It can be done in reports view, product and resource subpage respectively. \\ \hline
+Define, generate and send a prediction & Manager can define and generate prediction depending on date range and resoures or products. It can be done in prediction view, product and resource subpage respectively. \\ \hline
+Define notifications, turn notifications on & Manager can define critical value of the resource in notifications view. It will notify with email that resource exceed critical value. It can be set on/off separately for each object or for all with one button. \\ \hline
+Order resources, turn on/off automatic ordering & Manager can order the resources - supplier will be notified with a mail. It is possible to group resources and send one order. It is possible to turn on/off automatic orders - order will perform when the resource exceed critical value. It can be done in manage orders view. \\ \hline
+Create job, declare time range of the job & Manager can create job of an product and declare time range within the job was done. It can be done in job view. \\ \hline
+
+
+
+\end{longtable}
+
+\subsection{User}
+
+\begin{longtable}{|p{4cm}|p{12cm}|}
+\caption[Evaluating Functional Requirements for User]{Evaluating Functional Requirements for User}
+\label{Evaluating Functional Requirements for User}
+\centering
+\tabularnewline
+
+\hline
+\texttt{Functional Requirement} & \texttt{Implementation} \\ \hline
+Log in to the system & L.I.M.E. application recognize users and its roles. It is implemented using spring security. Password can be changed by administrator of the system. \\ \hline
+Create job, declare time range of the job & User can create job of an product and declare time range within the job was done. It can be done in job view. \\ \hline
+
+
+\end{longtable}
 
 \section{Evaluating Non-Functional Requirements}
 
+Similarly, this section will discuss how the non-functional requirements were implemented
+
+\begin{longtable}{|p{3cm}|p{7cm}|p{6cm}|}
+\caption[Evaluating Non-Functional Requirements]{Evaluating Non-Functional Requirements}
+\label{Evaluating Non-Functional Requirements}
+\centering
+\tabularnewline
+
+\hline
+\texttt{Area} & \texttt{Non-Functional Requirement} & \texttt{Implementation} \\ \hline
+Usability & Application must be responsive. It must be working on PC, tablets
+and phones with resolution at least 720p. & GUI is implemented with responsive frameworks: Angular and bootstrap \\ \hline
+Reliability & Application must be of type High Availability. It should be available
+24h/7d between 08:00 and 23:00. There could be service
+breaks during the week between 24:00 and 8:00. & Application is deployed on heroku. It uses database mysql addon. It runs 24/7 \\ \cline{2-3}
+ & Application must have quick restart in case of app machine failures. & It is possible to restart app with command: heroku restart \\ \hline
+Recovery & Application must have daily database backup performed  24:00 and 08:00. & 
+Database has default scheduled database dumps. It can be resheduled in heroku db configuration \\ \hline
+Performance & Application should respond no longer than 3 seconds while strain
+being on level 100 queries per minute. & Application uses client server architecture. RESTful api deliver much higher capacity. \\ \hline
+Supportability & Documentation should contain instruction for recovery data from
+database backup. & There is delivered step by step manual with database backup manual and sheduled and recovery. \\ \cline{2-3}
+ & Application should keep backward compatibility between the released
+versions. & With the future releases version, there will be database script provided, which will fill previous entries. \\ \hline
+Security & Application must have user levels security. It shall not pass a user who has inappropriate privileges. & Application has implemented user service implemented with spring security, which validates if the user exists and check for each REST endpoint if the user has appropriate privileges. \\ \hline
+
+\end{longtable}
 
 
 
 % ----------------------- Conclusions ------------------
 \chapter*{Conclusions}
 
-1 Page of Our Conclusions of Writing This Project
+One of the most important goal of our thesis was to deliver a software that will be used by the consumer of the market. Work began with market research. We received several proposals and chose the one that we considered the most appropriate. We decided to develop the ultimate system to manage the warehouse and human resources of the laboratory. Our project – L.I.M.E (Laboratory Internal Management Entity) was developed in line with market needs, consulted with major consumers.\\ \\
+At first, we had to decide how the database will look like - what entities, relations, type of the database. That is the fundamental part of the application. We can say with pride, that we achieved excellent  result. There were only few minor changes, most of the primal database project fulfilled needs of the application.\\ \\
+Secondly, we had to develop basic back-end parts of the application. Connection with database, user authentication and roles. Many helpers like database populator for test purposes.  \\ \\
+Subsequently we had to start develop the client application. This was the hardest part of the work. It was hard to write simultaneously front-end and back-end. There was many  disagreements, and we had to discuss for a long time often to come to the best solutions.\\ \\
+Afterwards, when we had already most of the functionalities, we started to develop features that uses most of the functionalities – reports, predictions, notifications. It required knowledge from the area of algorithms and mathematics. \\ \\
+To develop our application, we used the top software technologies. Server side is built with Java, Spring, SpringBoot, SpringSecurity, MySQL and the client with AngularJS, Bootstrap. The communication between units is made with RESTful API. The we well-known and wide used solutions helped us to achieve success. \\ \\
+During all the time we were documenting each progress we made. The documentation is essential for our project. We need to deliver all manuals and support for the consumers, to help them understand how to properly use and take full advantage of L.I.M.E. \\ \\
+Despite the many difficulties we encountered and the fact that it took about 40\% more time than we expected, we are happy, because there are some people, who will use. We have meet our goals and we can say with pride that we achieved great success!
+
 \thispagestyle{empty}
 
 
@@ -871,12 +1149,86 @@ The database consists of the following tables:
 
 % ----------------------- GLOSSARY ------------------
 \chapter*{Glossary}
-\begin{tabular}{cl}
+\begin{longtable}{p{4cm} p{11cm}}
 
-\textbf{LIME} & Laboratory Internal Management Entity - the name of the application discussed in this document. LIME is the system for resources management in a small chemical laboratory. \\
 
-\end{tabular}
-\\
+\textbf{Administrator} & A person who is responsible for the upkeep, configuration, and reliable operation of a system.\\ \\
+\textbf{Algorithm} & A procedure or formula for solving a problem, based on conductiong a sequence of specified actions. A computer program can be viewed as an elaborate algorithm. \\ \\
+\textbf{Angularjs} & A structural framework for dynamic web apps. It lets you use HTML as your template language and lets you extend HTML's syntax to express your application's components clearly and succinctly. \\ \\
+\textbf{Application} & A program designed to perform a specific function directly for the user.\\ \\
+\textbf{Application Service} & A services that are made available from a business's Web server for Web users or other Web-connected programs. \\ \\
+\textbf{Asynchronous} & An adjective describing objects or events that are not coordinated in time.\\ \\
+\textbf{Authorization} & The process of giving someone permission to do or have something. In multi-user computer systems, a system administrator defines for the system which users are allowed access to the system and what privileges of use (such as access to which file directories, hours of access, amount of allocated storage space, and so forth). \\ \\
+\textbf{Back-End} & Application serves indirectly in support of the front-end services.\\ \\
+\textbf{Backup} & Copying of physical or virtual files or databases to a secondary site for preservation in case of equipment failure or other catastrophe. \\ \\
+\textbf{Boilerplate} & A unit of writing that can be reused over and over without change. By extension, the idea is sometimes applied to reusable programming as in "boilerplate code."\\ \\
+\textbf{Bootstrap} & A free and open-source front-end library for designing websites and web applications. It contains HTML- and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions. \\ \\
+\textbf{Browser} & An application program that provides a way to look at and interact with all the information on the World Wide Web. The word "browser" seems to have originated prior to the Web as a generic term for user interfaces that let you browse (navigate through and read) text files online.\\ \\
+\textbf{Cloud} & A host on virtual server.\\ \\
+\textbf{Cloud-Based} & A software program where cloud-based and local components work together.\\ \\
+\textbf{Commit} & The final step in the successful completion of a previously started transaction in a computing system.\\ \\
+\textbf{Continuous Deployment} & A strategy for software releases wherein any code commit that passes the automated testing phase is automatically released into the production environment, making changes that are visible to the software's users.\\ \\
+\textbf{Dao (Data Access Objects)} & An API that lets a programmer request access to an database.\\ \\
+\textbf{Data} & The information that has been translated into a form that is more convenient to move or process.\\ \\
+\textbf{Data Availability} & An assurance that data continues to be available at a required level of performance in any situation.\\ \\
+\textbf{Database} & A collection of data that is organized so that its contents can easily be accessed, managed, and updated.\\ \\
+\textbf{Deploy} & To spread out or arrange strategically.\\ \\
+\textbf{Deprecated} & Something is acknowledged but discouraged.\\ \\
+\textbf{Development} & The process of conceiving, specifying, designing, programming, documenting, testing, and bug fixing involved in creating and maintaining applications, frameworks, or other software components. \\ \\
+\textbf{Distribution} & The phase that follows packaging.\\ \\
+\textbf{Endpoint} & Defines the address for a resource , an endpoint is any user device connected to a network.\\ \\
+\textbf{Event} & Any identifiable occurrence that has significance for system hardware or software. User-generated events include keystrokes and mouse clicks, among a wide variety of other possibilities.\\ \\
+\textbf{Feature} & A distinguishing characteristic of a software item (e.g., performance, portability, or functionality)\\ \\
+\textbf{Field} & A location for a single piece of data in a database.\\ \\
+\textbf{Foreign Key} & A key that targets a primary key in another table.\\ \\
+\textbf{Framework} & A real or conceptual structure intended to serve as a support or guide for the building of something that expands the structure into something useful.\\ \\
+\textbf{Front-End} & An application that interacti with users directly.\\ \\
+\textbf{Gui} & A graphical user interface to a computer.\\ \\
+\textbf{Header} & Something that goes in front of something else and is usually repeated as a standard part of the units of something else\\ \\
+\textbf{Heroku} & A cloud-based development platform as a service (PaaS) provider.\\ \\
+\textbf{Hosting} & The business of housing, serving, and maintaining files for one or more Web sites. More important than the computer space that is provided for Web site files is the fast connection to the Internet. \\ \\
+\textbf{Html (Hypertext Markup Language)} & A standard programming language for describing the contents and appearance of Web pages.\\ \\
+\textbf{Insatnce} & In object-oriented programming (OOP), is a specific realization of any object. An object may be varied in a number of ways. Each realized variation of that object is an instance. The creation of a realized instance is called instantiation.\\ \\
+\textbf{Integration} & The act of bringing together smaller components into a single system that functions as one.\\ \\
+\textbf{Interface} & A group of related methods with empty bodies. Implementing an interface allows a class to become more formal about the behavior it promises to provide. Interfaces form a contract between the class and the outside world, and this contract is enforced at build time by the compiler.\\ \\
+\textbf{Iterative} & Used to describe a situation in which a sequence of instructions can be executed multiple times. One pass through the sequence is called an iteration. If the sequence of instructions is executed repeatedly, it is called a loop, and we say that the computer iterates through the loop.\\ \\
+\textbf{Jar (Java Archive) } & A package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file for distribution. \\ \\
+\textbf{Java} & Aidely used programming language expressly designed for use in the distributed environment of the internet.\\ \\
+\textbf{Javascript} & An interpreted programming or script language from Netscape.\\ \\
+\textbf{Json (Javascript Object Notation)} & Text-based, human-readable data interchange format used for representing simple data structures and objects in Web browser-based code.\\ \\
+\textbf{Junit} & An open source framework designed for the purpose of writing and running tests in the Java programming language.\\ \\
+
+\textbf{LIME} & Laboratory Internal Management Entity - the name of the application discussed in this document. LIME is the system for resources management in a small chemical laboratory. \\ \\
+
+\textbf{Linux} & An open-source operating system modelled on UNIX.\\ \\
+\textbf{Login} & A string used to differentiate between users.\\ \\
+\textbf{Manager} & A person who is responsible for the managing resources, products and reports\\ \\
+\textbf{Mysql} & An open source relational database management system that uses SQL.\\ \\
+\textbf{Password} & A string that authorize access for a gine user login.\\ \\
+\textbf{Plugin} & A program that can easily be installed and used as part of another program.\\ \\
+\textbf{Primary Key} & A key in a relational database that is unique for each record, used to identify a particular record.\\ \\
+\textbf{Query} & A request to a database for information, or to update, modify, or delete information.\\ \\
+\textbf{Relational Database} & A collection of data items organized as a set of formally-described tables from which data can be accessed or reassembled in many different ways without having to reorganize the database tables.\\ \\
+\textbf{Rest (Representational State Transfer)} & Simple stateless architecture that generally runs over HTTP. It is used to communicate between applications.\\ \\
+\textbf{Rollback} & The undoing of partly completed database changes when a database transaction is determined to have failed.\\ \\
+\textbf{Row} & A group of fields in a database table organized to contain all the information relevant to a specific entity.\\ \\
+\textbf{Server} & A computer program that provides a service to another computer programs (and its user). In the client/server programming model, a server program awaits and fulfills requests from client programs, which may be running in the same or other computers.\\ \\
+\textbf{Software} & General term for the various kinds of programs used to operate computers and related devices.\\ \\
+\textbf{Spring Framework} & a Injection dependency framework at first (it's still as it is today) targeting managing life-cycle of Java components (what so-called beans). \\ \\
+\textbf{Springboot} & A suite, pre-configured, pre-sugared set of frameworks/technologies to reduce boiler plate configuration providing you the shortest way to have a Spring web application up and running with smallest line of code/configuration out-of-the-box. \\ \\
+\textbf{Spring security} & A Java/Java EE framework that provides authentication, authorization and other security features for enterprise applications.\\ \\
+\textbf{Sql (Structured Query Language)} & A standard interactive and programming language for getting information from and updating a database.\\ \\
+\textbf{Staff} & A person who is responsible for endpoint work and jobs.\\ \\
+\textbf{Synchronous} & An adjective describing objects or events that are coordinated in time.\\ \\
+\textbf{Table} & In a relational database, a data structure that organizes the information about a single topic into rows and columns.\\ \\
+\textbf{Upgrade} & A new version of or addition to a hardware or, more often, software product that is already installed or in use.\\ \\
+\textbf{Validation} & A quality assurance used to check if the typed data is correct.\\ \\
+\textbf{Virtual Server} & A server (computer and various server programs) at someone else's location that is shared by multiple Web site owners so that each owner can use and administer it as though they had complete control of the server.\\ \\
+\textbf{War } & A file used to distribute a collection of JAR-files, JavaServer Pages, Java Servlets, Java classes, XML files, tag libraries, static web pages (HTML and related files) and other resources that together constitute a web application. \\ \\
+\textbf{Web Application (Web App)} & An application program that is stored on a remote server and delivered over the Internet through a browser interface.\\ \\
+
+
+\end{longtable}
 
 \thispagestyle{empty}
 
@@ -905,8 +1257,366 @@ If you don't need it, delete it.
 % -----------------------------  APPENDIX A ---------------------------
 \chapter*{A. User Manual}
 
-There we will have manual
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/product/1}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/product/2}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/product/3}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/product/4}
+\end{center}
+\caption{job1}
+\end{figure}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/resource/1}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/resource/2}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/resource/3}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/resource/4}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/jobs/1}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/jobs/2}
+\end{center}
+\caption{job1}
+\end{figure}
 \thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/login/1}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/login/2}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/login/3}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/login/4}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/login/5}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/notifications/1}
+\end{center}
+\caption{job1}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/notifications/2}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/orders/1}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/1}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/2}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/3}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/4}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/5}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/6}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/7}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/resources/1}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/resources/2}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/resources/3}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/resources/4}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/resources/5}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/1}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/2}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/3}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/4}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/5}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/1}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/2}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/3}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/4}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/5}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/report/1}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/report/2}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/report/3}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/report/4}
+\end{center}
+\caption{job1}
+\end{figure}
+\thispagestyle{empty}
+
+
+
+
 
 % -----------------------------  APPENDIX B ---------------------------
 \chapter*{B. Test Report}

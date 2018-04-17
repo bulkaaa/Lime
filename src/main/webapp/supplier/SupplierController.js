@@ -11,7 +11,7 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'supplier', 'all');
                 }
             );
     };

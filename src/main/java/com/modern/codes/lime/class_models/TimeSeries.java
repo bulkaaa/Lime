@@ -45,9 +45,9 @@ public class TimeSeries {
      *
      * @return the integer
      */
-    public Integer sum() {
-        Integer sum = 0;
-        for (final Integer d : TS) {
+    public Double sum() {
+        Double sum = 0.0;
+        for (final Double d : TS) {
             sum += d;
         }
         return sum;
@@ -59,10 +59,10 @@ public class TimeSeries {
      * @param n the n
      * @return the integer
      */
-    public Integer sum(final int n) {
-        final ArrayList<Integer> TSLast = new ArrayList<>(TS.subList(TS.size() - n, TS.size()));
-        Integer sum = 0;
-        for (final Integer d : TSLast) {
+    public Double sum(final int n) {
+        final ArrayList<Double> TSLast = new ArrayList<>(TS.subList(TS.size() - n, TS.size()));
+        Double sum = 0.0;
+        for (final Double d : TSLast) {
             sum += d;
         }
         return sum;
@@ -73,7 +73,7 @@ public class TimeSeries {
      *
      * @param resource_cnt the resource cnt
      */
-    public void add(final Integer resource_cnt) {
+    public void add(final Double resource_cnt) {
         TS.add(resource_cnt);
     }
 
@@ -83,7 +83,7 @@ public class TimeSeries {
      * @param time the time
      * @return the integer
      */
-    public Integer get(final Integer time) {
+    public Double get(final Integer time) {
         return TS.get(time);
     }
 
@@ -96,6 +96,6 @@ public class TimeSeries {
         return TS.size();
     }
 
-    private final ArrayList<Integer> TS = new ArrayList<>();
+    private final ArrayList<Double> TS = new ArrayList<>();
     private String label;
 }

@@ -41,7 +41,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                     DialogService.handle(response, 'product', 'all');
                 }
             );
     };
@@ -346,8 +346,9 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                                  name: item.name,
                                                  description: item.description,
                                                  expectedValue: item.expectedValue,
-                                                 image: item.image,
+                                                 realimage: item.image,
                                                  unit: item.unit,
+                                                 category: item.category,
                                              });
                                          },
                                          function(response){

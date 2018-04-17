@@ -38,21 +38,21 @@ public class SmoothingService implements ISmoothingService {
         return mse / original.size();
     }
 
-    private static Integer Average(final TimeSeries ts) {
+    private static Double Average(final TimeSeries ts) {
         return ts.sum() / ts.size();
     }
 
-    private static Integer MovingAverage(final TimeSeries ts, final int n) {
+    private static Double MovingAverage(final TimeSeries ts, final int n) {
         return ts.sum(n) / n;
     }
 
-    private static Integer WeightedAverage(final TimeSeries ts) {
+    private static Double WeightedAverage(final TimeSeries ts) {
 
-        final Integer size = ts.size() - 1;
-        final Integer four = ts.get(size) * 4;
-        final Integer three = ts.get(size - 1) * 3;
-        final Integer two = ts.get(size - 2) * 2;
-        final Integer one = ts.get(size - 3);
+        final int size = ts.size() - 1;
+        final Double four = ts.get(size) * 4;
+        final Double three = ts.get(size - 1) * 3;
+        final Double two = ts.get(size - 2) * 2;
+        final Double one = ts.get(size - 3);
 
         return (four + three + two + one) / 10;
     }
@@ -62,7 +62,7 @@ public class SmoothingService implements ISmoothingService {
         final TimeSeries SmoothTS = new TimeSeries();
         SmoothTS.add(ts.get(0));
         for (int i = 1; i <= ts.size(); i++) {
-            SmoothTS.add((int) (alpha * ts.get(i - 1) + (1 - alpha) * SmoothTS.get(i - 1)));
+            SmoothTS.add( (alpha * ts.get(i - 1) + (1 - alpha) * SmoothTS.get(i - 1)));
         }
 
         return SmoothTS;
@@ -78,8 +78,8 @@ public class SmoothingService implements ISmoothingService {
         TrendTS.add(ts.get(1) - ts.get(0));
 
         for (int i = 1; i < ts.size(); i++) {
-            SmoothTS.add((int) (alpha * ts.get(i) + (1 - alpha) * (SmoothTS.get(i - 1) + TrendTS.get(i - 1))));
-            TrendTS.add((int) (beta * (SmoothTS.get(i) - SmoothTS.get(i - 1)) + (1 - beta) * TrendTS.get(i - 1)));
+            SmoothTS.add( (alpha * ts.get(i) + (1 - alpha) * (SmoothTS.get(i - 1) + TrendTS.get(i - 1))));
+            TrendTS.add( (beta * (SmoothTS.get(i) - SmoothTS.get(i - 1)) + (1 - beta) * TrendTS.get(i - 1)));
         }
 
         for (int i = 0; i < days; i++) {
@@ -100,17 +100,17 @@ public class SmoothingService implements ISmoothingService {
         //First Week
         for (int i = 1; i < 7; i++) {
             SmoothTS.add(ts.get(i));
-            TrendTS.add((int) (beta * (SmoothTS.get(i) - SmoothTS.get(i - 1)) + (1 - beta) * TrendTS.get(i - 1)));
-            SeasonTS.add((int) (gamma * ts.get(i) / SmoothTS.get(i) + (1 - gamma) * SeasonTS.get(i - 7)));
+            TrendTS.add( (beta * (SmoothTS.get(i) - SmoothTS.get(i - 1)) + (1 - beta) * TrendTS.get(i - 1)));
+            SeasonTS.add( (gamma * ts.get(i) / SmoothTS.get(i) + (1 - gamma) * SeasonTS.get(i - 7)));
         }
 
         //Second and Next Weeks
         for (int i = 7; i < ts.size(); i++) {
             SmoothTS.add(
-                    (int) (alpha * (ts.get(i) / SeasonTS.get(i - 7)) + (1 - alpha) * (SmoothTS.get(i - 1) + TrendTS.get(
+                    (alpha * (ts.get(i) / SeasonTS.get(i - 7)) + (1 - alpha) * (SmoothTS.get(i - 1) + TrendTS.get(
                             i - 1))));
-            TrendTS.add((int) (beta * (SmoothTS.get(i) - SmoothTS.get(i - 1)) + (1 - beta) * TrendTS.get(i - 1)));
-            SeasonTS.add((int) (gamma * ts.get(i) / SmoothTS.get(i) + (1 - gamma) * SeasonTS.get(i - 7)));
+            TrendTS.add( (beta * (SmoothTS.get(i) - SmoothTS.get(i - 1)) + (1 - beta) * TrendTS.get(i - 1)));
+            SeasonTS.add( (gamma * ts.get(i) / SmoothTS.get(i) + (1 - gamma) * SeasonTS.get(i - 7)));
         }
 
         //Forecast
