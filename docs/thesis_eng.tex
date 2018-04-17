@@ -746,6 +746,117 @@ Communication between client and server is done with RESTful API. Server accepts
  L.I.M.E. application have got system to recognize users and its roles. It is implemented using Spring Security. When the user logs in GUI application sends login request to server and the server application checks if the user exist and it’s roles. In the response, it passes the authorization data which is valid for 12 hours (session timeout). Each request from GUI to Server contains a header with the authorization data, so server can recognize which user sends request and if has appropriate roles.
 \section{Program Interface}
 
+User Interface of L.I.M.E application consists of common for all views top menu with 
+logo and name of the system. On its right side there is dropdown menu with login/reset 
+password options and on the bottom of the page - footer. After logging in, login dropdown 
+switches  to user account options and on the left side of the page appears side 
+menu with subpages available for a given kind of account. In the whole application 
+there are following views:
+\begin{enumerate}
+\item Login page:
+\begin{enumerate}
+\item input boxes for username and password
+\item login button
+\end{enumerate}
+\item Password recovery page:
+\begin{enumerate}
+\item inputs for email and email confirmation
+\item reset button
+\end{enumerate}
+\item Edit account page:
+\begin{enumerate}
+\item inputs for name, surname, email address, username and password
+\item edit button
+\end{enumerate}
+\item Login welcome page:
+\begin{enumerate}
+\item welcome banner with logout button
+\end{enumerate}
+\item Welcome page:
+\begin{enumerate}
+\item banner with information about application
+\end{enumerate}
+\item Resources page:
+\begin{enumerate}
+\item table displaying resources with name, image, description, quantity and unit.
+\item buttons for viewing details, editing and deleting each resource
+\item button for adding new resource
+\item search field for filtering resources by name 
+\end{enumerate}
+\item Products page:
+\begin{enumerate}
+\item table displaying product with name, image, description, expected value and unit.
+\item buttons for viewing details, editing and deleting each product
+\item buttons for viewing and editing formula of each product
+\item button for adding new resource
+\item search field for filtering resources by name
+\end{enumerate} 
+\item Orders page:
+\begin{enumerate}
+\item checkbox list with resources names and input for quantity of given resource
+\item send button for sending order to suppliers
+\item switch for turning auto orders on or off
+\end{enumerate}
+\item Report generation page for resources/products:
+\begin{enumerate}
+\item list of resources/products with checkboxes
+\item list of charts types with radio buttons
+\item input for start date
+\item input for number of days 
+\item input for email of  report receiver
+\item send report button for sending it by an email
+\item generate report button for displaying it on the current page
+\end{enumerate}
+\item Report prediction page for resources/products:
+\begin{enumerate}
+\item list of  checkboxes with resources/products names
+\item list of radio buttons with charts types
+\item input for start date
+\item input for number of days
+\item input for number of days of forecast
+\item email of receiver
+\item send report button for sending it by an email
+\item generate report button for displaying it on the current page
+\end{enumerate}
+\item Categories page for resources/products:
+\begin{enumerate}
+\item table displaying resources/products categories
+\item button for editing and deleting each category
+\item button for adding new category
+\end{enumerate}
+\item Notifications page: 
+\begin{enumerate}
+\item table displaying resources with its critical values and notification status
+\item buttons for editing notifications of each resource separately
+\item switch for turning notifications for all resources on or off
+\end{enumerate}
+\item Suppliers page:
+\begin{enumerate}
+\item table displaying suppliers with name, telephone, city, country,  postal code, street and email address 
+\item buttons for viewing details, editing and deleting each supplier
+\item button for adding new supplier
+\item search field for filtering suppliers by all displayed values
+\end{enumerate}
+\item Jobs page:
+\begin{enumerate}
+\item table displaying jobs with product name, description, start and end date, result value and username
+\item button for adding new job
+\end{enumerate}
+\item Users page:
+\begin{enumerate}
+\item table displaying users with name, surname, username, email address and roles
+\item buttons for viewing details, editing and deleting each user
+\item button for adding new user
+\item search field for filtering users by all displayed values
+\end{enumerate}
+\end{enumerate}
+
+Each view button opens pop-up modal with more detailed information about selected item. Edit modal also displays values of selected item, however in input boxes, so with possibility to modify them. Clicking delete button however shows confirmation dialog.\\ \\
+
+The main requirement concerning UI of LIME application was to make interface user friendly. It has been fulfilled by implementing pleasant looking and easy to navigate GUI. Placement of main components is quite standard – account settings in top right corner, main menu on the left side panel – which makes interface intuitive for the user. Throughout the whole application there are used common UI elements and the pattern in layout can be noticed. The purpose of that is to make user feel more comfortable and consequently make him use application more efficiently. Interface is also simple in design, there are no unnecessary elements and the language used on labels is rather clear and understandable. Another important thing is efficient error handling. When application comes across an error, it informs the user about encountered problem and gives possibility of reporting bug to the developers, by sending an email to the given address. As the result application becomes easy to troubleshoot – user can contact the support and that support will resolve issue. \\ \\
+
+The core functionality of LIME is user specific context i.e. user account. Authorization mechanism consists of two core components: client-side application and backend-side authorization provider. From the business perspective client-side application is responsible for retrieving user data, validation and sending data to authorization provider in secure way. First two elements are customized, out of the box functionalities of used technologies. Sending sensitive data is realized by encoding HTTP request data with Base64 encoder. After successful logging in encoded credentials are used in all further requests in HTTP Authorization header. It allows backend to intercept all incoming movement with checking if specific request is coming from authorized user.\\ \\
+
 
 \section{System Classes}
 
