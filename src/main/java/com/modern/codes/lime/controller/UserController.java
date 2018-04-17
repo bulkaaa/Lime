@@ -9,6 +9,7 @@ import javax.mail.MessagingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -84,6 +85,7 @@ public class UserController extends BaseController {
         }
 
         try {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             final String userJson = ParseTools.parseToJson(userService.save(user), User.class);
             MailService.SendEmail(user.getEmailAddress(), "Welcome to LIME",
                                   mailService.prepareWelcomeEmailBody(user.getUsername(), user.getPassword(),
@@ -124,6 +126,7 @@ public class UserController extends BaseController {
                                   bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
         }
         try {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             return ParseTools.parseToJson(userService.save(user), User.class);
         } catch (final Exception e) {
             throw new AlreadyExistsException(
