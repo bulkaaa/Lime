@@ -63,7 +63,7 @@ public class MailService implements IMailService {
         final Session session = getSession();
 
         final Message message = new MimeMessage(session);
-        message.setFrom(new InternetAddress(USERNAME));
+        message.setFrom(new InternetAddress("lime.lab.application@gmail.com"));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
         message.setSubject(subject);
 
@@ -150,7 +150,7 @@ public class MailService implements IMailService {
     private static final String MAIL_SMTP_STARTTLS_ENDABLE = "true";
     private static final String MAIL_SMTP_HOST = "smtp.gmail.com";
     private static final String MAIL_SMTP_PORT = "587";
-    private static final String USERNAME = "limemini102@gmail.com";
-    private static final String PASSWORD = "limeminipassword";
+    private static final String USERNAME = "lime.lab.application@gmail.com";
+    private static final String PASSWORD = "lime1234";
 
 }
