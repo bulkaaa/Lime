@@ -14,7 +14,7 @@ function DialogService($rootScope, $timeout, $q, $location,  $dialogs) {
 
 
     function generalServerError(){
-        $dialogs.error('Ups... Server error', 'Seems like this functionality is not working correctly yet. Please try again later or contact us: lime.lab.application@gmail.com');
+        $dialogs.error('Ups... Application error', 'Please refresh page and try again or contact us: lime.lab.application@gmail.com');
     }
     function validationError(response, name, action){
         let errorMessage = "Please check your input: ";

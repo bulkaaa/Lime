@@ -30,6 +30,7 @@ import com.modern.codes.lime.service.UserService;
  * The type Db populator.
  */
 @Service
+@SuppressWarnings("Duplicates")
 public class DBPopulator {
 
     /**

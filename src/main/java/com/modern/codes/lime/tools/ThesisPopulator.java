@@ -34,7 +34,7 @@ import com.modern.codes.lime.service.UserService;
 public class ThesisPopulator {
 
     /**
-     * Instantiates a new Db populator.
+     * Instantiates a new Thesis populator.
      *
      * @param jobService              the job service
      * @param formulaService          the formula service
@@ -370,75 +370,75 @@ public class ThesisPopulator {
      * Sets formulas.
      */
     public void setFormulas() {
-        formulaFlourCherry = new FormulaPOJO();
-        formulaB = new FormulaPOJO();
-        formulaC = new FormulaPOJO();
-        formulaD = new FormulaPOJO();
-        formulaFlourStrawberry = new FormulaPOJO();
-        formulaF = new FormulaPOJO();
-        formulaG = new FormulaPOJO();
-        formulaH = new FormulaPOJO();
+        formulaFlourCherrycake = new FormulaPOJO();
+        formulaMilkCherryCake = new FormulaPOJO();
+        formulaEggCherryCake = new FormulaPOJO();
+        formulaSugarCherryCake = new FormulaPOJO();
+        formulaFlourStrawberryCake = new FormulaPOJO();
+        formulaMilkStrawberryCake = new FormulaPOJO();
+        formulaEggStrawberryCake = new FormulaPOJO();
+        formulaSugarStrawberryCake = new FormulaPOJO();
         formulaFlourChocolateStrawberryCake = new FormulaPOJO();
-        formulaJ = new FormulaPOJO();
-        formulaK = new FormulaPOJO();
-        formulaL = new FormulaPOJO();
+        formulaMilkChocolateStrawberryCake = new FormulaPOJO();
+        formulaEggChocolateStrawberryCake = new FormulaPOJO();
+        formulaSugarChocolateStrawberryCake = new FormulaPOJO();
         formulaFlourDonut = new FormulaPOJO();
-        formulaN = new FormulaPOJO();
-        formulaO = new FormulaPOJO();
-        formulaP = new FormulaPOJO();
-        formulaQ = new FormulaPOJO();
-        formulaR = new FormulaPOJO();
-        formulaS = new FormulaPOJO();
-        formulaT = new FormulaPOJO();
-        formulaU = new FormulaPOJO();
-        formulaFlourCherry.setValue((double) 1);
-        formulaB.setValue((double) 1);
-        formulaC.setValue((double) 5);
-        formulaD.setValue(0.1);
-        formulaFlourStrawberry.setValue((double) 1);
-        formulaF.setValue((double) 1);
-        formulaG.setValue((double) 5);
-        formulaH.setValue(0.1);
-        formulaFlourChocolateStrawberryCake.setValue((double) 1);
-        formulaJ.setValue((double) 1);
-        formulaK.setValue((double) 5);
-        formulaL.setValue(0.1);
+        formulaMilkDonut = new FormulaPOJO();
+        formulaEggDonut = new FormulaPOJO();
+        formulaSugarDonut = new FormulaPOJO();
+        formulaCherryCherryCake = new FormulaPOJO();
+        formulaStrawberryStrawberryCake = new FormulaPOJO();
+        formulaStrawberryChocolateStrawberryCake = new FormulaPOJO();
+        formulaChocolateChocolateStrawberryCake = new FormulaPOJO();
+        formulaChocolateDonuts = new FormulaPOJO();
+        formulaFlourCherrycake.setValue(0.5);
+        formulaMilkCherryCake.setValue(0.25);
+        formulaEggCherryCake.setValue((double) 3);
+        formulaSugarCherryCake.setValue(0.1);
+        formulaFlourStrawberryCake.setValue(0.5);
+        formulaMilkStrawberryCake.setValue(0.25);
+        formulaEggStrawberryCake.setValue((double) 3);
+        formulaSugarStrawberryCake.setValue(0.1);
+        formulaFlourChocolateStrawberryCake.setValue(0.5);
+        formulaMilkChocolateStrawberryCake.setValue(0.25);
+        formulaEggChocolateStrawberryCake.setValue((double) 3);
+        formulaSugarChocolateStrawberryCake.setValue(0.1);
         formulaFlourDonut.setValue((double) 1);
-        formulaN.setValue((double) 1);
-        formulaO.setValue((double) 5);
-        formulaP.setValue(0.1);
-        formulaQ.setValue(0.2);
-        formulaR.setValue(0.2);
-        formulaS.setValue((double) 1);
-        formulaT.setValue(0.1);
-        formulaU.setValue((double) 1);
+        formulaMilkDonut.setValue(0.5);
+        formulaEggDonut.setValue((double) 4);
+        formulaSugarDonut.setValue(0.1);
+        formulaCherryCherryCake.setValue(0.1);
+        formulaStrawberryStrawberryCake.setValue(0.1);
+        formulaStrawberryChocolateStrawberryCake.setValue(0.1);
+        formulaChocolateChocolateStrawberryCake.setValue((double) 2);
+        formulaChocolateDonuts.setValue((double) 4);
     }
 
     /**
      * Save formulas.
      */
     public void saveFormulas() {
-        formulaFlourCherry = formulaService.save(formulaFlourCherry);
-        formulaB = formulaService.save(formulaB);
-        formulaC = formulaService.save(formulaC);
-        formulaD = formulaService.save(formulaD);
-        formulaFlourStrawberry = formulaService.save(formulaFlourStrawberry);
-        formulaF = formulaService.save(formulaF);
-        formulaG = formulaService.save(formulaG);
-        formulaH = formulaService.save(formulaH);
+        formulaFlourCherrycake = formulaService.save(formulaFlourCherrycake);
+        formulaMilkCherryCake = formulaService.save(formulaMilkCherryCake);
+        formulaEggCherryCake = formulaService.save(formulaEggCherryCake);
+        formulaSugarCherryCake = formulaService.save(formulaSugarCherryCake);
+        formulaFlourStrawberryCake = formulaService.save(formulaFlourStrawberryCake);
+        formulaMilkStrawberryCake = formulaService.save(formulaMilkStrawberryCake);
+        formulaEggStrawberryCake = formulaService.save(formulaEggStrawberryCake);
+        formulaSugarStrawberryCake = formulaService.save(formulaSugarStrawberryCake);
         formulaFlourChocolateStrawberryCake = formulaService.save(formulaFlourChocolateStrawberryCake);
-        formulaJ = formulaService.save(formulaJ);
-        formulaK = formulaService.save(formulaK);
-        formulaL = formulaService.save(formulaL);
+        formulaMilkChocolateStrawberryCake = formulaService.save(formulaMilkChocolateStrawberryCake);
+        formulaEggChocolateStrawberryCake = formulaService.save(formulaEggChocolateStrawberryCake);
+        formulaSugarChocolateStrawberryCake = formulaService.save(formulaSugarChocolateStrawberryCake);
         formulaFlourDonut = formulaService.save(formulaFlourDonut);
-        formulaN = formulaService.save(formulaN);
-        formulaO = formulaService.save(formulaO);
-        formulaP = formulaService.save(formulaP);
-        formulaQ = formulaService.save(formulaQ);
-        formulaR = formulaService.save(formulaR);
-        formulaS = formulaService.save(formulaS);
-        formulaT = formulaService.save(formulaT);
-        formulaU = formulaService.save(formulaU);
+        formulaMilkDonut = formulaService.save(formulaMilkDonut);
+        formulaEggDonut = formulaService.save(formulaEggDonut);
+        formulaSugarDonut = formulaService.save(formulaSugarDonut);
+        formulaCherryCherryCake = formulaService.save(formulaCherryCherryCake);
+        formulaStrawberryStrawberryCake = formulaService.save(formulaStrawberryStrawberryCake);
+        formulaStrawberryChocolateStrawberryCake = formulaService.save(formulaStrawberryChocolateStrawberryCake);
+        formulaChocolateChocolateStrawberryCake = formulaService.save(formulaChocolateChocolateStrawberryCake);
+        formulaChocolateDonuts = formulaService.save(formulaChocolateDonuts);
     }
 
     /**
@@ -587,53 +587,53 @@ public class ThesisPopulator {
 
     private void resourcesRelations() {
         List<FormulaPOJO> formulaListFlour = new ArrayList<>();
-        List<FormulaPOJO> formulaListB = new ArrayList<>();
-        List<FormulaPOJO> formulaListC = new ArrayList<>();
-        List<FormulaPOJO> formulaListD = new ArrayList<>();
-        List<FormulaPOJO> formulaListE = new ArrayList<>();
-        List<FormulaPOJO> formulaListF = new ArrayList<>();
-        List<FormulaPOJO> formulaListG = new ArrayList<>();
-        formulaListFlour.add(formulaFlourCherry);
-        formulaListFlour.add(formulaFlourStrawberry);
+        List<FormulaPOJO> formulaListMilk = new ArrayList<>();
+        List<FormulaPOJO> formulaListEgg = new ArrayList<>();
+        List<FormulaPOJO> formulaListSugar = new ArrayList<>();
+        List<FormulaPOJO> formulaListStrawberry = new ArrayList<>();
+        List<FormulaPOJO> formulaListCherry = new ArrayList<>();
+        List<FormulaPOJO> formulaListChocolate = new ArrayList<>();
+        formulaListFlour.add(formulaFlourCherrycake);
+        formulaListFlour.add(formulaFlourStrawberryCake);
         formulaListFlour.add(formulaFlourChocolateStrawberryCake);
         formulaListFlour.add(formulaFlourDonut);
-        formulaListB.add(formulaB);
-        formulaListB.add(formulaF);
-        formulaListB.add(formulaJ);
-        formulaListB.add(formulaN);
-        formulaListC.add(formulaC);
-        formulaListC.add(formulaG);
-        formulaListC.add(formulaK);
-        formulaListC.add(formulaO);
-        formulaListD.add(formulaD);
-        formulaListD.add(formulaH);
-        formulaListD.add(formulaL);
-        formulaListD.add(formulaP);
-        formulaListF.add(formulaQ); // cherrycake
-        formulaListE.add(formulaR); // strwaberry  cake
-        formulaListE.add(formulaS); // Strawberry for choc cake
-        formulaListG.add(formulaT); // chocolate for cake
-        formulaListG.add(formulaU); // chocolate for donuts
-        resourceChocolate.setPOJOCategory(resourceCategoryBasics);
+        formulaListMilk.add(formulaMilkCherryCake);
+        formulaListMilk.add(formulaMilkStrawberryCake);
+        formulaListMilk.add(formulaMilkChocolateStrawberryCake);
+        formulaListMilk.add(formulaMilkDonut);
+        formulaListEgg.add(formulaEggCherryCake);
+        formulaListEgg.add(formulaEggStrawberryCake);
+        formulaListEgg.add(formulaEggChocolateStrawberryCake);
+        formulaListEgg.add(formulaEggDonut);
+        formulaListSugar.add(formulaSugarCherryCake);
+        formulaListSugar.add(formulaSugarStrawberryCake);
+        formulaListSugar.add(formulaSugarChocolateStrawberryCake);
+        formulaListSugar.add(formulaSugarDonut);
+        formulaListCherry.add(formulaCherryCherryCake); // cherrycake
+        formulaListStrawberry.add(formulaStrawberryStrawberryCake); // strwaberry  cake
+        formulaListStrawberry.add(formulaStrawberryChocolateStrawberryCake); // Strawberry for choc cake
+        formulaListChocolate.add(formulaChocolateChocolateStrawberryCake); // chocolate for cake
+        formulaListChocolate.add(formulaChocolateDonuts); // chocolate for donuts
         resourceCherry.setPOJOCategory(resourceCategoryFruits);
         resourceStrawberry.setPOJOCategory(resourceCategoryFruits);
+        resourceChocolate.setPOJOCategory(resourceCategoryBasics);
         resourceMilk.setPOJOCategory(resourceCategoryBasics);
         resourceFlour.setPOJOCategory(resourceCategoryBasics);
         resourceEgg.setPOJOCategory(resourceCategoryBasics);
         resourceSugar.setPOJOCategory(resourceCategoryBasics);
         resourceFlour.setPOJOFormulas(formulaListFlour);
-        resourceMilk.setPOJOFormulas(formulaListB);
-        resourceEgg.setPOJOFormulas(formulaListC);
-        resourceSugar.setPOJOFormulas(formulaListD);
-        resourceStrawberry.setPOJOFormulas(formulaListE);
-        resourceCherry.setPOJOFormulas(formulaListF);
-        resourceChocolate.setPOJOFormulas(formulaListG);
-        resourceFlour.setPOJOSupplier(fruitSupplier);
-        resourceMilk.setPOJOSupplier(fruitSupplier);
-        resourceSugar.setPOJOSupplier(fruitSupplier);
+        resourceMilk.setPOJOFormulas(formulaListMilk);
+        resourceEgg.setPOJOFormulas(formulaListEgg);
+        resourceSugar.setPOJOFormulas(formulaListSugar);
+        resourceStrawberry.setPOJOFormulas(formulaListStrawberry);
+        resourceCherry.setPOJOFormulas(formulaListCherry);
+        resourceChocolate.setPOJOFormulas(formulaListChocolate);
+        resourceFlour.setPOJOSupplier(basicSupplier);
+        resourceMilk.setPOJOSupplier(basicSupplier);
+        resourceSugar.setPOJOSupplier(basicSupplier);
         resourceStrawberry.setPOJOSupplier(fruitSupplier);
         resourceCherry.setPOJOSupplier(fruitSupplier);
-        resourceChocolate.setPOJOSupplier(fruitSupplier);
+        resourceChocolate.setPOJOSupplier(basicSupplier);
         resourceEgg.setPOJOSupplier(basicSupplier);
     }
 
@@ -646,27 +646,27 @@ public class ThesisPopulator {
         List<FormulaPOJO> formulaListB = new ArrayList<>();
         List<FormulaPOJO> formulaListC = new ArrayList<>();
         List<FormulaPOJO> formulaListD = new ArrayList<>();
-        formulaListA.add(formulaFlourCherry);
-        formulaListA.add(formulaB);
-        formulaListA.add(formulaC);
-        formulaListA.add(formulaD);
-        formulaListB.add(formulaFlourStrawberry);
-        formulaListB.add(formulaF);
-        formulaListB.add(formulaG);
-        formulaListB.add(formulaH);
+        formulaListA.add(formulaFlourCherrycake);
+        formulaListA.add(formulaMilkCherryCake);
+        formulaListA.add(formulaEggCherryCake);
+        formulaListA.add(formulaSugarCherryCake);
+        formulaListB.add(formulaFlourStrawberryCake);
+        formulaListB.add(formulaMilkStrawberryCake);
+        formulaListB.add(formulaEggStrawberryCake);
+        formulaListB.add(formulaSugarStrawberryCake);
         formulaListC.add(formulaFlourChocolateStrawberryCake);
-        formulaListC.add(formulaJ);
-        formulaListC.add(formulaK);
-        formulaListC.add(formulaL);
+        formulaListC.add(formulaMilkChocolateStrawberryCake);
+        formulaListC.add(formulaEggChocolateStrawberryCake);
+        formulaListC.add(formulaSugarChocolateStrawberryCake);
         formulaListD.add(formulaFlourDonut);
-        formulaListD.add(formulaN);
-        formulaListD.add(formulaO);
-        formulaListD.add(formulaP);
-        formulaListA.add(formulaQ);
-        formulaListB.add(formulaR);
-        formulaListC.add(formulaS);
-        formulaListC.add(formulaT);
-        formulaListD.add(formulaU);
+        formulaListD.add(formulaMilkDonut);
+        formulaListD.add(formulaEggDonut);
+        formulaListD.add(formulaSugarDonut);
+        formulaListA.add(formulaCherryCherryCake);
+        formulaListB.add(formulaStrawberryStrawberryCake);
+        formulaListC.add(formulaStrawberryChocolateStrawberryCake);
+        formulaListC.add(formulaChocolateChocolateStrawberryCake);
+        formulaListD.add(formulaChocolateDonuts);
         jobListA.add(jobCherryCake);
         jobListB.add(jobStrawberryCake);
         jobListC.add(jobChocolateStrawberryCake);
@@ -700,48 +700,48 @@ public class ThesisPopulator {
     }
 
     private void formulasRelations() {
-        formulaFlourCherry.setPOJOProduct(productCherryCake);
-        formulaB.setPOJOProduct(productCherryCake);
-        formulaC.setPOJOProduct(productCherryCake);
-        formulaD.setPOJOProduct(productCherryCake);
-        formulaFlourStrawberry.setPOJOProduct(productStrawberryCake);
-        formulaF.setPOJOProduct(productStrawberryCake);
-        formulaG.setPOJOProduct(productStrawberryCake);
-        formulaH.setPOJOProduct(productStrawberryCake);
+        formulaFlourCherrycake.setPOJOProduct(productCherryCake);
+        formulaMilkCherryCake.setPOJOProduct(productCherryCake);
+        formulaEggCherryCake.setPOJOProduct(productCherryCake);
+        formulaSugarCherryCake.setPOJOProduct(productCherryCake);
+        formulaFlourStrawberryCake.setPOJOProduct(productStrawberryCake);
+        formulaMilkStrawberryCake.setPOJOProduct(productStrawberryCake);
+        formulaEggStrawberryCake.setPOJOProduct(productStrawberryCake);
+        formulaSugarStrawberryCake.setPOJOProduct(productStrawberryCake);
         formulaFlourChocolateStrawberryCake.setPOJOProduct(productChocolateStrawberryCake);
-        formulaJ.setPOJOProduct(productChocolateStrawberryCake);
-        formulaK.setPOJOProduct(productChocolateStrawberryCake);
-        formulaL.setPOJOProduct(productChocolateStrawberryCake);
+        formulaMilkChocolateStrawberryCake.setPOJOProduct(productChocolateStrawberryCake);
+        formulaEggChocolateStrawberryCake.setPOJOProduct(productChocolateStrawberryCake);
+        formulaSugarChocolateStrawberryCake.setPOJOProduct(productChocolateStrawberryCake);
         formulaFlourDonut.setPOJOProduct(productDonutWithChocolate);
-        formulaN.setPOJOProduct(productDonutWithChocolate);
-        formulaO.setPOJOProduct(productDonutWithChocolate);
-        formulaP.setPOJOProduct(productDonutWithChocolate);
-        formulaQ.setPOJOProduct(productCherryCake);
-        formulaR.setPOJOProduct(productStrawberryCake);
-        formulaS.setPOJOProduct(productChocolateStrawberryCake);
-        formulaT.setPOJOProduct(productChocolateStrawberryCake);
-        formulaU.setPOJOProduct(productDonutWithChocolate);
-        formulaFlourCherry.setPOJOResource(resourceFlour);
-        formulaFlourStrawberry.setPOJOResource(resourceFlour);
+        formulaMilkDonut.setPOJOProduct(productDonutWithChocolate);
+        formulaEggDonut.setPOJOProduct(productDonutWithChocolate);
+        formulaSugarDonut.setPOJOProduct(productDonutWithChocolate);
+        formulaCherryCherryCake.setPOJOProduct(productCherryCake);
+        formulaStrawberryStrawberryCake.setPOJOProduct(productStrawberryCake);
+        formulaStrawberryChocolateStrawberryCake.setPOJOProduct(productChocolateStrawberryCake);
+        formulaChocolateChocolateStrawberryCake.setPOJOProduct(productChocolateStrawberryCake);
+        formulaChocolateDonuts.setPOJOProduct(productDonutWithChocolate);
+        formulaFlourCherrycake.setPOJOResource(resourceFlour);
+        formulaFlourStrawberryCake.setPOJOResource(resourceFlour);
         formulaFlourChocolateStrawberryCake.setPOJOResource(resourceFlour);
         formulaFlourDonut.setPOJOResource(resourceFlour);
-        formulaB.setPOJOResource(resourceMilk);
-        formulaF.setPOJOResource(resourceMilk);
-        formulaJ.setPOJOResource(resourceMilk);
-        formulaN.setPOJOResource(resourceMilk);
-        formulaC.setPOJOResource(resourceEgg);
-        formulaG.setPOJOResource(resourceEgg);
-        formulaK.setPOJOResource(resourceEgg);
-        formulaO.setPOJOResource(resourceEgg);
-        formulaD.setPOJOResource(resourceSugar);
-        formulaH.setPOJOResource(resourceSugar);
-        formulaL.setPOJOResource(resourceSugar);
-        formulaP.setPOJOResource(resourceSugar);
-        formulaQ.setPOJOResource(resourceCherry);
-        formulaR.setPOJOResource(resourceStrawberry);
-        formulaS.setPOJOResource(resourceStrawberry);
-        formulaT.setPOJOResource(resourceChocolate);
-        formulaU.setPOJOResource(resourceChocolate);
+        formulaMilkCherryCake.setPOJOResource(resourceMilk);
+        formulaMilkStrawberryCake.setPOJOResource(resourceMilk);
+        formulaMilkChocolateStrawberryCake.setPOJOResource(resourceMilk);
+        formulaMilkDonut.setPOJOResource(resourceMilk);
+        formulaEggCherryCake.setPOJOResource(resourceEgg);
+        formulaEggStrawberryCake.setPOJOResource(resourceEgg);
+        formulaEggChocolateStrawberryCake.setPOJOResource(resourceEgg);
+        formulaEggDonut.setPOJOResource(resourceEgg);
+        formulaSugarCherryCake.setPOJOResource(resourceSugar);
+        formulaSugarStrawberryCake.setPOJOResource(resourceSugar);
+        formulaSugarChocolateStrawberryCake.setPOJOResource(resourceSugar);
+        formulaSugarDonut.setPOJOResource(resourceSugar);
+        formulaCherryCherryCake.setPOJOResource(resourceCherry);
+        formulaStrawberryStrawberryCake.setPOJOResource(resourceStrawberry);
+        formulaStrawberryChocolateStrawberryCake.setPOJOResource(resourceStrawberry);
+        formulaChocolateChocolateStrawberryCake.setPOJOResource(resourceChocolate);
+        formulaChocolateDonuts.setPOJOResource(resourceChocolate);
     }
 
     private void saveToDB() {
@@ -803,25 +803,25 @@ public class ThesisPopulator {
     private JobPOJO jobChocolateStrawberryCake;
     private JobPOJO jobDonut1;
     private JobPOJO jobDonut2;
-    private FormulaPOJO formulaFlourCherry;
-    private FormulaPOJO formulaB;
-    private FormulaPOJO formulaC;
-    private FormulaPOJO formulaD;
-    private FormulaPOJO formulaFlourStrawberry;
-    private FormulaPOJO formulaF;
-    private FormulaPOJO formulaG;
-    private FormulaPOJO formulaH;
+    private FormulaPOJO formulaFlourCherrycake;
+    private FormulaPOJO formulaMilkCherryCake;
+    private FormulaPOJO formulaEggCherryCake;
+    private FormulaPOJO formulaSugarCherryCake;
+    private FormulaPOJO formulaFlourStrawberryCake;
+    private FormulaPOJO formulaMilkStrawberryCake;
+    private FormulaPOJO formulaEggStrawberryCake;
+    private FormulaPOJO formulaSugarStrawberryCake;
     private FormulaPOJO formulaFlourChocolateStrawberryCake;
-    private FormulaPOJO formulaJ;
-    private FormulaPOJO formulaK;
-    private FormulaPOJO formulaL;
+    private FormulaPOJO formulaMilkChocolateStrawberryCake;
+    private FormulaPOJO formulaEggChocolateStrawberryCake;
+    private FormulaPOJO formulaSugarChocolateStrawberryCake;
     private FormulaPOJO formulaFlourDonut;
-    private FormulaPOJO formulaN;
-    private FormulaPOJO formulaO;
-    private FormulaPOJO formulaP;
-    private FormulaPOJO formulaQ;
-    private FormulaPOJO formulaR;
-    private FormulaPOJO formulaS;
-    private FormulaPOJO formulaT;
-    private FormulaPOJO formulaU;
+    private FormulaPOJO formulaMilkDonut;
+    private FormulaPOJO formulaEggDonut;
+    private FormulaPOJO formulaSugarDonut;
+    private FormulaPOJO formulaCherryCherryCake;
+    private FormulaPOJO formulaStrawberryStrawberryCake;
+    private FormulaPOJO formulaStrawberryChocolateStrawberryCake;
+    private FormulaPOJO formulaChocolateChocolateStrawberryCake;
+    private FormulaPOJO formulaChocolateDonuts;
 }

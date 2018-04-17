@@ -1,18 +1,13 @@
 package com.modern.codes.lime.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.modern.codes.lime.model.User;
-import com.modern.codes.lime.pojo.UserPOJO;
-import com.modern.codes.lime.service.IUserService;
 import com.modern.codes.lime.tools.DBPopulator;
-import com.modern.codes.lime.tools.ParseTools;
 import com.modern.codes.lime.tools.StartUpPopulator;
+import com.modern.codes.lime.tools.ThesisPopulator;
 
 /**
  * The type Dev controller.
@@ -22,9 +17,10 @@ import com.modern.codes.lime.tools.StartUpPopulator;
 public class DevController {
 
     @Autowired
-    public DevController(final DBPopulator pop, final StartUpPopulator upPop) {
+    public DevController(final DBPopulator pop, final StartUpPopulator upPop, final ThesisPopulator thesisPop) {
         this.pop = pop;
         this.upPop = upPop;
+        this.thesisPop = thesisPop;
     }
 
     /**
@@ -32,9 +28,9 @@ public class DevController {
      *
      * @return the string
      */
-    @GetMapping(path = "/populate")
+    @GetMapping(path = "/thesis")
     public String populate() {
-        pop.populate();
+        thesisPop.populate();
         return "DB reset completed";
     }
 
@@ -69,4 +65,9 @@ public class DevController {
 
     private final StartUpPopulator upPop;
 
+    /**
+     * The Thesis Populator.
+     */
+
+    private final ThesisPopulator thesisPop;
 }
