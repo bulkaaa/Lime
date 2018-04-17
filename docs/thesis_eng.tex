@@ -749,6 +749,154 @@ Communication between client and server is done with RESTful API. Server accepts
 
 \section{System Classes}
 
+The Application is composed with the following packages, and the package contain the following classes and interfaces:
+
+\begin{enumerate} 
+\item Lime	 
+\begin{enumerate} 
+\item \textbf{LimeApplication}	The Main Class for Lime Application.
+\end{enumerate} 
+\item Api	 
+\begin{enumerate} 
+\item \textbf{GlobalExceptionHandlingControllerAdvice} Performs exception handling for all REST API controller.
+\end{enumerate} 
+\item ClassModels	 
+\begin{enumerate} 
+\item \textbf{DrawSeries} The class for Plotting Time Series into a Chart
+\item \textbf{TimeSeries} The class of Time Series
+\end{enumerate} 
+\item Config	 
+\begin{enumerate} 
+\item \textbf{SecurityConfiguration} The type Security configuration.
+\item \textbf{StorageProperties} The type Storage properties.
+\item \textbf{SwaggerConfig} Main configuration class to enable the Swagger UI frontend.
+\end{enumerate} 
+\item Controller	 
+\begin{enumerate} 
+\item \textbf{BaseController} The Basic type of controller
+\item \textbf{DevController} The type Dev controller.
+\item \textbf{FileUploadController} The type File upload controller.
+\item \textbf{ForecastController} The type Forecast controller.
+\item \textbf{FormulaController} The type Formula controller.
+\item \textbf{JobController} The type Job controller.
+\item \textbf{OrderController} The type Order controller.
+\item \textbf{ProductCategoryController} The type Product category controller.
+\item \textbf{ProductController} The type Product controller.
+\item \textbf{ReportController} The type Report controller.
+\item \textbf{ResourceCategoryController} The type Resource category controller.
+\item \textbf{ResourceController} The type Resource controller.
+\item \textbf{SupplierController} The type Supplier controller.
+\item \textbf{UserController} The type User controller.
+
+\end{enumerate} 
+\item Dao	 
+\begin{enumerate} 
+\item \textbf{IBasicCRUDRepository<T,ID extends java.io.Serializable>} The interface Basic crud repository.
+\item \textbf{IFormulaDAO} The interface Formula dao.
+\item \textbf{IJobDAO} The interface Job dao.
+\item \textbf{IProductCategoryDAO} The interface Product category dao.
+\item \textbf{IProductDAO} The interface Product dao.
+\item \textbf{IResourceCategoryDAO} The interface Resource category dao.
+\item \textbf{IResourceDAO} The interface Resource dao.
+\item \textbf{IRoleDAO} The interface Role dao.
+\item \textbf{ISupplierDAO} The interface Supplier dao.
+\item \textbf{IUserDAO} The interface User dao.
+
+\end{enumerate} 
+\item Exception	 
+\begin{enumerate} 
+\item \textbf{AlreadyExistsException} thrown when an entity with at leas one unique field already exists .
+\item \textbf{ForbiddenException} thrown when eg. an authentication attempt is not allowed with the given credentials (not details returned).
+\item \textbf{IllegalDataException} thrown when the given data is not valid in the current context.
+\item \textbf{InvalidRequestException} thrown when a request is invalid in the current context.
+\item \textbf{NotAcceptableException} exception, thrown when given data is not acceptable.
+\item \textbf{NotFoundException} thrown when an entity is not found where it is expected.
+\item \textbf{OperationNotAllowedException} thrown when a contract management API call is not allowed.
+\item \textbf{ServiceUnavailableException} The type Service unavailable exception.
+\item \textbf{StorageException} The type Storage exception.
+\item \textbf{StorageFileNotFoundException} The type Storage file not found exception.
+\item \textbf{UnprocessableEntityException} thrown when an entity contains validation errors.
+
+\end{enumerate} 
+\item Model	 
+\begin{enumerate} 
+\item \textbf{CustomUserDetails} The type Custom user details.
+\item \textbf{Formula} Model representation of a formula used in Lime.
+\item \textbf{Job} Model representation of a job created by Lime user.
+\item \textbf{Product} Model representation of a product added in Lime.
+\item \textbf{ProductCategory} The type Product category.
+\item \textbf{Resource} Model representation of a resource used in Lime.
+\item \textbf{ResourceCategory} The type Resource category.
+\item \textbf{Role} Model representation of a user role in Lime.
+\item \textbf{Supplier} Model representation of a supplier in Lime.
+\item \textbf{User} Model representation of user of Lime.
+
+\end{enumerate} 
+\item Pojo	 
+\begin{enumerate} 
+\item \textbf{BasicPOJO} The type Basic pojo.
+\item \textbf{FormulaPOJO} The type Formula pojo.
+\item \textbf{JobPOJO} The type Job pojo.
+\item \textbf{ProductCategoryPOJO} The type Product category pojo.
+\item \textbf{ProductPOJO} The type Product pojo.
+\item \textbf{ResourceCategoryPOJO} The type Resource category pojo.
+\item \textbf{ResourcePOJO} The type Resource pojo.
+\item \textbf{RolePOJO} The type Role pojo.
+\item \textbf{SupplierPOJO} The type Supplier pojo.
+\item \textbf{UserPOJO} The type User pojo.
+
+\end{enumerate} 
+\item Service	 
+\begin{enumerate} 
+\item \textbf{IBasicCRUDService} The interface Basic crud service.
+\item \textbf{IForecastService} The interface Forecast service.
+\item \textbf{IFormulaService} The interface Formula service.
+\item \textbf{IJobService} The interface Job service.
+\item \textbf{IMailService} The interface Mail service.
+\item \textbf{INotificationService} The interface Notification service.
+\item \textbf{IProductCategoryService} The interface Product category service.
+\item \textbf{IProductService} The interface Product service.
+\item \textbf{IReportService} The interface Report service.
+\item \textbf{IResourceCategoryService} The interface Resource category service.
+\item \textbf{IResourceService} The interface Resource service.
+\item \textbf{IRoleService} The interface Role service.
+\item \textbf{ISmoothingService} The interface Smoothing service.
+\item \textbf{IStorageService} The interface Storage service.
+\item \textbf{ISupplierService} The interface Supplier service.
+\item \textbf{ITimeSeriesService} The interface Time series service.
+\item \textbf{IUserService} The interface User service.
+
+\end{enumerate} 
+\begin{enumerate} 
+\item \textbf{BasicCRUDService} The type Basic crud service.
+\item \textbf{CustomUserDetailsService} The type Custom user details service.
+\item \textbf{ForecastService} The type Forecast service.
+\item \textbf{FormulaService} The type Formula service.
+\item \textbf{JobService} The type Job service.
+\item \textbf{MailService} The type Mail service.
+\item \textbf{NotificationService} The type Notification service.
+\item \textbf{ProductCategoryService} The type Product category service.
+\item \textbf{ProductService} The type Product service.
+\item \textbf{ReportService} The type Report service.
+\item \textbf{ResourceCategoryService} The type Resource category service.
+\item \textbf{ResourceService} The type Resource service.
+\item \textbf{RoleService} The type Role service.
+\item \textbf{SmoothingService} The type Smoothing service.
+\item \textbf{StorageService} The type Storage service.
+\item \textbf{SupplierService} The type Supplier service.
+\item \textbf{TimeSeriesService} The type Time series service.
+\item \textbf{UserService} The type User service.
+
+\end{enumerate} 
+\item Tools
+\begin{enumerate} 
+\item \textbf{DBPopulator} The type Database populator.
+\item \textbf{ParseTools} The type Parse tools.
+\item \textbf{StartUpPopulator} 
+\item \textbf{TSGenerator} The type Time Series generator.
+
+\end{enumerate}
+\end{enumerate}
 
 \section{Database Design}
 
