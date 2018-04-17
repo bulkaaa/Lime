@@ -200,13 +200,15 @@ public class UserController extends BaseController {
             user.setPlainPassword(newPassword);
 
             userService.save(user);
+            LOG.error("NEW PASSWORD: ", newPassword);
             MailService.SendEmail(email, "Lime password reset", "Hi!\n\n Your new password to lime account: "
                                                                 + newPassword
                                                                 + "\n\n Please do not share it! \n\n Reegards, \nTeam"
                                                                 + " of LimeLab.");
+            LOG.error("after sending");
             return true;
         } catch (final MessagingException e) {
-            LOG.info("failed to change password " + e + " \n\n\nmessage: " + e.getMessage());
+            LOG.error("failed to change password " + e + " \n\n\nmessage: " + e.getMessage());
             throw e;
         }
     }
