@@ -187,7 +187,7 @@ public class UserController extends BaseController {
     @ApiOperation(value = "Delete a User object", notes = "Deletes a <b>User</b> object ", response = UserPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved User object"))
     @ResponseBody
-    public Boolean changePassword(@ApiParam("User email") @PathVariable final String email) {
+    public Boolean changePassword(@ApiParam("User email") @PathVariable final String email) throws MessagingException {
         try {
             LOG.info("User deletion request received for id: " + email);
 
@@ -203,8 +203,8 @@ public class UserController extends BaseController {
                                                                 + " of LimeLab.");
             return true;
         } catch (final MessagingException e) {
-            LOG.info("failed to change password " + e);
-            return false;
+            LOG.info("failed to change password " + e + " \n\n\nmessage: " + e.getMessage());
+            throw e;
         }
     }
 
