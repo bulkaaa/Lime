@@ -79,7 +79,7 @@ public class DrawSeries {
 
         // Save it
         try {
-            BitmapEncoder.saveBitmap(chart, "./chart", BitmapEncoder.BitmapFormat.PNG);
+            BitmapEncoder.saveBitmap(chart, "chart", BitmapEncoder.BitmapFormat.PNG);
             return Base64.getEncoder()
                          .encode(BitmapEncoder.getBitmapBytes(chart, BitmapEncoder.BitmapFormat.PNG));
         } catch (final IOException e) {
@@ -111,7 +111,7 @@ public class DrawSeries {
 
         // Save it
         try {
-            BitmapEncoder.saveBitmap(chart, "./chart", BitmapEncoder.BitmapFormat.PNG);
+            BitmapEncoder.saveBitmap(chart, "chart", BitmapEncoder.BitmapFormat.PNG);
             return Base64.getEncoder()
                          .encode(BitmapEncoder.getBitmapBytes(chart, BitmapEncoder.BitmapFormat.PNG));
         } catch (final IOException e) {

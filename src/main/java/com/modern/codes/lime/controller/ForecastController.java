@@ -113,7 +113,7 @@ public class ForecastController extends BaseController {
         final byte[] bytes = forecastService.plotForecast(startDate, noDays, noDaysForecast, chartType, productIds);
 
         try {
-            MailService.SendEmail(email, "Forecast Email from LIME", "Please Find Report Attached", "./chart");
+            MailService.SendEmail(email, "Forecast Email from LIME", "Please Find Report Attached", "chart");
         } catch (final MessagingException e) {
             LOG.error("FAILED TO SEND REPORT.", e);
         }
@@ -141,7 +141,7 @@ public class ForecastController extends BaseController {
         final byte[] bytes = forecastService.plotForecastResource(startDate, noDays, noDaysForecast, chartType, resourceIds);
 
         try {
-            MailService.SendEmail(email, "Forecast Email from LIME", "Please Find Report Attached", "./chart");
+            MailService.SendEmail(email, "Forecast Email from LIME", "Please Find Report Attached", "chart");
         } catch (final MessagingException e) {
             LOG.error("FAILED TO SEND REPORT.", e);
         }
