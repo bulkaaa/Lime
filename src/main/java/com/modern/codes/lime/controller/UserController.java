@@ -190,7 +190,7 @@ public class UserController extends BaseController {
     @ApiOperation(value = "Delete a User object", notes = "Deletes a <b>User</b> object ", response = UserPOJO.class)
     @ApiResponses(@ApiResponse(code = 200, message = "Saved User object"))
     @ResponseBody
-    public Boolean changePassword(@ApiParam("User email") @PathVariable final String email) throws MessagingException {
+    public Boolean changePassword(@ApiParam("User email") @PathVariable final String email) {
         try {
             LOG.info("User deletion request received for id: " + email);
 
@@ -200,16 +200,14 @@ public class UserController extends BaseController {
             user.setPlainPassword(newPassword);
 
             userService.save(user);
-            LOG.error("NEW PASSWORD: " + newPassword);
             MailService.SendEmail(email, "Lime password reset", "Hi!\n\n Your new password to lime account: "
                                                                 + newPassword
                                                                 + "\n\n Please do not share it! \n\n Reegards, \nTeam"
                                                                 + " of LimeLab.");
-            LOG.error("after sending");
             return true;
         } catch (final MessagingException e) {
-            LOG.error("failed to change password " + e + " \n\n\nmessage: " + e.getMessage());
-            throw e;
+            LOG.error("failed to change password " + e + "\nmessage: " + e.getMessage());
+            return false;
         }
     }
 
