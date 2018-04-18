@@ -107,7 +107,7 @@ public class ReportController {
 
         final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
         try {
-            MailService.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", "chart");
+            MailService.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", "./chart.png");
         } catch (final MessagingException e) {
             LOG.error("FAILED TO SEND REPORT", e);
         }
@@ -133,7 +133,7 @@ public class ReportController {
 
         final byte[] bytes = reportService.getReportBytesResource(startDate, noDays, chartType, resourceIds);
         try {
-            MailService.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", "chart");
+            MailService.SendEmail(email, "Report Email form LIME", "Please Find Report Attached", "./chart.png");
         } catch (final MessagingException e) {
             LOG.error("FAILED TO SEND REPORT", e);
         }
