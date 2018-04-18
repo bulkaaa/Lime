@@ -2,14 +2,20 @@
 # = DATA SOURCE
 # ===============================
 
-# Set here configurations for the database connection
-# push command: git push heroku LimeAppHeroku:master
-# heroku config:add DATABASE_URL="mysql://user:password@host/db?reconnect=true&createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8"
-# heroku credentials:ó
-#   username:limemini102@gmail.com
-#   password:LIMEmini102!@
-# gmail password: limeminipassword
 spring:
+  main:
+    banner-mode: "off"
+  datasource:
+    url: jdbc:mysql://localhost:3306/lime?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: test
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+      max-wait: 20000
+      max-active: 50
+      max-idle: 20
+      min-idle: 15
   jpa:
     show-sql: true
     hibernate:
@@ -21,6 +27,8 @@ spring:
   session:
     store-type: redis
 server:
+  port: 8080
+  address: localhost
   session:
     timeout: 43200
 storage:
