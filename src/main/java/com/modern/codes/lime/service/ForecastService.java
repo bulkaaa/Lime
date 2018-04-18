@@ -59,7 +59,7 @@ public class ForecastService implements IForecastService {
                                                              + noDays
                                                              + " Days and forecast for the next "
                                                              + noDaysForecast
-                                                             + " days.", "Sample_Chart", chartType);
+                                                             + " days.", "chart", chartType);
     }
 
 
@@ -86,7 +86,7 @@ public class ForecastService implements IForecastService {
                 + noDays
                 + " Days and forecast for the next "
                 + noDaysForecast
-                + " days.", "Sample_Chart", chartType);
+                + " days.", "chart", chartType);
     }
 
     private final ITimeSeriesService timeSeriesService;
