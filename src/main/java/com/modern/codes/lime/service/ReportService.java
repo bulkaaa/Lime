@@ -42,7 +42,7 @@ public class ReportService implements IReportService {
 
         final ArrayList<TimeSeries> seriesL = timeSeriesService.Extract(date, noDays, productIds);
         return DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Production in past " + noDays + " days",
-                                    "Sample_Chart", chartType);
+                                    "chart", chartType);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ReportService implements IReportService {
 
         final ArrayList<TimeSeries> seriesL = timeSeriesService.ExtractforResource(date, noDays, resourceIds);
         return DrawSeries.plotChart(seriesL, new ArrayList<>(), date, "Resource Use in past " + noDays + " days",
-                "Sample_Chart", chartType);
+                "chart", chartType);
     }
     private final ITimeSeriesService timeSeriesService;
 }

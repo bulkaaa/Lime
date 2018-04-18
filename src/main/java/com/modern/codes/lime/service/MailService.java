@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -18,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
+import org.knowm.xchart.BitmapEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -58,7 +61,7 @@ public class MailService implements IMailService {
      * @param attachment the attachment
      * @throws MessagingException the messaging exception
      */
-    public static void SendEmail(final String to, final String subject, final String content, final byte[] attachment)
+    public static void SendEmail(final String to, final String subject, final String content, final String attachment)
             throws MessagingException {
         final Session session = getSession();
 
@@ -73,9 +76,13 @@ public class MailService implements IMailService {
         textBodyPart.setText(content);
 
         final MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-        final ByteArrayDataSource rawData = new ByteArrayDataSource(attachment, "image/jpeg");
-        attachmentBodyPart.setDataHandler(new DataHandler(rawData));
-        attachmentBodyPart.setFileName("report.jpg");
+        final DataSource source = new FileDataSource(attachment);
+        attachmentBodyPart.setFileName(source.getName());
+        attachmentBodyPart.setDataHandler(new DataHandler(source));
+
+        // final ByteArrayDataSource rawData = new ByteArrayDataSource(attachment, "image/jpeg");
+        // attachmentBodyPart.setDataHandler(new DataHandler(rawData));
+        // attachmentBodyPart.setFileName("report.jpg");
 
         multipart.addBodyPart(textBodyPart);
         multipart.addBodyPart(attachmentBodyPart);

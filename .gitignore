@@ -2,7 +2,7 @@
 /build/
 /out/
 !gradle/wrapper/gradle-wrapper.jar
-Sample_Chart.png
+chart.png
 
 ### STS ###
 .apt_generated
