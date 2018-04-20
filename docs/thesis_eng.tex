@@ -1009,7 +1009,10 @@ The Application is composed with the following packages, and the package contain
 \end{enumerate}
 \end{enumerate}
 
+This is obvously a very brief description. Due to the amount of classes in this application it could not be possible to contain all of the methods as well or even a longer description. \\
+You can find and browse interface, class, enum, method descriptions and hierarchy in "Classes and method report" by launching index.html
 \section{Database Design}
+ 
 
 \begin{figure}[hb!]
 
@@ -1107,16 +1110,47 @@ The database consists of the following tables:
 \section{Prediction Model}
 
 The prediction of the future values of production of products and usage of resources is one of the key features of the application.
-For the prediction model, many known models for time series prediction were researched, until we found the one that was appropriate to use in the application. The Exponential Smoothing Method was chosen for the following reasons:
+The data collected from the application are in the form time series:
+\begin{definition}[Time Series]
+The expression \textit{time series data}, or \textit{time series} usually refers to a set of observations collected sequentially in time. These observations could have been collected at equally spaced time points. In this case we use the notation $y_t$ with ($t$ = ..., -1, 0, 1, 2, ...), i.e., the set of observations is indexed by $t$, the time at which observation was taken.
+\end{definition}
+
+There are many known models for the prediction of time series: starting from the simplest ones as predicting by using average or moving average, through exponential smoothing models and regression models to the most sophisticated models like ARMA, ARIMA models.
+Many known models for time series prediction were researched, until we found the one that was appropriate to use in the application. The Exponential Smoothing Model was chosen for the following reasons:
 \begin{enumerate}
 \item The set of variables is rather small and rather simple - no reason to use more sophisticated methods.
 \item The prediction model was to be implemented from scratch and Exponential Smoothing. Many more complicated methods could have been imported into the application using libraries, but the decision was that it would be more challenging for the project to take one of the less complicated methods and implement every step of it on our own.
+\item The Holt's Linear Exponential Smoothing Method was chosen in particular because we have noticed that the data may possess a trend, as the laboratory production grows over time.
 \end{enumerate}
 
+\subsection{Holt's Linear Exponential Smoothing Method}
+
+Holt developed a linear exponential smoothing method to allow forecasting of data with trends. The forecast for Holt's linear exponential smoothing is found using two smoothing constants  $\alpha$ and $\beta$ (with values between 0 and 1), and three equations
+
+\begin{equation}\label{Holt's Exponential smoothing 1}
+L_t = \alpha Y_t + (1 - \alpha) (L_{t-1} + b_{t-1})
+\end{equation}
+\begin{equation}\label{Holt's Exponential smoothing 2}
+b_t = \beta (L_t - L_{t-1}) + (1 - \beta) b_{t-1}
+\end{equation}
+\begin{equation}\label{Holt's Exponential smoothing 3}
+F_t+m = L_t - b_t m
+\end{equation}
+
+Here, $L_t$ denotes an estimate of the level of the series at time $t$ and $b_t$ denotes an estimate of the slope of the series at time $t$. Equation 6.1 adjusts $L_t$ directly for the trend of the previous period, $b_{t-1}$, by adding it to the last smoothed value, $L_{t-1}$. This helps to bring $L_t$ to the approximate trend of thew current data value. Equation 6.2 then updates the trend, which is expressed as the difference between the last two smoothed values. this is appropriate, because if there is a trend in the data, new values should be higher or lower than the previous one. Since they may be some randomness remaining, the trend is modified by smoothing with $\beta$ the trend in the last period $L_t - L_{t-1}$ and adding taht to the previous estimate of the trend multiplied by $ (1 - \beta)$. Finally, equation 6.3 is used to forecast ahead. the trend $b_t$ is multiplied by the number of periods ahead to be forecast, $m$ and added to the base value $L_t$.
 \begin{definition}[Mean Squared Error]
-Parę uporządkowaną $(A,F)$, gdzie $A\neq \emptyset$ jest zbiorem, a $F$ jest rodziną operacji określonych na $A$, nazywamy \textit{algebrą} (lub \textit{$F$-algebrą}). Zbiór $A$ nazywa się \textit{zbiorem elementów}, \textit{nośnikiem} lub \textit{uniwersum} algebry $(A,F)$, a $F$ \textit{zbiorem operacji elementarnych}.
+If $Y_t$ is the actual observation for time period $t$ and $F_t$ is the forecast for the same period, then the error is defined as:
+\begin{equation}\label{Error}
+e_t = Y_t - F_t
+\end{equation}
+Usually $F_t$ is calculated using data $Y_1$, ..., $Y_{t-1}$. it is one- step forecast because it is forecasting one period ahead of the last observation used in the calculation. therefore we describe $e_t$ as a \textit{one-step forecast error}. It is yhe difference between the observation $Y_t$ and the forecast made using all the observation but not including $Y_t$.
+If there are observations and forecasts for $n$ time periods, then there will be $n$ error terms, and the following standard statistical measure Mean Square Error can be defined:
+\begin{equation}\label{Mean Squared Error}
+MSE = 1/n \sum_{t=1}^{n} e_t^{2} 
+\end{equation}
+
 \end{definition}
-The alpha and beta coefficients used for the calculation of smoothing are being optimized so that the Mean Squared Error is minimized.
+The $\alpha$ and $\beta$ coefficients used for the calculation of smoothing are being optimized so that the Mean Squared Error is minimized.
 
 
 % ----------------------- Experimental Evaluation ------------------
@@ -1248,10 +1282,9 @@ Despite the many difficulties we encountered and the fact that it took about 40\
 
 \begin{thebibliography}{20} % IF YOU HAVE MORE REFERENCES, WRITE THE BIGGER NUMBER
 
-\bibitem[1]{Ktos} A. Author, \emph{Title of a book}, Publisher, year, page--page.
-\bibitem[2]{Innyktos} J. Bobkowski, S. Dobkowski, Title of an article, \emph{Magazine X, No. 7}, year, PAGE--PAGE.
-\bibitem[3]{B} C. Brink, Power structures, \emph{Algebra Universalis 30(2)}, 1993, 177--216.
-\bibitem[4]{H} F. Burris, H. P. Sankappanavar, \emph{A Course of Universal Algebra}, Springer-Verlag, New York, 1981.
+\bibitem[1]{A} S.Makridakis, S.C. Wheelwright R.J. Hyndman \emph{Forecasting Methids and Applications}, John Wiley \& Sons, 1998, 20--51, 135--177.
+\bibitem[2]{B} R. Prado, M. West,  \emph{Time Series: Modeling, Computation and Inference}, CRC Press, 2010, 1--13.
+
 \end{thebibliography}
 \pagenumbering{gobble}
 \thispagestyle{empty}
@@ -1347,20 +1380,20 @@ Despite the many difficulties we encountered and the fact that it took about 40\
 % ----------------------------  LIST OF FIGURES --------------------------------
 \listoffigures
 \thispagestyle{empty}
-If you don't need it, delete it.
+
 
 
 % -----------------------------  LIST OF TABLES --------------------------------
 \renewcommand{\listtablename}{List of tables}
 \listoftables
 \thispagestyle{empty}
-If you don't need it, delete it.
+
 
 % -----------------------------  LIST OF APPENDICES ---------------------------
 \chapter*{List of appendices}
 \begin{enumerate}
 \item Appendix A. User Manual
-\item Appendix B. Testing Scenarios
+\item Appendix B. Test Report
 \end{enumerate}
 \thispagestyle{empty}
 
@@ -1368,352 +1401,235 @@ If you don't need it, delete it.
 % -----------------------------  APPENDIX A ---------------------------
 \chapter*{A. User Manual}
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/categories/product/1}
-\end{center}
-\caption{job1}
-\end{figure}
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/categories/product/2}
-\end{center}
-\caption{job1}
-\end{figure}
+LIME application is located at: \textit{http://mini-lime.herokuapp.com}
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/categories/product/3}
-\end{center}
-\caption{job1}
-\end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/categories/product/4}
-\end{center}
-\caption{job1}
-\end{figure}
+Please open above website in the browser (recommended: Chrome).
 
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/categories/resource/1}
-\end{center}
-\caption{job1}
-\end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/categories/resource/2}
-\end{center}
-\caption{job1}
-\end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/categories/resource/3}
-\end{center}
-\caption{job1}
-\end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/categories/resource/4}
-\end{center}
-\caption{job1}
-\end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/jobs/1}
-\end{center}
-\caption{job1}
-\end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/jobs/2}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
+\begin{enumerate}
+\item LOGIN
+\begin{enumerate}
+\item If you already have an account, you can click on 'login' button in top right corner dropdown menu. Then fill the form with you credentials and click 'login'. 
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/login/1}
 \end{center}
-\caption{job1}
+\caption{Login Page}
 \end{figure}
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/login/2}
-\end{center}
-\caption{job1}
-\end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/login/3}
-\end{center}
-\caption{job1}
-\end{figure}
+\item If you have forgotten password to your account, click on 'reset password' option in the login menu.
+Fill the form with email connected to your account. If everything gone well, the information about send email will be displayed.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/login/4}
 \end{center}
-\caption{job1}
+\caption{Reset Password Page}
 \end{figure}
+
+\item If you manage to successfully login in, welcome message and side menu on the left side of the page 
+will appear.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/login/2}
+\end{center}
+\caption{Welcome Page shown after logging in}
+\end{figure}
+
+\item Depending on role assigned to your account, different subpages will be available. For instance, only manager can edit user accounts.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/login/5}
 \end{center}
-\caption{job1}
+\caption{Edit User Account Page}
 \end{figure}
 
+\item You can log out using Log Out button
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{AS/notifications/1}
+\includegraphics[width=\textwidth]{AS/login/3}
 \end{center}
-\caption{job1}
+\caption{Page seen after logging out}
 \end{figure}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/notifications/2}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/orders/1}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/product/1}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/product/2}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/product/3}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/product/4}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/product/5}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/product/6}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/product/7}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
+\end{enumerate}
+\item RESOURCES
+\begin{enumerate}
+\item To manage resources, please click on 'Resources' in the left side menu. 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/resources/1}
 \end{center}
-\caption{job1}
+\caption{Manage Resources Page}
 \end{figure}
 \thispagestyle{empty}
-
+\item To add new resource, click ‘Add New Resource’. 
+ Than fill in the form. In the ‘Image’ field, please provide image from your computer library and click 'save'.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/resources/2}
 \end{center}
-\caption{job1}
+\caption{Add Resource}
 \end{figure}
 \thispagestyle{empty}
 
+\item To view resource details, please click the magnifying glass next to it.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/resources/3}
 \end{center}
-\caption{job1}
+\caption{View Resource}
 \end{figure}
 \thispagestyle{empty}
+
+\item To edit resource, please click on the pencil icon next to it. Enter the changes and click update. 
+If you will leave image input empty, the old photo will be inserted and the image will not be changed.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/resources/4}
 \end{center}
-\caption{job1}
+\caption{Edit Resource}
 \end{figure}
 \thispagestyle{empty}
+
+\item To delete resource, please click the bin icon next to it and then confirm.
+\end{enumerate}
 
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/resources/5}
 \end{center}
-\caption{job1}
+\caption{Delete Resource}
 \end{figure}
 \thispagestyle{empty}
+
+\item PRODUCTS
+\begin{enumerate}
+\item To manage products, please click on 'Products' in the left side menu. 
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/1}
+\end{center}
+\caption{Manage Products Page}
+\end{figure}
+\thispagestyle{empty}
+
+\item To add new product, click ‘Add New Product’. Than fill in the form. In the ‘image’ field, please provide image from your computer library and click 'save'.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/4}
+\end{center}
+\caption{Add Product}
+\end{figure}
+\thispagestyle{empty}
+
+\item To view product details, please click the magnifying glass next to it.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/5}
+\end{center}
+\caption{View Product}
+\end{figure}
+\thispagestyle{empty}
+
+
+\item To edit product, please click on the edit icon next to it. Enter the changes and click update. If you will leave image input empty, the old photo will be inserted and the image will not be changed.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/6}
+\end{center}
+\caption{Edit Product}
+\end{figure}
+\thispagestyle{empty}
+
+\item To delete product, please click the bin icon next to it and then confirm.
 
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{AS/supplier/1}
+\includegraphics[width=\textwidth]{AS/product/7}
 \end{center}
-\caption{job1}
+\caption{Delete Product}
 \end{figure}
 \thispagestyle{empty}
+
+\item To view formula of the chosen product, please click the magnifying glass in the formula column.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/product/2}
+\end{center}
+\caption{View of a product's formula}
+\end{figure}
+\thispagestyle{empty}
+
+\item To edit formula of the chosen product, please click the pencil in the formula column. Check resources you want to add to formula and fill the quantity of each in the input box next to resource name. If you are done, click ‘save’.
 
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{AS/supplier/2}
+\includegraphics[width=\textwidth]{AS/product/3}
 \end{center}
-\caption{job1}
+\caption{Edit product's formula Page}
 \end{figure}
 \thispagestyle{empty}
+\end{enumerate}
 
+\item ORDERS
+\begin{enumerate}
+\item To send order to resource suppliers, please check resources you want to order and fill their quantity in the input box next to resource name.
+Then click ‘send order’.
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{AS/supplier/3}
+\includegraphics[width=\textwidth]{AS/orders/1}
 \end{center}
-\caption{job1}
+\caption{Manage Orders Page}
 \end{figure}
 \thispagestyle{empty}
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/supplier/4}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
+\end{enumerate}
 
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/supplier/5}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/users/1}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/users/2}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/users/3}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/users/4}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/users/5}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
+\item REPORT GENERATION RESOURCE/PRODUCT
+\begin{enumerate}
+\item To generate report please check resources/products for which you would like to see the report, choose chart  type,  the last date that will be in the scope of the report and for how many days back should the report be generated. If you want to just display report in the browser - click "generate report". If you want to receive report by an email, fill also "email of receiver" input box and click "send report".
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/report/1}
 \end{center}
-\caption{job1}
+\caption{Generate and Send Product Report}
 \end{figure}
 \thispagestyle{empty}
-
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=\textwidth]{AS/report/2}
-\end{center}
-\caption{job1}
-\end{figure}
-\thispagestyle{empty}
-
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/report/3}
 \end{center}
-\caption{job1}
+\caption{Generate and Send Resource Usage Report}
+\end{figure}
+\thispagestyle{empty}
+
+
+\end{enumerate}
+
+\item REPORT PREDICTION RESOURCE/PRODUCT
+\begin{enumerate}
+\item To generate forecast report please check resources/products for which you would like to see the report, choose chart type, the last date that will be in the scope of the report, how many days back should the report go and for how many days you would like to generate forecast report. If you want to just display report in the browser - click "generate forecast". If you want to receive report  by an email, fill also "email of receiver" input box and click "send forecast".
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/report/2}
+\end{center}
+\caption{Generate and Send Production Forecast Report}
 \end{figure}
 \thispagestyle{empty}
 
@@ -1721,9 +1637,252 @@ If you don't need it, delete it.
 \begin{center}
 \includegraphics[width=\textwidth]{AS/report/4}
 \end{center}
-\caption{job1}
+\caption{Generate and Send Resource Usage Forecast Report}
 \end{figure}
 \thispagestyle{empty}
+
+
+\end{enumerate}
+\item PRODUCTS/RESOURCES CATEGORIES
+\begin{enumerate}
+\item To manage categories of products/resources, please click on 'manage categories' in the left side menu, and choose products or resources subpage.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/product/1}
+\end{center}
+\caption{Manage Product Categories View}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/resource/1}
+\end{center}
+\caption{Manage Resource Categories View}
+\end{figure}
+
+\item To add new category, click ‘Add New Category’. Than fill in the form with category name and click 'Save'.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/product/2}
+\end{center}
+\caption{Add Product Category}
+\end{figure}
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/resource/2}
+\end{center}
+\caption{Add Resource Category}
+\end{figure}
+
+\item To edit category, please click on the pencil icon next to it. Enter the changes and click ‘update’. 
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/product/3}
+\end{center}
+\caption{Edit Product Category}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/resource/3}
+\end{center}
+\caption{Edit Resource Category}
+\end{figure}
+
+\item To delete category, please click the bin icon next to it and then confirm. You will not be able to delete category, if any products/resources are in this category – you need to change category of this products/resources first.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/product/4}
+\end{center}
+\caption{Delete Product Category}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/categories/resource/4}
+\end{center}
+\caption{Delete}
+\end{figure}
+
+\end{enumerate}
+
+\item NOTIFICATIONS
+\begin{enumerate}
+
+\item To manage notifications, please click on ‘Notifications’ in the left side menu. 
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/notifications/1}
+\end{center}
+\caption{Manage Notifications Page}
+\end{figure}
+
+
+\item To edit notification for chosen resource, please click on the pencil icon next to it. Enter critical value for which notifications will be send and turn notifications on or off.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/notifications/2}
+\end{center}
+\caption{Edit a notification}
+\end{figure}
+\thispagestyle{empty}
+
+\item You can also turn on/off notifications for all available resources by clicking on ‘notifications are’ switch on the top of the page
+\end{enumerate}
+
+\item SUPPLIERS
+\begin{enumerate}
+\item To manage suppliers, please click on ‘Suppliers’ in the left side menu. 
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/1}
+\end{center}
+\caption{Manage Suppliers View}
+\end{figure}
+\thispagestyle{empty}
+
+\item To add new supplier, click ‘Add New Supplier. Than fill in the form and click 'save'.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/2}
+\end{center}
+\caption{Add Supplier}
+\end{figure}
+\thispagestyle{empty}
+\item To view chosen supplier details, please click the magnifying glass next to it.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/3}
+\end{center}
+\caption{View Supplier}
+\end{figure}
+\thispagestyle{empty}
+
+\item To edit supplier, please click on the pencil icon next to it. Enter the changes and click update. 
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/4}
+\end{center}
+\caption{Edit Supplier}
+\end{figure}
+\thispagestyle{empty}
+\item To delete supplier, please click the bin icon next to it and then confirm.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/supplier/5}
+\end{center}
+\caption{Delete Supplier}
+\end{figure}
+
+\end{enumerate}
+
+
+
+\item JOBS
+\begin{enumerate}
+\item To manage jobs, please click on ‘manage jobs’ in the left side menu. 
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/jobs/1}
+\end{center}
+\caption{Manage Jobs View}
+\end{figure}
+
+
+
+\item To add new job, click ‘Add New Job’. Than fill in the form and click 'save'. Username which is displayed in the table next to each job will be added automatically, It will be login of the user adding the job.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/jobs/2}
+\end{center}
+\caption{Add New Job}
+\end{figure}
+\thispagestyle{empty}
+
+
+\end{enumerate} 
+\item USERS
+\begin{enumerate}
+\item To manage users, please click on ‘Manage Users’ in the left side menu. 
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/1}
+\end{center}
+\caption{Manage Users Page}
+\end{figure}
+\thispagestyle{empty}
+
+
+\item To add new user, click ‘Add New User’. Than fill in the form and click 'save'.  Note: Be careful while choosing role of the user - especially administrator role gives user access to sensitive data.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/2}
+\end{center}
+\caption{Add User}
+\end{figure}
+\thispagestyle{empty}
+
+
+\item To view chosen user details, please click the magnifying glass next to it.
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/3}
+\end{center}
+\caption{View User}
+\end{figure}
+\thispagestyle{empty}
+\item To edit user details, please click on the pencil icon next to it. Enter the changes and click update. 
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/4}
+\end{center}
+\caption{Edit User}
+\end{figure}
+\thispagestyle{empty}
+
+\item To delete user, please click the bin icon next to it and then confirm.
+
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{AS/users/5}
+\end{center}
+\caption{Delete User}
+\end{figure}
+\thispagestyle{empty}
+
+
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+
+
+
+
 
 
 
@@ -1732,7 +1891,7 @@ If you don't need it, delete it.
 % -----------------------------  APPENDIX B ---------------------------
 \chapter*{B. Test Report}
 
-Testi Report
+The application was throughly tested. The team performed almost a hundred of Unit Tests. The detailed report can be found and browsed in "Unit Test Reports" catalog by launching the file index.html.
 \thispagestyle{empty}
 
 
