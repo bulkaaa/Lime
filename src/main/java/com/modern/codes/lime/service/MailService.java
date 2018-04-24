@@ -137,7 +137,7 @@ public class MailService implements IMailService {
         final Properties props = new Properties();
         props.put("mail.smtp.auth", MAIL_SMTP_AUTH);
         props.put("mail.smtp.starttls.enable", MAIL_SMTP_STARTTLS_ENDABLE);
-        props.put("mail.smtp.host", SMTP_HOST_NAME);
+        props.put("mail.smtp.host", MAIL_SMTP_HOST);
         props.put("mail.smtp.port", MAIL_SMTP_PORT);
         return props;
     }
@@ -146,7 +146,7 @@ public class MailService implements IMailService {
         final Properties props = getProperties();
         return Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(SMTP_AUTH_USER, SMTP_AUTH_PWD);
+                return new PasswordAuthentication(USERNAME, PASSWORD);
             }
         });
     }
