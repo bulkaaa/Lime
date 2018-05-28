@@ -389,8 +389,14 @@ cursor: pointer;
     padding: 5px 15px;
 }
 
-.margins{
+.margins {
 margin: 20px 20px 20px 20px;
+}
+
+.shorten_text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* MARGINS & PADDINGS */
