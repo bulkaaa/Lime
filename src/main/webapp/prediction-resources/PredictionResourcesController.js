@@ -1,5 +1,6 @@
 app.controller('PredictionResourcesController', ['$scope', '$http', 'dialogs', 'DialogService', function($scope, $http, $dialogs, DialogService) {
 
+    $scope.chartType = "Bar";
     $scope.getResources = function() {
         $http.get("/resource/all")
             .then(

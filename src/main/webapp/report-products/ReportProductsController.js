@@ -1,5 +1,6 @@
 app.controller('ReportProductsController', ['$scope', '$http', 'DialogService', function($scope, $http, DialogService) {
 
+    $scope.chartType = "Bar";
     $scope.getProducts = function() {
         $http.get("/product/all")
             .then(

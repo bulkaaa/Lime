@@ -4,7 +4,7 @@
         <text class="hidden-xs col-sm-3 col-md-2"> Search by name: </text>
         <div class="col-xs-5 col-sm-5 col-md-2"> <input id="filter_input" class="form-control" ></div>
         <div class="pull-right offset-md-8 offset-sm-8 offset-xs-5" >
-            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
+            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="glyphicon glyphicon-plus">
             </i> Add New Product</button>
         </div>
     </div>
@@ -62,10 +62,10 @@
                 </div>
                 <div class="total-price col-md-2 col-sm-3 col-xs-3">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-info" ng-click="viewFormula(item)" ng-disabled="globals.currentUser.isManager || globals.currentUser.isStaff">
+                        <button type="button" class="btn btn-info" ng-click="viewFormula(item)" ng-disabled="globals.currentUser.isManager || !globals.currentUser.isAdmin && !globals.currentUser.isManager">
                             <i class="fa fa-search"></i>
                         </button>
-                        <button type="button" class="btn btn-default" ng-click="editFormula(item)" ng-disabled="globals.currentUser.isManager || globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        <button type="button" class="btn btn-default" ng-click="editFormula(item)" ng-disabled="globals.currentUser.isManager || !globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="fa fa-pencil-square-o">
                         </i></button>
                     </div>
                 </div>
@@ -77,9 +77,9 @@
                         <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
                             <i class="fa fa-search"></i>
                         </button>
-                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="fa fa-pencil-square-o">
                         </i></button>
-                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-trash">
+                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="fa fa-trash">
                         </i></button>
                     </div>
                 </div>

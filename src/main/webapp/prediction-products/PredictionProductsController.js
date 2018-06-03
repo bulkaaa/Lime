@@ -1,5 +1,8 @@
 app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'DialogService', function($scope, $http, $dialogs, DialogService) {
 
+    $scope.chartType = "Bar";
+    $scope.date = new Date();
+
     $scope.getProducts = function() {
         $http.get("/product/all")
             .then(

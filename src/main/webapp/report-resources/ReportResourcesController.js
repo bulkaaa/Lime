@@ -1,5 +1,6 @@
 app.controller('ReportResourcesController', ['$scope', '$http', 'DialogService', function($scope, $http, DialogService) {
 
+    $scope.chartType = "Bar";
     $scope.getResources = function() {
         $http.get("/resource/all")
             .then(

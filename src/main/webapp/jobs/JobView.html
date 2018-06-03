@@ -4,7 +4,7 @@
     </div>
     <div class="row btn-row">
         <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
-            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
+            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="glyphicon glyphicon-plus">
             </i> Add New Job</button>
         </div>
     </div>
