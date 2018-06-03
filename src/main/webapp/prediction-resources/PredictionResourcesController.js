@@ -11,7 +11,7 @@ app.controller('PredictionResourcesController', ['$scope', '$http', 'dialogs', '
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'resource', 'all');
                 }
             );
     };
@@ -31,7 +31,7 @@ app.controller('PredictionResourcesController', ['$scope', '$http', 'dialogs', '
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'forecast', 'generate');
                 }
             );
     };
@@ -49,7 +49,7 @@ app.controller('PredictionResourcesController', ['$scope', '$http', 'dialogs', '
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'forecast', 'generate');
                 }
             );
     };

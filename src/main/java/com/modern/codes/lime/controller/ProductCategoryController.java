@@ -73,7 +73,7 @@ public class ProductCategoryController extends BaseController {
                     String.format("Invalid product category creation request, form data contains %s error(s).",
                                   bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
         }
-        return ParseTools.parseToJson(iProductCategory, ProductCategory.class);
+        return ParseTools.parseToJson(productCategoryService.save(iProductCategory), ProductCategory.class);
     }
 
     /**

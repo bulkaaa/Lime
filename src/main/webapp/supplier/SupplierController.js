@@ -85,7 +85,7 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
                         }
                     },
                     function (response) {
-                        DialogService.generalServerError();
+                        DialogService.handle(response, 'supplier', 'delete');
                     }
                 );
         });
@@ -120,7 +120,11 @@ app.controller('SupplierController', ['$scope', '$rootScope', '$http', '$uibModa
                         $scope.items.push({
                             id: item.id,
                             name: item.name,
-                            surname: item.surname,
+                            telephone: item.telephone,
+                            city: item.city,
+                            country: item.country,
+                            postalCode: item.postalCode,
+                            street: item.street,
                             emailAddress: item.emailAddress,
                         });
                     }

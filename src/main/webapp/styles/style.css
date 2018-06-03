@@ -79,6 +79,7 @@ body {
     font-size: 14px;
     color: #43484D;
     font-weight: 400;
+    cursor: pointer;
 }
 
 .description span:first-child {

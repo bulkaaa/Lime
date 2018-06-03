@@ -17,12 +17,18 @@
             </div>
             <div class="description col-md-2 col-sm-3 col-xs-2">
                 </br>
-                <span>product name</span>
+                <a>
+                    <span ng-click="sortType='name'">product name</span>
+                    <i class="fa fa-sort-alpha-asc"></i>
+                </a>
                 <span></span>
             </div>
             <div class="description col-md-2 hidden-xs hidden-sm">
                 </br>
-                <span>product description</span>
+                <a>
+                    <span ng-click="sortType='description'">product description</span>
+                    <i class="fa fa-sort-alpha-asc"></i>
+                </a>
                 <span></span>
             </div>
             <div class="total-price col-md-2 col-sm-3 col-xs-3">
@@ -30,14 +36,15 @@
                 <span></span>
             </div>
             <div class="total-price col-md-1 hidden-sm hidden-xs">expected value
-                <i class="fa fa-info-circle fa-xs" data-toggle="tooltip" title="The expected quantity of products obtained from a given formula.
-The actual quantity can vary slightly."></i></div>
+                <i class="fa fa-sort-amount-asc" ng-click="sortType='expectedValue'" aria-hidden="true"></i>
+                <i class="fa fa-info-circle fa-xs" data-toggle="tooltip" title="The expected quantity of products obtained from a given formula. &#013;The actual quantity can vary slightly."></i>
+            </div>
             <div class="total-price col-md-1 hidden-xs hidden-sm">unit</div>
             <div class="total-price col-md-3 col-sm-5 col-xs-7">action</div>
         </div>
     </div>
 
-    <div ng-repeat="item in items">
+    <div ng-repeat="item in items | orderBy:sortType:sortReverse">
         <div id="{{item.id}}" class="item row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="image col-md-1 hidden-sm hidden-xs">

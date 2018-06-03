@@ -73,7 +73,7 @@ public class ResourceCategoryController extends BaseController {
                     String.format("Invalid Resource category creation request, form data contains %s error(s).",
                                   bindingResult.getErrorCount()), bindingResult, Locale.ENGLISH);
         }
-        return ParseTools.parseToJson(iResourceCategory, ResourceCategory.class);
+        return ParseTools.parseToJson(resourceCategoryService.save(iResourceCategory), ResourceCategory.class);
     }
 
     /**

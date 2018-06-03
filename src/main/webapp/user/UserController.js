@@ -58,7 +58,7 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
                             }
                         },
                         function (response) {
-                            DialogService.generalServerError();
+                            DialogService.handle(response, 'user', 'update');
                         }
                     );
 
@@ -112,7 +112,7 @@ app.controller('UserController', ['$scope', '$rootScope', '$http', '$uibModal', 
                         }
                     },
                     function (response) {
-                        DialogService.generalServerError();
+                        DialogService.handle(response, 'user', 'delete');
                     }
                 );
         });

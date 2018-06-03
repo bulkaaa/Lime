@@ -24,7 +24,7 @@ app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uib
                          }
                     },
                     function (response) {
-                        DialogService.generalServerError();
+                        DialogService.handle(response, 'resource', 'all');
                     }
                 );
         };
@@ -76,7 +76,7 @@ app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uib
                          })
                     },
                     function (response) {
-                        DialogService.generalServerError();
+                        DialogService.handle(response, 'notification', 'on');
                     }
                 );
         };
@@ -90,7 +90,7 @@ app.controller('NotificationController', ['$scope', '$rootScope', '$http', '$uib
                         })
                    },
                    function (response) {
-                       DialogService.generalServerError();
+                       DialogService.handle(response, 'notification', 'off');
                    }
                );
         };

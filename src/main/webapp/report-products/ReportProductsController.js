@@ -32,7 +32,7 @@ app.controller('ReportProductsController', ['$scope', '$http', 'DialogService', 
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'report', 'generate');
                 }
             );
     };
@@ -54,7 +54,7 @@ app.controller('ReportProductsController', ['$scope', '$http', 'DialogService', 
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'report', 'generate');
                 }
             );
     };

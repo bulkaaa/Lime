@@ -74,7 +74,7 @@ public class SupplierController extends BaseController {
         }
 
         supplierService.save(supplier);
-        return ParseTools.parseToJson(supplier, Supplier.class);
+        return ParseTools.parseToJson(supplierService.save(supplier), Supplier.class);
     }
 
     /**
@@ -104,7 +104,7 @@ public class SupplierController extends BaseController {
         }
 
         supplierService.save(supplier);
-        return ParseTools.parseToJson(supplier, Supplier.class);
+        return ParseTools.parseToJson(supplierService.save(supplier), Supplier.class);
     }
 
     /**

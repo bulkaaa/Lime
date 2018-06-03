@@ -39,6 +39,12 @@ import io.swagger.annotations.ApiModelProperty;
 @Table(name = "\"user\"")
 public class User implements Serializable {
 
+
+    private static final long serialVersionUID = 8269421897901384963L;
+    private static final int MAX_LENGTH_NAME = 25;
+    private static final int MAX_LENGTH_SURNAME = 250;
+    private static final int MAX_LENGTH_EMAIL = 240;
+
     /**
      * Update time stamps.
      */
@@ -236,22 +242,26 @@ public class User implements Serializable {
     @ApiModelProperty(value = "The unqiue id of the user", required = true)
     @JsonProperty("id")
     private String id;
+
     @ApiModelProperty(value = "The name of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
     @Size(max = MAX_LENGTH_NAME)
     @JsonProperty("name")
     private String name;
+
     @ApiModelProperty(value = "The surname of the user", required = true)
     @NotNull
     @Size(max = MAX_LENGTH_SURNAME)
     @JsonProperty("surname")
     private String surname;
+
     @ApiModelProperty(value = "The E-Mail address of the supplier.", required = true)
     @NotEmpty
     @Email
     @Size(max = MAX_LENGTH_EMAIL)
     @Column(unique = true)
     private String emailAddress;
+
     @ApiModelProperty(value = "The datetime when the user joined the  \"ChemicalLabs\"", required = true)
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "joined_at", updatable = false)
@@ -263,9 +273,11 @@ public class User implements Serializable {
     @NotNull
     @Column(unique = true)
     private String username;
+
     @ApiModelProperty(value = "The password of the user of the \"ChemicalLabs\"", required = true)
     @NotNull
     private String password;
+
     @Column(name = "enabled", nullable = false)
     private Boolean enabled = true;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -273,9 +285,5 @@ public class User implements Serializable {
                joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
-    private static final long serialVersionUID = 8269421897901384963L;
-    private static final int MAX_LENGTH_NAME = 25;
-    private static final int MAX_LENGTH_SURNAME = 250;
-    private static final int MAX_LENGTH_EMAIL = 240;
 
 }

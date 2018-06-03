@@ -11,7 +11,7 @@ app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'D
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'product', 'all');
                 }
             );
     };
@@ -31,7 +31,7 @@ app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'D
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'forecast', 'generate');
                 }
             );
     };
@@ -49,7 +49,7 @@ app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'D
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'forecast', 'generate');
                 }
             );
     };
