@@ -1,5 +1,6 @@
 app.controller('ReportProductsController', ['$scope', '$http', 'DialogService', function($scope, $http, DialogService) {
 
+    $scope.chartType = "Bar";
     $scope.getProducts = function() {
         $http.get("/product/all")
             .then(
@@ -32,7 +33,7 @@ app.controller('ReportProductsController', ['$scope', '$http', 'DialogService', 
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'report', 'generate');
                 }
             );
     };
@@ -54,7 +55,7 @@ app.controller('ReportProductsController', ['$scope', '$http', 'DialogService', 
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'report', 'generate');
                 }
             );
     };

@@ -1,5 +1,8 @@
 app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'DialogService', function($scope, $http, $dialogs, DialogService) {
 
+    $scope.chartType = "Bar";
+    $scope.date = new Date();
+
     $scope.getProducts = function() {
         $http.get("/product/all")
             .then(
@@ -11,7 +14,7 @@ app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'D
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'product', 'all');
                 }
             );
     };
@@ -31,7 +34,7 @@ app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'D
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'forecast', 'generate');
                 }
             );
     };
@@ -49,7 +52,7 @@ app.controller('PredictionProductsController', ['$scope', '$http', 'dialogs', 'D
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'forecast', 'generate');
                 }
             );
     };

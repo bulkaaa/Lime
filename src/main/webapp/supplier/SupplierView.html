@@ -4,7 +4,7 @@
         <text class="col-sm-2 col-md-2"> Search by all values: </text>
         <div class="col-sm-2 col-md-2"> <input id="filter_input" class="form-control" ></div>
         <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
-            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="globals.currentUser.isStaff"><i class="glyphicon glyphicon-plus">
+            <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="glyphicon glyphicon-plus">
             </i> Add New Supplier</button>
         </div>
     </div>
@@ -91,9 +91,9 @@
                         <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
                             <i class="fa fa-search"></i>
                         </button>
-                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="fa fa-pencil-square-o">
                         </i></button>
-                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-trash">
+                        <button type="button" class="btn btn-danger delete-btn" ng-click="deleteRecord(item.id, item)" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="fa fa-trash">
                         </i></button>
                     </div>
                 </div>

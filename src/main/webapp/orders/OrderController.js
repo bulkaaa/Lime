@@ -26,7 +26,7 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'resource', 'all');
                 }
             );
     };
@@ -70,7 +70,7 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
                         console.log("orders on");
                         },
                         function (response) {
-                            DialogService.generalServerError();
+                            DialogService.handle(response, 'notification', 'off');
                         }
                     );
             };
@@ -82,7 +82,7 @@ app.controller('OrderController', ['$scope', '$rootScope', '$http', '$location',
                          console.log("orders off");
                        },
                        function (response) {
-                           DialogService.generalServerError();
+                           DialogService.handle(response, 'notification', 'off');
                        }
                    );
             };

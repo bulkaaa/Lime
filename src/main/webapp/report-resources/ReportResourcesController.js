@@ -1,5 +1,6 @@
 app.controller('ReportResourcesController', ['$scope', '$http', 'DialogService', function($scope, $http, DialogService) {
 
+    $scope.chartType = "Bar";
     $scope.getResources = function() {
         $http.get("/resource/all")
             .then(
@@ -11,7 +12,7 @@ app.controller('ReportResourcesController', ['$scope', '$http', 'DialogService',
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'resource', 'all');
                 }
             );
     };
@@ -32,7 +33,7 @@ app.controller('ReportResourcesController', ['$scope', '$http', 'DialogService',
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'report', 'generate');
                 }
             );
     };
@@ -54,7 +55,7 @@ app.controller('ReportResourcesController', ['$scope', '$http', 'DialogService',
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'report', 'generate');
                 }
             );
     };

@@ -1,20 +1,4 @@
-app.directive('fileModel', ['$parse', function ($parse) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            var model = $parse(attrs.fileModel);
-            var modelSetter = model.assign;
-
-            element.bind('change', function(){
-                scope.$apply(function(){
-                    modelSetter(scope, element[0].files[0]);
-                });
-            });
-        }
-    };
-}])
-
-.controller('ResourceController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', '$sanitize', function($scope, $rootScope, $http, $modal, $dialogs, DialogService, $sanitize) {
+app.controller('ResourceController', ['$scope', '$rootScope', '$http', '$uibModal', 'dialogs', 'DialogService', '$sanitize', function($scope, $rootScope, $http, $modal, $dialogs, DialogService, $sanitize) {
     var modalInstance = null;
     $scope.resource = true;
 
@@ -32,7 +16,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                          value.realimage = res.data;
                                      },
                                      function (response) {
-                                         DialogService.generalServerError();
+                                         DialogService.handle(response, 'resource', 'all');
                                      }
                                  )
                         })
@@ -71,7 +55,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                 }
                             },
                             function (response) {
-                                DialogService.generalServerError();
+                                DialogService.handle(response, 'supplier', 'all');
                             }
                         );
 
@@ -83,7 +67,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                           }
                                     },
                                     function (response) {
-                                         DialogService.generalServerError();
+                                         DialogService.handle(response, 'resource-category', 'all');
                                     }
                                 );
 
@@ -140,7 +124,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                      $scope.item.realimage = res.data;
                                  },
                                  function (response) {
-                                     DialogService.generalServerError();
+                                     DialogService.handle(response, 'image', 'upload');
                                  }
                              )
                         }
@@ -163,7 +147,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                         }
                     },
                     function(response){
-                        DialogService.generalServerError();
+                        DialogService.handle(response, 'resource', 'delete');
                     }
                 );
         });
@@ -195,7 +179,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
                                   }
                             },
                             function (response) {
-                                 DialogService.generalServerError();
+                                 DialogService.handle(response, 'resource-category', 'all');
                             }
                 );
         modalInstance = $modal.open({
@@ -248,7 +232,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
 
                                                             },
                                                             function (response) {
-                                                                DialogService.generalServerError();
+                                                                DialogService.handle(response, 'resource', 'create');
                                                             }
                                                         );
                                         },

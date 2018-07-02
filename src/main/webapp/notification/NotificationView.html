@@ -35,7 +35,7 @@
                 <div class="total-price col-md-2 col-sm-2 notifications" id="item.notifications_on">{{item.notifications_on}}</div>
                 <div class="total-price col-md-2 col-sm-2 pull-right">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="globals.currentUser.isStaff"><i class="fa fa-pencil-square-o">
+                        <button type="button" class="btn btn-default" ng-click="editRecord(item)" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="fa fa-pencil-square-o">
                         </i></button>
                     </div>
                 </div>

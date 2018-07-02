@@ -12,7 +12,7 @@ app.controller('ProductCategoryController', ['$scope', '$rootScope', '$http', '$
                         }
                     },
                     function (response) {
-                        DialogService.generalServerError();
+                        DialogService.handle();
                     }
                 );
         };

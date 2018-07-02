@@ -1,5 +1,6 @@
 app.controller('PredictionResourcesController', ['$scope', '$http', 'dialogs', 'DialogService', function($scope, $http, $dialogs, DialogService) {
 
+    $scope.chartType = "Bar";
     $scope.getResources = function() {
         $http.get("/resource/all")
             .then(
@@ -11,7 +12,7 @@ app.controller('PredictionResourcesController', ['$scope', '$http', 'dialogs', '
                     }
                 },
                 function (response) {
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'resource', 'all');
                 }
             );
     };
@@ -31,7 +32,7 @@ app.controller('PredictionResourcesController', ['$scope', '$http', 'dialogs', '
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'forecast', 'generate');
                 }
             );
     };
@@ -49,7 +50,7 @@ app.controller('PredictionResourcesController', ['$scope', '$http', 'dialogs', '
                     }
                 },
                 function(response){
-                    DialogService.generalServerError();
+                    DialogService.handle(response, 'forecast', 'generate');
                 }
             );
     };
