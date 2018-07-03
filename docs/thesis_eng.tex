@@ -1,7 +1,10 @@
 \documentclass[a4paper,11pt,twoside]{report}
+\let\oldemph\emph
+\renewcommand\emph[1]{{\huge{#1}}}
 % THIS FILE SHOULD BE COMPILED BY pdfLaTeX
 
 % ----------------------   PREAMBLE PART ------------------------------
+
 
 % ------------------------ ENCODING & LANGUAGES ----------------------
 
@@ -10,6 +13,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[english, polish]{babel}
 \usepackage{longtable}
+\usepackage[section]{placeins}
+
 \usepackage{ltablex}
 \usepackage{amsmath, amsfonts, amsthm, latexsym} % MOSTLY MATHEMATICAL SYMBOLS
 
@@ -75,11 +80,12 @@
 
 
 % ----------------------- TABLE OF CONTENTS SETUP ---------------------------
+\usepackage[skip=0.5\baselineskip]{caption}
 
 \def\cleardoublepage{\clearpage\if@twoside
 \ifodd\c@page\else\hbox{}\thispagestyle{empty}\newpage
 \if@twocolumn\hbox{}\newpage\fi\fi\fi}
-
+                                                                                                                                                                                                                                                                                           
 
 % THIS MAKES DOTS IN TOC FOR CHAPTERS
 \usepackage{etoolbox}
@@ -154,7 +160,7 @@
 % -------------------------- USER SETTINGS ---------------------------
 
 \newcommand{\tytul}{System zarządzania zasobami małego laboratorium chemicznego}
-\renewcommand{\title}{A System for Resources Management in a Small Chemical Laboratory}
+\renewcommand{\title}{A System for Resources Management in a Small Chemistry Laboratory}
 \newcommand{\type}{Engineer} % Master OR Engineer
 \newcommand{\supervisor}{dr inż. Agnieszka Jastrzębska} % TITLE AND NAME OF THE SUPERVISOR
 
@@ -189,18 +195,13 @@ supervisor's signature & \hspace*{100pt} & author's signature
 \begin{abstract}
 
 \begin{center}
-\title
+\emph{\title}
 \end{center}
 
-For the subject of our engeeniring thesis, we have resolved a problem of management of supplies in a small chemical laboratory. We have designed and implemented a system supporting management of resources (chemical reagents, instruments, etc.). The system keeps track of the state of resources in the laboratory, and stores the data in a database. The system has graphical user-friendly interface which facilitates displaying and modifying the gathered data. Multiple functionalities in the system allow the user to: 
-\begin{itemize}
-\item Classify the resource into groups
-\item Assign descriptions with multimedia content to resources
-\item	Define and generate reports and notifications. reports are displaying current state of resources as well as plot of activity in time, plot of demand for some resource in time, bar chart, pie chart, whereas notifications are alerts about low level of some chemical reagent, etc.
-\item For each resource, store suppliers’ contact data and order new resources directly from the application
-\item Predict future demand for resources based on available historical data
-\end{itemize}
-The implemented system is a Web Application. It consists of a client application – developed in AngularJS – and server – developed in SpringBoot Java. Elements of application exchange information using RESTful API. As per development tools, we used IntelliJ IDEA (a Java integrated development environment (IDE)).
+
+Computer software is widely used amongst many areas and has become an essential part of many modern working environments. The application software serves as a replacement of traditional method of storing and accessing data and has improved those to the great extent.
+The topic of this engineering thesis is a resolution of a problem of management of supplies in a small chemistry laboratory by the means of designing a implementing a dedicated computer software.  Resulting from that is a system supporting management of resources (chemical reagents, instruments, etc.). The system keeps track of the state of resources in the laboratory, and stores the data in a database. The application has graphical user-friendly interface which facilitates displaying and modifying the gathered data. Multiple functionalities in the system allow the user to classify the resource into groups and assign descriptions with multimedia content to them. What is more, the application allows the user to define and generate reports and notifications. reports are displaying current state of resources as well as plot of activity in time, plot of demand for some resource in time, bar chart, pie chart, whereas notifications are alerts about low level of some chemical reagent, etc. The system also stores suppliers’ contact data for each resource and allows the user to order new resources directly from the application. Other functionalities include the prediction of the future demand for resources based on available historical data
+The implemented system is a Web Application. It consists of a client application – developed in AngularJS – and server – developed in SpringBoot Java. Elements of application exchange information using RESTful API. As for development tools, the IntelliJ IDEA (a Java integrated development environment (IDE)) was used to implement the solution.
 \\
 
 \noindent \textbf{Keywords:} Resource Management, Database, Time Series Forecast, Web Application, Java, AngularJS, SpringBoot, RESTful API, IntelliJ IDEA
@@ -214,22 +215,15 @@ The implemented system is a Web Application. It consists of a client application
 \begin{abstract}
 
 \begin{center}
-\tytul
+\emph{\tytul}
 \end{center}
 
-Jako temat pracy inżynierskiej, rozwiązalimy problem zarządzania zasobami w małym laboratorium chemicznym. Zaprojektowali\'smy i zaiplementowali\'smy system wspomagający rozporządzanie zasobami (reagentami chemicznymi, itd.) System zbiera informacje o stanie zasobów i przechowuje je w bazie danych. Aplikacja posada przyjazny dla użytkownika interfejs graficzny, co ułatwia wy\'swietlanie i modyfikacje zebranych danych. Pozostałe funkcjonalno\'sci systemu pozwalają na: 
-\begin{itemize}
-\item Klasyfikację zasobów w grupy
-\item Przypisanie zasobom opisów i multimediów (np. zdjęć)
-\item	Definiowanie i generowanie raportów i notyfikacji. Raporty przedstawiają obecny stan zasobów, jak również wykresy aktywnoci (produkcji) w czasie, wykresy zapotrzebowania na zasoby w czasie, wykresy słupkowe, wykresy kołowe. Notyfikacje to alerty o niskim poziomie zasobów.
-\item Dla każdego zasobu, przechowaywane są informacje o danych kontaktowych do dostawcy oraz umożliwione jest zamówienie nowych bezporednio z aplikacji.
-\item Przwewidywanie przyszłego zapotrzebowania na zasoby na podstawie danych historycznych
-\end{itemize}
-Zaimplementowany system jest aplikacją internetową. Składa się z aplikacji klieanta - zaimplementowanej w AngularJS – i serwera – zaimplementowanego przy użyciu SpringBoot Java. Alementy aplikacji wymieniając się danymi za pomocą RESTful API. jako narzędzie deweloperskie, korzystali\'smy z IntelliJ IDEA.
+ Opragramowanie komputerowe jest obecnie używane w wielu dziedzinach życia i na codzień ułatwie pracę wielu przedsiębiorstwom. Stosowanie programów komputerowych do przechowywania i odczytywania danych, znacznie usprawniło tę dziedzinę. Przedmiotem tej pracy inżynierskiej jest aplikacja, która rozwiązała problem zarządzania zasobami małego laboratorium chemicznego, poprzez zaprojektowanie i stworzenie oprogramowania komputerowego. Wynikiem pracy stała się aplikacja, która wspomoga zarządzanie zasobami w tej instytucji (reagentami chemicznymi, sprzętem laboratoryjnym i tym podobnych). Program zbiera informacje o stanie zasobów i przechowuje je w bazie danych. Aplikacja posada przyjazny dla użytkownika interfejs graficzny, co ułatwia wy\'swietlanie i modyfikacje zebranych danych. Pozostałe funkcjonalno\'sci systemu pozwalają na przypisane zasobom opisów i multimediów (np. zdjęć) oraz ich klasyfikację w grupy. Możliwe jest również definiowanie i generowanie raportów i notyfikacji. Raporty przedstawiają obecny stan zasobów, jak również wykresy aktywno\'s ci (produkcji) albo zapotrzebowania na zasoby w czasie. Są to wykresy słupkowe, wykresy kołowe lub inne. Notyfikacje to alerty o niskim poziomie zasobów. Dla każdego zasobu, przechowaywane są informacje o danych kontaktowych do dostawcy oraz umożliwione jest zamówienie nowych bezporednio z aplikacji. Dodatkową funkcjonalno\'scię jest również przwewidywanie przyszłego zapotrzebowania na zasoby na podstawie danych historycznych. Zaimplementowany system jest aplikacją internetową. Składa się z aplikacji klienta - zaimplementowanej w AngularJS – oraz serwera – zaimplementowanego przy użyciu SpringBoot Java. Elementy aplikacji wymieniając się danymi za pomocą RESTful API. Jako narzędzie deweloperskie, zostało użyte z IntelliJ IDEA.
 \\
 
 
 \noindent \textbf{Słowa kluczowe:} Zarządzanie zasobami, Baza danych, Prognozowania na podstawie szeregu czasowego, Aplikacja internetowa, Java, AngularJS, SpringBoot, RESTful API, IntelliJ IDEA
+
 \end{abstract}
 }
 
@@ -283,15 +277,16 @@ I hereby declare that the thesis entitled ,,\title '', submitted for the \type ~
 \markboth{}{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
-The subject of the presented paper is the implementation of the system for management of supplies in a small chemical laboratory. The idea for such solution came from a real life situation, where an existing chemical laboratory needed an application to faciliate their work. Throught all phases of design and implementation, the real needs of these existing chemical laboratory were taken into consideration and many elements of the application originated from there. 
-For instance, when thinking of a database, we matched the design to what we knew would be stored in this database. For example there are tables to store different products and resources, but the relationship between those two table reflects the laboratories' formulas, that is, which products are made of which resources and in which proportion. 
-The following chapters will describe in depth:
-\begin{itemize}
-\item The set of initial requirements including business analysis and the background of the problem
-\item The detailed design of the application
-\item The technical information of how we realised this project, including development model and work division
-\item Some final conclusions along with post implementation valuation of our resulting application
-\end{itemize}
+In the modern world we cannot think of a single day of our lives without computer software. What is more, it can be stated that no area of a modern world would achieve its state of technical progress without computing. Computer software has been successively introduced in many areas of science and they facilitate everyday work of many businesses to the extent that it is almost impossible this day to effectively run a company without the help of computer applications.
+That being said, it is only a question of time when will all of the facilities have these sort of a solutions implemented. 
+
+The subject of the presented paper is a description of a solution used to facilitate work of a chemistry laboratory as an example of how computer software can be used for this purpose.
+It describes in depth an implementation of the system for management of supplies in laboratory. The idea for such a solution came from a real life situation, where an existing chemistry laboratory needed an application to facilitate their work. Through all phases of design and implementation, the real needs of this facility were taken into consideration. 
+
+For instance, when thinking of a database, the design of the aforementioned was matched to what was supposed to be stored in this database. For example, included in the database are two tables to store different products and resources, but the relationship between those two tables reflect the laboratories' formulas, that is, which products are made of which resources and in which proportion. 
+
+The following chapters of the presented paper will describe in depth the set of initial requirements including business analysis and the background of the problem the chemistry laboratory was seeking a solution to. Then, the more detailed analysis of the application will be presented. There will also be provided some more information on how the project was realized, including development model and work division. The final chapters will present the results of the evaluation of the application along with some conclusions.
+
 
 
 
@@ -299,28 +294,31 @@ The following chapters will describe in depth:
 
 \chapter{Work Division Plan}
 
-The project was designed so as it could be completed by the group of three people. The tasks were divided so that each memeber of the group was assigned a part, and these parts were thought to be equally time consuming. That being said, all three participants of the project contributed towards the building of the system, its design and the frame application. What is more, great emphasis has been put on collaboration and team work, resulting in members of the group often performing tasks outside their divised part, which contributed toward the project's final success.
+The application was designed so as it could be completed by the group of three people. The tasks were divided so that each member of the group was assigned a part, and these parts were thought to be equally time consuming. That being said, all three participants of the project contributed towards the building of the system, its design and the frame application. What is more, great emphasis has been put on collaboration and team work, resulting in members of the group often performing tasks outside their designated part, which contributed toward the project's final success.
 
 \section{Work Division}
 
 \begin{table}[!h]% Koniecznie label po caption, inaczej jest zła numeracja
 \caption[Work Division]{Work Division}
 \label{division}
+
 \centering
+\tabularnewline
 \begin{tabular}{|p{4cm}|p{12cm}|}
+
 \hline
-\texttt{Name} & \texttt{Responsibility} \\ \hline
-\texttt{Klaudia Jarosz} & Implementation of the frame application\\ \cline{2-2}
-\texttt{} & Creating a database containg data about users, resources, suppliers and user's activity\\  \cline{2-2}
-\texttt{} & Design and implementation of a user-friendly interface \\ \hline
-\texttt{Maciej Głowala} & Implementation of the frame application\\ \cline{2-2}
-\texttt{} & Handling users with different roles\\  \cline{2-2}
-\texttt{} & Saving and restoring system state \\ \cline{2-2}
-\texttt{} & Virtual server setup \\ \hline
-\texttt{Aleksandra Bułka} & Implementation of the frame application\\ \cline{2-2}
-\texttt{} & Implementation of reports and notifications\\  \cline{2-2}
-\texttt{} & Forecasting module\\ \cline{2-2}
-\texttt{} & Ordering module \\ \hline
+\textbf{Name} & \textbf{Responsibility} \\ \hline
+Aleksandra Bułka & Implementation of the frame application\\ \cline{2-2}
+ & Implementation of reports and notifications\\  \cline{2-2}
+ & Forecasting module\\ \cline{2-2}
+ & Ordering module \\ \hline
+Maciej Głowala & Implementation of the frame application\\ \cline{2-2}
+ & Handling users with different roles\\  \cline{2-2}
+ & Saving and restoring system state \\ \cline{2-2}
+ & Virtual server setup \\ \hline
+Klaudia Jarosz & Implementation of the frame application\\ \cline{2-2}
+ & Creating a database containg data about users, resources, suppliers and user's activity\\  \cline{2-2}
+ & Design and implementation of a user-friendly interface \\ \hline
 
 
 \end{tabular}
@@ -332,11 +330,11 @@ The project was designed so as it could be completed by the group of three peopl
 
 \chapter{Background of the Problem}
 
-The idea of the L.I.M.E. project comes from the well-known problems of managing the warehouses and laboratories. Small companies tackles with many perplexities connected with governance of production and the resources.
+The application solves a well-known problem of managing warehouses and laboratories. Many companies tackle the perplexities connected to the governance of production and the resources which can be easily solved by computer software. There are many solutions to this problem that have been already developed and implemented and facilitate everyday working conditions in such companies. Therefore, while preparing to develop the L.I.M.E application, an emphasis has been put on researching these already existing solutions to find the best practices of developing such an application.
 
-\section{Other Known Solutions}
+\section{Resource Management Problem in Literature}
 
-The known solutions for the problem:
+The known solutions for the problem of managing resources have been widely described in literature. Hence presented are some of the best examples:
 
 \begin{enumerate}
 
@@ -347,74 +345,85 @@ The known solutions for the problem:
 \item Introduction to Materials Management by Steve Chapman 
 \end{enumerate}
 
-Those problems may be hard to resolve. And there comes the L.I.M.E. which allows to register products and resources, managers and workers. Application delivers job records, predictions, and auto resource orders. It’s ideal for small companies, who wants to improve control of staff, products and resources.
+\section{Applications for resolving a Resource Management Problem}
+
+During the reasearch, the following implementations of the solutions for the problem of managing resources have been found:
+
+\begin{enumerate}
+
+\item \textbf{Quartzy (www.quartzy.com)} Quartzy is a self-proclaimed world’s leading online lab management platform. Their clients include tens of thousands of biotech, pharma, and academic laboratories. Quartzy is a free application helping laboratories to manage ordering workflows and consolidate purchasing efforts into one place. The application has a built-in catalog of over 3M life science products. The application also helps to manage incoming supply requests for approval and enables immediate purchase of supplies. Quartzy also gives its users the possibility to mark supplies as received while automatically updating their inventory data and alerting the laboratory when supplies are back in stock and where to find them. \cite{A}
+\item \textbf{BIOVIA CISPro®} provides software to accurately track and report chemicals and supplies while meeting safety and regulatory requirements, including barcode labeling, remote inventory control and Safety Data Sheet (SDS) management. The BIOVIA software can be used to maintain a listing of all the chemicals in a facility, keep track of where they are in real-time quantity and monitor usage. The application also monitors the expiration dates and shelf life of chemicals. What is more, it also provides a solution for waste minimization and cost reduction. \cite{B}
+\item \textbf{KineMatik Laboratory Resource Management} KineMatik’s LRM manages lab inventory and equipment. It provides the user with real-time data on inventory and alerts on shortages and expirations. The database of laboratory supplies in the application can be searched by location, name, supplier, expiration date or person responsible. It also features some more advanced options like bar codes to track consumption and automatically prompts the user at their desktop to update the quantities used of each material. \cite{C}
+ 
+\end{enumerate}
+Even though the problem of management of resources in a laboratory may seem hard to resolve, these existing applications have provided well-functioning solutions. The L.I.M.E. application developed for this project includes some of the most-needed functionalities of the aforementioned solutions. L.I.M.E. allows the user to register products and resources, managers and workers. The application also delivers job records, predictions and automatic ordering of resources. By providing the most necessary functionalities of the existing solutions, the L.I.M.E application serves as an ideal system for small companies, who want to improve control of staff, products and resources.
 
 
 % ----------------------- Requirement Specification ------------------
 
-\chapter{Requirement Specification}
+\chapter{Requirements Specification}
 
 
 
 \section{Functional Requirements}
 
 
-The functional requirements cases of the applications are different for different users of the application. The table contained in this chapter provide functional requirements for different groups of application users.
+The functional requirements of the L.I.M.E application are defined separately for different users of the system. Three tables contained in this chapter provide functional requirements for different groups of application users separately.
 The three groups of users of the application are:
 \begin{enumerate}
 
-\item Administrator (manager of the whole system and its users)
+\item Administrator (a manager of the whole system and its users)
 \item Manager (a person with rights for laboratory resources management)
 \item Registered user
 
 \end{enumerate}
 
-\begin{longtable}{|p{3cm}||p{13cm}|}
+
+\begin{table}[!htbp]
 \caption[Functional Requirements]{Functional Requirements}
 \label{Functional Requirements}
 \tabularnewline
-
+\centering
+\begin{tabular}{|p{3cm}||p{13cm}|}
 \hline
-\texttt{Actor} & \texttt{Description} \\ \hline
-\texttt{Administrator} & Log in to the system, change and recover his password\\  \cline{2-2}
+\textbf{Actor} & \textbf{Description} \\ \hline
+\textbf{Administrator} & Log in to the system, change and recover his password\\  \cline{2-2}
 \texttt{} & Create, modify and remove an account in the system, modify roles\\  \cline{2-2}
 \texttt{} & View, create, modify and remove resources and products and their groups\\ \cline{2-2}
 \texttt{} & Define, generate and send a report or prediction\\ \cline{2-2}
 \texttt{} & Define notifications, turn notifications on/off\\ \cline{2-2}
 \texttt{} & Order resources, turn on/off automatic ordering\\ \cline{2-2}
 \texttt{} & Save the current state of the system, schedule a system backup or restore it from backup\\ \hline
-\texttt{Manager} & Log in to the system, change and recover his password\\  \cline{2-2}
+\textbf{Manager} & Log in to the system, change and recover his password\\  \cline{2-2}
 \texttt{} & View, create, modify and remove resources and products and their groups\\ \cline{2-2}
 \texttt{} & Define, generate and send a report or prediction\\ \cline{2-2}
 \texttt{} & Define notifications, turn notifications on/off\\ \cline{2-2}
 \texttt{} & Order resources, turn on/off automatic ordering\\ \hline
-\texttt{User} & Log in to the system, change and recover his password\\  \cline{2-2}
+\textbf{User} & Log in to the system, change and recover his password\\  \cline{2-2}
 \texttt{} & View, create, modify and remove resources and products\\ \cline{2-2}
 \texttt{} & Define, generate and send a report or prediction\\ \cline{2-2}
 \texttt{} & Order resources\\ \hline
 
-
-\end{longtable}
-
-
+\end{tabular}
+\end{table}
 
 \section{Non-functional Requirements}
 
-\begin{table}[!h]% Koniecznie label po caption, inaczej jest zła numeracja
+\begin{table}[!htbp]
 \caption[Non-functional Requirements]{Non-functional requirements}
 \label{requirements}
 \centering
 \begin{tabular}{|p{3cm}|p{2cm}|p{11cm}|}
 \hline
 Area & Number & Details \\ \hline
-\texttt{Usability} & 1 & Application must be responsive. It must be working on PC, tablets and phones with resolution at least 720p.\\  \hline
-\texttt{Reliability} & 2 & Application must be of type High Availability. It should be available 24h/7d between 08:00 and 23:00. There could be service breaks during the week between 24:00 and 8:00. \\  \cline{2-3}
+\textbf{Usability} & 1 & Application must be responsive. It must be working on PC, tablets and phones with resolution at least 720p.\\  \hline
+\textbf{Reliability} & 2 & Application must be of type High Availability. It should be available 24h/7d between 08:00 and 23:00. There could be service breaks during the week between 24:00 and 8:00. \\  \cline{2-3}
 \texttt{} & 3 & Application must have quick restart in case of app machine failures. \\ \hline
-\texttt{Recovery} & 4 & Application must have daily database recovery performed between 24:00 and 08:00. \\ \hline
-\texttt{Performance} & 5 & Application should respond no longer than 3 seconds while strain being on level 100 queries per minute. \\ \hline
-\texttt{Supportability} & 6 & Documentation should contain instruction for recovery data from database backup.  \\ \cline{2-3}
+\textbf{Recovery} & 4 & Application must have daily database recovery performed between 24:00 and 08:00. \\ \hline
+\textbf{Performance} & 5 & Application should respond no longer than 3 seconds while strain being on level 100 queries per minute. \\ \hline
+\textbf{Supportability} & 6 & Documentation should contain instruction for recovery data from database backup.  \\ \cline{2-3}
 \texttt{} & 7 & Application should keep backward compatibility between the released versions. \\ \hline
-\texttt{Security} & 8 & Application must have user levels security. It shall not pass a user who has inappropriate privileges. \\ \hline
+\textbf{Security} & 8 & Application must have user levels security. It shall not pass a user who has inappropriate privileges. \\ \hline
 
 
 \end{tabular}
@@ -424,8 +433,8 @@ Area & Number & Details \\ \hline
 
 \section{Use Cases}
 
-The uses cases of the applications, similarily to functional requirements are different for different users of the application. The tables contained in the following chapters provide descriptions of use cases for different groups of application users.
-
+The uses cases of the application, similarly to functional requirements are different for different users of the application. The tables contained in the following chapters provide descriptions of use cases for different groups of application users.
+\pagebreak
 \subsection{Administrator}
 
 
@@ -435,52 +444,52 @@ The uses cases of the applications, similarily to functional requirements are di
 \tabularnewline
 
 \hline
-\texttt{Actor} & \texttt{Name} & \texttt{Description} \\ \hline
-\texttt{Administrator} & Login & Log in to the system\\  \cline{2-3}
-\texttt{} & Password Management & Recover his password\\  \cline{3-3}
+\textbf{Actor} & \textbf{Name} & \textbf{Description} \\ \hline
+\text{Administrator} & Login & Log in to the system\\ \cline{2-3}
+\texttt{} & Password \mbox{Management} & Recover his password\\ \cline{3-3}
 \texttt{} & & Change his password\\ \cline{2-3}
 
-\texttt{} & User Account Management & Create an account in the system, assign the account to a role (user, manager)\\  \cline{3-3}
+\texttt{} & User Account \mbox{Management} & Create an account in the system, assign the account to a role (user, manager)\\ \cline{3-3}
 \texttt{} & & Modify an account in the system – change either personal data or assignment to a role (user, manager)\\ \cline{3-3}
 \texttt{} & & Remove an account from the system\\ \cline{2-3}
 \texttt{} & Resource View & Display nicely current availability of resources and their categorization - multiple viewing perspectives, sorting and filtering are available\\ \cline{2-3}
-\texttt{} & Resource Management & Define a new type of resource, describe it with description card, add multimedia content to this resource (for example a photograph) and assign the resource with a supplier\\ \cline{3-3}
+\texttt{} & Resource \mbox{Management} & Define a new type of resource, describe it with description card, add multimedia content to this resource (for example a photograph) and assign the resource with a supplier\\ \cline{3-3}
 \texttt{} & & Modify a resource, change description card, multimedia content associated with this resource (for example a photograph) and its assignment to a supplier\\ \cline{3-3}
 \texttt{} & & Delete a resource from database\\ \cline{2-3}
 
-\texttt{} & Resource Group Management & Create a group of laboratory resources, define which resources will belong to this group\\ \cline{3-3}
+\texttt{} & Resource Group \mbox{Management} & Create a group of laboratory resources, define which resources will belong to this group\\ \cline{3-3}
 \texttt{} & & Modify a group of laboratory resources, redefine which resources will belong to this group\\ \cline{3-3}
 \texttt{} & & Delete a group of laboratory resources\\ \cline{2-3}
 \texttt{} & Product View & Display nicely products produced by laboratory and their categorization\\ \cline{2-3}
-\texttt{} & Product Management & Define a new type of product, describe it with description card, add multimedia content to this product (for example a photograph)\\ \cline{3-3}
+\texttt{} & Product \mbox{Management} & Define a new type of product, describe it with description card, add multimedia content to this product (for example a photograph)\\ \cline{3-3}
 \texttt{} & & Modify a product, change description card, multimedia content associated with this product (for example a photograph)\\ \cline{3-3}
 \texttt{} & & Delete a product from database\\ \cline{2-3}
-\texttt{} & Product Group Management & Create a group of laboratory product, define which products will belong to this group\\ \cline{3-3}
+\texttt{} & Product Group \mbox{Management} & Create a group of laboratory product, define which products will belong to this group\\ \cline{3-3}
 \texttt{} & & Modify a group of laboratory products, redefine which products will belong to this group\\ \cline{3-3}
 \texttt{} & & Delete a group of laboratory products\\ \cline{2-3}
 
-\texttt{} & Report Definition & Define what the report will contain, for example a plot of production in time, plot of demand for some resource in time\\ \cline{3-3}
-\texttt{} &  & Define how the data will be presented, for example bar chart, pie chart, table with adjustable columns/rows \\ \cline{3-3}
-\texttt{} &  & Generate the desired report \\ \cline{3-3}
-\texttt{} &  & Define the recipients and send the report \\ \cline{2-3}
-\texttt{} & Prediction Report Definition & Define what the report will contain, this can be either for example production in time or demand for some resource in time\\ \cline{3-3}
-\texttt{} &  & Define for which resources, products or groups of resources or products the prediction should be made\\ \cline{3-3}
-\texttt{} &  & Generate the desired prediction report \\ \cline{3-3}
+\texttt{} & Report \mbox{Definition} & Define what the report will contain, for example a plot of production in time, plot of demand for some resource in time\\ \cline{3-3}
+\texttt{} & & Define how the data will be presented, for example bar chart, pie chart, table with adjustable columns/rows \\ \cline{3-3}
+\texttt{} & & Generate the desired report \\ \cline{3-3}
+\texttt{} & & Define the recipients and send the report \\ \cline{2-3}
+\texttt{} & Prediction Report \mbox{Definition} & Define what the report will contain, this can be either for example production in time or demand for some resource in time\\ \cline{3-3}
+\texttt{} & & Define for which resources, products or groups of resources or products the prediction should be made\\ \cline{3-3}
+\texttt{} & & Generate the desired prediction report \\ \cline{3-3}
 
 
 
-\texttt{} &  & Define the recipients and send the prediction report \\ \cline{2-3}
-\texttt{} & Notification Definiton & Define whether notifications (an alert about low level of some chemical reagent) will it be sent\\ \cline{3-3}
-\texttt{} &  & Define when the notifications will it be sent (set the value which is critical for each reasource)\\ \cline{2-3}
-\texttt{} & Order Management & Define how many and which resources are to be ordered\\ \cline{3-3}
+\texttt{} & & Define the recipients and send the prediction report \\ \cline{2-3}
+\texttt{} & Notification \mbox{Definition} & Define whether notifications (an alert about low level of some chemical reagent) will it be sent\\ \cline{3-3}
+\texttt{} & & Define when the notifications will it be sent (set the value which is critical for each reasource)\\ \cline{2-3}
+\texttt{} & Order \mbox{Management} & Define how many and which resources are to be ordered\\ \cline{3-3}
 
 
 \texttt{} & & Send an order\\ \cline{3-3}
 
 
 \texttt{} & & Turn on automatic ordering of resources or turn it off\\ \cline{2-3}
-\texttt{} & System State Management & Save the current state of the system\\ \cline{3-3}
-\texttt{} & & Shedule an automatic back-up of a system state\\ \cline{3-3}
+\texttt{} & System State \mbox{Management} & Save the current state of the system\\ \cline{3-3}
+\texttt{} & & Schedule an automatic back-up of a system state\\ \cline{3-3}
 \texttt{} & & Restore system state based on an archived backup\\ \hline
 
 
@@ -495,46 +504,46 @@ The uses cases of the applications, similarily to functional requirements are di
 \tabularnewline
 
 \hline
-\texttt{Actor} & \texttt{Name} & \texttt{Description} \\ \hline
-\texttt{Manager} & Login & Log in to the system\\  \cline{2-3}
-\texttt{} & Password Management & Recover his password\\  \cline{3-3}
+\textbf{Actor} & \textbf{Name} & \textbf{Description} \\ \hline
+\textbf{Manager} & Login & Log in to the system\\ \cline{2-3}
+\texttt{} & Password \mbox{Management} & Recover his password\\ \cline{3-3}
 \texttt{} & & Change his password\\ \cline{2-3}
 
 \texttt{} & Resource View & Display nicely current availability of resources and their categorization - multiple viewing perspectives, sorting and filtering are available\\ \cline{2-3}
-\texttt{} & Resource Management & Define a new type of resource, describe it with description card, add multimedia content to this resource (for example a photograph) and assign the resource with a supplier\\ \cline{3-3}
+\texttt{} & Resource \mbox{Management} & Define a new type of resource, describe it with description card, add multimedia content to this resource (for example a photograph) and assign the resource with a supplier\\ \cline{3-3}
 \texttt{} & & Modify a resource, change description card, multimedia content associated with this resource (for example a photograph) and its assignment to a supplier\\ \cline{3-3}
 \texttt{} & & Delete a resource from database\\ \cline{2-3}
 
-\texttt{} & Resource Group Management & Create a group of laboratory resources, define which resources will belong to this group\\ \cline{3-3}
+\texttt{} & Resource Group \mbox{Management} & Create a group of laboratory resources, define which resources will belong to this group\\ \cline{3-3}
 \texttt{} & & Modify a group of laboratory resources, redefine which resources will belong to this group\\ \cline{3-3}
 \texttt{} & & Delete a group of laboratory resources\\ \cline{2-3}
 \texttt{} & Product View & Display nicely products produced by laboratory and their categorization\\ \cline{2-3}
-\texttt{} & Product Management & Define a new type of product, describe it with description card, add multimedia content to this product (for example a photograph)\\ \cline{3-3}
+\texttt{} & Product \mbox{Management} & Define a new type of product, describe it with description card, add multimedia content to this product (for example a photograph)\\ \cline{3-3}
 \texttt{} & & Modify a product, change description card, multimedia content associated with this product (for example a photograph)\\ \cline{3-3}
 \texttt{} & & Delete a product from database\\ \cline{2-3}
-\texttt{} & Product Group Management & Create a group of laboratory product, define which products will belong to this group\\ \cline{3-3}
+\texttt{} & Product Group \mbox{Management} & Create a group of laboratory product, define which products will belong to this group\\ \cline{3-3}
 \texttt{} & & Modify a group of laboratory products, redefine which products will belong to this group\\ \cline{3-3}
 \texttt{} & & Delete a group of laboratory products\\ \cline{2-3}
 
-\texttt{} & Report Definition & Define what the report will contain, for example a plot of production in time, plot of demand for some resource in time\\ \cline{3-3}
-\texttt{} &  & Define how the data will be presented, for example bar chart, pie chart, table with adjustable columns/rows \\ \cline{3-3}
-\texttt{} &  & Generate the desired report \\ \cline{3-3}
-\texttt{} &  & Define the recipients and send the report \\ \cline{2-3}
-\texttt{} & Prediction Report Definition & Define what the report will contain, this can be either for example production in time or demand for some resource in time\\ \cline{3-3}
-\texttt{} &  & Define for which resources, products or groups of resources or products the prediction should be made\\ \cline{3-3}
-\texttt{} &  & Generate the desired prediction report \\ \cline{3-3}
+\texttt{} & Report \mbox{Definition} & Define what the report will contain, for example a plot of production in time, plot of demand for some resource in time\\ \cline{3-3}
+\texttt{} & & Define how the data will be presented, for example bar chart, pie chart, table with adjustable columns/rows \\ \cline{3-3}
+\texttt{} & & Generate the desired report \\ \cline{3-3}
+\texttt{} & & Define the recipients and send the report \\ \cline{2-3}
+\texttt{} & Prediction Report \mbox{Definition} & Define what the report will contain, this can be either for example production in time or demand for some resource in time\\ \cline{3-3}
+\texttt{} & & Define for which resources, products or groups of resources or products the prediction should be made\\ \cline{3-3}
+\texttt{} & & Generate the desired prediction report \\ \cline{3-3}
 
-\texttt{} &  & Define the recipients and send the prediction report \\ \cline{2-3}
-\texttt{} & Notification Definiton & Define whether notifications (an alert about low level of some chemical reagent) will it be sent\\ \cline{3-3}
-\texttt{} &  & Define when the notifications will it be sent (set the value which is critical for each reasource)\\ \cline{2-3}
-\texttt{} & Order Management & Define how many and which resources are to be ordered\\ \cline{3-3}
+\texttt{} & & Define the recipients and send the prediction report \\ \cline{2-3}
+\texttt{} & Notification \mbox{Definition} & Define whether notifications (an alert about low level of some chemical reagent) will it be sent\\ \cline{3-3}
+\texttt{} & & Define when the notifications will it be sent (set the value which is critical for each reasource)\\ \cline{2-3}
+\texttt{} & Order \mbox{Management} & Define how many and which resources are to be ordered\\ \cline{3-3}
 \texttt{} & & Send an order\\ \cline{3-3}
 \texttt{} & & Turn on automatic ordering of resources or turn it off\\ \hline
 
 \end{longtable}
 
 
-
+\pagebreak
 \subsection{User}
 
 
@@ -544,31 +553,31 @@ The uses cases of the applications, similarily to functional requirements are di
 \tabularnewline
 
 \hline
-\texttt{Actor} & \texttt{Name} & \texttt{Description} \\ \hline
-\texttt{User} & Login & Log in to the system\\  \cline{2-3}
-\texttt{} & Password Management & Recover his password\\  \cline{3-3}
+\textbf{Actor} & \textbf{Name} & \textbf{Description} \\ \hline
+\textbf{User} & Login & Log in to the system\\ \cline{2-3}
+\texttt{} & Password \mbox{Management} & Recover his password\\ \cline{3-3}
 \texttt{} & & Change his password\\ \cline{2-3}
 
 \texttt{} & Resource View & Display nicely current availability of resources and their categorization - multiple viewing perspectives, sorting and filtering are available\\ \cline{2-3}
-\texttt{} & Resource Management & Define a new type of resource, describe it with description card, add multimedia content to this resource (for example a photograph) and assign the resource with a supplier\\ \cline{3-3}
+\texttt{} & Resource \mbox{Management} & Define a new type of resource, describe it with description card, add multimedia content to this resource (for example a photograph) and assign the resource with a supplier\\ \cline{3-3}
 \texttt{} & & Modify a resource, change description card, multimedia content associated with this resource (for example a photograph) and its assignment to a supplier\\ \cline{3-3}
 \texttt{} & & Delete a resource from database\\ \cline{2-3}
 
 \texttt{} & Product View & Display nicely products produced by laboratory and their categorization\\ \cline{2-3}
-\texttt{} & Product Management & Define a new type of product, describe it with description card, add multimedia content to this product (for example a photograph)\\ \cline{3-3}
+\texttt{} & Product \mbox{Management} & Define a new type of product, describe it with description card, add multimedia content to this product (for example a photograph)\\ \cline{3-3}
 \texttt{} & & Modify a product, change description card, multimedia content associated with this product (for example a photograph)\\ \cline{3-3}
 \texttt{} & & Delete a product from database\\ \cline{2-3}
-\texttt{} & Report Definition & Define what the report will contain, for example a plot of production in time, plot of demand for some resource in time\\ \cline{3-3}
-\texttt{} &  & Define how the data will be presented, for example bar chart, pie chart, table with adjustable columns/rows \\ \cline{3-3}
-\texttt{} &  & Generate the desired report \\ \cline{3-3}
-\texttt{} &  & Define the recipients and send the report \\ \cline{2-3}
-\texttt{} & Prediction Report Definition & Define what the report will contain, this can be either for example production in time or demand for some resource in time\\ \cline{3-3}
-\texttt{} &  & Define for which resources, products or groups of resources or products the prediction should be made\\ \cline{3-3}
-\texttt{} &  & Generate the desired prediction report \\ \cline{3-3}
+\texttt{} & Report \mbox{Definition} & Define what the report will contain, for example a plot of production in time, plot of demand for some resource in time\\ \cline{3-3}
+\texttt{} & & Define how the data will be presented, for example bar chart, pie chart, table with adjustable columns/rows \\ \cline{3-3}
+\texttt{} & & Generate the desired report \\ \cline{3-3}
+\texttt{} & & Define the recipients and send the report \\ \cline{2-3}
+\texttt{} & Prediction Report \mbox{Definition} & Define what the report will contain, this can be either for example production in time or demand for some resource in time\\ \cline{3-3}
+\texttt{} & & Define for which resources, products or groups of resources or products the prediction should be made\\ \cline{3-3}
+\texttt{} & & Generate the desired prediction report \\ \cline{3-3}
 
-\texttt{} &  & Define the recipients and send the prediction report \\ \cline{2-3}
+\texttt{} & & Define the recipients and send the prediction report \\ \cline{2-3}
 
-\texttt{} & Order Management & Define how many and which resources are to be ordered\\ \cline{3-3}
+\texttt{} & Order \mbox{Management} & Define how many and which resources are to be ordered\\ \cline{3-3}
 \texttt{} & & Send an order\\ \hline
 
 \end{longtable}
@@ -580,10 +589,9 @@ The uses cases of the applications, similarily to functional requirements are di
 
 \chapter{Development Methodology}
 
-
 \section{Methodology}
 
-For our project, the development methodology of choice was the Waterfall Development Model. This methodology was highly recommended to us.
+For the project, the development methodology of choice was the Waterfall Development Model. This methodology was highly recommended to the teams completing an engineering thesis.
 
 \begin{figure}[h!]
 
@@ -596,20 +604,21 @@ For our project, the development methodology of choice was the Waterfall Develop
 \end{figure}
 
 
-In Waterfall Model phases are executed sequentially, in linear way. We have a steady set of requirements, non changeable in time. The system is developed progressively and the user is involved only in the early phases 
-Advantages of this model include it being easy to manage. Disadvantages are that it contains a strict sequence of activities, it has high cost of errors in beginning stages and high importance and cost of documentation and also a contact with the customer is weak. Therefore it can be used when it is possible to precisely define the requirements 
+In Waterfall Model phases are executed sequentially, in linear way. The project begins with a steady set of requirements that are non-changeable in time. The system is developed progressively and the business user is involved only in the early phases of the development. 
+One of the advantages of the Waterfall Model is that it is easy to manage, with a set of requirements and the plan of execution both defined at the beginning of the project. The disadvantage of such model is that it contains a strict sequence of activities, which results in low cost of errors in beginning stages but very high importance and cost corrections in the later phases. Therefore this model can only be used when it is possible to precisely define the requirements at the beginning of the project.\cite{D}
+ 
 
 \subsection{Argumentation}
 
-The reasons we have chosen this particular development model are presented below:
+The reasoning behind the choice of this particular development model is presented below:
 \begin{itemize}
-\item The sequential order of phases matched perfectly the organized schedule of the development of our Engineering Thesis
+\item The sequential order of phases were aligned with the organized schedule of the development of the Engineering Thesis
 
-\item Fixed set of requirements, as the initial requirements waere submitted by team to the Faculty and could not be changed later
-\item Easy management is facilitating our work as we work as a team and have no manager
-\item It was highly recommended by the coordinators of the Group Project
+\item Fixed set of requirements, known as the initial requirements were submitted by team to the Faculty and could not be changed later
+\item Easy management of the work in the Waterfall Model is facilitating the work of the team
+\item The use of this particular model was highly recommended by the coordinators of the Group Project and the supervisor of the thesis \cite{E}
+ 
 \end{itemize}
-
 
 
 
@@ -623,13 +632,14 @@ The reasons we have chosen this particular development model are presented below
 
 \section{Software Architectural Pattern}
 
-
-To facilitate the design of classes, we have decided to follow a software architectural pattern. A pattern of choice here was Model–view–controller (MVC) Pattern.
-This pattern is used to separate a given application into three interconnected parts. This is done to separate internal representations of information from the ways information is presented to, and accepted from, the user.
+To facilitate the design of classes, the project team has decided to follow an already established software architectural pattern. A pattern of choice was the Model–View–Controller (MVC) Pattern.
+The MVC pattern is used to separate a given application into three interconnected parts. The reason for doing that is to separate internal representations of information from the ways information is presented to, and accepted from, the user. The three parts composing the MVC model are: 
 \begin{itemize}
-\item Model - Model represents an object carrying data. It can also have logic to update controller if its data changes.
-\item View - View represents the visualization of the data that model contains.
-\item Controller - Controller acts on both model and view. It controls the data flow into model object and updates the view whenever data changes. It keeps view and model separate.
+\item Model – A model is a representation of an object carrying data. It can also have logic to update controller if its data changes.
+\item View – A view represents the visualization of the data that model contains visible to the user.
+\item Controller – A controller acts on both model and view. It controls the data flow into model object and updates the view whenever data changes. It keeps view and model separate. \cite{F} \cite{G}
+ 
+ 
 \end{itemize}
 \begin{figure}[h!]
 
@@ -642,20 +652,18 @@ This pattern is used to separate a given application into three interconnected p
 \end{figure}
 
 
-As mentioned before, it has helped us develop the division into classes, visible on the class diagram below.
-LIME – is the program’s main class.
-Then, the Model, View and Controller Classes were designed for each UI element.
-The database objects are handled by Servlet (classes taking an article from http POST and passing it to JDBC), DAO (classes responsible for the communication with database) and Query (classes to parse SQL) classes.
+The use of the MVC model has been very helpful while designing the division into projects’ classes. The Model, View and Controller Classes were designed for each element of the User Interface element.  Additionally, the database objects are handled by Servlet (classes taking an article from http POST and passing it to JDBC), DAO (classes responsible for the communication with database) and Query (classes to parse SQL) classes. These classes will be discussed in detail in the further chapters.
 
+\section{Backend Architectural Patterns}
 
-\section{Backend Architectural Pattern}
+The L.I.M.E. application includes some more architectural patterns. Precisely chosen patterns make overall architecture strong and well built. The description of these backend architectural patterns will be provided in this section. 
 
-L.I.M.E. project base on many architectural patterns. Precisely chosen patterns make overall architecture strong and well built. 
 \subsection{Data Access Object Pattern}
 
-Data access object (DAO) is an object that provides an abstract interface to some type of database or other persistence mechanism. By mapping application calls to the persistence layer, the DAO provides some specific data operations without exposing details of the database. This isolation supports the Single responsibility principle. It separates what data access the application needs, in terms of domain-specific objects and data types (the public interface of the DAO), from how these needs can be satisfied with a specific DBMS, database schema, etc. (the implementation of the DAO).
-	The most important fact and advantage is the relatively simple and rigorous separation between two important parts of an application that can but should not know anything of each other, and which can be expected to evolve frequently and independently. Changing business logic can rely on the same DAO interface, while changes to persistence logic do not affect DAO clients as long as the interface remains correctly implemented. All details of storage are hidden from the rest of the application (see information hiding). Thus, possible changes to the persistence mechanism can be implemented by just modifying one DAO implementation while the rest of the application isn't affected.
-L.I.M.E. implements one template parent interface with methods which are used by all DAO classes. IBasicCrudRepository extends hibernate CrudRepository and inherits from it all CRUD database operations. Singular DAO classes implement service-specific methods which are defined in DAO interfaces.
+Data access object (DAO) is an object that provides an abstract interface to some type of database or other persistence mechanism. By mapping application calls to the persistence layer, the DAO provides some specific data operations without exposing the details of the database. This isolation supports the single responsibility principle. It separates the data access the application needs, in terms of domain-specific objects and data types (the public interface of the DAO), from how these needs can be satisfied with a specific DBMS, database schema, etc. (the implementation of the DAO).
+The most important fact and advantage is the relatively simple and rigorous separation between two important parts of an application that can but should not know anything of each other, and which can be expected to evolve frequently and independently. Changing business logic can rely on the same DAO interface, while changes to persistence logic do not affect DAO clients as long as the interface remains correctly implemented. All details of storage are hidden from the rest of the application. Thus, possible changes to the persistence mechanism can be implemented by just modifying one DAO implementation while the rest of the application isn't affected.\cite{H}
+The L.I.M.E. application implements one template parent interface with methods which are used by all DAO classes, this class being IBasicCrudRepository which extends Hibernate CrudRepository and inherits from it all CRUD database operations. Singular DAO classes implement service-specific methods which are defined this DAO interface. 
+ 
 
 \subsection{Plain Old Java Object}
 
@@ -666,20 +674,21 @@ The main aim of the POJO classes is to differentiate business logic from databas
 
 \begin{center}
 
-\includegraphics[width=\textwidth]{pojo}
+\includegraphics[scale=1]{pojo}
 
 \end{center}
 \caption{Plain Old Java Object in Backend Architecture}
 \end{figure}
+The POJO phenomenon has most likely gained widespread acceptance because of the need for a common and easily understood term that contrasts with complicated object frameworks. 
  
-The POJO phenomenon has most likely gained widespread acceptance because of the need for a common and easily understood term that contrasts with complicated object frameworks.
 
-L.I.M.E implemens POJO classes for all existing entity class. Those classes are free from frameworks and complicated annotations. There is object mapper implemented, which maps directly Entity to POJO.
+The L.I.M.E application implements POJO classes for all existing entity classes. Those classes are free from frameworks and complicated annotations. There is an implemented object mapper, which maps directly from Entity to POJO classes.
+
 
 
 \subsection{Dependency Injection}
 
-Dependency Injection is a kind of broader version of "inversion of control" (IoC) principle. It relates to the way in which an object obtains references to its dependencies - the object is passed its dependencies through constructor arguments or after construction through setter methods or interface methods. It is called dependency injection since the dependencies of an object are 'injected' into it, the term dependency is a little misleading here, since it is not a new 'dependency' which is injected but rather a 'provider' of that particular capability. For example, passing a database connection as an argument to a constructor instead of creating one internal would be categorized as dependency injection.
+Dependency Injection is a broader version of ‘inversion of control’ (IoC) principle. It relates to the way in which an object obtains references its dependencies - the object is passed to its dependencies through constructor arguments or after construction through setter methods or interface methods. It is called dependency injection since the dependencies of an object are 'injected' into it. The term dependency is a little misleading here, since it is not a new 'dependency' which is injected but rather a 'provider' of that particular capability. For example, passing a database connection as an argument to a constructor instead of creating one internal would be categorized as dependency injection.
 The pattern seeks to establish a level of abstraction via a public interface and to remove dependencies on components by supplying a 'plugin' architecture. This means that the individual components are tied together by the architecture rather than being linked together themselves. The responsibility for object creation and linking is removed from the objects themselves and moved to a factory.
 
 
@@ -687,34 +696,31 @@ The pattern seeks to establish a level of abstraction via a public interface and
 
 \begin{center}
 
-\includegraphics[width=\textwidth]{dependency}
+\includegraphics[scale = 1]{dependency}
 
 \end{center}
 \caption{Dependency Injection}
 \end{figure}
- 
 The main advantage of Dependency Injection is fact that there is only one instance of each object shared through multiple controllers. What is more, it allows a client the flexibility of being configurable. Only the client's behavior is fixed. The client may act on anything that supports the intrinsic interface the client expects.
-Dependency injection can be used to externalize a system's configuration details into configuration files, allowing the system to be reconfigured without recompilation. Separate configurations can be written for different situations that require different implementations of components. This includes, but is not limited to, testing.
-	L.I.M.E. uses spring dependency injection. There are bean services, which implements the domain logic. Each service implements interface defining the methods. Interfaces and services corresponds to hibernate entities and fulfill the needs of application logic. Interface beans are autowired into the REST controllers.
+Dependency injection can be used to externalize a system's configuration details into configuration files, allowing the system to be reconfigured without recompilation. Separate configurations can be written for different situations that require different implementations of components. This includes, but is not limited to, testing. \cite{I}
+The L.I.M.E. application uses Spring dependency injection. There are bean services, which implement the domain logic. Each service implements interface defining the methods. Interfaces and services correspond to Hibernate’s entities and fulfill the needs of application logic. Interface beans are auto wired into the REST controllers.
 
 \subsection{RESTful API}
 
 REpresentational State Transfer (REST) is an architectural style that defines a set of constraints and properties based on HTTP. REST-compliant web services allow the requesting systems to access and manipulate textual representations of web resources by using a uniform and predefined set of stateless operations. Other kinds of web services, such as WSDL and SOAP, expose their own arbitrary sets of operations.
-In a RESTful web service, requests made to a resource's URI will elicit a response that may be in XML, HTML, JSON, or some other format. The response may confirm that some alteration has been made to the stored resource, and the response may provide hypertext links to other related resources or collections of resources. When HTTP is used, as is most common, the operations available are GET, POST, PUT, DELETE, and other predefined CRUD HTTP methods. 
+In a RESTful web service, requests made to a resource's URI will elicit a response that may be in XML, HTML, JSON, or some other format. The response may confirm that some alteration has been made to the stored resource, and the response may provide hypertext links to other related resources or collections of resources. When HTTP is used, as is most common, the operations available are GET, POST, PUT, DELETE, and other predefined CRUD HTTP methods. \cite{J}
 
 
 \begin{figure}[h!]
 
 \begin{center}
 
-\includegraphics[width=\textwidth]{rest}
+\includegraphics{rest}
 
 \end{center}
 \caption{RESTful API}
 \end{figure}
- 
-L.I.M.E. implements RESTful controllers which are used to communicate with a client part of application. It communicates with JSON body type. There are CRUD used methods like PUT, DELETE, POST, GET to make action more readable and indicate what exactly it does. There are Controllers corresponding to view in a client part. .
-
+The L.I.M.E. application implements RESTful controllers which are used to communicate with a client part of application. They communicates with a JSON body type. CRUD methods like PUT, DELETE, POST, GET are used to make action more readable and indicate what exactly is being done. There are Controllers corresponding to each view in a client part. 
 
 % ----------------------- Technical Analysis ------------------
 
@@ -723,35 +729,31 @@ L.I.M.E. implements RESTful controllers which are used to communicate with a cli
 
 
 \section{Client-Server Architecture}
-
-Client/server architecture is a producer/consumer computing architecture where the server acts as the producer and the client as a consumer. The server houses and provides high-end, computing-intensive services to the client on demand.
-L.I.M.E. implements client-service architecture. There are 2 applications in the project:
+Client/server architecture is a producer/consumer computing architecture where the server acts as the producer and the client acts as a consumer. The server houses and provides high-end, computing-intensive services to the client on demand.
+The L.I.M.E. application implements client-service architecture. There are 2 applications in the project:
 \begin{enumerate}
 \item Server implemented in JAVA,
 \item GUI implemented with AngularJS
 \end{enumerate}
-Communication between client and server is done with RESTful API. Server accepts request from authenticated users sent from GUI. Then process it, saves data in database and sends answer.
+Communication between client and server is done with RESTful API. Server accepts request from authenticated users sent from GUI. Then the server process the request, saves the data in the database and sends the answer back to the client.
+
 
 \begin{figure}[h]
 
 \begin{center}
 
-\includegraphics[width=\textwidth]{CS}
+\includegraphics[scale = 0.5]{CS}
 
 \end{center}
 \caption{Client-Server Architecture}
 \end{figure}
 
 \section{Login}
- L.I.M.E. application have got system to recognize users and its roles. It is implemented using Spring Security. When the user logs in GUI application sends login request to server and the server application checks if the user exist and it’s roles. In the response, it passes the authorization data which is valid for 12 hours (session timeout). Each request from GUI to Server contains a header with the authorization data, so server can recognize which user sends request and if has appropriate roles.
+The L.I.M.E. application has got a system to recognize users and their roles. It is implemented using Spring Security. When the user logs in, the GUI application sends login request to server and the server application checks whether the user exists and which role does he have. As a response, the server passes the authorization data which is valid for 12 hours (session timeout). Each request from GUI to Server contains a header with the authorization data, so server can recognize which user sends request and if he has an appropriate role.
 \section{Program Interface}
 
-User Interface of L.I.M.E application consists of common for all views top menu with 
-logo and name of the system. On its right side there is dropdown menu with login/reset 
-password options and on the bottom of the page - footer. After logging in, login dropdown 
-switches  to user account options and on the left side of the page appears side 
-menu with subpages available for a given kind of account. In the whole application 
-there are following views:
+The User Interface of L.I.M.E application consists of a top menu with the logo and the name of the system, which is common for all views. On the right side of the menu, there is a smaller dropdown menu with login and reset password options. On the bottom of the page there is a footer. After logging in, the login dropdown menu switches to user account options and on the left side of the page a side menu appears with different subpages available, depending on a role the user has. In the whole application there are following views (subpages) available:
+
 \begin{enumerate}
 \item Login page:
 \begin{enumerate}
@@ -851,115 +853,129 @@ there are following views:
 \end{enumerate}
 \end{enumerate}
 
-Each view button opens pop-up modal with more detailed information about selected item. Edit modal also displays values of selected item, however in input boxes, so with possibility to modify them. Clicking delete button however shows confirmation dialog.\\ \\
+Whenever a user presses a view button next to the resource or product, a pop-up modal opens with more detailed information about selected item such as its quantity. Similarly, an edit modal also displays information about selected item, but in the form of input boxes, so there is a possibility to modify them. Clicking delete button next to a resource or product results in showing a confirmation dialog.\\ \\
 
-The main requirement concerning UI of LIME application was to make interface user friendly. It has been fulfilled by implementing pleasant looking and easy to navigate GUI. Placement of main components is quite standard – account settings in top right corner, main menu on the left side panel – which makes interface intuitive for the user. Throughout the whole application there are used common UI elements and the pattern in layout can be noticed. The purpose of that is to make user feel more comfortable and consequently make him use application more efficiently. Interface is also simple in design, there are no unnecessary elements and the language used on labels is rather clear and understandable. Another important thing is efficient error handling. When application comes across an error, it informs the user about encountered problem and gives possibility of reporting bug to the developers, by sending an email to the given address. As the result application becomes easy to troubleshoot – user can contact the support and that support will resolve issue. \\ \\
+The main requirement concerning UI of the L.I.M.E. application was to make the interface user friendly. It has been fulfilled by implementing pleasant looking and easy to navigate GUI. Placement of main components is quite standard – account settings in top right corner, main menu on the left side panel – which makes the interface intuitive for the user. Throughout the whole application there are used common UI elements and the pattern in layout can be noticed. The purpose of that is to make user feel more comfortable and consequently make him use application more efficiently. Interface is also simple in design, there are no unnecessary elements and the language used on labels is rather clear and understandable. Another important aspect is efficient error handling. Whenever application comes across an error, it informs the user about the encountered problem and gives the user a possibility to report a bug to the developers, by sending an email to the given address. As the result application becomes easy to troubleshoot – user can contact the support and that support will resolve the issue. \\ \\
 
-The core functionality of LIME is user specific context i.e. user account. Authorization mechanism consists of two core components: client-side application and backend-side authorization provider. From the business perspective client-side application is responsible for retrieving user data, validation and sending data to authorization provider in secure way. First two elements are customized, out of the box functionalities of used technologies. Sending sensitive data is realized by encoding HTTP request data with Base64 encoder. After successful logging in encoded credentials are used in all further requests in HTTP Authorization header. It allows backend to intercept all incoming movement with checking if specific request is coming from authorized user.\\ \\
+The core functionality of L.I.M.E. application is user specific context i.e. user account. Authorization mechanism consists of two core components: client-side application and backend-side authorization provider. From the business perspective client-side application is responsible for retrieving user data, validation and sending data to authorization provider in secure way. First two elements are customized, out of the box functionalities of used technologies. Sending sensitive data is realized by encoding HTTP request data with Base64 encoder. After successful logging in encoded credentials are used in all further requests in HTTP Authorization header. It allows backend to intercept all incoming movement with checking if specific request is coming from authorized user.\\ \\
 
 
 \section{System Classes}
 
-The Application is composed with the following packages, and the package contain the following classes and interfaces:
+The L.I.M.E Application is composed with the following packages, and the packages contain the following classes and interfaces:
 
 \begin{enumerate} 
-\item Lime	 
+\item Lime 
 \begin{enumerate} 
-\item \textbf{LimeApplication}	The Main Class for Lime Application.
+\item \textbf{LimeApplication} Springboot launch class for the L.I.M.E. application.
+\end{enumerate}
+\item Api 
+\begin{enumerate} 
+\item \textbf{GlobalExceptionHandlingControllerAdvice} Performs exception handling for all REST API controllers.
 \end{enumerate} 
-\item Api	 
+\item ClassModels 
 \begin{enumerate} 
-\item \textbf{GlobalExceptionHandlingControllerAdvice} Performs exception handling for all REST API controller.
-\end{enumerate} 
-\item ClassModels	 
-\begin{enumerate} 
-\item \textbf{DrawSeries} The class for Plotting Time Series into a Chart
+\item \textbf{DrawSeries} The class for plotting Time Series into a Chart
 \item \textbf{TimeSeries} The class of Time Series
 \end{enumerate} 
-\item Config	 
+\item Config 
 \begin{enumerate} 
-\item \textbf{SecurityConfiguration} The type Security configuration.
-\item \textbf{StorageProperties} The type Storage properties.
+\item \textbf{SecurityConfiguration} Spring Security configuration class.
+
+\item \textbf{StorageProperties} Properties which indicate location of resources (images), taken out from application.yml.
 \item \textbf{SwaggerConfig} Main configuration class to enable the Swagger UI frontend.
 \end{enumerate} 
-\item Controller	 
+
+\item Controller 
 \begin{enumerate} 
-\item \textbf{BaseController} The Basic type of controller
-\item \textbf{DevController} The type Dev controller.
-\item \textbf{FileUploadController} The type File upload controller.
-\item \textbf{ForecastController} The type Forecast controller.
-\item \textbf{FormulaController} The type Formula controller.
-\item \textbf{JobController} The type Job controller.
-\item \textbf{OrderController} The type Order controller.
-\item \textbf{ProductCategoryController} The type Product category controller.
-\item \textbf{ProductController} The type Product controller.
-\item \textbf{ReportController} The type Report controller.
-\item \textbf{ResourceCategoryController} The type Resource category controller.
-\item \textbf{ResourceController} The type Resource controller.
-\item \textbf{SupplierController} The type Supplier controller.
-\item \textbf{UserController} The type User controller.
+\item \textbf{BaseController} Abstract controller - provides invalid request exception handler.
+\item \textbf{DevController} REST Controller used only for test purposes, includes a database populator.
+\item \textbf{FileUploadController} REST Controller for File operations.
+\item \textbf{ForecastController} REST Controller for Forecast operations.
+\item \textbf{FormulaController} REST Controller for Formula operations.
+\item \textbf{JobController} REST Controller for Job operations.
+\item \textbf{OrderController} REST Controller for Order operations.
+\item \textbf{ProductCategoryController} REST Controller for Product operations.
+
+\item \textbf{ProductController} REST Controller for Product operations.
+\item \textbf{ReportController} REST Controller for Report operations.
+\item \textbf{ResourceCategoryController} REST Controller for Resource operations.
+\item \textbf{ResourceController} REST Controller for Resource operations.
+\item \textbf{SupplierController} REST Controller for Supplier operations.
+\item \textbf{UserController} REST Controller for User operations.
 
 \end{enumerate} 
-\item Dao	 
+
+\item Dao 
 \begin{enumerate} 
-\item \textbf{IBasicCRUDRepository<T,ID extends java.io.Serializable>} The interface Basic crud repository.
-\item \textbf{IFormulaDAO} The interface Formula dao.
-\item \textbf{IJobDAO} The interface Job dao.
-\item \textbf{IProductCategoryDAO} The interface Product category dao.
-\item \textbf{IProductDAO} The interface Product dao.
-\item \textbf{IResourceCategoryDAO} The interface Resource category dao.
-\item \textbf{IResourceDAO} The interface Resource dao.
-\item \textbf{IRoleDAO} The interface Role dao.
-\item \textbf{ISupplierDAO} The interface Supplier dao.
-\item \textbf{IUserDAO} The interface User dao.
+\item \textbf{IBasicCRUDRepository<T,ID extends java.io.Serializable>} The interface
+    Basic crud repository - interface for parents of all Spring repositories.
+\item \textbf{IFormulaDAO} The interface for Formula dao.
+\item \textbf{IJobDAO} The interface for Job dao.
+
+\item \textbf{IProductCategoryDAO} The interface for Product category dao.
+\item \textbf{IProductDAO} The interface for Product dao.
+\item \textbf{IResourceCategoryDAO} The interface for Resource category dao.
+\item \textbf{IResourceDAO} The interface for Resource dao.
+
+\item \textbf{IRoleDAO} The interface for Role dao.
+
+\item \textbf{ISupplierDAO} The interface for Supplier dao.
+\item \textbf{IUserDAO} The interface for User dao.
 
 \end{enumerate} 
-\item Exception	 
+\item Exception 
 \begin{enumerate} 
-\item \textbf{AlreadyExistsException} thrown when an entity with at leas one unique field already exists .
-\item \textbf{ForbiddenException} thrown when eg. an authentication attempt is not allowed with the given credentials (not details returned).
-\item \textbf{IllegalDataException} thrown when the given data is not valid in the current context.
-\item \textbf{InvalidRequestException} thrown when a request is invalid in the current context.
-\item \textbf{NotAcceptableException} exception, thrown when given data is not acceptable.
-\item \textbf{NotFoundException} thrown when an entity is not found where it is expected.
-\item \textbf{OperationNotAllowedException} thrown when a contract management API call is not allowed.
-\item \textbf{ServiceUnavailableException} The type Service unavailable exception.
-\item \textbf{StorageException} The type Storage exception.
-\item \textbf{StorageFileNotFoundException} The type Storage file not found exception.
-\item \textbf{UnprocessableEntityException} thrown when an entity contains validation errors.
+
+\item \textbf{AlreadyExistsException} Exception thrown when an entity already exists (the new entity does not have at least one unique field).
+\item \textbf{ForbiddenException} Exception thrown when e.g. an authentication attempt is not allowed with the given credentials (no details returned).
+\item \textbf{IllegalDataException} Exception thrown when the given data is not valid in the current context.
+\item \textbf{InvalidRequestException}Exception thrown when a request is invalid in the current context.
+\item \textbf{NotAcceptableException} Exception thrown when given data is not acceptable.
+\item \textbf{NotFoundException} Exception thrown when an entity is not found where expected.
+\item \textbf{OperationNotAllowedException} Exception thrown when a contract management API call is not allowed.
+\item \textbf{ServiceUnavailableException} Exception thrown when the Service is unavailable.
+\item \textbf{StorageException} Exception thrown when a storage error occurs.
+
+\item \textbf{StorageFileNotFoundException} Exception thrown when the file is not found.
+\item \textbf{UnprocessableEntityException} Exception thrown when an entity contains validation errors.
 
 \end{enumerate} 
-\item Model	 
-\begin{enumerate} 
-\item \textbf{CustomUserDetails} The type Custom user details.
+\item Model 
+\begin{enumerate}
+ 
+\item \textbf{CustomUserDetails} The implementation of a Spring users credentials storage.
 \item \textbf{Formula} Model representation of a formula used in Lime.
 \item \textbf{Job} Model representation of a job created by Lime user.
 \item \textbf{Product} Model representation of a product added in Lime.
-\item \textbf{ProductCategory} The type Product category.
+\item \textbf{ProductCategory} Model representation of a product category.
 \item \textbf{Resource} Model representation of a resource used in Lime.
-\item \textbf{ResourceCategory} The type Resource category.
+\item \textbf{ResourceCategory} Model representation of a resource category.
 \item \textbf{Role} Model representation of a user role in Lime.
 \item \textbf{Supplier} Model representation of a supplier in Lime.
 \item \textbf{User} Model representation of user of Lime.
 
 \end{enumerate} 
-\item Pojo	 
+\item Pojo 
 \begin{enumerate} 
-\item \textbf{BasicPOJO} The type Basic pojo.
-\item \textbf{FormulaPOJO} The type Formula pojo.
-\item \textbf{JobPOJO} The type Job pojo.
-\item \textbf{ProductCategoryPOJO} The type Product category pojo.
-\item \textbf{ProductPOJO} The type Product pojo.
-\item \textbf{ResourceCategoryPOJO} The type Resource category pojo.
-\item \textbf{ResourcePOJO} The type Resource pojo.
-\item \textbf{RolePOJO} The type Role pojo.
-\item \textbf{SupplierPOJO} The type Supplier pojo.
-\item \textbf{UserPOJO} The type User pojo.
+\item \textbf{BasicPOJO} Plain old java object representation of each object.
+\item \textbf{FormulaPOJO} Plain old java object representation of Formula objects.
+\item \textbf{JobPOJO} Plain old java object representation of Job objects.
+\item \textbf{ProductCategoryPOJO} Plain old java object representation of Product category objects.
+\item \textbf{ProductPOJO} Plain old java object representation of Product objects.
+\item \textbf{ResourceCategoryPOJO} Plain old java object representation of Resource category objects.
+
+\item \textbf{ResourcePOJO} Plain old java object representation of Resource objects.
+
+\item \textbf{RolePOJO} Plain old java object representation of Role objects.
+\item \textbf{SupplierPOJO} Plain old java object representation of Supplier objects.
+\item \textbf{UserPOJO} Plain old java object representation of User objects.
 
 \end{enumerate} 
-\item Service	 
+\item Service 
 \begin{enumerate} 
-\item \textbf{IBasicCRUDService} The interface Basic crud service.
+
+\item \textbf{IBasicCRUDService} The interface - parent of all crud services.
 \item \textbf{IForecastService} The interface Forecast service.
 \item \textbf{IFormulaService} The interface Formula service.
 \item \textbf{IJobService} The interface Job service.
@@ -979,38 +995,47 @@ The Application is composed with the following packages, and the package contain
 
 \end{enumerate} 
 \begin{enumerate} 
-\item \textbf{BasicCRUDService} The type Basic crud service.
-\item \textbf{CustomUserDetailsService} The type Custom user details service.
-\item \textbf{ForecastService} The type Forecast service.
-\item \textbf{FormulaService} The type Formula service.
-\item \textbf{JobService} The type Job service.
-\item \textbf{MailService} The type Mail service.
-\item \textbf{NotificationService} The type Notification service.
-\item \textbf{ProductCategoryService} The type Product category service.
-\item \textbf{ProductService} The type Product service.
-\item \textbf{ReportService} The type Report service.
-\item \textbf{ResourceCategoryService} The type Resource category service.
-\item \textbf{ResourceService} The type Resource service.
-\item \textbf{RoleService} The type Role service.
-\item \textbf{SmoothingService} The type Smoothing service.
-\item \textbf{StorageService} The type Storage service.
-\item \textbf{SupplierService} The type Supplier service.
-\item \textbf{TimeSeriesService} The type Time series service.
-\item \textbf{UserService} The type User service.
+\item \textbf{BasicCRUDService} Implementation of parent of CRUD services - implements methods which all child classes use.
+\item \textbf{CustomUserDetailsService} Service that provides all methods needed to manage Custom objects.
+\item \textbf{ForecastService} Service that provides all methods needed to manage Forecast objects.
+\item \textbf{FormulaService} Service that provides all methods needed to manage Formula objects.
+\item \textbf{JobService} Service that provides all methods needed to manage Job objects.
+\item \textbf{MailService} Service that provides all methods needed to manage Mail objects.
+\item \textbf{NotificationService} Service that provides all methods needed to manage Notification objects.
+\item \textbf{ProductCategoryService} Service that provides all methods needed to manage Product Category objects.
+\item \textbf{ProductService} Service that provides all methods needed to manage Product objects.
+
+
+\item \textbf{ReportService} Service that provides all methods needed to manage Report objects.
+\item \textbf{ResourceCategoryService} Service that provides all methods needed to manage Resource Category objects.
+\item \textbf{ResourceService} Service that provides all methods needed to manage Resource objects.
+\item \textbf{RoleService} Service that provides all methods needed to manage Role objects.
+
+\item \textbf{SmoothingService} Service that provides all methods needed to manage Smoothing objects.
+ \item \textbf{StorageService} Service that provides all methods needed to manage Storage objects.
+
+\item \textbf{SupplierService} Service that provides all methods needed to manage Supplier objects.
+\item \textbf{TimeSeriesService} Service that provides all methods needed to manage Time Series objects.
+
+\item \textbf{UserService} Service that provides all methods needed to manage User objects.
+
 
 \end{enumerate} 
 \item Tools
 \begin{enumerate} 
-\item \textbf{DBPopulator} The type Database populator.
-\item \textbf{ParseTools} The type Parse tools.
-\item \textbf{StartUpPopulator} 
-\item \textbf{TSGenerator} The type Time Series generator.
+\item \textbf{ParseTools} Contains tools for parsing various objects.
+\item \textbf{StartUpPopulator} Contains a populator of a database for production application startup.
+
+\item \textbf{TSGenerator} Contains a generator of sample Time Series.
+
+
 
 \end{enumerate}
 \end{enumerate}
 
-This is obvously a very brief description. Due to the amount of classes in this application it could not be possible to contain all of the methods as well or even a longer description. \\
-You can find and browse interface, class, enum, method descriptions and hierarchy in "Classes and method report" by launching index.html
+The attached description of classes is obviously a very brief one. Due to the amount of classes in this application it could not be possible to contain all of the methods as well or even a longer description. \\
+The interface, class, enum, method descriptions and hierarchy can be found and browsed in "Classes and method report" by launching index.html
+
 \section{Database Design}
  
 
@@ -1031,7 +1056,7 @@ The database consists of the following tables:
 \begin{enumerate}
 \item \textbf{Product ID} ID of a product
 \item \textbf{Added At} Date of adding a product to a database
-\item \textbf{Describtion} Describtion of a product
+\item \textbf{Description} Description of a product
 \item \textbf{Expected Value} Expected value - how much of a product shall be obtained after production
 \item \textbf{Image} Image for this product
 \item \textbf{Name} Name of a product
@@ -1052,11 +1077,11 @@ The database consists of the following tables:
 \item \textbf{User ID} Assigns a job to a user which have performed it
 \end{enumerate}
 
-\item \textbf{User}  This table stores properties of every user of the system, such as:
+\item \textbf{User} The table stores properties of every user of the system, such as:
 \begin{enumerate}
 \item \textbf{User ID} ID of a user
 \item \textbf{Email address} Email address of this user
-\item \textbf{Enabled} Is this an active user of the system
+\item \textbf{Enabled} Indicates if this an active user of the system
 \item \textbf{Joined At} Date of joining the system
 \item \textbf{Name} Given Name
 \item \textbf{Surname} Surname
@@ -1068,24 +1093,24 @@ The database consists of the following tables:
 
 \item \textbf{Role} Stores each role with its name and ID
 
-\item \textbf{Formula}  Resolves the many-to-many relation between resources and product, represents the quantity of resources used to make a product
+\item \textbf{Formula} Resolves the many-to-many relation between resources and product, represents the quantity of resources used to make a product
 \begin{enumerate}
 \item \textbf{Formula ID} ID of a formula
 \item \textbf{Product ID} ID of a product
 \item \textbf{Resource ID} ID of a resource
-\item \textbf{Value} How much of a given resource is neede to make the given product
+\item \textbf{Value} The amount of a given resource needed to make the given product
 \end{enumerate}
 
-\item \textbf{Resource}  Stores information about a basic laboratory resource and its properties, such as:
+\item \textbf{Resource} Stores information about a basic laboratory resource and its properties, such as:
 \begin{enumerate}
 \item \textbf{Product ID} ID of a resource
-\item \textbf{Describtion} Describtion of a resource
+\item \textbf{Description} Description of a resource
 \item \textbf{Image} Image for the resource
 \item \textbf{Name} Name of a resource
 \item \textbf{Critical Value} critical value - how much of a resource shall be left for the notifications of the low level of resource to be triggered
-\item \textbf{Notifiactions On} Are the notifications about the low level of the resource turned on
-\item \textbf{Ordering On} Is automatic ordering of the resource turned on
-\item \textbf{Quantity} How much of a resource at the storage at the moment
+\item \textbf{Notifications On} Are the notifications about the low level of the resource turned on
+\item \textbf{Ordering On} Indicates if automatic ordering of the resource is turned on
+\item \textbf{Quantity} the amount of the resource at the storage at the moment
 \item \textbf{Unit} Unit of a measurement
 \item \textbf{Category ID} Assigns a resource to a category
 \item \textbf{Supplier ID} Assigns a resource to a supplier
@@ -1106,8 +1131,8 @@ The database consists of the following tables:
 \end{enumerate}
 
 \end{enumerate}
- 
-\section{Prediction Model}
+
+\section{Forecast}
 
 The prediction of the future values of production of products and usage of resources is one of the key features of the application.
 The data collected from the application are in the form time series:
@@ -1118,14 +1143,14 @@ The expression \textit{time series data}, or \textit{time series} usually refers
 There are many known models for the prediction of time series: starting from the simplest ones as predicting by using average or moving average, through exponential smoothing models and regression models to the most sophisticated models like ARMA, ARIMA models.
 Many known models for time series prediction were researched, until we found the one that was appropriate to use in the application. The Exponential Smoothing Model was chosen for the following reasons:
 \begin{enumerate}
-\item The set of variables is rather small and rather simple - no reason to use more sophisticated methods.
-\item The prediction model was to be implemented from scratch and Exponential Smoothing. Many more complicated methods could have been imported into the application using libraries, but the decision was that it would be more challenging for the project to take one of the less complicated methods and implement every step of it on our own.
-\item The Holt's Linear Exponential Smoothing Method was chosen in particular because we have noticed that the data may possess a trend, as the laboratory production grows over time.
+\item The set of variables is rather small and rather simple therefore there was no reason to use more sophisticated methods.
+\item The prediction model was to be implemented from scratch. Many more complicated methods could have been imported into the application using libraries, but the decision was made that it would be more challenging for the project to take one of the less complicated methods and then the project team implemented every step of it on their own.
+\item The Holt's Linear Exponential Smoothing Method was chosen in particular because we have noticed that the data may possess a trend, as the laboratory production grows over time. \cite{K}
 \end{enumerate}
 
 \subsection{Holt's Linear Exponential Smoothing Method}
 
-Holt developed a linear exponential smoothing method to allow forecasting of data with trends. The forecast for Holt's linear exponential smoothing is found using two smoothing constants  $\alpha$ and $\beta$ (with values between 0 and 1), and three equations
+Holt developed a linear exponential smoothing method to allow forecasting of data with trends. The forecast for Holt's linear exponential smoothing is found using two smoothing constants $\alpha$ and $\beta$ (with values between 0 and 1), and three equations
 
 \begin{equation}\label{Holt's Exponential smoothing 1}
 L_t = \alpha Y_t + (1 - \alpha) (L_{t-1} + b_{t-1})
@@ -1137,31 +1162,32 @@ b_t = \beta (L_t - L_{t-1}) + (1 - \beta) b_{t-1}
 F_t+m = L_t - b_t m
 \end{equation}
 
-Here, $L_t$ denotes an estimate of the level of the series at time $t$ and $b_t$ denotes an estimate of the slope of the series at time $t$. Equation 6.1 adjusts $L_t$ directly for the trend of the previous period, $b_{t-1}$, by adding it to the last smoothed value, $L_{t-1}$. This helps to bring $L_t$ to the approximate trend of thew current data value. Equation 6.2 then updates the trend, which is expressed as the difference between the last two smoothed values. this is appropriate, because if there is a trend in the data, new values should be higher or lower than the previous one. Since they may be some randomness remaining, the trend is modified by smoothing with $\beta$ the trend in the last period $L_t - L_{t-1}$ and adding taht to the previous estimate of the trend multiplied by $ (1 - \beta)$. Finally, equation 6.3 is used to forecast ahead. the trend $b_t$ is multiplied by the number of periods ahead to be forecast, $m$ and added to the base value $L_t$.
+Here, $L_t$ denotes an estimate of the level of the series at time $t$ and $b_t$ denotes an estimate of the slope of the series at time $t$. Equation 6.1 adjusts $L_t$ directly for the trend of the previous period, $b_{t-1}$, by adding it to the last smoothed value, $L_{t-1}$. This helps to bring $L_t$ to the approximate trend of thew current data value. Equation 6.2 then updates the trend, which is expressed as the difference between the last two smoothed values. This is appropriate, because if there is a trend in the data, new values should be higher or lower than the previous one. Since they may be some randomness remaining, the trend is modified by smoothing with $\beta$ the trend in the last period $L_t - L_{t-1}$ and adding that to the previous estimate of the trend multiplied by $ (1 - \beta)$. Finally, equation 6.3 is used to forecast ahead. The trend $b_t$ is multiplied by the number of periods ahead to be forecast, $m$ and added to the base value $L_t$.
 \begin{definition}[Mean Squared Error]
 If $Y_t$ is the actual observation for time period $t$ and $F_t$ is the forecast for the same period, then the error is defined as:
 \begin{equation}\label{Error}
 e_t = Y_t - F_t
 \end{equation}
-Usually $F_t$ is calculated using data $Y_1$, ..., $Y_{t-1}$. it is one- step forecast because it is forecasting one period ahead of the last observation used in the calculation. therefore we describe $e_t$ as a \textit{one-step forecast error}. It is yhe difference between the observation $Y_t$ and the forecast made using all the observation but not including $Y_t$.
+Usually $F_t$ is calculated using data $Y_1$, ..., $Y_{t-1}$. it is one- step forecast because it is forecasting one period ahead of the last observation used in the calculation. Therefore $e_t$ can be described as a \textit{one-step forecast error}. It is the difference between the observation $Y_t$ and the forecast made using all the observation but not including $Y_t$. 
 If there are observations and forecasts for $n$ time periods, then there will be $n$ error terms, and the following standard statistical measure Mean Square Error can be defined:
 \begin{equation}\label{Mean Squared Error}
 MSE = 1/n \sum_{t=1}^{n} e_t^{2} 
-\end{equation}
+\end{equation} \cite{L}
 
 \end{definition}
 The $\alpha$ and $\beta$ coefficients used for the calculation of smoothing are being optimized so that the Mean Squared Error is minimized.
+
 
 
 % ----------------------- Experimental Evaluation ------------------
 
 \chapter{Post Execution Documentation}
 
-In this section the final application was tested against the set of initial requirements. for every requirement given in Chapter 3, discussed is how the particular requirement is implemented in the application.
+In this section the final application was tested against the set of initial requirements. For every requirement given in Chapter 3, discussed is how the particular requirement is implemented in the application.
 
 \section{Evaluating Functional Requirements}
 
-The following sections will discuss how the functional requirements were implemented, separately for every group of users (Administrator, Mangaer and User)
+The following sections will discuss how the functional requirements were implemented, separately for every group of users (Administrator, Manager and User)
 
 \subsection{Administrator}
 
@@ -1172,17 +1198,17 @@ The following sections will discuss how the functional requirements were impleme
 \tabularnewline
 
 \hline
-\texttt{Functional Requirement} & \texttt{Implementation} \\ \hline
-Log in to the system and change his & L.I.M.E. application recognize users and its roles. It is implemented using spring security. Password can be changed by administrator of the system. \\ \hline
-Create, modify and remove an account in the system, modify its roles & Administrator can create account via manage users view. It is possible to chose within 3 roles: administrator, manager, staff. It is also possible to edit or remove an account in the same subpage \\ \hline
-View, create, modify and remove resources and products & Administrator can create products and recources in products view and resources view respectively. It is also possible to modify and remove objects in the same subpage. \\ \hline
-View, create, modify and remove groups of resources and products & Administrator can create groups of products and recources choosing products or resources in manage groups respectively. It is also possible to modify and remove objects in the same subpage. \\ \hline
-View, create, modify formula of the product & Administrator can create formula for the given product choosing resources and putting the needed value. It is possible creade and modify formula in products view. \\ \hline
-Denfine, generate and send a report & Administrator can define and generate raport depending on date range and resources or products. It can be done in reports view, product and resource subpage respectively. \\ \hline
-Denfine, generate and send a prediction & Administrator can define and generate prediction depending on date range and respoures or products. It can be done in prediction view, product and resource subpage respectively. \\ \hline
-Define notifications, turn notifications on & Administrator can define critical value of the resource in notifications view. It will notify with email that resource exceed critical value. It can be set on/off separately for each object or for all with one button. \\ \hline
-Create job, declare time range of the job & Administrator can create job of an product and declare time range within the job was done. It can be done in job view \\ \hline
-Order resources, turn on/off automatic ordering & Administrator can order the resources - supplier will be notified with a mail. It is possible to group resources and send one order. It is possible to turn on/off automatic orders - order will perform when the resource exceed critical value. It can be done in manage orders view. \\ \hline
+\textbf{Functional \mbox{Requirement}} & \textbf{Implementation} \\ \hline
+Log in to the system and change his & L.I.M.E. application recognize users and its roles. It is implemented using Spring security. Password can be changed by the administrator of the system. \\ \hline
+Create, modify and remove an account in the system, modify its roles & Administrator can create account via Manage Users view. It is possible to choose from 3 roles: administrator, manager and staff. It is also possible to edit or remove an account in the same view. \\ \hline
+View, create, modify and remove resources and products & Administrator can create products and resources in products view and resources view respectively. It is also possible to modify and remove objects in the same view. \\ \hline
+View, create, modify and remove groups of resources and products & Administrator can create groups of products and resources choosing products or resources in manage groups respectively. It is also possible to modify and remove objects in the same view. \\ \hline
+View, create, modify formula of the product & Administrator can create formula for the given product choosing resources and putting the needed value. It is possible to create and modify formula in products view. \\ \hline
+Define, generate and send a report & Administrator can define and generate report depending on date range and resources or products. It can be done in reports view, product and resource subpage respectively. \\ \hline
+Define, generate and send a prediction & Administrator can define and generate prediction depending on date range and resources or products. It can be done in prediction view, product and resource subpage respectively. \\ \hline
+Define notifications, turn notifications on & Administrator can define critical value of the resource in notifications view. He will be notified via email that the selected resource exceed critical value. The notifications can be set on/off separately for each object or for all with one button. \\ \hline
+Create job, declare time range of the job & Administrator can create job, choose the product which resulted from the job and declare time range within which the job was done. It can be done in job view. \\ \hline
+Order resources, turn on/off automatic ordering & Administrator can order the resources - supplier will be notified with a mail. It is also possible to group resources and send one order. It is possible to turn on/off automatic orders - an order will performed when the resource exceed critical value. It can be done in manage orders view. \\ \hline
 
 
 \end{longtable}
@@ -1196,15 +1222,15 @@ Order resources, turn on/off automatic ordering & Administrator can order the re
 \tabularnewline
 
 \hline
-\texttt{Functional Requirement} & \texttt{Implementation} \\ \hline
+\textbf{Functional \mbox{Requirement}} & \textbf{Implementation} \\ \hline
 
-Log in to the system & L.I.M.E. application recognize users and its roles. It is implemented using spring security. Password can be changed by administrator of the system. \\ \hline
-View, create, modify and remove resources and products & Manager can create products and recources in products view and  resources view respectively. It is also possible to modify and remove objects in the same subpage. \\ \hline
-Define, generate and send a report & Manager can define and generate raport depending on date range and resoures or products. It can be done in reports view, product and resource subpage respectively. \\ \hline
-Define, generate and send a prediction & Manager can define and generate prediction depending on date range and resoures or products. It can be done in prediction view, product and resource subpage respectively. \\ \hline
-Define notifications, turn notifications on & Manager can define critical value of the resource in notifications view. It will notify with email that resource exceed critical value. It can be set on/off separately for each object or for all with one button. \\ \hline
-Order resources, turn on/off automatic ordering & Manager can order the resources - supplier will be notified with a mail. It is possible to group resources and send one order. It is possible to turn on/off automatic orders - order will perform when the resource exceed critical value. It can be done in manage orders view. \\ \hline
-Create job, declare time range of the job & Manager can create job of an product and declare time range within the job was done. It can be done in job view. \\ \hline
+Log in to the system & L.I.M.E. application recognize users and its roles. It is implemented using Spring security. Password can be changed by the administrator of the system. \\ \hline
+View, create, modify and remove resources and products & Manager can create products and resources in products view and resources view respectively. It is also possible to modify and remove objects in the same subpage. \\ \hline
+Define, generate and send a report & Manager can define and generate a report depending on date range and resources or products chosen. It can be done in reports view, product and resource subpage respectively. \\ \hline
+Define, generate and send a prediction & Manager can define and generate prediction concerning a selected date range and resources or products. It can be done in prediction view, product and resource subpage respectively. \\ \hline
+Define notifications, turn notifications on & Manager can define critical value of the resource in notifications view. He will be notified via email that the selected resource exceed critical value. The notifications can be set on/off separately for each object or for all with one button. \\ \hline
+Order resources, turn on/off automatic ordering & Manager can order the resources – the supplier will be notified via mail. It is possible to group resources and send one order. It is also possible to turn on/off automatic orders - an order will be performed when the resource exceed critical value. It can be done in manage orders view. \\ \hline
+Create job, declare time range of the job & Manager can create job, choose the product which resulted from the job and declare time range within which the job was done. It can be done in job view. \\ \hline
 
 
 
@@ -1219,9 +1245,15 @@ Create job, declare time range of the job & Manager can create job of an product
 \tabularnewline
 
 \hline
-\texttt{Functional Requirement} & \texttt{Implementation} \\ \hline
-Log in to the system & L.I.M.E. application recognize users and its roles. It is implemented using spring security. Password can be changed by administrator of the system. \\ \hline
-Create job, declare time range of the job & User can create job of an product and declare time range within the job was done. It can be done in job view. \\ \hline
+\textbf{Functional \mbox{Requirement}} & \textbf{Implementation} \\ \hline
+Log in to the system & L.I.M.E. application recognize users and its roles. It is implemented using Spring security. Password can be changed by administrator of the system. \\ \hline
+View, create, modify and remove resources and products & User can create products and resources in products view and resources view respectively. It is also possible to modify and remove objects in the same subpage. \\ \hline
+Define, generate and send a report & User can define and generate a report depending on date range and resources or products chosen. It can be done in reports view, product and resource subpage respectively. \\ \hline
+Define, generate and send a prediction & User can define and generate prediction concerning a selected date range and resources or products. It can be done in prediction view, product and resource subpage respectively. \\ \hline
+Order resources & User can order the resources – the supplier will be notified via mail. It is possible to group resources and send one order. It can be done in manage orders view. \\ \hline
+Create job, declare time range of the job & User can create job, choose the product which resulted from the job and declare time range within which the job was done. It can be done in job view. \\ \hline
+
+
 
 
 \end{longtable}
@@ -1237,38 +1269,37 @@ Similarly, this section will discuss how the non-functional requirements were im
 \tabularnewline
 
 \hline
-\texttt{Area} & \texttt{Non-Functional Requirement} & \texttt{Implementation} \\ \hline
-Usability & Application must be responsive. It must be working on PC, tablets
-and phones with resolution at least 720p. & GUI is implemented with responsive frameworks: Angular and bootstrap \\ \hline
+\textbf{Area} & \textbf{Non-Functional Requirement} & \textbf{Implementation} \\ \hline
+Usability & Application must be responsive. It must be working on PC, tablets and phones with resolution at least 720p. & GUI is implemented with responsive frameworks: Angular and bootstrap \\ \hline
 Reliability & Application must be of type High Availability. It should be available
-24h/7d between 08:00 and 23:00. There could be service
-breaks during the week between 24:00 and 8:00. & Application is deployed on heroku. It uses database mysql addon. It runs 24/7 \\ \cline{2-3}
- & Application must have quick restart in case of app machine failures. & It is possible to restart app with command: heroku restart \\ \hline
-Recovery & Application must have daily database backup performed  24:00 and 08:00. & 
-Database has default scheduled database dumps. It can be resheduled in heroku db configuration \\ \hline
-Performance & Application should respond no longer than 3 seconds while strain
-being on level 100 queries per minute. & Application uses client server architecture. RESTful api deliver much higher capacity. \\ \hline
+24/7, between 08:00 and 23:00. There could be service breaks during the week between 24:00 and 8:00. & Application is deployed on Heroku. The application is available 24/7 \\ \cline{2-3}
+& Application must have quick restart in case of app machine failures. & It is possible to restart app with command: heroku restart \\ \hline
+Recovery & Application must have daily database backup performed 24:00 and 08:00. & 
+Database has default scheduled database dumps. It can be rescheduled in Heroku database configuration \\ \hline
+Performance & Application should respond no longer than 3 seconds while strain being on level 100 queries per minute. & Application uses client server architecture. RESTful Api delivers much higher capacity. \\ \hline
 Supportability & Documentation should contain instruction for recovery data from
-database backup. & There is delivered step by step manual with database backup manual and sheduled and recovery. \\ \cline{2-3}
- & Application should keep backward compatibility between the released
-versions. & With the future releases version, there will be database script provided, which will fill previous entries. \\ \hline
-Security & Application must have user levels security. It shall not pass a user who has inappropriate privileges. & Application has implemented user service implemented with spring security, which validates if the user exists and check for each REST endpoint if the user has appropriate privileges. \\ \hline
+database backup. & In the User Manual, there is a step by step description on how to perform a database backup, scheduling  and recovery. \\ \cline{2-3}
+& Application should keep backward compatibility between the released versions. & With the future releases version, there will be database script provided, which will fill previous entries. \\ \hline
+Security & Application must have user levels security. It shall not pass a user who has inappropriate privileges. & Application has implemented user service implemented with Spring security, which validates if the user exists and check for each REST endpoint if the user has appropriate privileges. \\ \hline
 
 \end{longtable}
+
 
 
 
 % ----------------------- Conclusions ------------------
 \chapter*{Conclusions}
 
-One of the most important goal of our thesis was to deliver a software that will be used by the consumer of the market. Work began with market research. We received several proposals and chose the one that we considered the most appropriate. We decided to develop the ultimate system to manage the warehouse and human resources of the laboratory. Our project – L.I.M.E (Laboratory Internal Management Entity) was developed in line with market needs, consulted with major consumers.\\ \\
-At first, we had to decide how the database will look like - what entities, relations, type of the database. That is the fundamental part of the application. We can say with pride, that we achieved excellent  result. There were only few minor changes, most of the primal database project fulfilled needs of the application.\\ \\
-Secondly, we had to develop basic back-end parts of the application. Connection with database, user authentication and roles. Many helpers like database populator for test purposes.  \\ \\
-Subsequently we had to start develop the client application. This was the hardest part of the work. It was hard to write simultaneously front-end and back-end. There was many  disagreements, and we had to discuss for a long time often to come to the best solutions.\\ \\
-Afterwards, when we had already most of the functionalities, we started to develop features that uses most of the functionalities – reports, predictions, notifications. It required knowledge from the area of algorithms and mathematics. \\ \\
-To develop our application, we used the top software technologies. Server side is built with Java, Spring, SpringBoot, SpringSecurity, MySQL and the client with AngularJS, Bootstrap. The communication between units is made with RESTful API. The we well-known and wide used solutions helped us to achieve success. \\ \\
-During all the time we were documenting each progress we made. The documentation is essential for our project. We need to deliver all manuals and support for the consumers, to help them understand how to properly use and take full advantage of L.I.M.E. \\ \\
-Despite the many difficulties we encountered and the fact that it took about 40\% more time than we expected, we are happy, because there are some people, who will use. We have meet our goals and we can say with pride that we achieved great success!
+
+One of the most important goals of the thesis was to deliver software that will be used by the consumers of the market. Work began with a market research. The project team has received several proposals and chose the one that we considered the most appropriate for the subject of the engineering thesis. The decision was made to develop the ultimate system to manage the warehouse and human resources of the laboratory. The resulting project – L.I.M.E (Laboratory Internal Management Entity) was developed in line with market needs, being consulted with major consumers.\\ \\
+At first, the project team has decided how the database will look like - what entities, relations and what type of the database will be used. That was the fundamental part of the application. This part of the project can be concluded as being completed perfectly. Even though there were a few minor changes but most of the original database project fulfilled needs of the application.\\ \\
+Secondly, the project team had to develop the basic back-end parts of the application: connection with a database, user authentication and roles. Many additional features like database populator were developed additionally at this stage, for test purposes. \\ \\
+Subsequently the project team has started to develop the client application. This was the hardest part of the project. It was difficult to write simultaneously front-end and back-end part of the application. There were many disagreements, and often the project team had to have long discussions before finally achieving the best solutions.\\ \\
+Afterwards, when already most of the functionalities were implemented, the project team started to develop the features that are used by the most of the functionalities – reports, predictions, notifications. It required knowledge from the area of algorithms and mathematics. \\ \\
+To develop the application, he top software technologies were. Server side is built with Java, Spring, SpringBoot, SpringSecurity and MySQL while the client side application was developed using AngularJS and Bootstrap. The communication between units was made with RESTful API. The well-known and widely used solutions helped the team to achieve final success. \\ \\
+During the entire duration of the project, each progress in development was documented. Then, the documentation is essential for the project was written. The manual was delivered for the consumers, to help them understand how to properly use and take full advantage of L.I.M.E. \\ \\
+Despite the many difficulties the project team has encountered and the fact that the completion of the project consumed about 40\% more time than was estimated, the results are very satisfying because of all people, who will use the L.I.M.E application. The objectives of the project have been met and the entire process was concluded with a great success.
+
 
 \thispagestyle{empty}
 
@@ -1281,9 +1312,19 @@ Despite the many difficulties we encountered and the fact that it took about 40\
 
 
 \begin{thebibliography}{20} % IF YOU HAVE MORE REFERENCES, WRITE THE BIGGER NUMBER
+\bibitem[1]{A} Quartzy Inc. \textbf{Quartzy | The free and easy way to manage your lab}, 2018, Available at https://www.quartzy.com [Accessed 15 May. 2018].
+\bibitem[2]{B} Dassault Systèmes,  \textbf{Worldwide Laboratory Integration with BIOVIA CISPro®}, 2018, Available at https://http://accelrys.com/products/unified-lab-management/biovia-cispro [Accessed 15 May. 2018].
+\bibitem[3]{C} KineMatik,  \textbf{Laboratory Resource Management}, 2018, Available at https://www.kinematik.com/solutions/industry/laboratory-resource-management-copy-0 [Accessed 15 May. 2018].
+\bibitem[4]{D} Software testing tutorials and automation,  \textbf{Waterfall Model}, 2016, Available at http://www.software-testing-tutorials-automation.com/2016/06/waterfall-model.html [Accessed 15 Nov. 2017].
+\bibitem[5]{E} J. Legierski, \textbf{Lecture Notes}, 2017, Available at http://pages.mini.pw.edu.pl/~legierskij/eng/dydaktyka\_eng.html [Accessed 15 Nov. 2017].
+\bibitem[6]{F} tutorialspoint.com, \textbf{ASP.NET MVC Tutorial}, 2018, Available at: http://www.tutorialspoint.com/design\_pattern [Accessed 15 Nov. 2017].
+\bibitem[7]{G} Wikipedia, \textbf{Model–view–controller}, 2016, Available at https://en.wikipedia.org/wiki/Model\%E2\%80\%93view\%E2\%80\%93controller [Accessed 15 May. 2018].
+\bibitem[8]{H} Wikipedia, \textbf{Data access object}, 2016, Available at https://en.wikipedia.org/wiki/Data\_access\_object [Accessed 15 May. 2018].
+\bibitem[9]{I} Best Practice Software Engineering, \textbf{Dependency Injection}, 2013, http://best-practice-software-engineering.ifs.tuwien.ac.at/patterns/dependency\_injection.html [Accessed 15 May. 2018].
+\bibitem[10]{J} Wikipedia, \textbf{Representational state transfer}, 2016, Available at https://en.wikipedia.org/wiki/Representational\_state\_transfer [Accessed 15 May. 2018].
+\bibitem[11]{K} S.Makridakis, S.C. Wheelwright R.J. Hyndman \textbf{Forecasting Methids and Applications}, John Wiley \& Sons, 1998, 20--51, 135--177.
+\bibitem[12]{L} R. Prado, M. West,  \textbf{Time Series: Modeling, Computation and Inference}, CRC Press, 2010, 1--13.
 
-\bibitem[1]{A} S.Makridakis, S.C. Wheelwright R.J. Hyndman \emph{Forecasting Methids and Applications}, John Wiley \& Sons, 1998, 20--51, 135--177.
-\bibitem[2]{B} R. Prado, M. West,  \emph{Time Series: Modeling, Computation and Inference}, CRC Press, 2010, 1--13.
 
 \end{thebibliography}
 \pagenumbering{gobble}
@@ -1295,81 +1336,81 @@ Despite the many difficulties we encountered and the fact that it took about 40\
 \chapter*{Glossary}
 \begin{longtable}{p{4cm} p{11cm}}
 
-
 \textbf{Administrator} & A person who is responsible for the upkeep, configuration, and reliable operation of a system.\\ \\
-\textbf{Algorithm} & A procedure or formula for solving a problem, based on conductiong a sequence of specified actions. A computer program can be viewed as an elaborate algorithm. \\ \\
-\textbf{Angularjs} & A structural framework for dynamic web apps. It lets you use HTML as your template language and lets you extend HTML's syntax to express your application's components clearly and succinctly. \\ \\
+\textbf{Algorithm} & A procedure or formula for solving a problem, based on conducting a sequence of specified actions. A computer program can be viewed as an elaborate algorithm. \\ \\
+\textbf{Angular} & A structural framework for dynamic web apps. It lets the developer use HTML as a template language and then extend HTML's syntax to express the application's components clearly and succinctly. \\ \\
 \textbf{Application} & A program designed to perform a specific function directly for the user.\\ \\
-\textbf{Application Service} & A services that are made available from a business's Web server for Web users or other Web-connected programs. \\ \\
+\textbf{Application Service} & A service that is made available from a business's Web server for Web users or other Web-connected programs. \\ \\
 \textbf{Asynchronous} & An adjective describing objects or events that are not coordinated in time.\\ \\
-\textbf{Authorization} & The process of giving someone permission to do or have something. In multi-user computer systems, a system administrator defines for the system which users are allowed access to the system and what privileges of use (such as access to which file directories, hours of access, amount of allocated storage space, and so forth). \\ \\
-\textbf{Back-End} & Application serves indirectly in support of the front-end services.\\ \\
-\textbf{Backup} & Copying of physical or virtual files or databases to a secondary site for preservation in case of equipment failure or other catastrophe. \\ \\
+\textbf{Authorization} & The process of giving someone permission to do or have something. In multi-user computer systems, a system administrator defines for the system which users are allowed access to the system and what privileges of use (such as access to which file directories, hours of access or the amount of allocated storage space) do they have. \\ \\
+\textbf{Back-End} & An application which serves indirectly as a support of the front-end services.\\ \\
+\textbf{Backup} & Copying physical, virtual files or databases to a secondary site for preservation in case of equipment failure. \\ \\
 \textbf{Boilerplate} & A unit of writing that can be reused over and over without change. By extension, the idea is sometimes applied to reusable programming as in "boilerplate code."\\ \\
 \textbf{Bootstrap} & A free and open-source front-end library for designing websites and web applications. It contains HTML- and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions. \\ \\
 \textbf{Browser} & An application program that provides a way to look at and interact with all the information on the World Wide Web. The word "browser" seems to have originated prior to the Web as a generic term for user interfaces that let you browse (navigate through and read) text files online.\\ \\
 \textbf{Cloud} & A host on virtual server.\\ \\
-\textbf{Cloud-Based} & A software program where cloud-based and local components work together.\\ \\
+\textbf{Cloud-Based} & A software program where cloud-located and local components work together.\\ \\
 \textbf{Commit} & The final step in the successful completion of a previously started transaction in a computing system.\\ \\
-\textbf{Continuous Deployment} & A strategy for software releases wherein any code commit that passes the automated testing phase is automatically released into the production environment, making changes that are visible to the software's users.\\ \\
-\textbf{Dao (Data Access Objects)} & An API that lets a programmer request access to an database.\\ \\
+\textbf{Continuous \mbox{Deployment}} & A strategy for software release in which any committed code that passes the automated testing phase is automatically released into the production environment, making changes that are visible to the software's users.\\ \\
+\textbf{DAO (Data Access Objects)} & An API that lets a programmer request access to an database.\\ \\
 \textbf{Data} & The information that has been translated into a form that is more convenient to move or process.\\ \\
 \textbf{Data Availability} & An assurance that data continues to be available at a required level of performance in any situation.\\ \\
 \textbf{Database} & A collection of data that is organized so that its contents can easily be accessed, managed, and updated.\\ \\
 \textbf{Deploy} & To spread out or arrange strategically.\\ \\
-\textbf{Deprecated} & Something is acknowledged but discouraged.\\ \\
+\textbf{Deprecated} & A solution can be deprecated when it is acknowledged but discouraged.\\ \\
 \textbf{Development} & The process of conceiving, specifying, designing, programming, documenting, testing, and bug fixing involved in creating and maintaining applications, frameworks, or other software components. \\ \\
 \textbf{Distribution} & The phase that follows packaging.\\ \\
-\textbf{Endpoint} & Defines the address for a resource , an endpoint is any user device connected to a network.\\ \\
-\textbf{Event} & Any identifiable occurrence that has significance for system hardware or software. User-generated events include keystrokes and mouse clicks, among a wide variety of other possibilities.\\ \\
+\textbf{Endpoint} & Defines the address for a resource. An endpoint is any user device connected to a network.\\ \\
+\textbf{Event} & Any identifiable occurrence that has significance for system hardware or software. User-generated events include keystrokes and mouse clicks, amongst a wide variety of other possibilities.\\ \\
 \textbf{Feature} & A distinguishing characteristic of a software item (e.g., performance, portability, or functionality)\\ \\
 \textbf{Field} & A location for a single piece of data in a database.\\ \\
 \textbf{Foreign Key} & A key that targets a primary key in another table.\\ \\
 \textbf{Framework} & A real or conceptual structure intended to serve as a support or guide for the building of something that expands the structure into something useful.\\ \\
-\textbf{Front-End} & An application that interacti with users directly.\\ \\
-\textbf{Gui} & A graphical user interface to a computer.\\ \\
-\textbf{Header} & Something that goes in front of something else and is usually repeated as a standard part of the units of something else\\ \\
+\textbf{Front-End} & An application that interacts with its users directly.\\ \\
+\textbf{Gui} & A graphical user interface to a computer program.\\ \\
+\textbf{Header} & An element of a page that goes in front of the other elements and is usually repeated as a standard part for every page. \\ \\
 \textbf{Heroku} & A cloud-based development platform as a service (PaaS) provider.\\ \\
-\textbf{Hosting} & The business of housing, serving, and maintaining files for one or more Web sites. More important than the computer space that is provided for Web site files is the fast connection to the Internet. \\ \\
-\textbf{Html (Hypertext Markup Language)} & A standard programming language for describing the contents and appearance of Web pages.\\ \\
+\textbf{Hosting} & The business of housing, serving, and maintaining files for one or more Web sites. \\ \\
+\textbf{HTML (Hypertext Markup Language)} & A standard programming language for describing the contents and appearance of Web pages.\\ \\
 \textbf{Insatnce} & In object-oriented programming (OOP), is a specific realization of any object. An object may be varied in a number of ways. Each realized variation of that object is an instance. The creation of a realized instance is called instantiation.\\ \\
 \textbf{Integration} & The act of bringing together smaller components into a single system that functions as one.\\ \\
 \textbf{Interface} & A group of related methods with empty bodies. Implementing an interface allows a class to become more formal about the behavior it promises to provide. Interfaces form a contract between the class and the outside world, and this contract is enforced at build time by the compiler.\\ \\
-\textbf{Iterative} & Used to describe a situation in which a sequence of instructions can be executed multiple times. One pass through the sequence is called an iteration. If the sequence of instructions is executed repeatedly, it is called a loop, and we say that the computer iterates through the loop.\\ \\
+\textbf{Iterative} & An adjective used to describe a situation in which a sequence of instructions can be executed multiple times. One pass through the sequence is called an iteration. If the sequence of instructions is executed repeatedly, it is called a loop, and can be said that the computer iterates through the loop.\\ \\
 \textbf{Jar (Java Archive) } & A package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file for distribution. \\ \\
-\textbf{Java} & Aidely used programming language expressly designed for use in the distributed environment of the internet.\\ \\
-\textbf{Javascript} & An interpreted programming or script language from Netscape.\\ \\
-\textbf{Json (Javascript Object Notation)} & Text-based, human-readable data interchange format used for representing simple data structures and objects in Web browser-based code.\\ \\
-\textbf{Junit} & An open source framework designed for the purpose of writing and running tests in the Java programming language.\\ \\
+\textbf{Java} & Widely used programming language designed for the use in the distributed environment of the internet.\\ \\
+\textbf{Javascript} & An interpreted programming script language from Netscape.\\ \\
+\textbf{JSON (Javascript Object Notation)} & Text-based, human-readable data interchange format used for representing simple data structures and objects in Web browser-based code.\\ \\
+\textbf{JUnit} & An open source framework designed for the purpose of writing and running tests in the Java programming language.\\ \\
 
 \textbf{LIME} & Laboratory Internal Management Entity - the name of the application discussed in this document. LIME is the system for resources management in a small chemical laboratory. \\ \\
 
-\textbf{Linux} & An open-source operating system modelled on UNIX.\\ \\
+\textbf{Linux} & An open-source operating system modeled on UNIX.\\ \\
 \textbf{Login} & A string used to differentiate between users.\\ \\
 \textbf{Manager} & A person who is responsible for the managing resources, products and reports\\ \\
 \textbf{Mysql} & An open source relational database management system that uses SQL.\\ \\
-\textbf{Password} & A string that authorize access for a gine user login.\\ \\
-\textbf{Plugin} & A program that can easily be installed and used as part of another program.\\ \\
+\textbf{Password} & A string that authorize access for a given user login.\\ \\
+\textbf{Plugin} & A program that can be easily installed and used as part of another program.\\ \\
 \textbf{Primary Key} & A key in a relational database that is unique for each record, used to identify a particular record.\\ \\
-\textbf{Query} & A request to a database for information, or to update, modify, or delete information.\\ \\
-\textbf{Relational Database} & A collection of data items organized as a set of formally-described tables from which data can be accessed or reassembled in many different ways without having to reorganize the database tables.\\ \\
-\textbf{Rest (Representational State Transfer)} & Simple stateless architecture that generally runs over HTTP. It is used to communicate between applications.\\ \\
-\textbf{Rollback} & The undoing of partly completed database changes when a database transaction is determined to have failed.\\ \\
+\textbf{Query} & A request to a database to retrieve, update, modify or delete information.\\ \\
+\textbf{Relational Database} & A collection of data items organized as a set of formally described tables from which the data can be accessed or reassembled in many different ways without having to reorganize the database tables.\\ \\
+\textbf{Rest (\mbox{Representational} \mbox{State} \mbox{Transfer})} & A simple stateless architecture that uses HTTP. It is used to communicate between applications.\\ \\
+\textbf{Rollback} & The undoing of a partly completed database change when a database transaction is determined to have failed.\\ \\
 \textbf{Row} & A group of fields in a database table organized to contain all the information relevant to a specific entity.\\ \\
 \textbf{Server} & A computer program that provides a service to another computer programs (and its user). In the client/server programming model, a server program awaits and fulfills requests from client programs, which may be running in the same or other computers.\\ \\
 \textbf{Software} & General term for the various kinds of programs used to operate computers and related devices.\\ \\
-\textbf{Spring Framework} & a Injection dependency framework at first (it's still as it is today) targeting managing life-cycle of Java components (what so-called beans). \\ \\
-\textbf{Springboot} & A suite, pre-configured, pre-sugared set of frameworks/technologies to reduce boiler plate configuration providing you the shortest way to have a Spring web application up and running with smallest line of code/configuration out-of-the-box. \\ \\
+\textbf{Spring Framework} & An Injection dependency framework targeting managing life-cycle of Java components (so-called beans). \\ \\
+\textbf{Springboot} & A suite, pre-configured, pre-sugared set of frameworks/technologies to reduce boilerplate configuration providing you the shortest way to have a Spring web application up and running with smallest line of code/configuration out-of-the-box. \\ \\
 \textbf{Spring security} & A Java/Java EE framework that provides authentication, authorization and other security features for enterprise applications.\\ \\
-\textbf{Sql (Structured Query Language)} & A standard interactive and programming language for getting information from and updating a database.\\ \\
-\textbf{Staff} & A person who is responsible for endpoint work and jobs.\\ \\
+\textbf{Sql (Structured Query Language)} & A standard interactive programming language for getting information from and updating a database.\\ \\
+\textbf{Staff} & A person who is responsible for performing jobs.\\ \\
 \textbf{Synchronous} & An adjective describing objects or events that are coordinated in time.\\ \\
 \textbf{Table} & In a relational database, a data structure that organizes the information about a single topic into rows and columns.\\ \\
-\textbf{Upgrade} & A new version of or addition to a hardware or, more often, software product that is already installed or in use.\\ \\
+\textbf{Upgrade} & A new version or addition to a hardware or, more often, a software product that is already installed or in use.\\ \\
 \textbf{Validation} & A quality assurance used to check if the typed data is correct.\\ \\
 \textbf{Virtual Server} & A server (computer and various server programs) at someone else's location that is shared by multiple Web site owners so that each owner can use and administer it as though they had complete control of the server.\\ \\
 \textbf{War } & A file used to distribute a collection of JAR-files, JavaServer Pages, Java Servlets, Java classes, XML files, tag libraries, static web pages (HTML and related files) and other resources that together constitute a web application. \\ \\
 \textbf{Web Application (Web App)} & An application program that is stored on a remote server and delivered over the Internet through a browser interface.\\ \\
+
 
 
 \end{longtable}
@@ -1399,18 +1440,17 @@ Despite the many difficulties we encountered and the fact that it took about 40\
 
 
 % -----------------------------  APPENDIX A ---------------------------
-\chapter*{A. User Manual}
+\chapter{Appendix A: User Manual}
 
 
-LIME application is located at: \textit{http://mini-lime.herokuapp.com}
+The L.I.M.E. application is located at: \textit{http://mini-lime.herokuapp.com}
 
-Please open above website in the browser (recommended: Chrome).
+Please open the website in the browser (recommended: Chrome).
 
 
+\section{Login}
 \begin{enumerate}
-\item LOGIN
-\begin{enumerate}
-\item If you already have an account, you can click on 'login' button in top right corner dropdown menu. Then fill the form with you credentials and click 'login'. 
+\item If you already have an account, then please click on the 'Login' button in top right corner dropdown menu. Then please fill the form with you credentials and click 'Login'. 
 
 \begin{figure}[h!]
 \begin{center}
@@ -1419,8 +1459,7 @@ Please open above website in the browser (recommended: Chrome).
 \caption{Login Page}
 \end{figure}
 
-\item If you have forgotten password to your account, click on 'reset password' option in the login menu.
-Fill the form with email connected to your account. If everything gone well, the information about send email will be displayed.
+\item If you have forgotten the password to your account, then please click on 'Reset Password' option in the login menu. Fill the form with the email connected to your account. If everything has gone well, the information about a sent email will be displayed.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1429,8 +1468,7 @@ Fill the form with email connected to your account. If everything gone well, the
 \caption{Reset Password Page}
 \end{figure}
 
-\item If you manage to successfully login in, welcome message and side menu on the left side of the page 
-will appear.
+\item If you manage to successfully log in, welcome message and side menu on the left side of the page will appear.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/login/2}
@@ -1447,7 +1485,7 @@ will appear.
 \caption{Edit User Account Page}
 \end{figure}
 
-\item You can log out using Log Out button
+\item You can log out using ‘Log Out’ button
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/login/3}
@@ -1455,7 +1493,7 @@ will appear.
 \caption{Page seen after logging out}
 \end{figure}
 \end{enumerate}
-\item RESOURCES
+\section{Resources}
 \begin{enumerate}
 \item To manage resources, please click on 'Resources' in the left side menu. 
 \begin{figure}[h!]
@@ -1465,8 +1503,7 @@ will appear.
 \caption{Manage Resources Page}
 \end{figure}
 \thispagestyle{empty}
-\item To add new resource, click ‘Add New Resource’. 
- Than fill in the form. In the ‘Image’ field, please provide image from your computer library and click 'save'.
+\item In order to add a new resource, click ‘Add New Resource’, then fill in the form. In the ‘Image’ field, please provide an image from your computer library and click 'Save'.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1476,7 +1513,7 @@ will appear.
 \end{figure}
 \thispagestyle{empty}
 
-\item To view resource details, please click the magnifying glass next to it.
+\item In order to view resource details, please click on the magnifying glass next to it.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1486,8 +1523,7 @@ will appear.
 \end{figure}
 \thispagestyle{empty}
 
-\item To edit resource, please click on the pencil icon next to it. Enter the changes and click update. 
-If you will leave image input empty, the old photo will be inserted and the image will not be changed.
+\item To edit a resource, please click on the pencil icon next to it. Enter the changes and click ‘Update’. If you will leave image input empty, the old photo will be inserted and the image will not be changed.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1497,7 +1533,7 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \end{figure}
 \thispagestyle{empty}
 
-\item To delete resource, please click the bin icon next to it and then confirm.
+\item To delete a resource, please click on the bin icon next to it and then confirm.
 \end{enumerate}
 
 
@@ -1509,7 +1545,7 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \end{figure}
 \thispagestyle{empty}
 
-\item PRODUCTS
+\section{Products}
 \begin{enumerate}
 \item To manage products, please click on 'Products' in the left side menu. 
 \begin{figure}[h!]
@@ -1520,7 +1556,7 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \end{figure}
 \thispagestyle{empty}
 
-\item To add new product, click ‘Add New Product’. Than fill in the form. In the ‘image’ field, please provide image from your computer library and click 'save'.
+\item To add a new product, please click ‘Add New Product’, then fill in the form. In the ‘Image’ field, please provide an image from your computer library and click 'Save'.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/product/4}
@@ -1529,7 +1565,7 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \end{figure}
 \thispagestyle{empty}
 
-\item To view product details, please click the magnifying glass next to it.
+\item In order to view product details, please click on the magnifying glass next to it.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1540,7 +1576,7 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \thispagestyle{empty}
 
 
-\item To edit product, please click on the edit icon next to it. Enter the changes and click update. If you will leave image input empty, the old photo will be inserted and the image will not be changed.
+\item To edit a product, please click on the pencil icon next to it. Enter the changes and click ‘Update’. If you will leave the image input empty, the old photo will be inserted and the image will not be changed.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1550,7 +1586,7 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \end{figure}
 \thispagestyle{empty}
 
-\item To delete product, please click the bin icon next to it and then confirm.
+\item To delete a product, please click the bin icon next to it and then confirm.
 
 
 \begin{figure}[h!]
@@ -1561,7 +1597,7 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \end{figure}
 \thispagestyle{empty}
 
-\item To view formula of the chosen product, please click the magnifying glass in the formula column.
+\item To view a formula for the chosen product, please click on the magnifying glass in the formula column.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1571,7 +1607,7 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \end{figure}
 \thispagestyle{empty}
 
-\item To edit formula of the chosen product, please click the pencil in the formula column. Check resources you want to add to formula and fill the quantity of each in the input box next to resource name. If you are done, click ‘save’.
+\item To edit a formula of the chosen product, please click the on the pencil in the formula column. Check the resources you want to add to formula and fill the quantity of each in the input box next to resource name. If you are done, please click ‘Save’.
 
 
 \begin{figure}[h!]
@@ -1583,10 +1619,10 @@ If you will leave image input empty, the old photo will be inserted and the imag
 \thispagestyle{empty}
 \end{enumerate}
 
-\item ORDERS
+\section{Orders}
 \begin{enumerate}
-\item To send order to resource suppliers, please check resources you want to order and fill their quantity in the input box next to resource name.
-Then click ‘send order’.
+\item To send an order to the resource suppliers, please check resources you wish to order and fill their quantity in the input box next to resource name.
+Then please click ‘Send Order’.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1598,13 +1634,13 @@ Then click ‘send order’.
 
 \end{enumerate}
 
-\item REPORT GENERATION RESOURCE/PRODUCT
+\section{Report generation for resource and product}
 \begin{enumerate}
-\item To generate report please check resources/products for which you would like to see the report, choose chart  type,  the last date that will be in the scope of the report and for how many days back should the report be generated. If you want to just display report in the browser - click "generate report". If you want to receive report by an email, fill also "email of receiver" input box and click "send report".
+\item To generate a report please check resources/products for which you would like to see the report. Then please choose a chart type, the last date that will be in the scope of the report and for how many days back should the report be generated. If you just want to display report in the browser - click ‘Generate Report’. If you want to receive report via email, please fill also ‘email of receiver’ input box and click ‘Send report’.
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{AS/report/1}
+\includegraphics[scale = 1]{AS/report/1}
 \end{center}
 \caption{Generate and Send Product Report}
 \end{figure}
@@ -1612,7 +1648,7 @@ Then click ‘send order’.
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{AS/report/3}
+\includegraphics[scale = 1]{AS/report/3}
 \end{center}
 \caption{Generate and Send Resource Usage Report}
 \end{figure}
@@ -1621,13 +1657,13 @@ Then click ‘send order’.
 
 \end{enumerate}
 
-\item REPORT PREDICTION RESOURCE/PRODUCT
+\section{Forecast Report for Resource and Product}
 \begin{enumerate}
-\item To generate forecast report please check resources/products for which you would like to see the report, choose chart type, the last date that will be in the scope of the report, how many days back should the report go and for how many days you would like to generate forecast report. If you want to just display report in the browser - click "generate forecast". If you want to receive report  by an email, fill also "email of receiver" input box and click "send forecast".
+\item To generate forecast report please check resources/products for which you would like to see the report, choose chart type, the last date that will be in the scope of the report, how many days back should the report go and for how many days you would like to generate forecast report. If you want to just display report in the browser – please click on "Generate Forecast". If you want to receive report via email, please fill also "Email of receiver" input box and click "Send Forecast".
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{AS/report/2}
+\includegraphics[scale = 1]{AS/report/2}
 \end{center}
 \caption{Generate and Send Production Forecast Report}
 \end{figure}
@@ -1635,7 +1671,7 @@ Then click ‘send order’.
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{AS/report/4}
+\includegraphics[scale = 1]{AS/report/4}
 \end{center}
 \caption{Generate and Send Resource Usage Forecast Report}
 \end{figure}
@@ -1643,9 +1679,9 @@ Then click ‘send order’.
 
 
 \end{enumerate}
-\item PRODUCTS/RESOURCES CATEGORIES
+\section{Categories of products and resources}
 \begin{enumerate}
-\item To manage categories of products/resources, please click on 'manage categories' in the left side menu, and choose products or resources subpage.
+\item To manage categories of products and resources, please click on 'Manage Categories' in the left side menu, and choose ‘Products’ or ‘Resources’ subpage.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/categories/product/1}
@@ -1660,7 +1696,7 @@ Then click ‘send order’.
 \caption{Manage Resource Categories View}
 \end{figure}
 
-\item To add new category, click ‘Add New Category’. Than fill in the form with category name and click 'Save'.
+\item To add new category, click ‘Add New Category’. Than please fill in the form with category name and click 'Save'.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/categories/product/2}
@@ -1676,7 +1712,7 @@ Then click ‘send order’.
 \caption{Add Resource Category}
 \end{figure}
 
-\item To edit category, please click on the pencil icon next to it. Enter the changes and click ‘update’. 
+\item To edit category, please click on the pencil icon next to it. Enter the changes and click ‘Update’ to save. 
 
 
 \begin{figure}[h!]
@@ -1693,7 +1729,7 @@ Then click ‘send order’.
 \caption{Edit Resource Category}
 \end{figure}
 
-\item To delete category, please click the bin icon next to it and then confirm. You will not be able to delete category, if any products/resources are in this category – you need to change category of this products/resources first.
+\item To delete category, please click the bin icon next to it and then confirm. You will not be able to delete category, if any products/resources are in this category – you will need to reassign these products/resources to a different category and then try to delete the category.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1711,7 +1747,7 @@ Then click ‘send order’.
 
 \end{enumerate}
 
-\item NOTIFICATIONS
+\section{Notifications}
 \begin{enumerate}
 
 \item To manage notifications, please click on ‘Notifications’ in the left side menu. 
@@ -1725,7 +1761,7 @@ Then click ‘send order’.
 \end{figure}
 
 
-\item To edit notification for chosen resource, please click on the pencil icon next to it. Enter critical value for which notifications will be send and turn notifications on or off.
+\item To a edit notification for chosen resource, please click on the pencil icon next to it. Enter critical value – an amount of a resource low enough to trigger the notifications and turn notifications on or off.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1735,10 +1771,10 @@ Then click ‘send order’.
 \end{figure}
 \thispagestyle{empty}
 
-\item You can also turn on/off notifications for all available resources by clicking on ‘notifications are’ switch on the top of the page
+\item You can also turn on/off notifications for all available resources by clicking on ‘Notifications are’ switch on the top of the page
 \end{enumerate}
 
-\item SUPPLIERS
+\section{Suppliers}
 \begin{enumerate}
 \item To manage suppliers, please click on ‘Suppliers’ in the left side menu. 
 
@@ -1769,7 +1805,7 @@ Then click ‘send order’.
 \end{figure}
 \thispagestyle{empty}
 
-\item To edit supplier, please click on the pencil icon next to it. Enter the changes and click update. 
+\item To edit supplier’s details, please click on the pencil icon next to it. Enter the changes and click update. 
 
 \begin{figure}[h!]
 \begin{center}
@@ -1778,7 +1814,7 @@ Then click ‘send order’.
 \caption{Edit Supplier}
 \end{figure}
 \thispagestyle{empty}
-\item To delete supplier, please click the bin icon next to it and then confirm.
+\item To delete a supplier, please click the bin icon next to it and then confirm.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1791,9 +1827,9 @@ Then click ‘send order’.
 
 
 
-\item JOBS
+\section{Jobs}
 \begin{enumerate}
-\item To manage jobs, please click on ‘manage jobs’ in the left side menu. 
+\item To manage jobs, please click on ‘Manage Jobs’ in the left side menu. 
 
 \begin{figure}[h!]
 \begin{center}
@@ -1804,7 +1840,7 @@ Then click ‘send order’.
 
 
 
-\item To add new job, click ‘Add New Job’. Than fill in the form and click 'save'. Username which is displayed in the table next to each job will be added automatically, It will be login of the user adding the job.
+\item To add new job, please click on ‘Add New Job’. Then fill in the form and click 'Save'. Username which is displayed in the table next to each job will be added automatically, It will be a login of the user adding the job.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{AS/jobs/2}
@@ -1815,7 +1851,7 @@ Then click ‘send order’.
 
 
 \end{enumerate} 
-\item USERS
+\section{Users}
 \begin{enumerate}
 \item To manage users, please click on ‘Manage Users’ in the left side menu. 
 
@@ -1829,7 +1865,7 @@ Then click ‘send order’.
 \thispagestyle{empty}
 
 
-\item To add new user, click ‘Add New User’. Than fill in the form and click 'save'.  Note: Be careful while choosing role of the user - especially administrator role gives user access to sensitive data.
+\item To add new user, please click on ‘Add New User’. Then fill in the form and click 'Save'. Note: Be careful when choosing the role for the user - administrator role gives user access to sensitive data.
 
 \begin{figure}[h!]
 \begin{center}
@@ -1840,7 +1876,7 @@ Then click ‘send order’.
 \thispagestyle{empty}
 
 
-\item To view chosen user details, please click the magnifying glass next to it.
+\item To view details for a chosen user, please click on the magnifying glass next to it.
 
 
 \begin{figure}[h!]
@@ -1861,7 +1897,7 @@ Then click ‘send order’.
 \end{figure}
 \thispagestyle{empty}
 
-\item To delete user, please click the bin icon next to it and then confirm.
+\item To delete user, please click on the bin icon next to it and then confirm.
 
 
 \begin{figure}[h!]
@@ -1875,15 +1911,183 @@ Then click ‘send order’.
 
 \end{enumerate}
 
+\section{Database Recovery}
+
+There is database dump nightly scheduled on the hosted server. There are up to 5 days backups stored. You can also perform a backup manually any time.
+\subsection{Management}
+\begin{enumerate}
+\item Please go to hosting server: https://id.heroku.com/login and log in.
+\item Please Choose mini-lime from application list.
+\item Then, click on ClearDB MySQL in the overview tab.
+\item Please Select DataBase.
+\item Then, please select Backups \& Jobs tab.
+ \end{enumerate}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale = 1]{DB/1}
+\end{center}
+\caption{DataBase Management}
+\end{figure}
+\thispagestyle{empty}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale = 1]{DB/2}
+\end{center}
+\caption{DataBase Management}
+\end{figure}
+\thispagestyle{empty}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale = 1]{DB/3}
+\end{center}
+\caption{DataBase Management}
+\end{figure}
+\thispagestyle{empty}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{DB/4}
+\end{center}
+\caption{DataBase Management}
+\end{figure}
+\thispagestyle{empty}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{DB/5}
+\end{center}
+\caption{DataBase Management}
+\end{figure}
+\thispagestyle{empty}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{DB/6}
+\end{center}
+\caption{DataBase Management}
+\end{figure}
+\thispagestyle{empty}
+
+
+\subsection{DataBase dump} 
+\begin{enumerate}
+\item Please click 'New Backup'.
+\item Please wait until queued job is done.
 \end{enumerate}
 
 
-% -----------------------------  APPENDIX B ---------------------------
-\chapter*{B. Test Report}
-
-The application was throughly tested. The team performed almost a hundred of Unit Tests. The detailed report can be found and browsed in "Unit Test Reports" catalog by launching the file index.html.
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{DB/7}
+\end{center}
+\caption{DataBase dump}
+\end{figure}
+\thispagestyle{empty}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{DB/8}
+\end{center}
+\caption{DataBase dump}
+\end{figure}
 \thispagestyle{empty}
 
+\subsection{Restore DataBase} 
+\begin{enumerate}
+\item Please choose BackUp from a list and then click 'Restore Backup' and confirm.
+\item Please wait until queued job is done.
+\end{enumerate}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{DB/9}
+\end{center}
+\caption{Restore DataBase}
+\end{figure}
+\thispagestyle{empty}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale = 1]{DB/10}
+\end{center}
+\caption{Restore DataBase}
+\end{figure}
+\thispagestyle{empty}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{DB/11}
+\end{center}
+\caption{Restore DataBase}
+\end{figure}
+\thispagestyle{empty}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% -----------------------------  APPENDIX B ---------------------------
+\chapter{Appendix B: Test Report}
+
+\subsection{Unit Tests} The application was throughly tested. The team performed almost a hundred of Unit Tests. The detailed report can be found and browsed in "Unit Test Reports" catalog by launching the file index.html.
+\subsection{Scenario Tests} Hence presented is a summary of scenario tests performed:
+
+\begin{longtable}{|p{1cm}|p{11cm}|p{4cm}|}
+\caption[Scenario Test Summary]{Scenario Test Summary}
+\label{Scenario Test Summary}
+\centering
+\tabularnewline
+
+\hline
+\textbf{\#} & \textbf{Scenario} & \textbf{Test Result} \\ \hline
+1 & An administrator logs in to the system & Passed \\ \hline
+2 & An administrator changes his password & Passed \\ \hline
+3 & An administrator creates a user account in the system. Then he checks in the Users view if the account has appeared & Passed \\ \hline
+4 & An administrator modifies a user account in the system. Then he checks in the Users view if the account has been changed & Passed \\ \hline
+5 & An administrator deletes a user account in the system. Then he checks in the Users view if the account has disappeared & Passed \\ \hline
+6 & An administrator creates a resource in the system. Then he checks in the Resources view if the resource has appeared and if it looks properly & Passed \\ \hline
+7 & An administrator modifies a resource in the system. Then he checks in the Resources view if the resource has changed its details & Passed \\ \hline
+8 & An administrator deletes a resource in the system. Then he checks in the Resources view if the resource has disappeared & Passed \\ \hline
+9 & An administrator creates a product in the system. Then he checks in the Products view if the product has appeared and if it looks properly & Passed \\ \hline
+10 & An administrator modifies a product in the system. Then he checks in the Products view if the product has changed its details & Passed \\ \hline
+11 & An administrator deletes a product in the system. Then he checks in the Products view if the product has disappeared & Passed \\ \hline
+
+12 & An administrator creates a category of resources in the system and assigns some resources to it. Then he checks in the Category -> Resources view if the category has appeared and if has proper resources assigned to it & Passed \\ \hline
+13 & An administrator modifies a category of resources in the system and assigns different resources to it. Then he checks in the Category -> Resources view if the category has proper resources assigned to it & Passed \\ \hline
+14 & An administrator deletes a (previously emptied) category of resources in the system. Then he checks in the Category -> Resources view if the category has disappeared & Passed \\ \hline
+15 & An administrator creates a category of products in the system and assigns some products to it. Then he checks in the Category -> Products view if the category has appeared and if has proper products assigned to it & Passed \\ \hline
+16 & An administrator modifies a category of products in the system and assigns different products to it. Then he checks in the Category -> Products view if the category has proper products assigned to it & Passed \\ \hline
+17 & An administrator deletes a (previously emptied) category of products in the system. Then he checks in the Category -> Products view if the category has disappeared & Passed \\ \hline
+
+
+18 & An administrator creates a formula for a product in the system and assigns some resources to it. Then he checks in the Products view if the formula has appeared with proper resources assigned to it & Passed \\ \hline
+19 & An administrator modifies a formula for a product in the system and assigns different resources to it. Then he checks in the Products view if the formula has proper resources assigned to it & Passed \\ \hline
+
+20 & An administrator creates a report for some a product in the system and chooses some time period. He inputs his own email address and clicks 'Send report'. Then he checks in the inbox if he had received a report and if the looks of it appear properly & Passed \\ \hline
+21 & An administrator creates a report for some a resource in the system and chooses some time period. He inputs his own email address and clicks 'Send report'. Then he checks in the inbox if he had received a report and if the looks of it appear properly & Passed \\ \hline
+22 & An administrator creates a forecast report for some a product in the system and chooses some time period. He inputs his own email address and clicks 'Send report'. Then he checks in the inbox if he had received a report and if the looks of it appear properly & Passed \\ \hline
+23 & An administrator creates a forecast report for some a resource in the system and chooses some time period. He inputs his own email address and clicks 'Send report'. Then he checks in the inbox if he had received a report and if the looks of it appear properly & Passed \\ \hline
+
+24 & An administrator creates a supplier in the system. Then he checks in the Suppliers view if the supplier has appeared and if it looks properly & Passed \\ \hline
+25 & An administrator modifies a supplier in the system. Then he checks in the Suppliers view if the supplier has changed its details & Passed \\ \hline
+26 & An administrator deletes a supplier in the system. Then he checks in the Suppliers view if the supplier has disappeared & Passed \\ \hline
+
+27 & An administrator creates a job and declare time range. Then he checks in the Jobs view if the job has appeared and if it looks properly and includes his own username & Passed \\ \hline
+28 & An administrator defines a notifications, turns notifications on. He performs a job where he reduces the amount of resource to a critical value. Then he checks in the inbox if he had received a notification about a low level of resource and if the looks of it appear properly & Passed \\ \hline
+29 & An administrator defines a notifications, turns notifications off. He performs a job where he reduces the amount of resource to a critical value. Then he checks in the inbox if he had recived nothing as expected & Passed \\ \hline
+
+30 & An administrator substitutes one of the supplier email addresses with his own. Then he orders the resources and checks in the inbox if he had received an order & Passed \\ \hline
+
+31 & An administrator substitutes one of the supplier email addresses with his own. He turns on automatic ordering. He performs a job where he reduces the amount of resource to a critical value. Then he checks in the inbox if he had received an order & Passed \\ \hline
+
+
+\end{longtable}
+
+\thispagestyle{empty}
 
 
 \end{document}
