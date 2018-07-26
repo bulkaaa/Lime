@@ -1,55 +1,55 @@
 <div class="shopping-cart">
     <div class="title">Manage Resources</div>
     <div class="row btn-row">
-            <text class="hidden-xs col-sm-3 col-md-2"> Search by name: </text>
-             <div class="col-xs-5 col-sm-5 col-md-2"> <input id="filter_input" class="form-control" ></div>
-        <div class="pull-right offset-md-8 offset-sm-8 offset-xs-5" >
+            <text class="col-sm-3 col-md-2"> Search by name: </text>
+             <div class="col-sm-5 col-md-2"> <input id="filter_input" class="form-control" ></div>
+        <div class="pull-right offset-md-8 offset-sm-8" >
             <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="glyphicon glyphicon-plus">
             </i> Add New Resource</button>
          </div>
     </div>
     <div class="item row item-border">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="description col-md-2 col-sm-2 hidden-xs">
+        <div class="col-md-12 col-sm-12">
+        <div class="description col-md-2 col-sm-2">
         </br>
             <div>image</div>
         <span></span>
         </div>
-        <div class="description col-md-2 col-sm-3 col-xs-5">
+        <div class="description col-md-2 col-sm-3">
             </br>
             <span>resource name</span>
             <span></span>
         </div>
-        <div class="description col-md-3 hidden-xs hidden-sm">
+        <div class="description col-md-3 hidden-sm">
             </br>
             <span>resource description</span>
             <span></span>
         </div>
-        <div class="total-price col-md-1 col-sm-2 hidden-xs">quantity</div>
-        <div class="total-price col-md-1 hidden-xs hidden-sm">unit</div>
-        <div class="total-price col-md-3 col-sm-5 col-xs-7 ">action</div>
+        <div class="total-price col-md-1 col-sm-2">quantity</div>
+        <div class="total-price col-md-1 hidden-sm">unit</div>
+        <div class="total-price col-md-3 col-sm-5">action</div>
         </div>
     </div>
 
     <div ng-repeat="item in items">
         <div id="{{item.id}}" class="item row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="image col-md-2 col-sm-2 hidden-xs">
+            <div class="col-md-12 col-sm-12">
+                <div class="image col-md-2 col-sm-2">
                     <img ng-src="data:image/png;base64,{{item.realimage}}">
                 </div>
-                <div class="description col-md-2 col-sm-3 col-xs-5">
+                <div class="description col-md-2 col-sm-3">
                    </br>
                     <span class="name" ng-bind="item.name">{{item.name}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-3 hidden-xs hidden-sm">
+                <div class="description col-md-3 hidden-sm">
                     </br>
                     <span>{{item.description}}</span>
                     <span></span>
                 </div>
-                <div class="total-price col-md-1 col-sm-2 hidden-xs shorten_text">{{item.quantity}}</div>
-                <div class="total-price col-md-1 hidden-xs hidden-sm">{{item.unit}}</div>
-                <div class="total-price col-md-3 col-sm-5 col-xs-7">
+                <div class="total-price col-md-1 col-sm-2 shorten_text">{{item.quantity}}</div>
+                <div class="total-price col-md-1 hidden-sm">{{item.unit}}</div>
+                <div class="total-price col-md-3 col-sm-5">
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
                             <i class="fa fa-search"></i>

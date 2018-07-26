@@ -3,54 +3,54 @@
         <i class="fa fa-info-circle fa-xs" data-toggle="tooltip" title="Jobs are used for creation of products from resources &#013;Job contain meta data of product creation process."></i>
     </div>
     <div class="row btn-row">
-        <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
+        <div class="pull-right offset-md-8 offset-sm-8 offset-xs-5" >
             <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="glyphicon glyphicon-plus">
             </i> Add New Job</button>
         </div>
     </div>
     <div class="item row item-border">
-        <div class="col-md-12 col-sm-12">
-            <div class="description col-md-2 col-sm-2">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="description col-lg-2 col-md-2 col-sm-2">
                 </br>
                 <div>product name</div>
                 <span></span>
             </div>
-            <div class="description col-md-3 col-sm-3">
+            <div class="description col-lg-3 col-md-3 col-sm-3">
                 </br>
                 <span>description</span>
                 <span></span>
             </div>
-            <div class="description col-md-2 col-sm-2">
+            <div class="description col-lg-2 col-md-3 col-sm-3">
                 </br>
                 <span>start date</span>
                 <span></span>
             </div>
-            <div class="total-price col-md-2 col-sm-2">end date</div>
-            <div class="total-price col-md-2 col-sm-2">result quantity</div>
-            <div class="total-price col-md-1 col-sm-1">user</div>
+            <div class="total-price col-lg-2 col-md-3 col-sm-3">end date</div>
+            <div class="total-price col-lg-2 hidden-md hidden-sm">result quantity</div>
+            <div class="total-price col-lg-1 col-md-1 col-sm-1">user</div>
         </div>
     </div>
 
     <div ng-repeat="item in items">
         <div id="{{item.id}}" class="item row">
-            <div class="col-md-12 col-sm-12">
-                <div class="description col-md-2 col-sm-2">
+            <div class="col-md-12 col-sm-12 col-lg-12 ">
+                <div class="description col-lg-2 col-md-2 col-sm-2">
                 </br>
                     {{item.productName}}
                 </div>
-                <div class="description col-md-3 col-sm-3">
+                <div class="description col-lg-3 col-md-3 col-sm-3">
                     </br>
                     <span>{{item.details}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-2 col-sm-2">
+                <div class="description col-lg-2 col-md-3 col-sm-3">
                     </br>
                     <span>{{item.startDate}}</span>
                     <span></span>
                 </div>
-                <div class="total-price col-md-2 col-sm-2">{{item.endDate}}</div>
-                <div class="total-price col-md-2 col-sm-2">{{item.resultValue}}</div>
-                <div class="total-price col-md-1 col-sm-1">{{item.username}}</div>
+                <div class="total-price col-lg-2 col-md-3 col-sm-3">{{item.endDate}}</div>
+                <div class="total-price col-lg-2 hidden-md hidden-sm">{{item.resultValue}}</div>
+                <div class="total-price col-lg-1 col-md-1 col-sm-1">{{item.username}}</div>
             </div>
         </div>
     </div>

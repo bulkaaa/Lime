@@ -1,92 +1,92 @@
 <div class="shopping-cart">
     <div class="title">Manage Suppliers</div>
     <div class="row btn-row">
-        <text class="col-sm-2 col-md-2"> Search by all values: </text>
-        <div class="col-sm-2 col-md-2"> <input id="filter_input" class="form-control" ></div>
-        <div class="col-sm-2 col-md-2 offset-md-10 offset-sm-10 pull-right" >
+        <text class="hidden-xs col-sm-3 col-md-2"> Search by all values: </text>
+        <div class="col-xs-5 col-sm-5 col-md-2"> <input id="filter_input" class="form-control" ></div>
+        <div class="pull-right offset-md-8 offset-sm-8 offset-xs-5" >
             <button type="button" class="btn btn-info" ng-click="addRecord()" ng-disabled="!globals.currentUser.isAdmin && !globals.currentUser.isManager"><i class="glyphicon glyphicon-plus">
             </i> Add New Supplier</button>
         </div>
     </div>
     <div class="item row item-border">
-        <div class="col-md-12 col-sm-12">
-            <div class="description col-md-2 col-sm-2">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="description col-lg-2 col-md-3 col-sm-3">
                 </br>
                 <div>name</div>
                 <span></span>
             </div>
-            <div class="description col-md-2 col-sm-2">
+            <div class="description col-lg-2 col-md-2 hidden-sm">
                 </br>
                 <span>telephone</span>
                 <span></span>
             </div>
-            <div class="description col-md-1 col-sm-1">
+            <div class="description col-lg-1 hidden-md hidden-sm">
                 </br>
                 <span>city</span>
                 <span></span>
             </div>
-            <div class="description col-md-1 col-sm-1">
+            <div class="description col-lg-1 hidden-md hidden-sm">
                 </br>
                 <span>country code</span>
                 <span></span>
             </div>
-            <div class="description col-md-1 col-sm-1">
+            <div class="description col-lg-1 hidden-md hidden-sm">
                 </br>
                 <span>postal code</span>
                 <span></span>
             </div>
-            <div class="description col-md-1 col-sm-1">
+            <div class="description col-lg-1 hidden-md hidden-sm">
                 </br>
                 <span>street</span>
                 <span></span>
             </div>
-            <div class="description col-md-2 col-sm-2">
+            <div class="description col-lg-2 col-md-4 col-sm-4">
                 </br>
                 <span>email</span>
                 <span></span>
             </div>
-            <div class="total-price col-md-2 col-sm-2">action</div>
+            <div class="total-price col-lg-2 col-md-3 col-sm-5">action</div>
         </div>
     </div>
 
     <div ng-repeat="item in items">
         <div id="{{item.id}}" class="item filter-row row">
-            <div class="col-md-12 col-sm-12">
-                <div class="description col-md-2 col-sm-2">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="description col-lg-2 col-md-3 col-sm-3">
                     </br>
                     <span class="filter">{{item.name}}</span>
                 </div>
-                <div class="description col-md-2 col-sm-2">
+                <div class="description col-lg-2 col-md-2 hidden-sm">
                     </br>
                     <span class="filter">{{item.telephone}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-1 col-sm-1">
+                <div class="description col-lg-1 hidden-md hidden-sm">
                     </br>
                     <span class="filter">{{item.city}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-1 col-sm-1">
+                <div class="description col-lg-1 hidden-md hidden-sm">
                     </br>
                     <span class="filter">{{item.country}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-1 col-sm-1">
+                <div class="description col-lg-1 hidden-md hidden-sm">
                     </br>
                     <span class="filter">{{item.postalCode}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-1 col-sm-1">
+                <div class="description col-lg-1 hidden-md hidden-sm">
                     </br>
                     <span class="filter">{{item.street}}</span>
                     <span></span>
                 </div>
-                <div class="description col-md-2 col-sm-2">
+                <div class="description col-lg-2 col-md-4 col-sm-4">
                     </br>
                     <span class="filter">{{item.emailAddress}}</span>
                     <span></span>
                 </div>
-                <div class="total-price col-md-2 col-sm-2">
+                <div class="total-price col-lg-2 col-md-3 col-sm-5">
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-info" ng-click="viewRecord(item)">
                             <i class="fa fa-search"></i>

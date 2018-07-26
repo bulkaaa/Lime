@@ -181,8 +181,8 @@ public class ThesisPopulator {
         basicSupplier.setStreet("Sochaczewska 156");
         fruitSupplier.setPostalCode("02-239");
         basicSupplier.setPostalCode("05-850");
-        fruitSupplier.setCountry("Polska");
-        basicSupplier.setCountry("Polska");
+        fruitSupplier.setCountry("PL");
+        basicSupplier.setCountry("PL");
         fruitSupplier.setCity("Warszawa");
         basicSupplier.setCity("Wieruchów");
         fruitSupplier.setEmailAddress("hubertpawlowski8@fakemail.com");
