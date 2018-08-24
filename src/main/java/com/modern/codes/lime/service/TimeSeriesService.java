@@ -6,9 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.modern.codes.lime.controller.ForecastController;
-import com.modern.codes.lime.model.Formula;
-import com.modern.codes.lime.model.Resource;
+
 import com.modern.codes.lime.pojo.FormulaPOJO;
 import com.modern.codes.lime.pojo.ResourcePOJO;
 import org.slf4j.Logger;
@@ -62,12 +60,12 @@ public class TimeSeriesService implements ITimeSeriesService {
         for (int i = 0; i < Days; i++) {
             final Calendar cal = Calendar.getInstance();
             cal.setTime(StartDate);
-            cal.add(Calendar.DATE, -Days + i);
+            cal.add(Calendar.DATE, -Days + i + 1);
             final Date dateBefore = cal.getTime();
 
             final Calendar cal2 = Calendar.getInstance();
             cal2.setTime(StartDate);
-            cal2.add(Calendar.DATE, -Days + i + 1);
+            cal2.add(Calendar.DATE, -Days + i + 2);
             final Date dateBeforeLimit = cal2.getTime();
             final List<JobPOJO> day = new ArrayList<>();
             for (final JobPOJO job : list) {
@@ -78,6 +76,7 @@ public class TimeSeriesService implements ITimeSeriesService {
                 }
             }
             double value = 0;
+
             for (final JobPOJO j : day) {
                 value += j.getResultValue();
             }
@@ -96,7 +95,7 @@ public class TimeSeriesService implements ITimeSeriesService {
         final ArrayList<TimeSeries> series = new ArrayList<TimeSeries>();
         final List<JobPOJO> list = jobService.findAll();
         if (!list.isEmpty()) {
-            //List of Jobs ALL JOBS JUST ALL
+            //List of Jobs
             for (final String resID : ResourceIds) {
                 final TimeSeries ts = ExtractResource(list, resID, StartDate, Days);
                 final String label = resourceService.findById(resID).getName();
@@ -113,17 +112,15 @@ public class TimeSeriesService implements ITimeSeriesService {
     private TimeSeries ExtractResource(final List<JobPOJO> list,
                                               final String ResID, final Date StartDate,
                                               final Integer Days){
-
         final TimeSeries ts = new TimeSeries();
         for (int i = 0; i < Days; i++) {
             final Calendar cal = Calendar.getInstance();
             cal.setTime(StartDate);
-            cal.add(Calendar.DATE, -Days + i);
+            cal.add(Calendar.DATE, -Days + i + 1);
             final Date dateBefore = cal.getTime();
-
             final Calendar cal2 = Calendar.getInstance();
             cal2.setTime(StartDate);
-            cal2.add(Calendar.DATE, -Days + i + 1);
+            cal2.add(Calendar.DATE, -Days + i + 2);
             final Date dateBeforeLimit = cal2.getTime();
             final List<JobPOJO> day = new ArrayList<>();
             for (final JobPOJO job : list) {
@@ -133,7 +130,6 @@ public class TimeSeriesService implements ITimeSeriesService {
                     day.add(job);
                 }
             }
-
             double value = 0;
             for (final JobPOJO j : day) {
 

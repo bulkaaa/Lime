@@ -14,6 +14,7 @@ public class SmoothingService implements ISmoothingService {
     public TimeSeries calculateSmoothing(TimeSeries series, final int days_ahead) {
         double alpha = 0.1;
         double beta = 1;
+
         double mse = MSE(series, DoubleExpSmoothing(series, alpha, beta, days_ahead));
         for (double a = 0; a <= 1; a += 0.01) {
             for (double b = 0; b <= 1; b += 0.01) {
@@ -75,6 +76,13 @@ public class SmoothingService implements ISmoothingService {
         final TimeSeries TrendTS = new TimeSeries();
 
         SmoothTS.add(ts.get(0));
+
+        if (ts.size() == 1) {
+            for (int i = 0; i < days; i++) {
+                SmoothTS.add(ts.get(0));
+            }
+            return SmoothTS;
+        }
         TrendTS.add(ts.get(1) - ts.get(0));
 
         for (int i = 1; i < ts.size(); i++) {

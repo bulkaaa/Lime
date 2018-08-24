@@ -57,6 +57,8 @@ public class DrawSeries {
                                                               .build();
         chart.getStyler()
              .setLegendPosition(Styler.LegendPosition.OutsideE);
+        chart.getStyler().setXAxisLabelRotation(45);
+        chart.getStyler().setXAxisLabelAlignment(Styler.TextAlignment.Right);
         if ("Line".equals(type)) {
             chart.getStyler()
                  .setDefaultSeriesRenderStyle(CategorySeries.CategorySeriesRenderStyle.Line);
@@ -132,6 +134,7 @@ public class DrawSeries {
                 final Date dateBefore = cal.getTime();
                 xData.add(dateBefore);
                 yData.add(timeSeries.get(i));
+
             }
 
             chart.addSeries(timeSeries.getLabel(), xData, yData);
@@ -156,8 +159,10 @@ public class DrawSeries {
     private static Date getDate(final ArrayList<TimeSeries> timeSeriesList, final Date toDay) {
         final Calendar call = Calendar.getInstance();
         call.setTime(toDay);
-        call.add(Calendar.DATE, -timeSeriesList.get(0)
-                                               .size() + 1);
+        LOG.info("Number of series: {}", timeSeriesList.size());
+        LOG.info("Number of days: {}", timeSeriesList.get(0).size());
+
+        call.add(Calendar.DATE, -timeSeriesList.get(0).size() + 1);
         return call.getTime();
     }
 

@@ -241,31 +241,31 @@ public class ThesisPopulator {
         resourceChocolate = new ResourcePOJO();
         resourceFlour.setName("Flour");
         resourceFlour.setUnit(Unit.KG);
-        resourceFlour.setQuantity((double) 30);
+        resourceFlour.setQuantity((double) 300);
         resourceFlour.setDescription("Description for resource A");
         resourceMilk.setName("Milk");
         resourceMilk.setUnit(Unit.LITER);
-        resourceMilk.setQuantity((double) 20);
+        resourceMilk.setQuantity((double) 200);
         resourceMilk.setDescription("Description for resource B");
         resourceEgg.setName("EGG");
         resourceEgg.setUnit(Unit.UNIT);
-        resourceEgg.setQuantity((double) 100);
+        resourceEgg.setQuantity((double) 1000);
         resourceEgg.setDescription("Description for resource C");
         resourceSugar.setName("SUGAR");
         resourceSugar.setUnit(Unit.KG);
-        resourceSugar.setQuantity((double) 20);
+        resourceSugar.setQuantity((double) 200);
         resourceSugar.setDescription("Description for resource D");
         resourceStrawberry.setName("Strawberry");
         resourceStrawberry.setUnit(Unit.KG);
-        resourceStrawberry.setQuantity((double) 10);
+        resourceStrawberry.setQuantity((double) 100);
         resourceStrawberry.setDescription("Description for resource E");
         resourceCherry.setName("Cherry");
         resourceCherry.setUnit(Unit.KG);
-        resourceCherry.setQuantity((double) 10);
+        resourceCherry.setQuantity((double) 100);
         resourceCherry.setDescription("Description for resource F");
         resourceChocolate.setName("Chocolate");  //formula  S U
         resourceChocolate.setUnit(Unit.BAR);
-        resourceChocolate.setQuantity((double) 30);
+        resourceChocolate.setQuantity((double) 300);
         resourceChocolate.setDescription("Description for resource G");
 
         resourceFlour.setImage("thesis_flour.jpg");
@@ -339,29 +339,44 @@ public class ThesisPopulator {
      * Sets jobs.
      */
     public void setJobs() {
-        jobCherryCake = new JobPOJO();
-        jobStrawberryCake = new JobPOJO();
-        jobChocolateStrawberryCake = new JobPOJO();
+        jobCherryCake1 = new JobPOJO();
+        jobCherryCake2 = new JobPOJO();
+        jobStrawberryCake1 = new JobPOJO();
+        jobStrawberryCake2 = new JobPOJO();
+        jobChocolateStrawberryCake1 = new JobPOJO();
+        jobChocolateStrawberryCake2 = new JobPOJO();
         jobDonut1 = new JobPOJO();
         jobDonut2 = new JobPOJO();
-        jobCherryCake.setStartDate(ParseTools.parseDate("2018-04-12 11:30:02"));
-        jobCherryCake.setEndDate(ParseTools.parseDate("2018-04-12 13:30:02"));
-        jobCherryCake.setResultValue((double) 24);
-        jobCherryCake.setDetails("Everything gone ok.");
-        jobStrawberryCake.setStartDate(ParseTools.parseDate("2018-04-06 13:30:02"));
-        jobStrawberryCake.setEndDate(ParseTools.parseDate("2018-04-06 17:30:02"));
-        jobStrawberryCake.setResultValue((double) 1);
-        jobStrawberryCake.setDetails("Everything gone ok.");
-        jobChocolateStrawberryCake.setStartDate(ParseTools.parseDate("2018-04-07 11:30:02"));
-        jobChocolateStrawberryCake.setEndDate(ParseTools.parseDate("2018-04-07 13:30:02"));
-        jobChocolateStrawberryCake.setResultValue((double) 1);
-        jobChocolateStrawberryCake.setDetails("Everything gone ok.");
-        jobDonut1.setStartDate(ParseTools.parseDate("2018-04-07 13:30:02"));
-        jobDonut1.setEndDate(ParseTools.parseDate("2018-04-07 17:30:02"));
+        jobCherryCake1.setStartDate(ParseTools.parseDate("2018-08-23 11:00:02"));
+        jobCherryCake1.setEndDate(ParseTools.parseDate("2018-08-23 15:20:02"));
+        jobCherryCake1.setResultValue((double) 20);
+        jobCherryCake1.setDetails("Everything gone ok.");
+        jobCherryCake2.setStartDate(ParseTools.parseDate("2018-08-24 12:00:02"));
+        jobCherryCake2.setEndDate(ParseTools.parseDate("2018-08-24 14:20:02"));
+        jobCherryCake2.setResultValue((double) 24);
+        jobCherryCake2.setDetails("4 cakes more than usual.");
+        jobStrawberryCake1.setStartDate(ParseTools.parseDate("2018-08-23 13:30:02"));
+        jobStrawberryCake1.setEndDate(ParseTools.parseDate("2018-08-23 17:30:02"));
+        jobStrawberryCake1.setResultValue((double) 1);
+        jobStrawberryCake1.setDetails("Everything gone ok.");
+        jobStrawberryCake2.setStartDate(ParseTools.parseDate("2018-08-22 13:30:02"));
+        jobStrawberryCake2.setEndDate(ParseTools.parseDate("2018-08-22 17:30:02"));
+        jobStrawberryCake2.setResultValue((double) 1);
+        jobStrawberryCake2.setDetails("Everything gone ok.");
+        jobChocolateStrawberryCake1.setStartDate(ParseTools.parseDate("2018-08-23 11:30:02"));
+        jobChocolateStrawberryCake1.setEndDate(ParseTools.parseDate("2018-08-23 13:30:02"));
+        jobChocolateStrawberryCake1.setResultValue((double) 1);
+        jobChocolateStrawberryCake1.setDetails("Everything gone ok.");
+        jobChocolateStrawberryCake2.setStartDate(ParseTools.parseDate("2018-08-22 11:30:02"));
+        jobChocolateStrawberryCake2.setEndDate(ParseTools.parseDate("2018-08-22 13:30:02"));
+        jobChocolateStrawberryCake2.setResultValue((double) 1);
+        jobChocolateStrawberryCake2.setDetails("Everything gone ok.");
+        jobDonut1.setStartDate(ParseTools.parseDate("2018-08-24 13:30:02"));
+        jobDonut1.setEndDate(ParseTools.parseDate("2018-08-24 17:30:02"));
         jobDonut1.setResultValue((double) 21);
         jobDonut1.setDetails("One donut additional.");
-        jobDonut2.setStartDate(ParseTools.parseDate("2018-04-08 12:00:00"));
-        jobDonut2.setEndDate(ParseTools.parseDate("2018-04-08 16:00:00"));
+        jobDonut2.setStartDate(ParseTools.parseDate("2018-08-23 13:00:00"));
+        jobDonut2.setEndDate(ParseTools.parseDate("2018-08-23 16:30:00"));
         jobDonut2.setResultValue((double) 19);
         jobDonut2.setDetails("One donut less than usual.");
     }
@@ -485,10 +500,13 @@ public class ThesisPopulator {
      * Save jobs.
      */
     public void saveJobs() {
-        jobCherryCake = jobService.save(jobCherryCake);
-        jobStrawberryCake = jobService.save(jobStrawberryCake);
-        jobChocolateStrawberryCake = jobService.save(jobChocolateStrawberryCake);
+        jobCherryCake1 = jobService.save(jobCherryCake1);
+        jobStrawberryCake1 = jobService.save(jobStrawberryCake1);
+        jobChocolateStrawberryCake1 = jobService.save(jobChocolateStrawberryCake1);
         jobDonut1 = jobService.save(jobDonut1);
+        jobCherryCake2 = jobService.save(jobCherryCake2);
+        jobStrawberryCake2 = jobService.save(jobStrawberryCake2);
+        jobChocolateStrawberryCake2 = jobService.save(jobChocolateStrawberryCake2);
         jobDonut2 = jobService.save(jobDonut2);
     }
 
@@ -559,10 +577,13 @@ public class ThesisPopulator {
         List<RolePOJO> roleListAdmin = new ArrayList<>();
         List<RolePOJO> roleListManager = new ArrayList<>();
         List<RolePOJO> roleListStaff = new ArrayList<>();
-        staffJobList.add(jobCherryCake);
-        staffJobList.add(jobStrawberryCake);
-        staffJobList.add(jobChocolateStrawberryCake);
+        staffJobList.add(jobCherryCake1);
+        staffJobList.add(jobStrawberryCake1);
+        staffJobList.add(jobChocolateStrawberryCake1);
         staffJobList.add(jobDonut1);
+        staffJobList.add(jobCherryCake2);
+        staffJobList.add(jobStrawberryCake2);
+        staffJobList.add(jobChocolateStrawberryCake2);
         staffJobList.add(jobDonut2);
         roleListAdmin.add(roleAdmin);
         roleListManager.add(roleManager);
@@ -667,9 +688,12 @@ public class ThesisPopulator {
         formulaListC.add(formulaStrawberryChocolateStrawberryCake);
         formulaListC.add(formulaChocolateChocolateStrawberryCake);
         formulaListD.add(formulaChocolateDonuts);
-        jobListA.add(jobCherryCake);
-        jobListB.add(jobStrawberryCake);
-        jobListC.add(jobChocolateStrawberryCake);
+        jobListA.add(jobCherryCake1);
+        jobListA.add(jobCherryCake2);
+        jobListB.add(jobStrawberryCake1);
+        jobListB.add(jobStrawberryCake2);
+        jobListC.add(jobChocolateStrawberryCake1);
+        jobListC.add(jobChocolateStrawberryCake2);
         jobListD.add(jobDonut1);
         jobListD.add(jobDonut2);
         productDonutWithChocolate.setPOJOCategory(productCategoryOthers);
@@ -687,12 +711,18 @@ public class ThesisPopulator {
     }
 
     private void jobsRelations() {
-        jobCherryCake.setPOJOUser(userStaff);
-        jobCherryCake.setPOJOProduct(productCherryCake);
-        jobStrawberryCake.setPOJOUser(userStaff);
-        jobStrawberryCake.setPOJOProduct(productStrawberryCake);
-        jobChocolateStrawberryCake.setPOJOUser(userStaff);
-        jobChocolateStrawberryCake.setPOJOProduct(productChocolateStrawberryCake);
+        jobCherryCake1.setPOJOUser(userStaff);
+        jobCherryCake1.setPOJOProduct(productCherryCake);
+        jobCherryCake2.setPOJOUser(userStaff);
+        jobCherryCake2.setPOJOProduct(productCherryCake);
+        jobStrawberryCake1.setPOJOUser(userStaff);
+        jobStrawberryCake1.setPOJOProduct(productStrawberryCake);
+        jobStrawberryCake2.setPOJOUser(userStaff);
+        jobStrawberryCake2.setPOJOProduct(productStrawberryCake);
+        jobChocolateStrawberryCake1.setPOJOUser(userStaff);
+        jobChocolateStrawberryCake1.setPOJOProduct(productChocolateStrawberryCake);
+        jobChocolateStrawberryCake2.setPOJOUser(userStaff);
+        jobChocolateStrawberryCake2.setPOJOProduct(productChocolateStrawberryCake);
         jobDonut1.setPOJOUser(userStaff);
         jobDonut1.setPOJOProduct(productDonutWithChocolate);
         jobDonut2.setPOJOUser(userStaff);
@@ -798,9 +828,12 @@ public class ThesisPopulator {
     private ProductPOJO productStrawberryCake;
     private ProductPOJO productChocolateStrawberryCake;
     private ProductPOJO productDonutWithChocolate;
-    private JobPOJO jobCherryCake;
-    private JobPOJO jobStrawberryCake;
-    private JobPOJO jobChocolateStrawberryCake;
+    private JobPOJO jobCherryCake1;
+    private JobPOJO jobCherryCake2;
+    private JobPOJO jobStrawberryCake1;
+    private JobPOJO jobStrawberryCake2;
+    private JobPOJO jobChocolateStrawberryCake1;
+    private JobPOJO jobChocolateStrawberryCake2;
     private JobPOJO jobDonut1;
     private JobPOJO jobDonut2;
     private FormulaPOJO formulaFlourCherrycake;

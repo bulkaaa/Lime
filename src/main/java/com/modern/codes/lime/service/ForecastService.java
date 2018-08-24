@@ -1,5 +1,6 @@
 package com.modern.codes.lime.service;
 
+import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,13 +40,11 @@ public class ForecastService implements IForecastService {
     }
 
     @Override
-    public byte[] plotForecast(@RequestParam final String startDate, @RequestParam final Integer noDays,
-                               @RequestParam final Integer noDaysForecast, @RequestParam final String chartType,
-                               @RequestParam  final List<String> productIds) {
-        final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+    public byte[] plotForecast(final String startDate, final Integer noDays, final Integer noDaysForecast,
+                               final String chartType, final List<String> productIds) {
         final Date date;
         try {
-            date = formatter.parse(startDate);
+            date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
         } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
@@ -64,17 +65,16 @@ public class ForecastService implements IForecastService {
 
 
     @Override
-    public byte[] plotForecastResource(@RequestParam final String startDate, @RequestParam final Integer noDays,
-                               @RequestParam final Integer noDaysForecast, @RequestParam final String chartType,
-                                       @RequestParam  final List<String> resourceIds) {
-        final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+    public byte[] plotForecastResource(final String startDate, final Integer noDays, final Integer noDaysForecast,
+                                       final String chartType, final List<String> resourceIds) {
         final Date date;
         try {
-            date = formatter.parse(startDate);
+            date = new SimpleDateFormat("dd-MM-yyyy").parse(startDate);
         } catch (final ParseException e) {
             throw new InvalidRequestException("Invalid date format.", null, Locale.ENGLISH);
         }
         final ArrayList<TimeSeries> seriesL = timeSeriesService.ExtractforResource(date, noDays, resourceIds);
+
         final ArrayList<TimeSeries> seriesFL = new ArrayList<>();
         for (final TimeSeries series : seriesL) {
             final TimeSeries forecast = smoothingService.calculateSmoothing(series, noDaysForecast);
@@ -92,4 +92,6 @@ public class ForecastService implements IForecastService {
     private final ITimeSeriesService timeSeriesService;
     private final ISmoothingService smoothingService;
     private final IJobService jobService;
+    private static final Logger LOG = LoggerFactory.getLogger(ForecastService.class);
+
 }

@@ -54,8 +54,8 @@ public class ForecastController extends BaseController {
             @RequestBody @ApiParam("List of product ids") final List<String> productIds,
             @RequestParam final String startDate, @RequestParam final Integer noDays,
             @RequestParam final Integer noDaysForecast, @RequestParam final String chartType) {
-        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n  "
-                 + "chartType: [] \n", productIds, startDate, noDays, noDaysForecast, chartType);
+        LOG.info("Generate request received product list: {} \n Date from: {} \n noDays: {} \n noDaysForecast: {} \n"
+                 + "chartType: {} \n", productIds, startDate, noDays, noDaysForecast, chartType);
 
         final byte[] img = forecastService.plotForecast(startDate, noDays, noDaysForecast, chartType, productIds);
 
@@ -82,8 +82,8 @@ public class ForecastController extends BaseController {
             @RequestBody @ApiParam("List of resource ids") final List<String> resourceIds,
             @RequestParam final String startDate, @RequestParam final Integer noDays,
             @RequestParam final Integer noDaysForecast, @RequestParam final String chartType) {
-        LOG.info("Generate request received resource list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n  "
-                + "chartType: [] \n", resourceIds, startDate, noDays, noDaysForecast, chartType);
+        LOG.info("Generate request received resource list: {} \n Date from: {} \n noDays: {} \n noDaysForecast: {} \n"
+                + "chartType: {} \n", resourceIds, startDate, noDays, noDaysForecast, chartType);
 
         final byte[] img = forecastService.plotForecastResource(startDate, noDays, noDaysForecast, chartType, resourceIds);
 
@@ -107,8 +107,8 @@ public class ForecastController extends BaseController {
                              @RequestParam final String startDate, @RequestParam final Integer noDays,
                              @RequestParam final Integer noDaysForecast, @RequestParam final String email,
                              @RequestParam final String chartType) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: "
-                 + "{} \n chartType: [] \n", productIds, startDate, noDays, noDaysForecast, email, chartType);
+        LOG.info("Send request received product list: {} \n Date from: {} \n noDays: {} \n noDaysForecast: {} \n email: "
+                 + "{} \n chartType: {} \n", productIds, startDate, noDays, noDaysForecast, email, chartType);
 
         final byte[] bytes = forecastService.plotForecast(startDate, noDays, noDaysForecast, chartType, productIds);
 
@@ -135,8 +135,8 @@ public class ForecastController extends BaseController {
                              @RequestParam final String startDate, @RequestParam final Integer noDays,
                              @RequestParam final Integer noDaysForecast, @RequestParam final String email,
                              @RequestParam final String chartType) {
-        LOG.info("Send request received resources list: \n Date from: {} \n noDays: [] \n noDaysForecast: [] \n email: "
-                + "{} \n chartType: [] \n", resourceIds, startDate, noDays, noDaysForecast, email, chartType);
+        LOG.info("Send request received resources list: {} \n Date from: {} \n noDays: {} \n noDaysForecast: {} \n email: "
+                + "{} \n chartType: {} \n", resourceIds, startDate, noDays, noDaysForecast, email, chartType);
 
         final byte[] bytes = forecastService.plotForecastResource(startDate, noDays, noDaysForecast, chartType, resourceIds);
 

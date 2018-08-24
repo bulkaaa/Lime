@@ -52,7 +52,7 @@ public class ReportController {
     public ResponseEntity<byte[]> generate(@RequestParam final String startDate, @RequestParam final Integer noDays,
                                            @RequestParam final String chartType,
                                            @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
-        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n productIds: [] \n "
+        LOG.info("Generate request received product list: {} \n Date from: {} \n noDays: {} \n productIds: {} \n "
                  + "chartType: [] \n", startDate, noDays, productIds, chartType);
 
         final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
@@ -78,8 +78,8 @@ public class ReportController {
     public ResponseEntity<byte[]> generate2(@RequestParam final String startDate, @RequestParam final Integer noDays,
                                            @RequestParam final String chartType,
                                            @RequestBody @ApiParam("Resource ids list") final List<String> resourcesIds) {
-        LOG.info("Generate request received product list: \n Date from: {} \n noDays: [] \n resourceIds: [] \n "
-                + "chartType: [] \n", startDate, noDays, resourcesIds, chartType);
+        LOG.info("Generate request received product list: {} \n Date from: {} \n noDays: {} \n resourceIds: {} \n "
+                + "chartType: {} \n", startDate, noDays, resourcesIds, chartType);
 
         final byte[] bytes = reportService.getReportBytesResource(startDate, noDays, chartType, resourcesIds);
 
@@ -102,8 +102,8 @@ public class ReportController {
     public void send(@RequestParam final String startDate, @RequestParam final String email,
                      @RequestParam final Integer noDays, @RequestParam final String chartType,
                      @RequestBody @ApiParam("Products ids list") final List<String> productIds) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n productIds: [] \n"
-                 + " chartType: [] \n", startDate, noDays, email, productIds, chartType);
+        LOG.info("Send request received product list: \n Date from: {} \n noDays: {} \n email: {} \n productIds: {} \n"
+                 + " chartType: {} \n", startDate, noDays, email, productIds, chartType);
 
         final byte[] bytes = reportService.getReportBytes(startDate, noDays, chartType, productIds);
         try {
@@ -128,8 +128,8 @@ public class ReportController {
     public void send2(@RequestParam final String startDate, @RequestParam final String email,
                      @RequestParam final Integer noDays, @RequestParam final String chartType,
                      @RequestBody @ApiParam("Resources ids list") final List<String> resourceIds) {
-        LOG.info("Send request received product list: \n Date from: {} \n noDays: [] \n email: {} \n resourceIds: [] \n"
-                + " chartType: [] \n", startDate, noDays, email, resourceIds, chartType);
+        LOG.info("Send request received product list: {} \n Date from: {} \n noDays: {} \n email: {} \n resourceIds: {} \n"
+                + " chartType: {} \n", startDate, noDays, email, resourceIds, chartType);
 
         final byte[] bytes = reportService.getReportBytesResource(startDate, noDays, chartType, resourceIds);
         try {
