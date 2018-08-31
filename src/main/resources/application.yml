@@ -1,28 +1,15 @@
 # ===============================
-# = DATA SOURCE
+# = JPA / HIBERNATE
 # ===============================
-
-# Set here configurations for the database connection
-# push command: git push heroku LimeAppHeroku:master
-# heroku config:add DATABASE_URL="mysql://user:password@host/db?reconnect=true&createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8"
-# heroku credentials:ó
-#   username:limemini102@gmail.com
-#   password:LIMEmini102!@
-# gmail password: limeminipassword
 spring:
   jpa:
+    database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: update
-      naming.strategy: org.hibernate.cfg.ImprovedNamingStrategy
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-  session:
-    store-type: redis
-server:
-  session:
-    timeout: 43200
-storage:
-  properties:
-    location: pics
+      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://ec2-50-19-126-219.compute-1.amazonaws.com:5432/dlvk4k4kg58ni
+    username: zdtcqbmjxerpqi
+    password: 42a288f038279f2c0f5ab3db025612f65c74d582101934f3aecf9fc7992a9db9
+    driverClassName: org.postgresql.Driver
